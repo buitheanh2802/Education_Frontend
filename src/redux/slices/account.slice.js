@@ -5,7 +5,9 @@ import { login } from './../actions/account.action';
 const mySlice = createSlice({
     name : 'login',
     initialState : {
-
+        data : {},
+        isFetching : true,
+        isLoginSuccess : true
     },
     reducers : {
         logout : (state,action) => {
