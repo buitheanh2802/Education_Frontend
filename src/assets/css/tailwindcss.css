@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.menu-before::after{
+    position: absolute;
+    content: "";
+    top: 50%;
+    right: -0.5px;
+    width: 1px;
+    height: 75%;
+    transform: translateY(-50%);
+    background: #ff0000;
+}
