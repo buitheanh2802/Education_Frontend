@@ -940,8 +940,8 @@ video {
 }
 
 @media (min-width: 640px) {
-  .sm\:h-\[30px\] {
-    height: 30px;
+  .sm\:h-\[25px\] {
+    height: 25px;
   }
 
   .sm\:h-\[20px\] {
@@ -956,8 +956,8 @@ video {
     width: 100%;
   }
 
-  .sm\:w-\[30px\] {
-    width: 30px;
+  .sm\:w-\[25px\] {
+    width: 25px;
   }
 
   .sm\:w-\[20px\] {

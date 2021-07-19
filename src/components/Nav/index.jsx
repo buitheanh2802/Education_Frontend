@@ -15,7 +15,7 @@ const Nav = () => {
         <nav className="py-[10px] px-[15px] mt-[10px]">
             <div className="container mx-auto flex justify-between items-center">
                 <Link to="/"><img className="sm:w-full w-[80%]" src={Logo} alt="Education.com" /></Link>
-                <button onClick={() => setShowMenu(true)} className="lg:hidden"><img className="w-[20px] h-[20px] sm:w-[30px] sm:h-[30px]" src={IconMenu} alt="" /></button>
+                <button onClick={() => setShowMenu(true)} className="lg:hidden"><img className="w-[20px] h-[20px] sm:w-[25px] sm:h-[25px]" src={IconMenu} alt="" /></button>
                 <ul className={`${showMenu ? 'block' : 'hidden'} subMenu lg:flex lg:text-white text-[14px] sm:text-[17px]`}>
                     <li className="px-[15px] flex lg:hidden justify-between items-center">
                         <Link to="/"><img className="sm:w-full w-[80%]" src={Logo} alt="Education.com" /></Link>
