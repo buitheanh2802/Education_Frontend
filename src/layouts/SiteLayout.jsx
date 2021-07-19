@@ -1,9 +1,11 @@
 import React from 'react';
+import Header from '../components/Headers';
 
 const SiteLayout = () => {
     return (
-        <div>
-        </div>
+        <>
+            <Header />
+        </>
     );
 };
 
