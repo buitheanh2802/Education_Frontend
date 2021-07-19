@@ -19,6 +19,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "tailwind": "tailwindcss -i ./src/assets/css/tailwind.css -o ./src/assets/css/main.css -w --verbose ",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -47,6 +48,7 @@
     "postcss": "^8.3.5",
     "postcss-cli": "^8.3.1",
     "tailwindcss": "^2.2.4",
+    "tailwindcss-cli": "^0.1.2",
     "win-node-env": "^0.4.0"
   }
 }
