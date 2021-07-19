@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.menu-before::after{
+.menu-after::after{
     position: absolute;
     content: "";
     top: 50%;
