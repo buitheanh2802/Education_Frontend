@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router ,Route,Switch } from 'react-router-dom';
-import SiteLayout from './../layouts/SiteLayout';
+import  Headers from '../components/Headers'
 
 const RootRoute = () => {
     return (
         <Router>
             <Switch>
                 <Route path='/'>
-                    <SiteLayout />
+                    <Headers />
                 </Route>
             </Switch>
         </Router>
