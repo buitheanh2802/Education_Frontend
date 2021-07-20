@@ -1,10 +1,16 @@
 import React from 'react';
-import Headers from '../components/Headers';
-const SiteLayout = () => {
+import Banner from '../components/Banner';
+import Header from '../components/Headers';
+import Introduce from '../components/Introduce';
 
+const SiteLayout = () => {
     return (
         <>
-            <Headers/>
+            <Header />
+            <div className="px-[15px]">
+                <Introduce />
+            </div>
+            <Banner />
         </>
     );
 };
