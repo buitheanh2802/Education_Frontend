@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 const Header = () => {
     return (
-        <div>
+        <div className="text-[#ff0000]">
             đây là header
         </div>
     )
