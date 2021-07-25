@@ -1,8 +1,11 @@
 import React from 'react';
 import Banner from '../components/Banner';
-import Header from '../components/Headers';
-import HotCourse from '../components/HotCourse';
+// import BannerColla from '../components/BannerColla';
+// import Contact from '../components/Contact';
+// import HotCourse from '../components/HotCourse';
 import Introduce from '../components/Introduce';
+import Footer from '../components/Footer';
+import Header from '../components/Headers';
 
 const SiteLayout = () => {
     return (
@@ -13,7 +16,13 @@ const SiteLayout = () => {
             </div>
             <Banner />
 
-            <HotCourse/>
+            {/* <HotCourse/>
+            
+            <BannerColla/>
+
+            <Contact/> */}
+
+            <Footer/>
         </>
     );
 };
