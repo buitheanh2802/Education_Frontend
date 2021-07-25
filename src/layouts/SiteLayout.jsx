@@ -1,6 +1,7 @@
 import React from 'react';
 import Banner from '../components/Banner';
 import Header from '../components/Headers';
+import HotCourse from '../components/HotCourse';
 import Introduce from '../components/Introduce';
 
 const SiteLayout = () => {
@@ -11,6 +12,8 @@ const SiteLayout = () => {
                 <Introduce />
             </div>
             <Banner />
+
+            <HotCourse/>
         </>
     );
 };

@@ -9,6 +9,29 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
-  mode : 'jit'
+  corePlugins: {
+    container: false
+  },
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        '.container': {
+          maxWidth: '100%',
+          '@screen md': {
+            maxWidth: '640px',
+          },
+          '@screen lg': {
+            maxWidth: '980px',
+          },
+          '@screen xl': {
+            maxWidth: '1100px',
+          },
+          '@screen 2xl': {
+            maxWidth: '1280px',
+          },
+        }
+      })
+    }
+  ],
+  mode: 'jit'
 }
