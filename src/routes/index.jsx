@@ -6,9 +6,7 @@ const RootRoute = () => {
     return (
         <Router>
             <Switch>
-                <Route path='/'>
-                    <SiteLayout />
-                </Route>
+                <Route path='/'> <SiteLayout /> </Route>
             </Switch>
         </Router>
     );
