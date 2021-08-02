@@ -1,4 +1,5 @@
 export const path = {
-    HOME : '/',
-    ABOUT : '/about'
+    HOME: '/',
+    ABOUT: '/about',
+    KHOAHOC: '/khoa-hoc'
 }
