@@ -6,23 +6,23 @@ import HotCourse from '../components/HotCourse';
 import Introduce from '../components/Introduce';
 import Footer from '../components/Footer';
 import Header from '../components/Headers';
+import { Route, Switch } from 'react-router-dom';
+import { path } from "../constants";
+import KhoaHoc from '../pages/KhoaHoc';
+import Thuchanh from '../pages/Thuchanh';
 
 const SiteLayout = () => {
     return (
         <>
             <Header />
-            <div className="px-[15px]">
-                <Introduce />
-            </div>
-            <Banner />
 
-            {/* <HotCourse/> */}
-            
-            {/* <BannerColla/> */}
+            <Switch>
+                <Route path={path.KHOAHOC} component={KhoaHoc}></Route>
+                <Route path={path.THUCHANH} component={Thuchanh}></Route>
+            </Switch>
 
-            {/* <Contact/> */}
 
-            <Footer/>
+            <Footer />
         </>
     );
 };

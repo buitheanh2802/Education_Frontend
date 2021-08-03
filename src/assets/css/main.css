@@ -705,6 +705,14 @@ video {
   margin-top: 20px;
 }
 
+.mb-\[15px\] {
+  margin-bottom: 15px;
+}
+
+.mb-\[60px\] {
+  margin-bottom: 60px;
+}
+
 .mb-\[20px\] {
   margin-bottom: 20px;
 }
@@ -717,16 +725,8 @@ video {
   margin-bottom: 30px;
 }
 
-.mb-\[15px\] {
-  margin-bottom: 15px;
-}
-
 .mb-\[10px\] {
   margin-bottom: 10px;
-}
-
-.mb-\[60px\] {
-  margin-bottom: 60px;
 }
 
 .mt-\[10px\] {
@@ -961,11 +961,6 @@ video {
   padding: 20px;
 }
 
-.px-\[15px\] {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
 .px-\[20px\] {
   padding-left: 20px;
   padding-right: 20px;
@@ -974,6 +969,11 @@ video {
 .py-\[5px\] {
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.px-\[15px\] {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .px-\[38px\] {
@@ -1023,12 +1023,12 @@ video {
   font-size: 16px;
 }
 
-.text-\[22px\] {
-  font-size: 22px;
-}
-
 .text-\[35px\] {
   font-size: 35px;
+}
+
+.text-\[22px\] {
+  font-size: 22px;
 }
 
 .text-\[18px\] {
@@ -1048,6 +1048,11 @@ video {
 }
 
 .text-white {
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
+.text-\[\#ffffff\] {
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
@@ -1085,11 +1090,6 @@ video {
 .text-\[\#f44336\] {
   --tw-text-opacity: 1;
   color: rgba(244, 67, 54, var(--tw-text-opacity));
-}
-
-.text-\[\#ffffff\] {
-  --tw-text-opacity: 1;
-  color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
 .shadow {
@@ -1233,12 +1233,12 @@ video {
     width: 66.666667%;
   }
 
-  .sm\:w-\[180px\] {
-    width: 180px;
-  }
-
   .sm\:w-\[58\%\] {
     width: 58%;
+  }
+
+  .sm\:w-\[180px\] {
+    width: 180px;
   }
 
   .sm\:w-\[140px\] {
@@ -1293,14 +1293,6 @@ video {
 
   .md\:mb-\[30px\] {
     margin-bottom: 30px;
-  }
-
-  .md\:block {
-    display: block;
-  }
-
-  .md\:hidden {
-    display: none;
   }
 
   .md\:w-2\/3 {
@@ -1400,12 +1392,12 @@ video {
     font-size: 28px;
   }
 
-  .lg\:text-\[36px\] {
-    font-size: 36px;
-  }
-
   .lg\:text-\[60px\] {
     font-size: 60px;
+  }
+
+  .lg\:text-\[36px\] {
+    font-size: 36px;
   }
 
   .lg\:text-white {
