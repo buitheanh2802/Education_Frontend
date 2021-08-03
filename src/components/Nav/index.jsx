@@ -22,7 +22,7 @@ const Nav = () => {
                         <Link to="/"><img className="w-[120px] sm:w-[140px] lg:w-[160px]" src={LogoBlack} alt="Education.com" /></Link>
                         <button onClick={() => setShowMenu(false)} className="lg:hidden"><img className="w-[15px] h-[15px] sm:w-[20px] sm:h-[20px]" src={IconClose} alt="" /></button>
                     </li>
-                    <li className="px-[15px]"><NavLink to="/" activeClassName="text-[#f44336]" className="flex items-center"><img className="w-[15px] h-[15px] mr-[10px] sm:w-[20px] sm:h-[20px] lg:hidden" src={IconHome} alt="" /> Trang chủ</NavLink></li>
+                    <li className="px-[15px]"><NavLink exact to="/" activeClassName="text-[#f44336]" className="flex items-center"><img className="w-[15px] h-[15px] mr-[10px] sm:w-[20px] sm:h-[20px] lg:hidden" src={IconHome} alt="" /> Trang chủ</NavLink></li>
                     <li className="px-[15px]"><NavLink to="/khoa-hoc" activeClassName="text-[#f44336]" className="flex items-center"><img className="w-[15px] h-[15px] mr-[10px] sm:w-[20px] sm:h-[20px] lg:hidden" src={IconCourse} alt="" /> Khóa học</NavLink></li>
                     <li className="px-[15px]"><NavLink to="/thuc-hanh" activeClassName="text-[#f44336]" className="flex items-center"><img className="w-[15px] h-[15px] mr-[10px] sm:w-[20px] sm:h-[20px] lg:hidden" src={IconPractice} alt="" /> Thực hành</NavLink></li>
                     <li className="px-[15px] menu-after relative"><NavLink to="/dang-nhap" activeClassName="text-[#f44336]" className="flex items-center"><img className="w-[15px] h-[15px] mr-[10px] sm:w-[20px] sm:h-[20px] lg:hidden" src={IconLogin} alt="" /> Đăng nhập</NavLink></li>

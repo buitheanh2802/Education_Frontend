@@ -1,8 +1,5 @@
 @tailwind base;
 @tailwind components;
-<<<<<<< HEAD
-@tailwind utilities;
-=======
 @tailwind utilities;
 
 
@@ -74,4 +71,3 @@
     -ms-user-select: none;
     user-select: none;
 }
->>>>>>> 1145c3086e3c616464b62ee6f061835249e11f1b

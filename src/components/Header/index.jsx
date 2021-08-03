@@ -1,7 +1,7 @@
 import React from 'react';
 import Nav from '../Nav';
 
-const Headers = () => {
+const Header = () => {
     return (
         <header className="h-screen bg-center bg-cover relative" style={{ backgroundImage: "url(https://thanhdat19521.github.io/eduford/images/banner.png)" }}>
             <div className="bg-[#000000] bg-opacity-[35%] absolute top-0 left-0 right-0 bottom-0 z-0">
@@ -18,4 +18,4 @@ const Headers = () => {
     );
 };
 
-export default Headers
+export default Header
