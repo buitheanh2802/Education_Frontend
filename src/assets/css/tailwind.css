@@ -1,21 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
-.menu-after::after{
-    position: fixed;
+.menu-after::after {
+    position: absolute;
     content: "";
     top: 50%;
     right: -0.5px;
     width: 1px;
-    height: 75%;
+    height: 85%;
     transform: translateY(-50%);
-    background: #ff0000;
+    background: #8b4646;
 }
 
 @media (max-width: 1024px) {
-    .subMenu{
+    .subMenu {
         position: fixed;
         top: 0;
         right: 0;
@@ -26,12 +24,10 @@
         animation: showMenu ease .6s;
         transition-delay: .6s;
     }
-
-    .subMenu li{
+    .subMenu li {
         padding: 15px;
     }
-
-    .subMenu li:nth-child(1){
+    .subMenu li:nth-child(1) {
         border-bottom: 1px solid #E2E8F0;
         padding-top: 20px;
         margin-bottom: 15px;
@@ -39,7 +35,7 @@
 }
 
 @media (max-width: 640px) {
-    .subMenu{
+    .subMenu {
         position: fixed;
         top: 0;
         right: 0;
@@ -53,21 +49,44 @@
 }
 
 @keyframes showMenu {
-    0%{
+    0% {
         opacity: 0;
         transform: translateX(50%);
     }
-    100%{
+    100% {
         opacity: 1;
         transform: translateX(0%);
     }
 }
 
-.unselectable{
+.unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.fixed__menu {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+    position: fixed;
+    padding: 5px 10px;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin-top: 0;
+    background: #111827;
+    animation: GoTop .5s ease;
+}
+
+@keyframes GoTop {
+    0% {
+        top: 15px;
+        opacity: 0;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+    }
 }

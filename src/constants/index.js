@@ -1,6 +1,9 @@
 export const path = {
-    HOME : '/',
-    ABOUT : '/about',
-    KHOAHOC: '/khoa-hoc',
-    THUCHANH: '/thuc-hanh'
+    // Website
+    HOME: '/',
+    COURSE: '/khoa-hoc',
+    EXERCISE: '/thuc-hanh',
+
+    // Admin
+    ADMIN: '/admin'
 }
