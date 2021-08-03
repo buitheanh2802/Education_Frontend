@@ -70,11 +70,9 @@
 
 .fixed__menu {
     box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
-    position: fixed;
+    position: sticky;
     padding: 5px 10px;
     top: 0;
-    right: 0;
-    left: 0;
     margin-top: 0;
     background: #111827;
     animation: GoTop .5s ease;

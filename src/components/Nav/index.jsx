@@ -19,15 +19,15 @@ const Nav = () => {
         function fixedMEnu() {
             const menu = document.querySelector('.menu');
             window.addEventListener('scroll', () => {
-                (window.pageYOffset > 200 && pathname === path.HOME)
+                (window.pageYOffset > 200)
                     ? menu.classList.add('fixed__menu')
                     : menu.classList.remove('fixed__menu')
             })
         }
         fixedMEnu();
-    },[pathname])
+    }, [pathname])
     return (
-        <nav className={`menu px-[15px] sm:px-[35px] z-[9999] ${pathname === path.HOME ? 'mt-[10px] py-[10px]' : 'py-[5px] bg-gray-900 fixed__menu fixed top-0 right-0 left-0'}`}>
+        <nav className={`menu px-[15px] sm:px-[35px] z-[9999] ${pathname === path.HOME ? 'mt-[10px] py-[10px]' : 'py-[5px] bg-gray-900'}`}>
             <div className="container mx-auto flex justify-between items-center">
                 <Link to="/"><img className="w-[100px] lg:w-[120px] 2xl:w-[140px]" src={LogoWhite} alt="Education.com" /></Link>
                 <button onClick={() => setShowMenu(true)} className="lg:hidden"><img className="w-[20px] h-[20px] sm:w-[25px] sm:h-[25px]" src={IconMenu} alt="" /></button>
