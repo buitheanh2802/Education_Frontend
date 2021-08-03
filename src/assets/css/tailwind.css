@@ -4,7 +4,7 @@
 
 
 .menu-after::after{
-    position: absolute;
+    position: fixed;
     content: "";
     top: 50%;
     right: -0.5px;
@@ -16,7 +16,7 @@
 
 @media (max-width: 1024px) {
     .subMenu{
-        position: absolute;
+        position: fixed;
         top: 0;
         right: 0;
         left: 60%;
@@ -40,7 +40,7 @@
 
 @media (max-width: 640px) {
     .subMenu{
-        position: absolute;
+        position: fixed;
         top: 0;
         right: 0;
         left: 0;
