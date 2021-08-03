@@ -4,16 +4,16 @@ import urlLogo from '../../assets/media/pictures/logo-white.svg'
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 px-[15px] text-white mt-[60px]">
+        <footer className="bg-gray-900 px-[15px] text-white">
             <div className="container mx-auto pt-[30px] pb-[50px] text-center md:text-left">
                 <ul className="hidden lg:grid grid-cols-10 gap-[30px] items-center text-[22px] font-medium">
-                        <li className=" lg:col-span-3">
-                            <img className="w-[160px] sm:w-[180px] lg:w-[200px]" src={urlLogo} alt="" />
-                        </li>
-                        <li className=" lg:col-span-2">Cộng tác viên</li>
-                        <li className=" lg:col-span-2">Chúng tôi</li>
-                        <li className=" lg:col-span-1">Hỗ trợ</li>
-                        <li className=" lg:col-span-2">Theo dõi</li>
+                    <li className=" lg:col-span-3">
+                        <img className="w-[160px] sm:w-[180px] lg:w-[200px]" src={urlLogo} alt="" />
+                    </li>
+                    <li className=" lg:col-span-2">Cộng tác viên</li>
+                    <li className=" lg:col-span-2">Chúng tôi</li>
+                    <li className=" lg:col-span-1">Hỗ trợ</li>
+                    <li className=" lg:col-span-2">Theo dõi</li>
                 </ul>
                 <div className="grid md:grid-cols-3 lg:grid-cols-10 gap-[30px] mb-[30px]">
                     <ul className=" lg:col-span-3">

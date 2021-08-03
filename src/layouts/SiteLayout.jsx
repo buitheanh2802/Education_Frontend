@@ -8,8 +8,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Headers';
 import { Route, Switch } from 'react-router-dom';
 import { path } from "../constants";
-import KhoaHoc from '../pages/KhoaHoc';
-import Thuchanh from '../pages/Thuchanh';
+import HomePage from '../pages/HomePage';
 
 const SiteLayout = () => {
     return (
@@ -17,8 +16,7 @@ const SiteLayout = () => {
             <Header />
 
             <Switch>
-                <Route path={path.KHOAHOC} component={KhoaHoc}></Route>
-                <Route path={path.THUCHANH} component={Thuchanh}></Route>
+                <Route path={path.HOME} component={HomePage} />
             </Switch>
 
 

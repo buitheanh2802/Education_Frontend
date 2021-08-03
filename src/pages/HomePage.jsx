@@ -1,11 +1,11 @@
 import React from 'react'
 
-const KhoaHoc = () => {
+const HomePage = () => {
     return (
         <div>
-            main kháo học
+            
         </div>
     )
 }
 
-export default KhoaHoc
+export default HomePage
