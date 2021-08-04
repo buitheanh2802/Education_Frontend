@@ -1,16 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const mySice = createSlice({
-    name: "user",
+const mySlice = createSlice({
+    name: 'userLogin',
     initialState: {
-        isUser: true,
-        profile: {
-            fullname: "Nguyễn Thành Đạt"
-        }
+        isUser: false,
+        profile: null,
+        notification: null
     },
-    reducers: {}
+    reducers: {
+        findAll: (state, action) => {
+            return { ...state, isUser: true, profile: action.payload }
+        },
+        findNotifi: (state, action) => {
+            return { ...state, notification: action.payload }
+        }
+    }
 })
 
-const { actions, reducer } = mySice;
-export const { } = actions;
-export default reducer
+export const { findAll, findNotifi } = mySlice.actions;
+export default mySlice.reducer
