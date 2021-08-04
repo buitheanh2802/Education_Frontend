@@ -1,4 +1,3 @@
-import { fromJSON } from 'postcss'
 import React from 'react'
 import Select from 'react-select'
 import khoahoc_img from '../assets/media/pictures/khoa-hoc.png'
