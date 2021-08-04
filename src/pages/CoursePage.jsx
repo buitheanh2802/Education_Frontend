@@ -32,16 +32,16 @@ const CoursePage = () => {
                 </div>
                 <div className="mt-[30px] mb-[75px] mx-[15px] md:mx-auto">
                     <div className="container mx-auto">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[30px]">
-                            <div className=" rounded-[15px]  course-item" >
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[30px] ">
+                            <div className=" rounded-[15px]  course-item relative" >
                                 <div className="w-full h-[220px] bg-no-repeat  bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
                                 <div className="px-[20px] ">
                                     <p className="text-[20px] font-bold mt-[12px]">Lập trình javascript (căn bản)</p>
                                     <p className="text-[14px] mt-[4px] text-green-500">Giảng viên: Nguyễn Thành Đạt</p>
-                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 desc">
+                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 mb-[63px]">
                                         Khoá học này sẽ giúp bạn hiểu được cách thức hoạt động của mã javascript, cách để xây dựng một ứng dụng javascript chuyên nghiệp.
                                     </p>
-                                    <div className="flex justify-between items-center mt-[17px] mb-[25px]">
+                                    <div className="w-full pr-[40px] flex justify-between items-center mt-[17px]  bottom-[25px] absolute">
                                         <div className="flex items-center">
                                             <span className="text-blue-500"><i class="fas fa-user-friends"></i></span>
                                             <span className="text-blue-500 ml-[10px] text-[14px]">19.520 thành viên</span>
@@ -50,17 +50,16 @@ const CoursePage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className=" rounded-[15px]  course-item" >
+                            <div className=" rounded-[15px]  course-item relative" >
                                 <div className="w-full h-[220px] bg-no-repeat  bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
                                 <div className="px-[20px] ">
                                     <p className="text-[20px] font-bold mt-[12px]">Lập trình javascript (căn bản)</p>
                                     <p className="text-[14px] mt-[4px] text-green-500">Giảng viên: Nguyễn Thành Đạt</p>
-                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 desc">
+                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 mb-[63px]">
                                         Khoá học này sẽ giúp bạn hiểu được cách thức hoạt động của mã javascript, cách để xây dựng một ứng dụng javascript chuyên nghiệp.
-                                        Khoá học này sẽ giúp bạn hiểu được cách thức hoạt động của mã javascript, cách để xây dựng một ứng dụng javascript chuyên nghiệp.
-
+                                        Khoá học này sẽ giúp bạn hiểu được cách thức hoạt động của mã
                                     </p>
-                                    <div className="flex justify-between items-center mt-[17px] mb-[25px]">
+                                    <div className="w-full pr-[40px] flex justify-between items-center mt-[17px]  bottom-[25px] absolute">
                                         <div className="flex items-center">
                                             <span className="text-blue-500"><i class="fas fa-user-friends"></i></span>
                                             <span className="text-blue-500 ml-[10px] text-[14px]">19.520 thành viên</span>
@@ -69,15 +68,15 @@ const CoursePage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className=" rounded-[15px]  course-item" >
-                                <div className="w-full h-[220px] bg-no-repeat   bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
+                            <div className=" rounded-[15px]  course-item relative" >
+                                <div className="w-full h-[220px] bg-no-repeat  bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
                                 <div className="px-[20px] ">
                                     <p className="text-[20px] font-bold mt-[12px]">Lập trình javascript (căn bản)</p>
                                     <p className="text-[14px] mt-[4px] text-green-500">Giảng viên: Nguyễn Thành Đạt</p>
-                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 desc">
+                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 mb-[63px]">
                                         Khoá học này sẽ giúp bạn hiểu được cách thức hoạt động của mã javascript, cách để xây dựng một ứng dụng javascript chuyên nghiệp.
                                     </p>
-                                    <div className="flex justify-between items-center mt-[17px] mb-[25px]">
+                                    <div className="w-full pr-[40px] flex justify-between items-center mt-[17px]  bottom-[25px] absolute">
                                         <div className="flex items-center">
                                             <span className="text-blue-500"><i class="fas fa-user-friends"></i></span>
                                             <span className="text-blue-500 ml-[10px] text-[14px]">19.520 thành viên</span>
@@ -86,15 +85,15 @@ const CoursePage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className=" rounded-[15px]  course-item" >
-                                <div className="w-full h-[220px] bg-no-repeat   bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
+                            <div className=" rounded-[15px]  course-item relative" >
+                                <div className="w-full h-[220px] bg-no-repeat  bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
                                 <div className="px-[20px] ">
                                     <p className="text-[20px] font-bold mt-[12px]">Lập trình javascript (căn bản)</p>
                                     <p className="text-[14px] mt-[4px] text-green-500">Giảng viên: Nguyễn Thành Đạt</p>
-                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 desc">
+                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 mb-[63px]">
                                         Khoá học này sẽ giúp bạn hiểu được cách thức hoạt động của mã javascript, cách để xây dựng một ứng dụng javascript chuyên nghiệp.
                                     </p>
-                                    <div className="flex justify-between items-center mt-[17px] mb-[25px]">
+                                    <div className="w-full pr-[40px] flex justify-between items-center mt-[17px]  bottom-[25px] absolute">
                                         <div className="flex items-center">
                                             <span className="text-blue-500"><i class="fas fa-user-friends"></i></span>
                                             <span className="text-blue-500 ml-[10px] text-[14px]">19.520 thành viên</span>
@@ -103,15 +102,15 @@ const CoursePage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className=" rounded-[15px]  course-item" >
-                                <div className="w-full h-[220px] bg-no-repeat   bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
+                            <div className=" rounded-[15px]  course-item relative" >
+                                <div className="w-full h-[220px] bg-no-repeat  bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
                                 <div className="px-[20px] ">
                                     <p className="text-[20px] font-bold mt-[12px]">Lập trình javascript (căn bản)</p>
                                     <p className="text-[14px] mt-[4px] text-green-500">Giảng viên: Nguyễn Thành Đạt</p>
-                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 desc">
+                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 mb-[63px]">
                                         Khoá học này sẽ giúp bạn hiểu được cách thức hoạt động của mã javascript, cách để xây dựng một ứng dụng javascript chuyên nghiệp.
                                     </p>
-                                    <div className="flex justify-between items-center mt-[17px] mb-[25px]">
+                                    <div className="w-full pr-[40px] flex justify-between items-center mt-[17px]  bottom-[25px] absolute">
                                         <div className="flex items-center">
                                             <span className="text-blue-500"><i class="fas fa-user-friends"></i></span>
                                             <span className="text-blue-500 ml-[10px] text-[14px]">19.520 thành viên</span>
@@ -120,15 +119,15 @@ const CoursePage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className=" rounded-[15px]  course-item" >
-                                <div className="w-full h-[220px] bg-no-repeat   bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
+                            <div className=" rounded-[15px]  course-item relative" >
+                                <div className="w-full h-[220px] bg-no-repeat  bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
                                 <div className="px-[20px] ">
                                     <p className="text-[20px] font-bold mt-[12px]">Lập trình javascript (căn bản)</p>
                                     <p className="text-[14px] mt-[4px] text-green-500">Giảng viên: Nguyễn Thành Đạt</p>
-                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 desc">
+                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 mb-[63px]">
                                         Khoá học này sẽ giúp bạn hiểu được cách thức hoạt động của mã javascript, cách để xây dựng một ứng dụng javascript chuyên nghiệp.
                                     </p>
-                                    <div className="flex justify-between items-center mt-[17px] mb-[25px]">
+                                    <div className="w-full pr-[40px] flex justify-between items-center mt-[17px]  bottom-[25px] absolute">
                                         <div className="flex items-center">
                                             <span className="text-blue-500"><i class="fas fa-user-friends"></i></span>
                                             <span className="text-blue-500 ml-[10px] text-[14px]">19.520 thành viên</span>
@@ -137,15 +136,15 @@ const CoursePage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className=" rounded-[15px]  course-item" >
-                                <div className="w-full h-[220px] bg-no-repeat   bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
+                            <div className=" rounded-[15px]  course-item relative" >
+                                <div className="w-full h-[220px] bg-no-repeat  bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
                                 <div className="px-[20px] ">
                                     <p className="text-[20px] font-bold mt-[12px]">Lập trình javascript (căn bản)</p>
                                     <p className="text-[14px] mt-[4px] text-green-500">Giảng viên: Nguyễn Thành Đạt</p>
-                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 desc">
+                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 mb-[63px]">
                                         Khoá học này sẽ giúp bạn hiểu được cách thức hoạt động của mã javascript, cách để xây dựng một ứng dụng javascript chuyên nghiệp.
                                     </p>
-                                    <div className="flex justify-between items-center mt-[17px] mb-[25px]">
+                                    <div className="w-full pr-[40px] flex justify-between items-center mt-[17px]  bottom-[25px] absolute">
                                         <div className="flex items-center">
                                             <span className="text-blue-500"><i class="fas fa-user-friends"></i></span>
                                             <span className="text-blue-500 ml-[10px] text-[14px]">19.520 thành viên</span>
@@ -154,17 +153,15 @@ const CoursePage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className=" rounded-[15px]  course-item" >
-                                <div className="w-full h-[220px] bg-no-repeat   bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
+                            <div className=" rounded-[15px]  course-item relative" >
+                                <div className="w-full h-[220px] bg-no-repeat  bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
                                 <div className="px-[20px] ">
                                     <p className="text-[20px] font-bold mt-[12px]">Lập trình javascript (căn bản)</p>
                                     <p className="text-[14px] mt-[4px] text-green-500">Giảng viên: Nguyễn Thành Đạt</p>
-                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 desc">
+                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 mb-[63px]">
                                         Khoá học này sẽ giúp bạn hiểu được cách thức hoạt động của mã javascript, cách để xây dựng một ứng dụng javascript chuyên nghiệp.
-                                        Khoá học này sẽ giúp bạn hiểu được cách thức hoạt động của mã javascript, cách để xây dựng một ứng dụng javascript chuyên nghiệp.
-
                                     </p>
-                                    <div className="flex justify-between items-center mt-[17px] mb-[25px]">
+                                    <div className="w-full pr-[40px] flex justify-between items-center mt-[17px]  bottom-[25px] absolute">
                                         <div className="flex items-center">
                                             <span className="text-blue-500"><i class="fas fa-user-friends"></i></span>
                                             <span className="text-blue-500 ml-[10px] text-[14px]">19.520 thành viên</span>
@@ -173,15 +170,15 @@ const CoursePage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className=" rounded-[15px]  course-item" >
-                                <div className="w-full h-[220px] bg-no-repeat   bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
+                            <div className=" rounded-[15px]  course-item relative" >
+                                <div className="w-full h-[220px] bg-no-repeat  bg-center rounded-t-[15px]" style={{ backgroundImage: `url(${khoahoc_img})`, backgroundSize: '100% ' }}> </div>
                                 <div className="px-[20px] ">
                                     <p className="text-[20px] font-bold mt-[12px]">Lập trình javascript (căn bản)</p>
                                     <p className="text-[14px] mt-[4px] text-green-500">Giảng viên: Nguyễn Thành Đạt</p>
-                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 desc">
+                                    <p className="text-justify text-[16px] leading-[24px] mt-[4px] text-gray-700 mb-[63px]">
                                         Khoá học này sẽ giúp bạn hiểu được cách thức hoạt động của mã javascript, cách để xây dựng một ứng dụng javascript chuyên nghiệp.
                                     </p>
-                                    <div className="flex justify-between items-center mt-[17px] mb-[25px]">
+                                    <div className="w-full pr-[40px] flex justify-between items-center mt-[17px]  bottom-[25px] absolute">
                                         <div className="flex items-center">
                                             <span className="text-blue-500"><i class="fas fa-user-friends"></i></span>
                                             <span className="text-blue-500 ml-[10px] text-[14px]">19.520 thành viên</span>
