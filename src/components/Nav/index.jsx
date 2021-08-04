@@ -19,8 +19,6 @@ const Nav = () => {
     const { pathname } = useLocation();
     const [isPopup, setIsPopup] = useState(false);
 
-    console.log(profile)
-
     useEffect(() => {
         function fixedMEnu() {
             const menu = document.querySelector('.menu');
