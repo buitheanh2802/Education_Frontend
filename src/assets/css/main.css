@@ -1272,7 +1272,7 @@ video {
 .menu-after::after {
   position: absolute;
   content: "";
-  top: 50%;
+  top: 55%;
   right: -0.5px;
   width: 1px;
   height: 75%;
