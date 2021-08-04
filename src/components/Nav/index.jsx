@@ -17,14 +17,16 @@ const Nav = () => {
 
     useEffect(() => {
         function fixedMEnu() {
-            const menu = document.querySelector('.menu');
-            (pathname === path.HOME) ? (window.pageYOffset > 200)
-                ? menu.classList.add('fixed__menu')
-                : menu.classList.remove('fixed__menu')
-                : menu.classList.add('fixed__menu')
+            window.addEventListener('scroll', () => {
+                const menu = document.querySelector('.menu');
+                (pathname === path.HOME) ? (window.pageYOffset > 200)
+                    ? menu.classList.add('fixed__menu')
+                    : menu.classList.remove('fixed__menu')
+                    : menu.classList.add('fixed__menu')
+            })
         }
-
-        window.addEventListener('scroll', fixedMEnu)
+        fixedMEnu();
+        
     }, [pathname])
 
     return (

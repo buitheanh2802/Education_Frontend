@@ -10,7 +10,7 @@ const SiteLayout = () => {
         <>
             <Nav />
             <Switch>
-                <Route path={path.HOME} component={HomePage} />
+                <Route exact path={path.HOME} component={HomePage} />
             </Switch>
 
             <Footer />
