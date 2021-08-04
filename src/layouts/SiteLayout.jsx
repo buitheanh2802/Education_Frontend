@@ -4,7 +4,8 @@ import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 import { path } from '../constants';
 import HomePage from '../pages/HomePage';
-import KhoaHoc from '../pages/KhoaHoc';
+import CoursePage from '../pages/CoursePage';
+import PracticePage from '../pages/PracticePage';
 
 const SiteLayout = () => {
     return (
@@ -15,7 +16,8 @@ const SiteLayout = () => {
             </div>
             <Switch>
                 <Route exact path={path.HOME} component={HomePage} />
-                <Route path={path.KHOAHOC} component={KhoaHoc} />
+                <Route path={path.COURSE} component={CoursePage} />
+                <Route path={path.PRACTICE} component={PracticePage} />
             </Switch>
 
             <Footer />

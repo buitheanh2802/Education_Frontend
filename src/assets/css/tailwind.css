@@ -70,3 +70,26 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+.font-roboto {
+  font-family: "Roboto", sans-serif;
+}
+#main {
+  font-family: "Roboto", sans-serif;
+}
+.desc {
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.course-item {
+  box-shadow: #e6e2e2 0px 6px 9px 2px;
+}
+.btn_slick:hover {
+  color: #447ec5;
+  cursor: pointer;
+  text-shadow: 0px 0px 3px #447ec5;
+}
