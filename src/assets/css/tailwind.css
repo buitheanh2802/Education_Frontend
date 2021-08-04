@@ -93,3 +93,6 @@
   cursor: pointer;
   text-shadow: 0px 0px 3px #447ec5;
 }
+.pagings .active {
+  color: #447ec5;
+}
