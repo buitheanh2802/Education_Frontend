@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const mySlice = createSlice({
-    name: 'user',
+    name: 'notification',
     initialState: {
         isLoading: false,
-        isUser: false,
-        profile: null
+        models: null,
+        totalRows: null
     },
     reducers: {}
 })
