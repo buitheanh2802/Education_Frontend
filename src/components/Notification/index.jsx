@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IconCancel, IconDetele, IconDone, IconList, IconLoading } from '../Icon';
 import { findNotification } from '../../redux/actions/notification.action';
 import urlAvatar from '../../assets/media/pictures/avatar.png';
-import './style.css';
 import { Link } from 'react-router-dom';
 
 const Notification = ({ className, setIsNotification }) => {

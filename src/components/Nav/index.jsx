@@ -79,7 +79,7 @@ const Nav = () => {
                                 <Notification className="hidden lg:block" />
                             </div>}
                         </li>
-                        <li className={`px-[15px] relative ${user.isUser && 'hidden lg:block'}`}>
+                        <li className={`pl-[15px] relative ${user.isUser && 'hidden lg:block'}`}>
                             {user.isUser
                                 ? <i onClick={showPopup} className="cursor-pointer select-none w-[30px] h-[30px] block rounded-full bg-center bg-cover" style={{ backgroundImage: `url(${urlAvatar})` }}></i>
                                 : <Link to="/dang-ky" className="flex items-center"><img className="w-[15px] h-[15px] mr-[10px] sm:w-[20px] sm:h-[20px] lg:hidden" src={IconSignUp} alt="đăng ký" /> Đăng ký</Link>}

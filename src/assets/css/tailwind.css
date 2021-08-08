@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 .menu-after::after {
     position: absolute;
     content: "";
@@ -74,4 +73,23 @@
     padding-top: 5px;
     padding-bottom: 5px;
     background: #111827;
+}
+
+.notification::-webkit-scrollbar-track {
+    border: 1px solid white;
+    background-color: #b2bec3;
+}
+
+.notification::-webkit-scrollbar {
+    width: 3px;
+    background-color: #dfe6e9;
+}
+
+.notification::-webkit-scrollbar-thumb {
+    background-color: #c0bfbf;
+}
+
+*::-webkit-scrollbar {
+    width: 0px;
+    background-color: #dfe6e9;
 }
