@@ -48,8 +48,17 @@ const Notification = ({ className, setIsNotification }) => {
                                     <li className="py-[5px] px-[10px] hover:bg-gray-100 rounded-[3px] duration-300 flex">
                                         <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${urlAvatar})` }}></i>
                                         <div className="pl-[15px]">
-                                            <p className="leading-[20px]"><span className="font-medium">eduford</span> nhắc nhở bạn hoàn thành bài tập <span className="font-medium">Learning app</span></p>
-                                            <p className="text-[#FF0000] text-[14px]">30 phút trước</p>
+                                            <p className="leading-[20px]"><span className="font-medium">Nguyễn Thành Đạt</span> đã trả lời bình luận của bạn.</p>
+                                            <p className="text-[#FF0000] text-[14px]">3 giờ trước</p>
+                                        </div>
+                                    </li>
+                                </Link>
+                                <Link to="/">
+                                    <li className="py-[5px] px-[10px] hover:bg-gray-100 rounded-[3px] duration-300 flex">
+                                        <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${urlAvatar})` }}></i>
+                                        <div className="pl-[15px]">
+                                            <p className="leading-[20px]"><span className="font-medium">eduford</span> đã trả lời bình luận của bạn.</p>
+                                            <p className="text-[#FF0000] text-[14px]">3 giờ trước</p>
                                         </div>
                                     </li>
                                 </Link>
@@ -72,71 +81,8 @@ const Notification = ({ className, setIsNotification }) => {
                                     <li className="py-[5px] px-[10px] hover:bg-gray-100 rounded-[3px] duration-300 flex">
                                         <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${urlAvatar})` }}></i>
                                         <div className="pl-[15px]">
-                                            <p className="leading-[20px]">Giảng viên <span className="font-medium">Nguyễn Thành Đạt</span> vừa tạo một bài mới cho khoá học <span className="font-medium">javascrit (cơ bản)</span>.</p>
-                                            <p className="text-[#FF0000] text-[14px]">12 ngày trước</p>
-                                        </div>
-                                    </li>
-                                </Link>
-                                <Link to="/">
-                                    <li className="py-[5px] px-[10px] hover:bg-gray-100 rounded-[3px] duration-300 flex">
-                                        <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${urlAvatar})` }}></i>
-                                        <div className="pl-[15px]">
-                                            <p className="leading-[20px]">Bạn đã đăng ký khoá học <span className="font-medium">javascrit (cơ bản)</span> thành công.</p>
-                                            <p className="text-[#FF0000] text-[14px]">1 tháng trước</p>
-                                        </div>
-                                    </li>
-                                </Link>
-                                <Link to="/">
-                                    <li className="py-[5px] px-[10px] hover:bg-gray-100 rounded-[3px] duration-300 flex">
-                                        <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${urlAvatar})` }}></i>
-                                        <div className="pl-[15px]">
-                                            <p className="leading-[20px]">Chào mừng bạn đã gia nhập cộng đồng <span className="font-medium">eduford</span>.</p>
-                                            <p className="text-[#FF0000] text-[14px]">2 tháng trước</p>
-                                        </div>
-                                    </li>
-                                </Link>
-                                <Link to="/">
-                                    <li className="py-[5px] px-[10px] hover:bg-gray-100 rounded-[3px] duration-300 flex">
-                                        <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${urlAvatar})` }}></i>
-                                        <div className="pl-[15px]">
-                                            <p className="leading-[20px]"><span className="font-medium">Nguyễn Thành Đạt</span> đã trả lời bình luận của bạn.</p>
-                                            <p className="text-[#FF0000] text-[14px]">3 giờ trước</p>
-                                        </div>
-                                    </li>
-                                </Link>
-                                <Link to="/">
-                                    <li className="py-[5px] px-[10px] hover:bg-gray-100 rounded-[3px] duration-300 flex">
-                                        <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${urlAvatar})` }}></i>
-                                        <div className="pl-[15px]">
-                                            <p className="leading-[20px]">Giảng viên <span className="font-medium">Nguyễn Thành Đạt</span> vừa tạo một bài mới cho khoá học <span className="font-medium">javascrit (cơ bản)</span>.</p>
-                                            <p className="text-[#FF0000] text-[14px]">12 ngày trước</p>
-                                        </div>
-                                    </li>
-                                </Link>
-                                <Link to="/">
-                                    <li className="py-[5px] px-[10px] hover:bg-gray-100 rounded-[3px] duration-300 flex">
-                                        <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${urlAvatar})` }}></i>
-                                        <div className="pl-[15px]">
-                                            <p className="leading-[20px]">Bạn đã đăng ký khoá học <span className="font-medium">javascrit (cơ bản)</span> thành công.</p>
-                                            <p className="text-[#FF0000] text-[14px]">1 tháng trước</p>
-                                        </div>
-                                    </li>
-                                </Link>
-                                <Link to="/">
-                                    <li className="py-[5px] px-[10px] hover:bg-gray-100 rounded-[3px] duration-300 flex">
-                                        <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${urlAvatar})` }}></i>
-                                        <div className="pl-[15px]">
-                                            <p className="leading-[20px]">Chào mừng bạn đã gia nhập cộng đồng <span className="font-medium">eduford</span>.</p>
-                                            <p className="text-[#FF0000] text-[14px]">2 tháng trước</p>
-                                        </div>
-                                    </li>
-                                </Link>
-                                <Link to="/">
-                                    <li className="py-[5px] px-[10px] hover:bg-gray-100 rounded-[3px] duration-300 flex">
-                                        <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${urlAvatar})` }}></i>
-                                        <div className="pl-[15px]">
-                                            <p className="leading-[20px]"><span className="font-medium">Nguyễn Thành Đạt</span> đã trả lời bình luận của bạn.</p>
-                                            <p className="text-[#FF0000] text-[14px]">3 giờ trước</p>
+                                            <p className="leading-[20px]"><span className="font-medium">eduford</span> nhắc nhở bạn hoàn thành bài tập <span className="font-medium">Learning app</span></p>
+                                            <p className="text-[#FF0000] text-[14px]">5 ngày trước</p>
                                         </div>
                                     </li>
                                 </Link>
