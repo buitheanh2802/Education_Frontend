@@ -662,48 +662,16 @@ video {
   left: 0px;
 }
 
-.top-0 {
-  top: 0px;
-}
-
 .top-full {
   top: 100%;
-}
-
-.left-1\/2 {
-  left: 50%;
-}
-
-.right-\[15px\] {
-  right: 15px;
-}
-
-.right-\[10px\] {
-  right: 10px;
-}
-
-.top-\[1px\] {
-  top: 1px;
-}
-
-.top-\[2px\] {
-  top: 2px;
 }
 
 .top-\[5px\] {
   top: 5px;
 }
 
-.top-\[-10px\] {
-  top: -10px;
-}
-
-.bottom-\[-2px\] {
-  bottom: -2px;
-}
-
-.bottom-0 {
-  bottom: 0px;
+.right-\[10px\] {
+  right: 10px;
 }
 
 .z-\[9999\] {
@@ -712,14 +680,6 @@ video {
 
 .z-10 {
   z-index: 10;
-}
-
-.z-20 {
-  z-index: 20;
-}
-
-.z-0 {
-  z-index: 0;
 }
 
 .z-\[-1\] {
@@ -751,10 +711,6 @@ video {
   margin-right: 10px;
 }
 
-.mr-\[15px\] {
-  margin-right: 15px;
-}
-
 .block {
   display: block;
 }
@@ -779,12 +735,12 @@ video {
   height: 20px;
 }
 
-.h-\[15px\] {
-  height: 15px;
-}
-
 .h-\[30px\] {
   height: 30px;
+}
+
+.h-\[15px\] {
+  height: 15px;
 }
 
 .h-\[10px\] {
@@ -807,20 +763,12 @@ video {
   width: 20px;
 }
 
-.w-\[15px\] {
-  width: 15px;
-}
-
-.w-\[50px\] {
-  width: 50px;
-}
-
-.w-\[25px\] {
-  width: 25px;
-}
-
 .w-\[30px\] {
   width: 30px;
+}
+
+.w-\[15px\] {
+  width: 15px;
 }
 
 .w-\[200px\] {
@@ -833,12 +781,6 @@ video {
 
 .-translate-y-1\/2 {
   --tw-translate-y: -50%;
-  -webkit-transform: var(--tw-transform);
-          transform: var(--tw-transform);
-}
-
-.-translate-x-1\/2 {
-  --tw-translate-x: -50%;
   -webkit-transform: var(--tw-transform);
           transform: var(--tw-transform);
 }
@@ -886,16 +828,6 @@ video {
   border-radius: 9999px;
 }
 
-.rounded-t-\[50px\] {
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
-}
-
-.rounded-b-\[50px\] {
-  border-bottom-right-radius: 50px;
-  border-bottom-left-radius: 50px;
-}
-
 .rounded-t-\[5px\] {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -910,14 +842,6 @@ video {
   border-width: 1px;
 }
 
-.border-\[20px\] {
-  border-width: 20px;
-}
-
-.border-\[10px\] {
-  border-width: 10px;
-}
-
 .border-solid {
   border-style: solid;
 }
@@ -930,10 +854,6 @@ video {
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgba(255, 255, 255, var(--tw-border-opacity));
-}
-
-.border-transparent {
-  border-color: transparent;
 }
 
 .bg-gray-900 {
@@ -982,16 +902,6 @@ video {
   padding-right: 20px;
 }
 
-.px-\[5px\] {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.px-\[10px\] {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
 .pt-\[30px\] {
   padding-top: 30px;
 }
@@ -1010,14 +920,6 @@ video {
 
 .pl-\[15px\] {
   padding-left: 15px;
-}
-
-.pb-\[5px\] {
-  padding-bottom: 5px;
-}
-
-.pt-\[5px\] {
-  padding-top: 5px;
 }
 
 .pt-\[10px\] {
