@@ -7,7 +7,7 @@
     top: 50%;
     right: -0.5px;
     width: 1px;
-    height: 85%;
+    height: 65%;
     transform: translateY(-50%);
     background: #8b4646;
 }
@@ -17,7 +17,7 @@
         position: fixed;
         top: 0;
         right: 0;
-        left: 60%;
+        left: 55%;
         bottom: 0;
         background-color: #ffffff;
         z-index: 9999;
@@ -70,21 +70,26 @@
 
 .fixed__menu {
     box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
-    position: sticky;
-    padding: 5px 10px;
-    top: 0;
-    margin-top: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
     background: #111827;
-    animation: GoTop .5s ease;
 }
 
-@keyframes GoTop {
-    0% {
-        top: 15px;
-        opacity: 0;
-    }
-    100% {
-        top: 0;
-        opacity: 1;
-    }
+.notification::-webkit-scrollbar-track {
+    border: 1px solid white;
+    background-color: #b2bec3;
+}
+
+.notification::-webkit-scrollbar {
+    width: 3px;
+    background-color: #dfe6e9;
+}
+
+.notification::-webkit-scrollbar-thumb {
+    background-color: #c0bfbf;
+}
+
+*::-webkit-scrollbar {
+    width: 0px;
+    background-color: #dfe6e9;
 }

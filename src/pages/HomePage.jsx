@@ -1,10 +1,14 @@
 import React from 'react'
+import Header from '../components/Header'
 
 const HomePage = () => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <Header />
+            <div className="container mx-auto">
+                <h1>đây là trang chủ</h1>
+            </div>
+        </>
     )
 }
 

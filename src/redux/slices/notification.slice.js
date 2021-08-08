@@ -1,24 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { actionLogin } from "../actions/user.action";
+import { findNotification } from "../actions/notification.action";
 
 const mySlice = createSlice({
-    name: 'user',
+    name: 'notification',
     initialState: {
         isLoading: false,
         actionLoading: false,
         errors: null,
-        isUser: false,
-        profile: null
+        models: null,
+        totalRows: null,
+        total: 2
     },
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(actionLogin.pending, (state) => {
+        builder.addCase(findNotification.pending, (state) => {
             state.isLoading = true;
         })
-        builder.addCase(actionLogin.fulfilled, (state, action) => {
-            state.isUser = true;
+
+        builder.addCase(findNotification.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.profile = action.payload;
+            state.models = action.payload;
         })
     }
 })
