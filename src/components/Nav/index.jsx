@@ -36,6 +36,7 @@ const Nav = () => {
             })
         }
         fixedMenu();
+        setIsMenu(false);
     }, [pathname]);
 
     const showNotification = () => {
