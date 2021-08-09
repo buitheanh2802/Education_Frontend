@@ -16,7 +16,7 @@ const Notification = ({ className, setIsNotification }) => {
     }, [dispatch])
 
     return (
-        <div className={`${className} pr-[5px] py-[15px] bg-white text-black text-[16px] rounded-[3px]`}>
+        <div className={`${className} shadow-2xl lg:border-l lg:border-r lg:border-b lg:border-solid lg:border-gray-300 pr-[5px] py-[15px] bg-white text-black text-[16px] rounded-[3px]`}>
             <div className="notification h-full lg:max-h-[50vh] overflow-y-scroll">
                 <div className="sticky top-0 bg-white lg:bg-transparent lg:relative px-[15px] py-[5px] flex justify-between items-center border-b border-solid border-gray-200 lg:border-none">
                     <button className="lg:hidden" onClick={() => setIsNotification(false)}><IconBack w={20} h={20} color="#333" /></button>

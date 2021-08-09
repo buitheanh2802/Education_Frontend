@@ -84,8 +84,8 @@ const Nav = () => {
                                 ? <i onClick={showPopup} className="cursor-pointer select-none w-[30px] h-[30px] block rounded-full bg-center bg-cover" style={{ backgroundImage: `url(${urlAvatar})` }}></i>
                                 : <Link to="/dang-ky" className="flex items-center"><img className="w-[15px] h-[15px] mr-[10px] sm:w-[20px] sm:h-[20px] lg:hidden" src={IconSignUp} alt="đăng ký" /> Đăng ký</Link>}
                             {isPopup && <div className="absolute top-full right-0 w-[200px] pt-[12px]">
-                                <span className="absolute block top-[-4px] right-[22px] border-[8px] border-solid border-transparent border-b-white"></span>
-                                <ul className="bg-white text-[#333] text-[16px] rounded-[3px] font-medium p-[5px]">
+                                <span className="absolute block top-[-4px] right-[8px] border-[8px] border-solid border-transparent border-b-white"></span>
+                                <ul className="bg-white text-[#333] text-[16px] rounded-[3px] font-medium p-[5px] lg:shadow-2xl lg:border-l lg:border-r lg:border-b lg:border-solid lg:border-gray-300">
                                     <Link to='/profile'><li className="px-[10px] py-[5px] hover:bg-gray-100 duration-300 rounded-[3px] flex items-center"><IconProfile w={20} color="#333" /> <p className="ml-[10px]">Thông tin cá nhân</p></li></Link>
                                     <Link to='/admin'><li className="px-[10px] py-[5px] hover:bg-gray-100 duration-300 rounded-[3px] flex items-center"><IconAdmin w={20} color="#333" /> <p className="ml-[10px]">Trang quản trị</p></li></Link>
                                     <Link to='/setting'><li className="px-[10px] py-[5px] hover:bg-gray-100 duration-300 rounded-[3px] flex items-center"><IconSetting w={20} color="#333" /> <p className="ml-[10px]">Cài đặt</p></li></Link>
