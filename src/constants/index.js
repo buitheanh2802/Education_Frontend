@@ -5,5 +5,5 @@ export const path = {
     EXERCISE: '/thuc-hanh',
 
     // Admin
-    ADMIN: '/admin'
+    ADMIN: '/admin',
 }
