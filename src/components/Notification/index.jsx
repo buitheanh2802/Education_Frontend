@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { IconBack, IconCancel, IconDetele, IconDone, IconList, IconLoading } from '../Icon';
+import { IconBack, IconDetele, IconDone, IconList, IconLoading } from '../atoms/Icon';
 import { findNotification } from '../../redux/actions/notification.action';
 import urlAvatar from '../../assets/media/pictures/avatar.png';
 import { Link } from 'react-router-dom';
@@ -16,19 +16,19 @@ const Notification = ({ className, setIsNotification }) => {
     }, [dispatch])
 
     return (
-        <div className={`${className} shadow-2xl lg:border-l lg:border-r lg:border-b lg:border-solid lg:border-gray-300 pr-[5px] py-[15px] bg-white text-black text-[16px] rounded-[3px]`}>
+        <div className={`${className} lg:shadow-2xl lg:border-l lg:border-r lg:border-b lg:border-solid lg:border-gray-300 pr-[5px] py-[15px] bg-white text-black text-[16px] rounded-[3px]`}>
             <div className="notification h-full lg:max-h-[50vh] overflow-y-scroll">
                 <div className="sticky top-0 bg-white lg:bg-transparent lg:relative px-[15px] py-[5px] flex justify-between items-center border-b border-solid border-gray-200 lg:border-none">
-                    <button className="lg:hidden" onClick={() => setIsNotification(false)}><IconBack w={20} h={20} color="#333" /></button>
+                    <button className="lg:hidden" onClick={() => setIsNotification(false)}><IconBack className="w-[20px] h-[20px]" /></button>
                     <h4 className="font-bold text-[22px]">Thông báo</h4>
-                    <button onClick={() => setIsList(!isList)} className="hover:bg-gray-200 p-[5px] rounded-[3px] duration-300"><IconList w={20} h={20} /></button>
-                    {isList && <ul className="absolute top-[90%] w-2/3 right-[15px] rounded-[3px] bg-white shadow-lg p-[5px] border border-solid border-gray-200">
-                        <li className="px-[15px] py-[7px] hover:bg-gray-100 rounded-[3px] duration-300 cursor-pointer flex items-center"><IconDone w={20} /> <p className="ml-[10px]">Đánh dấu tất cả đã đọc</p></li>
-                        <li className="px-[15px] py-[7px] hover:bg-gray-100 rounded-[3px] duration-300 cursor-pointer flex items-center"><IconDetele w={20} /> <p className="ml-[10px]">Xóa tất cả thông báo</p></li>
+                    <button onClick={() => setIsList(!isList)} className="hover:bg-gray-200 p-[5px] rounded-[3px] duration-300"><IconList className="w-[20px] h-[20px]" /></button>
+                    {isList && <ul className="absolute top-[90%] w-[280px] right-[15px] rounded-[3px] bg-white shadow-lg p-[5px] border border-solid border-gray-200">
+                        <li className="px-[15px] py-[7px] hover:bg-gray-100 rounded-[3px] duration-300 cursor-pointer flex items-center"><IconDone className="w-[20px] h-[20px]" /> <p className="ml-[10px]">Đánh dấu tất cả đã đọc</p></li>
+                        <li className="px-[15px] py-[7px] hover:bg-gray-100 rounded-[3px] duration-300 cursor-pointer flex items-center"><IconDetele className="w-[20px] h-[20px]" /> <p className="ml-[10px]">Xóa tất cả thông báo</p></li>
                     </ul>}
                 </div>
                 {notification.isLoading
-                    ? <IconLoading w={35} h={35} color="#333" />
+                    ? <IconLoading className="w-[35px] h-[35px] fill-current text-[#333] mx-auto" />
                     : <>
                         <div className="px-[5px]">
                             <ul className="flex justify-between items-center px-[10px] py-[5px]">
