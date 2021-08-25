@@ -1,12 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router ,Route,Switch } from 'react-router-dom';
+import {
+    BrowserRouter as Router,
+    Switch
+} from 'react-router-dom';
 import SiteLayout from './../layouts/SiteLayout';
+import PublicRouter from './PublicRouter';
 
 const RootRoute = () => {
     return (
         <Router>
             <Switch>
-                <Route path='/'> <SiteLayout /> </Route>
+                <PublicRouter path='/'> <SiteLayout /> </PublicRouter>
             </Switch>
         </Router>
     );

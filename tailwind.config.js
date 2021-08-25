@@ -17,18 +17,18 @@ module.exports = {
     function ({ addComponents }) {
       addComponents({
         '.container': {
-          maxWidth: '100%',
+          maxWidth: 'calc(100% - 30px)',
           '@screen md': {
-            maxWidth: '640px',
+            maxWidth: 'calc(100% - 70px)',
           },
           '@screen lg': {
             maxWidth: '980px',
           },
           '@screen xl': {
-            maxWidth: '1100px',
+            maxWidth: '1200px',
           },
           '@screen 2xl': {
-            maxWidth: '1280px',
+            maxWidth: '1480px',
           },
         }
       })
