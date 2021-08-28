@@ -1,95 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.menu-after::after {
-    position: absolute;
-    content: "";
-    top: 50%;
-    right: -0.5px;
-    width: 1px;
-    height: 65%;
-    transform: translateY(-50%);
-    background: #8b4646;
-}
-
-@media (max-width: 1024px) {
-    .subMenu {
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 55%;
-        bottom: 0;
-        background-color: #ffffff;
-        z-index: 9999;
-        animation: showMenu ease .6s;
-        transition-delay: .6s;
-    }
-    .subMenu li {
-        padding: 15px;
-    }
-    .subMenu li:nth-child(1) {
-        border-bottom: 1px solid #E2E8F0;
-        padding-top: 20px;
-        margin-bottom: 15px;
-    }
-}
-
-@media (max-width: 640px) {
-    .subMenu {
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        background-color: #ffffff;
-        z-index: 9999;
-        animation: showMenu ease .6s;
-        transition-delay: .6s;
-    }
-}
-
-@keyframes showMenu {
+@keyframes newTab {
     0% {
         opacity: 0;
-        transform: translateX(50%);
     }
     100% {
         opacity: 1;
-        transform: translateX(0%);
     }
 }
 
-.unselectable {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+* {
+    animation: newTab 0.3s ease;
 }
 
-.fixed__menu {
-    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
-    padding-top: 5px;
-    padding-bottom: 5px;
-    background: #111827;
-}
-
-.notification::-webkit-scrollbar-track {
-    border: 1px solid white;
-    background-color: #b2bec3;
-}
-
-.notification::-webkit-scrollbar {
-    width: 3px;
-    background-color: #dfe6e9;
-}
-
-.notification::-webkit-scrollbar-thumb {
-    background-color: #c0bfbf;
-}
-
-*::-webkit-scrollbar {
-    width: 0px;
-    background-color: #dfe6e9;
+body {
+    background: #F7FAFC;
 }
