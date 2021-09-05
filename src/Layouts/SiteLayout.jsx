@@ -6,6 +6,8 @@ import HomePage from '../Pages/Public/HomePage';
 import Header from '../Pages/Public/Commons/Header';
 import PostPage from '../Pages/Public/PostPage';
 import QuestionsPage from '../Pages/Public/QuestionsPage';
+import TagsPage from '../Pages/Public/TagsPage';
+
 
 const SiteLayout = () => {
     return (
@@ -14,7 +16,8 @@ const SiteLayout = () => {
             <Switch>
                 <PublicRouter exact path={path.HOME} component={HomePage} />
                 <PublicRouter path={path.POSTS} component={PostPage} />
-                <PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
+                <PublicRouter path={path.QUESTIONS} component={QuestionsPage} /> 
+                <PublicRouter path={path.TAGS} component={TagsPage} />                           
             </Switch>
         </>
     );
