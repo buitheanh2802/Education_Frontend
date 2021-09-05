@@ -2,8 +2,8 @@ import React from 'react'
 
 const TagsPage = () => {
     return (
-        <div>
-            <h3>sknvs;NV</h3>
+        <div className="mt-[80px] container mx-auto">
+            <h3>Hello tag page</h3>
         </div>
     )
 }
