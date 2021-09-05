@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@keyframes newTab {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+* {
+    animation: newTab 0.3s ease;
+}
+
+body {
+    background: #F7FAFC;
+}
