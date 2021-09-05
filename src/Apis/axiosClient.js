@@ -1,12 +1,12 @@
 import axios from 'axios';
 import queryString from 'query-string';
 
-const axiosClient = axios.create({
-    baseURL : '??????????',
-    headers : {
-        'Content-Type' : 'application/json'
+const AxiosClient = axios.create({
+    baseURL: process.env.REACT_APP_URL_API,
+    headers: {
+        'Content-Type': 'application/json'
     },
-    paramsSerializer : (params) => queryString.stringify(params)
+    paramsSerializer: (params) => queryString.stringify(params)
 });
 
-export default axiosClient;
+export default AxiosClient;

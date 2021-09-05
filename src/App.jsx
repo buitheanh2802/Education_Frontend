@@ -1,13 +1,13 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import store from './redux/store';
-import RootRouter from './routes';
-import "./assets/css/main.css";
+import Store from './Redux/Store';
+import RootRouter from './Routes';
+import "./Assets/css/main.css";
 
 const App = () => {
   return (
-    <Provider store={store}>
-        <RootRouter />
+    <Provider store={Store}>
+      <RootRouter />
     </Provider>
   );
 };
