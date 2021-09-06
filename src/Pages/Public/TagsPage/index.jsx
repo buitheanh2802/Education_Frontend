@@ -49,7 +49,7 @@ return (
 <div className="container mx-auto mt-[80px] ">
     <Navigation path={pathName} button={button} />
     <div className="flex justify-between mt-[15px]  gap-[50px]">
-        <div className="flex flex-wrap max-[170px] xl:gap-x-[95px]  sm:gap-x-[50px] sm:gap-x-[20px] gap-y-[20px] mb-[30px] pb-[45px] w-full  px-[20px] py-[15px] bg-white shadow rounded  ">
+        <div className="flex flex-wrap max-[170px] xl:gap-x-[95px]  sm:gap-x-[50px]  gap-y-[20px] mb-[30px] pb-[45px] w-full  px-[20px] py-[15px] bg-white shadow rounded  ">
             <div className="item md:text-[16px] text-[14px] w-max-[170px]">
                 <div className="flex items-center">
                     <h3 className="text-[24px] leading-[36px] ">Javascript </h3>

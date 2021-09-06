@@ -6,13 +6,13 @@ import {
 import { path } from '../Constants';
 import SiteLayout from '../Layouts/SiteLayout';
 import PublicRouter from './PublicRouter';
-import Authorization from '../Pages/Auth'
+import AuthLayout from 'src/Layouts/AuthLayout';
 
 const RootRoute = () => {
     return (
         <Router>
             <Switch>
-                <PublicRouter path={path.AUTH}> <Authorization /> </PublicRouter>
+                <PublicRouter path={path.AUTH}> <AuthLayout /> </PublicRouter>
                 <PublicRouter path={path.HOME}> <SiteLayout /> </PublicRouter>
             </Switch>
         </Router>
