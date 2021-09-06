@@ -1,3 +1,4 @@
+import LocalStorage from 'src/Helpers/Storage';
 import AxiosClient from './AxiosClient';
 
 const AuthApi = {
@@ -14,6 +15,15 @@ const AuthApi = {
     async logout() {
         const url = '/auth/signout';
         return AxiosClient.get(url, { withCredentials: true })
+    },
+
+    async profile() {
+        const url = '/auth/profile/me';
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
     }
 }
 

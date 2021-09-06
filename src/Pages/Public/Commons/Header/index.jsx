@@ -8,6 +8,7 @@ const Header = () => {
     const { pathname } = useLocation();
     const { profile } = useSelector(state => state.Auth);
     const [isMenu, setIsMenu] = useState(false);
+
     return (
         <div className={`${pathname !== path.HOME ? 'bg-white text-gray-800 shadow-sm' : 'pt-[15px] border-transparent text-white'} border-b border-solid duration-300 fixed top-0 left-0 right-0 z-[9999]`}>
             <nav className="container mx-auto select-none flex justify-between items-center py-[10px]">
@@ -37,10 +38,11 @@ const Header = () => {
                     {profile
                         ? <ul className="lg:flex lg:gap-[5px] px-[15px] lg:px-0 items-center">
                             <li className={`px-[15px] menu-after relative `}>
-                                <i className="relative select-none block cursor-pointer"><Icon.Bell className="w-[25px] h-[25px] fill-current text-white" /></i>
+                                <i className={pathname === path.HOME ? 'text-white hover:text-[#51ffb9]' : 'text-gray-500 hover:text-blue-600'}><Icon.Bell className="cursor-pointer w-[20px] h-[20px] fill-current" /></i>
                             </li>
                             <li className={`pl-[15px] relative`}>
-                                <i className="border border-solid border-white bg-gray-300 cursor-pointer select-none w-[30px] h-[30px] block rounded-full bg-center bg-cover" style={{ backgroundImage: `url()` }}></i>
+                                {(profile?.avatar?.avatarUrl?.length > 0) ? <p className="absolute top-1/2 transform -translate-y-1/2 border border-gray-300 cursor-pointer select-none w-[30px] h-[30px] rounded-full bg-center bg-cover" style={{ backgroundImage: `url(${profile?.avatar?.avatarUrl})` }}></p>
+                                    : <p className="flex justify-center items-center text-gray-500 absolute top-1/2 transform -translate-y-1/2 border border-gray-300 bg-gray-200 cursor-pointer select-none w-[30px] h-[30px] rounded-full"> {profile?.fullname?.slice(0, 1)} </p>}
                             </li>
                         </ul>
                         : <ul className="lg:flex lg:gap-[5px] px-[15px] lg:px-0">

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Icon } from 'src/Components/Icon'
 import { path, Images } from 'src/Constants/'
@@ -13,7 +13,7 @@ import { regex } from 'src/Constants/'
 const Login = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { error, isLoading, profile } = useSelector(state => state.Auth)
+    const { error, isLoading } = useSelector(state => state.Auth)
     const { register, handleSubmit, formState: { errors }, clearErrors } = useForm({
         mode: "onSubmit",
         reValidateMode: "onBlur"
@@ -24,10 +24,6 @@ const Login = () => {
     }
 
     const resetErrorAuth = () => error && dispatch(RemoveErrorAuth())
-
-    useEffect(() => {
-        if (profile) return history.push(path.HOME)
-    }, [profile, history])
     return (
         <div className="container mx-auto rounded grid grid-cols-1 lg:grid-cols-2 items-center h-screen">
             <button

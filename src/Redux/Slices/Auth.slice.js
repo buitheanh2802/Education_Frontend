@@ -1,4 +1,5 @@
-import { ActionLogin, ActionLogout } from "../Actions/Auth.action";
+import LocalStorage from "src/Helpers/Storage";
+import { ActionGetProfile, ActionLogin, ActionLogout } from "../Actions/Auth.action";
 
 const { createSlice } = require("@reduxjs/toolkit");
 
@@ -28,9 +29,12 @@ const mySlice = createSlice({
         })
 
         builder.addCase(ActionLogin.fulfilled, (state, action) => {
-            const { status, data, message } = action.payload;
+            const { status, data, message } = action?.payload;
             state.isLoading = false;
-            if (status) state.profile = data;
+            if (status) {
+                state.profile = data?.profile;
+                LocalStorage.Set('_token_', data?.token)
+            }
             switch (message[0]) {
                 case "NOT_VERIFY":
                     state.error = "Tài khoản chưa được kích hoạt";
@@ -42,6 +46,23 @@ const mySlice = createSlice({
                 default:
                     break;
             }
+        })
+
+        // profile
+        builder.addCase(ActionGetProfile.pending, (state) => {
+            state.isLoading = true;
+        })
+
+        builder.addCase(ActionGetProfile.rejected, (state) => {
+            state.isLoading = false;
+            state.error = "Đăng nhập không thành công";
+        })
+
+        builder.addCase(ActionGetProfile.fulfilled, (state, action) => {
+            const { status, data, message } = action?.payload;
+            state.isLoading = false;
+            if (status) state.profile = data;
+            if (message[0]) LocalStorage.Remote('_token_')
         })
 
 
@@ -56,7 +77,7 @@ const mySlice = createSlice({
         })
 
         builder.addCase(ActionLogout.fulfilled, (state, action) => {
-            const { status } = action.payload;
+            const { status } = action?.payload;
             if (status) {
                 state = {
                     ...state,
