@@ -1,12 +1,17 @@
 import BgLogin from '../Assets/media/pictures/signin-image.png';
 import BgSinup from '../Assets/media/pictures/signup-image.png';
+import BgContact from '../Assets/media/pictures/contact-image.png';
 export const Images = {
-    BgLogin, BgSinup
+    BgLogin, BgSinup, BgContact
 }
 
 export const path = {
     // Website
     HOME: '/',
+
+    //contact
+    CONTACT: '/contact',
+
 
     // questions
     QUESTIONS: '/questions',
@@ -25,6 +30,7 @@ export const path = {
     // tags
     TAGS: '/tags',
     TAGS_ID: '/tags/:id',
+    TAGS_FLOW: '/tags/flow',
 
     // auth
     AUTH: '/auth',
@@ -35,7 +41,8 @@ export const path = {
     NOT_FOUND: '/not-found',
 
     // Admin
-    ADMIN: '/admin'
+    ADMIN: '/admin',
+
 }
 
 export const regex = {
