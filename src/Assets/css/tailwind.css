@@ -2,98 +2,107 @@
 @tailwind components;
 @tailwind utilities;
 @keyframes newTab {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 * {
-    animation: newTab 0.3s ease;
+  animation: newTab 0.3s ease;
 }
 
 body {
-    background: #F7FAFC;
+  background: #f7fafc;
 }
 
 /* Menu */
 
 @media (max-width: 1024px) {
-    .menu_top {
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        width: 40%;
-        background-color: white;
-        color: black;
-        transition-duration: 0.3s;
-    }
+  .menu_top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40%;
+    background-color: white;
+    color: black;
+    transition-duration: 0.3s;
+  }
 }
 
 @media (max-width: 768px) {
-    .menu_top {
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        width: 50%;
-        background-color: white;
-        color: black;
-        transition-duration: 0.3s;
-    }
+  .menu_top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    background-color: white;
+    color: black;
+    transition-duration: 0.3s;
+  }
 }
 
 @media (max-width: 640px) {
-    .menu_top {
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background-color: white;
-        color: black;
-        transition-duration: 0.3s;
-    }
+  .menu_top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    color: black;
+    transition-duration: 0.3s;
+  }
 }
 
 /* auth */
 
-.input:focus+label, .input:active+label {
-    color: #3182CE;
+.input:focus + label,
+.input:active + label {
+  color: #3182ce;
 }
 
 /* error */
 
 .icon-error {
-    position: relative;
-    animation: shaky 0.2s ease;
-    transition-delay: 0.2s;
+  position: relative;
+  animation: shaky 0.2s ease;
+  transition-delay: 0.2s;
 }
 
 @keyframes shaky {
-    0%, 33%, 67%, 100% {
-        right: 0;
-    }
-    17%, 83% {
-        right: 5px;
-    }
-    50% {
-        right: -5px;
-    }
+  0%,
+  33%,
+  67%,
+  100% {
+    right: 0;
+  }
+  17%,
+  83% {
+    right: 5px;
+  }
+  50% {
+    right: -5px;
+  }
 }
 
 /* menu */
 
 .menu-after::after {
-    position: absolute;
-    content: "";
-    top: 50%;
-    right: -0.5px;
-    width: 1px;
-    height: 65%;
-    transform: translateY(-50%);
-    background: #51ffb9;
+  position: absolute;
+  content: "";
+  top: 50%;
+  right: -0.5px;
+  width: 1px;
+  height: 65%;
+  transform: translateY(-50%);
+  background: #51ffb9;
+}
+.block-avt {
+  background: linear-gradient(#6ff7f7, #5189f1);
+  border-radius: 5px 5px 0 0;
 }

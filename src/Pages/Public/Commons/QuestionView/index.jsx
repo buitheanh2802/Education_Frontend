@@ -33,7 +33,7 @@ const QuestionView = ({ data }) => {
                             <div className="flex justify-between mt-[5px] ">
                                 <div className="flex text-[14px] gap-[15px]">
                                     <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                                        <Icon.Eye className="fill-current w-[15px]" />
+                                        <Icon.Eye className=" w-[15px]" />
                                         <span>{item?.post?.view}</span>
                                     </div>
                                     <div className="flex items-center gap-[5px] text-[#5f5f5f]">
