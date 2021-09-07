@@ -1,4 +1,4 @@
-import AxiosClient from './axiosClient';
+import AxiosClient from './AxiosClient';
 
 const UserApi = {
     async get(userId) {

@@ -124,7 +124,7 @@ const PostsDetail = () => {
                   <div className="p-[15px]">
                     <button className="text-blue-500 w-full  py-[3px] border border-blue-500 rounded-[3px] flex justify-center items-center hover:bg-blue-500 hover:text-white">
                         <Icon.Bookmark className="fill-current w-[13px]" />
-                        <span className="text-[14x] ml-1">Bookmark bài viết này </span>
+                        <span className="text-[14x] ml-1">Bookmark bài viết này</span>
                     </button>
                   </div>
               </div>
