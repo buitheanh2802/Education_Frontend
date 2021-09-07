@@ -10,17 +10,6 @@ export const ActionLogin = createAsyncThunk('auth/login', async (account) => {
     }
 })
 
-export const ActionRegister = createAsyncThunk('auth/register', async (account) => {
-    try {
-        const { data } = await AuthApi.register(account);
-        console.log(data)
-        return data
-    } catch (error) {
-        console.log(error.response.data)
-        return error.response.data
-    }
-})
-
 export const ActionGetProfile = createAsyncThunk('auth/profile/me', async () => {
     try {
         const { data } = await AuthApi.profile();

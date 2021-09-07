@@ -1,3 +1,4 @@
+import ResponseError from "src/Constants/ResponseError";
 import LocalStorage from "src/Helpers/Storage";
 import { ActionGetProfile, ActionLogin, ActionLogout } from "../Actions/Auth.action";
 
@@ -35,16 +36,8 @@ const mySlice = createSlice({
                 state.profile = data?.profile;
                 LocalStorage.Set('_token_', data?.token)
             }
-            switch (message[0]) {
-                case "NOT_VERIFY":
-                    state.error = "Tài khoản chưa được kích hoạt";
-                    break;
-                case "EMAIL_NOTEXIST":
-                case "INVALID_PASSWORD":
-                    state.error = "Tài khoản mật khẩu không chính xác";
-                    break;
-                default:
-                    break;
+            else {
+                state.error = ResponseError(message[0]);
             }
         })
 
@@ -55,7 +48,7 @@ const mySlice = createSlice({
 
         builder.addCase(ActionGetProfile.rejected, (state) => {
             state.isLoading = false;
-            state.error = "Đăng nhập không thành công";
+            state.error = ResponseError("ERROR_SERVER")
         })
 
         builder.addCase(ActionGetProfile.fulfilled, (state, action) => {

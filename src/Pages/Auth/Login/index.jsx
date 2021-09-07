@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Icon } from 'src/Components/Icon'
 import { path, Images } from 'src/Constants/'
@@ -24,6 +24,8 @@ const Login = () => {
     }
 
     const resetErrorAuth = () => error && dispatch(RemoveErrorAuth())
+
+    useEffect(() => { return () => dispatch(RemoveErrorAuth()) }, [dispatch])
     return (
         <div className="container mx-auto rounded grid grid-cols-1 lg:grid-cols-2 items-center h-screen">
             <button

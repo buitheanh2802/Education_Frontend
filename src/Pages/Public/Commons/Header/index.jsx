@@ -42,7 +42,7 @@ const Header = () => {
                             </li>
                             <li className={`pl-[15px] relative`}>
                                 {(profile?.avatar?.avatarUrl?.length > 0) ? <p className="absolute top-1/2 transform -translate-y-1/2 border border-gray-300 cursor-pointer select-none w-[30px] h-[30px] rounded-full bg-center bg-cover" style={{ backgroundImage: `url(${profile?.avatar?.avatarUrl})` }}></p>
-                                    : <p className="flex justify-center items-center text-gray-500 absolute top-1/2 transform -translate-y-1/2 border border-gray-300 bg-gray-200 cursor-pointer select-none w-[30px] h-[30px] rounded-full"> {profile?.fullname?.slice(0, 1)} </p>}
+                                    : <p className="flex justify-center items-center text-gray-500 absolute top-1/2 transform -translate-y-1/2 border border-gray-300 bg-gray-200 cursor-pointer select-none w-[30px] h-[30px] rounded-full"> {profile?.fullname?.slice(0, 1)?.toUpperCase()} </p>}
                             </li>
                         </ul>
                         : <ul className="lg:flex lg:gap-[5px] px-[15px] lg:px-0">
