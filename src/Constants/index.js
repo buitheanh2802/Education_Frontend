@@ -1,19 +1,23 @@
-import BgLogin from "../Assets/media/pictures/signin-image.png";
-import BgSinup from "../Assets/media/pictures/signup-image.png";
+import BgLogin from '../Assets/media/pictures/signin-image.png';
+import BgSinup from '../Assets/media/pictures/signup-image.png';
+import BgContact from '../Assets/media/pictures/contact-image.png';
 export const Images = {
-  BgLogin,
-  BgSinup,
-};
+    BgLogin, BgSinup, BgContact
+}
 
 export const path = {
   // Website
   HOME: "/",
 
-  // questions
-  QUESTIONS: "/questions",
-  QUESTIONS_CREATE: "/questions/create",
-  QUESTIONS_FLOW: "/questions/flow",
-  QUESTIONS_BOOK_MARK: "/questions/bookmark",
+    //contact
+    CONTACT: '/contact',
+
+
+    // questions
+    QUESTIONS: '/questions',
+    QUESTIONS_CREATE: '/questions/create',
+    QUESTIONS_FLOW: '/questions/flow',
+    QUESTIONS_BOOK_MARK: '/questions/bookmark',
 
   // post
   POSTS: "/posts",
@@ -24,9 +28,10 @@ export const path = {
   POSTS_FLOW: "/posts/flow",
   POSTS_BOOK_MARK: "/posts/bookmark",
 
-  // tags
-  TAGS: "/tags",
-  TAGS_ID: "/tags/:id",
+    // tags
+    TAGS: '/tags',
+    TAGS_ID: '/tags/:id',
+    TAGS_FLOW: '/tags/flow',
 
   // auth
   AUTH: "/auth",
@@ -36,9 +41,10 @@ export const path = {
   // error
   NOT_FOUND: "/not-found",
 
-  // Admin
-  ADMIN: "/admin",
-};
+    // Admin
+    ADMIN: '/admin',
+
+}
 
 export const regex = {
   PASSWORD: {
