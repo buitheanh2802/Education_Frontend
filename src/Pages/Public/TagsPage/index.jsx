@@ -46,10 +46,10 @@ const button = { path: path.QUESTIONS_CREATE, icon: Icon.questions, value: "Đ�
     }
 ]
 return (
-<div className="container mx-auto mt-[80px] ">
+<div className="container mx-auto mt-[80px]  ">
     <Navigation path={pathName} button={button} />
-    <div className="flex justify-between mt-[15px]  gap-[50px]">
-        <div className="flex flex-wrap max-[170px] xl:gap-x-[95px]  sm:gap-x-[50px]  gap-y-[20px] mb-[30px] pb-[45px] w-full  px-[20px] py-[15px] bg-white shadow rounded  ">
+    <div className="flex justify-between mt-[15px]  gap-[50px] ">
+        <div className="flex justify-between flex-wrap max-[170px] px-[15px] sm:px-[35px] xl:gap-x-[95px]  sm:gap-x-[30px]  gap-y-[20px] mb-[30px] pb-[45px] w-full  py-[15px] bg-white shadow rounded  ">
             <div className="item md:text-[16px] text-[14px] w-max-[170px]">
                 <div className="flex items-center">
                     <h3 className="text-[24px] leading-[36px] ">Javascript </h3>
@@ -129,6 +129,17 @@ return (
             <div className="item md:text-[16px] text-[14px]">
                 <div className="flex items-center">
                     <h3 className="text-[24px] leading-[36px] ">C# </h3>
+                    <Icon.Star className="w-[14px] ml-[10px] " />
+                </div>
+                <p><span className="font-bold leading-[24px]">12</span> Bài viết</p>
+                <p><span className="font-bold leading-[24px]">123</span> Câu hỏi</p>
+                <p><span className="font-bold leading-[24px]">124</span> Người theo dõi</p>
+                <button className="mt-[5px]  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded px-[15px] md:px-[30px] py-[8px]  text-[16px] hover:bg-[#1273eb] hover:text-white">+
+                    Theo dõi</button>
+            </div>
+            <div className="item md:text-[16px] text-[14px]">
+                <div className="flex items-center">
+                    <h3 className="text-[24px] leading-[36px] ">MySql </h3>
                     <Icon.Star className="w-[14px] ml-[10px] " />
                 </div>
                 <p><span className="font-bold leading-[24px]">12</span> Bài viết</p>

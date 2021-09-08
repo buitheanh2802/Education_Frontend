@@ -1,24 +1,33 @@
 import BgLogin from '../Assets/media/pictures/signin-image.png';
 import BgSinup from '../Assets/media/pictures/signup-image.png';
 import BgContact from '../Assets/media/pictures/contact-image.png';
+import JSImage from '../Assets/media/pictures/js.png';
 export const Images = {
-    BgLogin, BgSinup, BgContact
+  BgLogin, BgSinup, BgContact, JSImage
 }
 
 export const path = {
   // Website
   HOME: "/",
 
-    //contact
-    CONTACT: '/contact',
+  //contact
+  CONTACT: '/contact',
 
 
+<<<<<<< HEAD
     // questions
     QUESTIONS: '/questions',
     QUESTIONS_CREATE: '/questions/create',
     QUESTIONS_FLOW: '/questions/flow',
   QUESTIONS_BOOK_MARK: '/questions/bookmark',
   QUESTIONS_DETAIL: '/questionsDetail',
+=======
+  // questions
+  QUESTIONS: '/questions',
+  QUESTIONS_CREATE: '/questions/create',
+  QUESTIONS_FLOW: '/questions/flow',
+  QUESTIONS_BOOK_MARK: '/questions/bookmark',
+>>>>>>> c4e7f01f662f76b4a86ea4d8e0d437f31805a717
 
   // post
   POSTS: "/posts",
@@ -29,21 +38,27 @@ export const path = {
   POSTS_FLOW: "/posts/flow",
   POSTS_BOOK_MARK: "/posts/bookmark",
 
-    // tags
-    TAGS: '/tags',
-    TAGS_ID: '/tags/:id',
-    TAGS_FLOW: '/tags/flow',
-
+  // tags
+  TAGS: '/tags',
+  TAGS_ID: '/tags/:id',
+  TAGS_FLOW: '/tags/flow',
+  //detailtags
+  TAGS_DETAIL: '/detailtag',
   // auth
-  AUTH: "/auth",
-  LOGIN: "/auth/login",
-  REGISTER: "/auth/register",
+  AUTH: '/auth',
+  LOGIN: '/auth/login',
+  REGISTER: '/auth/register',
+
+  //profile
+  PROFILE: '/profile',
+
 
   // error
-  NOT_FOUND: "/not-found",
+  NOT_FOUND: '/not-found',
 
-    // Admin
-    ADMIN: '/admin',
+
+  // Admin
+  ADMIN: '/admin',
 
 }
 
