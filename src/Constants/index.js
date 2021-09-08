@@ -48,6 +48,9 @@ export const path = {
   //profile
   PROFILE: "/profile",
 
+  //profile
+  PROFILE: "/profile",
+
   // error
   NOT_FOUND: "/not-found",
 
