@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import BgLogin from "../Assets/media/pictures/signin-image.png";
 import BgSinup from "../Assets/media/pictures/signup-image.png";
 import BgContact from "../Assets/media/pictures/contact-image.png";
@@ -8,12 +9,22 @@ export const Images = {
   BgContact,
   JSImage,
 };
+=======
+import BgLogin from '../Assets/media/pictures/signin-image.png';
+import BgSinup from '../Assets/media/pictures/signup-image.png';
+import BgContact from '../Assets/media/pictures/contact-image.png';
+import JSImage from '../Assets/media/pictures/js.png';
+export const Images = {
+  BgLogin, BgSinup, BgContact, JSImage
+}
+>>>>>>> a518c807c1b423baa3abc72efdc5d111f5cf98d2
 
 export const path = {
   // Website
   HOME: "/",
 
   //contact
+<<<<<<< HEAD
   CONTACT: "/contact",
 
   //HEAD
@@ -23,6 +34,19 @@ export const path = {
   QUESTIONS_FLOW: "/questions/flow",
   QUESTIONS_BOOK_MARK: "/questions/bookmark",
   QUESTIONS_DETAIL: "/questionsDetail",
+=======
+  CONTACT: '/contact',
+
+
+//HEAD
+    // questions
+    QUESTIONS: '/questions',
+    QUESTIONS_CREATE: '/questions/create',
+    QUESTIONS_FLOW: '/questions/flow',
+  QUESTIONS_BOOK_MARK: '/questions/bookmark',
+  QUESTIONS_DETAIL: '/questionsDetail',
+
+>>>>>>> a518c807c1b423baa3abc72efdc5d111f5cf98d2
 
   // post
   POSTS: "/posts",
@@ -35,25 +59,44 @@ export const path = {
   POSTS_BOOK_MARK: "/posts/bookmark",
 
   // tags
+<<<<<<< HEAD
   TAGS: "/tags",
   TAGS_ID: "/tags/:id",
   TAGS_FLOW: "/tags/flow",
   //detailtags
   TAGS_DETAIL: "/detailtag",
+=======
+  TAGS: '/tags',
+  TAGS_ID: '/tags/:id',
+  TAGS_FLOW: '/tags/flow',
+  //detailtags
+  TAGS_DETAIL: '/detailtag',
+>>>>>>> a518c807c1b423baa3abc72efdc5d111f5cf98d2
   // auth
-  AUTH: "/auth",
-  LOGIN: "/auth/login",
-  REGISTER: "/auth/register",
+  AUTH: '/auth',
+  LOGIN: '/auth/login',
+  REGISTER: '/auth/register',
+
+  //profile
+  PROFILE: '/profile',
+
 
   //profile
   PROFILE: "/profile",
 
   // error
-  NOT_FOUND: "/not-found",
+  NOT_FOUND: '/not-found',
+
 
   // Admin
+<<<<<<< HEAD
   ADMIN: "/admin",
 };
+=======
+  ADMIN: '/admin',
+
+}
+>>>>>>> a518c807c1b423baa3abc72efdc5d111f5cf98d2
 
 export const regex = {
   PASSWORD: {
