@@ -5,6 +5,7 @@ import { Icon } from 'src/Components/Icon'
 import DetailTagView from '../Commons/DetailTagView'
 import FeaturedTag from '../Commons/FeaturedTag'
 import { Images } from 'src/Constants/'
+import NavigationInDetailTag from '../Commons/NavigationInDetailTag'
 const DetailTagPage = () => {
 
     const pathName = [
@@ -83,7 +84,7 @@ const DetailTagPage = () => {
                         </div>
                     </div>
                     <div className="w-full shadow-sm bg-white rounded">
-                        <Navigation path={pathName} button={button} />
+                        <NavigationInDetailTag path={pathName} button={button} />
 
                         <DetailTagView data={fieldQuestions}></DetailTagView>
                     </div>
