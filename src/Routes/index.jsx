@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     BrowserRouter as Router,
     Switch
@@ -12,12 +12,19 @@ import LocalStorage from 'src/Helpers/Storage';
 import { ActionGetProfile } from 'src/Redux/Actions/Auth.action';
 
 const RootRoute = () => {
+    const [isLoading, setIsLoading] = useState(true)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (LocalStorage.Get('_token_')) return dispatch(ActionGetProfile())
+        (async () => {
+            LocalStorage.Get('_token_')
+                ? await dispatch(ActionGetProfile())
+                && setIsLoading(false)
+                : setIsLoading(false)
+        })()
     }, [dispatch])
 
+    if (isLoading) return null
     return (
         <Router>
             <Switch>
