@@ -1,8 +1,9 @@
 import BgLogin from '../Assets/media/pictures/signin-image.png';
 import BgSinup from '../Assets/media/pictures/signup-image.png';
 import BgContact from '../Assets/media/pictures/contact-image.png';
+import JSImage from '../Assets/media/pictures/js.png';
 export const Images = {
-    BgLogin, BgSinup, BgContact
+    BgLogin, BgSinup, BgContact, JSImage
 }
 
 export const path = {
@@ -31,11 +32,16 @@ export const path = {
     TAGS: '/tags',
     TAGS_ID: '/tags/:id',
     TAGS_FLOW: '/tags/flow',
-
+    //detailtags
+    TAGS_DETAIL: '/detailtag',
     // auth
     AUTH: '/auth',
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
+
+    //profile
+    PROFILE: '/profile',
+
 
     // error
     NOT_FOUND: '/not-found',
