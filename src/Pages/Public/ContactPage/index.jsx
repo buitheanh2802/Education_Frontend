@@ -28,7 +28,7 @@ return (
         <div className="max-w-[1000px] mx-auto mt-[30px] ">
             <div className="grid md:grid-cols-2 gap-[30px] ">
                 <div className="bg-white  border rounded-[10px] ">
-                    <h4 className="pt-[20px] text-[20px] md:text-[24px] leading-[36px] font-light text-center bg-[#E3DEDE] rounded-t-[10px] pb-[13px]">
+                    <h4 className="pt-[20px] text-[20px] lg:text-[24px] leading-[36px] font-light text-center bg-[#E3DEDE] rounded-t-[10px] pb-[13px]">
                         GỬI THÔNG TIN LIÊN HỆ - GÓP Ý</h4>
                     <form action="" className="px-[20px] lg:px-[50px] pb-[30px]">
                         <p className="mt-[20px] text-left text-[18px] leading-[26px]">Góp ý hoặc liên hệ với DevStar nếu
@@ -73,8 +73,8 @@ return (
        
        
             <div className="bg-white  border rounded-[10px]">
-            <h4 className="pt-[20px] text-[24px] leading-[36px] font-light text-center bg-[#E3DEDE] rounded-t-[10px] pb-[13px]">THÔNG TIN LIÊN HỆ KHÁC</h4>
-                <div className="px-[40px] lg:px-[50px] pb-[30px]">
+            <h4 className="pt-[20px] text-[20px] lg:text-[24px] leading-[36px] font-light text-center bg-[#E3DEDE] rounded-t-[10px] pb-[13px]">THÔNG TIN LIÊN HỆ KHÁC</h4>
+                <div className="px-[20px] lg:px-[50px] pb-[30px] ">
                     <p className="mt-[20px] text-left text-[18px] leading-[26px]">Mọi thông tin đóng góp ý kiến hoặc hỗ trợ, người dùng có thể liên hệ trực tiếp qua các kênh sau:</p>
                     <div className="flex mt-[10px] items-center">
                     <button type="button" className="bg-[#093AB7] border hover:bg-gray-200   h-[40px] w-[40px]">

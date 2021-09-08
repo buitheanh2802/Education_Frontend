@@ -2196,6 +2196,10 @@ body {
     font-size: 20px;
   }
 
+  .lg\:text-\[24px\] {
+    font-size: 24px;
+  }
+
   .lg\:leading-\[54px\] {
     line-height: 54px;
   }
