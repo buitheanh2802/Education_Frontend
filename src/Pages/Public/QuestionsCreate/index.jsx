@@ -24,7 +24,7 @@ const QuestionsCreate = () => {
         // defaultValue={[colourOptions[4], colourOptions[5]]}
         isMulti
         options={colourOptions}
-        placeholder={"Gắn thẻ câu hỏi: Tối đa 5 thẻ"}
+        placeholder={"Gắn thẻ câu hỏi: Tối đa 5 thẻ "}
       />
     );
   };
