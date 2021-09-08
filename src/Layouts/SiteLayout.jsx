@@ -9,6 +9,8 @@ import QuestionsPage from "../Pages/Public/QuestionsPage";
 import TagsPage from "../Pages/Public/TagsPage";
 import PostsDetail from "src/Pages/Public/PostsDetail";
 import ContactPage from "src/Pages/Public/ContactPage";
+import PostsCreate from "src/Pages/Public/PostsCreate";
+import QuestionsCreate from "src/Pages/Public/QuestionsCreate";
 
 const SiteLayout = () => {
   return (
@@ -16,14 +18,19 @@ const SiteLayout = () => {
       <Header />
       <Switch>
         <PublicRouter exact path={path.HOME} component={HomePage} />
+        <PublicRouter path={path.TAGS} component={TagsPage} />
+        <PublicRouter path={path.POSTS_DETAIL} component={PostsDetail} />
+        <PublicRouter path={path.POSTS_CREATE} component={PostsCreate} />
+        <PublicRouter path={path.CONTACT} component={ContactPage} />
+        <PublicRouter
+          path={path.QUESTIONS_CREATE}
+          component={QuestionsCreate}
+        />
         <PublicRouter path={path.POSTS} component={PostPage} />
         <PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
-        <PublicRouter path={path.TAGS} component={TagsPage} />
-        <PublicRouter path={path.POSTS_DETAIL} component={PostsDetail} /> 
-        <PublicRouter path={path.CONTACT} component={ContactPage}/>   
       </Switch>
     </>
-  )
-  }
+  );
+};
 
 export default SiteLayout;

@@ -608,6 +608,13 @@ video {
   --tw-ring-offset-shadow: 0 0 #0000;
   --tw-ring-shadow: 0 0 #0000;
   --tw-shadow: 0 0 #0000;
+  --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgba(59, 130, 246, 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
 }
 
 .container {
@@ -755,6 +762,10 @@ video {
   margin-top: 80px;
 }
 
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
 .mb-\[5px\] {
   margin-bottom: 5px;
 }
@@ -769,10 +780,6 @@ video {
 
 .mt-\[3px\] {
   margin-top: 3px;
-}
-
-.ml-1 {
-  margin-left: 0.25rem;
 }
 
 .mr-\[3px\] {
@@ -887,12 +894,12 @@ video {
   width: 20px;
 }
 
-.w-\[12px\] {
-  width: 12px;
-}
-
 .w-\[13px\] {
   width: 13px;
+}
+
+.w-\[12px\] {
+  width: 12px;
 }
 
 .w-\[60px\] {
@@ -991,6 +998,10 @@ video {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.grid-cols-\[5fr\2c 2fr\] {
+  grid-template-columns: 5fr 2fr;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -1021,6 +1032,14 @@ video {
 
 .gap-\[25px\] {
   gap: 25px;
+}
+
+.gap-5 {
+  gap: 1.25rem;
+}
+
+.gap-3 {
+  gap: 0.75rem;
 }
 
 .gap-\[50px\] {
@@ -1266,6 +1285,21 @@ video {
   padding-right: 70px;
 }
 
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.py-\[8px\] {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 .py-\[10px\] {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -1314,11 +1348,6 @@ video {
 .py-\[15px\] {
   padding-top: 15px;
   padding-bottom: 15px;
-}
-
-.py-\[8px\] {
-  padding-top: 8px;
-  padding-bottom: 8px;
 }
 
 .pr-\[10px\] {
@@ -1543,6 +1572,10 @@ video {
   color: rgba(95, 95, 95, var(--tw-text-opacity));
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -1703,6 +1736,35 @@ body {
   border-radius: 5px 5px 0 0;
 }
 
+/* custem ReactSelect */
+
+.css-yk16xz-control {
+  border-color: white !important;
+  padding: 2px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.css-1pahdxg-control {
+  padding: 2px;
+}
+
+/* custem ReactQull */
+
+.ql-toolbar.ql-snow {
+  border: none;
+  border-bottom: 1px solid rgb(206, 205, 205);
+  background: white;
+  border-radius: 5px 5px 0 0;
+}
+
+.ql-container.ql-snow {
+  border: none;
+  border-radius: 0 0 5px 5px;
+  background: white;
+  height: 380px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
 .after\:absolute::after {
   content: "";
   position: absolute;
@@ -1831,6 +1893,17 @@ body {
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.focus\:ring-2:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.focus\:ring-blue-500:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgba(59, 130, 246, var(--tw-ring-opacity));
 }
 
 @media (min-width: 640px) {
@@ -2013,6 +2086,10 @@ body {
 
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-\[3fr\2c 1fr\] {
+    grid-template-columns: 3fr 1fr;
   }
 
   .lg\:grid-cols-\[2\.8fr\2c 1\.2fr\] {
