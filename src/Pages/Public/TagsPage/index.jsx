@@ -7,6 +7,8 @@ import { Icon } from '../../../Components/Icon'
 // tôi là bùi thế anh
 const TagsPage = () => {
 // navigation
+
+
 const pathName = [
 {
 path: path.TAGS,
