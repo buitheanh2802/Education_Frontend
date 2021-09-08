@@ -42,9 +42,10 @@ const QuestionsDetail = () => {
                 </div>
                 
                 <div className="flex justify-between  ">
-                    <p className="text-[18px] sm:text-[24px] font-medium">Tìm hiểu EpressJs</p>
+                          <p className="text-[18px] sm:text-[24px] font-medium">Tìm hiểu EpressJs</p>
                     <Icon.DotsVertical className=" w-[13px]" />
-                </div>
+                      </div>
+                      <p className="text-gray-500 text-[12px] sm:text-[14px] mt-[8px]">Yêu cầu khoảng 2 giờ trước</p>
                 <div className="flex items-center mt-[10px]">
                     <p className="flex items-center text-gray-500">
                         <Icon.Eye className="fill-current w-[15px] " />
@@ -70,7 +71,7 @@ const QuestionsDetail = () => {
                         <button className="bg-[#E2E8F0] rounded-[3px] px-[5px] py-[2px] text-[12px] ml-2">JavaScript</button>
                     </span>
                 </div>
-                <p className="text-gray-500 text-[12px] sm:text-[14px] mt-[8px]">Đã đăng vào thg 8 23, 12:04 PM</p>
+                
                 <div className="mt-[20px] h-96 bg-gray-500"></div>
                 <div className="mt-[20px] flex items-center">
                     <button className=" px-4 md:px-6 py-[1px] border border-blue-500 rounded-[3px] flex items-center bg-[#5488C7] text-white">
@@ -128,12 +129,12 @@ const QuestionsDetail = () => {
               </div>
               <div className="bg-white shadow rounded-[5px] mt-[20px] p-[15px] ">
                   <div className="leading-[15px]">
-                        <p className="text-[18px] font-medium text-gray-600">BÀI VIẾT MỚI NHẤT</p>
+                        <p className="text-[18px] font-medium text-gray-600">CÂU HỎI MỚI NHẤT</p>
                         <span className="inline-block w-[60px] h-[3px] bg-gray-600 "></span>
                   </div>
                   <div className="mt-[5px]">
                       <div className="py-[10px] border-b border-gray-100">
-                          <p className="text-black font-medium">Module Pattern trong Javascript</p>
+                          <p className="text-black font-medium">JSX là gì?</p>
                           <p className="flex items-center ">
                               <span className="text-[14px] font-medium text-blue-500">Phạm Minh Công</span>
                               <span className="text-[12px] text-gray-500 ml-2">Khoảng 14h trước</span>
@@ -141,115 +142,78 @@ const QuestionsDetail = () => {
                           <div className="flex items-center mt-[5px]">
                             <p className="flex items-center text-gray-500">
                                 <Icon.Eye className="fill-current w-[15px] " />
-                                <span className="text-[14px] ml-1">48</span>
+                                <span className="text-[14px] ml-1">10 người xem</span>
                             </p>
                             <p className="flex items-center text-gray-500 ml-[10px]">
                                 <Icon.Chat className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">20</span>
-                            </p>
-                            <p className="flex items-center text-gray-500 ml-[10px]">
-                                <Icon.Like className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">12</span>
-                            </p>
-                            <p className="flex items-center text-gray-500 ml-[10px]">
-                                <Icon.Dislike className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">12</span>
+                                <span className="text-[14px] ml-1">5 bình luận</span>
+                                  </p>
+                                  <p className="flex items-center text-gray-500 ml-[10px]">
+                                <Icon.Bookmark className="fill-current w-[13px] " />
+                                <span className="text-[14px] ml-1">0 đã lưu</span>
                             </p>
                         </div>
-                      </div> <div className="py-[10px] border-b border-gray-100">
-                          <p className="text-black font-medium">Module Pattern trong Javascript</p>
+                          </div>
+                          <div className="py-[10px] border-b border-gray-100">
+                          <p className="text-black font-medium">JSX là gì?</p>
                           <p className="flex items-center ">
-                              <span className="text-[14px] font-medium text-blue-500">TPhạm Minh Công</span>
+                              <span className="text-[14px] font-medium text-blue-500">Phạm Minh Công</span>
                               <span className="text-[12px] text-gray-500 ml-2">Khoảng 14h trước</span>
                           </p>
-                          <div className="flex items-center mt-[5px]">
+                        <div className="flex items-center mt-[5px]">
                             <p className="flex items-center text-gray-500">
                                 <Icon.Eye className="fill-current w-[15px] " />
-                                <span className="text-[14px] ml-1">48</span>
+                                <span className="text-[14px] ml-1">10 người xem</span>
                             </p>
                             <p className="flex items-center text-gray-500 ml-[10px]">
                                 <Icon.Chat className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">20</span>
+                                <span className="text-[14px] ml-1">5 bình luận</span>
                             </p>
                             <p className="flex items-center text-gray-500 ml-[10px]">
-                                <Icon.Like className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">12</span>
-                            </p>
-                            <p className="flex items-center text-gray-500 ml-[10px]">
-                                <Icon.Dislike className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">12</span>
+                                <Icon.Bookmark className="fill-current w-[13px] " />
+                                <span className="text-[14px] ml-1">0 đã lưu</span>
                             </p>
                         </div>
-                      </div>     <div className="py-[10px] border-b border-gray-100">
-                          <p className="text-black font-medium">Module Pattern trong Javascript</p>
+                      </div>   
+                          <div className="py-[10px] border-b border-gray-100">
+                          <p className="text-black font-medium">JSX là gì?</p>
                           <p className="flex items-center ">
-                              <span className="text-[14px] font-medium text-blue-500">TPhạm Minh Công</span>
+                              <span className="text-[14px] font-medium text-blue-500">Phạm Minh Công</span>
                               <span className="text-[12px] text-gray-500 ml-2">Khoảng 14h trước</span>
                           </p>
-                          <div className="flex items-center mt-[5px]">
+                        <div className="flex items-center mt-[5px]">
                             <p className="flex items-center text-gray-500">
                                 <Icon.Eye className="fill-current w-[15px] " />
-                                <span className="text-[14px] ml-1">48</span>
+                                <span className="text-[14px] ml-1">10 người xem</span>
                             </p>
                             <p className="flex items-center text-gray-500 ml-[10px]">
                                 <Icon.Chat className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">20</span>
+                                <span className="text-[14px] ml-1">5 bình luận</span>
                             </p>
                             <p className="flex items-center text-gray-500 ml-[10px]">
-                                <Icon.Like className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">12</span>
-                            </p>
-                            <p className="flex items-center text-gray-500 ml-[10px]">
-                                <Icon.Dislike className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">12</span>
+                                <Icon.Bookmark className="fill-current w-[13px] " />
+                                <span className="text-[14px] ml-1">0 đã lưu</span>
                             </p>
                         </div>
-                      </div>     <div className="py-[10px] border-b border-gray-100">
-                          <p className="text-black font-medium">Module Pattern trong Javascript</p>
+                      </div>   
+                        <div className="py-[10px] border-b border-gray-100">
+                          <p className="text-black font-medium">JSX là gì?</p>
                           <p className="flex items-center ">
-                              <span className="text-[14px] font-medium text-blue-500">TPhạm Minh Công</span>
+                              <span className="text-[14px] font-medium text-blue-500">Phạm Minh Công</span>
                               <span className="text-[12px] text-gray-500 ml-2">Khoảng 14h trước</span>
                           </p>
-                          <div className="flex items-center mt-[5px]">
+                        <div className="flex items-center mt-[5px]">
                             <p className="flex items-center text-gray-500">
                                 <Icon.Eye className="fill-current w-[15px] " />
-                                <span className="text-[14px] ml-1">48</span>
+                                <span className="text-[14px] ml-1">10 người xem</span>
                             </p>
                             <p className="flex items-center text-gray-500 ml-[10px]">
                                 <Icon.Chat className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">20</span>
+                                <span className="text-[14px] ml-1">5 bình luận</span>
                             </p>
                             <p className="flex items-center text-gray-500 ml-[10px]">
-                                <Icon.Like className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">12</span>
-                            </p>
-                            <p className="flex items-center text-gray-500 ml-[10px]">
-                                <Icon.Dislike className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">12</span>
-                            </p>
-                        </div>
-                      </div>     <div className="py-[10px] border-b border-gray-100">
-                          <p className="text-black font-medium">Module Pattern trong Javascript</p>
-                          <p className="flex items-center ">
-                              <span className="text-[14px] font-medium text-blue-500">TPhạm Minh Công</span>
-                              <span className="text-[12px] text-gray-500 ml-2">Khoảng 14h trước</span>
-                          </p>
-                          <div className="flex items-center mt-[5px]">
-                            <p className="flex items-center text-gray-500">
-                                <Icon.Eye className="fill-current w-[15px] " />
-                                <span className="text-[14px] ml-1">48</span>
-                            </p>
-                            <p className="flex items-center text-gray-500 ml-[10px]">
-                                <Icon.Chat className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">20</span>
-                            </p>
-                            <p className="flex items-center text-gray-500 ml-[10px]">
-                                <Icon.Like className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">12</span>
-                            </p>
-                            <p className="flex items-center text-gray-500 ml-[10px]">
-                                <Icon.Dislike className="fill-current w-[13px] " />
-                                <span className="text-[14px] ml-1">12</span>
+                                <Icon.Bookmark className="fill-current w-[13px] " />
+                                <span className="text-[14px] ml-1">0 đã lưu</span>
                             </p>
                         </div>
                       </div>        
