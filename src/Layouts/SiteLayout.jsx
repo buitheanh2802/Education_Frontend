@@ -10,6 +10,7 @@ import TagsPage from '../Pages/Public/TagsPage';
 import ContactPage from '../Pages/Public/ContactPage';
 import ProfilePage from 'src/Pages/Public/ProfilePage';
 import DetailTagPage from 'src/Pages/Public/DetailTagPage';
+import PostsDetail from 'src/Pages/Public/PostsDetail';
 
 
 const SiteLayout = () => {
@@ -21,7 +22,8 @@ const SiteLayout = () => {
                 <PublicRouter exact path={path.POSTS} component={PostPage} />
                 <PublicRouter exact path={path.QUESTIONS} component={QuestionsPage} /> 
                 <PublicRouter exact path={path.TAGS} component={TagsPage} />      
-                <PublicRouter exact path={path.CONTACT} component={ContactPage}/>  
+                <PublicRouter exact path={path.CONTACT} component={ContactPage}/> 
+                <PublicRouter exact path={path.POSTS_DETAIL} component={PostsDetail} />
                 <PublicRouter exact path={path.PROFILE} component={ProfilePage} />      
                 <PublicRouter exact path={path.TAGS_DETAIL} component={DetailTagPage}/>                    
             </Switch>
