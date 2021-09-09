@@ -10,6 +10,7 @@ import Authorization from '../Pages/Auth';
 import { useDispatch } from 'react-redux';
 import LocalStorage from 'src/Helpers/Storage';
 import { ActionGetProfile } from 'src/Redux/Actions/Auth.action';
+import Loading from 'src/Components/Loading';
 
 const RootRoute = () => {
     const [isLoading, setIsLoading] = useState(true)
@@ -24,7 +25,7 @@ const RootRoute = () => {
         })()
     }, [dispatch])
 
-    if (isLoading) return null
+    if (isLoading) return <div className="h-screen flex items-center justify-center bg-gray-100"><Loading className="w-[40px] h-[40px] fill-current text-gray-500" /></div>
     return (
         <Router>
             <Switch>

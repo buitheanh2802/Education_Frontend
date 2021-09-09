@@ -24,6 +24,15 @@ const AuthApi = {
                 Authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
+    },
+
+    async role() {
+        const url = '/auth/profile/role';
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
     }
 }
 

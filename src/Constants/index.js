@@ -7,6 +7,11 @@ export const Images = {
 export const path = {
     // Website
     HOME: '/',
+    SETTING: '/setting',
+
+    PROFILE_ME: '/profile/me',
+    PROFILE_USER: '/profile/:id',
+
 
     // questions
     QUESTIONS: '/questions',
