@@ -30,7 +30,7 @@ return (
                 <div className="bg-white  border rounded-[10px] ">
                     <h4 className="pt-[20px] text-[20px] lg:text-[24px] leading-[36px] font-light text-center bg-[#E3DEDE] rounded-t-[10px] pb-[13px]">
                         GỬI THÔNG TIN LIÊN HỆ - GÓP Ý</h4>
-                    <form action="" className="px-[20px] lg:px-[50px] pb-[30px]">
+                    <form action="" className="px-[10px] lg:px-[50px] pb-[30px]">
                         <p className="mt-[20px] text-left text-[18px] leading-[26px]">Góp ý hoặc liên hệ với DevStar nếu
                             như  bạn có nhu cầu về dịch vụ hoặc thắc mắc khác.</p>
                         <div className="grid grid-cols-2 gap-[15px] md:gap-[25px]">
@@ -40,26 +40,26 @@ return (
                                     class="text-[14px] leading-[24px] border rounded-[4px] py-[7px] pl-[18px] italic font-light w-full text-[#4B4848] mt-[10px]" />
                             </div>
 
-                            <div className="">
+                            <div className="col-span-2 md:col-span-1">
                                 <div className="">
                                     <h5 className="text-[16px] text-left leading-[24px] ">Email</h5>
                                     <input type="text" value="" placeholder="Email"
                                         class="w-full text-[14px] leading-[24px] border rounded-[4px] py-[7px] pl-[18px] italic font-light  text-[#4B4848] mt-[10px]" />
                                 </div>
                             </div>
-                            <div className="">
+                            <div className="col-span-2 sm:col-span-1">
                                 <div className="">
                                     <h5 className="text-[16px] text-left leading-[24px] ">SĐT</h5>
                                     <input type="text" value="" placeholder="Số điện thoại"
                                         class="w-full text-[14px] leading-[24px] border rounded-[4px] py-[7px] pl-[18px] italic font-light text-[#4B4848] mt-[10px]" />
                                 </div>
                             </div>
-                            <div className="col-span-2">
+                            <div className="col-span-2 sm:col-span-1 ">
                                 <label className="text-[16px] text-left leading-[24px] mt-[10px]">Tiêu đề</label>
                                 <input type="text" value="" placeholder="Tiêu đề"
-                                    class="text-[14px] leading-[24px] border rounded-[4px] py-[7px] pl-[18px] italic font-light w-full text-[#4B4848] mt-[10px]" />
+                                    class="input text-[14px] leading-[24px] border rounded-[4px] py-[7px] pl-[18px] italic font-light w-full text-[#4B4848] mt-[10px]" />
                             </div>
-                            <div className="col-span-2">
+                            <div className="col-span-2 ">
                                 <label className="text-[16px] text-left leading-[24px] mt-[10px]">Nội dung</label>
                                 <textarea type="text" value="" placeholder="Nội dung"
                                     class="text-[14px] leading-[24px] border rounded-[4px] py-[7px] pl-[18px] italic font-light w-full text-[#4B4848] mt-[10px]" />
