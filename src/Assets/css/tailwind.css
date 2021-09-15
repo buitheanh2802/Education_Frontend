@@ -130,3 +130,60 @@ body {
   height: 380px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
+
+@keyframes mymove {
+  from {
+    top: 50%;
+    opacity: 0;
+  }
+  to {
+    top: 100%;
+    opacity: 1;
+  }
+}
+.post__menu {
+  width: 180px;
+  position: absolute;
+  animation: mymove 0.2s ease-in;
+  right: 0;
+  transform: translatex(10px);
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 20%);
+  border-radius: 5px;
+  /* padding: 5px 0; */
+}
+.post__menu ul::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border-bottom: 7px solid white;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  transform: translateY(-100%);
+}
+
+.post__share {
+  width: 190px;
+  position: absolute;
+  animation: mymove 0.2s ease-in;
+  right: 50%;
+  top: 100%;
+  margin-top: 13px;
+  transform: translatex(50%);
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 20%);
+  border-radius: 5px;
+}
+.post__share ul::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 48%;
+  width: 0;
+  height: 0;
+  border-bottom: 7px solid white;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  transform: translateY(-104%);
+}
