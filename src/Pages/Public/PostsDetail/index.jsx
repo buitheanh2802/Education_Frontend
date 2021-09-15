@@ -135,8 +135,8 @@ const PostsDetail = () => {
                         Chia sẻ đến Twitter
                       </li>
                       <li className="flex items-center text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
-                        <Icon.Twitter className="fill-current w-[15px] mr-[5px]" />
-                        Chia sẻ đến Twitter
+                        <Icon.Email className="fill-current w-[12px] mr-[5px]" />
+                        Chia sẻ đến Email
                       </li>
                     </ul>
                   </div>
