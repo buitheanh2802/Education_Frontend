@@ -300,12 +300,12 @@ export const Icon = {
     },
     Reply({...props}){
         return (
-            <img src="https://img.icons8.com/material-sharp/18/000000/left2.png"/>            
+            <img {...props} src="https://img.icons8.com/ios-filled/15/000000/left2.png"/>        
         )
     },
     Calendar({...props}){
         return(
-            <img src="https://img.icons8.com/ios/15/000000/calendar--v1.png"/>
+            <img {...props} src="https://img.icons8.com/ios/15/000000/calendar--v1.png"/>
         )
     }
 }

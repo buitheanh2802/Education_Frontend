@@ -27,7 +27,7 @@ const QuestionInProfile = ({ data }) => {
                                             <span>{item?.post?.comment}</span>
                                         </div>
                                         <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                                            <Icon.Reply className="fill-current w-[15px]" />
+                                            <Icon.Reply className="fill-current w-[15px] text-[#5f5f5f]" />
                                             <span>{item?.post?.bookmark}</span>
                                         </div>
                                     </div>
@@ -40,32 +40,28 @@ const QuestionInProfile = ({ data }) => {
                                             <img className="max-w-[40px] max-h-[40px] rounded-full" src={item?.user?.avatar} alt={item?.user?.fullname} />
                                         </Link>
                                     </div>
-                                    <div className="col-span-9">
+                                    <div className="w-full">
                                         <Link to={item?.user?.path} className="text-[#2d6ff7] hover:underline font-medium text-[15px]" >{item?.user?.fullname}</Link>
-                                        <h3 className="pr-[50px] my-[5px]">
+                                        <h3 className="pr-[50px] my-[5px] ">
                                             <Link to={item?.post?.path} className="font-medium text-[18px] hover:underline">{item?.post?.title}</Link>
-                                            <span className="px-[5px]">-</span>
-                                            <button className="translate-y-[2px]"> <Icon.Link className="w-[14px] fill-current text-[#666]" /></button>
                                         </h3>
-                                        <div className="flex justify-between gap-[5px] my-[10px]">
+                                        <div className="w-full gap-[5px] my-[10px]">
                                             {item?.post?.tags?.map((tag, indexTag) => {
                                                 return (
-                                                    <>
+                                                    <div className=" flex justify-between ">
                                                         <div>
                                                             <Link key={indexTag} to={tag?.path} className="block hover:bg-gray-300 bg-[#e7e7e7] px-[10px] py-[2px] text-[#5f5f5f] lg:text-[12px] rounded-[3px]" >{tag?.value}</Link>
                                                         </div>
-                                                        <div>
+                                                        <div className="my-auto">
                                                             <Icon.Questions className="fill-current w-[20px] text-[#5f5f5f] text-right" />
                                                         </div>
+                                                    </div>
 
-                                                    </>
                                                 )
                                             })}
 
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>

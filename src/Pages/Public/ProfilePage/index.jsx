@@ -48,7 +48,7 @@ const ProfilePage = () => {
             path: "/profile/buitheanh"
         },
         post: {
-            title: "Tìm hiểu về ExpressJS",
+            title: "Làm thế nào để giữ class active khi load lại page trong javascript sử dụng localstorage?",
             time: "T5, 5:00 PM",
             view: 150,
             comment: 87,

@@ -24,7 +24,7 @@ const Profile = ({ authors, tags }) => {
                                             <span className="lg:text-[13px] xl:text-[16px] sm:text-[14px] text-[#4A5568] ">{item?.username}</span>
                                         </div>
                                         <div className="mt-2 md:text-right">
-                                            <button className="bg-[#BEE3F8] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#BEE3F8] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">+ Theo dõi</button>
+                                            <button className="bg-[#fff] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#BEE3F8] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">+ Theo dõi</button>
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-3 gap-4 xl:text-[15px] text-[12px] py-[15px]">

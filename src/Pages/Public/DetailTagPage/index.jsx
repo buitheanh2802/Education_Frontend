@@ -80,7 +80,7 @@ const DetailTagPage = () => {
                                 <h3 className="text-[30px] font-semibold inline-block">Javascript</h3>
                                 <Icon.Star className="w-[20px] mb-[15px] ml-[10px] inline-block" />
                             </div>
-                            <button className="mt-[10px] bg-[#BEE3F8] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#BEE3F8] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">+ Theo dõi</button>
+                            <button className="mt-[10px] bg-[#fff] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#BEE3F8] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">+ Theo dõi</button>
                         </div>
                     </div>
                     <div className="w-full shadow-sm bg-white rounded">
