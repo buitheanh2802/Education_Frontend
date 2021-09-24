@@ -9,6 +9,7 @@ import Loading from 'src/Components/Loading'
 import SuccessMessage from 'src/Components/SuccessMessage'
 import { path, Images, regex } from 'src/Constants/'
 import ResponseError from 'src/Constants/ResponseError'
+import Oauthentication from '../Components/Oauthentication'
 
 const Register = () => {
     const history = useHistory();
@@ -164,19 +165,8 @@ const Register = () => {
 
                     <p className="text-gray-600 text-center text-[12px]">- HOẶC -</p>
 
-                    <div className="flex my-[20px] gap-[15px] items-center">
-                        <p className="text-gray-500">Đăng nhập với</p>
+                    <Oauthentication />
 
-                        <button type="button" className="bg-gray-100 border hover:bg-gray-200 duration-300 rounded-full h-[40px] w-[40px]">
-                            <Icon.Google className="w-[20px] mx-auto" />
-                        </button>
-                        <button type="button" className="bg-gray-100 border hover:bg-gray-200 duration-300 rounded-full h-[40px] w-[40px]">
-                            <Icon.Facebook className="w-[20px] mx-auto" />
-                        </button>
-                        <button type="button" className="bg-gray-100 border hover:bg-gray-200 duration-300 rounded-full h-[40px] w-[40px]">
-                            <Icon.Github className="w-[20px] mx-auto" />
-                        </button>
-                    </div>
                     <p>Bạn đã có tài khoản? <Link className="text-blue-600 hover:text-blue-800 hover:underline" to={path.LOGIN}>Đăng nhập</Link></p>
                 </form>
             </div>

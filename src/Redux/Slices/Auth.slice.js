@@ -55,7 +55,7 @@ const mySlice = createSlice({
             const { status, data, message } = action?.payload;
             state.isLoading = false;
             if (status) state.profile = data;
-            if (message[0]) LocalStorage.Remote('_token_')
+            if (message[0]) LocalStorage.Remove('_token_')
         })
 
 
@@ -72,14 +72,12 @@ const mySlice = createSlice({
         builder.addCase(ActionLogout.fulfilled, (state, action) => {
             const { status } = action?.payload;
             if (status) {
-                state = {
-                    ...state,
-                    isLoading: false,
-                    actionLoading: false,
-                    profile: null,
-                    error: null,
-                    message: null
-                }
+                state.isLoading = false;
+                state.actionLoading = false;
+                state.profile = null;
+                state.error = null;
+                state.message = null;
+                LocalStorage.Remove('_token_');
             }
         })
     }

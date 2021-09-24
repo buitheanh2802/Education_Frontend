@@ -7,7 +7,7 @@ const LocalStorage = {
         return localStorage.setItem(key, value);
     },
 
-    Remote(key) {
+    Remove(key) {
         return localStorage.removeItem(key);
     },
 

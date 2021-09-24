@@ -30,20 +30,28 @@ const Header = () => {
                         </Link>
                     </h1>
                     <div className="flex items-center gap-[15px]">
-                        {profile && <i onClick={() => setIsNotification(!isNotification)} className={`${pathname === path.HOME ? 'text-white hover:text-[#51ffb9]' : 'text-gray-500 hover:text-blue-600'} lg:hidden`}><Icon.Bell className="cursor-pointer w-[20px] h-[20px] fill-current" /></i>}
+                        {profile && <i onClick={() => setIsNotification(!isNotification)} className={`${pathname === path.HOME ? 'text-white hover:text-[#51ffb9]' : 'text-gray-500 hover:text-blue-600'} lg:hidden`}><Icon.Bell className="cursor-pointer w-[25px] h-[25px] fill-current" /></i>}
                         <button onClick={() => setIsMenu(true)} className="lg:hidden"><Icon.Menu className={`fill-current w-[20px] sm:w-[25px] ${pathname === path.HOME ? "text-white" : "text-black"}`} /></button>
                     </div>
                     <div className={`${isMenu ? "ml-0 sm:ml-[50%] md:ml-[60%]" : "ml-[100%] lg:ml-0"} menu_top lg:flex w-full lg:justify-between font-medium text-[14px] sm:text-[16px] lg:transform lg:translate-y-[2px]`}>
                         <ul className="flex justify-between lg:hidden  py-[10px] border-b px-[15px] lg:px-0">
-                            <Link
-                                onClick={() => {
-                                    setIsMenu(false)
-                                    setIsPopup(false)
-                                }}
-                                className="flex items-center" to={path.HOME}>
-                                <Icon.Logo className="w-[24px]" />
-                                <span className="sm:text-[23px] text-[20px] font-bold ml-[5px]">DevStar</span>
-                            </Link>
+                            {profile
+                                ? <Link to={path.PROFILE_ME} className="flex items-center gap-[10px]">
+                                    {(profile?.avatar?.avatarUrl?.length > 0)
+                                        ? <p onClick={() => setIsPopup(!isPopup)} className="border border-gray-300 cursor-pointer select-none w-[45px] h-[45px] rounded-full bg-center bg-cover" style={{ backgroundImage: `url(${profile?.avatar?.avatarUrl})` }} alt={profile?.fullname} ></p>
+                                        : <p onClick={() => setIsPopup(!isPopup)} className="flex justify-center items-center text-gray-500 border border-gray-300 bg-gray-200 cursor-pointer select-none w-[45px] h-[45px] rounded-full"> {profile?.fullname?.slice(0, 1)?.toUpperCase()} </p>}
+                                    <span className="text-[16px] font-medium">{profile?.fullname}</span>
+                                </Link>
+                                : <Link
+                                    onClick={() => {
+                                        setIsMenu(false)
+                                        setIsPopup(false)
+                                    }}
+                                    className="flex items-center" to={path.HOME}>
+                                    <Icon.Logo className="w-[24px]" />
+                                    <span className="sm:text-[23px] text-[20px] font-bold ml-[5px]">DevStar</span>
+                                </Link>}
+
                             <button onClick={() => setIsMenu(false)}> <Icon.Close className="w-[20px]" /> </button>
                         </ul>
                         <ul className="lg:flex lg:gap-[20px] px-[15px] lg:px-0 pt-[10px] lg:pt-0">
@@ -114,7 +122,7 @@ const Header = () => {
                             </li>
                         </ul>
 
-                        <Auth isPopup={isPopup} setIsMenu={setIsMenu} setIsPopup={setIsPopup} />
+                        <Auth isNotification={isNotification} setIsNotification={setIsNotification} isPopup={isPopup} setIsMenu={setIsMenu} setIsPopup={setIsPopup} />
                     </div>
                 </nav>
             </div>
