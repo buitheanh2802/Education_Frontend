@@ -1,7 +1,7 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import Store from './Redux/Store';
-import RootRouter from './Routes';
+import React from "react";
+import { Provider } from "react-redux";
+import Store from "./Redux/Store";
+import RootRouter from "./Routes";
 import "./Assets/css/main.css";
 
 const App = () => {
