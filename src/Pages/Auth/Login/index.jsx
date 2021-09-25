@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Icon } from 'src/Components/Icon'
 import { path, Images } from 'src/Constants/'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { ActionLogin } from 'src/Redux/Actions/Auth.action'
-import { RemoveErrorAuth } from 'src/Redux/Slices/Auth.slice'
 import Loading from 'src/Components/Loading'
 import ErrorMessage from 'src/Components/ErrorMessage'
 import { regex } from 'src/Constants/'
@@ -24,9 +23,8 @@ const Login = () => {
         dispatch(ActionLogin(data))
     }
 
-    const resetErrorAuth = () => error && dispatch(RemoveErrorAuth())
+    const resetErrorAuth = () => error && dispatch(resetErrorAuth())
 
-    useEffect(() => { return () => dispatch(RemoveErrorAuth()) }, [dispatch])
     return (
         <div className="container mx-auto rounded grid grid-cols-1 lg:grid-cols-2 items-center h-screen">
             <button

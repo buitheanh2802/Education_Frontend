@@ -1,4 +1,4 @@
-const ResponseError = (ERROR) => {
+const ResponseMessage = (ERROR) => {
     switch (ERROR) {
         case "EMAIL_NOTEXIST": return "Tài khoản không tồn tại";
         case "USER_NOTEXIST": return "Tài khoản không tồn tại";
@@ -12,9 +12,14 @@ const ResponseError = (ERROR) => {
         case "EXPIRED_TOKEN": return "Phiên làm việc hết hạn";
         case "ACCESS_DENIED": return "Không có quyền truy cập";
         case "LIMITED_REQUEST": return "Bạn thao tác quá nhanh";
+        
+        case "LOGOUT_SUCCESS": return "Đăng xuất không thành công";
+        case "LOGOUT_ERROR": return "Đăng xuất thành công";
+        case "LOGIN_SUCCESS": return "Đăng nhập thành công";
+        case "LOGIN_ERROR": return "Đăng nhập không thành công";
         default: return null
     }
 }
 
-export default ResponseError;
+export default ResponseMessage;
 

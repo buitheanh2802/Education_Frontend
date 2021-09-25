@@ -8,7 +8,7 @@ import { Icon } from 'src/Components/Icon'
 import Loading from 'src/Components/Loading'
 import SuccessMessage from 'src/Components/SuccessMessage'
 import { path, Images, regex } from 'src/Constants/'
-import ResponseError from 'src/Constants/ResponseError'
+import ResponseMessage from 'src/Constants/ResponseMessage'
 import Oauthentication from '../Components/Oauthentication'
 
 const Register = () => {
@@ -33,7 +33,7 @@ const Register = () => {
         } catch (error) {
             setResponse({
                 ...response,
-                error: ResponseError(error?.response?.data?.message[0]),
+                error: ResponseMessage(error?.response?.data?.message[0]),
                 isLoading: false
             })
         }

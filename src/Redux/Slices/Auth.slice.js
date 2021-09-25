@@ -1,4 +1,4 @@
-import ResponseError from "src/Constants/ResponseError";
+import ResponseMessage from "src/Constants/ResponseMessage";
 import LocalStorage from "src/Helpers/Storage";
 import { ActionGetProfile, ActionLogin, ActionLogout } from "../Actions/Auth.action";
 
@@ -14,8 +14,12 @@ const mySlice = createSlice({
         message: null
     },
     reducers: {
-        RemoveErrorAuth: (state) => {
-            state.error = null
+        resetErrorAuth: (state) => {
+            state.error = null;
+        },
+
+        resetMessageAuth: (state) => {
+            state.message = null;
         }
     },
     extraReducers: (builder) => {
@@ -26,18 +30,20 @@ const mySlice = createSlice({
 
         builder.addCase(ActionLogin.rejected, (state) => {
             state.isLoading = false;
-            state.error = "Đăng nhập không thành công"
+            state.error = [ResponseMessage("ERROR_SERVER")];
         })
 
         builder.addCase(ActionLogin.fulfilled, (state, action) => {
+            console.log(action?.payload)
             const { status, data, message } = action?.payload;
             state.isLoading = false;
             if (status) {
+                state.message = [ResponseMessage("LOGIN_SUCCESS")];
                 state.profile = data?.profile;
-                LocalStorage.Set('_token_', data?.token)
+                LocalStorage.Set('_token_', data?.token);
             }
             else {
-                state.error = ResponseError(message[0]);
+                state.error = [ResponseMessage(message[0])];
             }
         })
 
@@ -48,14 +54,19 @@ const mySlice = createSlice({
 
         builder.addCase(ActionGetProfile.rejected, (state) => {
             state.isLoading = false;
-            state.error = ResponseError("ERROR_SERVER")
+            state.error = [ResponseMessage("ERROR_SERVER")]
         })
 
         builder.addCase(ActionGetProfile.fulfilled, (state, action) => {
             const { status, data, message } = action?.payload;
             state.isLoading = false;
-            if (status) state.profile = data;
-            if (message[0]) LocalStorage.Remove('_token_')
+            if (status) {
+                state.message = [ResponseMessage("LOGIN_SUCCESS")];
+                state.profile = data;
+            } else {
+                state.error = [ResponseMessage(message[0])]
+                LocalStorage.Remove("_token_")
+            }
         })
 
 
@@ -66,22 +77,22 @@ const mySlice = createSlice({
 
         builder.addCase(ActionLogout.rejected, (state) => {
             state.isLoading = false;
-            state.error = "Đăng xuất không thành công"
+            state.error = [ResponseMessage("LOGOUT_ERROR")]
         })
 
         builder.addCase(ActionLogout.fulfilled, (state, action) => {
-            const { status } = action?.payload;
+            const { status, message } = action?.payload;
             if (status) {
-                state.isLoading = false;
+                state.message = [ResponseMessage("LOGOUT_SUCCESS")];
                 state.actionLoading = false;
                 state.profile = null;
-                state.error = null;
-                state.message = null;
                 LocalStorage.Remove('_token_');
+            } else {
+                state.error = [ResponseMessage(message[0])];
             }
         })
     }
 })
 
-export const { RemoveErrorAuth } = mySlice.actions;
+export const { resetErrorAuth, resetMessageAuth } = mySlice.actions;
 export default mySlice.reducer;

@@ -116,3 +116,25 @@ body {
     transform: translateY(-50%);
     background: #7e588b;
 }
+
+/* alert message */
+
+.message_animation {
+    animation: message ease 5s;
+    animation-delay: 0.2s;
+}
+
+@keyframes message {
+    0% {
+        opacity: 0;
+        margin-left: calc(-100% - 15px);
+    }
+    90%, 10% {
+        opacity: 1;
+        margin-left: 0;
+    }
+    100% {
+        opacity: 0;
+        margin-left: calc(-100% - 15px);
+    }
+}
