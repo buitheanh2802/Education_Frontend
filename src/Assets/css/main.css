@@ -1618,12 +1618,12 @@ video {
   font-size: 15px;
 }
 
-.text-\[18px\] {
-  font-size: 18px;
-}
-
 .text-\[16px\] {
   font-size: 16px;
+}
+
+.text-\[18px\] {
+  font-size: 18px;
 }
 
 .text-\[13px\] {
@@ -1668,6 +1668,14 @@ video {
 
 .italic {
   font-style: italic;
+}
+
+.leading-\[20px\] {
+  line-height: 20px;
+}
+
+.leading-\[22px\] {
+  line-height: 22px;
 }
 
 .leading-\[36px\] {
@@ -2309,14 +2317,14 @@ body {
             column-gap: 60px;
   }
 
-  .sm\:px-\[35px\] {
-    padding-left: 35px;
-    padding-right: 35px;
-  }
-
   .sm\:px-\[15px\] {
     padding-left: 15px;
     padding-right: 15px;
+  }
+
+  .sm\:px-\[35px\] {
+    padding-left: 35px;
+    padding-right: 35px;
   }
 
   .sm\:py-5 {
