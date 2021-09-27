@@ -2063,16 +2063,15 @@ body {
   position: absolute;
   -webkit-animation: mymove 0.2s ease-in;
           animation: mymove 0.2s ease-in;
-  right: 50%;
+  left: 0;
   top: 100%;
-  margin-top: 13px;
-  -webkit-transform: translatex(50%);
-          transform: translatex(50%);
+  /* margin-top: 13px; */
+  /* transform: translatex(50%); */
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 20%);
   border-radius: 5px;
 }
 
-.post__share ul::before {
+/* .post__share ul::before {
   content: " ";
   position: absolute;
   top: 0;
@@ -2082,9 +2081,8 @@ body {
   border-bottom: 7px solid white;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  -webkit-transform: translateY(-104%);
-          transform: translateY(-104%);
-}
+  transform: translateY(-104%);
+} */
 
 .after\:absolute::after {
   content: "";

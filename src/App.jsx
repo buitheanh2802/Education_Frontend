@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
+=======
+import React from "react";
+>>>>>>> 0fa62252ff6b2eb346c217f8a126ade0f25b52ef
 import { Provider } from "react-redux";
 import Store from "./Redux/Store";
 import RootRouter from "./Routes";

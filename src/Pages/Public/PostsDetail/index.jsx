@@ -1,21 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Icon } from "src/Components/Icon";
 import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 import ProfileUsePost from "../Commons/ProfileUserPosts";
 import ProfileUserPostsMobile from "../Commons/ProfileUserPostsMobile";
 import PostsNew from "../Commons/PostsNew";
+import PostApi from "src/Apis/PostApi";
 const PostsDetail = () => {
   const [postmenu, setPostmenu] = useState(false);
   const [postShare, setpostShare] = useState(false);
+  const [postDetail, setPostDetail] = useState(true);
+  // const [postAll, setPostAll] = useState(true);
+
+  useEffect(() => {
+    const List = async () => {
+      try {
+        const Post = await PostApi.getAll();
+        setPostDetail(Post.data[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    List();
+  }, []);
 
   return (
     <>
+      {/* {postDetail && (
+        <> */}
       <div className="mt-[80px] container mx-auto bg-white rounded-[5px] shadow">
         <div className="px-[10px] sm:px-[15px] py-[10px] ">
           <p className="text-gray-500 text-[14px] ">
             Trang chủ / Bài viết /
             <span className="text-blue-500">
-              Tìm hiểu về Middleware trong NodeJs
+              {postDetail.title || <Skeleton width={200} />}
             </span>
           </p>
         </div>
@@ -26,7 +44,7 @@ const PostsDetail = () => {
             <ProfileUserPostsMobile />
             <div className="flex justify-between  ">
               <p className="text-[18px] sm:text-[24px] font-medium">
-                Tìm hiểu về Middleware trong NodeJs
+                {postDetail.title || <Skeleton width={500} />}
               </p>
               <div className="relative">
                 <button
@@ -95,7 +113,12 @@ const PostsDetail = () => {
             <p className="text-gray-500 text-[12px] sm:text-[14px] mt-[8px]">
               Đã đăng vào thg 8 23, 12:04 PM
             </p>
-            <div className="mt-[20px] h-96 bg-gray-500"></div>
+            <div
+              className="mt-[20px] "
+              dangerouslySetInnerHTML={{
+                __html: postDetail.content || <Skeleton count={30} />,
+              }}
+            ></div>
             <div className="mt-[20px] inline-block">
               <div className="flex items-center border-b border-gray-300 ">
                 <button className="text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  hover:bg-gray-500 hover:text-white">
@@ -151,6 +174,8 @@ const PostsDetail = () => {
         </div>
       </div>
     </>
+    //   )}
+    // </>
   );
 };
 
