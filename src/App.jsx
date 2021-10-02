@@ -6,6 +6,7 @@ import "./Assets/css/main.css";
 import ProfileApi from './Apis/ProfileApi';
 
 const App = () => {
+  const [tags, setTag] = useState([]);
 
   const [profiles, setProfile] = useState([]);
   useEffect(() => {
@@ -27,7 +28,7 @@ const App = () => {
         <RootRouter profiles={profiles} />
       </Provider>
     </>
-  );
+  )
 };
 
 export default App;

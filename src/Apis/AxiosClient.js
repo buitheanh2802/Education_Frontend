@@ -1,5 +1,5 @@
-import axios from 'axios';
-import queryString from 'query-string';
+import axios from "axios";
+import queryString from "query-string";
 
 const AxiosClient = axios.create({
     baseURL: 'https://devstar-mockapi.herokuapp.com',
