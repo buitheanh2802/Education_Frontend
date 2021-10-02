@@ -300,13 +300,20 @@ export const Icon = {
     },
     Reply({...props}){
         return (
-            <img {...props} src="https://img.icons8.com/ios-filled/15/000000/left2.png"/>        
-        )
+            <img src="https://img.icons8.com/small/16/000000/left2.png"/>        )
     },
     Calendar({...props}){
         return(
-            <img {...props} src="https://img.icons8.com/ios/15/000000/calendar--v1.png"/>
-        )
+            <svg { ...props } width={18} height={18} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+            <rect width={16} height={16} fill="url(#pattern0)" />
+            <defs>
+              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width={1} height={1}>
+                <use xlinkHref="#image0" transform="scale(0.02)" />
+              </pattern>
+              <image id="image0" width={52} height={52} xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAABFElEQVRoge2aUQ6DIAyG/y27xS7kk/d/VjmHexgSjCDgyii1X0KMQAo/pTUqQD4DgBnAastk66iobd8xeYP4g/Vi37EZj903tf8knEhTfCEjAIOje1MrE+tfWkrtGzvnA2ciQgNSCfjF/nKmPLUyuf1LKbW/axcZIylme/VXYo70vQKZ/ZQrB+xzfY0HYon96Hyp93xtNEZY8wrU9bS9HKI98vj7LK6x2zliPKJCuBGKkRitsllWzN7SIxuhFVortmUhxiMqhBtihFwJ9tR7NHVbFrf2iKbfmqgQbogRoumXG5p+uaFCuCFGiKZfbpR4hPWnVDEeUSHc8GPEAHijrx89JlQ54nuSoNaJBuqyIHKEQ+HABzez1Jjdw5d1AAAAAElFTkSuQmCC" />
+            </defs>
+          </svg>        
+          )
     }
 }
 

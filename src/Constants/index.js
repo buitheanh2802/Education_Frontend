@@ -41,7 +41,7 @@ export const path = {
   REGISTER: '/auth/register',
 
   //profile
-  PROFILE: '/profile',
+  PROFILE: '/profile/:id',
 
 
   // error

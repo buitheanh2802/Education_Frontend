@@ -56,7 +56,7 @@ const DetailTagPage = () => {
             dislike: 20,
             path: path.POSTS_ID,
             tags: [
-                { path: path.TAGS_ID, value: "ExpressJS" }
+                { path: path.TAGS_ID, value: "Javascript" }
             ]
         }
     }]
