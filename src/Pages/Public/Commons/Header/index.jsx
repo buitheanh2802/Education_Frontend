@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Icon } from 'src/Components/Icon';
@@ -8,15 +8,28 @@ import Auth from './Components/Auth';
 
 const Header = () => {
     const { pathname } = useLocation();
+    const [active, isActive] = useState(false)
     const [isMenu, setIsMenu] = useState(false);
     const [isPopup, setIsPopup] = useState(false);
     const [isNotification, setIsNotification] = useState(false);
     const { profile } = useSelector(state => state.Auth);
 
+    useEffect(() => {
+        const fixedTop = () => window.pageYOffset > 300 ? isActive(true) : isActive(false);
+
+        if (pathname === path.HOME) return (() => {
+            fixedTop();
+            window.addEventListener('scroll', fixedTop)
+        })();
+
+        isActive(true);
+        window.removeEventListener('scroll', fixedTop)
+    }, [pathname])
+
     return (
         <>
             {isNotification && <Notification setIsNotification={setIsNotification} className="z-[99999] fixed top-0 left-0 bottom-0 right-0 lg:hidden" />}
-            <div className={`${pathname !== path.HOME ? 'bg-white text-gray-800 shadow-sm' : 'pt-[15px] border-transparent text-white'} border-b border-solid duration-300 fixed top-0 left-0 right-0 z-[9999]`}>
+            <div className={`${active ? 'bg-white text-gray-800 shadow-sm' : 'pt-[15px] border-transparent text-white'} border-b border-solid duration-300 fixed top-0 left-0 right-0 z-[9999]`}>
                 <nav className="container mx-auto select-none flex justify-between items-center py-[10px]">
                     <h1 className="mr-[80px]">
                         <Link
@@ -95,7 +108,7 @@ const Header = () => {
                                 </NavLink>
                             </li>
                         </ul>
-                        <Auth isNotification={isNotification} setIsNotification={setIsNotification} isPopup={isPopup} setIsMenu={setIsMenu} setIsPopup={setIsPopup} />
+                        <Auth isNotification={isNotification} setIsNotification={setIsNotification} isPopup={isPopup} setIsMenu={setIsMenu} setIsPopup={setIsPopup} active={active} />
                     </div>
                 </nav>
             </div>

@@ -5,11 +5,8 @@ import FeaturedAuthor from '../Commons/FeaturedAuthor'
 import TrendingTags from '../Commons/TrendingTags'
 import { path } from 'src/Constants/'
 import { Icon } from 'src/Components/Icon'
-import { useSelector } from 'react-redux'
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min'
 
 const QuestionsPage = () => {
-    const { profile } = useSelector(state => state.Auth)
 
     // navigation
     const pathName = [
@@ -95,7 +92,6 @@ const QuestionsPage = () => {
         }
     ]
 
-    if (!profile) return <Redirect to="/" />
     return (
         <div className="container mx-auto mt-[80px]">
             <Navigation path={pathName} button={button} />

@@ -1,15 +1,14 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Icon } from 'src/Components/Icon';
 import { path } from 'src/Constants/';
 import Notification from '../Notification';
 import { ActionLogout } from 'src/Redux/Actions/Auth.action';
 import Loading from 'src/Components/Loading';
 
-const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotification }) => {
+const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotification, active }) => {
     const dispatch = useDispatch()
-    const { pathname } = useLocation();
     const { profile, actionLoading } = useSelector(state => state.Auth);
 
     return (
@@ -46,7 +45,7 @@ const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotificatio
                 </ul>
                 <ul className="lg:flex lg:gap-[5px] px-[15px] lg:px-0 items-center">
                     <li className="px-[15px] menu-after relative hidden lg:block">
-                        <i onClick={() => setIsNotification(!isNotification)} className={pathname === path.HOME ? 'text-white hover:text-[#51ffb9]' : 'text-gray-500 hover:text-blue-600'}><Icon.Bell className="cursor-pointer w-[20px] h-[20px] fill-current" /></i>
+                        <i onClick={() => setIsNotification(!isNotification)} className={active ? 'text-white hover:text-[#51ffb9]' : 'text-gray-500 hover:text-blue-600'}><Icon.Bell className="cursor-pointer w-[20px] h-[20px] fill-current" /></i>
                         {isNotification && <div className="absolute top-full right-0 w-[400px] pt-[12px]">
                             <span className="absolute w-[10px] h-[10px] block border-t border-l bg-white border-gray-300 transform rotate-[45deg] -translate-y-1/2 right-[20px]"></span>
                             <Notification className="hidden lg:block font-normal" />
@@ -69,8 +68,8 @@ const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotificatio
                 </ul>
             </>
                 : <ul className="lg:flex lg:gap-[5px] mx-[15px] lg:mx-0 border-t lg:border-none">
-                    <li className="py-[10px] lg:py-0"><Link className={`lg:px-[15px] lg:py-[5px] lg:border lg:border-solid lg:rounded duration-300 lg:border-[#fff0] ${pathname === path.HOME ? "hover:text-[#51ffb9]" : "lg:text-gray-800 lg:hover:text-blue-600"}`} to={path.LOGIN}>Đăng nhập</Link></li>
-                    <li className="py-[10px] lg:py-0"><Link className={`lg:px-[15px] lg:py-[5px] lg:border lg:border-solid lg:rounded duration-300 ${pathname === path.HOME ? "lg:border-white hover:border-[#67d4a8] hover:text-[#fff] hover:bg-[#67d4a8]" : "lg:border-[#1273eb] lg:text-gray-800 hover:text-[#fff] hover:bg-blue-600"}`} to={path.REGISTER}>Đăng ký</Link></li>
+                    <li className="py-[10px] lg:py-0"><Link className={`lg:px-[15px] lg:py-[5px] lg:border lg:border-solid lg:rounded duration-300 lg:border-[#fff0] ${active ? "lg:text-gray-800 lg:hover:text-blue-600" : "hover:text-[#51ffb9]"}`} to={path.LOGIN}>Đăng nhập</Link></li>
+                    <li className="py-[10px] lg:py-0"><Link className={`lg:px-[15px] lg:py-[5px] lg:border lg:border-solid lg:rounded duration-300 ${active ? "lg:border-[#1273eb] lg:text-gray-800 hover:text-[#fff] hover:bg-blue-600" : "lg:border-white hover:border-[#67d4a8] hover:text-[#fff] hover:bg-[#67d4a8]"}`} to={path.REGISTER}>Đăng ký</Link></li>
                 </ul>
             }
         </>
