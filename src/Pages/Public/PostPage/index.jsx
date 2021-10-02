@@ -15,7 +15,7 @@ const PostPage = () => {
     const button = { path: path.POSTS_CREATE, icon: Icon.Pen, value: "Viết bài" }
 
     return (
-        <div className="mt-[80px] container mx-auto">
+        <div className="mt-[55px] container mx-auto py-[20px]">
             <Navigation path={pathName} button={button} />
         </div>
     )
