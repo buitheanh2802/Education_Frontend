@@ -6,7 +6,7 @@ const Oauthentication = () => {
     const login = {
         Facebook: () => window.location.href = `${api}/auth/facebook`,
         Google: () => window.location.href = `${api}/auth/google`,
-        loginGithub: () => window.location.href = `${api}/auth/github`
+        Github: () => window.location.href = `${api}/auth/github`
     }
 
     return (

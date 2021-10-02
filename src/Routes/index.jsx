@@ -14,7 +14,6 @@ import Loading from 'src/Components/Loading';
 import queryParam from 'src/Helpers/QueryParams'
 import AdminLayout from 'src/Layouts/AdminLayout';
 import PrivateRouter from './PrivateRouter';
-import Notfound from 'src/Pages/Public/Notfound';
 import AlertMessage from 'src/Components/AlertMessage';
 
 const RootRoute = () => {
@@ -35,12 +34,11 @@ const RootRoute = () => {
     if (isLoading) return <div className="h-screen flex items-center justify-center bg-gray-100"><Loading className="w-[40px] h-[40px] fill-current text-gray-500" /></div>
     return (
         <Router>
-            <AlertMessage />  
+            <AlertMessage />
             <Switch>
-                <PublicRouter exact path={path.HOME} component={SiteLayout} />
                 <PublicRouter path={path.AUTH} component={Authorization} />
                 <PrivateRouter path={path.ADMIN} component={AdminLayout} />
-                <PublicRouter path="*" component={Notfound} />
+                <PublicRouter path={path.HOME} component={SiteLayout} />
             </Switch>
         </Router>
     );

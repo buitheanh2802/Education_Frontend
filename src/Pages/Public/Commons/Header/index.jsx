@@ -63,19 +63,6 @@ const Header = () => {
                                     }}
                                     activeClassName="text-blue-700 relative lg:after:bottom-[-15px] lg:after:right-0 lg:after:bg-[#1273eb] lg:after:absolute lg:after:w-full lg:after:h-[2px]"
                                     className="hover:text-blue-600 duration-300 flex items-center"
-                                    to="/cours">
-                                    <Icon.Course className="w-[16px] h-[16px] mr-[10px] sm:w-[20px] sm:h-[20px] lg:hidden fill-current" />
-                                    Khóa học
-                                </NavLink>
-                            </li>
-                            <li className="py-[10px] lg:py-0">
-                                <NavLink
-                                    onClick={() => {
-                                        setIsMenu(false)
-                                        setIsPopup(false)
-                                    }}
-                                    activeClassName="text-blue-700 relative lg:after:bottom-[-15px] lg:after:right-0 lg:after:bg-[#1273eb] lg:after:absolute lg:after:w-full lg:after:h-[2px]"
-                                    className="hover:text-blue-600 duration-300 flex items-center"
                                     to="/posts">
                                     <Icon.Pen className="w-[16px] h-[16px] mr-[10px] sm:w-[20px] sm:h-[20px] lg:hidden fill-current" />
                                     Bài viết
@@ -107,21 +94,7 @@ const Header = () => {
                                     Tổ chức
                                 </NavLink>
                             </li>
-                            <li className="py-[10px] lg:py-0">
-                                <NavLink
-                                    onClick={() => {
-                                        setIsMenu(false)
-                                        setIsPopup(false)
-                                    }}
-                                    activeClassName="text-blue-700 relative lg:after:bottom-[-15px] lg:after:right-0 lg:after:bg-[#1273eb] lg:after:absolute lg:after:w-full lg:after:h-[2px]"
-                                    className="hover:text-blue-600 duration-300 flex items-center"
-                                    to="/about">
-                                    <Icon.About className="w-[16px] h-[16px] mr-[10px] sm:w-[20px] sm:h-[20px] lg:hidden fill-current" />
-                                    Giới thiệu
-                                </NavLink>
-                            </li>
                         </ul>
-
                         <Auth isNotification={isNotification} setIsNotification={setIsNotification} isPopup={isPopup} setIsMenu={setIsMenu} setIsPopup={setIsPopup} />
                     </div>
                 </nav>

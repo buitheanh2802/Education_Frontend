@@ -13,8 +13,8 @@ const ResponseMessage = (ERROR) => {
         case "ACCESS_DENIED": return "Không có quyền truy cập";
         case "LIMITED_REQUEST": return "Bạn thao tác quá nhanh";
         
-        case "LOGOUT_SUCCESS": return "Đăng xuất không thành công";
-        case "LOGOUT_ERROR": return "Đăng xuất thành công";
+        case "LOGOUT_SUCCESS": return "Đăng xuất thành công";
+        case "LOGOUT_ERROR": return "Đăng xuất không thành công";
         case "LOGIN_SUCCESS": return "Đăng nhập thành công";
         case "LOGIN_ERROR": return "Đăng nhập không thành công";
         default: return null
