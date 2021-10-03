@@ -97,7 +97,7 @@ const QuestionsPage = () => {
         <div className="container mx-auto mt-[55px] py-[20px]">
             <Navigation path={pathName} button={button} />
             <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
-                <Scrollbar className="col-span-7 shadow-sm bg-white px-[5px] rounded h-screen">
+                <Scrollbar className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded h-screen">
                     <QuestionView data={fieldQuestions} />
                     <QuestionView data={fieldQuestions} />
                     <QuestionView data={fieldQuestions} />
@@ -106,7 +106,7 @@ const QuestionsPage = () => {
                     <QuestionView data={fieldQuestions} />
                     <QuestionView data={fieldQuestions} />
                 </Scrollbar>
-                <Scrollbar className="col-span-3 bg-white shadow rounded h-screen">
+                <Scrollbar className="col-span-10 lg:col-span-3 bg-white shadow rounded h-screen">
                     <FeaturedAuthor authors={authors} />
                     <TrendingTags tags={tags} />
                 </Scrollbar>

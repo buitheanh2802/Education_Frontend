@@ -29,7 +29,7 @@ const Header = () => {
     return (
         <>
             {isNotification && <Notification setIsNotification={setIsNotification} className="z-[99999] fixed top-0 left-0 bottom-0 right-0 lg:hidden" />}
-            <div className={`${active ? 'bg-white text-gray-800 shadow-sm' : 'pt-[15px] border-transparent text-white'} border-b border-solid duration-300 fixed top-0 left-0 right-0 z-[9999]`}>
+            <div className={`${active ? 'bg-white text-gray-900 shadow-sm' : 'pt-[15px] border-transparent text-white'} border-b border-solid duration-300 fixed top-0 left-0 right-0 z-[9999]`}>
                 <nav className="container mx-auto select-none flex justify-between items-center py-[10px]">
                     <h1 className="mr-[80px]">
                         <Link
