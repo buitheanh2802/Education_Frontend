@@ -45,7 +45,9 @@ const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotificatio
                 </ul>
                 <ul className="lg:flex lg:gap-[5px] px-[15px] lg:px-0 items-center">
                     <li className="px-[15px] menu-after relative hidden lg:block">
-                        <i onClick={() => setIsNotification(!isNotification)} className={active ? 'text-white hover:text-[#51ffb9]' : 'text-gray-500 hover:text-blue-600'}><Icon.Bell className="cursor-pointer w-[20px] h-[20px] fill-current" /></i>
+                        <i onClick={() => setIsNotification(!isNotification)} className={active ? 'text-gray-500 hover:text-blue-600' : 'text-white hover:text-[#51ffb9]'}><Icon.Bell className="cursor-pointer w-[20px] h-[20px] fill-current" /></i>
+
+                        
                         {isNotification && <div className="absolute top-full right-0 w-[400px] pt-[12px]">
                             <span className="absolute w-[10px] h-[10px] block border-t border-l bg-white border-gray-300 transform rotate-[45deg] -translate-y-1/2 right-[20px]"></span>
                             <Notification className="hidden lg:block font-normal" />
