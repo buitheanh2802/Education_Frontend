@@ -5,6 +5,7 @@ import FeaturedAuthor from '../Commons/FeaturedAuthor'
 import TrendingTags from '../Commons/TrendingTags'
 import { path } from 'src/Constants/'
 import { Icon } from 'src/Components/Icon'
+import Scrollbar from 'react-smooth-scrollbar'
 
 const QuestionsPage = () => {
 
@@ -95,14 +96,20 @@ const QuestionsPage = () => {
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
             <Navigation path={pathName} button={button} />
-            <div className="mt-[15px] gap-[15px] flex justify-between">
-                <div className="w-full shadow-sm bg-white px-[5px] rounded">
+            <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
+                <Scrollbar className="col-span-7 shadow-sm bg-white px-[5px] rounded h-screen">
                     <QuestionView data={fieldQuestions} />
-                </div>
-                <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded">
+                    <QuestionView data={fieldQuestions} />
+                    <QuestionView data={fieldQuestions} />
+                    <QuestionView data={fieldQuestions} />
+                    <QuestionView data={fieldQuestions} />
+                    <QuestionView data={fieldQuestions} />
+                    <QuestionView data={fieldQuestions} />
+                </Scrollbar>
+                <Scrollbar className="col-span-3 bg-white shadow rounded h-screen">
                     <FeaturedAuthor authors={authors} />
                     <TrendingTags tags={tags} />
-                </div>
+                </Scrollbar>
             </div>
         </div>
     )

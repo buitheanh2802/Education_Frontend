@@ -16,7 +16,11 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-select": "^4.3.1",
+    "react-smooth-scrollbar": "^8.0.6",
+    "react-swipe": "^6.0.4",
     "redux": "^4.1.0",
+    "smooth-scrollbar": "^8.6.3",
+    "swipe-js-iso": "^2.1.5",
     "swiper": "^7.0.3",
     "thunk": "^0.0.1",
     "web-vitals": "^1.0.1"

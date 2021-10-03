@@ -23,7 +23,7 @@ const Header = () => {
         })();
 
         isActive(true);
-        window.removeEventListener('scroll', fixedTop)
+        window.addEventListener('scroll', () => isActive(true))
     }, [pathname])
 
     return (
@@ -43,8 +43,8 @@ const Header = () => {
                         </Link>
                     </h1>
                     <div className="flex items-center gap-[15px]">
-                        {profile && <i onClick={() => setIsNotification(!isNotification)} className={`${pathname === path.HOME ? 'text-white hover:text-[#51ffb9]' : 'text-gray-500 hover:text-blue-600'} lg:hidden`}><Icon.Bell className="cursor-pointer w-[25px] h-[25px] fill-current" /></i>}
-                        <button onClick={() => setIsMenu(true)} className="lg:hidden"><Icon.Menu className={`fill-current w-[20px] sm:w-[25px] ${pathname === path.HOME ? "text-white" : "text-black"}`} /></button>
+                        {profile && <i onClick={() => setIsNotification(!isNotification)} className={`${active ? 'text-gray-500 hover:text-blue-600' : 'text-white hover:text-[#51ffb9]'} lg:hidden`}><Icon.Bell className="cursor-pointer w-[25px] h-[25px] fill-current" /></i>}
+                        <button onClick={() => setIsMenu(true)} className="lg:hidden"><Icon.Menu className={`fill-current w-[20px] sm:w-[25px] ${active ? "text-black" : "text-white"}`} /></button>
                     </div>
                     <div className={`${isMenu ? "ml-0 sm:ml-[50%] md:ml-[60%]" : "ml-[100%] lg:ml-0"} menu_top lg:flex w-full lg:justify-between font-medium text-[14px] sm:text-[16px] lg:transform lg:translate-y-[2px]`}>
                         <ul className="flex justify-between lg:hidden  py-[10px] border-b px-[15px] lg:px-0">
@@ -64,7 +64,6 @@ const Header = () => {
                                     <Icon.Logo className="w-[24px]" />
                                     <span className="sm:text-[23px] text-[20px] font-bold ml-[5px]">DevStar</span>
                                 </Link>}
-
                             <button onClick={() => setIsMenu(false)}> <Icon.Close className="w-[20px]" /> </button>
                         </ul>
                         <ul className="lg:flex lg:gap-[20px] px-[15px] lg:px-0 pt-[10px] lg:pt-0">
