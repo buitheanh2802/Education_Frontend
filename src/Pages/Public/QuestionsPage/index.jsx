@@ -94,11 +94,11 @@ const QuestionsPage = () => {
     return (
         <div className="container mx-auto mt-[80px]">
             <Navigation path={pathName} button={button} />
-            <div className="mt-[15px] gap-[15px] flex justify-between">
-                <div className="w-full shadow-sm bg-white px-[5px] rounded">
+            <div className="mt-[15px] gap-[15px] flex justify-between  ">
+                <div className="w-full shadow-sm bg-white px-[5px] rounded ">
                     <QuestionView data={fieldQuestions} />
                 </div>
-                <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded">
+                <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded sm:block hidden">
                     <FeaturedAuthor authors={authors} />
                     <TrendingTags tags={tags} />
                 </div>
