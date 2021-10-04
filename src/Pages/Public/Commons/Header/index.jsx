@@ -33,7 +33,7 @@ const Header = () => {
                         <li className="py-[10px] lg:py-0"><NavLink onClick={() => setIsMenu(false)} activeClassName="text-blue-700 relative lg:after:bottom-[-15px] lg:after:right-0 lg:after:bg-[#1273eb] lg:after:absolute lg:after:w-full lg:after:h-[2px]" className="hover:text-blue-600 duration-300" to="/groups">Tổ chức</NavLink></li>
                         <li className="py-[10px] lg:py-0"><NavLink onClick={() => setIsMenu(false)} activeClassName="text-blue-700 relative lg:after:bottom-[-15px] lg:after:right-0 lg:after:bg-[#1273eb] lg:after:absolute lg:after:w-full lg:after:h-[2px]" className="hover:text-blue-600 duration-300" to="/about">Giới thiệu</NavLink></li>
                     </ul>
-
+                    
                     {profile
                         ? <ul className="lg:flex lg:gap-[5px] px-[15px] lg:px-0 items-center">
                             <li className={`px-[15px] menu-after relative `}>
