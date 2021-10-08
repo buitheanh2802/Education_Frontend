@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
-import { path, Images } from "src/Constants/";
+import { Images } from "src/Constants/";
 const ContactPage = () => {
   return (
     <div className="">
@@ -25,11 +24,11 @@ const ContactPage = () => {
             thắc mắc khác
           </p>
         </div> */}
-        <div className="absolute px-[15px] text-center  top-0 right-1/2 translate-x-1/2 translate-y-1/2  ">
-          <h3 className="font-semibold text-[24px]  lg:text-[30px] xl:text-[32px] lg:leading-[54px] md:leading-[35px] text-white">
+        <div className="absolute   sm:px-[15px] text-center  top-0 right-1/2 translate-x-1/2 translate-y-1/2  ">
+          <h3 className="font-semibold text-[16px]  lg:text-[30px] xl:text-[32px] lg:leading-[54px] md:leading-[35px] leading-[20px] text-white">
             Liên hệ - Góp ý
           </h3>
-          <p className=" text-[15px] md:text-[18px] lg:text-[20px] lg:leading-[36px] md:leading-[25px] text-white">
+          <p className=" text-[14px] md:text-[18px] lg:text-[20px] lg:leading-[36px] md:leading-[25px] leading-[22px] text-white">
             Góp ý hoặc liên hệ với DevStar nếu bạn có nhu cầu dịch vụ hoặc những
             thắc mắc khác
           </p>
