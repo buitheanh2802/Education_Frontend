@@ -22,6 +22,19 @@ const PostsCreate = () => {
     { value: "silver", label: "Silver", color: "#666666" },
   ];
 
+  ////////
+  const Tags = (e) => {
+    const arr = e.map((item) => {
+      return item.value;
+    });
+    // console.log(arr);
+    setTagsId(arr);
+  };
+  /////////
+  const Content = (e) => {
+    setContent(e);
+  };
+
   const AnimatedMulti = () => {
     return (
       <Select
@@ -31,7 +44,7 @@ const PostsCreate = () => {
         isMulti
         options={colourOptions}
         placeholder={"Gắn thẻ bài viết: Tối đa 5 thẻ và ít nhất 1 thẻ "}
-        onChange={(e) => setTagsId(e.value)}
+        onChange={(e) => Tags(e)}
       />
     );
   };
@@ -44,8 +57,8 @@ const PostsCreate = () => {
         tagsId: tagsId,
         content: content,
       };
-      // await PostApi.add(data);
-      console.log(data);
+      await PostApi.add(data);
+      // console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -89,7 +102,7 @@ const PostsCreate = () => {
         </div>
       </div>
       <div className="mt-[20px]">
-        <QuillReact onChange={(e) => setContent(e.target.value)} />
+        <QuillReact Content={Content} />
       </div>
     </div>
   );

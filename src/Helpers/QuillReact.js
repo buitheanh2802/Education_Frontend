@@ -45,6 +45,7 @@ class QuillReact extends React.Component {
           theme="snow"
           modules={this.modules}
           formats={this.formats}
+          onChange={(e) => this.props.Content(e)}
         ></ReactQuill>
       </div>
     );

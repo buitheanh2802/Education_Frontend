@@ -17,6 +17,7 @@ const PostsDetail = () => {
       try {
         const Post = await PostApi.getAll();
         setPostDetail(Post.data[0]);
+        console.log(Post.data[0]);
       } catch (error) {
         console.log(error);
       }
@@ -77,7 +78,7 @@ const PostsDetail = () => {
               <p className="flex items-center text-gray-500">
                 <Icon.Eye className="fill-current w-[15px] " />
                 <span className="text-[12px] sm:text-[14px] ml-1">
-                  48 lượt xem
+                  12 lượt xem
                 </span>
               </p>
               <p className="flex items-center text-gray-500 ml-[10px]">
@@ -115,19 +116,33 @@ const PostsDetail = () => {
             </p>
             <div
               className="mt-[20px] "
-              dangerouslySetInnerHTML={{
-                __html: postDetail.content || <Skeleton count={30} />,
-              }}
+              dangerouslySetInnerHTML={
+                {
+                  __html: postDetail.content,
+                } || <Skeleton count={30} />
+              }
             ></div>
             <div className="mt-[20px] inline-block">
               <div className="flex items-center border-b border-gray-300 ">
                 <button className="text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  hover:bg-gray-500 hover:text-white">
                   <Icon.Like className="fill-current w-[13px]" />
-                  <span className="text-[12x] md:text-[14x] ml-1">50</span>
+                  <span className="text-[12x] md:text-[14x] ml-1">
+                    {postDetail.likes ? (
+                      postDetail.likes.length
+                    ) : (
+                      <Skeleton width={10} />
+                    )}
+                  </span>
                 </button>
                 <button className=" text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center hover:bg-gray-500 hover:text-white">
                   <Icon.Dislike className="fill-current w-[13px]" />
-                  <span className="text-[12x] md:text-[14x] ml-1">16</span>
+                  <span className="text-[12x] md:text-[14x] ml-1">
+                    {postDetail.dislike ? (
+                      postDetail.dislike.length
+                    ) : (
+                      <Skeleton width={10} />
+                    )}
+                  </span>
                 </button>
                 <div className="relative">
                   <button

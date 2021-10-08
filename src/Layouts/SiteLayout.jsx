@@ -12,8 +12,10 @@ import ContactPage from "src/Pages/Public/ContactPage";
 import PostsCreate from "src/Pages/Public/PostsCreate";
 import QuestionsCreate from "src/Pages/Public/QuestionsCreate";
 import DetailTagPage from "src/Pages/Public/DetailTagPage";
-import ProfilePage from "src/Pages/Public/ProfilePage";
+import ProfileUser from "src/Pages/Public/ProfileUsers";
 import QuestionsDetail from "src/Pages/Public/QuestionsDetail";
+import IntroPage from "src/Pages/Public/IntroPage/IntroPage";
+import Profile from "src/Pages/Public/ProfilePage";
 
 const SiteLayout = () => {
   return (
@@ -31,9 +33,14 @@ const SiteLayout = () => {
         />
         <PublicRouter path={path.POSTS} component={PostPage} />
         <PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
-        <PublicRouter path={path.QUESTIONS_DETAIL} component={QuestionsDetail} />
-        <PublicRouter exact path={path.PROFILE} component={ProfilePage} />
+        <PublicRouter
+          path={path.QUESTIONS_DETAIL}
+          component={QuestionsDetail}
+        />
+        <PublicRouter exact path={path.PROFILE} component={Profile} />
         <PublicRouter exact path={path.TAGS_DETAIL} component={DetailTagPage} />
+        <PublicRouter path={path.INTRO} component={IntroPage} />
+        <PublicRouter path={path.PROFILE_USER} component={ProfileUser} />
       </Switch>
     </>
   );

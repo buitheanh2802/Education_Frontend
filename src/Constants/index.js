@@ -49,7 +49,10 @@ export const path = {
   PROFILE: "/profile",
 
   //profile
-  PROFILE: "/profile",
+  PROFILE_USER: "/profile/user",
+
+  //intro
+  INTRO: "/intro",
 
   // error
   NOT_FOUND: "/not-found",

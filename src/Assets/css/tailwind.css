@@ -187,3 +187,20 @@ body {
   border-right: 7px solid transparent;
   transform: translateY(-104%);
 } */
+.section-infor::before {
+  content: " ";
+  position: absolute;
+  width: 130px;
+  height: 200px;
+  top: -70px;
+  left: 10%;
+  background-image: url("../media/pictures/vector.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  z-index: 10;
+}
+
+.card-item:hover {
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 40%);
+}
