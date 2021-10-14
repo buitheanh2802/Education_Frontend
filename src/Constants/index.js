@@ -46,10 +46,11 @@ export const path = {
   REGISTER: "/auth/register",
 
   //profile
-  PROFILE: '/profile/:id',
-
-  //profile
-  PROFILE_USER: "/profile/user",
+  PROFILE: "/profile/:id",
+  EDIT_PROFILE: "/profile/:id/edit",
+  PROFILE_PERSONAL: "/profile/:id/edit/personal",
+  PROFILE_CONTACT: "/profile/:id/edit/contact",
+  PROFILE_PASSWORD: "/profile/:id/edit/password",
 
   //intro
   INTRO: "/intro",

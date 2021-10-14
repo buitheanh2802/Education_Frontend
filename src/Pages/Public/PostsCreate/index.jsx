@@ -10,6 +10,7 @@ const PostsCreate = () => {
   const [title, setTitle] = useState();
   const [tagsId, setTagsId] = useState();
   const [content, setContent] = useState();
+  const [boxBtn, setBoxBtn] = useState();
   ///react-select
   const animatedComponents = makeAnimated();
   const colourOptions = [
@@ -27,7 +28,6 @@ const PostsCreate = () => {
     const arr = e.map((item) => {
       return item.value;
     });
-    // console.log(arr);
     setTagsId(arr);
   };
   /////////
@@ -43,7 +43,7 @@ const PostsCreate = () => {
         // defaultValue={[colourOptions[4], colourOptions[5]]}
         isMulti
         options={colourOptions}
-        placeholder={"Gắn thẻ bài viết: Tối đa 5 thẻ và ít nhất 1 thẻ "}
+        placeholder={"Gắn thẻ bài viết "}
         onChange={(e) => Tags(e)}
       />
     );
@@ -58,7 +58,6 @@ const PostsCreate = () => {
         content: content,
       };
       await PostApi.add(data);
-      // console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -75,26 +74,39 @@ const PostsCreate = () => {
       </div>
       <div className="mt-[20px] grid grid-cols-1  lg:grid-cols-[3fr,1fr] gap-5">
         {AnimatedMulti()}
-        {/* <Select
-          closeMenuOnSelect={false}
-          components={animatedComponents}
-          // defaultValue={[colourOptions[4], colourOptions[5]]}
-          isMulti
-          options={colourOptions}
-          placeholder={"Gắn thẻ bài viết: Tối đa 5 thẻ và ít nhất 1 thẻ "}
-          onChange={(e) => setTagsId(e.target.value)}
-        /> */}
+
         <div className="grid  grid-cols-[5fr,2fr] gap-3">
-          <button
-            className=" justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500
-           rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
-            onClick={() => OnSubmit()}
-          >
-            <Icon.Pen className="fill-current w-[13px]" />
-            <span className="text-[12x] md:text-[16x] ml-1">
-              Xuất bản bài viết
-            </span>
-          </button>
+          <div className="relative">
+            <button
+              className={
+                boxBtn
+                  ? "w-full justify-center bg-blue-500 text-white px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center"
+                  : " w-full justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
+              }
+              onClick={() => setBoxBtn(!boxBtn)}
+            >
+              <Icon.Pen className="fill-current w-[13px]" />
+              <span className="text-[12x] md:text-[16x] ml-1">
+                Xuất bản bài viết
+              </span>
+            </button>
+            <ul
+              className={
+                boxBtn
+                  ? "absolute z-10 text-center w-full mt-[10px] box_btn bg-white top-full left-0 rounded-[3px]"
+                  : "hidden"
+              }
+            >
+              <li className="py-3 px-3 text-[12x] flex justify-center items-center md:text-[16x] text-gray-600 cursor-pointer border-b border-gray-100 hover:bg-blue-100">
+                <Icon.HeartFilled className="fill-current w-[13px] " />
+                <span className="ml-2">Lưu thành bản nháp</span>
+              </li>
+              <li className="py-3 px-3 text-[12x] md:text-[16x] justify-center items-center text-gray-600 cursor-pointer hover:bg-blue-100 flex">
+                <Icon.Pen className="fill-current w-[13px]" />
+                <span className="ml-2"> Xuất bản bài ngay   </span>
+              </li>
+            </ul>
+          </div>
           <button className="justify-center bg-white text-red-500 px-3  py-[8px] border border-red-500 rounded-[3px] flex items-center hover:bg-red-500 hover:text-white">
             <Icon.Close className="fill-current w-[13px]" />
             <span className="text-[12x] md:text-[16x] ml-1">Hủy</span>
