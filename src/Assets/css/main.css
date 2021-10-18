@@ -1108,8 +1108,20 @@ video {
   align-self: center;
 }
 
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
 .overflow-y-scroll {
   overflow-y: scroll;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
 }
 
 .rounded-\[3px\] {
@@ -1394,6 +1406,18 @@ video {
   padding-right: 5px;
 }
 
+.pb-1 {
+  padding-bottom: 0.25rem;
+}
+
+.pb-\[1px\] {
+  padding-bottom: 1px;
+}
+
+.pb-\[5px\] {
+  padding-bottom: 5px;
+}
+
 .text-center {
   text-align: center;
 }
@@ -1622,6 +1646,7 @@ video {
 *::-webkit-scrollbar {
   width: 0px;
   background-color: #dfe6e9;
+  height: 0px;
 }
 
 body {
