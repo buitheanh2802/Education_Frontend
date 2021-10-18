@@ -9,22 +9,14 @@ import Scrollbar from 'react-smooth-scrollbar'
 
 const PostPage = () => {
 
-    // navigation
+    // Navigation
     const pathName = [
-        {
-            path: path.POSTS,
-            value: "Mới cập nhật"
-        },
-        {
-            path: path.POSTS_FLOW,
-            value: "Đang theo dõi"
-        },
-        {
-            path: path.POSTS_BOOK_MARK,
-            value: "Bookmark của tôi"
-        }
+        { path: path.POSTS, value: "Mới cập nhật" },
+        { path: path.POSTS_POPULAR, value: "Thịnh hành" },
+        { path: path.POSTS_FLOW, value: "Đang theo dõi" },
+        { path: path.POSTS_BOOK_MARK, value: "Bookmark của tôi" },
     ]
-    const button = { path: path.POSTS_CREATE, icon: Icon.Pen, value: "Đặt câu hỏi" }
+    const button = { path: path.POSTS_CREATE, icon: Icon.Pen, value: "Viết bài" }
 
     // authors
     const authors = [
