@@ -1946,6 +1946,10 @@ body {
     margin-bottom: 10px;
   }
 
+  .sm\:block {
+    display: block;
+  }
+
   .sm\:h-\[20px\] {
     height: 20px;
   }

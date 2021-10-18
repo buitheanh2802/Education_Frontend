@@ -8,7 +8,7 @@ const QuestionView = ({ data }) => {
             {data?.map((item, index) => {
                 return (
                     <div key={index} className="w-full flex px-[10px] py-[15px] border-b">
-                        <div className="mr-[20px] ">
+                        <div className="mr-[20px] hidden sm:block">
                             <Link to={item?.user?.path} >
                                 <img className="max-w-[40px] max-h-[40px] rounded-full" src={item?.user?.avatar} alt={item?.user?.fullname} />
                             </Link>
