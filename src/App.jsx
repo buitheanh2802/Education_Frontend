@@ -4,10 +4,11 @@ import Store from './Redux/Store';
 import RootRouter from './Routes';
 import "./Assets/css/main.css";
 import ProfileApi from './Apis/ProfileApi';
+import TagAPi from './Apis/TagApi';
 
 const App = () => {
-  const [tags, setTag] = useState([]);
-
+  // const [tag, setTag] = useState([]);
+  
   const [profiles, setProfile] = useState([]);
   useEffect(() => {
     const profiles = async () => {

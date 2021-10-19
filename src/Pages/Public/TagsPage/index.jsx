@@ -6,23 +6,7 @@ import { Icon } from "../../../Components/Icon";
 import TagAPi from "src/Apis/TagApi";
 import { data } from "autoprefixer";
 const TagsPage = () => {
-  const [tags, setTag] = useState([]);
-  useEffect(() => {
-    fetch("https://devstar-mockapi.herokuapp.com/tags")
-      .then((data) => data.json())
-      .then((data) => {
-        setTag(data);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      console.log(tags)
-    
-  }, []);
-
-
-
+ 
   // navigation
   const pathName = [
     {
@@ -68,209 +52,89 @@ const TagsPage = () => {
       folow: 345,
     },
   ];
+  const [tag, setTag] = useState([]);
+  useEffect(() => {
+    const tag = async () => {
+      try {
+        const { data: tags } = await TagAPi.getAll();
 
+        setTag(tags.data.models);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    tag();
+  }, []);
   return (
     <div className="container mx-auto mt-[80px]  ">
       <Navigation path={pathName} button={button} />
       <div className="flex justify-between mt-[15px]  gap-[30px] ">
-        <div className="flex justify-between flex-wrap max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px]  sm:gap-x-[60px]  gap-y-[20px] mb-[30px] pb-[45px] w-full  py-[15px] bg-white shadow rounded  ">
-          {tags.map((item, index) => {
-            return           <div className="item md:text-[16px] text-[14px] w-max-[200px]">
-            <div className="flex items-center">
-              <h3 className="text-[24px] leading-[36px] ">{item.name}</h3>
-              <Icon.Star className="w-[14px] ml-[10px] " />
-            </div>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">12</span> Bài viết
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">123</span> Câu hỏi
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">{item.follows}</span> Người theo
-              dõi
-            </p>
-            <button className="mt-[5px]  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded px-[25px] md:px-[30px] py-[8px]  text-[16px] hover:bg-[#1273eb] hover:text-white">
-              + Theo dõi
-            </button>
-          </div>
-      
-          })}
-    
+        <div className="flex justify-between  max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px]  sm:gap-x-[60px]  gap-y-[20px] mb-[30px] pb-[45px] w-full  py-[15px] bg-white shadow rounded  ">
+          <div className="grid grid-cols-1 gap-[20px] xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
+            {tag.map((item, index) => {
+              console.log(item);
 
-          {/* <div className="item md:text-[16px] text-[14px] w-max-[200px]">
-            <div className="flex items-center">
-              <h3 className="text-[24px] leading-[36px] ">{tags.name} </h3>
-              <Icon.Star className="w-[14px] ml-[10px] " />
-            </div>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">12</span> Bài viết
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">123</span> Câu hỏi
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">{tags.follows}</span> Người theo
-              dõi
-            </p>
-            <button className="mt-[5px]  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded px-[25px] md:px-[30px] py-[8px]  text-[16px] hover:bg-[#1273eb] hover:text-white">
-              + Theo dõi
-            </button>
+              return (
+                <div className="item md:text-[16px] text-[14px] w-max-[200px]  ">
+                  <div className="grid grid-cols-2 justify-center items-center ">
+                    <div className="">
+                      <img
+                        src={item.avatar.avatarUrl}
+                        alt=""
+                        className="w-[80px]"
+                      />
+                    </div>
+                    <div className="">
+                      <div className="flex items-center">
+                        <h3 className="text-[20px] leading-[30px] ">
+                          {item.name}
+                        </h3>
+                        <Icon.Star className="w-[14px] ml-[10px] " />
+                      </div>
+                      <p className="text-[#8A8A8A] text-[14px]">
+                        <span className="font-bold leading-[20px] ">
+                          {item.postCounts}
+                        </span>{" "}
+                        Bài viết
+                      </p>
+                      <p className="text-[#8A8A8A] text-[14px]">
+                        <span className="font-bold leading-[20px] ">
+                          {item.questionCounts}
+                        </span>{" "}
+                        Câu hỏi
+                      </p>
+                      <p className="text-[#8A8A8A] text-[14px]">
+                        <span className="font-bold leading-[20px] ">
+                          {item.followerCounts}
+                        </span>{" "}
+                        Người theo dõi
+                      </p>
+                    </div>
+                  </div>
+
+                  {item.isFollowing ? (
+                    <div className="mt-[5px] mx-[15px] xl:[mx-10px] text-center  my-auto   border border-[#6C91F0] font-bold rounded   text-[15px] bg-[#1273eb] :text-white">
+                      <button className="font-bold  px-[20px] md:px-[30px] py-[5px] ">
+                        {" "}
+                        - Bỏ theo dõi
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="mt-[5px] mx-[15px] xl:[mx-10px] text-center  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded   text-[15px] hover:bg-[#1273eb] hover:text-white">
+                      <button className="font-bold px-[20px] md:px-[30px] py-[5px] ">
+                        {" "}
+                       + Theo dõi
+                      </button>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
+
           
-          <div className="item md:text-[16px] text-[14px]">
-            <div className="flex items-center">
-              <h3 className="text-[24px] leading-[36px] ">MySql </h3>
-              <Icon.Star className="w-[14px] ml-[10px] " />
-            </div>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">12</span> Bài viết
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">123</span> Câu hỏi
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">124</span> Người theo
-              dõi
-            </p>
-            <button className="mt-[5px]  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded px-[25px] md:px-[30px] py-[8px]  text-[16px] hover:bg-[#1273eb] hover:text-white">
-              + Theo dõi
-            </button>
-          </div>
-          <div className="item md:text-[16px] text-[14px]">
-            <div className="flex items-center">
-              <h3 className="text-[24px] leading-[36px] ">jQuery </h3>
-              <Icon.Star className="w-[14px] ml-[10px] " />
-            </div>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">12</span> Bài viết
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">123</span> Câu hỏi
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">124</span> Người theo
-              dõi
-            </p>
-            <button className="mt-[5px]  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded px-[25px] md:px-[30px] py-[8px]  text-[16px] hover:bg-[#1273eb] hover:text-white">
-              + Theo dõi
-            </button>
-          </div>
-          <div className="item md:text-[16px] text-[14px]">
-            <div className="flex items-center">
-              <h3 className="text-[24px] leading-[36px] ">Node Js </h3>
-              <Icon.Star className="w-[14px] ml-[10px] " />
-            </div>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">12</span> Bài viết
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">123</span> Câu hỏi
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px]">124</span> Người theo
-              dõi
-            </p>
-            <button className="mt-[5px]  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded px-[25px] md:px-[30px] py-[8px]  text-[16px] hover:bg-[#1273eb] hover:text-white">
-              + Theo dõi
-            </button>
-          </div>
-          <div className="item md:text-[16px] text-[14px]">
-            <div className="flex items-center">
-              <h3 className="text-[24px] leading-[36px] ">Bootstrap </h3>
-              <Icon.Star className="w-[14px] ml-[10px] " />
-            </div>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">12</span> Bài viết
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">123</span> Câu hỏi
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">124</span> Người theo
-              dõi
-            </p>
-            <button className="mt-[5px]  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded px-[25px] md:px-[30px] py-[8px]  text-[16px] hover:bg-[#1273eb] hover:text-white">
-              + Theo dõi
-            </button>
-          </div>
-          <div className="item md:text-[16px] text-[14px]">
-            <div className="flex items-center">
-              <h3 className="text-[24px] leading-[36px] ">Java </h3>
-              <Icon.Star className="w-[14px] ml-[10px] " />
-            </div>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">12</span> Bài viết
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">123</span> Câu hỏi
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px]">124</span> Người theo
-              dõi
-            </p>
-            <button className="mt-[5px]  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded px-[25px] md:px-[30px] py-[8px]  text-[16px] hover:bg-[#1273eb] hover:text-white">
-              + Theo dõi
-            </button>
-          </div>
-          <div className="item md:text-[16px] text-[14px]">
-            <div className="flex items-center">
-              <h3 className="text-[24px] leading-[36px] ">React </h3>
-              <Icon.Star className="w-[14px] ml-[10px] " />
-            </div>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">12</span> Bài viết
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">123</span> Câu hỏi
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px] ">124</span> Người theo
-              dõi
-            </p>
-            <button className="mt-[5px]  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded px-[25px] md:px-[30px] py-[8px]  text-[16px] hover:bg-[#1273eb] hover:text-white">
-              + Theo dõi
-            </button>
-          </div>
-          <div className="item md:text-[16px] text-[14px]">
-            <div className="flex items-center">
-              <h3 className="text-[24px] leading-[36px] ">C# </h3>
-              <Icon.Star className="w-[14px] ml-[10px] " />
-            </div>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px]">12</span> Bài viết
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px]">123</span> Câu hỏi
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px]">124</span> Người theo
-              dõi
-            </p>
-            <button className="mt-[5px]  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded px-[25px] md:px-[30px] py-[8px]  text-[16px] hover:bg-[#1273eb] hover:text-white">
-              + Theo dõi
-            </button>
-          </div>
-          <div className="item md:text-[16px] text-[14px]">
-            <div className="flex items-center">
-              <h3 className="text-[24px] leading-[36px] ">MySql </h3>
-              <Icon.Star className="w-[14px] ml-[10px] " />
-            </div>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px]">12</span> Bài viết
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px]">123</span> Câu hỏi
-            </p>
-            <p className="text-[#8A8A8A]">
-              <span className="font-bold leading-[24px]">124</span> Người theo
-              dõi
-            </p>
-            <button className="mt-[5px]  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded px-[25px] md:px-[30px] py-[8px]  text-[16px] hover:bg-[#1273eb] hover:text-white">
-              + Theo dõi
-            </button>
-          </div> */}
-        
+
+          
         </div>
         <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded hidden lg:block">
           <FeaturedAuthor authors={authors} />
