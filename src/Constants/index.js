@@ -46,10 +46,14 @@ export const path = {
   REGISTER: "/auth/register",
 
   //profile
-  PROFILE: '/profile/:id',
+  PROFILE: "/profile/:id",
+  EDIT_PROFILE: "/profile/:id/edit",
+  PROFILE_PERSONAL: "/profile/:id/edit/personal",
+  PROFILE_CONTACT: "/profile/:id/edit/contact",
+  PROFILE_PASSWORD: "/profile/:id/edit/password",
 
-  //profile
-  PROFILE: "/profile",
+  //intro
+  INTRO: "/intro",
 
   // error
   NOT_FOUND: "/not-found",

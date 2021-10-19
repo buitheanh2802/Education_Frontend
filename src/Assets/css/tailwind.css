@@ -19,7 +19,15 @@ body {
 }
 
 /* Menu */
-
+@media (min-width: 1024px) {
+  .section-infor::before {
+    width: 130px;
+    height: 200px;
+  }
+  .ql-container.ql-snow {
+    height: 63vh;
+  }
+}
 @media (max-width: 1024px) {
   .menu_top {
     position: fixed;
@@ -30,6 +38,13 @@ body {
     background-color: white;
     color: black;
     transition-duration: 0.3s;
+  }
+  .section-infor::before {
+    width: 80px;
+    height: 130px;
+  }
+  .ql-container.ql-snow {
+    height: 57vh;
   }
 }
 
@@ -127,7 +142,6 @@ body {
   border: none;
   border-radius: 0 0 5px 5px;
   background: white;
-  height: 380px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
@@ -175,7 +189,11 @@ body {
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 20%);
   border-radius: 5px;
 }
-/* .post__share ul::before {
+.box_btn {
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 20%);
+  animation: mymove 0.2s ease-in;
+}
+.box_btn::before {
   content: " ";
   position: absolute;
   top: 0;
@@ -186,4 +204,19 @@ body {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   transform: translateY(-104%);
-} */
+}
+
+.card-item:hover {
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 40%);
+}
+.section-infor::before {
+  content: " ";
+  position: absolute;
+  top: -70px;
+  left: 10%;
+  background-image: url("../media/pictures/vector.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  z-index: 10;
+}

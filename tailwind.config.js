@@ -1,38 +1,35 @@
 module.exports = {
-  purge: [
-    "./src/**/*.jsx",
-    "./src/**/*.js"
-  ],
+  purge: ["./src/**/*.jsx", "./src/**/*.js"],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {}
+    extend: {},
   },
   variants: {
     extend: {},
   },
   corePlugins: {
-    container: false
+    container: false,
   },
   plugins: [
     function ({ addComponents }) {
       addComponents({
-        '.container': {
-          maxWidth: 'calc(100% - 30px)',
-          '@screen md': {
-            maxWidth: 'calc(100% - 70px)',
+        ".container": {
+          maxWidth: "calc(100% - 30px)",
+          "@screen md": {
+            maxWidth: "calc(100% - 70px)",
           },
-          '@screen lg': {
-            maxWidth: '980px',
+          "@screen lg": {
+            maxWidth: "980px",
           },
-          '@screen xl': {
-            maxWidth: '1200px',
+          "@screen xl": {
+            maxWidth: "1200px",
           },
-          '@screen 2xl': {
-            maxWidth: '1480px',
+          "@screen 2xl": {
+            maxWidth: "1480px",
           },
-        }
-      })
-    }
+        },
+      });
+    },
   ],
-  mode: 'jit'
-}
+  mode: "jit",
+};
