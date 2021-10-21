@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
-
+import { timeFormatter } from "../../../../Helpers/Timer";
 const QuestionView = ({ questions }) => {
   //   console.log(questions.data.);
   return (
@@ -26,7 +26,7 @@ const QuestionView = ({ questions }) => {
               </Link>
               <span className="px-[5px]">-</span>
               <span className="text-[13px] text-[#707885]">
-                {item?.createdAt}
+                {timeFormatter(item?.createdAt)}
               </span>
               <h3 className="pr-[50px]">
                 <Link
