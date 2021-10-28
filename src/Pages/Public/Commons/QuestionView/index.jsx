@@ -13,7 +13,8 @@ const QuestionView = ({ questions }) => {
               <Link to={item?.createBy?.path}>
                 <img
                   className="max-w-[40px] max-h-[40px] rounded-full"
-                  src=""
+                  src={item?.createBy?.avatar?.avatarUrl}
+                  alt={item?.createBy?.fullname}
                 />
               </Link>
             </div>
