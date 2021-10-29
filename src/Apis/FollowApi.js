@@ -7,14 +7,14 @@ const FollowApi = {
         const url = `/follow/${username}`;
         return AxiosClient.post(url, { username: username }, {
             headers: {
-                authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${token}`
             }
         })
     },
     unFollow(username) {
         const token = localStorage.getItem('_token_');
         const url = `/follow/${username}`;
-        return AxiosClient.delete(url, { username: username }, {
+        return AxiosClient.delete(url, {
             headers: {
                 authorization : `Bearer ${token}`
             }

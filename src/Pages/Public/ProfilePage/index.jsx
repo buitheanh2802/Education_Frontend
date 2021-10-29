@@ -10,9 +10,14 @@ const ProfilePage = (props) => {
   const [profile, setProfile] = useState([]);
   const username = props.match.params.username;
 
-  const handleFollow = async() => {
-    const fol = !profile?.data?.isFollowing ? FollowApi.unFollow(username) : FollowApi.follow(username);
-    await fol;
+  const handleFollow = async () => {
+    if (profile?.data?.isFollowing) {
+      await FollowApi.unFollow(username);
+      setProfile({ ...profile, data: { ...profile.data, isFollowing: false } })
+    } else {
+      await FollowApi.follow(username);
+      setProfile({ ...profile, data: { ...profile.data, isFollowing: true } })
+    }
   }
 
   useEffect(() => {
@@ -40,7 +45,7 @@ const ProfilePage = (props) => {
     };
     listPost();
   }, []);
-  
+
   const pathName = [
     {
       path: path.POSTS,
@@ -73,17 +78,17 @@ const ProfilePage = (props) => {
           <div className="py-[5px] mx-[10px]">
             <div className="py-[10px] bg-[#BEE3F8]">
               <Link className="block">
-                { profile?.data?.avatar?.avatarUrl ? 
+                {profile?.data?.avatar?.avatarUrl ?
                   <img
                     className="mx-auto max-h-[70px] rounded-full"
                     width="70px" height="70px"
                     src={profile?.data?.avatar?.avatarUrl}
                     alt={profile?.data?.username} />
-                  : 
-                  <div className="py-[22px] text-[#4A5568] mx-auto text-center md:w-[70px] md:h-[70px] rounded-full bg-white text-[18px]">
-                    {profile?.data?.username.toUpperCase().substring(0,1)}
+                  :
+                  <div className="py-[12px] text-[#4A5568] mx-auto text-center md:w-[70px] md:h-[70px] rounded-full bg-white font-bold text-[30px]">
+                    {profile?.data?.username.toUpperCase().substring(0, 1)}
                   </div>
-                }   
+                }
               </Link>
             </div>
             <div>
@@ -100,58 +105,58 @@ const ProfilePage = (props) => {
                     </span>
                   </div>
                   <div className="mt-2 md:text-right">
-                    <button onClick={() => handleFollow() } className="bg-[#fff] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#BEE3F8] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
-                    { !profile?.data?.isFollowing ? '- Bỏ theo dõi' : '+ Theo dõi' }  
+                    <button onClick={() => handleFollow()} className="bg-[#fff] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#BEE3F8] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
+                      {profile?.data?.isFollowing ? '- Bỏ theo dõi' : '+ Theo dõi'}
                     </button>
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-4 xl:text-[15px] text-[12px] py-[15px]">
                   <div className="mx-auto">
-                      <div className="text-center gap-[5px] text-[#4A5568]">
-                        <div className="flex items-center">
-                          <Icon.Point className="fill-current w-[13px] mr-[5px]" />
-                          <span>Điểm</span>
-                        </div>
-                        <span>{profile?.data?.points}</span>
+                    <div className="text-center gap-[5px] text-[#4A5568]">
+                      <div className="flex items-center">
+                        <Icon.Point className="fill-current w-[13px] mr-[5px]" />
+                        <span>Điểm</span>
                       </div>
+                      <span>{profile?.data?.points}</span>
+                    </div>
                   </div>
                   <div className="mx-auto">
-                      <div className="text-center gap-[5px] text-[#4A5568]">
-                        <div className="flex items-center">
-                          <Icon.Pen className="fill-current w-[13px] mr-[5px]" />
-                          <span>Bài viết</span>
-                        </div>
-                        <span>{profile?.data?.postCounts}</span>
+                    <div className="text-center gap-[5px] text-[#4A5568]">
+                      <div className="flex items-center">
+                        <Icon.Pen className="fill-current w-[13px] mr-[5px]" />
+                        <span>Bài viết</span>
                       </div>
+                      <span>{profile?.data?.postCounts}</span>
+                    </div>
                   </div>
                   <div className="mx-auto">
-                      <div className="text-center gap-[5px] text-[#4A5568]">
-                        <div className="flex items-center">
-                          <Icon.questions className="fill-current w-[13px] mr-[5px]" />
-                          <span>Câu hỏi</span>
-                        </div>
-                        <span>{profile?.data?.questionCounts}</span>
+                    <div className="text-center gap-[5px] text-[#4A5568]">
+                      <div className="flex items-center">
+                        <Icon.questions className="fill-current w-[13px] mr-[5px]" />
+                        <span>Câu hỏi</span>
                       </div>
+                      <span>{profile?.data?.questionCounts}</span>
+                    </div>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-[30px] xl:text-[15px] py-[15px] text-[13px]">
                   <div className="mx-auto">
-                      <div className="text-center gap-[5px] text-[#4A5568]">
-                        <div className="flex items-center">
-                          <Icon.User className="fill-current w-[13px] mr-[5px]" />
-                          <span>Có {profile?.data?.followers}</span>
-                        </div>
-                        <span>người theo dõi</span>
+                    <div className="text-center gap-[5px] text-[#4A5568]">
+                      <div className="flex items-center">
+                        <Icon.User className="fill-current w-[13px] mr-[5px]" />
+                        <span>Có {profile?.data?.followers}</span>
                       </div>
+                      <span>người theo dõi</span>
+                    </div>
                   </div>
                   <div className="mx-auto">
-                      <div className="text-center gap-[5px] text-[#4A5568]">
-                        <div className="flex items-center">
-                          <Icon.Username className="fill-current w-[13px] mr-[5px]" />
-                          <span>Theo dõi</span>
-                        </div>
-                        <span>{profile?.data?.followingCounts} người dùng</span>
+                    <div className="text-center gap-[5px] text-[#4A5568]">
+                      <div className="flex items-center">
+                        <Icon.Username className="fill-current w-[13px] mr-[5px]" />
+                        <span>Theo dõi</span>
                       </div>
+                      <span>{profile?.data?.followingCounts} người dùng</span>
+                    </div>
                   </div>
                 </div>
                 {/* <div className="">
