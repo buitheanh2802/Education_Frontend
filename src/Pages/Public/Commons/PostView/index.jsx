@@ -2,10 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Icon } from 'src/Components/Icon'
 import { useSelector } from 'react-redux'
-import FollowApi from 'src/Apis/FollowApi'
+import BookmarkApi from 'src/Apis/BookmarkApi'
 
 const PostView = ({ posts }) => {
     const user = useSelector(state => state.Auth);
+
+    const handleAddBookmark = async(shortId) => {
+        await BookmarkApi.addBookmark(shortId);
+        console.log('ok');
+    }
     return (
         <>
             {posts?.data?.models?.map((item, index) => {
@@ -39,7 +44,6 @@ const PostView = ({ posts }) => {
                                     )
                                 })}
                             </div>
-
                             <div className="flex justify-between mt-[5px] ">
                                 <div className="flex text-[14px] gap-[15px]">
                                     <div className="flex items-center gap-[5px] text-[#5f5f5f]">
@@ -51,7 +55,7 @@ const PostView = ({ posts }) => {
                                         <span>{item?.comments}</span>
                                     </div>
                                     <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                                        <Icon.Bookmark className="fill-current w-[15px]" />
+                                        <Icon.Bookmark className="fill-current w-[15px]" onClick={() => handleAddBookmark(item?.shortId)} />
                                         <span>{item?.bookmarks}</span>
                                     </div>
                                 </div>
