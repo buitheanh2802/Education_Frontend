@@ -9,14 +9,24 @@ const QuestionView = ({ questions }) => {
       {questions?.data?.models?.map((item, index) => {
         return (
           <div key={index} className="w-full flex px-[10px] py-[15px] border-b">
-            <div className="mr-[20px] ">
-              <Link to={item?.createBy?.path}>
-                <img
-                  className="max-w-[40px] max-h-[40px] rounded-full"
-                  src={item?.createBy?.avatar?.avatarUrl}
+            <div className="mr-[15px] ">
+              {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
+                <Link
+                  to=""
+                  className="mt-[5px]  border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
+                  style={{
+                    backgroundImage: `url(${item?.createBy?.avatar?.avatarUrl})`,
+                  }}
                   alt={item?.createBy?.fullname}
-                />
-              </Link>
+                ></Link>
+              ) : (
+                <Link
+                  to=""
+                  className="mt-[5px] flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
+                >
+                  {item?.createBy?.fullname?.slice(0, 1)?.toUpperCase()}
+                </Link>
+              )}
             </div>
             <div className="w-full">
               <Link

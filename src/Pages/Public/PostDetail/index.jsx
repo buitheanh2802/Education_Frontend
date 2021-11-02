@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "src/Components/Icon";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation, useHistory } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import PostsNew from "../Commons/PostNew";
 import PostApi from "src/Apis/PostApi";
 import { timeFormatter } from "src/Helpers/Timer";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  EmailShareButton,
+} from "react-share";
+
 const PostsDetail = () => {
   const shortId = useParams();
   const [postmenu, setPostmenu] = useState(false);
   const [postShare, setpostShare] = useState(false);
   const [postDetail, setPostDetail] = useState([]);
-  // const [postAll, setPostAll] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -24,7 +29,8 @@ const PostsDetail = () => {
     };
     list(shortId?.id);
   }, []);
-  //   console.log(postDetail?.data);
+  const shareUrl = "https://www.npmjs.com/package/react-share";
+  // console.log(window.location.href);
   return (
     <>
       {/* {postDetail && (
@@ -44,17 +50,33 @@ const PostsDetail = () => {
           <div className="bg-white rounded-[5px] shadow px-[5px] sm:px-[15px] py-[20px] ">
             <div className="block lg:hidden">
               <div className="flex items-center mb-[5px] ">
-                <Link to="">
-                  <img
-                    className="max-w-[40px] max-h-[40px] rounded-full"
-                    src={postDetail?.data?.createBy?.avatar?.avatarUrl}
-                    alt={postDetail?.data?.createBy?.fullname}
-                  />
-                </Link>
+                {postDetail?.data?.createBy?.avatar?.avatarUrl?.length > 0 ? (
+                  <Link
+                    to=""
+                    className="  border border-gray-300 cursor-pointer select-none w-[55px] h-[55px] rounded-full bg-center bg-cover"
+                    style={{
+                      backgroundImage: `url(${postDetail?.data?.createBy?.avatar?.avatarUrl})`,
+                    }}
+                    alt={postDetail?.fullname}
+                  ></Link>
+                ) : (
+                  <Link
+                    to=""
+                    className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
+                  >
+                    {postDetail?.data?.createBy?.fullname
+                      ?.slice(0, 1)
+                      ?.toUpperCase()}
+                  </Link>
+                )}
                 <div className="ml-2">
                   <p className="text-blue-500 text-[14px] sm:text-[16px] font-medium flex items-center">
-                    {postDetail?.data?.createBy?.fullname}
-                    <span className=" text-[12px] sm:text-[14px] text-gray-500 hidden sm:block">
+                    <Link to={postDetail?.data?.createBy?.path}>
+                      <span className="hover:underline">
+                        {postDetail?.data?.createBy?.fullname}
+                      </span>
+                    </Link>
+                    <span className=" text-[12px] sm:text-[14px] text-gray-500 hidden sm:block ">
                       - @{postDetail?.data?.createBy?.username}
                     </span>
                     <span>
@@ -67,19 +89,19 @@ const PostsDetail = () => {
                     <p className="flex items-center text-gray-500">
                       <Icon.Point className="fill-current w-[12px] sm:w-[15px] " />
                       <span className="text-[12px] sm:text-[14px] ml-1">
-                        48
+                        {postDetail?.data?.createBy?.points}
                       </span>
                     </p>
                     <p className="flex items-center text-gray-500 ml-[10px]">
                       <Icon.Pen className="fill-current  w-[12px] sm:w-[13px] " />
                       <span className="text-[12px] sm:text-[14px] ml-1">
-                        20
+                        {postDetail?.data?.createBy?.postCounts}
                       </span>
                     </p>
                     <p className="flex items-center text-gray-500 ml-[10px]">
                       <Icon.Questions className="fill-current w-[12px] sm:w-[13px] " />
                       <span className="text-[12px] sm:text-[14px] ml-1">
-                        12
+                        {postDetail?.data?.createBy?.questionCounts}
                       </span>
                     </p>
                   </div>
@@ -127,8 +149,7 @@ const PostsDetail = () => {
               <p className="flex items-center text-gray-500 ml-[10px]">
                 <Icon.Chat className="fill-current w-[13px] " />
                 <span className="text-[12px] sm:text-[14px] ml-1">
-                  {postDetail?.data?.comments}
-                  bình luận
+                  {postDetail?.data?.comments} bình luận
                 </span>
               </p>
               <p className="flex items-center text-gray-500 ml-[10px]">
@@ -199,17 +220,32 @@ const PostsDetail = () => {
                     }
                   >
                     <ul className=" text-[14px] ">
-                      <li className="flex items-center text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
-                        <Icon.Facebook className="fill-current w-[12px] mr-[5px] " />
-                        Chia sẻ đến FaceBook
+                      <li className=" text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
+                        <FacebookShareButton
+                          url={shareUrl}
+                          className="flex items-center"
+                        >
+                          <Icon.Facebook className="fill-current w-[12px] mr-[5px] " />
+                          Chia sẻ đến FaceBook
+                        </FacebookShareButton>
                       </li>
-                      <li className="flex items-center text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
-                        <Icon.Twitter className="fill-current w-[15px] mr-[5px]" />
-                        Chia sẻ đến Twitter
+                      <li className="text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
+                        <TwitterShareButton
+                          url={shareUrl}
+                          className="flex items-center"
+                        >
+                          <Icon.Twitter className="fill-current w-[15px] mr-[5px]" />
+                          Chia sẻ đến Twitter
+                        </TwitterShareButton>
                       </li>
-                      <li className="flex items-center text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
-                        <Icon.Email className="fill-current w-[12px] mr-[5px]" />
-                        Chia sẻ đến Email
+                      <li className=" text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
+                        <EmailShareButton
+                          url={shareUrl}
+                          className="flex items-center"
+                        >
+                          <Icon.Email className="fill-current w-[12px] mr-[5px]" />
+                          Chia sẻ đến Email
+                        </EmailShareButton>
                       </li>
                     </ul>
                   </div>
@@ -220,14 +256,26 @@ const PostsDetail = () => {
         </div>
         <div className="hidden lg:block">
           <div className="bg-white shadow rounded-[5px] ">
-            <div className="flex py-[7px] block-avt">
-              <Link to="" className="m-auto ">
-                <img
-                  className="max-w-[55px] max-h-[55px] rounded-full"
-                  src={postDetail?.data?.createBy?.avatar?.avatarUrl}
-                  alt={postDetail?.data?.createBy?.fullname}
-                />
-              </Link>
+            <div className="flex py-[7px] block-avt justify-center">
+              {postDetail?.data?.createBy?.avatar?.avatarUrl?.length > 0 ? (
+                <Link
+                  to=""
+                  className="  border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
+                  style={{
+                    backgroundImage: `url(${postDetail?.data?.createBy?.avatar?.avatarUrl})`,
+                  }}
+                  alt={postDetail?.fullname}
+                ></Link>
+              ) : (
+                <Link
+                  to=""
+                  className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
+                >
+                  {postDetail?.data?.createBy?.fullname
+                    ?.slice(0, 1)
+                    ?.toUpperCase()}
+                </Link>
+              )}
             </div>
             <div className="py-[10px] px-[15px]  border-b border-gray-100 flex justify-between items-center">
               <p className="text-[16px] font-medium ">
@@ -251,21 +299,27 @@ const PostsDetail = () => {
                     <Icon.Point className="fill-current w-[13px]  mr-[3px]" />
                     Điểm
                   </span>
-                  <span className="block ">100</span>
+                  <span className="block ">
+                    {postDetail?.data?.createBy?.points}
+                  </span>
                 </p>
                 <p className="text-center ml-[30px] ">
                   <span className="flex items-center text-[14px] text-gray-500">
                     <Icon.Pen className="fill-current w-[13px]  mr-[3px]" />
                     Bài viết
                   </span>
-                  <span className="block ">100</span>
+                  <span className="block ">
+                    {postDetail?.data?.createBy?.postCounts}
+                  </span>
                 </p>{" "}
                 <p className="text-center ml-[30px]">
                   <span className="flex items-center text-[14px] text-gray-500">
                     <Icon.Questions className="fill-current w-[13px]  mr-[3px]" />
                     Câu hỏi
                   </span>
-                  <span className="block ">100</span>
+                  <span className="block ">
+                    {postDetail?.data?.createBy?.questionCounts}
+                  </span>
                 </p>
               </div>
             </div>
