@@ -96,6 +96,5 @@ const DetailTagPage = () => {
         </div>
     )
 
-
 }
 export default DetailTagPage;

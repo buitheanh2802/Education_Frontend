@@ -1,10 +1,9 @@
-import AxiosClient from "./AxiosClient";
-
-const TagApi = {
-  getAll() {
-    const url = `/tag`;
-    return AxiosClient.get(url);
-  },
-};
-
-export default TagApi;
+import AxiosClient from './AxiosClient';
+const TagAPi = {
+    getAll() {
+        // const url = `/tags`;
+        const url = `/tag`;
+        return AxiosClient.get(url)
+    }
+}
+export default TagAPi;

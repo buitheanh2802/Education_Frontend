@@ -1,17 +1,16 @@
 import AxiosClient from './AxiosClient';
+const token = localStorage.getItem('_token_');
 
 const ProfileApi = {
-    getAll(){
-        const url = `/nguyen-profile`;
-        return AxiosClient.get(url) ;;
+    getUser(username){
+        const url = `user/${username}`;
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization : `Bearer ${token}`
+            }
+        })
     },
-    get(id){
-        const url = `/nguyen-profile/${id}`;
-        return AxiosClient.get(url);
-    },
-    getPost(){
-        const url = `/nguyen-posts`;
-        return AxiosClient.get(url);
+    getPost(){   
     }
 }
 

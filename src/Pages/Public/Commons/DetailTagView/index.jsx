@@ -22,7 +22,6 @@ const DetailTagView = ({ data }) => {
                                         <Icon.Calendar className="fill-current w-[13px] " />
                                     </div>
                                     <div className=" inline-block">
-
                                         <span className="col-span-4 text-[13px] text-[#707885]">{item?.post?.time}</span>
                                     </div>
                                 </div>
@@ -41,7 +40,6 @@ const DetailTagView = ({ data }) => {
                                             </>
                                         )
                                     })}
-
                                 </div>
                                 <div className="flex justify-between mt-[5px] ">
                                     <div className="flex text-[14px] gap-[15px]">
@@ -67,7 +65,6 @@ const DetailTagView = ({ data }) => {
             })}
         </>
     )
-
 }
 
 export default DetailTagView

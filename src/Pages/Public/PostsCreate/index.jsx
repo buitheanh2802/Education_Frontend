@@ -86,7 +86,6 @@ const PostsCreate = () => {
       console.log(error);
     }
   };
-
   return (
     <div className="mt-[80px] container mx-auto ">
       <div className="">
