@@ -1,5 +1,5 @@
 import AxiosClient from './AxiosClient';
-// import {} from 'src/Helpers/Storage';
+import LocalStorage from 'src/Helpers/Storage';
 
 const UserApi = {
     async get(userId) {

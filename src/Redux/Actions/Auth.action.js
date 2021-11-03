@@ -22,15 +22,8 @@ export const ActionGetProfile = createAsyncThunk('auth/profile/me', async () => 
 export const ActionLogout = createAsyncThunk('auth/logout', async () => {
     try {
         const { data } = await AuthApi.logout();
-<<<<<<< HEAD
-        console.log(data)
         return data
     } catch (error) {
-        console.log(error.response.data)
-=======
-        return data
-    } catch (error) {
->>>>>>> 6f13f814d30f7bc48e7c9171bb1951b12c761a0f
         return error.response.data
     }
 })

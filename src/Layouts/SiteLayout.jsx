@@ -10,6 +10,7 @@ import PostsCreate from "../Pages/Public/PostsCreate";
 import PostsDetail from "src/Pages/Public/PostDetail";
 import TagsPage from "src/Pages/Public/TagsPage";
 import Userpage from "src/Pages/Public/UserPage";
+import Footer from "src/Pages/Public/Commons/Footer";
 
 const SiteLayout = () => {
   return (
@@ -26,6 +27,7 @@ const SiteLayout = () => {
         <PublicRouter path={path.TAGS} component={TagsPage} />
         <PublicRouter path={path.USER_ID} component={Userpage} />
       </Switch>
+      <Footer />
     </>
   );
 };
