@@ -22,16 +22,12 @@ const SiteLayout = () => {
         <PublicRouter path={path.POSTS_ID} component={PostsDetail} />
         <PublicRouter path={path.POSTS} component={PostPage} />
         <PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
-<<<<<<< HEAD
         <PublicRouter exact path={path.HOME} component={HomePage} />
         <PublicRouter path={path.POSTS} component={PostPage} />
         <PublicRouter path={path.TAGS} component={TagsPage} />
         <PublicRouter path={path.USER_ID} component={Userpage} />
       </Switch>
       <Footer />
-=======
-      </Switch>
->>>>>>> b81ac7ea3f5fe5a1aaef9f42fd3885522d556881
     </>
   );
 };
