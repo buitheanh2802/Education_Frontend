@@ -8,6 +8,9 @@ import PostPage from '../Pages/Public/PostPage';
 import QuestionsPage from '../Pages/Public/QuestionsPage';
 import Notfound from 'src/Pages/Public/Notfound';
 import Footer from 'src/Pages/Public/Commons/Footer';
+import ChallengeCatePage from 'src/Pages/Public/ChallengeCatePage';
+import ChallengePage from 'src/Pages/Public/ChallengePage';
+import QuizPage from 'src/Pages/Public/QuizPage';
 
 const SiteLayout = () => {
     return (
@@ -17,6 +20,9 @@ const SiteLayout = () => {
                 <PublicRouter exact path={path.HOME} component={HomePage} />
                 <PublicRouter path={path.POSTS} component={PostPage} />
                 <PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
+                <PublicRouter exact path={path.CHALLENGE} component={ChallengeCatePage} />
+                <PublicRouter path={path.CHALLENGE_ID} component={ChallengePage} />
+                <PublicRouter path={path.QUIZ} component={QuizPage} />
                 <PublicRouter path="*" component={Notfound} />
             </Switch>
             <Footer />

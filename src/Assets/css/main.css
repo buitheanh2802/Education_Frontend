@@ -797,6 +797,14 @@ video {
   margin-top: 20px;
 }
 
+.mt-\[12px\] {
+  margin-top: 12px;
+}
+
+.mt-\[4px\] {
+  margin-top: 4px;
+}
+
 .mr-\[15px\] {
   margin-right: 15px;
 }
@@ -891,6 +899,10 @@ video {
 
 .h-\[35px\] {
   height: 35px;
+}
+
+.h-\[220px\] {
+  height: 220px;
 }
 
 .h-\[25px\] {
@@ -1108,10 +1120,6 @@ video {
   align-self: center;
 }
 
-.overflow-auto {
-  overflow: auto;
-}
-
 .overflow-x-auto {
   overflow-x: auto;
 }
@@ -1311,6 +1319,10 @@ video {
   fill: currentColor;
 }
 
+.p-\[15px\] {
+  padding: 15px;
+}
+
 .p-\[5px\] {
   padding: 5px;
 }
@@ -1406,18 +1418,6 @@ video {
   padding-right: 5px;
 }
 
-.pb-1 {
-  padding-bottom: 0.25rem;
-}
-
-.pb-\[1px\] {
-  padding-bottom: 1px;
-}
-
-.pb-\[5px\] {
-  padding-bottom: 5px;
-}
-
 .text-center {
   text-align: center;
 }
@@ -1434,6 +1434,14 @@ video {
   font-size: 12px;
 }
 
+.text-\[20px\] {
+  font-size: 20px;
+}
+
+.text-\[16px\] {
+  font-size: 16px;
+}
+
 .text-\[13px\] {
   font-size: 13px;
 }
@@ -1444,14 +1452,6 @@ video {
 
 .text-\[18px\] {
   font-size: 18px;
-}
-
-.text-\[20px\] {
-  font-size: 20px;
-}
-
-.text-\[16px\] {
-  font-size: 16px;
 }
 
 .text-\[15px\] {
@@ -1484,6 +1484,10 @@ video {
 
 .italic {
   font-style: italic;
+}
+
+.leading-\[24px\] {
+  line-height: 24px;
 }
 
 .leading-\[20px\] {
@@ -1525,6 +1529,11 @@ video {
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
+.text-blue-500 {
+  --tw-text-opacity: 1;
+  color: rgba(59, 130, 246, var(--tw-text-opacity));
+}
+
 .text-\[\#707885\] {
   --tw-text-opacity: 1;
   color: rgba(112, 120, 133, var(--tw-text-opacity));
@@ -1543,11 +1552,6 @@ video {
 .text-gray-800 {
   --tw-text-opacity: 1;
   color: rgba(31, 41, 55, var(--tw-text-opacity));
-}
-
-.text-blue-500 {
-  --tw-text-opacity: 1;
-  color: rgba(59, 130, 246, var(--tw-text-opacity));
 }
 
 .text-black {
@@ -1974,6 +1978,10 @@ body {
     width: 20px;
   }
 
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .sm\:text-\[30px\] {
     font-size: 30px;
   }
@@ -2120,6 +2128,10 @@ body {
 
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .lg\:justify-between {

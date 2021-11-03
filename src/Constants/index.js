@@ -19,6 +19,14 @@ export const path = {
     QUESTIONS_FLOW: '/questions/flow',
     QUESTIONS_BOOK_MARK: '/questions/bookmark',
 
+    //Challenge
+    CHALLENGE: '/challenge',
+    CHALLENGE_ID: '/challenge/:id',
+
+    //Quiz
+    QUIZ: '/quiz',
+    QUIZ_CREATE: '/quiz/create',
+
     // post
     POSTS: '/posts',
     POSTS_ID: '/posts/:id',

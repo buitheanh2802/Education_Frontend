@@ -1,8 +1,7 @@
 import ResponseMessage from "src/Constants/ResponseMessage";
 import LocalStorage from "src/Helpers/Storage";
 import { ActionGetProfile, ActionLogin, ActionLogout } from "../Actions/Auth.action";
-
-const { createSlice } = require("@reduxjs/toolkit");
+import { createSlice } from '@reduxjs/toolkit';
 
 const mySlice = createSlice({
     name: "Auth",
@@ -34,7 +33,6 @@ const mySlice = createSlice({
         })
 
         builder.addCase(ActionLogin.fulfilled, (state, action) => {
-            console.log(action?.payload)
             const { status, data, message } = action?.payload;
             state.isLoading = false;
             if (status) {
