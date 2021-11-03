@@ -27,13 +27,15 @@ const ChallengePage = () => {
                                     <p className="text-[16px] leading-[24px] mt-[4px] text-gray-700 mb-[100px]">{item?.descriptions}</p>
                                     <div className="w-full pr-[30px] absolute bottom-[15px]">
                                         <div className="mt-[35px] rounded-[5px] border border-gray-300  pt-[12px] pb-[19px] w-full  ">
-                                            <p className=" text-[12px] text-green-500 px-[15px]">Sơ cấp:</p>
+                                            <p className={`text-[12px] px-[15px] ${item?.level > 4 ? "text-red-500" : item?.level > 2 ? "text-yellow-500" : "text-green-500"}`}>
+                                                {item?.level > 4 ? "Nâng cao:" : item?.level > 2 ? "Trung cấp" : "Sơ cấp"}
+                                            </p>
                                             <div className="grid grid-cols-5 gap-[10px] px-[15px] mt-[6px]">
-                                                <span className="h-[5px] bg-green-500 rounded-[3px]"></span>
-                                                <span className="h-[5px] bg-green-500 rounded-[3px]"></span>
-                                                <span className="h-[5px] bg-gray-300 rounded-[3px]"></span>
-                                                <span className="h-[5px] bg-gray-300 rounded-[3px]"></span>
-                                                <span className="h-[5px] bg-gray-300 rounded-[3px]"></span>
+                                                <span className={`h-[5px] bg-green-500 rounded-[3px]`}></span>
+                                                <span className={`h-[5px] bg-green-500 rounded-[3px]`}></span>
+                                                <span className={`h-[5px] bg-gray-300 rounded-[3px]`}></span>
+                                                <span className={`h-[5px] bg-gray-300 rounded-[3px]`}></span>
+                                                <span className={`h-[5px] bg-gray-300 rounded-[3px]`}></span>
                                             </div>
                                         </div>
                                     </div>
