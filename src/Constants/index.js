@@ -21,7 +21,8 @@ export const path = {
 
     //Challenge
     CHALLENGE: '/challenge',
-    CHALLENGE_ID: '/challenge/:id',
+    CHALLENGE_CATE_ID: '/challenge/:cateid',
+    CHALLENGE_ID: '/challenge/detail/:id',
 
     //Quiz
     QUIZ: '/quiz',

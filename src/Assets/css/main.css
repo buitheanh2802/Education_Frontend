@@ -2040,6 +2040,11 @@ body {
   color: rgba(0, 0, 255, var(--tw-text-opacity));
 }
 
+.hover\:text-blue-500:hover {
+  --tw-text-opacity: 1;
+  color: rgba(59, 130, 246, var(--tw-text-opacity));
+}
+
 .hover\:underline:hover {
   text-decoration: underline;
 }
