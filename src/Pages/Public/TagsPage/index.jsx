@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../Commons/Navigation";
 import FeaturedAuthor from "../Commons/FeaturedAuthor";
-import { path } from "../../../../src/Constants";
+import { path } from "src/Constants/";
 import { Icon } from "../../../Components/Icon";
 import TagAPi from "src/Apis/TagApi";
-
+import { data } from "autoprefixer";
 const TagsPage = () => {
  
   // navigation
@@ -52,7 +52,6 @@ const TagsPage = () => {
       folow: 345,
     },
   ];
-
   const [tag, setTag] = useState([]);
   useEffect(() => {
     const tag = async () => {
@@ -66,31 +65,29 @@ const TagsPage = () => {
     tag();
   }, []);
   return (
-    <div className="container mx-auto mt-[80px] ">
+    <div className="container mx-auto mt-[80px]  ">
       <Navigation path={pathName} button={button} />
-      <div className="flex  mt-[15px]  gap-[30px] ">
-        <div className="flex  w-max-[170px] px-[15px] sm:px-[35px]   gap-y-[20px] mb-[30px] pb-[45px] w-full w-max-[1100px]  py-[15px] bg-white shadow rounded  ">
-          <div className="grid grid-cols-1 gap-[45px] 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
+      <div className="flex justify-between mt-[15px]  gap-[30px] ">
+        <div className="flex justify-between  max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px]  sm:gap-x-[60px]  gap-y-[20px] mb-[30px] pb-[45px] w-full  py-[15px] bg-white shadow rounded  ">
+          <div className="grid grid-cols-1 gap-[20px] xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
             {tag.map((item, index) => {
               console.log(item);
+
               return (
                 <div className="item md:text-[16px] text-[14px] w-max-[200px]  ">
                   <div className="grid grid-cols-2 justify-center items-center ">
                     <div className="">
-                      {item.avatar.avatarUrl ? 
                       <img
-                      src={item.avatar.avatarUrl}
-                      alt=""
-                      className="w-[80px] " 
-                    /> : <div className="w-[80px] h-[75px] bg-blue-400 flex justify-center items-center ">
-                      <p className="text-white">{item.name}</p>
-                    </div>
-                      }
-                      
+                        src={item.avatar.avatarUrl}
+                        alt=""
+                        className="w-[80px]"
+                      />
                     </div>
                     <div className="">
                       <div className="flex items-center">
-                        <h3 className="text-[20px] leading-[30px] "> {item.name} </h3>
+                        <h3 className="text-[20px] leading-[30px] ">
+                          {item.name}
+                        </h3>
                         <Icon.Star className="w-[14px] ml-[10px] " />
                       </div>
                       <p className="text-[#8A8A8A] text-[14px]">
@@ -115,14 +112,14 @@ const TagsPage = () => {
                   </div>
 
                   {item.isFollowing ? (
-                    <div className="mt-[5px]  xl:[mx-10px] text-center  my-auto   border border-[#6C91F0] font-bold rounded   text-[15px] bg-[#1273eb] :text-white">
+                    <div className="mt-[5px] mx-[15px] xl:[mx-10px] text-center  my-auto   border border-[#6C91F0] font-bold rounded   text-[15px] bg-[#1273eb] :text-white">
                       <button className="font-bold  px-[20px] md:px-[30px] py-[5px] ">
                         {" "}
                         - Bỏ theo dõi
                       </button>
                     </div>
                   ) : (
-                    <div className="mt-[5px]  xl:[mx-10px] text-center  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded   text-[15px] hover:bg-[#1273eb] hover:text-white">
+                    <div className="mt-[5px] mx-[15px] xl:[mx-10px] text-center  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded   text-[15px] hover:bg-[#1273eb] hover:text-white">
                       <button className="font-bold px-[20px] md:px-[30px] py-[5px] ">
                         {" "}
                        + Theo dõi
@@ -133,6 +130,10 @@ const TagsPage = () => {
               );
             })}
           </div>
+
+          
+
+          
         </div>
         <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded hidden lg:block">
           <FeaturedAuthor authors={authors} />
@@ -141,4 +142,4 @@ const TagsPage = () => {
     </div>
   );
 };
-export default TagsPage
+export default TagsPage;

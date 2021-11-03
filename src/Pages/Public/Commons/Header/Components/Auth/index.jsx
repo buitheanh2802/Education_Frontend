@@ -13,7 +13,8 @@ const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotificatio
 
     return (
         <>
-            {profile ? <>
+            {profile ? 
+            <>
                 <ul className="mx-[15px] border-t lg:hidden">
                     <li className="py-[10px] lg:py-0">
                         <NavLink

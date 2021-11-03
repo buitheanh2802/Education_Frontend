@@ -20,5 +20,4 @@ const NavigationInDetailTag = ({ path }) => {
         </div>
     )
 }
-
 export default NavigationInDetailTag
