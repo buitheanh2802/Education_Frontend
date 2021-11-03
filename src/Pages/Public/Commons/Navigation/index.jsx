@@ -3,7 +3,7 @@ import { NavLink, useHistory } from "react-router-dom";
 
 const Navigation = ({ path, button }) => {
   const history = useHistory();
-  console.log(path);
+  // console.log(path);
   return (
     <div className="  mx-auto w-full">
       <div className="flex justify-between shadow-sm bg-white px-[5px]  rounded  ">

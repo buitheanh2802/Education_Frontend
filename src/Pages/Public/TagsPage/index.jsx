@@ -58,7 +58,8 @@ const TagsPage = () => {
     const tag = async () => {
       try {
         const { data: tags } = await TagAPi.getAll();
-        // setTag(tags.data.models);
+        console.log(tags.data.models);
+        setTag(tags.data.models);
       } catch (error) {
         console.log(error);
       }
@@ -71,7 +72,7 @@ const TagsPage = () => {
       <div className="flex justify-between mt-[15px]  gap-[30px] ">
         <div className="flex justify-between  max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px]  sm:gap-x-[60px]  gap-y-[20px] mb-[30px] pb-[45px] w-full  py-[15px] bg-white shadow rounded  ">
           <div className="grid grid-cols-1 gap-[20px] xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
-            {tag.map((item, index) => {
+            {tag?.map((item, index) => {
               return (
                 <div className="item md:text-[16px] text-[14px] w-max-[200px]  ">
                   <div className="grid grid-cols-2 justify-center items-center ">
