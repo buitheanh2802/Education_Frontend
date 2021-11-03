@@ -16,7 +16,6 @@ import PostsCreate from "src/Pages/Public/PostsCreate";
 // import IntroPage from "src/Pages/Public/IntroPage/IntroPage";
 // import ProfilePage from "src/Pages/Public/ProfilePage";
 // import EditProfile from "src/Pages/Public/EditProfile";
-import Userpage from "src/Pages/Public/UserPage";
 import Footer from "src/Pages/Public/Commons/Footer";
 
 const SiteLayout = () => {
@@ -32,7 +31,8 @@ const SiteLayout = () => {
         <PublicRouter exact path={path.HOME} component={HomePage} />
         <PublicRouter path={path.POSTS} component={PostPage} />
         <PublicRouter path={path.TAGS} component={TagsPage} />
-        <PublicRouter path={path.USER_ID} component={Userpage} />
+        {/* <PublicRouter exact path={path.EDIT_PROFILE} component={EditProfile} />
+        <PublicRouter exact path={path.PROFILE} component={ProfilePage} /> */}
       </Switch>
       <Footer />
     </>

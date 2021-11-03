@@ -5,7 +5,9 @@ import { path } from "src/Constants/";
 import { Icon } from "../../../Components/Icon";
 import TagAPi from "src/Apis/TagApi";
 const TagsPage = () => {
- 
+
+  // state
+  const [tag, setTag] = useState([]);
   // navigation
   const pathName = [
     {
@@ -51,12 +53,12 @@ const TagsPage = () => {
       folow: 345,
     },
   ];
-  const [tag, setTag] = useState([]);
+
   useEffect(() => {
     const tag = async () => {
       try {
         const { data: tags } = await TagAPi.getAll();
-        setTag(tags.data.models);
+        // setTag(tags.data.models);
       } catch (error) {
         console.log(error);
       }
@@ -70,8 +72,6 @@ const TagsPage = () => {
         <div className="flex justify-between  max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px]  sm:gap-x-[60px]  gap-y-[20px] mb-[30px] pb-[45px] w-full  py-[15px] bg-white shadow rounded  ">
           <div className="grid grid-cols-1 gap-[20px] xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
             {tag.map((item, index) => {
-              console.log(item);
-
               return (
                 <div className="item md:text-[16px] text-[14px] w-max-[200px]  ">
                   <div className="grid grid-cols-2 justify-center items-center ">
@@ -129,10 +129,6 @@ const TagsPage = () => {
               );
             })}
           </div>
-
-          
-
-          
         </div>
         <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded hidden lg:block">
           <FeaturedAuthor authors={authors} />

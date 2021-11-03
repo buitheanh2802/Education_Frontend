@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 
 const NavigationInDetailTag = ({ path }) => {
-    const history = useHistory()
+    const history = useHistory();
     return (
         <div className="md:flex md:justify-between sm:grid sm:grid-cols-1 shadow-sm bg-white px-[5px] rounded ">
             <div className=" py-[15px] flex items-center">
