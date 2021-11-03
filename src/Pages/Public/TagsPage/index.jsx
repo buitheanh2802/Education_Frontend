@@ -4,7 +4,6 @@ import FeaturedAuthor from "../Commons/FeaturedAuthor";
 import { path } from "src/Constants/";
 import { Icon } from "../../../Components/Icon";
 import TagAPi from "src/Apis/TagApi";
-import { data } from "autoprefixer";
 const TagsPage = () => {
  
   // navigation
