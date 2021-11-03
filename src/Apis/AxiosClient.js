@@ -1,8 +1,8 @@
-import axios from "axios";
-import queryString from "query-string";
+import axios from 'axios';
+import queryString from 'query-string';
 
 const AxiosClient = axios.create({
-    baseURL: 'https://devstar-api.herokuapp.com/api',
+    baseURL: process.env.REACT_APP_URL_API,
     headers: {
         'Content-Type': 'application/json'
     },

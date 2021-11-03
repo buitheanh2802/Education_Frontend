@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Icon } from 'src/Components/Icon'
 import { path, Images } from 'src/Constants/'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { ActionLogin } from 'src/Redux/Actions/Auth.action'
-import { RemoveErrorAuth } from 'src/Redux/Slices/Auth.slice'
 import Loading from 'src/Components/Loading'
 import ErrorMessage from 'src/Components/ErrorMessage'
 import { regex } from 'src/Constants/'
+import Oauthentication from '../Components/Oauthentication'
 
 const Login = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { error, isLoading, profile } = useSelector(state => state.Auth)
+    const { error, isLoading } = useSelector(state => state.Auth)
     const { register, handleSubmit, formState: { errors }, clearErrors } = useForm({
         mode: "onSubmit",
         reValidateMode: "onBlur"
@@ -23,11 +23,8 @@ const Login = () => {
         dispatch(ActionLogin(data))
     }
 
-    const resetErrorAuth = () => error && dispatch(RemoveErrorAuth())
+    const resetErrorAuth = () => error && dispatch(resetErrorAuth())
 
-    useEffect(() => {
-        if (profile) return history.push(path.HOME)
-    }, [profile, history])
     return (
         <div className="container mx-auto rounded grid grid-cols-1 lg:grid-cols-2 items-center h-screen">
             <button
@@ -97,19 +94,8 @@ const Login = () => {
 
                     <p className="text-gray-600 text-center text-[12px]">- HOẶC -</p>
 
-                    <div className="flex my-[20px] gap-[15px] items-center">
-                        <p className="text-gray-500">Đăng nhập với</p>
+                    <Oauthentication />
 
-                        <button type="button" className="bg-gray-100 border hover:bg-gray-200 duration-300 rounded-full h-[40px] w-[40px]">
-                            <Icon.Google className="w-[20px] mx-auto" />
-                        </button>
-                        <button type="button" className="bg-gray-100 border hover:bg-gray-200 duration-300 rounded-full h-[40px] w-[40px]">
-                            <Icon.Facebook className="w-[20px] mx-auto" />
-                        </button>
-                        <button type="button" className="bg-gray-100 border hover:bg-gray-200 duration-300 rounded-full h-[40px] w-[40px]">
-                            <Icon.Github className="w-[20px] mx-auto" />
-                        </button>
-                    </div>
                     <p>Bạn chưa có tài khoản? <Link className="text-blue-600 hover:text-blue-800 hover:underline" to={path.REGISTER}>Đăng ký</Link></p>
                 </form>
             </div>

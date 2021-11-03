@@ -1,17 +1,17 @@
-import BgLogin from "../Assets/media/pictures/signin-image.png";
-import BgSinup from "../Assets/media/pictures/signup-image.png";
-import BgContact from "../Assets/media/pictures/contact-image.png";
-import JSImage from "../Assets/media/pictures/js.png";
+import BgLogin from '../Assets/media/pictures/signin-image.png';
+import BgSinup from '../Assets/media/pictures/signup-image.png';
 export const Images = {
-  BgLogin,
-  BgSinup,
-  BgContact,
-  JSImage,
-};
+    BgLogin, BgSinup
+}
 
 export const path = {
     // Website
     HOME: '/',
+    SETTING: '/setting',
+
+    PROFILE_ME: '/profile/me',
+    PROFILE_USER: '/profile/:id',
+
 
     // questions
     QUESTIONS: '/questions',
@@ -30,14 +30,6 @@ export const path = {
     // tags
     TAGS: '/tags',
     TAGS_ID: '/tags/:id',
-    TAGS_FLOW:'/tags/flow',
-
-    //user profile
-    USER_ID:'/user/:username',
-    USER_POST:'/user/:username/post',
-    USER_FOLLOWER:'/user/:username/follower',
-    USER_FOLLOWING:'/user/:username/following',
-    USER_BOOKMARK:'/user/:username/bookmark/post',
 
     // auth
     AUTH: '/auth',
@@ -52,47 +44,46 @@ export const path = {
 }
 
 export const regex = {
-  PASSWORD: {
-    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-    message: "Yêu cầu chứa ít nhất 1 ký tự số, chữ và không có khoảng trắng",
-  },
-
-  EMAIL: {
-    value:
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    message: "Định dạng email không hợp lệ",
-  },
-
-  USER_NAME: {
-    value: /^(?=[a-zA-Z0-9]{8,20}$)(?!.*[.]{2})[^.].*[^.]$/,
-    message: "Tên tài khoản không hợp lệ",
-  },
-
-  REQUIRED: {
-    value: true,
-    message: "Yêu cầu nhập trường này",
-  },
-
-  FULL_NAME: {
-    value: (value) => {
-      const lengthValue = value.trim().length;
-      if (lengthValue === 0) return "Họ và tên không hợp lệ";
-      if (lengthValue < 5) return "Yêu cầu nhập ít nhất 5 ký tự";
-      if (lengthValue > 30) return "Yêu cầu nhập không quá 30 ký tự";
+    PASSWORD: {
+        value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+        message: "Yêu cầu chứa ít nhất 1 ký tự số, chữ và không có khoảng trắng"
     },
-  },
 
-  MAX_LENGTH(max) {
-    return {
-      value: max,
-      message: `Yêu cầu nhập không quá ${max} ký tự`,
-    };
-  },
+    EMAIL: {
+        value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        message: "Định dạng email không hợp lệ"
+    },
 
-  MIN_LENGTH(min) {
-    return {
-      value: min,
-      message: `Yêu cầu nhập tối thiểu ${min} ký tự`,
-    };
-  },
-};
+    USER_NAME: {
+        value: /^(?=[a-zA-Z0-9]{8,20}$)(?!.*[.]{2})[^.].*[^.]$/,
+        message: "Tên tài khoản không hợp lệ"
+    },
+
+    REQUIRED: {
+        value: true,
+        message: "Yêu cầu nhập trường này"
+    },
+
+    FULL_NAME: {
+        value: (value) => {
+            const lengthValue = value.trim().length;
+            if (lengthValue === 0) return "Họ và tên không hợp lệ";
+            if (lengthValue < 5) return "Yêu cầu nhập ít nhất 5 ký tự";
+            if (lengthValue > 30) return "Yêu cầu nhập không quá 30 ký tự";
+        }
+    },
+
+    MAX_LENGTH(max) {
+        return {
+            value: max,
+            message: `Yêu cầu nhập không quá ${max} ký tự`
+        }
+    },
+
+    MIN_LENGTH(min) {
+        return {
+            value: min,
+            message: `Yêu cầu nhập tối thiểu ${min} ký tự`
+        }
+    }
+}
