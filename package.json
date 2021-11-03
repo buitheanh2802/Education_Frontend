@@ -18,6 +18,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-select": "^4.3.1",
+    "react-share": "^4.4.0",
     "react-smooth-scrollbar": "^8.0.6",
     "redux": "^4.1.0",
     "swiper": "^7.0.3",
