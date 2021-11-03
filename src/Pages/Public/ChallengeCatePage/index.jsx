@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Loading from 'src/Components/Loading'
 import { path } from 'src/Constants/'
 import Navigation from 'src/Pages/Public/Commons/Navigation'
@@ -8,6 +8,7 @@ import { ActionGetsChallengeCate } from 'src/Redux/Actions/ChallengeCate.action'
 
 const ChallengeCatePage = () => {
     const dispatch = useDispatch();
+    const history = useHistory()
     const { challengeCates, isLoading } = useSelector(state => state.ChallengeCate);
     const pathName = [
         { path: path.CHALLENGE, value: "Danh mục bài tập" },
@@ -17,7 +18,7 @@ const ChallengeCatePage = () => {
     useEffect(() => {
         if (challengeCates) return
         dispatch(ActionGetsChallengeCate())
-    }, [dispatch])
+    }, [dispatch, challengeCates])
 
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
@@ -27,7 +28,7 @@ const ChallengeCatePage = () => {
                     {challengeCates?.map(item => {
                         return (
                             <div key={item?._id} className="shadow-sm bg-white rounded  course-item p-[15px] relative" >
-                                <div className="w-full h-[220px] bg-no-repeat bg-cover   bg-center rounded  cursor-pointer" style={{ backgroundImage: `url(${item?.avatar})` }}> </div>
+                                <div onClick={() => history.push(path.CHALLENGE + "/" + item?._id)} className="w-full h-[220px] bg-no-repeat bg-cover  bg-center rounded  cursor-pointer" style={{ backgroundImage: `url(${item?.avatar})` }}> </div>
                                 <div className="w-full" >
                                     <div className="flex justify-between items-center mt-[12px]">
                                         <Link to={path.CHALLENGE + "/" + item?._id}><span className="text-[20px] font-bold  cursor-pointer text-gray-800 hover:text-blue-600">{item?.title}</span></Link>
