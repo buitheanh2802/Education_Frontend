@@ -832,11 +832,6 @@ video {
   margin-bottom: 10px;
 }
 
-.mx-\[15px\] {
-  margin-left: 15px;
-  margin-right: 15px;
-}
-
 .mx-\[5px\] {
   margin-left: 5px;
   margin-right: 5px;
@@ -855,6 +850,11 @@ video {
 .mx-\[2px\] {
   margin-left: 2px;
   margin-right: 2px;
+}
+
+.mx-\[15px\] {
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .mt-\[50px\] {
@@ -1555,8 +1555,8 @@ video {
   gap: 1rem;
 }
 
-.gap-\[3px\] {
-  gap: 3px;
+.gap-\[45px\] {
+  gap: 45px;
 }
 
 .gap-x-\[30px\] {
@@ -2108,11 +2108,6 @@ video {
 .px-\[0px\] {
   padding-left: 0px;
   padding-right: 0px;
-}
-
-.px-\[25px\] {
-  padding-left: 25px;
-  padding-right: 25px;
 }
 
 .pr-\[10px\] {
@@ -4035,14 +4030,14 @@ body {
     gap: 180px;
   }
 
-  .xl\:gap-x-\[95px\] {
-    -webkit-column-gap: 95px;
-            column-gap: 95px;
-  }
-
   .xl\:gap-x-\[30px\] {
     -webkit-column-gap: 30px;
             column-gap: 30px;
+  }
+
+  .xl\:gap-x-\[95px\] {
+    -webkit-column-gap: 95px;
+            column-gap: 95px;
   }
 
   .xl\:px-\[8px\] {
@@ -4113,6 +4108,10 @@ body {
 }
 
 @media (min-width: 1536px) {
+  .\32xl\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .\32xl\:grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
