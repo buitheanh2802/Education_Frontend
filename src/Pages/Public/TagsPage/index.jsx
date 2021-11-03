@@ -52,10 +52,6 @@ const TagsPage = () => {
       folow: 345,
     },
   ];
-<<<<<<< HEAD
-
-=======
->>>>>>> 1923b51b20253f4f6abbd9e0b3fa3408a3cc5400
   const [tag, setTag] = useState([]);
   useEffect(() => {
     const tag = async () => {

@@ -63,12 +63,9 @@ class QuillReact extends React.Component {
     return (
       <div className="text-editor">
         <ReactQuill
-<<<<<<< HEAD
           ref={(el) => {
             this.quillObj = el;
           }}
-=======
->>>>>>> 1923b51b20253f4f6abbd9e0b3fa3408a3cc5400
           theme="snow"
           modules={this.modules}
           formats={this.formats}
