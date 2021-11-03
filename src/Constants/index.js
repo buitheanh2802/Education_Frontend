@@ -11,7 +11,11 @@ export const path = {
 
     PROFILE_ME: '/profile/me',
     PROFILE_USER: '/profile/:id',
-
+    USER_ID:'/user/:username',
+    USER_POST:'/user/:username/post',
+    USER_FOLLOWER:'/user/:username/follower',
+    USER_FOLLOWING:'/user/:username/following',
+    USER_BOOKMARK:'/user/:username/bookmark/post',
 
     // questions
     QUESTIONS: '/questions',
