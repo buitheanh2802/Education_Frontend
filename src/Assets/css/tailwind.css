@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@keyframes newTab {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+* {
+  animation: newTab 0.3s ease;
+}
+
+body {
+  background: #f7fafc;
+}
+
+/* Menu */
+@media (min-width: 1024px) {
+  .ql-container.ql-snow {
+    height: 63vh;
+  }
+}
+@media (max-width: 1024px) {
+  .menu_top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40%;
+    background-color: white;
+    color: black;
+    transition-duration: 0.3s;
+  }
+  .ql-container.ql-snow {
+    height: 57vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu_top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    background-color: white;
+    color: black;
+    transition-duration: 0.3s;
+  }
+}
+
+@media (max-width: 640px) {
+  .menu_top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    color: black;
+    transition-duration: 0.3s;
+  }
+}
+
+/* auth */
+
+.input:focus + label,
+.input:active + label {
+  color: #3182ce;
+}
+
+/* error */
+
+.icon-error {
+  position: relative;
+  animation: shaky 0.2s ease;
+  transition-delay: 0.2s;
+}
+
+@keyframes shaky {
+  0%,
+  33%,
+  67%,
+  100% {
+    right: 0;
+  }
+  17%,
+  83% {
+    right: 5px;
+  }
+  50% {
+    right: -5px;
+  }
+}
+
+/* menu */
+
+.menu-after::after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  right: -0.5px;
+  width: 1px;
+  height: 65%;
+  transform: translateY(-50%);
+  background: #51ffb9;
+}
+@keyframes mymove {
+  from {
+    top: 50%;
+    opacity: 0;
+  }
+  to {
+    top: 100%;
+    opacity: 1;
+  }
+}
+.box_btn {
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 20%);
+  animation: mymove 0.2s ease-in;
+}
+.box_btn::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 48%;
+  width: 0;
+  height: 0;
+  border-bottom: 7px solid white;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  transform: translateY(-104%);
+}
+
+/* custem ReactSelect */
+.css-yk16xz-control {
+  border-color: white !important;
+  padding: 2px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+.css-1pahdxg-control {
+  padding: 2px;
+}
+
+/* custem ReactQull */
+.ql-toolbar.ql-snow {
+  border: none;
+  border-bottom: 1px solid rgb(206, 205, 205);
+  background: white;
+  border-radius: 5px 5px 0 0;
+}
+.ql-container.ql-snow {
+  border: none;
+  border-radius: 0 0 5px 5px;
+  background: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.block-avt {
+  background: linear-gradient(#6ff7f7, #5189f1);
+  border-radius: 5px 5px 0 0;
+}
+.post__menu {
+  width: 180px;
+  position: absolute;
+  animation: mymove 0.2s ease-in;
+  right: 0;
+  transform: translatex(10px);
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 20%);
+  border-radius: 5px;
+  /* padding: 5px 0; */
+}
+.post__menu ul::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border-bottom: 7px solid white;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  transform: translateY(-100%);
+}
+.post__share {
+  width: 190px;
+  position: absolute;
+  animation: mymove 0.2s ease-in;
+  left: 0;
+  top: 100%;
+  /* margin-top: 13px; */
+  /* transform: translatex(50%); */
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 20%);
+  border-radius: 5px;
+}

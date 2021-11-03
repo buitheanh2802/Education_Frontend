@@ -1,0 +1,37 @@
+{
+    "compilerOptions": {
+        "module": "commonJS",
+        "target": "es6",
+        "baseUrl": ".",
+        "paths": {
+            "src/Assets/*": [
+                "./src/Assets/*"
+            ],
+            "src/Components/*": [
+                "./src/Components/*"
+            ],
+            "src/Constants/*": [
+                "./src/Constants/*"
+            ],
+            "src/Helpers/*": [
+                "./src/Helpers/*"
+            ],
+            "src/Pages/*": [
+                "./src/Pages/*"
+            ],
+            "src/Apis/*": [
+                "./src/Apis/*"
+            ],
+            "src/Redux/*": [
+                "./src/Redux/*"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "./src/**/*",
+        "src/Redux/Slices/.js"
+    ]
+}
