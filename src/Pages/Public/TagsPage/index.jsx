@@ -4,17 +4,20 @@ import FeaturedAuthor from "../Commons/FeaturedAuthor";
 import { path } from "src/Constants/";
 import { Icon } from "../../../Components/Icon";
 import TagAPi from "src/Apis/TagApi";
-import { data } from "autoprefixer";
+import { useLocation } from "react-router";
+import { Link } from "react-router-dom";  
+
 const TagsPage = () => {
- 
-  // navigation
+  
+  const location = useLocation();
+
   const pathName = [
     {
       path: path.TAGS,
       value: "Mới cập nhật",
     },
     {
-      path: path.TAGS_ID,
+      path: path.TAGS_POPULAR,
       value: "Thịnh hành",
     },
     {
@@ -52,66 +55,72 @@ const TagsPage = () => {
       folow: 345,
     },
   ];
-  const [tag, setTag] = useState([]);
+  const [tags, setTag] = useState([]);
+  let endPoint;
   useEffect(() => {
     const tag = async () => {
       try {
-        const { data: tags } = await TagAPi.getAll();
-        setTag(tags.data.models);
+        if(location.pathname === '/tags'){
+          endPoint= "";
+        } else if (location.pathname === '/tags/popular') {
+          endPoint= "/popular";
+        } else {
+          endPoint= "/following";
+        }
+        const { data: tags } = await TagAPi.getAll(endPoint);
+        setTag(location.pathname === '/tags/popular' ? tags.data : tags.data.models);
       } catch (error) {
         console.log(error);
       }
     };
     tag();
-  }, []);
+  }, [location.pathname]);
   return (
     <div className="container mx-auto mt-[80px]  ">
       <Navigation path={pathName} button={button} />
       <div className="flex justify-between mt-[15px]  gap-[30px] ">
         <div className="flex justify-between  max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px]  sm:gap-x-[60px]  gap-y-[20px] mb-[30px] pb-[45px] w-full  py-[15px] bg-white shadow rounded  ">
           <div className="grid grid-cols-1 gap-[20px] xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
-            {tag.map((item, index) => {
-              console.log(item);
-
+            {tags.map((item, index) => {
               return (
-                <div className="item md:text-[16px] text-[14px] w-max-[200px]  ">
-                  <div className="grid grid-cols-2 justify-center items-center ">
+                <div key={index} className="item md:text-[16px] text-[14px] w-max-[200px]">
+                  <Link className="grid grid-cols-2 justify-center items-center" to={`/tag/${item?.slug}`} >
                     <div className="">
                       <img
-                        src={item.avatar.avatarUrl}
-                        alt=""
+                        src={item?.avatar?.avatarUrl}
+                        alt={item?.name}
                         className="w-[80px]"
                       />
                     </div>
                     <div className="">
                       <div className="flex items-center">
                         <h3 className="text-[20px] leading-[30px] ">
-                          {item.name}
+                          {item?.name}
                         </h3>
                         <Icon.Star className="w-[14px] ml-[10px] " />
                       </div>
                       <p className="text-[#8A8A8A] text-[14px]">
                         <span className="font-bold leading-[20px] ">
-                          {item.postCounts}
+                          {item?.postCounts}
                         </span>{" "}
                         Bài viết
                       </p>
                       <p className="text-[#8A8A8A] text-[14px]">
                         <span className="font-bold leading-[20px] ">
-                          {item.questionCounts}
+                          {item?.questionCounts}
                         </span>{" "}
                         Câu hỏi
                       </p>
                       <p className="text-[#8A8A8A] text-[14px]">
                         <span className="font-bold leading-[20px] ">
-                          {item.followerCounts}
+                          {item?.followerCounts || item?.followers} 
                         </span>{" "}
                         Người theo dõi
                       </p>
                     </div>
-                  </div>
+                  </Link>
 
-                  {item.isFollowing ? (
+                  {item?.isFollowing ? (
                     <div className="mt-[5px] mx-[15px] xl:[mx-10px] text-center  my-auto   border border-[#6C91F0] font-bold rounded   text-[15px] bg-[#1273eb] :text-white">
                       <button className="font-bold  px-[20px] md:px-[30px] py-[5px] ">
                         {" "}
@@ -130,10 +139,6 @@ const TagsPage = () => {
               );
             })}
           </div>
-
-          
-
-          
         </div>
         <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded hidden lg:block">
           <FeaturedAuthor authors={authors} />

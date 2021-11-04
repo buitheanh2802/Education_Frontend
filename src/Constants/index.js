@@ -5,43 +5,57 @@ export const Images = {
 }
 
 export const path = {
-    // Website
-    HOME: '/',
-    SETTING: '/setting',
+  // Website
+  HOME: "/",
 
-    PROFILE_ME: '/profile/me',
-    PROFILE_USER: '/profile/:id',
+  //contact
+  CONTACT: "/contact",
 
+  //HEAD
+  // questions
+  QUESTIONS: "/questions",
+  QUESTIONS_CREATE: "/questions/create",
+  QUESTIONS_FLOW: "/questions/flow",
+  QUESTIONS_BOOK_MARK: "/questions/bookmark",
+  QUESTIONS_DETAIL: "/questionsDetail",
 
-    // questions
-    QUESTIONS: '/questions',
-    QUESTIONS_CREATE: '/questions/create',
-    QUESTIONS_FLOW: '/questions/flow',
-    QUESTIONS_BOOK_MARK: '/questions/bookmark',
+  // post
+  POSTS: "/posts",
+  POSTS_DETAIL: "/postsDetail",
+  POSTS_ID: "/posts/:id",
+  // POSTS_CREATE: "/postsCreate",
+  POSTS_CREATE: "/posts/create",
+  POSTS_POPULAR: "/posts/popular",
+  POSTS_FLOW: "/posts/flow",
+  POSTS_BOOK_MARK: "/posts/bookmark",
 
-    // post
-    POSTS: '/posts',
-    POSTS_ID: '/posts/:id',
-    POSTS_CREATE: '/posts/create',
-    POSTS_POPULAR: '/posts/popular',
-    POSTS_FLOW: '/posts/flow',
-    POSTS_BOOK_MARK: '/posts/bookmark',
+  // tags
+  TAGS: "/tags",
+  TAGS_ID: "/tag/:slug",
+  TAGS_POPULAR: "/tags/popular",
+  TAGS_FLOW: "/tags/flow",
+  //detailtags
+  // auth
+  AUTH: "/auth",
+  LOGIN: "/auth/login",
+  REGISTER: "/auth/register",
 
-    // tags
-    TAGS: '/tags',
-    TAGS_ID: '/tags/:id',
+  //profile
+  PROFILE: "/profile/:username",
+  EDIT_PROFILE: "/profile/:id/edit",
+  PROFILE_PERSONAL: "/profile/:id/edit/personal",
+  PROFILE_CONTACT: "/profile/:id/edit/contact",
+  PROFILE_PASSWORD: "/profile/:id/edit/password",
 
-    // auth
-    AUTH: '/auth',
-    LOGIN: '/auth/login',
-    REGISTER: '/auth/register',
+  //intro
+  INTRO: "/intro",
 
-    // error
-    NOT_FOUND: '/not-found',
+  // error
+  NOT_FOUND: "/not-found",
 
-    // Admin
-    ADMIN: '/admin'
-}
+  // Admin
+  ADMIN: "/admin",
+};
 
 export const regex = {
     PASSWORD: {

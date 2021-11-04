@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "src/Components/Icon";
-import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import ProfileUsePost from "../Commons/ProfileUserPosts";
 import ProfileUserPostsMobile from "../Commons/ProfileUserPostsMobile";
