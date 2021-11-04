@@ -2,8 +2,8 @@ import LocalStorage from 'src/Helpers/Storage';
 import AxiosClient from './AxiosClient';
 
 const ChallengeApi = {
-    async get(id) {
-        const url = `/challenge/${id}`;
+    async get(challengeId) {
+        const url = `/challenges/${challengeId}`;
         return AxiosClient.get(url, {
             headers: {
                 Authorization: `Bearer ${LocalStorage.Get('_token_')}`
