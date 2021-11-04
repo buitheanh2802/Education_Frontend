@@ -11,11 +11,11 @@ export const path = {
 
     PROFILE_ME: '/profile/me',
     PROFILE_USER: '/profile/:id',
-    USER_ID:'/user/:username',
-    USER_POST:'/user/:username/post',
-    USER_FOLLOWER:'/user/:username/follower',
-    USER_FOLLOWING:'/user/:username/following',
-    USER_BOOKMARK:'/user/:username/bookmark/post',
+    USER_ID: '/user/:username',
+    USER_POST: '/user/:username/post',
+    USER_FOLLOWER: '/user/:username/follower',
+    USER_FOLLOWING: '/user/:username/following',
+    USER_BOOKMARK: '/user/:username/bookmark/post',
 
     // questions
     QUESTIONS: '/questions',
@@ -34,7 +34,7 @@ export const path = {
     // tags
     TAGS: '/tags',
     TAGS_ID: '/tags/:id',
-    TAGS_FLOW : '/tags/follow',
+    TAGS_FLOW: '/tags/follow',
     // auth
     AUTH: '/auth',
     LOGIN: '/auth/login',
@@ -44,8 +44,28 @@ export const path = {
     NOT_FOUND: '/not-found',
 
     // Admin
-    ADMIN: '/admin'
-}
+    ADMIN: '/admin',
+    //contact
+    CONTACT: "/contact",
+
+    //HEAD
+    // questions
+    QUESTIONS_DETAIL: "/questionsDetail",
+
+    // post
+    POSTS_DETAIL: "/postsDetail",
+    // POSTS_CREATE: "/postsCreate",
+
+    //profile
+    PROFILE: "/profile/:username",
+    EDIT_PROFILE: "/profile/:id/edit",
+    PROFILE_PERSONAL: "/profile/:id/edit/personal",
+    PROFILE_CONTACT: "/profile/:id/edit/contact",
+    PROFILE_PASSWORD: "/profile/:id/edit/password",
+
+    //intro
+    INTRO: "/intro",
+};
 
 export const regex = {
     PASSWORD: {

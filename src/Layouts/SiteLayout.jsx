@@ -17,6 +17,12 @@ import PostsCreate from "src/Pages/Public/PostsCreate";
 // import ProfilePage from "src/Pages/Public/ProfilePage";
 // import EditProfile from "src/Pages/Public/EditProfile";
 import Footer from "src/Pages/Public/Commons/Footer";
+import QuestionsDetail from "src/Pages/Public/QuestionsDetail";
+import Userpage from "src/Pages/Public/UserPage";
+import DetailTagPage from "src/Pages/Public/DetailTagPage";
+import IntroPage from "src/Pages/Public/IntroPage/IntroPage";
+import EditProfile from "src/Pages/Public/EditProfile";
+import ProfilePage from "src/Pages/Public/ProfilePage";
 
 const SiteLayout = () => {
   return (
@@ -28,11 +34,16 @@ const SiteLayout = () => {
         <PublicRouter path={path.POSTS_ID} component={PostsDetail} />
         <PublicRouter path={path.POSTS} component={PostPage} />
         <PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
-        <PublicRouter exact path={path.HOME} component={HomePage} />
-        <PublicRouter path={path.POSTS} component={PostPage} />
+        <PublicRouter
+          path={path.QUESTIONS_DETAIL}
+          component={QuestionsDetail}
+        />
         <PublicRouter path={path.TAGS} component={TagsPage} />
-        {/* <PublicRouter exact path={path.EDIT_PROFILE} component={EditProfile} />
-        <PublicRouter exact path={path.PROFILE} component={ProfilePage} /> */}
+        <PublicRouter path={path.USER_ID} component={Userpage} />
+        <PublicRouter exact path={path.TAGS_ID} component={DetailTagPage} />
+        <PublicRouter path={path.INTRO} component={IntroPage} />
+        <PublicRouter exact path={path.EDIT_PROFILE} component={EditProfile} />
+        <PublicRouter exact path={path.PROFILE} component={ProfilePage} /> 
       </Switch>
       <Footer />
     </>

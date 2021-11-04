@@ -62,6 +62,7 @@ const mySlice = createSlice({
             state.isLoading = false;
             if (status) {
                 state.message = [ResponseMessage("LOGIN_SUCCESS")];
+                // console.log(data);
                 state.profile = data;
             } else {
                 state.error = [ResponseMessage(message[0])]
