@@ -9,7 +9,6 @@ const PostView = ({ posts }) => {
 
     const handleAddBookmark = async(shortId) => {
         await BookmarkApi.addBookmark(shortId);
-        console.log('ok');
     }
     return (
         <>

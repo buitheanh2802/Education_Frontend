@@ -8,7 +8,6 @@ const DetailTagView = ({ data }) => {
             {data?.map((item, index) => {
                 return (
                     <div key={index} className="w-full px-[10px] py-[15px] border-b lg:mt-0 md:mt-3">
-
                         <div className="flex">
                             <div className="mx-[10px]">
                                 <Link to={item?.user?.path} >

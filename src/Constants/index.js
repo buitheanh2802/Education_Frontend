@@ -36,10 +36,10 @@ export const path = {
 
   // tags
   TAGS: "/tags",
-  TAGS_ID: "/tags/:id",
+  TAGS_ID: "/tag/:slug",
+  TAGS_POPULAR: "/tags/popular",
   TAGS_FLOW: "/tags/flow",
   //detailtags
-  TAGS_DETAIL: "/detailtag",
   // auth
   AUTH: "/auth",
   LOGIN: "/auth/login",
