@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Navigation from '../Commons/Navigation'
-import { path } from 'src/Constants/'
+import { path } from '../../../Constants/index';
 import { Icon } from 'src/Components/Icon'
 import DetailTagView from '../Commons/DetailTagView'
 import FeaturedTag from '../Commons/FeaturedTag'
@@ -16,6 +16,7 @@ const DetailTagPage = () => {
     useEffect(() => {
         const detailTag = async () => {
             try {
+                console.log(slug);
                 const { data: tag } = await TagAPi.getDetail(slug);
                 setTag(tag);
             } catch (error) {

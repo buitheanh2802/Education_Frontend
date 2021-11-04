@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../Commons/Navigation";
 import FeaturedAuthor from "../Commons/FeaturedAuthor";
-import { path } from "src/Constants/";
+import { path } from "../../../Constants/index";
 import { Icon } from "../../../Components/Icon";
 import TagAPi from "src/Apis/TagApi";
 import { useLocation } from "react-router";
@@ -84,7 +84,7 @@ const TagsPage = () => {
             {tags.map((item, index) => {
               return (
                 <div key={index} className="item md:text-[16px] text-[14px] w-max-[200px]">
-                  <Link className="grid grid-cols-2 justify-center items-center" to={`/tag/${item?.slug}`} >
+                  <Link className="grid grid-cols-2 justify-center items-center" to={`/tags/${item?.slug}`} >
                     <div className="">
                       <img
                         src={item?.avatar?.avatarUrl}

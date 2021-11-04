@@ -33,8 +33,9 @@ export const path = {
 
     // tags
     TAGS: '/tags',
-    TAGS_ID: '/tags/:id',
+    TAGS_ID: '/tags/:slug',
     TAGS_FLOW: '/tags/follow',
+    TAGS_POPULAR : '/tags/popular',
     // auth
     AUTH: '/auth',
     LOGIN: '/auth/login',
