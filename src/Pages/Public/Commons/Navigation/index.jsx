@@ -4,7 +4,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 const Navigation = ({ path, button }) => {
     const history = useHistory()
     return (
-        <div className="flex justify-between shadow-sm bg-white px-[10px] rounded gap-[15px]">
+        <div className="flex justify-between shadow-sm bg-white px-[10px] rounded gap-[15px] border">
             <div className="py-[15px] flex items-center overflow-x-auto w-full whitespace-nowrap">
                 {path?.map((item, index) => <NavLink key={index} to={item?.path}
                     activeClassName="after:absolute after:w-full after:h-[2px] after:rounded after:bottom-[-16px] after:left-0 after:bg-[#1273eb] font-medium text-black"

@@ -10,6 +10,12 @@ const mySlice = createSlice({
         challenges: null,
         pagination: null
     },
+    reducers: {
+        resetChallenge: (state) => {
+            state.challenges = null;
+            state.pagination = null;
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(ActionGetsChallenge.pending, (state) => {
             state.isLoading = true;
@@ -34,4 +40,5 @@ const mySlice = createSlice({
     }
 })
 
+export const { resetChallenge } = mySlice.actions;
 export default mySlice.reducer;

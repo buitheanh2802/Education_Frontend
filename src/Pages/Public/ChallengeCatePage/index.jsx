@@ -24,10 +24,10 @@ const ChallengeCatePage = () => {
         <div className="container mx-auto mt-[55px] py-[20px]">
             <Navigation path={pathName} />
             {isLoading ? <Loading className="w-[40px] h-[40px] fill-current text-gray-500 mx-auto mt-[20px]" /> :
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-[20px]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[20px] mt-[20px]">
                     {challengeCates?.map(item => {
                         return (
-                            <div key={item?._id} className="shadow-sm bg-white rounded  course-item p-[15px] relative" >
+                            <div key={item?._id} className="shadow-sm hover:shadow-md duration-300 bg-white rounded  course-item p-[15px] relative border" >
                                 <div onClick={() => history.push(path.CHALLENGE + "/" + item?._id)} className="w-full h-[220px] bg-no-repeat bg-cover  bg-center rounded  cursor-pointer" style={{ backgroundImage: `url(${item?.avatar})` }}> </div>
                                 <div className="w-full" >
                                     <div className="flex justify-between items-center mt-[12px]">

@@ -6,7 +6,7 @@ const DetailChallenge = () => {
     console.log(id)
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
-
+            Detail
         </div>
     )
 }
