@@ -5,6 +5,7 @@ import Loading from 'src/Components/Loading';
 import { path } from 'src/Constants/';
 import { ActionGetsChallenge } from 'src/Redux/Actions/Challenge.action';
 import { resetChallenge } from 'src/Redux/Slices/Challenge.slice';
+import PathContent from '../Commons/PathContent';
 
 const ChallengePage = () => {
     const dispatch = useDispatch();
@@ -15,10 +16,11 @@ const ChallengePage = () => {
     useEffect(() => {
         dispatch(ActionGetsChallenge(cateid));
         return () => dispatch(resetChallenge());
-    }, [dispatch])
+    }, [dispatch, cateid])
 
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
+            <PathContent />
             {isloading ? <Loading className="w-[40px] h-[40px] fill-current text-gray-500 mx-auto mt-[20px]" /> :
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[20px] mt-[20px]">
                     {challenges?.map(item => {
