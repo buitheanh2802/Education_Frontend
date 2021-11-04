@@ -6,26 +6,11 @@ import "./Assets/css/main.css";
 import ProfileApi from './Apis/ProfileApi';
 
 const App = () => {
-  const [tags, setTag] = useState([]);
-
-  const [profiles, setProfile] = useState([]);
-  useEffect(() => {
-    const profiles = async () => {
-      try {
-        const { data: profiles } = await ProfileApi.getAll();
-        console.log('profile', profiles)
-        setProfile(profiles);
-      } catch (error) {
-        console.log("Failed to get data", error.response);
-      }
-    }
-    profiles();
-  }, []);
 
   return (
     <>
       <Provider store={Store}>
-        <RootRouter profiles={profiles} />
+        <RootRouter />
       </Provider>
     </>
   )
