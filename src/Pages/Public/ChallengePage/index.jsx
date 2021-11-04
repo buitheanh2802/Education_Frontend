@@ -11,27 +11,33 @@ const ChallengePage = () => {
     const dispatch = useDispatch();
     const { cateid } = useParams();
     const history = useHistory();
-    const { challenges, isloading } = useSelector(state => state.Challenge);
+    const { challenges, isLoading } = useSelector(state => state.Challenge);
 
     useEffect(() => {
         dispatch(ActionGetsChallenge(cateid));
         return () => dispatch(resetChallenge());
     }, [dispatch, cateid])
 
+
+    const pathName = [
+        { path: path.CHALLENGE, value: "Danh mục bài tập" },
+        { path: `${path.CHALLENGE}/${cateid}`, value: "Learn and Practice Responsive Web Development by building 8 Websites with given designs" }
+    ]
+
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
-            <PathContent />
-            {isloading ? <Loading className="w-[40px] h-[40px] fill-current text-gray-500 mx-auto mt-[20px]" /> :
+            <PathContent path={pathName} />
+            {isLoading ? <Loading className="w-[40px] h-[40px] fill-current text-gray-500 mx-auto mt-[20px]" /> :
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[20px] mt-[20px]">
                     {challenges?.map(item => {
                         return (
                             <div key={item?._id} className="shadow-sm hover:shadow-md duration-300 bg-white rounded  course-item p-[15px] relative border" >
-                                <div onClick={() => history.push(`${path.CHALLENGE}/detail/${item?._id}`)} className="w-full h-[200px] sm:h-[220px] xl:h-[200px] bg-no-repeat bg-cover bg-center rounded cursor-pointer" style={{ backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK2yuHuE_KiWXOfDSMKzBFbAFiolnyJ9gtbQ&usqp=CAU)` }}> </div>
+                                <div onClick={() => history.push(`${path.CHALLENGE}/detail/${item?._id}`)} className="w-full h-[200px] sm:h-[220px] xl:h-[200px] bg-no-repeat bg-cover bg-center rounded cursor-pointer" style={{ backgroundImage: `url(${item?.avatar})` }}> </div>
                                 <div className="w-full" >
                                     <div className="flex justify-between items-center mt-[12px]">
                                         <h2 onClick={() => history.push(`${path.CHALLENGE}/detail/${item?._id}`)} className="text-[20px] font-bold  cursor-pointer hover:text-blue-600">{item?.title}</h2>
                                     </div>
-                                    <p className="text-[14px] mt-[4px] text-green-500">Tác giả: Nguyễn Thành Đạt</p>
+                                    <p className="text-[14px] mt-[4px] text-green-500">Tác giả: {item?.createBy?.fullname?.length === 0 ? "Devstar channel" : item?.createBy?.fullname}</p>
                                     <p className="text-[16px] leading-[24px] mt-[4px] text-gray-700 mb-[100px]">{item?.descriptions}</p>
                                     <div className="w-full pr-[30px] absolute bottom-[15px]">
                                         <div className="mt-[35px] rounded-[5px] border border-gray-300  pt-[12px] pb-[19px] w-full  ">
