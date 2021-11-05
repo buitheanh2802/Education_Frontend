@@ -80,21 +80,26 @@ const TagsPage = () => {
       <Navigation path={pathName} button={button} />
       <div className="flex justify-between mt-[15px]  gap-[30px] ">
         <div className="flex justify-between  max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px]  sm:gap-x-[60px]  gap-y-[20px] mb-[30px] pb-[45px] w-full  py-[15px] bg-white shadow rounded  ">
-          <div className="grid grid-cols-1 gap-[20px] xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-[20px] 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
             {tags.map((item, index) => {
               return (
-                <div key={index} className="item md:text-[16px] text-[14px] w-max-[200px]">
-                  <Link className="grid grid-cols-2 justify-center items-center" to={`/tags/${item?.slug}`} >
-                    <div className="">
+                <div key={index} className="item md:text-[14px] text-[14px] w-max-[220px]">
+                  <Link className="grid grid-cols-3  justify-center items-center" to={`/tags/${item?.slug}`} >
+                  <div className="col-span-1">
+                      {item.avatar.avatarUrl ? 
                       <img
-                        src={item?.avatar?.avatarUrl}
-                        alt={item?.name}
-                        className="w-[80px]"
-                      />
+                      src={item.avatar.avatarUrl}
+                      alt=""
+                      className="w-[80px] " 
+                    /> : <div className="w-[80px] h-[75px] bg-blue-400 flex justify-center items-center ">
+                      <p className="text-white text-[12px]">{item.name}</p>
                     </div>
-                    <div className="">
+                      }
+                      
+                    </div>
+                    <div className="col-span-2 ml-[10px]">
                       <div className="flex items-center">
-                        <h3 className="text-[20px] leading-[30px] ">
+                        <h3 className="text-[18px] leading-[20px] ">
                           {item?.name}
                         </h3>
                         <Icon.Star className="w-[14px] ml-[10px] " />
@@ -121,14 +126,14 @@ const TagsPage = () => {
                   </Link>
 
                   {item?.isFollowing ? (
-                    <div className="mt-[5px] mx-[15px] xl:[mx-10px] text-center  my-auto   border border-[#6C91F0] font-bold rounded   text-[15px] bg-[#1273eb] :text-white">
+                    <div className="mt-[5px] xl:[mx-10px] text-center  my-auto   border border-[#6C91F0] font-bold rounded   text-[15px] bg-[#1273eb] :text-white">
                       <button className="font-bold  px-[20px] md:px-[30px] py-[5px] ">
                         {" "}
                         - Bỏ theo dõi
                       </button>
                     </div>
                   ) : (
-                    <div className="mt-[5px] mx-[15px] xl:[mx-10px] text-center  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded   text-[15px] hover:bg-[#1273eb] hover:text-white">
+                    <div className="mt-[5px]  xl:[mx-10px] text-center  my-auto text-[#6C91F0]  border border-[#6C91F0] font-bold rounded   text-[15px] hover:bg-[#1273eb] hover:text-white">
                       <button className="font-bold px-[20px] md:px-[30px] py-[5px] ">
                         {" "}
                        + Theo dõi
