@@ -14,7 +14,7 @@ const Navigation = ({ path, button }) => {
                     className="relative text-[15px] px-[10px] text-gray-600 hover:text-blue-600">{item?.value}</NavLink>)}
             </div>
             {button && <div className="self-center whitespace-nowrap">
-                <button onClick={() => { history.push(button?.path) }} className="flex my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] ">
+                <button onClick={() => { history.push(button?.path); button?.event() }} className="flex my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] ">
                     <div className="self-center"><button.icon className="w-[15px] fill-current" /> </div>
                     <span className="hidden md:block">{button?.value}</span>
                 </button>
@@ -32,4 +32,4 @@ export default Navigation
 //     { path: path.POSTS_FLOW, value: "Đang theo dõi" },
 //     { path: path.POSTS_BOOK_MARK, value: "Bookmark của tôi" },
 // ]
-// const button = { path: path.POSTS_CREATE, icon: Icon.Pen, value: "Viết bài" }
+// const button = { path: path.POSTS_CREATE, icon: Icon.Pen, value: "Viết bài", event: function }

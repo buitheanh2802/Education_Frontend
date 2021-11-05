@@ -16,3 +16,7 @@ export const CompactText = (text, start, end) => {
 
     return [...newArrayText.splice(0, start), "...", ...newArrayText]?.join(" ");
 }
+
+export const OpenWindownTab = (link) => {
+    return window.open(link, "_taget")
+}

@@ -6,7 +6,6 @@ import { ActionGetsChallenge } from 'src/Redux/Actions/Challenge.action';
 import { resetChallenge } from 'src/Redux/Slices/Challenge.slice';
 import PathContent from '../Commons/PathContent';
 import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 import { ActionGetChallengeCate } from 'src/Redux/Actions/ChallengeCate.action';
 
 const ChallengePage = () => {

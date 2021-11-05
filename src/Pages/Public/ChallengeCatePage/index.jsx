@@ -5,7 +5,6 @@ import { path } from 'src/Constants/'
 import Navigation from 'src/Pages/Public/Commons/Navigation'
 import { ActionGetsChallengeCate } from 'src/Redux/Actions/ChallengeCate.action'
 import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 
 const ChallengeCatePage = () => {
     const dispatch = useDispatch();

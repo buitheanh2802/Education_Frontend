@@ -23,6 +23,8 @@ export const path = {
     CHALLENGE: '/challenge',
     CHALLENGE_CATE_ID: '/challenge/:cateid',
     CHALLENGE_ID: '/challenge/detail/:id',
+    CHALLENGE_SOLUTION: '/challenge/solution',
+    CHALLENGE_SOLUTION_CHALLENGE_ID: '/challenge/solution/:challengeId',
 
     //Quiz
     QUIZ: '/quiz',
