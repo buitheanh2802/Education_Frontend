@@ -69,10 +69,10 @@ const ChallengePage = () => {
                                 <div className="w-full pr-[30px] absolute bottom-[15px]">
                                     <div className="mt-[35px] rounded-[5px] border border-gray-300  pt-[12px] pb-[19px] w-full  ">
                                         <p className={`text-[12px] px-[15px] ${item?.level > 4 ? "text-red-500" : item?.level > 2 ? "text-yellow-500" : "text-green-500"}`}>
-                                            {item?.level > 4 ? "Nâng cao:" : item?.level > 2 ? "Trung cấp" : "Sơ cấp"}:
+                                            {item?.level > 4 ? "Nâng cao" : item?.level > 2 ? "Trung cấp" : "Sơ cấp"}:
                                         </p>
                                         <div className="grid grid-cols-5 gap-[10px] px-[15px] mt-[6px]">
-                                            {[...Array(5)].map((arr, index) => <span key={index} className={`${index < item?.level ? "bg-green-500" : "bg-gray-300"} h-[5px] rounded-[3px]`}></span>)}
+                                            {[...Array(5)].map((arr, index) => <span key={index} className={`${index < item?.level ? (item?.level > 4 ? "bg-red-500" : item?.level > 2 ? "bg-yellow-500" : "bg-green-500") : "bg-gray-300"} h-[5px] rounded-[3px] `}></span>)}
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@ const ChallengePage = () => {
                     )
                 })}
             </div>
-        </div>
+        </div >
     )
 }
 
