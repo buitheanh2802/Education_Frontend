@@ -11,21 +11,28 @@ import UserBookMark from "./UserBookMark";
 import UserPost from "./UserPost";
 
 const Userpage = (props) => {
+  const username = props.match.params.username;
+  const [user, setUser] = useState(null);
+  const [userFollowers, setUserFollowers] = useState([]);
+  const [userFollowing, setUserFollowing] = useState([]);
+  const [userBookMark, setUserBookMark] = useState([]);
+  const [userPost, setUserPost] = useState([]);
+
   const pathName = [
     {
-      path: path.USER_POST,
+      path: `/user/${username}/post`,
       value: "Bài viết",
     },
     {
-      path: path.USER_BOOKMARK,
+      path: `/user/${username}/bookmark/post`,
       value: "Bookmark",
     },
     {
-      path: path.USER_FOLLOWING,
+      path: `/user/${username}/following`,
       value: "Đang theo dõi",
     },
     {
-      path: path.USER_FOLLOWER,
+      path: `/user/${username}/follower`,
       value: "Người theo dõi",
     },
   ];
@@ -36,11 +43,8 @@ const Userpage = (props) => {
   };
 
   // authors
-
-  const [user, setUser] = useState([]);
-
   useEffect(() => {
-    const username = props.match.params.username;
+    
     const user = async () => {
       try {
         const { data: users } = await ProfileUserApi.getUser(username);
@@ -53,7 +57,7 @@ const Userpage = (props) => {
     user();
   }, []);
 
-  const [userFollowers, setUserFollowers] = useState([]);
+  
   useEffect(() => {
     const username = props.match.params.username;
     console.log(username);
@@ -71,7 +75,7 @@ const Userpage = (props) => {
     userFollowers();
   }, []);
 
-  const [userFollowing, setUserFollowing] = useState([]);
+  
   useEffect(() => {
     const username = props.match.params.username;
     const userFollowing = async () => {
@@ -88,7 +92,7 @@ const Userpage = (props) => {
     userFollowing();
   }, []);
 
-  const [userBookMark, setUserBookMark] = useState([]);
+ 
   useEffect(() => {
     const username = props.match.params.username;
     const userBookMark = async () => {
@@ -103,7 +107,7 @@ const Userpage = (props) => {
     userBookMark();
   }, []);
 
-  const [userPost, setUserPost] = useState([]);
+ 
   useEffect(() => {
     const username = props.match.params.username;
     const userPost = async () => {
@@ -134,17 +138,17 @@ const Userpage = (props) => {
                 />
                : 
                 <div className="py-[12px] text-[#4A5568] mx-auto text-center md:w-[70px] md:h-[70px] rounded-full bg-blue-300 font-bold text-[30px]">
-                  {user?.username}
+                  {user?.username?.toUpperCase().substring(0, 1)}
                 </div>
               }
             </div>
             <div className="ml-[30px] my-auto">
               <div className="">
                 <h3 className="text-[22px] font-semibold inline-block">
-                  {user.fullname}
+                  {user?.fullname}
                 </h3>
                 <Icon.Star className="w-[18px] mb-[15px] ml-[10px] inline-block" />
-                <p className="text-[#666]">@{user.username}</p>
+                <p className="text-[#666]">@{user?.username}</p>
               </div>
               <button className="mt-[10px] bg-[#fff] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#fdfdfd] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
                 + Theo dõi
@@ -186,14 +190,14 @@ const Userpage = (props) => {
             </Switch>
           </div>
         </div>
-        <div className=" min-w-100 max-w-100 bg-white shadow rounded px-[20px] py-[20px] my-[5px] text-[15px] ">
+        <div className="min-w-100 max-w-100 bg-white shadow rounded px-[20px] py-[20px] my-[5px] text-[15px] ">
           <div className="flex justify-between my-[5px] ">
             <p className="text-gray-500">Tổng số bài viết : </p>
-            <span className="font-bold text-[13px]">{user.postCounts}</span>
+            <span className="font-bold text-[13px]">{user?.postCounts}</span>
           </div>
           <div className="flex justify-between my-[5px]">
             <p className="text-gray-500">Tổng số câu hỏi : </p>
-            <span className="font-bold text-[13px]">{user.questionCounts}</span>
+            <span className="font-bold text-[13px]">{user?.questionCounts}</span>
           </div>
           <div className="flex justify-between my-[5px]">
             <p className="text-gray-500">Bookmark : </p>
@@ -201,7 +205,7 @@ const Userpage = (props) => {
           </div>
           <div className="flex justify-between my-[5px]">
             <p className="text-gray-500">Số người theo dõi : </p>
-            <span className="font-bold text-[13px]">{user.followers}</span>
+            <span className="font-bold text-[13px]">{user?.followers}</span>
           </div>
         </div>
       </div>

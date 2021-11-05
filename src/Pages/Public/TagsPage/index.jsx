@@ -83,7 +83,7 @@ const TagsPage = () => {
           <div className="grid grid-cols-1 gap-[20px] 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
             {tags.map((item, index) => {
               return (
-                <div key={index} className="item md:text-[14px] text-[14px] w-max-[220px]">
+                <div key={index} className="item md:text-[16px] text-[14px] w-max-[220px]">
                   <Link className="grid grid-cols-3  justify-center items-center" to={`/tags/${item?.slug}`} >
                   <div className="col-span-1">
                       {item.avatar.avatarUrl ? 
