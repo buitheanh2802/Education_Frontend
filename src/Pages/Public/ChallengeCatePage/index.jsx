@@ -30,13 +30,13 @@ const ChallengeCatePage = () => {
                             return (
                                 <div key={index} className="shadow-sm duration-300 bg-white rounded  course-item p-[15px] relative border">
                                     <div className="w-full h-[200px] sm:h-[220px] xl:h-[200px] bg-no-repeat bg-cover bg-center rounded cursor-pointer">
-                                        <Skeleton className="h-full" />
+                                        <Skeleton className="z-0 h-full" />
                                     </div>
                                     <div className="w-full mt-[12px]">
-                                        <Skeleton className="w-full py-[5px]" />
+                                        <Skeleton className="z-0 w-full py-[5px]" />
                                     </div>
                                     <Skeleton />
-                                    <Skeleton className="w-2/3" />
+                                    <Skeleton className="z-0 w-2/3" />
                                 </div>
                             )
                         })}
