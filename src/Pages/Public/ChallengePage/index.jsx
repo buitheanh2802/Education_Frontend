@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router';
 import { path } from 'src/Constants/';
@@ -7,14 +7,23 @@ import { resetChallenge } from 'src/Redux/Slices/Challenge.slice';
 import PathContent from '../Commons/PathContent';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { ActionGetChallengeCate } from 'src/Redux/Actions/ChallengeCate.action';
 
 const ChallengePage = () => {
     const dispatch = useDispatch();
     const { cateid } = useParams();
+    const [routeName, setRouteName] = useState(null)
     const history = useHistory();
     const { challenges, isLoading } = useSelector(state => state.Challenge);
 
     useEffect(() => {
+        (async () => {
+            const { payload } = await dispatch(ActionGetChallengeCate(cateid));
+            const { data, status } = payload;
+            if (status) return setRouteName(data?.title)
+            setRouteName("Danh sách bài tập")
+        })()
+
         dispatch(ActionGetsChallenge(cateid));
         return () => dispatch(resetChallenge());
     }, [dispatch, cateid])
@@ -22,12 +31,12 @@ const ChallengePage = () => {
 
     const pathName = [
         { path: path.CHALLENGE, value: "Danh mục bài tập" },
-        { path: `${path.CHALLENGE}/${cateid}`, value: "Learn and Practice Responsive Web Development by building 8 Websites with given designs" }
+        { path: `${path.CHALLENGE}/${cateid}`, value: routeName }
     ]
 
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
-            <PathContent path={pathName} />
+            {routeName ? <PathContent path={pathName} /> : <Skeleton className="h-full py-[15px] border" />}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[20px] mt-[20px]">
                 {isLoading && (
                     <>
@@ -35,7 +44,7 @@ const ChallengePage = () => {
                             return (
                                 <div key={index} className="shadow-sm duration-300 bg-white rounded  course-item p-[15px] relative border">
                                     <div className="w-full h-[200px] sm:h-[220px] xl:h-[200px] bg-no-repeat bg-cover bg-center rounded cursor-pointer">
-                                        <Skeleton className="h-full" />
+                                        <Skeleton className="h-full border" />
                                     </div>
                                     <div className="w-full mt-[12px]">
                                         <Skeleton className="w-full py-[5px]" />
