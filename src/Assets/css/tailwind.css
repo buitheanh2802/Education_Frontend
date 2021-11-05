@@ -121,21 +121,28 @@ body {
 /* alert message */
 
 .message_animation {
-    animation: message ease 5s;
-    animation-delay: 0.2s;
+    position: fixed;
+    padding: 10px 15px;
+    min-width: 260px;
+    max-width: 300px;
+    left: calc(-100% - 15px);
+    border-radius: 3px;
+    bottom: 30px;
+    animation: message ease 6s;
+    animation-delay: 0.3s;
 }
 
 @keyframes message {
     0% {
         opacity: 0;
-        margin-left: calc(-100% - 15px);
-    }
-    90%, 10% {
-        opacity: 1;
         margin-left: 0;
+    }
+    85%, 10% {
+        opacity: 1;
+        margin-left: calc(100% + 30px);
     }
     100% {
         opacity: 0;
-        margin-left: calc(-100% - 15px);
+        margin-left: 0;
     }
 }

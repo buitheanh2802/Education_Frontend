@@ -20,3 +20,7 @@ export const CompactText = (text, start, end) => {
 export const OpenWindownTab = (link) => {
     return window.open(link, "_taget")
 }
+
+export const AlartMessage = (type, message) => {
+    document.getElementById('alart-message').innerHTML = `<div class="message_animation ${type ? "bg-green-100 text-green-500" : "bg-red-100 text-red-500"}"><span className="text-[14px]">${message}</span></div>`
+}

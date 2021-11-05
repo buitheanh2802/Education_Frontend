@@ -2,6 +2,7 @@ import ResponseMessage from "src/Constants/ResponseMessage";
 import LocalStorage from "src/Helpers/Storage";
 import { ActionGetProfile, ActionLogin, ActionLogout } from "../Actions/Auth.action";
 import { createSlice } from '@reduxjs/toolkit';
+import { AlartMessage } from "src/Helpers/";
 
 const mySlice = createSlice({
     name: "Auth",
@@ -36,7 +37,7 @@ const mySlice = createSlice({
             const { status, data, message } = action?.payload;
             state.isLoading = false;
             if (status) {
-                state.message = [ResponseMessage("LOGIN_SUCCESS")];
+                AlartMessage(true, ResponseMessage("LOGIN_SUCCESS"));
                 state.profile = data?.profile;
                 LocalStorage.Set('_token_', data?.token);
             }
@@ -52,17 +53,17 @@ const mySlice = createSlice({
 
         builder.addCase(ActionGetProfile.rejected, (state) => {
             state.isLoading = false;
-            state.error = [ResponseMessage("ERROR_SERVER")]
+            AlartMessage(false, ResponseMessage("ERROR_SERVER"));
         })
 
         builder.addCase(ActionGetProfile.fulfilled, (state, action) => {
             const { status, data, message } = action?.payload;
             state.isLoading = false;
             if (status) {
-                state.message = [ResponseMessage("LOGIN_SUCCESS")];
+                AlartMessage(true, ResponseMessage("LOGIN_SUCCESS"));
                 state.profile = data;
             } else {
-                state.error = [ResponseMessage(message[0])]
+                AlartMessage(false, ResponseMessage(message[0]));
                 LocalStorage.Remove("_token_")
             }
         })
@@ -75,18 +76,18 @@ const mySlice = createSlice({
 
         builder.addCase(ActionLogout.rejected, (state) => {
             state.isLoading = false;
-            state.error = [ResponseMessage("LOGOUT_ERROR")]
+            AlartMessage(false, ResponseMessage("LOGOUT_ERROR"));
         })
 
         builder.addCase(ActionLogout.fulfilled, (state, action) => {
             const { status, message } = action?.payload;
             if (status) {
-                state.message = [ResponseMessage("LOGOUT_SUCCESS")];
+                AlartMessage(true, ResponseMessage("LOGOUT_SUCCESS"));
                 state.actionLoading = false;
                 state.profile = null;
                 LocalStorage.Remove('_token_');
             } else {
-                state.error = [ResponseMessage(message[0])];
+                AlartMessage(false, ResponseMessage(message[0]))
             }
         })
     }
