@@ -42,7 +42,7 @@ const DetailChallenge = () => {
             })();
             history.push(path.NOT_FOUND)
         })()
-    }, [dispatch, id, profile?._id])
+    }, [dispatch, history, profile?._id, id])
 
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
