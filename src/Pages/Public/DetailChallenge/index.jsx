@@ -56,6 +56,18 @@ const DetailChallenge = () => {
                 <div className="grid grid-cols-3 gap-[20px] mt-[20px]">
                     <div className="rounded bg-white border border-green-200 px-[15px] py-[10px] col-span-2">
                         <h3 className="text-[22px] text-gray-800 font-medium">{challenge?.title}</h3>
+                        <div className="flex text-[14px] gap-[15px]">
+                            <p className="font-medium">Tương tác: </p>
+                            <div className="flex items-center gap-[5px] text-[#5f5f5f]">
+                                <Icon.Eye className="fill-current w-[15px]" />
+                                <span>{challenge?.submitedBy?.length}</span>
+                            </div>
+                            <div className="flex items-center gap-[5px] text-[#5f5f5f]">
+                                <Icon.Chat className="fill-current w-[15px]" />
+                                <span>{challenge?.solutionSubmitedBy?.length}</span>
+                            </div>
+                        </div>
+
                         <p className="mt-[5px] text-gray-600">{challenge?.descriptions}</p>
 
                         <div className="grid grid-cols-5 gap-[10px] w-1/2 mt-[25px]">
