@@ -51,12 +51,12 @@ const DetailChallenge = () => {
         <div className="container mx-auto mt-[55px] py-[20px]">
             {isLoading ? <Navigation path={pathName} button={(profile) ? button : null} /> : <Skeleton className="h-full py-[15px] border" />}
             <div className="mt-[20px]">
-                <div className="bg-white rounded border">
+                <div className="bg-white rounded border overflow-hidden">
                     {challenge ? <iframe className="h-[400px] w-full border-0 p-0 m-0" src={challenge?.figmaUrl}></iframe> : <Skeleton className="h-[400px] w-full" />}
                 </div>
                 {challenge ?
                     <div className="grid grid-cols-3 gap-[20px] mt-[20px]">
-                        <div className="rounded bg-green-50 border border-green-200 px-[15px] py-[10px] col-span-2">
+                        <div className="rounded bg-green-50 bg-opacity-50 border border-green-200 px-[15px] py-[10px] col-span-2">
                             <h3 className="text-[22px] text-gray-800 font-medium">{challenge?.title}</h3>
                             <div className="flex text-[14px] gap-[15px]">
                                 <p className="font-medium">Tương tác: </p>
