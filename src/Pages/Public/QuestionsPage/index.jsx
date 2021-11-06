@@ -110,9 +110,8 @@ const QuestionsPage = () => {
     };
     listQuestion();
   }, []);
-  //   console.log(questions, "jhab");
   return (
-    <div className="container mx-auto mt-[80px]">
+    <div className="container mx-auto mt-[80px] mb-[20px]">
       <Navigation path={pathName} button={button} />
       <div className="mt-[15px] gap-[15px] flex justify-between">
         <div className="w-full shadow-sm bg-white px-[5px] rounded">

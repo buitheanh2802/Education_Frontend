@@ -8,25 +8,20 @@ class QuillReact extends React.Component {
       text: "",
     };
   }
-  // quillObj;
-  // imageHandler = async () => {
-  //   const input = document.createElement("input");
-
-  //   input.setAttribute("type", "file");
-  //   input.setAttribute("accept", "image/*");
-  //   input.click();
-
-  //   input.onchange = async () => {
-  //     var file = input.files[0];
-  //     var formData = new FormData();
-
-  //     formData.append("image", file);
-
-  //     var fileName = file.name;
-
-  //     const res = await this.props.handle(file, fileName, this.quillObj);
-  //   };
-  // };
+  handleImage = async () => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+    // input.onchange = async e => {
+    //     const file = e.target.files[0];
+    //     // const targetEditor = editor.current.getEditor();
+    //     // const curentSpace = targetEditor.getSelection(true);
+    //     // const res = await uploadFile(file.name, file);
+    //     // url
+    //     // targetEditor.insertEmbed(curentSpace.index, 'image', res);
+    // }
+  };
 
   modules = {
     toolbar: {
@@ -39,9 +34,9 @@ class QuillReact extends React.Component {
         ["clean"],
         [{ color: [] }],
       ],
-      // handlers: {
-      //   image: this.imageHandler,
-      // },
+      handlers: {
+        image: this.handleImage,
+      },
     },
   };
 

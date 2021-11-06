@@ -1,22 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
+import { timeFormatter } from "../../../../Helpers/Timer";
 
 const PostView = ({ posts }) => {
-  console.log(posts);
   return (
     <>
       {posts?.data?.models?.map((item, index) => {
         return (
           <div key={index} className="w-full flex px-[10px] py-[15px] border-b">
-            <div className="mr-[20px] hidden sm:block">
-              <Link to={item?.createBy?.path}>
-                <img
-                  className="max-w-[40px] max-h-[40px] rounded-full"
-                  src={item?.createBy?.avatar?.avatarUrl}
+            <div className="mr-[15px] hidden sm:block">
+              {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
+                <Link
+                  to=""
+                  className="mt-[5px]  border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
+                  style={{
+                    backgroundImage: `url(${item?.createBy?.avatar?.avatarUrl})`,
+                  }}
                   alt={item?.createBy?.fullname}
-                />
-              </Link>
+                ></Link>
+              ) : (
+                <Link
+                  to=""
+                  className="mt-[5px] flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
+                >
+                  {item?.createBy?.fullname?.slice(0, 1)?.toUpperCase()}
+                </Link>
+              )}
             </div>
             <div className="w-full">
               <Link
@@ -27,11 +37,11 @@ const PostView = ({ posts }) => {
               </Link>
               <span className="px-[5px]"> - </span>
               <span className="text-[13px] text-[#707885]">
-                {item?.createdAt}
+                {timeFormatter(item?.createdAt)}
               </span>
               <h3 className="pr-[50px] mt-[5px]">
                 <Link
-                  to={`/posts/${item?.shortId}`}
+                  to={`/posts/${item?.slug}-${item?.shortId}`}
                   className="font-medium text-[18px] hover:underline"
                 >
                   {item?.title}

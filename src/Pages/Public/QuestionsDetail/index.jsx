@@ -1,21 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Icon } from "src/Components/Icon";
-import { Link } from "react-router-dom";
-import ProfileUseQuestion from "../Commons/ProfileUseQuestion";
-import ProfileUserQuestionMobile from "../Commons/ProfileUserQuestionMobile";
-import QuestionsNew from "../Commons/QuestionsNew";
-const QuestionsDetail = () => {
-  const [postmenu, setPostmenu] = useState(false);
-  const [Questionshare, setQuestionshare] = useState(false);
+import { Link, useParams } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import PostsNew from "../Commons/PostNew";
+import { timeFormatter } from "src/Helpers/Timer";
+import { useSelector } from "react-redux";
+import QuestionApi from "src/Apis/QuestionApi";
 
+const QuestionsDetail = () => {
+  const shortId = useParams();
+  const [questionMenu, setQuestionMenu] = useState(false);
+  const [questionDetail, setQuestionDetail] = useState([]);
+  const { profile } = useSelector((state) => state.Auth);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const list = async (id) => {
+      try {
+        let { data: question } = await QuestionApi.getId(
+          id.split("-")[id.split("-").length - 1]
+        );
+        setQuestionDetail(question);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    list(shortId?.id);
+  }, [shortId?.id]);
+  console.log(questionDetail);
   return (
     <>
+      {/* {postDetail && (
+        <> */}
       <div className="mt-[80px] container mx-auto bg-white rounded-[5px] shadow">
         <div className="px-[10px] sm:px-[15px] py-[10px] ">
           <p className="text-gray-500 text-[14px] ">
-          Trang chủ / Hỏi đáp /
-            <span className="text-blue-500">
-            Tìm hiểu EpressJs
+            Trang chủ / Câu hỏi /
+            <span className="text-blue-500 ml-1">
+              {questionDetail?.data?.title || <Skeleton width={200} />}
             </span>
           </p>
         </div>
@@ -23,58 +45,124 @@ const QuestionsDetail = () => {
       <div className="w-full container mx-auto grid grid-cols-1 lg:grid-cols-[2.8fr,1.2fr] gap-[30px] mt-[20px]">
         <div className="">
           <div className="bg-white rounded-[5px] shadow px-[5px] sm:px-[15px] py-[20px] ">
-            <ProfileUserQuestionMobile />
+            <div className="block lg:hidden">
+              <div className="flex items-center mb-[5px] ">
+                {questionDetail?.data?.createBy?.avatar?.avatarUrl?.length >
+                0 ? (
+                  <Link
+                    to=""
+                    className="  border border-gray-300 cursor-pointer select-none w-[55px] h-[55px] rounded-full bg-center bg-cover"
+                    style={{
+                      backgroundImage: `url(${questionDetail?.data?.createBy?.avatar?.avatarUrl})`,
+                    }}
+                    alt={questionDetail?.fullname}
+                  ></Link>
+                ) : (
+                  <Link
+                    to=""
+                    className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
+                  >
+                    {questionDetail?.data?.createBy?.fullname
+                      ?.slice(0, 1)
+                      ?.toUpperCase()}
+                  </Link>
+                )}
+                <div className="ml-2">
+                  <p className="text-blue-500 text-[14px] sm:text-[16px] font-medium flex items-center">
+                    <Link to={questionDetail?.data?.createBy?.path}>
+                      <span className="hover:underline">
+                        {questionDetail?.data?.createBy?.fullname}
+                      </span>
+                    </Link>
+                    <span className=" text-[12px] sm:text-[14px] text-gray-500 hidden sm:block ">
+                      - @{questionDetail?.data?.createBy?.username}
+                    </span>
+                    <span>
+                      <button className="mt-1 sm:mt-0 ml-2 border rounded-[3px] border-blue-500 text-[12px] text-blue-500 px-[5px] py-[1px] hover:text-white hover:bg-blue-500">
+                        + Theo dõi
+                      </button>
+                    </span>
+                  </p>
+                  <div className="flex items-center mt-[3px]">
+                    <p className="flex items-center text-gray-500">
+                      <Icon.Point className="fill-current w-[12px] sm:w-[15px] " />
+                      <span className="text-[12px] sm:text-[14px] ml-1">
+                        {questionDetail?.data?.createBy?.points}
+                      </span>
+                    </p>
+                    <p className="flex items-center text-gray-500 ml-[10px]">
+                      <Icon.Pen className="fill-current  w-[12px] sm:w-[13px] " />
+                      <span className="text-[12px] sm:text-[14px] ml-1">
+                        {questionDetail?.data?.createBy?.postCounts}
+                      </span>
+                    </p>
+                    <p className="flex items-center text-gray-500 ml-[10px]">
+                      <Icon.Questions className="fill-current w-[12px] sm:w-[13px] " />
+                      <span className="text-[12px] sm:text-[14px] ml-1">
+                        {questionDetail?.data?.createBy?.questionCounts}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="flex justify-between  ">
               <p className="text-[18px] sm:text-[24px] font-medium">
-              Tìm hiểu EpressJs
+                {questionDetail?.data?.title || <Skeleton width={500} />}
               </p>
               <div className="relative">
                 <button
                   className="h-full btn__post"
-                  onClick={() => setPostmenu(!postmenu)}
+                  onClick={() => setQuestionMenu(!questionMenu)}
                 >
                   <Icon.DotsVertical className=" w-[13px] " />
                 </button>
                 <div
                   className={
-                    postmenu
+                    questionMenu
                       ? "post__menu bg-white"
                       : "post__menu bg-white hidden"
                   }
                 >
-                  <ul className="relative text-[12px] py-[5px]">
+                  <ul className="relative text-[14px] py-[5px]">
                     <li className="flex items-center cursor-pointer text-gray-700 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
                       <Icon.Flag className="fill-current w-[16px]  mr-[5px]" />
                       Báo cáo
                     </li>
                     <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
                       <Icon.ExternaLink className="fill-current w-[20px] mr-[5px]" />
-                      Nhờ chuyên gia trả lời
+                      Sao chép link câu hỏi
                     </li>
+                    {questionDetail?.data?.createBy?.username ===
+                    profile?.username ? (
+                      <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
+                        <Icon.Fix className="fill-current w-[15px] mr-[5px]" />
+                        Sửa câu hỏi
+                      </li>
+                    ) : (
+                      <li className="hidden"></li>
+                    )}
                   </ul>
                 </div>
               </div>
             </div>
-            <p className="text-gray-500 text-[12px] sm:text-[14px] mt-[8px]">
-            Yêu cầu khoảng 2 giờ trước
-            </p>
             <div className="flex items-center mt-[10px]">
               <p className="flex items-center text-gray-500">
                 <Icon.Eye className="fill-current w-[15px] " />
                 <span className="text-[12px] sm:text-[14px] ml-1">
-                9 lượt xem
+                  {questionDetail?.data?.views} lượt xem
                 </span>
               </p>
               <p className="flex items-center text-gray-500 ml-[10px]">
                 <Icon.Chat className="fill-current w-[13px] " />
                 <span className="text-[12px] sm:text-[14px] ml-1">
-                  2 bình luận
+                  {questionDetail?.data?.comments} bình luận
                 </span>
               </p>
               <p className="flex items-center text-gray-500 ml-[10px]">
                 <Icon.Bookmark className="fill-current w-[13px] " />
                 <span className="text-[12px] sm:text-[14px] ml-1">
-                  0 đã lưu
+                  {questionDetail?.data?.bookmarks.length} đã lưu
                 </span>
               </p>
             </div>
@@ -84,34 +172,122 @@ const QuestionsDetail = () => {
                 <span className="text-[14px] ml-1">Tags</span>
               </p>
               <span>
-                <button className="bg-[#E2E8F0] rounded-[3px] px-[5px] py-[2px] text-[12px] ml-2">
-                  JavaScript
-                </button>
-                <button className="bg-[#E2E8F0] rounded-[3px] px-[5px] py-[2px] text-[12px] ml-2">
-                  JavaScript
-                </button>
-                <button className="bg-[#E2E8F0] rounded-[3px] px-[5px] py-[2px] text-[12px] ml-2">
-                  JavaScript
-                </button>
+                {questionDetail?.data?.tags?.map((item, index) => {
+                  return (
+                    <button
+                      className="bg-[#E2E8F0] hover:bg-gray-300 rounded-[3px] px-[5px] py-[2px] text-[12px] ml-2"
+                      key={index}
+                    >
+                      {item.name}
+                    </button>
+                  );
+                })}
               </span>
             </div>
-           
-            <div className="mt-[20px] h-96 bg-gray-500"></div>
+            <p className="text-gray-500 text-[12px] sm:text-[14px] mt-[8px]">
+              {timeFormatter(questionDetail?.data?.createdAt)}
+            </p>
+            <div
+              className="mt-[20px] "
+              dangerouslySetInnerHTML={{
+                __html: questionDetail?.data?.content,
+              }}
+            ></div>
             <div className="mt-[20px] flex items-center">
-                    <button className="border border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white">
-                        <span className="text-[12x] md:text-[14x] ml-1">Ghi Câu Trả Lời</span>
-                    </button>
-              
-                    
-                </div>
+              <button className="border border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white">
+                <span className="text-[12x] md:text-[14x] ml-1">
+                  Ghi Câu Trả Lời
+                </span>
+              </button>
+            </div>
           </div>
         </div>
         <div className="hidden lg:block">
-          <ProfileUseQuestion />
-          <QuestionsNew />
+          <div className="bg-white shadow rounded-[5px] ">
+            <div className="flex py-[7px] block-avt justify-center">
+              {questionDetail?.data?.createBy?.avatar?.avatarUrl?.length > 0 ? (
+                <Link
+                  to=""
+                  className="  border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
+                  style={{
+                    backgroundImage: `url(${questionDetail?.data?.createBy?.avatar?.avatarUrl})`,
+                  }}
+                  alt={questionDetail?.fullname}
+                ></Link>
+              ) : (
+                <Link
+                  to=""
+                  className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
+                >
+                  {questionDetail?.data?.createBy?.fullname
+                    ?.slice(0, 1)
+                    ?.toUpperCase()}
+                </Link>
+              )}
+            </div>
+            <div className="py-[10px] px-[15px]  border-b border-gray-100 flex justify-between items-center">
+              <p className="text-[16px] font-medium ">
+                <Link to={questionDetail?.data?.createBy?.path}>
+                  <span className="block hover:underline	">
+                    {questionDetail?.data?.createBy?.fullname}
+                  </span>
+                </Link>
+                <span className="block text-[14px] text-gray-500 font-normal">
+                  @{questionDetail?.data?.createBy?.username}
+                </span>
+              </p>
+              <button className="border border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white">
+                + Theo dõi
+              </button>
+            </div>
+            <div className="py-[10px] flex border-b border-gray-100">
+              <div className="m-auto flex">
+                <p className="text-center  ">
+                  <span className="flex items-center text-[14px] text-gray-500">
+                    <Icon.Point className="fill-current w-[13px]  mr-[3px]" />
+                    Điểm
+                  </span>
+                  <span className="block ">
+                    {questionDetail?.data?.createBy?.points}
+                  </span>
+                </p>
+                <p className="text-center ml-[30px] ">
+                  <span className="flex items-center text-[14px] text-gray-500">
+                    <Icon.Pen className="fill-current w-[13px]  mr-[3px]" />
+                    Bài viết
+                  </span>
+                  <span className="block ">
+                    {questionDetail?.data?.createBy?.postCounts}
+                  </span>
+                </p>{" "}
+                <p className="text-center ml-[30px]">
+                  <span className="flex items-center text-[14px] text-gray-500">
+                    <Icon.Questions className="fill-current w-[13px]  mr-[3px]" />
+                    Câu hỏi
+                  </span>
+                  <span className="block ">
+                    {questionDetail?.data?.createBy?.questionCounts}
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div className="p-[15px]">
+              <button className="text-blue-500 w-full  py-[3px] border border-blue-500 rounded-[3px] flex justify-center items-center hover:bg-blue-500 hover:text-white">
+                <Icon.Bookmark className="fill-current w-[13px]" />
+                <span className="text-[14x] ml-1">
+                  {questionDetail?.data?.isBookmark
+                    ? "Đã Bookmark bài viết này"
+                    : "Bookmark bài viết này"}
+                </span>
+              </button>
+            </div>
+          </div>
+          <PostsNew />
         </div>
       </div>
     </>
+    //   )}
+    // </>
   );
 };
 
