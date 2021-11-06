@@ -1562,6 +1562,10 @@ video {
   padding: 0px;
 }
 
+.p-\[25px\] {
+  padding: 25px;
+}
+
 .px-\[15px\] {
   padding-left: 15px;
   padding-right: 15px;
@@ -1863,6 +1867,20 @@ video {
 .text-green-700 {
   --tw-text-opacity: 1;
   color: rgba(4, 120, 87, var(--tw-text-opacity));
+}
+
+.text-blue-900 {
+  --tw-text-opacity: 1;
+  color: rgba(30, 58, 138, var(--tw-text-opacity));
+}
+
+.text-green-900 {
+  --tw-text-opacity: 1;
+  color: rgba(6, 78, 59, var(--tw-text-opacity));
+}
+
+.underline {
+  text-decoration: underline;
 }
 
 .shadow-sm {
