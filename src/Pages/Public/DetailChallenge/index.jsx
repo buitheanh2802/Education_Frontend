@@ -23,10 +23,10 @@ const DetailChallenge = () => {
     ]
 
     const button = isDownLoad ? {
-        icon: Icon.questions,
+        icon: Icon.LightBulb,
         value: "Nộp bài", path: "/"
     } : {
-        icon: Icon.LogOut,
+        icon: Icon.DownLoad,
         value: "Tải bài tập",
         event: async () => {
             OpenWindownTab(challenge?.resourceUrl);
