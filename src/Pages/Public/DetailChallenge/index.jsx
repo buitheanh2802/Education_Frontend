@@ -17,8 +17,6 @@ const DetailChallenge = () => {
     const [isDownLoad, setIsDownLoad] = useState(null);
     const { id } = useParams();
 
-    console.log(challenge)
-
     const pathName = [
         { path: `${path.CHALLENGE}/detail/${id}`, value: "Chi tiết bài tập" },
         { path: `${path.CHALLENGE_SOLUTION}/${id}`, value: "Giải pháp" }
@@ -30,7 +28,10 @@ const DetailChallenge = () => {
     } : {
         icon: Icon.LogOut,
         value: "Tải bài tập",
-        event: () => OpenWindownTab(challenge?.resourceUrl)
+        event: async () => {
+            OpenWindownTab(challenge?.resourceUrl);
+            // phần này call api xác nhận đã tải bài tập
+        }
     }
 
     useEffect(() => {
@@ -60,11 +61,11 @@ const DetailChallenge = () => {
                             <div className="flex text-[14px] gap-[15px]">
                                 <p className="font-medium">Tương tác: </p>
                                 <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                                    <Icon.Eye className="fill-current w-[15px]" />
+                                    <Icon.DownLoad className="fill-current w-[18px]" />
                                     <span>{challenge?.submitedBy?.length}</span>
                                 </div>
                                 <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                                    <Icon.Chat className="fill-current w-[15px]" />
+                                    <Icon.Save className="fill-current w-[15px]" />
                                     <span>{challenge?.solutionSubmitedBy?.length}</span>
                                 </div>
                             </div>
@@ -77,10 +78,10 @@ const DetailChallenge = () => {
                         </div>
                         <div className="rounded bg-white border border-blue-200 px-[15px] py-[10px]">
                             {challenge?.createBy?.avatar?.avatarUrl
-                                ? <div className="w-[100px] h-[100px] rounded-full border-[3px] overflow-hidden mx-auto">
+                                ? <div className="w-[80px] h-[80px] rounded-full border-[3px] overflow-hidden mx-auto">
                                     <img className="w-full h-full object-cover" src="https://tse4.mm.bing.net/th?id=OIP.02MuUrbEnxLo5Bln0b8hIgHaFj&pid=Api&P=0&w=221&h=166" alt="" />
                                 </div> :
-                                <div className="w-[100px] h-[100px] rounded-full border-[3px] overflow-hidden mx-auto flex items-center justify-center text-gray-600 bg-gray-300">
+                                <div className="w-[80px] h-[80px] rounded-full border-[3px] overflow-hidden mx-auto flex items-center justify-center text-gray-600 bg-gray-300">
                                     <span className="text-[30px]">{challenge?.createBy?.fullname?.slice(0, 2)?.toUpperCase()}</span>
                                 </div>}
                             <div className="col-span-1">

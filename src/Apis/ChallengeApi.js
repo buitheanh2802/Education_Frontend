@@ -18,6 +18,15 @@ const ChallengeApi = {
                 Authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
+    },
+
+    async update(data) {
+        const url = `/challenges/${data?._id}`;
+        return AxiosClient.put(url, data, {
+            headers: {
+                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
     }
 }
 
