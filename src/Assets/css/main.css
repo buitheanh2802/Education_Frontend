@@ -1137,6 +1137,10 @@ video {
   width: 185px;
 }
 
+.w-\[60px\] {
+  width: 60px;
+}
+
 .min-w-\[40px\] {
   min-width: 40px;
 }
@@ -1280,6 +1284,11 @@ video {
   border-radius: 9999px;
 }
 
+.rounded-t {
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
 .border {
   border-width: 1px;
 }
@@ -1384,6 +1393,16 @@ video {
   border-color: rgba(243, 244, 246, var(--tw-border-opacity));
 }
 
+.border-blue-50 {
+  --tw-border-opacity: 1;
+  border-color: rgba(239, 246, 255, var(--tw-border-opacity));
+}
+
+.border-yellow-100 {
+  --tw-border-opacity: 1;
+  border-color: rgba(254, 243, 199, var(--tw-border-opacity));
+}
+
 .bg-green-100 {
   --tw-bg-opacity: 1;
   background-color: rgba(209, 250, 229, var(--tw-bg-opacity));
@@ -1483,6 +1502,16 @@ video {
   background-color: rgba(236, 253, 245, var(--tw-bg-opacity));
 }
 
+.bg-blue-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(96, 165, 250, var(--tw-bg-opacity));
+}
+
+.bg-yellow-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 251, 235, var(--tw-bg-opacity));
+}
+
 .bg-opacity-10 {
   --tw-bg-opacity: 0.1;
 }
@@ -1514,6 +1543,26 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(18, 115, 235, 0));
 }
 
+.from-blue-500 {
+  --tw-gradient-from: #3b82f6;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(59, 130, 246, 0));
+}
+
+.from-blue-50 {
+  --tw-gradient-from: #eff6ff;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(239, 246, 255, 0));
+}
+
+.from-blue-100 {
+  --tw-gradient-from: #dbeafe;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(219, 234, 254, 0));
+}
+
+.from-blue-200 {
+  --tw-gradient-from: #bfdbfe;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(191, 219, 254, 0));
+}
+
 .via-\[\#4193aa\] {
   --tw-gradient-stops: var(--tw-gradient-from), #4193aa, var(--tw-gradient-to, rgba(65, 147, 170, 0));
 }
@@ -1528,6 +1577,34 @@ video {
 
 .to-\[\#0051b5\] {
   --tw-gradient-to: #0051b5;
+}
+
+.to-blue-500 {
+  --tw-gradient-to: #3b82f6;
+}
+
+.to-blue-100 {
+  --tw-gradient-to: #dbeafe;
+}
+
+.to-blue-200 {
+  --tw-gradient-to: #bfdbfe;
+}
+
+.to-yellow-200 {
+  --tw-gradient-to: #fde68a;
+}
+
+.to-red-200 {
+  --tw-gradient-to: #fecaca;
+}
+
+.to-red-100 {
+  --tw-gradient-to: #fee2e2;
+}
+
+.to-yellow-100 {
+  --tw-gradient-to: #fef3c7;
 }
 
 .bg-cover {

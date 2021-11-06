@@ -76,17 +76,20 @@ const DetailChallenge = () => {
                                 {[...Array(5)].map((arr, index) => <span key={index} className={`${index < challenge?.level ? (challenge?.level > 4 ? "bg-red-500" : challenge?.level > 2 ? "bg-yellow-500" : "bg-green-500") : "bg-gray-300"} h-[5px] rounded-[3px] `}></span>)}
                             </div>
                         </div>
-                        <div className="rounded border border-blue-200 bg-blue-50 px-[15px] py-[10px]">
-                            {challenge?.createBy?.avatar?.avatarUrl
-                                ? <div className="w-[80px] h-[80px] rounded-full border-[3px] overflow-hidden mx-auto">
-                                    <img className="w-full h-full object-cover" src="https://tse4.mm.bing.net/th?id=OIP.02MuUrbEnxLo5Bln0b8hIgHaFj&pid=Api&P=0&w=221&h=166" alt="" />
-                                </div> :
-                                <div className="w-[80px] h-[80px] rounded-full border-[3px] overflow-hidden mx-auto flex items-center justify-center text-gray-600 bg-gray-300">
-                                    <span className="text-[30px]">{challenge?.createBy?.fullname?.slice(0, 2)?.toUpperCase()}</span>
-                                </div>}
-                            <div className="col-span-1">
-                                <div className="pt-[10px]">
-                                    <h5 className="text-center font-medium text-[18px] text-blue-600">Tác giả: {challenge?.createBy?.fullname}</h5>
+                        <div className="rounded border border-blue-200">
+                            <div className="bg-blue-400 px-[15px] py-[10px] rounded-t bg-gradient-to-b from-blue-50 to-blue-200">
+                                {challenge?.createBy?.avatar?.avatarUrl
+                                    ? <div className="w-[60px] h-[60px] rounded-full border-[3px] overflow-hidden mx-auto">
+                                        <img className="w-full h-full object-cover" src="https://tse4.mm.bing.net/th?id=OIP.02MuUrbEnxLo5Bln0b8hIgHaFj&pid=Api&P=0&w=221&h=166" alt="" />
+                                    </div> :
+                                    <div className="w-[60px] h-[60px] rounded-full border-[3px] overflow-hidden mx-auto flex items-center justify-center text-gray-600 bg-gray-300">
+                                        <span className="text-[20px]">{challenge?.createBy?.fullname?.slice(0, 2)?.toUpperCase()}</span>
+                                    </div>}
+                            </div>
+                            <div className="col-span-1 px-[15px] py-[10px]">
+                                <div className="pt-[10px] flex justify-between items-center">
+                                    <h5 className="font-medium text-blue-800">{challenge?.createBy?.fullname}</h5>
+                                    <button className="px-[20px] py-[5px] rounded border">+ Theo dõi</button>
                                 </div>
                             </div>
                         </div>
