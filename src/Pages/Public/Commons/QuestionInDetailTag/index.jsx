@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Icon } from 'src/Components/Icon'
 
-const DetailTagView = ({ data }) => {
+const QuestionInDetailTag = ({ data }) => {
     return (
         <>
             {data?.map((item, index) => {
@@ -59,7 +59,7 @@ const DetailTagView = ({ data }) => {
                                         </div>
                                         <div className="flex items-center gap-[5px] text-[#5f5f5f]">
                                             <Icon.Chat className="fill-current w-[15px]" />
-                                            <span>{item?.comments}</span>
+                                            <span>0</span>
                                         </div>
                                         <div className="flex items-center gap-[5px] text-[#5f5f5f]">
                                             <Icon.Bookmark className="fill-current w-[15px]" />
@@ -77,4 +77,5 @@ const DetailTagView = ({ data }) => {
     )
 }
 
-export default DetailTagView
+export default QuestionInDetailTag;
+

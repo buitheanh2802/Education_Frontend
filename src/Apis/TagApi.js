@@ -1,21 +1,33 @@
 import AxiosClient from './AxiosClient';
 const TagAPi = {
     getAll(endPoint) {
-        const token = localStorage.getItem('_token_');
         const url = `/tag${endPoint}`;
-        if(endPoint === "following") {
-            return AxiosClient.get(url, {
-                headers: {
-                    Authorization : `Bearer ${token}`
-                }
-            })
-        } else {
-            return AxiosClient.get(url);
-        }
-    },
-    getDetail(slug){
-        const url = `/tag/${slug}`;
         return AxiosClient.get(url);
+    },
+    getDetail(tagname){
+        const url = `/tag/${tagname}`;
+        return AxiosClient.get(url);
+    },
+    getTagPopular() {
+        const url = `/tag/popular`;
+        return AxiosClient.get(url);
+    },
+    getPostInTag(tagname){
+        const url = `/tag/${tagname}/post`;         
+        return AxiosClient.get(url);
+    },
+    getQuestionInTag(tagname){
+        const url = `/tag/${tagname}/question`;         
+        return AxiosClient.get(url);
+    },
+    getFollowInTag(tagname){
+        const token = localStorage.getItem('_token_');
+        const url = `/tag/${tagname}/follow`;         
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization : `Bearer ${token}`
+            }
+        })
     }
 }
 export default TagAPi;

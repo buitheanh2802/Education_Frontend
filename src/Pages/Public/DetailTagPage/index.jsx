@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import Navigation from '../Commons/Navigation'
 import { path } from 'src/Constants/'
 import { Icon } from 'src/Components/Icon'
 import DetailTagView from '../Commons/DetailTagView'
 import FeaturedTag from '../Commons/FeaturedTag'
-import { Images } from 'src/Constants/'
 import NavigationInDetailTag from '../Commons/NavigationInDetailTag'
 import TagAPi from 'src/Apis/TagApi'
-import { Link, useParams } from 'react-router-dom';
-
+import { useLocation } from "react-router";
+import { Switch, Route, useParams } from "react-router-dom";
+  
 const DetailTagPage = () => {
+    const location = useLocation();
     const { slug } = useParams();
+
     const [tag, setTag] = useState({});
+    const [tags, setTags] = useState({});
+    const [navs, setNav] = useState([]);
 
     useEffect(() => {
         const detailTag = async () => {
@@ -25,43 +28,45 @@ const DetailTagPage = () => {
         detailTag();
     }, []);
 
+    useEffect(() => {
+        const popTag = async () => {
+            try {
+                const { data: tags } = await TagAPi.getTagPopular();
+                setTags(tags);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        popTag();
+    }, []);
+
+    useEffect(() => {
+        const tagNav = async () => {
+            try {
+                if(location.pathname === `/tag/${slug}`) {
+                    const { data: navs } = await TagAPi.getPostInTag(slug);
+                    setNav(navs.data.models);
+                } else if(location.pathname === `/tag/${slug}question`) {
+                    const { data: navs } = await TagAPi.getQuestionInTag(slug);
+                    setNav(navs.data.models);                    
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        tagNav();
+    }, [location.pathname]);
+
     const pathName = [
         {
-            path: path.TAGS,
-            value: "Mới cập nhật"
+            path: `/tag/${slug}`,
+            value: "Bài viết"
         },
         {
-            path: path.TAGS_ID,
-            value: "Thịnh hành"
-        },
-        {
-            path: path.TAGS_FLOW,
-            value: "Đang theo dõi"
+            path: `/tag/${slug}/question`,
+            value: "Câu hỏi"
         }
-
     ]
-
-    const button = { path: path.QUESTIONS_CREATE, icon: Icon.questions, value: "Đặt câu hỏi" }
-    const fieldQuestions = [{
-        user: {
-            fullname: "Bùi Thế Anh",
-            avatar: "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
-            path: "/profile/buitheanh"
-        },
-        post: {
-            title: "Tìm hiểu về ExpressJS",
-            time: "T5, 5:00 PM",
-            view: 150,
-            comment: 87,
-            bookmark: 25,
-            link: 120,
-            dislike: 20,
-            path: path.POSTS_ID,
-            tags: [
-                { path: path.TAGS_ID, value: "Javascript" }
-            ]
-        }
-    }]
     
     return (
         <div className="container mx-auto mt-[80px]">
@@ -80,12 +85,12 @@ const DetailTagPage = () => {
                         </div>
                     </div>
                     <div className="w-full shadow-sm bg-white rounded">
-                        <NavigationInDetailTag path={pathName} button={button} />
-                        <DetailTagView data={fieldQuestions} ></DetailTagView>
+                        <NavigationInDetailTag path={pathName} />
+                        <DetailTagView data={navs} path={pathName}/>
                     </div>
                 </div>
                 <div className=" min-w-100 max-w-100 bg-white shadow rounded">
-                    <FeaturedTag tag={tag}></FeaturedTag>
+                    <FeaturedTag tag={tag} popTag={tags}></FeaturedTag>
                 </div>
             </div>
         </div>
