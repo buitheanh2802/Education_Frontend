@@ -36,10 +36,10 @@ const ChallengePage = () => {
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
             {routeName ? <PathContent path={pathName} /> : <Skeleton className="h-full py-[15px] border" />}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[20px] mt-[20px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-[20px]">
                 {isLoading && (
                     <>
-                        {[...Array(4)].map((item, index) => {
+                        {[...Array(3)].map((item, index) => {
                             return (
                                 <div key={index} className="shadow-sm duration-300 bg-white rounded course-item p-[15px] relative border">
                                     <div className="w-full h-[200px] sm:h-[220px] xl:h-[200px] bg-no-repeat bg-cover bg-center rounded cursor-pointer">
