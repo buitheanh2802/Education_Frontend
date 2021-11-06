@@ -12,6 +12,7 @@ import ChallengeCatePage from 'src/Pages/Public/ChallengeCatePage';
 import ChallengePage from 'src/Pages/Public/ChallengePage';
 import QuizPage from 'src/Pages/Public/QuizPage';
 import DetailChallenge from 'src/Pages/Public/DetailChallenge';
+import SolutionPage from 'src/Pages/Public/SolutionPage';
 
 const SiteLayout = () => {
     return (
@@ -25,6 +26,7 @@ const SiteLayout = () => {
                 <PublicRouter exact path={path.CHALLENGE_CATE_ID} component={ChallengePage} />
                 <PublicRouter path={path.CHALLENGE_ID} component={DetailChallenge} />
                 <PublicRouter path={path.QUIZ} component={QuizPage} />
+                <PublicRouter path={path.CHALLENGE_SOLUTION_CHALLENGE_ID} component={SolutionPage}/>
                 <PublicRouter path="*" component={Notfound} />
             </Switch>
             <Footer />
