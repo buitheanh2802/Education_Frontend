@@ -1,7 +1,12 @@
 import BgLogin from '../Assets/media/pictures/signin-image.png';
 import BgSinup from '../Assets/media/pictures/signup-image.png';
+import Step1 from '../Assets/media/pictures/Step1.svg';
+import Step2 from '../Assets/media/pictures/Step2.svg';
+import Step3 from '../Assets/media/pictures/Step3.svg';
+
 export const Images = {
-    BgLogin, BgSinup
+    BgLogin, BgSinup,
+    Step1, Step2, Step3
 }
 
 export const path = {
