@@ -41,7 +41,7 @@ const ChallengePage = () => {
                     <>
                         {[...Array(4)].map((item, index) => {
                             return (
-                                <div key={index} className="shadow-sm duration-300 bg-white rounded  course-item p-[15px] relative border">
+                                <div key={index} className="shadow-sm duration-300 bg-white rounded course-item p-[15px] relative border">
                                     <div className="w-full h-[200px] sm:h-[220px] xl:h-[200px] bg-no-repeat bg-cover bg-center rounded cursor-pointer">
                                         <Skeleton className="h-full border" />
                                     </div>
@@ -65,7 +65,7 @@ const ChallengePage = () => {
                                     <h2 onClick={() => history.push(`${path.CHALLENGE}/detail/${item?._id}`)} className="text-[20px] font-bold  cursor-pointer hover:text-blue-600">{item?.title}</h2>
                                 </div>
                                 <p className="text-[14px] mt-[4px] text-green-500">Tác giả: {item?.createBy?.fullname?.length === 0 ? "Devstar channel" : item?.createBy?.fullname}</p>
-                                <p className="text-[16px] leading-[24px] mt-[4px] text-gray-700 mb-[100px]">{item?.descriptions}</p>
+                                <p className="text-[16px] leading-[24px] mt-[4px] text-gray-700 mb-[80px]">{item?.descriptions}</p>
                                 <div className="w-full pr-[30px] absolute bottom-[15px]">
                                     <div className="mt-[35px] rounded-[5px] border border-gray-300  pt-[12px] pb-[19px] w-full  ">
                                         <p className={`text-[12px] px-[15px] ${item?.level > 4 ? "text-red-500" : item?.level > 2 ? "text-yellow-500" : "text-green-500"}`}>

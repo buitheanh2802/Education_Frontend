@@ -17,6 +17,8 @@ const DetailChallenge = () => {
     const [isDownLoad, setIsDownLoad] = useState(null);
     const { id } = useParams();
 
+    console.log(challenge)
+
     const pathName = [
         { path: `${path.CHALLENGE}/detail/${id}`, value: "Chi tiết bài tập" },
         { path: `${path.CHALLENGE_SOLUTION}/${id}`, value: "Giải pháp" }
@@ -47,6 +49,35 @@ const DetailChallenge = () => {
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
             {isLoading ? <Navigation path={pathName} button={(profile) ? button : null} /> : <Skeleton className="h-full py-[15px] border" />}
+            <div className="mt-[20px]">
+                <div className="bg-white rounded border">
+                    {challenge ? <iframe className="h-[400px] w-full border-0 p-0 m-0" src={challenge?.figmaUrl}></iframe> : <Skeleton className="h-[400px] w-full" />}
+                </div>
+                <div className="grid grid-cols-3 gap-[20px] mt-[20px]">
+                    <div className="rounded bg-white border border-green-200 px-[15px] py-[10px] col-span-2">
+                        <h3 className="text-[22px] text-gray-800 font-medium">{challenge?.title}</h3>
+                        <p className="mt-[5px] text-gray-600">{challenge?.descriptions}</p>
+
+                        <div className="grid grid-cols-5 gap-[10px] w-1/2 mt-[25px]">
+                            {[...Array(5)].map((arr, index) => <span key={index} className={`${index < challenge?.level ? (challenge?.level > 4 ? "bg-red-500" : challenge?.level > 2 ? "bg-yellow-500" : "bg-green-500") : "bg-gray-300"} h-[5px] rounded-[3px] `}></span>)}
+                        </div>
+                    </div>
+                    <div className="rounded bg-white border border-blue-200 px-[15px] py-[10px]">
+                        {challenge?.createBy?.avatar?.avatarUrl
+                            ? <div className="w-[100px] h-[100px] rounded-full border-[3px] overflow-hidden mx-auto">
+                                <img className="w-full h-full object-cover" src="https://tse4.mm.bing.net/th?id=OIP.02MuUrbEnxLo5Bln0b8hIgHaFj&pid=Api&P=0&w=221&h=166" alt="" />
+                            </div> :
+                            <div className="w-[100px] h-[100px] rounded-full border-[3px] overflow-hidden mx-auto flex items-center justify-center text-gray-600 bg-gray-300">
+                                <span className="text-[30px]">{challenge?.createBy?.fullname?.slice(0, 2)?.toUpperCase()}</span>
+                            </div>}
+                        <div className="col-span-1">
+                            <div className="pt-[10px]">
+                                <h5 className="text-center font-medium text-[18px] text-blue-600">Tác giả: {challenge?.createBy?.fullname}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
