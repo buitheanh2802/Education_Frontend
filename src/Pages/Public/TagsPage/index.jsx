@@ -60,8 +60,6 @@ const TagsPage = () => {
           endPoint= "";
         } else if (location.pathname === '/tags/popular') {
           endPoint= "/popular";
-        } else {
-          endPoint= "/following";
         }
         const { data: tags } = await TagAPi.getAll(endPoint);
         setTags(location.pathname === '/tags/popular' ? tags.data : tags.data.models);

@@ -6,7 +6,7 @@ import FeaturedTag from '../Commons/FeaturedTag'
 import NavigationInDetailTag from '../Commons/NavigationInDetailTag'
 import TagAPi from 'src/Apis/TagApi'
 import { useLocation } from "react-router";
-import { Switch, Route, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
   
 const DetailTagPage = () => {
     const location = useLocation();
@@ -14,7 +14,8 @@ const DetailTagPage = () => {
 
     const [tag, setTag] = useState({});
     const [tags, setTags] = useState({});
-    const [navs, setNav] = useState([]);
+    const [postTag, setPostTag] = useState([]);
+    const [questionTag, setQuestionTag] = useState([]);
 
     useEffect(() => {
         const detailTag = async () => {
@@ -40,22 +41,30 @@ const DetailTagPage = () => {
         popTag();
     }, []);
 
+
     useEffect(() => {
-        const tagNav = async () => {
+        const postTag = async () => {
             try {
-                if(location.pathname === `/tag/${slug}`) {
-                    const { data: navs } = await TagAPi.getPostInTag(slug);
-                    setNav(navs.data.models);
-                } else if(location.pathname === `/tag/${slug}question`) {
-                    const { data: navs } = await TagAPi.getQuestionInTag(slug);
-                    setNav(navs.data.models);                    
-                }
+                const { data: posts } = await TagAPi.getPostInTag(slug);
+                setPostTag(posts.data.models);
             } catch (error) {
                 console.log(error);
             }
         };
-        tagNav();
-    }, [location.pathname]);
+        postTag();
+    }, []);
+
+    useEffect(() => {
+        const questionTag = async () => {
+            try {
+                const { data: questions } = await TagAPi.getQuestionInTag(slug);
+                setQuestionTag(questions.data.models);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        questionTag();
+    }, []);
 
     const pathName = [
         {
@@ -86,7 +95,7 @@ const DetailTagPage = () => {
                     </div>
                     <div className="w-full shadow-sm bg-white rounded">
                         <NavigationInDetailTag path={pathName} />
-                        <DetailTagView data={navs} path={pathName}/>
+                        <DetailTagView data={location.pathname === `/tag/${slug}` ? postTag : questionTag} path={pathName}/>
                     </div>
                 </div>
                 <div className=" min-w-100 max-w-100 bg-white shadow rounded">
