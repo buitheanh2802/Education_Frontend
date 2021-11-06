@@ -47,17 +47,17 @@ const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotificatio
                     <li className="px-[15px] menu-after relative hidden lg:block">
                         <i onClick={() => setIsNotification(!isNotification)} className={active ? 'text-gray-500 hover:text-blue-600' : 'text-white hover:text-[#51ffb9]'}><Icon.Bell className="cursor-pointer w-[20px] h-[20px] fill-current" /></i>
 
-                        
+
                         {isNotification && <div className="absolute top-full right-0 w-[400px] pt-[12px]">
                             <span className="absolute w-[10px] h-[10px] block border-t border-l bg-white border-gray-300 transform rotate-[45deg] -translate-y-1/2 right-[20px]"></span>
                             <Notification className="hidden lg:block font-normal" />
                         </div>}
                     </li>
-                    <li className='pl-[15px] relative hidden lg:block'>
+                    <li className='pl-[15px] relative hidden lg:block w-[30px] ml-[15px]'>
                         {(profile?.avatar?.avatarUrl?.length > 0)
-                            ? <p onClick={() => setIsPopup(!isPopup)} className="absolute top-1/2 transform -translate-y-1/2 border border-gray-300 cursor-pointer select-none w-[30px] h-[30px] rounded-full bg-center bg-cover" style={{ backgroundImage: `url(${profile?.avatar?.avatarUrl})` }} alt={profile?.fullname} ></p>
-                            : <p onClick={() => setIsPopup(!isPopup)} className="flex justify-center items-center text-gray-500 absolute top-1/2 transform -translate-y-1/2 border border-gray-300 bg-gray-200 cursor-pointer select-none w-[30px] h-[30px] rounded-full"> {profile?.fullname?.slice(0, 1)?.toUpperCase()} </p>}
-                        {isPopup && <div className="absolute top-[calc(100%+15px)] right-[-30px] w-[200px] pt-[12px]">
+                            ? <p onClick={() => setIsPopup(!isPopup)} className="right-0 absolute top-1/2 transform -translate-y-1/2 border border-gray-300 cursor-pointer select-none w-[30px] h-[30px] rounded-full bg-center bg-cover" style={{ backgroundImage: `url(${profile?.avatar?.avatarUrl})` }} alt={profile?.fullname} ></p>
+                            : <p onClick={() => setIsPopup(!isPopup)} className="right-0 flex justify-center items-center text-gray-500 absolute top-1/2 transform -translate-y-1/2 border border-gray-300 bg-gray-200 cursor-pointer select-none w-[30px] h-[30px] rounded-full"> {profile?.fullname?.slice(0, 1)?.toUpperCase()} </p>}
+                        {isPopup && <div className="absolute top-[calc(100%+15px)] right-0 w-[200px] pt-[12px]">
                             <span className="absolute w-[10px] h-[10px] block border-t border-l bg-white border-gray-300 transform rotate-[45deg] -translate-y-1/2 right-[10px]"></span>
                             <ul className="bg-white text-[#333] text-[15px] rounded-[3px] font-normal p-[5px] shadow-lg border border-solid border-gray-300">
                                 <Link onClick={() => setIsPopup(!isPopup)} to={path.PROFILE_ME}><li className="px-[10px] py-[5px] hover:bg-gray-100 duration-300 rounded-[3px] flex items-center text-[#333]"><Icon.Profile className="w-[20px] h-[20px] fill-current" /> <p className="ml-[10px]">Thông tin cá nhân</p></li></Link>

@@ -17,16 +17,19 @@ export const CompactText = (text, start, end) => {
     return [...newArrayText.splice(0, start), "...", ...newArrayText]?.join(" ");
 }
 
+// handle open tab brower
 export const OpenWindownTab = (link) => {
     return window.open(link, "_taget")
 }
 
+// handle create message
 export const AlartMessage = (type, message) => {
     document.getElementById('alart-message').innerHTML = `<div class="message_animation ${type ? "bg-green-100 text-green-500" : "bg-red-100 text-red-500"}"><span className="text-[14px]">${message}</span></div>`
 }
 
-export const SplitString = (string) => {
+// handle split string
+export const SplitString = (string, number) => {
     if (typeof string !== "string") return
-    if (string?.length > 200) return string.split(0, 200) + "...";
+    if (string?.length > number) return string.split(0, number) + "...";
     return string
 }
