@@ -89,7 +89,7 @@ const DetailChallenge = () => {
                             <div className="col-span-1 px-[15px] py-[10px]">
                                 <div className="pt-[10px] flex justify-between items-center">
                                     <h5 className="font-medium text-blue-800">{challenge?.createBy?.fullname}</h5>
-                                    <button className="px-[20px] py-[5px] rounded border">+ Theo dõi</button>
+                                    <button className="px-[20px] py-[5px] rounded border text-[14px] text-gray-600 hover:text-white hover:bg-blue-500">+ Theo dõi</button>
                                 </div>
                             </div>
                         </div>

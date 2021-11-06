@@ -2317,6 +2317,11 @@ body {
   background-color: rgba(103, 212, 168, var(--tw-bg-opacity));
 }
 
+.hover\:bg-blue-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(59, 130, 246, var(--tw-bg-opacity));
+}
+
 .hover\:from-\[\#0051b5\]:hover {
   --tw-gradient-from: #0051b5;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(0, 81, 181, 0));
@@ -2354,6 +2359,11 @@ body {
 .hover\:text-\[blue\]:hover {
   --tw-text-opacity: 1;
   color: rgba(0, 0, 255, var(--tw-text-opacity));
+}
+
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {
