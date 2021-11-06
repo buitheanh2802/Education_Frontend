@@ -6,6 +6,7 @@ import Navigation from 'src/Pages/Public/Commons/Navigation'
 import { ActionGetsChallengeCate } from 'src/Redux/Actions/ChallengeCate.action'
 import Skeleton from 'react-loading-skeleton'
 import { Images } from 'src/Constants/'
+import { SplitString } from 'src/Helpers/'
 
 const ChallengeCatePage = () => {
     const dispatch = useDispatch();
@@ -85,7 +86,7 @@ const ChallengeCatePage = () => {
                                     <div className="flex justify-between items-center mt-[12px]">
                                         <Link to={path.CHALLENGE + "/" + item?._id}><span className="text-[20px] font-medium  cursor-pointer text-gray-800 hover:text-blue-600">{item?.title}</span></Link>
                                     </div>
-                                    <p className="text-[16px] leading-[24px] mt-[4px] text-gray-500"> {item?.descriptions} </p>
+                                    <p className="text-[16px] leading-[24px] mt-[4px] text-gray-500"> {SplitString(item?.descriptions)} </p>
                                 </div>
                             </div>
                         )
