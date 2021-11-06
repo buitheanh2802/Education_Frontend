@@ -56,7 +56,7 @@ const DetailChallenge = () => {
                 </div>
                 {challenge ?
                     <div className="grid grid-cols-3 gap-[20px] mt-[20px]">
-                        <div className="rounded bg-white border border-green-200 px-[15px] py-[10px] col-span-2">
+                        <div className="rounded bg-green-50 border border-green-200 px-[15px] py-[10px] col-span-2">
                             <h3 className="text-[22px] text-gray-800 font-medium">{challenge?.title}</h3>
                             <div className="flex text-[14px] gap-[15px]">
                                 <p className="font-medium">Tương tác: </p>
@@ -76,7 +76,7 @@ const DetailChallenge = () => {
                                 {[...Array(5)].map((arr, index) => <span key={index} className={`${index < challenge?.level ? (challenge?.level > 4 ? "bg-red-500" : challenge?.level > 2 ? "bg-yellow-500" : "bg-green-500") : "bg-gray-300"} h-[5px] rounded-[3px] `}></span>)}
                             </div>
                         </div>
-                        <div className="rounded bg-white border border-blue-200 px-[15px] py-[10px]">
+                        <div className="rounded border border-blue-200 bg-blue-50 px-[15px] py-[10px]">
                             {challenge?.createBy?.avatar?.avatarUrl
                                 ? <div className="w-[80px] h-[80px] rounded-full border-[3px] overflow-hidden mx-auto">
                                     <img className="w-full h-full object-cover" src="https://tse4.mm.bing.net/th?id=OIP.02MuUrbEnxLo5Bln0b8hIgHaFj&pid=Api&P=0&w=221&h=166" alt="" />
