@@ -17,6 +17,10 @@ const ProfileUserApi = {
         const url = `/user/${username}/following`
         return AxiosClient.get(url)
     },
+    getTagUser(username) {
+        const url = `/user/${username}/tag`
+        return AxiosClient.get(url)
+    },
     getBookmarkUser(username) {
         const url = `/user/${username}/bookmark/post`
         return AxiosClient.get(url)

@@ -9,6 +9,8 @@ import { Switch, Route } from "react-router-dom";
 import UserFollower from "./UserFollower";
 import UserBookMark from "./UserBookMark";
 import UserPost from "./UserPost";
+import UserTag from "./UserTag";
+
 
 const Userpage = (props) => {
   const username = props.match.params.username;
@@ -17,6 +19,7 @@ const Userpage = (props) => {
   const [userFollowing, setUserFollowing] = useState([]);
   const [userBookMark, setUserBookMark] = useState([]);
   const [userPost, setUserPost] = useState([]);
+  const [userTag, setUserTag] = useState([]);
 
   const pathName = [
     {
@@ -34,6 +37,10 @@ const Userpage = (props) => {
     {
       path: `/user/${username}/follower`,
       value: "Người theo dõi",
+    },
+    {
+      path: `/user/${username}/tag`,
+      value: "Thẻ",
     },
   ];
   const button = {
@@ -93,6 +100,21 @@ const Userpage = (props) => {
   }, []);
 
  
+  useEffect(() => {
+    const username = props.match.params.username;
+    const userTag = async () => {
+      try {
+        const { data: tagUser } = await ProfileUserApi.getTagUser(username);
+        console.log("helooo tagsUser ", tagUser);
+        setUserTag(tagUser.data.models);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    userTag();
+  }, []);
+
+
   useEffect(() => {
     const username = props.match.params.username;
     const userBookMark = async () => {
@@ -186,6 +208,11 @@ const Userpage = (props) => {
                 exact
                 path={path.USER_POST}
                 render={(props) => <UserPost userPost={userPost} {...props} />}
+              ></Route>
+              <Route
+                exact
+                path={path.USER_TAG}
+                render={(props) => <UserTag userTag={userTag} {...props} />}
               ></Route>
             </Switch>
           </div>

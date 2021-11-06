@@ -29,7 +29,7 @@ const UserFollowing = ({ userFollowing }) => {
                         />
                       ) : (
                         <div className="py-[12px] text-[#4A5568] mx-auto text-center md:w-[40px] md:h-[40px] rounded-full bg-blue-300 font-bold text-[15px]">
-                          {item?.username.toUpperCase().substring(0, 1)}
+                          {item?.username?.toUpperCase().substring(0, 1)}
                         </div>
                       )}
                     </div>

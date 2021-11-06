@@ -12,7 +12,7 @@ const UserPost = ({ userPost }) => {
         </div>
       ) : (
         <div className="w-full px-[10px] py-[15px] border-b lg:mt-0 md:mt-3">
-          {userPost.map((item, index) => {
+          {userPost?.map((item, index) => {
             return (
               <>
                 <div className="flex py-[10px] ">
@@ -90,7 +90,6 @@ const UserPost = ({ userPost }) => {
           })}
         </div>
       )}
-      );
     </div>
   );
 };
