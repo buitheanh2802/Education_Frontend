@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import Store from "./Redux/Store";
 import RootRouter from "./Routes";
 import "./Assets/css/main.css";
-import ProfileApi from './Apis/ProfileApi';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const App = () => {
 

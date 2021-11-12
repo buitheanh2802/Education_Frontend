@@ -1,75 +1,91 @@
+import Step1 from '../Assets/media/pictures/Step1.svg';
+import Step2 from '../Assets/media/pictures/Step2.svg';
+import Step3 from '../Assets/media/pictures/Step3.svg';
 import BgLogin from '../Assets/media/pictures/signin-image.png';
 import BgSinup from '../Assets/media/pictures/signup-image.png';
 export const Images = {
-    BgLogin, BgSinup
+    BgLogin, BgSinup,
+    Step1, Step2, Step3
 }
 
 export const path = {
+     // Website
+     HOME: '/',
+     SETTING: '/setting',
+ 
+     PROFILE_ME: '/profile/me',
+     PROFILE_USER: '/profile/:id',
+ 
+     //Profile_user
+     USER_ID: '/user/:username',
+     USER_POST: '/user/:username/post',
+     USER_FOLLOWER: '/user/:username/follower',
+     USER_FOLLOWING: '/user/:username/following',
+     USER_BOOKMARK: '/user/:username/bookmark/post',
+     USER_TAG:'/user/:username/tag',
+ 
+     // questions
+     QUESTIONS: '/questions',
+     QUESTIONS_CREATE: '/questions/create',
+     QUESTIONS_FLOW: '/questions/flow',
+     QUESTIONS_BOOK_MARK: '/questions/bookmark',
+ 
+     // post
+     POSTS: '/posts',
+     POSTS_ID: '/posts/:id',
+     POSTS_CREATE: '/posts/create',
+     POSTS_POPULAR: '/posts/popular',
+     POSTS_FLOW: '/posts/flow',
+     POSTS_BOOK_MARK: '/posts/bookmark',
+ 
+     // tags
+     TAGS: '/tags',
+     TAGS_ID: '/tags/:slug',
+     TAGS_FLOW: '/tags/follow',
+     TAGS_POPULAR : '/tags/popular',
+     // auth
+     AUTH: '/auth',
+     LOGIN: '/auth/login',
+     REGISTER: '/auth/register',
+ 
+     // error
+     NOT_FOUND: '/not-found',
+ 
+     // Admin
+     ADMIN: '/admin',
+     //contact
+     CONTACT: "/contact",
+ 
+     //HEAD
+     // questions
+     QUESTIONS_DETAIL: "/questionsDetail",
+ 
+     // post
+     POSTS_DETAIL: "/postsDetail",
+     // POSTS_CREATE: "/postsCreate",
+ 
+     //profile
+     PROFILE: "/profile/:username",
+     EDIT_PROFILE: "/profile/:id/edit",
+     PROFILE_PERSONAL: "/profile/:id/edit/personal",
+     PROFILE_CONTACT: "/profile/:id/edit/contact",
+     PROFILE_PASSWORD: "/profile/:id/edit/password",
+ 
+     //intro
+     INTRO: "/intro",
     // Website
-    HOME: '/',
-    SETTING: '/setting',
 
-    PROFILE_ME: '/profile/me',
-    PROFILE_USER: '/profile/:id',
+    //Challenge
+    CHALLENGE: '/challenge',
+    CHALLENGE_CATE_ID: '/challenge/:cateid',
+    CHALLENGE_ID: '/challenge/detail/:id',
+    CHALLENGE_SOLUTION: '/challenge/solution',
+    CHALLENGE_SOLUTION_CHALLENGE_ID: '/challenge/solution/:challengeId',
 
-    //Profile_user
-    USER_ID: '/user/:username',
-    USER_POST: '/user/:username/post',
-    USER_FOLLOWER: '/user/:username/follower',
-    USER_FOLLOWING: '/user/:username/following',
-    USER_BOOKMARK: '/user/:username/bookmark/post',
-    USER_TAG:'/user/:username/tag',
-
-    // questions
-    QUESTIONS: '/questions',
-    QUESTIONS_CREATE: '/questions/create',
-    QUESTIONS_FLOW: '/questions/flow',
-    QUESTIONS_BOOK_MARK: '/questions/bookmark',
-
-    // post
-    POSTS: '/posts',
-    POSTS_ID: '/posts/:id',
-    POSTS_CREATE: '/posts/create',
-    POSTS_POPULAR: '/posts/popular',
-    POSTS_FLOW: '/posts/flow',
-    POSTS_BOOK_MARK: '/posts/bookmark',
-
-    // tags
-    TAGS: '/tags',
-    TAGS_ID: '/tags/:slug',
-    TAGS_FLOW: '/tags/follow',
-    TAGS_POPULAR : '/tags/popular',
-    // auth
-    AUTH: '/auth',
-    LOGIN: '/auth/login',
-    REGISTER: '/auth/register',
-
-    // error
-    NOT_FOUND: '/not-found',
-
-    // Admin
-    ADMIN: '/admin',
-    //contact
-    CONTACT: "/contact",
-
-    //HEAD
-    // questions
-    QUESTIONS_DETAIL: "/questionsDetail",
-
-    // post
-    POSTS_DETAIL: "/postsDetail",
-    // POSTS_CREATE: "/postsCreate",
-
-    //profile
-    PROFILE: "/profile/:username",
-    EDIT_PROFILE: "/profile/:id/edit",
-    PROFILE_PERSONAL: "/profile/:id/edit/personal",
-    PROFILE_CONTACT: "/profile/:id/edit/contact",
-    PROFILE_PASSWORD: "/profile/:id/edit/password",
-
-    //intro
-    INTRO: "/intro",
-};
+    //Quiz
+    QUIZ: '/quiz',
+    QUIZ_CREATE: '/quiz/create',
+}
 
 export const regex = {
     PASSWORD: {
