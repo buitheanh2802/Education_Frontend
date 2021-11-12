@@ -101,9 +101,9 @@ const Header = () => {
                                     }}
                                     activeClassName="text-blue-700 relative lg:after:bottom-[-15px] lg:after:right-0 lg:after:bg-[#1273eb] lg:after:absolute lg:after:w-full lg:after:h-[2px]"
                                     className="hover:text-blue-600 duration-300 flex items-center"
-                                    to="/groups">
+                                    to="/challenge">
                                     <Icon.Group className="w-[16px] h-[16px] mr-[10px] sm:w-[20px] sm:h-[20px] lg:hidden fill-current" />
-                                    Tổ chức
+                                    Thực hành
                                 </NavLink>
                             </li>
                         </ul>

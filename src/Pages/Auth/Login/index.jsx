@@ -9,6 +9,7 @@ import Loading from 'src/Components/Loading'
 import ErrorMessage from 'src/Components/ErrorMessage'
 import { regex } from 'src/Constants/'
 import Oauthentication from '../Components/Oauthentication'
+import { resetErrorAuth } from 'src/Redux/Slices/Auth.slice'
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Login = () => {
         dispatch(ActionLogin(data))
     }
 
-    const resetErrorAuth = () => error && dispatch(resetErrorAuth())
+    error && setTimeout(() => dispatch(resetErrorAuth()), 5000)
 
     return (
         <div className="container mx-auto rounded grid grid-cols-1 lg:grid-cols-2 items-center h-screen">
@@ -43,7 +44,6 @@ const Login = () => {
                     <div className="my-[25px]">
                         <div className="relative">
                             <input
-                                onKeyUp={resetErrorAuth}
                                 onChangeCapture={() => clearErrors('email')}
                                 {...register('email', {
                                     required: regex.REQUIRED,
@@ -63,7 +63,6 @@ const Login = () => {
                     <div className="my-[25px]">
                         <div className="relative">
                             <input
-                                onKeyUp={resetErrorAuth}
                                 onChangeCapture={() => clearErrors('password')}
                                 disabled={isLoading}
                                 {...register('password', {

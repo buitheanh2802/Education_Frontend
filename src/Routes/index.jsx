@@ -13,7 +13,7 @@ import Loading from 'src/Components/Loading';
 import queryParam from 'src/Helpers/QueryParams'
 import AdminLayout from 'src/Layouts/AdminLayout';
 import PrivateRouter from './PrivateRouter';
-import AlertMessage from 'src/Components/AlertMessage';
+// import AlertMessage from 'src/Components/AlertMessage';
 import AuthLayout from 'src/Layouts/AuthLayout';
 
 const RootRoute = () => {
@@ -35,7 +35,6 @@ const RootRoute = () => {
         <Loading className="w-[40px] h-[40px] fill-current text-gray-500" /></div>
     return (
         <Router>
-            <AlertMessage />
             <Switch>
                 <PublicRouter path={path.AUTH} component={AuthLayout} />
                 <PrivateRouter path={path.ADMIN} component={AdminLayout} />
