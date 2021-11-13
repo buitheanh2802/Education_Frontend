@@ -6,28 +6,140 @@ import PostsNew from "../Commons/PostNew";
 import { timeFormatter } from "src/Helpers/Timer";
 import { useSelector } from "react-redux";
 import QuestionApi from "src/Apis/QuestionApi";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  EmailShareButton,
+} from "react-share";
+import BookmarkApi from "src/Apis/BookmarkApi";
+import LikeApi from "src/Apis/LikeApi";
+import FollowApi from "src/Apis/FollowApi";
+import UserApi from "src/Apis/UserApi";
 
 const QuestionsDetail = () => {
   const shortId = useParams();
   const [questionMenu, setQuestionMenu] = useState(false);
   const [questionDetail, setQuestionDetail] = useState([]);
   const { profile } = useSelector((state) => state.Auth);
+  const [questionShare, setQuestionShare] = useState(false);
+  const [render, setRender] = useState(false);
+  const [user, setUser] = useState([]);
+  // const [username, setUsername] = useState("");
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setRender(false);
     const list = async (id) => {
       try {
         let { data: question } = await QuestionApi.getId(
           id.split("-")[id.split("-").length - 1]
         );
         setQuestionDetail(question);
+        if (question.data.createBy.username) {
+          const CallApi = async () => {
+            try {
+              const { data: user } = await UserApi.get(
+                question.data.createBy.username
+              );
+              setUser(user);
+            } catch (error) {
+              console.log(error);
+            }
+          };
+          CallApi();
+        }
       } catch (error) {
         console.log(error);
       }
     };
     list(shortId?.id);
-  }, [shortId?.id]);
-  console.log(questionDetail);
+  }, [shortId?.id, render]);
+  if (Object.keys(questionDetail).length === 0) return null;
+
+  const idQuestion = shortId.id;
+  const arrLike = questionDetail?.data?.likes;
+  const checkLike = arrLike.some((a) => a === profile._id);
+  const handleLike = async () => {
+    setRender(true);
+    if (checkLike === false) {
+      await LikeApi.likeQuestion(idQuestion);
+      setQuestionDetail({
+        ...questionDetail,
+        data: { ...questionDetail.data },
+      });
+    } else {
+      await LikeApi.delLikeQuestion(idQuestion);
+      setQuestionDetail({
+        ...questionDetail,
+        data: { ...questionDetail.data },
+      });
+    }
+  };
+  ///////////////
+  const arrDisLike = questionDetail?.data?.dislike;
+  const checkDisLike = arrDisLike.some((a) => a === profile._id);
+  const handleDisLike = async () => {
+    setRender(true);
+    if (checkDisLike === false) {
+      await LikeApi.disLikeQuestion(idQuestion);
+      setQuestionDetail({
+        ...questionDetail,
+        data: { ...questionDetail.data },
+      });
+    } else {
+      await LikeApi.delDisLikeQuestion(idQuestion);
+      setQuestionDetail({
+        ...questionDetail,
+        data: { ...questionDetail.data },
+      });
+    }
+  };
+
+  /////////
+  const arrBookmark = questionDetail?.data?.bookmarks;
+  const checkBookmark = arrBookmark.some((a) => a === profile._id);
+  const handleBookmark = async () => {
+    setRender(true);
+    if (checkBookmark === false) {
+      await BookmarkApi.addBookmarkQuestion(idQuestion);
+      setQuestionDetail({
+        ...questionDetail,
+        data: { ...questionDetail.data },
+      });
+    } else {
+      await BookmarkApi.delBookmarkQuestion(idQuestion);
+      setQuestionDetail({
+        ...questionDetail,
+        data: { ...questionDetail.data },
+      });
+    }
+  };
+
+  ////////
+  const handleFollow = async () => {
+    if (user.data.isFollowing) {
+      setRender(true);
+      await FollowApi.unFollow(user.data.username);
+      setUser({
+        ...user,
+        data: {
+          ...user.data,
+        },
+      });
+    } else {
+      setRender(true);
+      await FollowApi.follow(user.data.username);
+      setUser({
+        ...user,
+        data: {
+          ...user.data,
+        },
+      });
+    }
+  };
+  const shareUrl = "https://www.npmjs.com/package/react-share";
+  // console.log(window.location.href);
+  // console.log(user);
   return (
     <>
       {/* {postDetail && (
@@ -193,22 +305,106 @@ const QuestionsDetail = () => {
                 __html: questionDetail?.data?.content,
               }}
             ></div>
-            <div className="mt-[20px] flex items-center">
-              <button className="border border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white">
-                <span className="text-[12x] md:text-[14x] ml-1">
-                  Ghi Câu Trả Lời
-                </span>
-              </button>
+            <div className="sm:flex justify-between">
+              <div className="mt-[20px] inline-block">
+                <div className="flex items-center border-b border-gray-300 ">
+                  <button
+                    onClick={() => handleLike()}
+                    className={
+                      checkLike
+                        ? " px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  bg-blue-500 text-white"
+                        : " text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  hover:bg-blue-300 hover:text-white"
+                    }
+                  >
+                    <Icon.Like className="fill-current w-[13px]" />
+                    <span className="text-[12x] md:text-[14x] ml-1">
+                      {questionDetail?.data?.countLikes} Like
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => handleDisLike()}
+                    className={
+                      checkDisLike
+                        ? " px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  bg-blue-500 text-white"
+                        : " text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  hover:bg-blue-300 hover:text-white"
+                    }
+                  >
+                    <Icon.Dislike className="fill-current w-[13px]" />
+                    <span className="text-[12x] md:text-[14x] ml-1">
+                      {questionDetail?.data?.countDislike} Dislikes
+                    </span>
+                  </button>
+                  <div className="relative">
+                    <button
+                      className={
+                        questionShare
+                          ? " px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center bg-blue-500 text-white"
+                          : "text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center hover:bg-blue-300 hover:text-white"
+                      }
+                      onClick={() => setQuestionShare(!questionShare)}
+                    >
+                      <Icon.Share className="fill-current w-[15px]" />
+                      <span className="text-[12x] md:text-[14x] ml-1">
+                        Share
+                      </span>
+                    </button>
+                    <div
+                      className={
+                        questionShare
+                          ? "post__share bg-white py-[5px]"
+                          : "post__share bg-white py-[5px] hidden"
+                      }
+                    >
+                      <ul className=" text-[14px] ">
+                        <li className=" text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
+                          <FacebookShareButton
+                            url={shareUrl}
+                            className="flex items-center"
+                          >
+                            <Icon.Facebook className="fill-current w-[12px] mr-[5px] " />
+                            Chia sẻ đến FaceBook
+                          </FacebookShareButton>
+                        </li>
+                        <li className="text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
+                          <TwitterShareButton
+                            url={shareUrl}
+                            className="flex items-center"
+                          >
+                            <Icon.Twitter className="fill-current w-[15px] mr-[5px]" />
+                            Chia sẻ đến Twitter
+                          </TwitterShareButton>
+                        </li>
+                        <li className=" text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
+                          <EmailShareButton
+                            url={shareUrl}
+                            className="flex items-center"
+                          >
+                            <Icon.Email className="fill-current w-[12px] mr-[5px]" />
+                            Chia sẻ đến Email
+                          </EmailShareButton>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-[20px] flex items-center">
+                <button className="border border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white">
+                  <span className="text-[12x] md:text-[14x] ml-1">
+                    Ghi Câu Trả Lời
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
         <div className="hidden lg:block">
           <div className="bg-white shadow rounded-[5px] ">
-            <div className="flex py-[7px] block-avt justify-center">
+            <div className="flex py-[5px] block-avt justify-center">
               {questionDetail?.data?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                 <Link
                   to=""
-                  className="  border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
+                  className="  border border-gray-300 cursor-pointer select-none w-[45px] h-[45px] rounded-full bg-center bg-cover"
                   style={{
                     backgroundImage: `url(${questionDetail?.data?.createBy?.avatar?.avatarUrl})`,
                   }}
@@ -236,8 +432,15 @@ const QuestionsDetail = () => {
                   @{questionDetail?.data?.createBy?.username}
                 </span>
               </p>
-              <button className="border border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white">
-                + Theo dõi
+              <button
+                onClick={() => handleFollow()}
+                className={
+                  user?.data?.isFollowing
+                    ? "border border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
+                    : "border border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
+                }
+              >
+                {user?.data?.isFollowing ? "- Đã theo dõi" : "+ Theo dõi"}
               </button>
             </div>
             <div className="py-[10px] flex border-b border-gray-100">
@@ -247,37 +450,38 @@ const QuestionsDetail = () => {
                     <Icon.Point className="fill-current w-[13px]  mr-[3px]" />
                     Điểm
                   </span>
-                  <span className="block ">
-                    {questionDetail?.data?.createBy?.points}
-                  </span>
+                  <span className="block ">{user?.data?.points}</span>
                 </p>
                 <p className="text-center ml-[30px] ">
                   <span className="flex items-center text-[14px] text-gray-500">
                     <Icon.Pen className="fill-current w-[13px]  mr-[3px]" />
                     Bài viết
                   </span>
-                  <span className="block ">
-                    {questionDetail?.data?.createBy?.postCounts}
-                  </span>
+                  <span className="block ">{user?.data?.postCounts}</span>
                 </p>{" "}
                 <p className="text-center ml-[30px]">
                   <span className="flex items-center text-[14px] text-gray-500">
                     <Icon.Questions className="fill-current w-[13px]  mr-[3px]" />
                     Câu hỏi
                   </span>
-                  <span className="block ">
-                    {questionDetail?.data?.createBy?.questionCounts}
-                  </span>
+                  <span className="block ">{user?.data?.questionCounts}</span>
                 </p>
               </div>
             </div>
             <div className="p-[15px]">
-              <button className="text-blue-500 w-full  py-[3px] border border-blue-500 rounded-[3px] flex justify-center items-center hover:bg-blue-500 hover:text-white">
+              <button
+                onClick={() => handleBookmark()}
+                className={
+                  checkBookmark
+                    ? " w-full  py-[3px] border border-blue-500 rounded-[3px] flex justify-center items-center bg-blue-500 text-white"
+                    : "text-blue-500 w-full  py-[3px] border border-blue-500 rounded-[3px] flex justify-center items-center hover:bg-blue-500 hover:text-white"
+                }
+              >
                 <Icon.Bookmark className="fill-current w-[13px]" />
                 <span className="text-[14x] ml-1">
-                  {questionDetail?.data?.isBookmark
-                    ? "Đã Bookmark bài viết này"
-                    : "Bookmark bài viết này"}
+                  {checkBookmark
+                    ? "Đã Bookmark câu hỏi này"
+                    : "Bookmark câu hỏi này"}
                 </span>
               </button>
             </div>

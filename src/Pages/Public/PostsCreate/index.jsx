@@ -146,7 +146,7 @@ const PostsCreate = () => {
       </div>
       <div className="mt-[20px] mb-[40px]">
         <QuillReact Content={Content} />
-        <div className="fixed top-0 left-0 hidden right-0 bottom-0 bg-gray-500 bg-opacity-70 z-[999999] overflow-auto">
+        {/* <div className="fixed top-0 left-0 hidden right-0 bottom-0 bg-gray-500 bg-opacity-70 z-[999999] overflow-auto">
           <div className="max-w-[650px] mx-[15px] mt-[15vh] sm:mx-auto mb-[50px] rounded-[2px] bg-white relative px-[15px]">
             <button className="absolute top-[18px] right-[15px] ">
               <Icon.Close className="fill-current w-[11px] text-gray-500 hover:text-gray-700 " />
@@ -225,7 +225,7 @@ const PostsCreate = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

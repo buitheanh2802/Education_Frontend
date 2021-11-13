@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Icon } from "src/Components/Icon";
 import { Link, useParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import PostsNew from "../Commons/PostNew";
 import PostApi from "src/Apis/PostApi";
 import { timeFormatter } from "src/Helpers/Timer";
@@ -17,13 +18,31 @@ import FollowApi from "src/Apis/FollowApi";
 
 const PostsDetail = () => {
   const shortId = useParams();
+  const idParam = shortId.id;
   const [postmenu, setPostmenu] = useState(false);
   const [postShare, setpostShare] = useState(false);
   const [postDetail, setPostDetail] = useState([]);
   const { profile } = useSelector((state) => state.Auth);
+  const [render, setRender] = useState(false);
 
   const id = shortId.id.split("-")[shortId.id.split("-").length - 1];
+  useEffect(() => {
+    setRender(false);
+
+    const list = async () => {
+      try {
+        const { data: post } = await PostApi.getPost(id);
+        setPostDetail(post);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    list();
+  }, [render]);
+  // console.log(postDetail);
+
   const handleLike = async () => {
+    setRender(true);
     if (postDetail?.data?.isLike) {
       await LikeApi.likePost(id);
       setPostDetail({
@@ -40,6 +59,7 @@ const PostsDetail = () => {
   };
 
   const handleDisLike = async () => {
+    setRender(true);
     if (postDetail?.data?.isDislike) {
       await LikeApi.disLikePost(id);
       setPostDetail({
@@ -57,13 +77,13 @@ const PostsDetail = () => {
 
   const handleBookmark = async () => {
     if (postDetail?.data?.isBookmark) {
-      await BookmarkApi.addBookmark(id);
+      await BookmarkApi.addBookmarkPost(id);
       setPostDetail({
         ...postDetail,
         data: { ...postDetail.data, isBookmark: false },
       });
     } else {
-      await BookmarkApi.addBookmark(id);
+      await BookmarkApi.addBookmarkPost(id);
       setPostDetail({
         ...postDetail,
         data: { ...postDetail.data, isBookmark: true },
@@ -94,20 +114,6 @@ const PostsDetail = () => {
     }
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const list = async (id) => {
-      try {
-        let { data: post } = await PostApi.getPost(
-          id.split("-")[id.split("-").length - 1]
-        );
-        setPostDetail(post);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    list(shortId?.id);
-  }, [shortId?.id]);
   const shareUrl = "https://www.npmjs.com/package/react-share";
   // console.log(window.location.href);
   return (
@@ -115,11 +121,15 @@ const PostsDetail = () => {
       {/* {postDetail && (
         <> */}
       <div className="mt-[80px] container mx-auto bg-white rounded-[5px] shadow">
-        <div className="px-[10px] sm:px-[15px] py-[10px] ">
-          <p className="text-gray-500 text-[14px] ">
+        <div className="px-[10px] sm:px-[15px] py-[10px]">
+          <p className="text-gray-500 text-[14px]">
             Trang chủ / Bài viết /
             <span className="text-blue-500 ml-1">
-              {postDetail?.data?.title || <Skeleton width={200} />}
+              {postDetail?.data?.title ? (
+                postDetail?.data?.title
+              ) : (
+                <Skeleton className="z-0 w-[250px] " />
+              )}
             </span>
           </p>
         </div>
@@ -189,7 +199,9 @@ const PostsDetail = () => {
             </div>
             <div className="flex justify-between  ">
               <p className="text-[18px] sm:text-[24px] font-medium">
-                {postDetail?.data?.title || <Skeleton width={500} />}
+                {postDetail?.data?.title || (
+                  <Skeleton className="z-0 w-[200px] " />
+                )}
               </p>
               <div className="relative">
                 <button
@@ -275,13 +287,13 @@ const PostsDetail = () => {
               }}
             ></div>
             <div className="mt-[20px] inline-block">
-              <div className="flex items-center border-b border-gray-300 ">
+              <div className="flex items-center border-b border-blue-300 ">
                 <button
                   onClick={() => handleLike()}
                   className={
                     postDetail?.data?.isLike
-                      ? " px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  bg-gray-500 text-white"
-                      : " text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  hover:bg-gray-500 hover:text-white"
+                      ? " px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  bg-blue-500 text-white"
+                      : " text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  hover:bg-blue-300 hover:text-white"
                   }
                 >
                   <Icon.Like className="fill-current w-[13px]" />
@@ -293,8 +305,8 @@ const PostsDetail = () => {
                   onClick={() => handleDisLike()}
                   className={
                     postDetail?.data?.isDislike
-                      ? " px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  bg-gray-500 text-white"
-                      : " text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  hover:bg-gray-500 hover:text-white"
+                      ? " px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  bg-blue-500 text-white"
+                      : " text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  hover:bg-blue-300 hover:text-white"
                   }
                 >
                   <Icon.Dislike className="fill-current w-[13px]" />
@@ -306,8 +318,8 @@ const PostsDetail = () => {
                   <button
                     className={
                       postShare
-                        ? " px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center bg-gray-500 text-white"
-                        : "text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center hover:bg-gray-500 hover:text-white"
+                        ? " px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center bg-blue-500 text-white"
+                        : "text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center hover:bg-blue-300 hover:text-white"
                     }
                     onClick={() => setpostShare(!postShare)}
                   >
@@ -358,11 +370,11 @@ const PostsDetail = () => {
         </div>
         <div className="hidden lg:block">
           <div className="bg-white shadow rounded-[5px] ">
-            <div className="flex py-[7px] block-avt justify-center">
+            <div className="flex py-[5px] block-avt justify-center">
               {postDetail?.data?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                 <Link
                   to=""
-                  className="  border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
+                  className="  border border-gray-300 cursor-pointer select-none w-[45px] h-[45px] rounded-full bg-center bg-cover"
                   style={{
                     backgroundImage: `url(${postDetail?.data?.createBy?.avatar?.avatarUrl})`,
                   }}

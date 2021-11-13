@@ -1,14 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-class QuillReact extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: "",
-    };
-  }
-  handleImage = async () => {
+import ImageApi from "src/Apis/ImageApi";
+const QuillReact = (Content) => {
+  const handleImage = async () => {
     const input = document.createElement("input");
     input.setAttribute("type", "file");
     input.setAttribute("accept", "image/*");
@@ -23,7 +18,7 @@ class QuillReact extends React.Component {
     // }
   };
 
-  modules = {
+  const modules = {
     toolbar: {
       container: [
         [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -35,12 +30,12 @@ class QuillReact extends React.Component {
         [{ color: [] }],
       ],
       handlers: {
-        image: this.handleImage,
+        image: handleImage(),
       },
     },
   };
 
-  formats = [
+  const formats = [
     "header",
     "bold",
     "italic",
@@ -54,20 +49,15 @@ class QuillReact extends React.Component {
     "image",
   ];
 
-  render() {
-    return (
-      <div className="text-editor">
-        <ReactQuill
-          ref={(el) => {
-            this.quillObj = el;
-          }}
-          theme="snow"
-          modules={this.modules}
-          formats={this.formats}
-          onChange={(e) => this.props.Content(e)}
-        ></ReactQuill>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="text-editor">
+      <ReactQuill
+        theme="snow"
+        modules={modules}
+        formats={formats}
+        // onChange={(e) => Content(e)}
+      ></ReactQuill>
+    </div>
+  );
+};
 export default QuillReact;
