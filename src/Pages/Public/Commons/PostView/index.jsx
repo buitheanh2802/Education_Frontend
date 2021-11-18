@@ -9,6 +9,7 @@ const PostView = ({ posts }) => {
 
     const handleAddBookmark = async(shortId) => {
         await BookmarkApi.addBookmark(shortId);
+        console.log(posts);
     }
     return (
         <>
@@ -69,67 +70,3 @@ const PostView = ({ posts }) => {
 }
 
 export default PostView
-
-// bookmarks: 1
-// comments: 0
-// createBy:
-    // avatar:
-        // avatarUrl: ""
-        // _id: ""
-    // email: "theanhbui345@gmail.com"
-    // fullname: "Bùi Thế Anh"
-    // username: "buitheanh111"
-// createdAt: "2021-10-11T13:56:36.293Z"
-// dislikes: 0
-// isTrending: false
-// likes: 0
-// shortId: "xcSK9RCGX"
-// slug: "hello-khoa-hoc-reactjs"
-// tags: Array(3)
-    // 0: {name: 'NodeJS', slug: 'nodejs'}
-    // 1: {name: 'ReactJS', slug: 'reactjs'}
-    // 2: {slug: 'vuejs', name: 'VueJS'}
-// title: "hello khoa hoc reactJS"
-// views: 0
-
-
-// const fieldPost = [
-//     {
-//         user: {
-//             fullname: "Nguyễn Thàn Đạt",
-//             avatar: "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
-//             path: "/profile/nguyenthanhdat"
-//         },
-//         post: {
-//             title: "Tìm hiểu về middleware trong NodeJS",
-//             time: "Khoảng 2h trước",
-//             view: 150,
-//             bookmark: 25,
-//             path: path.POSTS_ID,
-//             tags: [
-//                 { path: path.TAGS_ID, value: "NodeJS" },
-//                 { path: path.TAGS_ID, value: "ExpressJS" }
-//             ]
-//         }
-//     },
-//     {
-//         user: {
-//             fullname: "Bùi Thế Anh",
-//             avatar: "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
-//             path: "/profile/buitheanh"
-//         },
-//         post: {
-//             title: "Tìm hiểu về ExpressJS",
-//             time: "Khoảng 3h trước",
-//             view: 150,
-//             comment: 87,
-//             bookmark: 25,
-//             link: 120,
-//             dislike: 20,
-//             path: path.POSTS_ID,
-//             tags: [
-//                 { path: path.TAGS_ID, value: "ExpressJS" }
-//             ]
-//         }
-//     }
-// ]

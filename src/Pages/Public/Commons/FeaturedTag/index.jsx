@@ -7,14 +7,14 @@ const FeaturedTag = ({ tag, popTag }) => {
         <div className="py-[5px] mx-[10px]">
             <div className=" divide-y divide-light-blue-400 pb-[10px]">
                 <div className="flex flex-wrap">
-                    <h2 className="uppercase text-[#4A5568] font-medium py-[10px] ml-[5px] mr-[10px] text-[14px] xl:text-[16px]">{tag?.data?.name}</h2>
+                    <h2 className="uppercase text-[#4A5568] font-medium py-[10px] ml-[5px] mr-[10px] text-[14px] xl:text-[16px]">{tag?.name}</h2>
                     <hr class="filler-line border-t-1 xl:mt-[28px] mt-[25px] border-[#4A5568] overflow-visible h-0 flex-grow" />
                 </div>
                 <div className="grid grid-cols-3 gap-4 py-[20px]">
                     <div className="mx-auto">
                         <div className="text-center gap-[5px] text-[#4A5568]">
                             <div className="font-bold text-[22px] ">
-                                <span>{tag?.data?.postCounts}</span>
+                                <span>{tag?.postCounts}</span>
                             </div>
                             <span>Bài viết</span>
                         </div>
@@ -22,7 +22,7 @@ const FeaturedTag = ({ tag, popTag }) => {
                     <div className="mx-auto">
                         <div className="text-center gap-[5px] text-[#4A5568]">
                             <div className="font-bold text-[22px] ">
-                                <span>{tag?.data?.questionCounts}</span>
+                                <span>{tag?.questionCounts}</span>
                             </div>
                             <span>Câu hỏi</span>
                         </div>
@@ -30,7 +30,7 @@ const FeaturedTag = ({ tag, popTag }) => {
                     <div className="mx-auto">
                         <div className="text-center gap-[5px] text-[#4A5568]">
                             <div className="font-bold text-[22px] ">
-                                <span>{tag?.data?.followerCounts}</span>
+                                <span>{tag?.followerCounts}</span>
                             </div>
                             <span>Theo dõi</span>
                         </div>

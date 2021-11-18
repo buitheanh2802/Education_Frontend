@@ -6,11 +6,10 @@ import { Icon } from "../../../Components/Icon";
 import TagAPi from "src/Apis/TagApi";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";  
+import FollowApi from "src/Apis/FollowApi";
 
 const TagsPage = () => {
   
-  const location = useLocation();
-
   const pathName = [
     {
       path: path.TAGS,
@@ -51,32 +50,35 @@ const TagsPage = () => {
       folow: 345,
     },
   ];
+
+  const handleUnFollow = async (id) => {
+    
+  }
+  const handleFollow = async (id) => {
+    
+  }
+
   const [tags, setTags] = useState([]);
-  let endPoint;
   useEffect(() => {
     const tag = async () => {
-      try {
-        if(location.pathname === '/tags'){
-          endPoint= "";
-        } else if (location.pathname === '/tags/popular') {
-          endPoint= "/popular";
-        }
-        const { data: tags } = await TagAPi.getAll(endPoint);
-        setTags(location.pathname === '/tags/popular' ? tags.data : tags.data.models);
+      try { 
+        const { data: tags } = await TagAPi.getAll();
+        setTags(tags.data.models);
         console.log(tags);
       } catch (error) {
         console.log(error);
       }
     };
     tag();
-  }, [location.pathname]);
+  }, []);
+
   return (
     <div className="container mx-auto mt-[80px]  ">
-      <Navigation path={pathName} button={button} />
+      {/* <Navigation path={pathName} button={button} /> */}
       <div className="flex justify-between mt-[15px]  gap-[30px]">
         <div className="max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px] sm:gap-x-[60px] gap-y-[20px] mb-[30px] pb-[45px] w-full py-[15px] bg-white shadow rounded">
           <div className="grid grid-cols-1 gap-[20px] xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
-            {tags.map((item, index) => {
+            {tags?.map((item, index) => {
               return (
                 <div key={index} className="item md:text-[16px] text-[14px] w-max-[200px] px-[10px] py-[10px]">
                   <Link className="grid grid-cols-3 gap-[10px] justify-center items-center" to={`/tag/${item?.slug}`} >
@@ -115,14 +117,14 @@ const TagsPage = () => {
                     </div>
                   </Link>
                   {item?.isFollowing ? (
-                    <div className="mt-[10px] xl:[mx-10px] text-center my-auto border border-[#6C91F0] font-bold rounded text-[15px] bg-[#1273eb] :text-white">
+                    <div onClick={() => handleUnFollow(item._id)} className="mt-[10px] xl:[mx-10px] text-center my-auto border border-[#6C91F0] font-bold rounded text-[15px] bg-[#1273eb] :text-white">
                       <button className="font-bold  px-[20px] md:px-[30px] py-[5px] ">
                         {" "}
                         - Bỏ theo dõi
                       </button>
                     </div>
                   ) : (
-                    <div className="mt-[10px] xl:[mx-10px] text-center my-auto text-[#6C91F0] border border-[#6C91F0] font-bold rounded   text-[15px] hover:bg-[#1273eb] hover:text-white">
+                    <div onClick={() => handleFollow(item._id)} className="mt-[10px] xl:[mx-10px] text-center my-auto text-[#6C91F0] border border-[#6C91F0] font-bold rounded   text-[15px] hover:bg-[#1273eb] hover:text-white">
                       <button className="font-bold px-[20px] md:px-[30px] py-[5px] ">
                         {" "}
                        + Theo dõi

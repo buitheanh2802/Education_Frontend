@@ -1,7 +1,8 @@
 import AxiosClient from './AxiosClient';
+const token = localStorage.getItem('_token_');
 const TagAPi = {
-    getAll(endPoint) {
-        const url = `/tag${endPoint}`;
+    getAll() {
+        const url = `/tag`;
         return AxiosClient.get(url);
     },
     getDetail(tagname){
@@ -21,13 +22,8 @@ const TagAPi = {
         return AxiosClient.get(url);
     },
     getFollowInTag(tagname){
-        const token = localStorage.getItem('_token_');
-        const url = `/tag/${tagname}/follow`;         
-        return AxiosClient.get(url, {
-            headers: {
-                Authorization : `Bearer ${token}`
-            }
-        })
+        const url = `/tag/${tagname}/follower`;
+        return AxiosClient.get(url)
     }
 }
 export default TagAPi;
