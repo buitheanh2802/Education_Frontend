@@ -185,7 +185,7 @@ body {
   border-radius: 5px 5px 0 0;
 }
 .post__menu {
-  width: 180px;
+  width: 200px;
   position: absolute;
   animation: mymove 0.2s ease-in;
   right: 0;
@@ -210,7 +210,7 @@ body {
   width: 190px;
   position: absolute;
   animation: mymove 0.2s ease-in;
-  left: 0;
+  /* left: 0; */
   top: 100%;
   /* margin-top: 13px; */
   /* transform: translatex(50%); */

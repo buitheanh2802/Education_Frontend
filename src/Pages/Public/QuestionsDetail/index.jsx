@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "src/Components/Icon";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import PostsNew from "../Commons/PostNew";
 import { timeFormatter } from "src/Helpers/Timer";
@@ -24,8 +24,9 @@ const QuestionsDetail = () => {
   const [questionShare, setQuestionShare] = useState(false);
   const [render, setRender] = useState(false);
   const [user, setUser] = useState([]);
-  // const [username, setUsername] = useState("");
-
+  const [copyLink, setCopyLink] = useState(false);
+  const history = useHistory();
+  const token = localStorage.getItem("_token_");
   useEffect(() => {
     window.scrollTo(0, 0);
     setRender(false);
@@ -58,9 +59,10 @@ const QuestionsDetail = () => {
 
   const idQuestion = shortId.id;
   const arrLike = questionDetail?.data?.likes;
-  const checkLike = arrLike.some((a) => a === profile._id);
+  const checkLike = arrLike.some((a) => a === profile?._id);
   const handleLike = async () => {
     setRender(true);
+    if (token === null) history.push("/auth/login");
     if (checkLike === false) {
       await LikeApi.likeQuestion(idQuestion);
       setQuestionDetail({
@@ -77,9 +79,11 @@ const QuestionsDetail = () => {
   };
   ///////////////
   const arrDisLike = questionDetail?.data?.dislike;
-  const checkDisLike = arrDisLike.some((a) => a === profile._id);
+  const checkDisLike = arrDisLike.some((a) => a === profile?._id);
   const handleDisLike = async () => {
     setRender(true);
+    if (token === null) history.push("/auth/login");
+
     if (checkDisLike === false) {
       await LikeApi.disLikeQuestion(idQuestion);
       setQuestionDetail({
@@ -97,9 +101,11 @@ const QuestionsDetail = () => {
 
   /////////
   const arrBookmark = questionDetail?.data?.bookmarks;
-  const checkBookmark = arrBookmark.some((a) => a === profile._id);
+  const checkBookmark = arrBookmark.some((a) => a === profile?._id);
   const handleBookmark = async () => {
     setRender(true);
+    if (token === null) history.push("/auth/login");
+
     if (checkBookmark === false) {
       await BookmarkApi.addBookmarkQuestion(idQuestion);
       setQuestionDetail({
@@ -117,6 +123,8 @@ const QuestionsDetail = () => {
 
   ////////
   const handleFollow = async () => {
+    if (token === null) history.push("/auth/login");
+
     if (user.data.isFollowing) {
       setRender(true);
       await FollowApi.unFollow(user.data.username);
@@ -137,9 +145,22 @@ const QuestionsDetail = () => {
       });
     }
   };
-  const shareUrl = "https://www.npmjs.com/package/react-share";
-  // console.log(window.location.href);
-  // console.log(user);
+  const url = window.location.href;
+
+  const handelCopy = () => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "text");
+
+    input.setAttribute("value", url);
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand("copy");
+    document.body.removeChild(input);
+    ////////
+    const copy = true;
+    setCopyLink(copy);
+  };
+
   return (
     <>
       {/* {postDetail && (
@@ -190,8 +211,17 @@ const QuestionsDetail = () => {
                       - @{questionDetail?.data?.createBy?.username}
                     </span>
                     <span>
-                      <button className="mt-1 sm:mt-0 ml-2 border rounded-[3px] border-blue-500 text-[12px] text-blue-500 px-[5px] py-[1px] hover:text-white hover:bg-blue-500">
-                        + Theo dõi
+                      <button
+                        onClick={() => handleFollow()}
+                        className={
+                          user?.data?.isFollowing
+                            ? "mt-1 sm:mt-0 ml-2 border rounded-[3px] border-blue-500 text-[12px] px-[5px] py-[1px] text-white bg-blue-500"
+                            : "mt-1 sm:mt-0 ml-2 border rounded-[3px] border-blue-500 text-[12px] text-blue-500 px-[5px] py-[1px] hover:text-white hover:bg-blue-500"
+                        }
+                      >
+                        {user?.data?.isFollowing
+                          ? "- Đã theo dõi"
+                          : "+ Theo dõi"}
                       </button>
                     </span>
                   </p>
@@ -241,9 +271,18 @@ const QuestionsDetail = () => {
                       <Icon.Flag className="fill-current w-[16px]  mr-[5px]" />
                       Báo cáo
                     </li>
-                    <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
+                    <li
+                      onClick={() => handelCopy()}
+                      className={
+                        copyLink
+                          ? "flex items-center cursor-pointer mt-1 bg-blue-100 py-1 px-[10px] text-blue-500"
+                          : "flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500"
+                      }
+                    >
                       <Icon.ExternaLink className="fill-current w-[20px] mr-[5px]" />
-                      Sao chép link câu hỏi
+                      {copyLink
+                        ? "Đã sao chép link câu hỏi"
+                        : "Sao chép link câu hỏi"}
                     </li>
                     {questionDetail?.data?.createBy?.username ===
                     profile?.username ? (
@@ -358,7 +397,7 @@ const QuestionsDetail = () => {
                       <ul className=" text-[14px] ">
                         <li className=" text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
                           <FacebookShareButton
-                            url={shareUrl}
+                            url={url}
                             className="flex items-center"
                           >
                             <Icon.Facebook className="fill-current w-[12px] mr-[5px] " />
@@ -367,7 +406,7 @@ const QuestionsDetail = () => {
                         </li>
                         <li className="text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
                           <TwitterShareButton
-                            url={shareUrl}
+                            url={url}
                             className="flex items-center"
                           >
                             <Icon.Twitter className="fill-current w-[15px] mr-[5px]" />
@@ -376,7 +415,7 @@ const QuestionsDetail = () => {
                         </li>
                         <li className=" text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
                           <EmailShareButton
-                            url={shareUrl}
+                            url={url}
                             className="flex items-center"
                           >
                             <Icon.Email className="fill-current w-[12px] mr-[5px]" />

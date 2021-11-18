@@ -30,11 +30,15 @@ const BookmarkApi = {
   delBookmarkQuestion(shortId) {
     const token = localStorage.getItem("_token_");
     const url = `/question/bookmark/${shortId}`;
-    return AxiosClient.delete(url, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+    return AxiosClient.delete(
+      url,
+      // { shortId: shortId },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
   },
 };
 

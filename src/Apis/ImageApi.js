@@ -1,10 +1,10 @@
 import AxiosClient from "./AxiosClient";
+const token = localStorage.getItem("_token_");
 
 const ImageApi = {
-  uploadImage(data) {
-    const token = localStorage.getItem("_token_");
+  addImage(data) {
     const url = `/picture`;
-    return AxiosClient.post(url, {
+    return AxiosClient.post(url, data, {
       headers: {
         authorization: `Bearer ${token}`,
       },

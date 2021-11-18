@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
 import CreatetableSelect from "react-select/creatable";
-// import { useForm } from "react-hook-form";
 import makeAnimated from "react-select/animated";
-import QuillReact from "src/Helpers/QuillReact";
+// import QuillReact from "src/Helpers/QuillReact";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { Icon } from "src/Components/Icon";
 import TagApi from "src/Apis/TagApi";
 import PostApi from "src/Apis/PostApi";
+import { regex } from "src/Constants/";
+import ImageApi from "src/Apis/ImageApi";
 const PostsCreate = () => {
-  // const {register, handleSubmid, formState: { error }} = useForm();
   const [title, setTitle] = useState();
   const [tag, setTag] = useState();
   const [content, setContent] = useState();
   const [boxBtn, setBoxBtn] = useState();
   const [taged, setTaged] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const animatedComponents = makeAnimated();
   ////////
   useEffect(() => {
     const listTags = async () => {
@@ -41,24 +46,83 @@ const PostsCreate = () => {
   ///////
   const Content = (e) => {
     setContent(e);
+    // console.log(e);
   };
 
-  ///react-select
-  const animatedComponents = makeAnimated();
-  const AnimatedMulti = () => {
-    return (
-      <CreatetableSelect
-        closeMenuOnSelect={false}
-        components={animatedComponents}
-        isMulti
-        options={tag}
-        placeholder={"Gắn thẻ bài viết "}
-        onChange={(e) => tagItem(e)}
-      />
-    );
+  //////////////////////////
+
+  const showModal = () => {
+    setIsModalVisible(true);
   };
-  //
-  const OnSubmit1 = async () => {
+  const imageHandler = (a) => {
+    showModal();
+  };
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const onUploadImage = (e) => {
+    var formData = new FormData();
+    formData.append("image", e.target.files[0]);
+
+    const CallApi = async () => {
+      // try {
+      //   const { data } = await ImageApi.addImage(formData);
+      //   console.log(data);
+      // } catch (error) {
+      //   console.log(error);
+      // }
+      const token = localStorage.getItem("_token_");
+      fetch("http://localhost:4000/api/picture", {
+        method: "POST",
+        headers: { Authorization: "Bearer " + token },
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const url = data.data.photo.photoUrl;
+          console.log(url);
+          // setUrl(url)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    CallApi();
+  };
+  const modules = {
+    toolbar: {
+      container: [
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        ["bold", "italic", "underline"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        [{ align: [] }],
+        ["link", "image"],
+        ["clean"],
+        [{ color: [] }],
+      ],
+      handlers: {
+        image: imageHandler,
+      },
+    },
+  };
+
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+    "image",
+  ];
+
+  ///react-select
+  const OnSubmit1 = async (data) => {
     try {
       let data = {
         title: title,
@@ -77,7 +141,7 @@ const PostsCreate = () => {
       let data = {
         title: title,
         tagsId: taged,
-        content: content,
+        // content: content,
         isDraft: true,
       };
       console.table(data);
@@ -96,64 +160,104 @@ const PostsCreate = () => {
           placeholder="Tiêu đề bài viết..."
           onChange={(e) => setTitle(e.target.value)}
         />
+        {/* <span className="text-red-500 text-[12px]">
+            {errors?.title && errors?.title?.message}
+          </span> */}
       </div>
       <div className="mt-[20px] grid grid-cols-1  lg:grid-cols-[3fr,1fr] gap-5">
-        {AnimatedMulti()}
+        <div className="">
+          <CreatetableSelect
+            closeMenuOnSelect={false}
+            components={animatedComponents}
+            isMulti
+            options={tag}
+            placeholder={"Gắn thẻ bài viết "}
+            onChange={(e) => tagItem(e)}
+          />
+          {/* <span className="text-red-500 text-[12px]">
+              {errors?.title && errors?.title?.message}
+            </span> */}
+        </div>
 
         <div className="grid  grid-cols-[5fr,2fr] gap-3">
-          <div className="relative">
-            <button
-              className={
-                boxBtn
-                  ? "w-full justify-center bg-blue-500 text-white px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center"
-                  : " w-full justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
-              }
-              onClick={() => setBoxBtn(!boxBtn)}
-            >
-              <Icon.Pen className="fill-current w-[13px]" />
-              <span className="text-[12x] md:text-[16x] ml-1">
-                Xuất bản bài viết
-              </span>
-            </button>
-            <ul
-              className={
-                boxBtn
-                  ? "absolute z-10 text-center w-full mt-[10px] box_btn bg-white top-full left-0 rounded-[3px]"
-                  : "hidden"
-              }
-            >
-              <li
-                className="py-3 px-3 text-[12x] flex justify-center items-center md:text-[16x] text-gray-600 cursor-pointer border-b border-gray-100 hover:bg-blue-100"
-                onClick={() => OnSubmit1()}
-              >
-                <Icon.HeartFilled className="fill-current w-[13px]" />
-                <span className="ml-2">Lưu thành bản nháp</span>
-              </li>
-              <li
-                className="py-3 px-3 text-[12x] md:text-[16x] justify-center items-center text-gray-600 cursor-pointer hover:bg-blue-100 flex"
-                onClick={() => OnSubmit2()}
+          <div className="m-0">
+            <div className="relative">
+              <button
+                className={
+                  boxBtn
+                    ? "relative w-full justify-center bg-blue-500 text-white px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center"
+                    : "relative w-full justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
+                }
+                onClick={() => setBoxBtn(!boxBtn)}
               >
                 <Icon.Pen className="fill-current w-[13px]" />
-                <span className="ml-2"> Xuất bản bài ngay   </span>
-              </li>
-            </ul>
+                <span className="text-[12x] md:text-[16x] ml-1">
+                  Xuất bản bài viết
+                </span>
+              </button>
+              <ul
+                className={
+                  boxBtn
+                    ? "absolute z-10 text-center w-full mt-[10px] box_btn bg-white top-full left-0 rounded-[3px]"
+                    : "hidden"
+                }
+              >
+                <li
+                  className="py-3 px-3 text-[12x] flex justify-center items-center md:text-[16x] text-gray-600 cursor-pointer border-b border-gray-100 hover:bg-blue-100"
+                  onClick={() => OnSubmit1()}
+                >
+                  <Icon.HeartFilled className="fill-current w-[13px]" />
+                  <span className="ml-2">Lưu thành bản nháp</span>
+                </li>
+                <li
+                  className="py-3 px-3 text-[12x] md:text-[16x] justify-center items-center text-gray-600 cursor-pointer hover:bg-blue-100 flex"
+                  onClick={() => OnSubmit2()}
+                >
+                  <Icon.Pen className="fill-current w-[13px]" />
+                  <span className="ml-2"> Xuất bản bài ngay   </span>
+                </li>
+              </ul>
+            </div>
           </div>
-          <button className="justify-center bg-white text-red-500 px-3  py-[8px] border border-red-500 rounded-[3px] flex items-center hover:bg-red-500 hover:text-white">
-            <Icon.Close className="fill-current w-[13px]" />
-            <span className="text-[12x] md:text-[16x] ml-1">Hủy</span>
-          </button>
+          <div className="m-0">
+            <button className="w-full justify-center bg-white text-red-500 px-3  py-[8px] border border-red-500 rounded-[3px] flex items-center hover:bg-red-500 hover:text-white">
+              <Icon.Close className="fill-current w-[13px]" />
+              <span className="text-[12x] md:text-[16x] ml-1">Hủy</span>
+            </button>
+          </div>
         </div>
       </div>
       <div className="mt-[20px] mb-[40px]">
-        <QuillReact Content={Content} />
-        {/* <div className="fixed top-0 left-0 hidden right-0 bottom-0 bg-gray-500 bg-opacity-70 z-[999999] overflow-auto">
+        {/* <QuillReact content={Content} /> */}
+        <div className="text-editor">
+          <ReactQuill
+            theme="snow"
+            modules={modules}
+            formats={formats}
+            onChange={Content}
+          ></ReactQuill>
+        </div>
+        <div
+          className={
+            isModalVisible
+              ? "fixed top-0 left-0 right-0 bottom-0 bg-gray-500 bg-opacity-70 z-[999999] overflow-auto"
+              : "hidden"
+          }
+        >
           <div className="max-w-[650px] mx-[15px] mt-[15vh] sm:mx-auto mb-[50px] rounded-[2px] bg-white relative px-[15px]">
-            <button className="absolute top-[18px] right-[15px] ">
+            <button
+              onClick={() => handleCancel()}
+              className="absolute top-[18px] right-[15px] "
+            >
               <Icon.Close className="fill-current w-[11px] text-gray-500 hover:text-gray-700 " />
             </button>
             <p className="text-[20px] pt-[10px] text-gray-700">Thêm ảnh</p>
             <div className="mt-[25px] text-[14px] text-gray-700 ">
-              <div className="cursor-pointer border-dashed border-[1px] border-gray-400">
+              <div
+                // onClick={() => onUploadImage()}
+                className="cursor-pointer border-dashed border-[1px] border-gray-400"
+              >
+                <input type="file" onChange={(e) => onUploadImage(e)} />
                 <div className="leading-[12px] pt-[25px] pb-[30px] sm:pb-[50px]">
                   <button className=" text-center block w-full ">
                     <Icon.UpLoad className="fill-current w-[45px] text-gray-600 mx-auto" />
@@ -220,12 +324,15 @@ const PostsCreate = () => {
               </div>
             </div>
             <div className="pt-[30px] pb-[15px] flex justify-end">
-              <button className="border border-gray-400 text-gray-500 hover:bg-blue-50  hover:text-blue-400 rounded-[3px] px-[20px] py-[5px]">
+              <button
+                onClick={() => handleCancel()}
+                className="border border-gray-400 text-gray-500 hover:bg-blue-50  hover:text-blue-400 rounded-[3px] px-[20px] py-[5px]"
+              >
                 Hủy
               </button>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );

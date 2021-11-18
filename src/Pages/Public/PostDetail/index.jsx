@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "src/Components/Icon";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import PostsNew from "../Commons/PostNew";
@@ -15,16 +15,18 @@ import {
 import LikeApi from "src/Apis/LikeApi";
 import BookmarkApi from "src/Apis/BookmarkApi";
 import FollowApi from "src/Apis/FollowApi";
-
+import Loading from "src/Components/Loading";
 const PostsDetail = () => {
   const shortId = useParams();
   const idParam = shortId.id;
   const [postmenu, setPostmenu] = useState(false);
   const [postShare, setpostShare] = useState(false);
+  const [copyLink, setCopyLink] = useState(false);
   const [postDetail, setPostDetail] = useState([]);
   const { profile } = useSelector((state) => state.Auth);
   const [render, setRender] = useState(false);
-
+  const history = useHistory();
+  const token = localStorage.getItem("_token_");
   const id = shortId.id.split("-")[shortId.id.split("-").length - 1];
   useEffect(() => {
     setRender(false);
@@ -43,6 +45,8 @@ const PostsDetail = () => {
 
   const handleLike = async () => {
     setRender(true);
+    if (token === null) history.push("/auth/login");
+
     if (postDetail?.data?.isLike) {
       await LikeApi.likePost(id);
       setPostDetail({
@@ -57,9 +61,10 @@ const PostsDetail = () => {
       });
     }
   };
-
   const handleDisLike = async () => {
     setRender(true);
+    if (token === null) history.push("/auth/login");
+
     if (postDetail?.data?.isDislike) {
       await LikeApi.disLikePost(id);
       setPostDetail({
@@ -76,6 +81,8 @@ const PostsDetail = () => {
   };
 
   const handleBookmark = async () => {
+    if (token === null) history.push("/auth/login");
+
     if (postDetail?.data?.isBookmark) {
       await BookmarkApi.addBookmarkPost(id);
       setPostDetail({
@@ -93,6 +100,8 @@ const PostsDetail = () => {
 
   const username = postDetail?.data?.createBy?.username;
   const handleFollow = async () => {
+    if (token === null) history.push("/auth/login");
+
     if (postDetail?.data?.createBy?.isFollowing) {
       await FollowApi.unFollow(username);
       setPostDetail({
@@ -114,7 +123,21 @@ const PostsDetail = () => {
     }
   };
 
-  const shareUrl = "https://www.npmjs.com/package/react-share";
+  const url = window.location.href;
+  // console.log("url: ", url);
+  const handelCopy = () => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "text");
+
+    input.setAttribute("value", url);
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand("copy");
+    document.body.removeChild(input);
+    ////////
+    const copy = true;
+    setCopyLink(copy);
+  };
   // console.log(window.location.href);
   return (
     <>
@@ -169,8 +192,17 @@ const PostsDetail = () => {
                       - @{postDetail?.data?.createBy?.username}
                     </span>
                     <span>
-                      <button className="mt-1 sm:mt-0 ml-2 border rounded-[3px] border-blue-500 text-[12px] text-blue-500 px-[5px] py-[1px] hover:text-white hover:bg-blue-500">
-                        + Theo dõi
+                      <button
+                        onClick={() => handleFollow()}
+                        className={
+                          postDetail?.data?.createBy?.isFollowing
+                            ? "mt-1 sm:mt-0 ml-2 border rounded-[3px] border-blue-500 text-[12px]  px-[5px] py-[1px] text-white bg-blue-500"
+                            : "mt-1 sm:mt-0 ml-2 border rounded-[3px] border-blue-500 text-[12px] text-blue-500 px-[5px] py-[1px] hover:text-white hover:bg-blue-500"
+                        }
+                      >
+                        {postDetail?.data?.createBy?.isFollowing
+                          ? "- Đã theo dõi"
+                          : "+ Theo dõi"}
                       </button>
                     </span>
                   </p>
@@ -210,21 +242,25 @@ const PostsDetail = () => {
                 >
                   <Icon.DotsVertical className=" w-[13px] " />
                 </button>
-                <div
-                  className={
-                    postmenu
-                      ? "post__menu bg-white"
-                      : "post__menu bg-white hidden"
-                  }
-                >
+                <div className={postmenu ? "post__menu  bg-white" : " hidden"}>
                   <ul className="relative text-[14px] py-[5px]">
                     <li className="flex items-center cursor-pointer text-gray-700 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
                       <Icon.Flag className="fill-current w-[16px]  mr-[5px]" />
                       Báo cáo
                     </li>
-                    <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
+
+                    <li
+                      onClick={() => handelCopy()}
+                      className={
+                        copyLink
+                          ? "flex items-center cursor-pointer mt-1 bg-blue-100 py-1 px-[10px] text-blue-500"
+                          : "flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500"
+                      }
+                    >
                       <Icon.ExternaLink className="fill-current w-[20px] mr-[5px]" />
-                      Sao chép link bài viết
+                      {copyLink
+                        ? "Đã sao chép link bài viết"
+                        : "Sao chép link bài viết"}
                     </li>
                     {postDetail?.data?.createBy?.username ===
                     profile?.username ? (
@@ -329,14 +365,14 @@ const PostsDetail = () => {
                   <div
                     className={
                       postShare
-                        ? "post__share bg-white py-[5px]"
-                        : "post__share bg-white py-[5px] hidden"
+                        ? "post__share right-0 sm:left-0 bg-white py-[5px]"
+                        : " hidden"
                     }
                   >
                     <ul className=" text-[14px] ">
                       <li className=" text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
                         <FacebookShareButton
-                          url={shareUrl}
+                          url={url}
                           className="flex items-center"
                         >
                           <Icon.Facebook className="fill-current w-[12px] mr-[5px] " />
@@ -345,7 +381,7 @@ const PostsDetail = () => {
                       </li>
                       <li className="text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
                         <TwitterShareButton
-                          url={shareUrl}
+                          url={url}
                           className="flex items-center"
                         >
                           <Icon.Twitter className="fill-current w-[15px] mr-[5px]" />
@@ -354,7 +390,7 @@ const PostsDetail = () => {
                       </li>
                       <li className=" text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
                         <EmailShareButton
-                          url={shareUrl}
+                          url={url}
                           className="flex items-center"
                         >
                           <Icon.Email className="fill-current w-[12px] mr-[5px]" />

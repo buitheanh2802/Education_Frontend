@@ -17,7 +17,7 @@ export const path = {
   QUESTIONS: "/questions",
   QUESTION_ID: "/question/:slug-:id",
   QUESTIONS_CREATE: "/questions/create",
-  QUESTIONS_FLOW: "/questions/flow",
+  QUESTIONS_FLOW: "/questions/follow",
   QUESTIONS_BOOK_MARK: "/questions/bookmark",
 
   // post
