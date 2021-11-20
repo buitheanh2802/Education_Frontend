@@ -8,17 +8,15 @@ import { path } from '../Constants'
 
 const AdminLayout = () => {
     return (
-        <>
-            <div className="h-screen fixed top-0 left-0 bottom-0 w-[300px] bg-gray-200">
+        <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl h-screen overflow-hidden relative">
+            <div className="flex items-start justify-between">
                 <SlideBar />
+                <div className="flex flex-col w-full pl-0 md:p-4 md:space-y-4">
+                    <Header />
+                </div>
+
             </div>
-            <div className="ml-[300px]">
-                <Header />
-                <Switch>
-                    <PrivateRouter exact path={path.ADMIN} component={Dashboard} />
-                </Switch>
-            </div>
-        </>
+        </div>
     )
 }
 
