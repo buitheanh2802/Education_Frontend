@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch } from 'react-router'
+import { Route, Switch } from 'react-router'
 import Dashboard from 'src/Pages/Private/Dashboard'
 import SlideBar from 'src/Pages/Private/Commons/SlideBar'
 import Header from 'src/Pages/Private/Commons/Header'
@@ -13,6 +13,13 @@ const AdminLayout = () => {
                 <SlideBar />
                 <div className="flex flex-col w-full pl-0 md:p-4 md:space-y-4">
                     <Header />
+                    <div className="overflow-auto h-screen pb-24 pt-2 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
+                        <div className="flex flex-col flex-wrap sm:flex-row ">
+                            <Switch>
+                                <PrivateRouter exact path={path.ADMIN} component={Dashboard} />
+                            </Switch>
+                        </div>
+                    </div>
                 </div>
 
             </div>
