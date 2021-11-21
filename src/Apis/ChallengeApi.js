@@ -20,9 +20,17 @@ const ChallengeApi = {
         })
     },
 
-    async update(data) {
-        const url = `/challenges/${data?._id}`;
+    async update(data, id) {
+        const url = `/challenges/${id}`;
         return AxiosClient.put(url, data, {
+            headers: {
+                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
+    },
+    async addSubmit(id) {
+        const url = `/challenges/submited-user/${id}`;
+        return AxiosClient.post(url, {}, {
             headers: {
                 Authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }

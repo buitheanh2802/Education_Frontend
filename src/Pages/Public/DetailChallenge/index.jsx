@@ -7,6 +7,7 @@ import Navigation from '../Commons/Navigation';
 import Skeleton from 'react-loading-skeleton'
 import { Icon } from 'src/Components/Icon';
 import { OpenWindownTab } from 'src/Helpers/';
+import ChallengeApi from 'src/Apis/ChallengeApi';
 
 const DetailChallenge = () => {
     const dispatch = useDispatch();
@@ -31,6 +32,8 @@ const DetailChallenge = () => {
         event: async () => {
             OpenWindownTab(challenge?.resourceUrl);
             // phần này call api xác nhận đã tải bài tập
+            await ChallengeApi.addSubmit(id);
+
         }
     }
 
