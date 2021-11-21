@@ -5,6 +5,7 @@ import SlideBar from 'src/Pages/Private/Commons/SlideBar'
 import Header from 'src/Pages/Private/Commons/Header'
 import PrivateRouter from 'src/Routes/PrivateRouter'
 import { path } from '../Constants'
+import Exercise from 'src/Pages/Private/Exercise'
 
 const AdminLayout = () => {
     return (
@@ -17,6 +18,7 @@ const AdminLayout = () => {
                         <div className="flex flex-col flex-wrap sm:flex-row ">
                             <Switch>
                                 <PrivateRouter exact path={path.ADMIN} component={Dashboard} />
+                                <PrivateRouter path="/admin/exercise" component={Exercise} />
                             </Switch>
                         </div>
                     </div>
