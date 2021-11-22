@@ -6,9 +6,13 @@ import { Icon } from "../../../Components/Icon";
 import TagAPi from "src/Apis/TagApi";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";  
+import {useDispatch } from "react-redux"
+import { setLoading } from "src/Redux/Slices/Loading.slice";
+import Loading from "src/Components/Loading";
 
 const TagsPage = () => {
   
+  const [loading,setLoading] = useState(true);
   const location = useLocation();
 
   const pathName = [
@@ -56,6 +60,9 @@ const TagsPage = () => {
     },
   ];
   const [tags, setTag] = useState([]);
+
+ 
+
   let endPoint;
   useEffect(() => {
     const tag = async () => {
@@ -67,8 +74,11 @@ const TagsPage = () => {
         } else {
           endPoint= "/following";
         }
-        const { data: tags } = await TagAPi.getAll(endPoint);
-        setTag(location.pathname === '/tags/popular' ? tags.data : tags.data.models);
+        const {data: tags}  = await TagAPi.getAll(endPoint);
+        // if(tags.status){
+          setLoading(false);
+           setTag(location.pathname === '/tags/popular' ? tags.data : tags.data.models);
+        // }
       } catch (error) {
         console.log(error);
       }
@@ -77,7 +87,13 @@ const TagsPage = () => {
   }, [location.pathname]);
   return (
     <div className="container mx-auto mt-[80px]  ">
-      <Navigation path={pathName} button={button} />
+      {loading && (
+        <Loading className="w-[20px] items-center"/>
+      )}
+      
+      {!loading && (
+        <>
+        <Navigation path={pathName} button={button} />
       <div className="flex justify-between mt-[15px]  gap-[30px] ">
         <div className="flex justify-between  max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px]  sm:gap-x-[60px]  gap-y-[20px] mb-[30px] pb-[45px] w-full  py-[15px] bg-white shadow rounded  ">
           <div className="grid grid-cols-1 gap-[20px] 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
@@ -149,6 +165,8 @@ const TagsPage = () => {
           <FeaturedAuthor authors={authors} />
         </div>
       </div>
+        </>
+      )}
     </div>
   );
 };
