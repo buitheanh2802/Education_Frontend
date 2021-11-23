@@ -7,7 +7,11 @@ const TagAPi = {
     },
     getDetail(tagname){
         const url = `/tag/${tagname}`;
-        return AxiosClient.get(url);
+        return AxiosClient.get(url,  {
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        });
     },
     getTagPopular() {
         const url = `/tag/popular`;
