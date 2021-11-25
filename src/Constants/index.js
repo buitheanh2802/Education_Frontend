@@ -54,7 +54,7 @@ export const path = {
   // Admin
   ADMIN: '/manager',
   // Phê duyệt bài viết
-  PHE_DUYET_BAI_VIET : '/publish_post',
+  PHE_DUYET_BAI_VIET : '/manager/publish_post',
   //contact
   CONTACT: "/contact",
 

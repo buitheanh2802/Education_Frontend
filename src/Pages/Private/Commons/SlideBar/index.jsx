@@ -35,7 +35,7 @@ const SlideBar = () => {
                     </NavLink>
                     <NavLink
                         activeClassName="text-blue-500 bg-gradient-to-r from-white to-blue-100 border-r-4 border-blue-500 dark:from-gray-700 dark:to-gray-800"
-                        className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" to="/admin/exercise">
+                        className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" to="/manager/exercise">
                         <span className="text-left">
                             <Icon.AdminExercise />
                         </span>

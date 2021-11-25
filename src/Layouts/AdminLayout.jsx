@@ -18,9 +18,9 @@ const AdminLayout = () => {
                     <div className="overflow-auto h-screen pb-24 pt-2 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
                         <div className="flex flex-col flex-wrap sm:flex-row ">
                             <Switch>
+                                <PrivateRouter path={path.PHE_DUYET_BAI_VIET} component={PheDuyetBaiViet} />
+                                <PrivateRouter path="/exercise" component={Exercise} />
                                 <PrivateRouter exact path={path.ADMIN} component={Dashboard} />
-                                <PrivateRouter exact path={path.PHE_DUYET_BAI_VIET} component={PheDuyetBaiViet} />
-                                <PrivateRouter path="/admin/exercise" component={Exercise} />
                             </Switch>
                         </div>
                     </div>

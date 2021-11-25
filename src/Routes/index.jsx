@@ -6,7 +6,7 @@ import {
 import { path } from '../Constants';
 import SiteLayout from '../Layouts/SiteLayout';
 import PublicRouter from './PublicRouter';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LocalStorage from 'src/Helpers/Storage';
 import { ActionGetProfile } from 'src/Redux/Actions/Auth.action';
 import queryParam from 'src/Helpers/QueryParams'
@@ -35,11 +35,11 @@ const RootRoute = () => {
         <Loading className="w-[40px] h-[40px] fill-current text-gray-500" /></div>
     return (
         <Router>
-             {loading && <Loading />  }
+            {loading && <Loading />}
             {/* <AlertMessage /> */}
             <Switch>
-                <PublicRouter path={path.AUTH} component={AuthLayout} />
                 <PrivateRouter path={path.ADMIN} component={AdminLayout} />
+                <PublicRouter path={path.AUTH} component={AuthLayout} />
                 <PublicRouter path={path.HOME} component={SiteLayout} />
             </Switch>
         </Router>
