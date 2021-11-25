@@ -52,7 +52,9 @@ export const path = {
   NOT_FOUND: '/not-found',
 
   // Admin
-  ADMIN: '/admin',
+  ADMIN: '/manager',
+  // Phê duyệt bài viết
+  PHE_DUYET_BAI_VIET : '/publish_post',
   //contact
   CONTACT: "/contact",
 

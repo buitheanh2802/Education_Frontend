@@ -631,30 +631,6 @@ video {
   max-width: calc(100% - 30px);
 }
 
-@media (min-width: 768px) {
-  .container {
-    max-width: calc(100% - 70px);
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 980px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1200px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1480px;
-  }
-}
-
 .pointer-events-none {
   pointer-events: none;
 }
@@ -4256,6 +4232,10 @@ body {
 
   .md\:p-4 {
     padding: 1rem;
+  }
+
+  .md\:p-2 {
+    padding: 0.5rem;
   }
 
   .md\:px-3 {

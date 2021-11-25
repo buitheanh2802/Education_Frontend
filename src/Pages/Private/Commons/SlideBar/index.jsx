@@ -5,7 +5,7 @@ import { path } from 'src/Constants/'
 
 const SlideBar = () => {
     return (
-        <div className="h-screen hidden lg:block my-4 ml-4 shadow-lg relative w-80">
+        <div className="h-screen hidden lg:block shadow-lg relative w-80">
             <div className="bg-white h-full rounded-2xl dark:bg-gray-700">
                 <Link to={path.HOME} className="flex items-center pt-6 px-4">
                     <Icon.Logo className="sm:w-[30px] w-[24px]" />
@@ -41,6 +41,16 @@ const SlideBar = () => {
                         </span>
                         <span className="mx-4 text-sm font-normal">
                             Quản trị bài tập
+                        </span>
+                    </NavLink>
+                    <NavLink
+                        activeClassName="text-blue-500 bg-gradient-to-r from-white to-blue-100 border-r-4 border-blue-500 dark:from-gray-700 dark:to-gray-800"
+                        className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" to="/manager/publish_post">
+                        <span className="text-left">
+                            <Icon.AdminExercise />
+                        </span>
+                        <span className="mx-4 text-sm font-normal">
+                            Phê duyệt bài viết
                         </span>
                     </NavLink>
                 </nav>
