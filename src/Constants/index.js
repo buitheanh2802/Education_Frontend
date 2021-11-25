@@ -9,70 +9,70 @@ export const Images = {
 }
 
 export const path = {
-     // Website
-     HOME: '/',
-     SETTING: '/setting',
- 
-     PROFILE_ME: '/profile/me',
-     PROFILE_USER: '/profile/:id',
- 
-     //Profile_user
-     USER_ID: '/user/:username',
-     USER_POST: '/user/:username/post',
-     USER_FOLLOWER: '/user/:username/follower',
-     USER_FOLLOWING: '/user/:username/following',
-     USER_BOOKMARK: '/user/:username/bookmark/post',
-     USER_TAG:'/user/:username/tag',
- 
-     // questions
-     QUESTIONS: '/questions',
-     QUESTIONS_CREATE: '/questions/create',
-     QUESTIONS_FLOW: '/questions/flow',
-     QUESTIONS_BOOK_MARK: '/questions/bookmark',
- 
-     // post
-     POSTS: '/posts',
-     POSTS_ID: '/posts/:id',
-     POSTS_CREATE: '/posts/create',
-     POSTS_POPULAR: '/posts/popular',
-     POSTS_FLOW: '/posts/flow',
-     POSTS_BOOK_MARK: '/posts/bookmark',
- 
-     // tags
-     TAGS: '/tags',
-     TAGS_ID: '/tags/:slug',
-     TAGS_FLOW: '/tags/follow',
-     TAGS_POPULAR : '/tags/popular',
-     // auth
-     AUTH: '/auth',
-     LOGIN: '/auth/login',
-     REGISTER: '/auth/register',
- 
-     // error
-     NOT_FOUND: '/not-found',
- 
-     // Admin
-     ADMIN: '/admin',
-     //contact
-     CONTACT: "/contact",
- 
-     //HEAD
-     // questions
-     QUESTIONS_DETAIL: "/questionsDetail",
- 
-     // post
-     POSTS_DETAIL: "/postsDetail",
-     // POSTS_CREATE: "/postsCreate",
- 
-     //profile
-     PROFILE: "/profile/:username",
-     EDIT_PROFILE: "/profile/:id/edit",
-     PROFILE_PERSONAL: "/profile/:id/edit/personal",
-     PROFILE_CONTACT: "/profile/:id/edit/contact",
-     PROFILE_PASSWORD: "/profile/:id/edit/password",
- 
-     //intro
-     INTRO: "/intro",
+    // Website
+    HOME: '/',
+    SETTING: '/setting',
+
+    PROFILE_ME: '/profile/me',
+    PROFILE_USER: '/profile/:id',
+
+    //Profile_user
+    USER_ID: '/user/:username',
+    USER_POST: '/user/:username/post',
+    USER_FOLLOWER: '/user/:username/follower',
+    USER_FOLLOWING: '/user/:username/following',
+    USER_BOOKMARK: '/user/:username/bookmark/post',
+    USER_TAG: '/user/:username/tag',
+
+    // questions
+    QUESTIONS: '/questions',
+    QUESTIONS_CREATE: '/questions/create',
+    QUESTIONS_FLOW: '/questions/flow',
+    QUESTIONS_BOOK_MARK: '/questions/bookmark',
+
+    // post
+    POSTS: '/posts',
+    POSTS_ID: '/posts/:id',
+    POSTS_CREATE: '/posts/create',
+    POSTS_POPULAR: '/posts/popular',
+    POSTS_FLOW: '/posts/flow',
+    POSTS_BOOK_MARK: '/posts/bookmark',
+
+    // tags
+    TAGS: '/tags',
+    TAGS_ID: '/tags/:slug',
+    TAGS_FLOW: '/tags/follow',
+    TAGS_POPULAR: '/tags/popular',
+    // auth
+    AUTH: '/auth',
+    LOGIN: '/auth/login',
+    REGISTER: '/auth/register',
+
+    // error
+    NOT_FOUND: '/not-found',
+
+    // Admin
+    ADMIN: '/admin',
+    //contact
+    CONTACT: "/contact",
+
+    //HEAD
+    // questions
+    QUESTIONS_DETAIL: "/questionsDetail",
+
+    // post
+    POSTS_DETAIL: "/postsDetail",
+    // POSTS_CREATE: "/postsCreate",
+
+    //profile
+    PROFILE: "/profile/:username",
+    EDIT_PROFILE: "/profile/:id/edit",
+    PROFILE_PERSONAL: "/profile/:id/edit/personal",
+    PROFILE_CONTACT: "/profile/:id/edit/contact",
+    PROFILE_PASSWORD: "/profile/:id/edit/password",
+
+    //intro
+    INTRO: "/intro",
     // Website
 
     //Challenge
@@ -85,7 +85,8 @@ export const path = {
     //Quiz
     QUIZ: '/quiz',
     QUIZ_CREATE: '/quiz/create',
-}
+    //HEAD
+};
 
 export const regex = {
     PASSWORD: {
