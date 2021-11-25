@@ -23,7 +23,6 @@ const AdminLayout = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     )
