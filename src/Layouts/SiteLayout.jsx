@@ -12,6 +12,7 @@ import TagsPage from "src/Pages/Public/TagsPage";
 import Userpage from "src/Pages/Public/UserPage";
 import Footer from "src/Pages/Public/Commons/Footer";
 import QuestionsDetail from "src/Pages/Public/QuestionsDetail";
+import QuestionsCreate from "src/Pages/Public/QuestionsCreate";
 
 const SiteLayout = () => {
   return (
@@ -20,6 +21,10 @@ const SiteLayout = () => {
       <Switch>
         <PublicRouter exact path={path.HOME} component={HomePage} />
         <PublicRouter path={path.POSTS_CREATE} component={PostsCreate} />
+        <PublicRouter
+          path={path.QUESTIONS_CREATE}
+          component={QuestionsCreate}
+        />
         <PublicRouter path={path.POSTS_ID} component={PostsDetail} />
         <PublicRouter path={path.QUESTION_ID} component={QuestionsDetail} />
         <PublicRouter path={path.POSTS} component={PostPage} />

@@ -63,7 +63,6 @@ const QuestionsPage = () => {
         } else {
           endPoint = "listbookmark";
         }
-        // const { data: questions } = await QuestionApi.getQuestion();
         const { data: questions } = await QuestionApi.getQuestion(endPoint);
         setQuestion(questions);
       } catch (error) {

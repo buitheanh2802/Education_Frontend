@@ -307,7 +307,7 @@ const QuestionsDetail = () => {
               <p className="flex items-center text-gray-500 ml-[10px]">
                 <Icon.Chat className="fill-current w-[13px] " />
                 <span className="text-[12px] sm:text-[14px] ml-1">
-                  {questionDetail?.data?.comments} bình luận
+                  {questionDetail?.data?.countComment} bình luận
                 </span>
               </p>
               <p className="flex items-center text-gray-500 ml-[10px]">

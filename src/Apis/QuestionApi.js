@@ -26,6 +26,14 @@ const QuestionApi = {
       },
     });
   },
+  add(data) {
+    const url = `/question`;
+    return AxiosClient.post(url, data, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  },
 };
 
 export default QuestionApi;
