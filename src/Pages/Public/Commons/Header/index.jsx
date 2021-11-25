@@ -1,30 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Icon } from 'src/Components/Icon';
-import { path } from 'src/Constants/';
-import Notification from './Components/Notification';
-import Auth from './Components/Auth';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { Icon } from "src/Components/Icon";
+import { path } from "src/Constants/";
+import Notification from "./Components/Notification";
+import Auth from "./Components/Auth";
 
 const Header = () => {
-    const { pathname } = useLocation();
-    const [active, isActive] = useState(false)
-    const [isMenu, setIsMenu] = useState(false);
-    const [isPopup, setIsPopup] = useState(false);
-    const [isNotification, setIsNotification] = useState(false);
-    const { profile } = useSelector(state => state.Auth);
+  const { pathname } = useLocation();
+  const [active, isActive] = useState(false);
+  const [isMenu, setIsMenu] = useState(false);
+  const [isPopup, setIsPopup] = useState(false);
+  const [isNotification, setIsNotification] = useState(false);
+  const { profile } = useSelector((state) => state.Auth);
 
-    useEffect(() => {
-        const fixedTop = () => window.pageYOffset > 300 ? isActive(true) : isActive(false);
+  useEffect(() => {
+    const fixedTop = () =>
+      window.pageYOffset > 300 ? isActive(true) : isActive(false);
 
-        if (pathname === path.HOME) return (() => {
-            fixedTop();
-            window.addEventListener('scroll', fixedTop)
-        })();
+    if (pathname === path.HOME)
+      return (() => {
+        fixedTop();
+        window.addEventListener("scroll", fixedTop);
+      })();
 
-        isActive(true);
-        window.addEventListener('scroll', () => isActive(true))
-    }, [pathname])
+    isActive(true);
+    window.addEventListener("scroll", () => isActive(true));
+  }, [pathname]);
 
     return (
         <>
@@ -115,4 +117,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Header;

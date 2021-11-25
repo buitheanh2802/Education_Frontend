@@ -1,21 +1,18 @@
 import AxiosClient from "./AxiosClient";
+
 const token = localStorage.getItem("_token_");
 
-const PostApi = {
-  getPost(endPoint) {
-    const url = `/post/${endPoint}`;
+const ImageApi = {
+  getImage() {
+    const url = `/picture`;
     return AxiosClient.get(url, {
       headers: {
         authorization: `Bearer ${token}`,
       },
     });
   },
-  get(id) {
-    const url = `/posts/${id}`;
-    return AxiosClient.get(url);
-  },
-  add(data) {
-    const url = `/post`;
+  addImage(data) {
+    const url = `/picture`;
     return AxiosClient.post(url, data, {
       headers: {
         authorization: `Bearer ${token}`,
@@ -24,4 +21,4 @@ const PostApi = {
   },
 };
 
-export default PostApi;
+export default ImageApi;

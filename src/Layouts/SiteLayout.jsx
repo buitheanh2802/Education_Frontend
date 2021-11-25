@@ -23,12 +23,13 @@ import PostsCreate from "src/Pages/Public/PostsCreate";
 // import IntroPage from "src/Pages/Public/IntroPage/IntroPage";
 // import ProfilePage from "src/Pages/Public/ProfilePage";
 // import EditProfile from "src/Pages/Public/EditProfile";
-import QuestionsDetail from "src/Pages/Public/QuestionsDetail";
 import Userpage from "src/Pages/Public/UserPage";
 import DetailTagPage from "src/Pages/Public/DetailTagPage";
 import IntroPage from "src/Pages/Public/IntroPage/IntroPage";
 import EditProfile from "src/Pages/Public/EditProfile";
 import ProfilePage from "src/Pages/Public/ProfilePage";
+import QuestionsDetail from "src/Pages/Public/QuestionsDetail";
+import QuestionsCreate from "src/Pages/Public/QuestionsCreate";
 
 const SiteLayout = () => {
   return (
@@ -38,7 +39,12 @@ const SiteLayout = () => {
         <PublicRouter exact path={path.TAGS_ID} component={DetailTagPage} />
         <PublicRouter exact path={path.HOME} component={HomePage} />
         <PublicRouter path={path.POSTS_CREATE} component={PostsCreate} />
+        <PublicRouter
+          path={path.QUESTIONS_CREATE}
+          component={QuestionsCreate}
+        />
         <PublicRouter path={path.POSTS_ID} component={PostsDetail} />
+        <PublicRouter path={path.QUESTION_ID} component={QuestionsDetail} />
         <PublicRouter path={path.POSTS} component={PostPage} />
         <PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
         <PublicRouter
