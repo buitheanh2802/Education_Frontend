@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Icon } from 'src/Components/Icon'
 
 const FeaturedTag = ({ tag, popTag }) => {
     return (
@@ -45,7 +44,7 @@ const FeaturedTag = ({ tag, popTag }) => {
                         {popTag?.data?.map((pop, index) => {
                             return (
                                 <div key={index}>
-                                    <Link className="inline-block md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[15px] xl:py-[5px] xl:text-[14px] hover:bg-gray-300 text-[#4A5568] bg-[#BEE3F8]">
+                                    <Link to={pop?.slug} className="inline-block md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[15px] xl:py-[5px] xl:text-[14px] hover:bg-gray-300 text-[#4A5568] bg-[#BEE3F8]">
                                         {pop?.name}
                                     </Link>
                                     <div className="text-center inline-block bg-[#2C5282] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[15px] xl:py-[5px] xl:text-[14px] text-[#fff] gap-[5px]">
