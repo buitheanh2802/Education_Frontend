@@ -305,6 +305,7 @@ const QuestionsCreate = () => {
             components={animatedComponents}
             isMulti
             options={tag}
+            // id={}
             placeholder={"Gắn thẻ câu hỏi "}
             onChange={(e) => tagItem(e)}
           />
