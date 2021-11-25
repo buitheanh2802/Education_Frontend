@@ -5,18 +5,25 @@ import { Icon } from "src/Components/Icon";
 import { Link } from "react-router-dom";
 import ProfileApi from "src/Apis/ProfileApi";
 import FollowApi from "src/Apis/FollowApi";
-
+import Loading from 'src/Components/Loading'
+import { useDispatch } from "react-redux";
+import { setLoading } from "src/Redux/Slices/Loading.slice";
 const ProfilePage = (props) => {
+  const dispatch = useDispatch();
   const [profile, setProfile] = useState([]);
   const username = props.match.params.username;
 
   const handleFollow = async () => {
+    dispatch(setLoading(true))
+
     if (profile?.data?.isFollowing) {
       await FollowApi.unFollow(username);
       setProfile({ ...profile, data: { ...profile.data, isFollowing: false } })
+      dispatch(setLoading(false))
     } else {
       await FollowApi.follow(username);
       setProfile({ ...profile, data: { ...profile.data, isFollowing: true } })
+      dispatch(setLoading(false))
     }
   }
 
@@ -24,7 +31,7 @@ const ProfilePage = (props) => {
     const profile = async () => {
       try {
         const { data: profile } = await ProfileApi.getUser(username);
-        console.log("pro", profile.data);
+        console.log('profile',profile)
         setProfile(profile);
       } catch (error) {
         console.log("Failed to get data", error.response);
@@ -105,9 +112,15 @@ const ProfilePage = (props) => {
                     </span>
                   </div>
                   <div className="mt-2 md:text-right">
-                    <button onClick={() => handleFollow()} className="bg-[#fff] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#BEE3F8] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
-                      {profile?.data?.isFollowing ? '- Bỏ theo dõi' : '+ Theo dõi'}
-                    </button>
+                    {profile?.data?.isFollowing ?
+                      <button onClick={() => handleFollow()} className="mt-[10px] bg-[#0d61c7] border border-[#0d61c7] hover:bg-[#fff] hover:text-[#0d61c7] text-[#fff] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
+                        - Bỏ theo dõi
+                      </button>
+                      : 
+                      <button onClick={() => handleFollow()} className="mt-[10px] bg-[#fff] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#BEE3F8] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
+                        + theo dõi
+                      </button>
+                    }      
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-4 xl:text-[15px] text-[12px] py-[15px]">

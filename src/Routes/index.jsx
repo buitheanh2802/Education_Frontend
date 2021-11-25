@@ -6,20 +6,20 @@ import {
 import { path } from '../Constants';
 import SiteLayout from '../Layouts/SiteLayout';
 import PublicRouter from './PublicRouter';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import LocalStorage from 'src/Helpers/Storage';
 import { ActionGetProfile } from 'src/Redux/Actions/Auth.action';
-import Loading from 'src/Components/Loading';
 import queryParam from 'src/Helpers/QueryParams'
 import AdminLayout from 'src/Layouts/AdminLayout';
 import PrivateRouter from './PrivateRouter';
 import AlertMessage from 'src/Components/AlertMessage';
 import AuthLayout from 'src/Layouts/AuthLayout';
+import Loading from 'src/Components/Loading'
 
 const RootRoute = () => {
     const [isLoading, setIsLoading] = useState(true)
     const dispatch = useDispatch()
-
+    const loading = useSelector(state => state.Loading)
     queryParam("token") && LocalStorage.Set('_token_', queryParam("token"))
 
     useEffect(() => {
@@ -35,6 +35,7 @@ const RootRoute = () => {
         <Loading className="w-[40px] h-[40px] fill-current text-gray-500" /></div>
     return (
         <Router>
+             {loading && <Loading />  }
             <AlertMessage />
             <Switch>
                 <PublicRouter path={path.AUTH} component={AuthLayout} />

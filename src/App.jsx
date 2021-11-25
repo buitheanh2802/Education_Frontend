@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Provider } from "react-redux";
-import Store from "./Redux/Store";
-import RootRouter from "./Routes";
+import React, { useEffect, useState } from 'react';
+import { Provider,useSelector } from 'react-redux';
+import Store from './Redux/Store';
+import RootRouter from './Routes';
 import "./Assets/css/main.css";
-import ProfileApi from './Apis/ProfileApi';
-
 const App = () => {
-
   return (
     <>
       <Provider store={Store}>
