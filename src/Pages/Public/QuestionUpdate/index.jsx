@@ -8,9 +8,9 @@ import TagApi from "src/Apis/TagApi";
 import PostApi from "src/Apis/PostApi";
 import ImageApi from "src/Apis/ImageApi";
 import QuestionApi from "src/Apis/QuestionApi";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router-dom";
 
-const QuestionsCreate = () => {
+const QuestionUpdate = () => {
   const [title, setTitle] = useState();
   const [tag, setTag] = useState();
   const [content, setContent] = useState();
@@ -22,6 +22,9 @@ const QuestionsCreate = () => {
   const editor = useRef();
   const animatedComponents = makeAnimated();
   const history = useHistory();
+  const [questionDetail, setQuestionDetail] = useState([]);
+  const shortId = useParams();
+  console.log(shortId);
   // {
   //   type: "",
   //   message: "",
@@ -30,6 +33,17 @@ const QuestionsCreate = () => {
   // if (token === null) history.push("/auth/login");
 
   useEffect(() => {
+    // const listDetailQuestion = async (id) => {
+    //   try {
+    //     let { data: question } = await QuestionApi.getId(
+    //       id.split("-")[id.split("-").length - 1]
+    //     );
+    //     setQuestionDetail(question);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    // listDetailQuestion(shortId?.id);
     const listTags = async () => {
       try {
         const { data: tags } = await TagApi.getAll();
@@ -54,6 +68,7 @@ const QuestionsCreate = () => {
     };
     listImage();
   }, []);
+  //   console.log(questionDetail);
 
   const tagItem = (e) => {
     const arrTag = e.map((item) => {
@@ -234,54 +249,6 @@ const QuestionsCreate = () => {
       console.log(error);
     }
   };
-  // const handlerSubmit2 = async () => {
-  //   try {
-  //     var errors = [];
-  //     if (!title) {
-  //       errors = [
-  //         ...errors,
-  //         {
-  //           type: "t",
-  //           message: "Tiêu đề không được để trống",
-  //         },
-  //       ];
-  //     }
-  //     if (tagId.length <= 0 || tagId.length > 5) {
-  //       errors = [
-  //         ...errors,
-  //         {
-  //           type: "tag",
-  //           message: "Gắn thẻ câu hỏi ít nhất 1 thẻ và không quá 5 thẻ",
-  //         },
-  //       ];
-  //     }
-
-  //     if (!content || validateContent.indexOf(content) !== -1) {
-  //       errors = [
-  //         ...errors,
-  //         {
-  //           type: "c",
-  //           message: "Nội dung không được để trống",
-  //         },
-  //       ];
-  //     }
-
-  //     if (errors.length !== 0) {
-  //       setValidateError(errors);
-  //       return;
-  //     }
-
-  //     let data = {
-  //       title: title,
-  //       tags: tagId,
-  //       content: content,
-  //       isDraft: true,
-  //     };
-  //     await PostApi.add(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   const handelQuestionCancel = () => {
     history.push("/questions");
   };
@@ -309,7 +276,6 @@ const QuestionsCreate = () => {
             components={animatedComponents}
             isMulti
             options={tag}
-            // id={}
             placeholder={"Gắn thẻ câu hỏi "}
             onChange={(e) => tagItem(e)}
           />
@@ -334,7 +300,7 @@ const QuestionsCreate = () => {
               >
                 <Icon.Pen className="fill-current w-[13px]" />
                 <span className="text-[12x] md:text-[16x] ml-1">
-                  Xuất bản câu hỏi
+                  Sửa câu hỏi
                 </span>
               </button>
               {/* <ul
@@ -451,4 +417,4 @@ const QuestionsCreate = () => {
   );
 };
 
-export default QuestionsCreate;
+export default QuestionUpdate;

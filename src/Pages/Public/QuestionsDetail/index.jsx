@@ -27,6 +27,7 @@ const QuestionsDetail = () => {
   const [copyLink, setCopyLink] = useState(false);
   const history = useHistory();
   const token = localStorage.getItem("_token_");
+
   useEffect(() => {
     window.scrollTo(0, 0);
     setRender(false);
@@ -161,6 +162,13 @@ const QuestionsDetail = () => {
     setCopyLink(copy);
   };
 
+  const handelRemove = async (id) => {
+    await QuestionApi.remove(id);
+
+    history.push("/questions");
+    // console.log("id question", id);
+  };
+
   return (
     <>
       {/* {postDetail && (
@@ -286,12 +294,31 @@ const QuestionsDetail = () => {
                     </li>
                     {questionDetail?.data?.createBy?.username ===
                     profile?.username ? (
-                      <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
-                        <Icon.Fix className="fill-current w-[15px] mr-[5px]" />
-                        Sửa câu hỏi
-                      </li>
+                      <>
+                        <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
+                          <Icon.Fix className="fill-current w-[15px] mr-[5px]" />
+                          <Link
+                            to={`/questions/update/${questionDetail?.data?.slug}-${questionDetail?.data?._id}`}
+                            className="block w-full"
+                          >
+                            Sửa câu hỏi
+                          </Link>
+                        </li>
+                        <li
+                          onClick={() =>
+                            handelRemove(questionDetail?.data?._id)
+                          }
+                          className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500"
+                        >
+                          <Icon.Can className="fill-current w-[12px] mr-[5px]" />
+                          Xóa câu hỏi
+                        </li>
+                      </>
                     ) : (
-                      <li className="hidden"></li>
+                      <>
+                        <li className="hidden"></li>
+                        <li className="hidden"></li>
+                      </>
                     )}
                   </ul>
                 </div>

@@ -13,6 +13,7 @@ import Userpage from "src/Pages/Public/UserPage";
 import Footer from "src/Pages/Public/Commons/Footer";
 import QuestionsDetail from "src/Pages/Public/QuestionsDetail";
 import QuestionsCreate from "src/Pages/Public/QuestionsCreate";
+import QuestionUpdate from "src/Pages/Public/QuestionUpdate";
 
 const SiteLayout = () => {
   return (
@@ -25,6 +26,7 @@ const SiteLayout = () => {
           path={path.QUESTIONS_CREATE}
           component={QuestionsCreate}
         />
+        <PublicRouter path={path.QUESTIONS_UPDATE} component={QuestionUpdate} />
         <PublicRouter path={path.POSTS_ID} component={PostsDetail} />
         <PublicRouter path={path.QUESTION_ID} component={QuestionsDetail} />
         <PublicRouter path={path.POSTS} component={PostPage} />
