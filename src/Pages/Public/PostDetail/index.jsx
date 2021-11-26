@@ -1,46 +1,158 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "src/Components/Icon";
-import { Link, useParams, useLocation, useHistory } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import PostsNew from "../Commons/PostNew";
 import PostApi from "src/Apis/PostApi";
 import { timeFormatter } from "src/Helpers/Timer";
+import { useSelector } from "react-redux";
 import {
   FacebookShareButton,
   TwitterShareButton,
   EmailShareButton,
 } from "react-share";
-
+import LikeApi from "src/Apis/LikeApi";
+import BookmarkApi from "src/Apis/BookmarkApi";
+import FollowApi from "src/Apis/FollowApi";
+import Loading from "src/Components/Loading";
 const PostsDetail = () => {
   const shortId = useParams();
+  const idParam = shortId.id;
   const [postmenu, setPostmenu] = useState(false);
   const [postShare, setpostShare] = useState(false);
+  const [copyLink, setCopyLink] = useState(false);
   const [postDetail, setPostDetail] = useState([]);
-
+  const { profile } = useSelector((state) => state.Auth);
+  const [render, setRender] = useState(false);
+  const history = useHistory();
+  const token = localStorage.getItem("_token_");
+  const id = shortId.id.split("-")[shortId.id.split("-").length - 1];
   useEffect(() => {
-    window.scrollTo(0, 0);
-    const list = async (id) => {
+    setRender(false);
+
+    const list = async () => {
       try {
-        let { data: post } = await PostApi.getPost(id);
+        const { data: post } = await PostApi.getPost(id);
         setPostDetail(post);
       } catch (error) {
         console.log(error);
       }
     };
-    list(shortId?.id);
-  }, []);
-  const shareUrl = "https://www.npmjs.com/package/react-share";
+    list();
+  }, [render]);
+  // console.log(postDetail);
+
+  const handleLike = async () => {
+    setRender(true);
+    if (token === null) history.push("/auth/login");
+
+    if (postDetail?.data?.isLike) {
+      await LikeApi.likePost(id);
+      setPostDetail({
+        ...postDetail,
+        data: { ...postDetail.data, isLike: false },
+      });
+    } else {
+      await LikeApi.likePost(id);
+      setPostDetail({
+        ...postDetail,
+        data: { ...postDetail.data, isLike: true },
+      });
+    }
+  };
+  const handleDisLike = async () => {
+    setRender(true);
+    if (token === null) history.push("/auth/login");
+
+    if (postDetail?.data?.isDislike) {
+      await LikeApi.disLikePost(id);
+      setPostDetail({
+        ...postDetail,
+        data: { ...postDetail.data, isDislike: false },
+      });
+    } else {
+      await LikeApi.disLikePost(id);
+      setPostDetail({
+        ...postDetail,
+        data: { ...postDetail.data, isDislike: true },
+      });
+    }
+  };
+
+  const handleBookmark = async () => {
+    if (token === null) history.push("/auth/login");
+
+    if (postDetail?.data?.isBookmark) {
+      await BookmarkApi.addBookmarkPost(id);
+      setPostDetail({
+        ...postDetail,
+        data: { ...postDetail.data, isBookmark: false },
+      });
+    } else {
+      await BookmarkApi.addBookmarkPost(id);
+      setPostDetail({
+        ...postDetail,
+        data: { ...postDetail.data, isBookmark: true },
+      });
+    }
+  };
+
+  const username = postDetail?.data?.createBy?.username;
+  const handleFollow = async () => {
+    if (token === null) history.push("/auth/login");
+
+    if (postDetail?.data?.createBy?.isFollowing) {
+      await FollowApi.unFollow(username);
+      setPostDetail({
+        ...postDetail,
+        data: {
+          ...postDetail.data,
+          createBy: { ...postDetail.data.createBy, isFollowing: false },
+        },
+      });
+    } else {
+      await FollowApi.follow(username);
+      setPostDetail({
+        ...postDetail,
+        data: {
+          ...postDetail.data,
+          createBy: { ...postDetail.data.createBy, isFollowing: true },
+        },
+      });
+    }
+  };
+
+  const url = window.location.href;
+  // console.log("url: ", url);
+  const handelCopy = () => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "text");
+
+    input.setAttribute("value", url);
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand("copy");
+    document.body.removeChild(input);
+    ////////
+    const copy = true;
+    setCopyLink(copy);
+  };
   // console.log(window.location.href);
   return (
     <>
       {/* {postDetail && (
         <> */}
       <div className="mt-[80px] container mx-auto bg-white rounded-[5px] shadow">
-        <div className="px-[10px] sm:px-[15px] py-[10px] ">
-          <p className="text-gray-500 text-[14px] ">
+        <div className="px-[10px] sm:px-[15px] py-[10px]">
+          <p className="text-gray-500 text-[14px]">
             Trang chủ / Bài viết /
             <span className="text-blue-500 ml-1">
-              {postDetail?.data?.title || <Skeleton width={200} />}
+              {postDetail?.data?.title ? (
+                postDetail?.data?.title
+              ) : (
+                <Skeleton className="z-0 w-[250px] " />
+              )}
             </span>
           </p>
         </div>
@@ -80,8 +192,17 @@ const PostsDetail = () => {
                       - @{postDetail?.data?.createBy?.username}
                     </span>
                     <span>
-                      <button className="mt-1 sm:mt-0 ml-2 border rounded-[3px] border-blue-500 text-[12px] text-blue-500 px-[5px] py-[1px] hover:text-white hover:bg-blue-500">
-                        + Theo dõi
+                      <button
+                        onClick={() => handleFollow()}
+                        className={
+                          postDetail?.data?.createBy?.isFollowing
+                            ? "mt-1 sm:mt-0 ml-2 border rounded-[3px] border-blue-500 text-[12px]  px-[5px] py-[1px] text-white bg-blue-500"
+                            : "mt-1 sm:mt-0 ml-2 border rounded-[3px] border-blue-500 text-[12px] text-blue-500 px-[5px] py-[1px] hover:text-white hover:bg-blue-500"
+                        }
+                      >
+                        {postDetail?.data?.createBy?.isFollowing
+                          ? "- Đã theo dõi"
+                          : "+ Theo dõi"}
                       </button>
                     </span>
                   </p>
@@ -110,7 +231,9 @@ const PostsDetail = () => {
             </div>
             <div className="flex justify-between  ">
               <p className="text-[18px] sm:text-[24px] font-medium">
-                {postDetail?.data?.title || <Skeleton width={500} />}
+                {postDetail?.data?.title || (
+                  <Skeleton className="z-0 w-[200px] " />
+                )}
               </p>
               <div className="relative">
                 <button
@@ -119,22 +242,35 @@ const PostsDetail = () => {
                 >
                   <Icon.DotsVertical className=" w-[13px] " />
                 </button>
-                <div
-                  className={
-                    postmenu
-                      ? "post__menu bg-white"
-                      : "post__menu bg-white hidden"
-                  }
-                >
+                <div className={postmenu ? "post__menu  bg-white" : " hidden"}>
                   <ul className="relative text-[14px] py-[5px]">
                     <li className="flex items-center cursor-pointer text-gray-700 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
                       <Icon.Flag className="fill-current w-[16px]  mr-[5px]" />
                       Báo cáo
                     </li>
-                    <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
+
+                    <li
+                      onClick={() => handelCopy()}
+                      className={
+                        copyLink
+                          ? "flex items-center cursor-pointer mt-1 bg-blue-100 py-1 px-[10px] text-blue-500"
+                          : "flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500"
+                      }
+                    >
                       <Icon.ExternaLink className="fill-current w-[20px] mr-[5px]" />
-                      Sao chép link bài viết
+                      {copyLink
+                        ? "Đã sao chép link bài viết"
+                        : "Sao chép link bài viết"}
                     </li>
+                    {postDetail?.data?.createBy?.username ===
+                    profile?.username ? (
+                      <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
+                        <Icon.Fix className="fill-current w-[15px] mr-[5px]" />
+                        Sửa bài viết
+                      </li>
+                    ) : (
+                      <li className="hidden"></li>
+                    )}
                   </ul>
                 </div>
               </div>
@@ -187,42 +323,56 @@ const PostsDetail = () => {
               }}
             ></div>
             <div className="mt-[20px] inline-block">
-              <div className="flex items-center border-b border-gray-300 ">
-                <button className="text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  hover:bg-gray-500 hover:text-white">
+              <div className="flex items-center border-b border-blue-300 ">
+                <button
+                  onClick={() => handleLike()}
+                  className={
+                    postDetail?.data?.isLike
+                      ? " px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  bg-blue-500 text-white"
+                      : " text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  hover:bg-blue-300 hover:text-white"
+                  }
+                >
                   <Icon.Like className="fill-current w-[13px]" />
                   <span className="text-[12x] md:text-[14x] ml-1">
-                    {postDetail?.data?.likes}
+                    {postDetail?.data?.likes} Like
                   </span>
                 </button>
-                <button className=" text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center hover:bg-gray-500 hover:text-white">
+                <button
+                  onClick={() => handleDisLike()}
+                  className={
+                    postDetail?.data?.isDislike
+                      ? " px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  bg-blue-500 text-white"
+                      : " text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  hover:bg-blue-300 hover:text-white"
+                  }
+                >
                   <Icon.Dislike className="fill-current w-[13px]" />
                   <span className="text-[12x] md:text-[14x] ml-1">
-                    {postDetail?.data?.dislikes}
+                    {postDetail?.data?.dislikes} Dislikes
                   </span>
                 </button>
                 <div className="relative">
                   <button
                     className={
                       postShare
-                        ? " px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center bg-gray-500 text-white"
-                        : "text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center hover:bg-gray-500 hover:text-white"
+                        ? " px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center bg-blue-500 text-white"
+                        : "text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center hover:bg-blue-300 hover:text-white"
                     }
                     onClick={() => setpostShare(!postShare)}
                   >
                     <Icon.Share className="fill-current w-[15px]" />
-                    <span className="text-[12x] md:text-[14x] ml-1">30</span>
+                    <span className="text-[12x] md:text-[14x] ml-1">Share</span>
                   </button>
                   <div
                     className={
                       postShare
-                        ? "post__share bg-white py-[5px]"
-                        : "post__share bg-white py-[5px] hidden"
+                        ? "post__share right-0 sm:left-0 bg-white py-[5px]"
+                        : " hidden"
                     }
                   >
                     <ul className=" text-[14px] ">
                       <li className=" text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
                         <FacebookShareButton
-                          url={shareUrl}
+                          url={url}
                           className="flex items-center"
                         >
                           <Icon.Facebook className="fill-current w-[12px] mr-[5px] " />
@@ -231,7 +381,7 @@ const PostsDetail = () => {
                       </li>
                       <li className="text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
                         <TwitterShareButton
-                          url={shareUrl}
+                          url={url}
                           className="flex items-center"
                         >
                           <Icon.Twitter className="fill-current w-[15px] mr-[5px]" />
@@ -240,7 +390,7 @@ const PostsDetail = () => {
                       </li>
                       <li className=" text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
                         <EmailShareButton
-                          url={shareUrl}
+                          url={url}
                           className="flex items-center"
                         >
                           <Icon.Email className="fill-current w-[12px] mr-[5px]" />
@@ -256,11 +406,11 @@ const PostsDetail = () => {
         </div>
         <div className="hidden lg:block">
           <div className="bg-white shadow rounded-[5px] ">
-            <div className="flex py-[7px] block-avt justify-center">
+            <div className="flex py-[5px] block-avt justify-center">
               {postDetail?.data?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                 <Link
                   to=""
-                  className="  border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
+                  className="  border border-gray-300 cursor-pointer select-none w-[45px] h-[45px] rounded-full bg-center bg-cover"
                   style={{
                     backgroundImage: `url(${postDetail?.data?.createBy?.avatar?.avatarUrl})`,
                   }}
@@ -288,8 +438,17 @@ const PostsDetail = () => {
                   @{postDetail?.data?.createBy?.username}
                 </span>
               </p>
-              <button className="border border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white">
-                + Theo dõi
+              <button
+                onClick={() => handleFollow()}
+                className={
+                  postDetail?.data?.createBy?.isFollowing
+                    ? "border border-blue-500 px-4 py-[3px] text-[14px] rounded-[3px] bg-blue-500 text-white"
+                    : "border border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
+                }
+              >
+                {postDetail?.data?.createBy?.isFollowing
+                  ? "- Đã theo dõi"
+                  : "+ Theo dõi"}
               </button>
             </div>
             <div className="py-[10px] flex border-b border-gray-100">
@@ -324,9 +483,20 @@ const PostsDetail = () => {
               </div>
             </div>
             <div className="p-[15px]">
-              <button className="text-blue-500 w-full  py-[3px] border border-blue-500 rounded-[3px] flex justify-center items-center hover:bg-blue-500 hover:text-white">
+              <button
+                onClick={() => handleBookmark()}
+                className={
+                  postDetail?.data?.isBookmark
+                    ? " w-full  py-[3px] border border-blue-500 rounded-[3px] flex justify-center items-center bg-blue-500 text-white"
+                    : "text-blue-500 w-full  py-[3px] border border-blue-500 rounded-[3px] flex justify-center items-center hover:bg-blue-500 hover:text-white"
+                }
+              >
                 <Icon.Bookmark className="fill-current w-[13px]" />
-                <span className="text-[14x] ml-1">Bookmark bài viết này</span>
+                <span className="text-[14x] ml-1">
+                  {postDetail?.data?.isBookmark
+                    ? "Đã Bookmark bài viết này"
+                    : "Bookmark bài viết này"}
+                </span>
               </button>
             </div>
           </div>

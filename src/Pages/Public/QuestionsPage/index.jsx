@@ -6,9 +6,11 @@ import TrendingTags from "../Commons/TrendingTags";
 import { path } from "src/Constants/";
 import { Icon } from "src/Components/Icon";
 import QuestionApi from "src/Apis/QuestionApi";
-
+import { useLocation } from "react-router";
 const QuestionsPage = () => {
   // navigation
+  const location = useLocation();
+  const [questions, setQuestion] = useState([]);
   const pathName = [
     {
       path: path.QUESTIONS,
@@ -50,69 +52,27 @@ const QuestionsPage = () => {
       value: "NodeJS",
     },
   ];
-
-  // Questions
-  //   const fieldQuestions = [
-  //     {
-  //       user: {
-  //         fullname: "Nguyễn Thành Đạt",
-  //         avatar:
-  //           "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
-  //         path: "/profile/nguyenthanhdat",
-  //       },
-  //       post: {
-  //         title:
-  //           "Tìm hiểu về middleware trong NodeJS Tìm hiểu về middleware trong NodeJS Tìm hiểu về middleware trong NodeJS ",
-  //         time: "Khoảng 2h trước",
-  //         view: 150,
-  //         comment: 87,
-  //         bookmark: 25,
-  //         link: 120,
-  //         dislike: 20,
-  //         path: path.POSTS_ID,
-  //         tags: [
-  //           { path: path.TAGS_ID, value: "NodeJS" },
-  //           { path: path.TAGS_ID, value: "ExpressJS" },
-  //         ],
-  //       },
-  //     },
-  //     {
-  //       user: {
-  //         fullname: "Bùi Thế Anh",
-  //         avatar:
-  //           "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
-  //         path: "/profile/buitheanh",
-  //       },
-  //       post: {
-  //         title: "Tìm hiểu về ExpressJS",
-  //         time: "Khoảng 3h trước",
-  //         view: 150,
-  //         comment: 87,
-  //         bookmark: 25,
-  //         link: 120,
-  //         dislike: 20,
-  //         path: path.POSTS_ID,
-  //         tags: [{ path: path.TAGS_ID, value: "ExpressJS" }],
-  //       },
-  //     },
-  //   ];
-
-  const [questions, setQuestion] = useState([]);
-
   useEffect(() => {
     const listQuestion = async () => {
       try {
-        const { data: questions } = await QuestionApi.getQuestion();
+        let endPoint;
+        if (location.pathname === "/questions") {
+          endPoint = "";
+        } else if (location.pathname === "/questions/follow") {
+          endPoint = "follow";
+        } else {
+          endPoint = "listbookmark";
+        }
+        const { data: questions } = await QuestionApi.getQuestion(endPoint);
         setQuestion(questions);
       } catch (error) {
         console.log("Error", error.sesponse);
       }
     };
     listQuestion();
-  }, []);
-  //   console.log(questions, "jhab");
+  }, [location.pathname]);
   return (
-    <div className="container mx-auto mt-[80px]">
+    <div className="container mx-auto mt-[80px] mb-[20px]">
       <Navigation path={pathName} button={button} />
       <div className="mt-[15px] gap-[15px] flex justify-between">
         <div className="w-full shadow-sm bg-white px-[5px] rounded">

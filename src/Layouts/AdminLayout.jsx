@@ -1,24 +1,32 @@
 import React from 'react'
-import { Switch } from 'react-router'
+import { Route, Switch } from 'react-router'
 import Dashboard from 'src/Pages/Private/Dashboard'
 import SlideBar from 'src/Pages/Private/Commons/SlideBar'
 import Header from 'src/Pages/Private/Commons/Header'
 import PrivateRouter from 'src/Routes/PrivateRouter'
 import { path } from '../Constants'
+import Exercise from 'src/Pages/Private/Exercise'
+import PheDuyetBaiViet from 'src/Pages/Private/Phe-duyet-bai-viet'
 
 const AdminLayout = () => {
     return (
-        <>
-            <div className="h-screen fixed top-0 left-0 bottom-0 w-[300px] bg-gray-200">
+        <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl h-screen overflow-hidden relative">
+            <div className="flex items-start justify-between">
                 <SlideBar />
+                <div className="flex flex-col w-full pl-0 md:p-2 md:space-y-4">
+                    <Header />
+                    <div className="overflow-auto h-screen pb-24 pt-2 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
+                        <div className="flex flex-col flex-wrap sm:flex-row ">
+                            <Switch>
+                                <PrivateRouter path={path.PHE_DUYET_BAI_VIET} component={PheDuyetBaiViet} />
+                                <PrivateRouter path="/exercise" component={Exercise} />
+                                <PrivateRouter exact path={path.ADMIN} component={Dashboard} />
+                            </Switch>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="ml-[300px]">
-                <Header />
-                <Switch>
-                    <PrivateRouter exact path={path.ADMIN} component={Dashboard} />
-                </Switch>
-            </div>
-        </>
+        </div>
     )
 }
 

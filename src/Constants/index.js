@@ -9,6 +9,18 @@ export const Images = {
 }
 
 export const path = {
+
+
+
+
+
+
+
+
+
+    //HEAD
+    // Website
+    QUESTION_ID: "/question/:slug-:id",
     // Website
     HOME: '/',
     SETTING: '/setting',
@@ -23,6 +35,7 @@ export const path = {
     USER_FOLLOWING: '/user/:username/following',
     USER_BOOKMARK: '/user/:username/bookmark/post',
     USER_TAG: '/user/:username/tag',
+
 
     // questions
 
@@ -58,14 +71,8 @@ export const path = {
     ADMIN: '/admin',
     //contact
     CONTACT: "/contact",
-
-    //HEAD
-    // questions
-    QUESTIONS_DETAIL: "/questionsDetail",
-
-    // post
-    POSTS_DETAIL: "/postsDetail",
-    // POSTS_CREATE: "/postsCreate",
+    // Phê duyệt bài viết
+    PHE_DUYET_BAI_VIET: '/manager/publish_post',
 
     //profile
     PROFILE: "/profile/:username",
@@ -76,10 +83,8 @@ export const path = {
 
     //intro
     INTRO: "/intro",
-
-    CONTACT: "/contact",
-
     // Website
+
 
     //Challenge
     CHALLENGE: '/challenge',

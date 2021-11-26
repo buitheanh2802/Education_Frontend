@@ -5,11 +5,11 @@ import { path } from "../../../Constants/index";
 import { Icon } from "../../../Components/Icon";
 import TagAPi from "src/Apis/TagApi";
 import { useLocation } from "react-router";
-import { Link } from "react-router-dom";  
+import { Link } from "react-router-dom";
 import FollowApi from "src/Apis/FollowApi";
 
 const TagsPage = () => {
-  
+
   const pathName = [
     {
       path: path.TAGS,
@@ -52,16 +52,16 @@ const TagsPage = () => {
   ];
 
   const handleUnFollow = async (id) => {
-    
+
   }
   const handleFollow = async (id) => {
-    
+
   }
 
   const [tags, setTags] = useState([]);
   useEffect(() => {
     const tag = async () => {
-      try { 
+      try {
         const { data: tags } = await TagAPi.getAll();
         setTags(tags.data.models);
         console.log(tags);
@@ -83,19 +83,18 @@ const TagsPage = () => {
                 <div key={index} className="item md:text-[16px] text-[14px] w-max-[200px] px-[10px] py-[10px]">
                   <Link className="grid grid-cols-3 gap-[10px] justify-center items-center" to={`/tag/${item?.slug}`} >
                     <div className="mx-auto">
-                    {item.avatar.avatarUrl ? 
-
+                      {item.avatar.avatarUrl ? 
                       <img
-                      src={item.avatar.avatarUrl}
-                      alt=""
-                      className="w-[80px] " 
-                    /> : <div className="w-[80px] h-[75px] bg-blue-400 flex justify-center items-center ">
-                      <p className="text-white text-[12px]">{item.name}</p>
-                    </div>
+                        src={item.avatar.avatarUrl}
+                        alt=""
+                        className="w-[80px] "
+                      /> : 
+                      <div className="w-[80px] h-[75px] bg-blue-400 flex justify-center items-center ">
+                        <p className="text-white text-[12px]">{item.name}</p>
+                      </div> 
                       }
-                      
                     </div>
-                    <div className="col-span-2 ml-[10px]">
+                    <div className="col-span-2">
                       <div className="flex items-center">
                         <h3 className="text-[18px] leading-[20px] ">
                           {item?.name}
@@ -116,7 +115,7 @@ const TagsPage = () => {
                       </p>
                       <p className="text-[#8A8A8A] text-[14px]">
                         <span className="font-bold leading-[20px] ">
-                          {item?.followerCounts || item?.followers} 
+                          {item?.followerCounts || item?.followers}
                         </span>{" "}
                         Người theo dõi
                       </p>
@@ -133,20 +132,20 @@ const TagsPage = () => {
                     <div onClick={() => handleFollow(item._id)} className="mt-[10px] xl:[mx-10px] text-center my-auto text-[#6C91F0] border border-[#6C91F0] font-bold rounded   text-[15px] hover:bg-[#1273eb] hover:text-white">
                       <button className="font-bold px-[20px] md:px-[30px] py-[5px] ">
                         {" "}
-                       + Theo dõi
+                        + Theo dõi
                       </button>
                     </div>
                   )}
                 </div>
               );
             })}
-          </div>
-        </div>
+          </div >
+        </div >
         <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded hidden lg:block">
           <FeaturedAuthor authors={authors} />
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 export default TagsPage;

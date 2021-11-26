@@ -6,9 +6,12 @@ const QuestionView = ({ questions }) => {
   //   console.log(questions.data.);
   return (
     <>
-      {questions?.data?.models?.map((item, index) => {
+      {questions?.data?.models?.map((item) => {
         return (
-          <div key={index} className="w-full flex px-[10px] py-[15px] border-b">
+          <div
+            key={item?._id}
+            className="w-full flex px-[10px] py-[15px] border-b"
+          >
             <div className="mr-[15px] ">
               {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                 <Link
@@ -41,7 +44,7 @@ const QuestionView = ({ questions }) => {
               </span>
               <h3 className="pr-[50px]">
                 <Link
-                  to={item?.path}
+                  to={`/question/${item?.slug}-${item?._id}`}
                   className="font-medium text-[18px] hover:underline"
                 >
                   {item?.title}
@@ -56,7 +59,7 @@ const QuestionView = ({ questions }) => {
                 {item?.tags?.map((tag) => {
                   return (
                     <Link
-                      key={tag?.id}
+                      key={tag?._id}
                       to={tag?.path}
                       className="block hover:bg-gray-300 bg-[#e7e7e7] px-[10px] py-[2px] text-[#5f5f5f] text-[12px] rounded-[3px]"
                     >
@@ -73,12 +76,12 @@ const QuestionView = ({ questions }) => {
                     <span>{item?.views}</span>
                   </div>
                   <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                    <Icon.Chat className="fill-current w-[15px]" />
-                    {/* <span>{item?.comments}</span> */}
+                    <Icon.Like className="fill-current w-[15px]" />
+                    <span>{item?.countLikes}</span>
                   </div>
                   <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                    <Icon.Bookmark className="fill-current w-[15px]" />
-                    {/* <span>{item?.bookmarks}</span> */}
+                    <Icon.Dislike className="fill-current w-[15px]" />
+                    <span>{item?.countDislike}</span>
                   </div>
                 </div>
                 <Icon.Questions className="fill-current w-[20px] text-[#5f5f5f]" />

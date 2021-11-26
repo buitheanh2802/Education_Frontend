@@ -23,12 +23,13 @@ import PostsCreate from "src/Pages/Public/PostsCreate";
 // import IntroPage from "src/Pages/Public/IntroPage/IntroPage";
 // import ProfilePage from "src/Pages/Public/ProfilePage";
 // import EditProfile from "src/Pages/Public/EditProfile";
-import QuestionsDetail from "src/Pages/Public/QuestionsDetail";
 import Userpage from "src/Pages/Public/UserPage";
 import DetailTagPage from "src/Pages/Public/DetailTagPage";
 import IntroPage from "src/Pages/Public/IntroPage/IntroPage";
 import EditProfile from "src/Pages/Public/EditProfile";
 import ProfilePage from "src/Pages/Public/ProfilePage";
+import QuestionsDetail from "src/Pages/Public/QuestionsDetail";
+import QuestionsCreate from "src/Pages/Public/QuestionsCreate";
 
 const SiteLayout = () => {
     return (
@@ -61,25 +62,5 @@ const SiteLayout = () => {
         </>
     );
 };
-
-{/* <PublicRouter path={path.TAGS} component={TagsPage} />
-<PublicRouter path={path.POSTS_DETAIL} component={PostsDetail} />
-<PublicRouter path={path.POSTS_CREATE} component={PostsCreate} />
-<PublicRouter path={path.CONTACT} component={ContactPage} />
-<PublicRouter
-  path={path.QUESTIONS_CREATE}
-  component={QuestionsCreate}
-/>
-<PublicRouter path={path.POSTS} component={PostPage} />
-<PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
-<PublicRouter
-  path={path.QUESTIONS_DETAIL}
-  component={QuestionsDetail}
-/>
-<PublicRouter exact path={path.TAGS_DETAIL} component={DetailTagPage} />
-<PublicRouter path={path.INTRO} component={IntroPage} />
-<PublicRouter exact path={path.EDIT_PROFILE} component={EditProfile} />
-<PublicRouter exact path={path.PROFILE} component={ProfilePage} />
-</Switch> */}
 
 export default SiteLayout;

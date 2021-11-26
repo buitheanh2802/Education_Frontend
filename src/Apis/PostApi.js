@@ -1,5 +1,5 @@
 import AxiosClient from "./AxiosClient";
-const token = localStorage.getItem('_token_');
+const token = localStorage.getItem("_token_");
 
 const PostApi = {
     getPostNew() {

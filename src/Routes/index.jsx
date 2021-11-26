@@ -34,9 +34,11 @@ const RootRoute = () => {
         <Loading className="w-[40px] h-[40px] fill-current text-gray-500" /></div>
     return (
         <Router>
+            {loading && <Loading />}
+            {/* <AlertMessage /> */}
             <Switch>
-                <PublicRouter path={path.AUTH} component={AuthLayout} />
                 <PrivateRouter path={path.ADMIN} component={AdminLayout} />
+                <PublicRouter path={path.AUTH} component={AuthLayout} />
                 <PublicRouter path={path.HOME} component={SiteLayout} />
             </Switch>
         </Router>
