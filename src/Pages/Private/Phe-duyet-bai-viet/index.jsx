@@ -26,6 +26,7 @@ const PheDuyetBaiViet = (props) => {
                 if (models && models.length > 0) setPostList(models);
                 // set pagination
                 setPagination(metaData.pagination);
+                console.log(models);
                 // end call
                 setStartCall(false);
             } catch (error) {
@@ -40,7 +41,18 @@ const PheDuyetBaiViet = (props) => {
         <div className="w-full">
             <Header />
             <PublishNav />
-            <PublishItem />
+            {postList && postList.map((item,index) => {
+                return (
+                    <PublishItem 
+                        index={index + 1}
+                        key={index}
+                        title={item.title}
+                        content={item.content}
+                        createBy={item.createBy}
+                        createAt={item.createdAt}
+                    />
+                )
+            })}
         </div>
     );
 };
