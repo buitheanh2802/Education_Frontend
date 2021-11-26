@@ -22,6 +22,15 @@ const PostApi = {
       },
     });
   },
+  getListPublish(params){
+    const url = '/post/publish/list';
+    return AxiosClient.get(url,{
+      params,
+      headers : {
+        authorization : `Bearer ${token}`
+      }
+    })
+  }
 };
 
 export default PostApi;
