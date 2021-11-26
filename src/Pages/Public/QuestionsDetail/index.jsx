@@ -298,7 +298,7 @@ const QuestionsDetail = () => {
                         <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
                           <Icon.Fix className="fill-current w-[15px] mr-[5px]" />
                           <Link
-                            to={`/questions/update/${questionDetail?.data?.slug}-${questionDetail?.data?._id}`}
+                            to={`/question/update/${questionDetail?.data?.slug}-${questionDetail?.data?._id}`}
                             className="block w-full"
                           >
                             Sửa câu hỏi

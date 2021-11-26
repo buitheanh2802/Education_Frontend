@@ -39,7 +39,7 @@ const QuestionApi = {
     });
   },
   update(id, data) {
-    const url = `/question/${id}`;
+    const url = `/question/update/${id}`;
     return AxiosClient.put(url, data, {
       headers: {
         authorization: `Bearer ${token}`,

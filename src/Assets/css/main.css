@@ -3617,6 +3617,10 @@ body {
 
 /* ///////// */
 
+.swal2-toast {
+  margin-top: 70px;
+}
+
 .after\:absolute::after {
   content: "";
   position: absolute;

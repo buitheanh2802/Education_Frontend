@@ -30,7 +30,7 @@ export const path = {
   QUESTIONS: "/questions",
   QUESTION_ID: "/question/:slug-:id",
   QUESTIONS_CREATE: "/questions/create",
-  QUESTIONS_UPDATE: "/questions/update",
+  QUESTIONS_UPDATE: "/question/update/:id",
   QUESTIONS_FLOW: "/questions/follow",
   QUESTIONS_BOOK_MARK: "/questions/bookmark",
 

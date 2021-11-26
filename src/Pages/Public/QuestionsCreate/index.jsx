@@ -9,6 +9,7 @@ import PostApi from "src/Apis/PostApi";
 import ImageApi from "src/Apis/ImageApi";
 import QuestionApi from "src/Apis/QuestionApi";
 import { useHistory } from "react-router";
+import Swal from "sweetalert2";
 
 const QuestionsCreate = () => {
   const [title, setTitle] = useState();
@@ -184,6 +185,18 @@ const QuestionsCreate = () => {
   ];
 
   ///react-select
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    background: "#EFF6FF",
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
   const handlerSubmit = async (data) => {
     try {
       var errors = [];
@@ -230,8 +243,17 @@ const QuestionsCreate = () => {
 
       await QuestionApi.add(data);
       // console.log(data);
+
+      await Toast.fire({
+        icon: "success",
+        title: "Đăng câu hỏi thành công",
+      });
     } catch (error) {
       console.log(error);
+      Toast.fire({
+        icon: "error",
+        title: "Đăng câu hỏi thất bại",
+      });
     }
   };
   // const handlerSubmit2 = async () => {

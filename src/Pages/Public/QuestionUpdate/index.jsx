@@ -5,7 +5,6 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Icon } from "src/Components/Icon";
 import TagApi from "src/Apis/TagApi";
-import PostApi from "src/Apis/PostApi";
 import ImageApi from "src/Apis/ImageApi";
 import QuestionApi from "src/Apis/QuestionApi";
 import { useHistory, useParams } from "react-router-dom";
@@ -24,26 +23,19 @@ const QuestionUpdate = () => {
   const history = useHistory();
   const [questionDetail, setQuestionDetail] = useState([]);
   const shortId = useParams();
-  console.log(shortId);
-  // {
-  //   type: "",
-  //   message: "",
-  // }
-  // const token = localStorage.getItem("_token_");
-  // if (token === null) history.push("/auth/login");
 
   useEffect(() => {
-    // const listDetailQuestion = async (id) => {
-    //   try {
-    //     let { data: question } = await QuestionApi.getId(
-    //       id.split("-")[id.split("-").length - 1]
-    //     );
-    //     setQuestionDetail(question);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-    // listDetailQuestion(shortId?.id);
+    const listDetailQuestion = async (id) => {
+      try {
+        let { data: question } = await QuestionApi.getId(
+          id.split("-")[id.split("-").length - 1]
+        );
+        setQuestionDetail(question);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    listDetailQuestion(shortId?.id);
     const listTags = async () => {
       try {
         const { data: tags } = await TagApi.getAll();
@@ -68,8 +60,6 @@ const QuestionUpdate = () => {
     };
     listImage();
   }, []);
-  //   console.log(questionDetail);
-
   const tagItem = (e) => {
     const arrTag = e.map((item) => {
       return item.value;
@@ -87,6 +77,11 @@ const QuestionUpdate = () => {
         ])
       : setValidateError(validateError.filter((i) => i.type !== "tag"));
   };
+
+  const tagsQuestion = questionDetail?.data?.tags?.map((item) => {
+    return item.name;
+  });
+
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
 
@@ -243,8 +238,8 @@ const QuestionUpdate = () => {
         // isDraft: false,
       };
 
-      await QuestionApi.add(data);
-      // console.log(data);
+      // await QuestionApi.add(data);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -260,6 +255,7 @@ const QuestionUpdate = () => {
           type="text"
           className="w-full px-[15px] py-[9px] bg-white rounded-[3px] shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Tiêu đề câu hỏi..."
+          defaultValue={questionDetail?.data?.title}
           onChange={(e) => handleChangeTitle(e)}
         />
         <span className="text-red-500 text-[12px]">
@@ -275,6 +271,7 @@ const QuestionUpdate = () => {
             closeMenuOnSelect={false}
             components={animatedComponents}
             isMulti
+            defaultValue={tagsQuestion}
             options={tag}
             placeholder={"Gắn thẻ câu hỏi "}
             onChange={(e) => tagItem(e)}
@@ -344,6 +341,7 @@ const QuestionUpdate = () => {
             theme="snow"
             modules={modules}
             formats={formats}
+            defaultValue={questionDetail?.data?.content}
             onChange={Content}
             ref={editor}
             placeholder={"Nhập nội dung câu hỏi tại đây..."}
