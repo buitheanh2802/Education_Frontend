@@ -1,43 +1,38 @@
 import AxiosClient from './AxiosClient'
+const token = localStorage.getItem('_token_');
 
 const FollowApi = {
     //follow user
     follow(username) {
-        const token = localStorage.getItem('_token_');
         const url = `/follow/${username}`;
         return AxiosClient.post(url, { username: username }, {
             headers: {
-                authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             }
         })
     },
     //unfollow user
     unFollow(username) {
-        const token = localStorage.getItem('_token_');
         const url = `/follow/${username}`;
         return AxiosClient.delete(url, {
             headers: {
-                authorization : `Bearer ${token}`
+                Authorization : `Bearer ${token}`
             }
         })
     },
-    //follow tag
-    followTag(id){
-        const token = localStorage.getItem('_token_');
+    followTag(id) {
         const url = `/follow/${id}`;
-        return AxiosClient.post(url, { id: id }, {
+        return AxiosClient.post(url, { _id: id }, {
             headers: {
-                authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             }
         })
     },
-    //unfollow tag
-    unfollowTag(id){
-        const token = localStorage.getItem('_token_');
+    unFollowTag(id) {
         const url = `/follow/${id}`;
-        return AxiosClient.post(url, {
+        return AxiosClient.delete(url, {
             headers: {
-                authorization: `Bearer ${token}`
+                Authorization : `Bearer ${token}`
             }
         })
     }

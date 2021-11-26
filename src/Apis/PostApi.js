@@ -2,17 +2,29 @@ import AxiosClient from "./AxiosClient";
 const token = localStorage.getItem('_token_');
 
 const PostApi = {
-    getPost(endPoint) {
-        const url = `/post/${endPoint}`;
-        if(endPoint === "following" || endPoint === "bookmark") {
-            return AxiosClient.get(url, {
-                headers: {
-                    Authorization : `Bearer ${token}`
-                }
-            })
-        } else {
-            return AxiosClient.get(url);
-        }
+    getPostNew() {
+        const url = `/post/newest`;
+        return AxiosClient.get(url);
+    },
+    getPostTren() {
+        const url = `/post/trending`;
+        return AxiosClient.get(url);
+    },
+    getPostFol() {
+        const url = `/post/following`;
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization : `Bearer ${token}`
+            }
+        })
+    },
+    getPostMark() {
+        const url = `/post/bookmark`;
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization : `Bearer ${token}`
+            }
+        })
     },
     get(id) {
         const url = `/posts/${id}`;
