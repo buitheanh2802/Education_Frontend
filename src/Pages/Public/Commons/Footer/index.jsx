@@ -9,7 +9,7 @@ const Footer = () => {
     const date = new Date();
 
     return (
-        <footer className={`pt-[30px] xl:mb-[50px] text-center md:text-left ${pathname !== path.HOME && "bg-gradient-to-t to-white from-gray-50 border-t border-gray-100"}`}>
+        <footer className={`pt-[30px] xl:mb-[50px] text-center md:text-left ${pathname !== path.HOME && "bg-gradient-to-t to-white from-gray-50 border-t"}`}>
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 xl:grid-cols-5 xl:flex xl:justify-between text-gray-900 md:gap-x-[50px] xl:gap-x-[30px]">
                 <ul className="md:col-span-2 xl:flex-[2.5] md:order-1 md:pr-[60px]">
                     <li className="mb-[20px]">

@@ -5,15 +5,16 @@ const UserFollower = ({ userFollower }) => {
   console.log("userFollower", userFollower);
   return (
     <div className="container mx-auto">
-      <div className="flex grid-cols-4 ">
-        <div className="flex justify-between items-center gap-[50px]">
-          {userFollower.map((item, index) => {
-            if(item.length==0){
-              return (
-              <div className="">K có người follower</div>
-              )
-            }
-            else{
+      {userFollower.length == 0 ? (
+        <div>
+          <p className="text-center text-[18px] leading-[30px] my-[10px] py-[35px] font-bold text-gray-500">
+            Không có gì ở đây cả
+          </p>
+        </div>
+      ) : (
+        <div className="flex grid-cols-4 ">
+          <div className="flex justify-between items-center gap-[50px]">
+            {userFollower.map((item, index) => {
               return (
                 <div className="flex py-[20px] px-[10px] mb-[20px] bg-white">
                   <div className="">
@@ -62,13 +63,10 @@ const UserFollower = ({ userFollower }) => {
                   </div>
                 </div>
               );
-            }
-           
-          })}
-
-        
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

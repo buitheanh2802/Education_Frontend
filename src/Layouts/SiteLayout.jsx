@@ -6,20 +6,38 @@ import HomePage from "../Pages/Public/HomePage";
 import Header from "../Pages/Public/Commons/Header";
 import PostPage from "../Pages/Public/PostPage";
 import QuestionsPage from "../Pages/Public/QuestionsPage";
-import PostsCreate from "../Pages/Public/PostsCreate";
-import PostsDetail from "src/Pages/Public/PostDetail";
-import TagsPage from "src/Pages/Public/TagsPage";
-import Userpage from "src/Pages/Public/UserPage";
+import Notfound from "src/Pages/Public/Notfound";
 import Footer from "src/Pages/Public/Commons/Footer";
+import ChallengeCatePage from "src/Pages/Public/ChallengeCatePage";
+import ChallengePage from "src/Pages/Public/ChallengePage";
+import QuizPage from "src/Pages/Public/QuizPage";
+import DetailChallenge from "src/Pages/Public/DetailChallenge";
+import SolutionPage from "src/Pages/Public/SolutionPage";
+import TagsPage from "../Pages/Public/TagsPage";
+// import ContactPage from "src/Pages/Public/ContactPage";
+import PostsCreate from "src/Pages/Public/PostsCreate";
+// import QuestionsCreate from "src/Pages/Public/QuestionsCreate";
+// import DetailTagPage from "src/Pages/Public/DetailTagPage";
+// import QuestionsDetail from "src/Pages/Public/QuestionsDetail";
+// import IntroPage from "src/Pages/Public/IntroPage/IntroPage";
+// import ProfilePage from "src/Pages/Public/ProfilePage";
+// import EditProfile from "src/Pages/Public/EditProfile";
+import Userpage from "src/Pages/Public/UserPage";
+import DetailTagPage from "src/Pages/Public/DetailTagPage";
+import IntroPage from "src/Pages/Public/IntroPage/IntroPage";
+import EditProfile from "src/Pages/Public/EditProfile";
+import ProfilePage from "src/Pages/Public/ProfilePage";
 import QuestionsDetail from "src/Pages/Public/QuestionsDetail";
 import QuestionsCreate from "src/Pages/Public/QuestionsCreate";
 import QuestionUpdate from "src/Pages/Public/QuestionUpdate";
+import PostsDetail from "src/Pages/Public/PostDetail";
 
 const SiteLayout = () => {
   return (
     <>
       <Header />
       <Switch>
+        <PublicRouter exact path={path.TAGS_ID} component={DetailTagPage} />
         <PublicRouter exact path={path.HOME} component={HomePage} />
         <PublicRouter path={path.POSTS_CREATE} component={PostsCreate} />
         <PublicRouter
@@ -31,10 +49,38 @@ const SiteLayout = () => {
         <PublicRouter path={path.QUESTION_ID} component={QuestionsDetail} />
         <PublicRouter path={path.POSTS} component={PostPage} />
         <PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
-        <PublicRouter exact path={path.HOME} component={HomePage} />
-        <PublicRouter path={path.POSTS} component={PostPage} />
+        <PublicRouter
+          path={path.QUESTIONS_DETAIL}
+          component={QuestionsDetail}
+        />
         <PublicRouter path={path.TAGS} component={TagsPage} />
         <PublicRouter path={path.USER_ID} component={Userpage} />
+        <PublicRouter path={path.INTRO} component={IntroPage} />
+        <PublicRouter exact path={path.EDIT_PROFILE} component={EditProfile} />
+        <PublicRouter exact path={path.PROFILE} component={ProfilePage} />
+        <PublicRouter
+          exact
+          path={path.CHALLENGE}
+          component={ChallengeCatePage}
+        />
+        <PublicRouter
+          exact
+          path={path.CHALLENGE_CATE_ID}
+          component={ChallengePage}
+        />
+        <PublicRouter path={path.CHALLENGE_ID} component={DetailChallenge} />
+        <PublicRouter path={path.QUIZ} component={QuizPage} />
+        <PublicRouter
+          path={path.CHALLENGE_SOLUTION_CHALLENGE_ID}
+          component={SolutionPage}
+        />
+        <PublicRouter path="*" component={Notfound} />
+        <PublicRouter exact path={path.HOME} component={HomePage} />
+        <PublicRouter path={path.TAGS} component={TagsPage} />
+        <PublicRouter path={path.USER_ID} component={Userpage} />
+        <PublicRouter exact path={path.TAGS_ID} component={DetailTagPage} />
+        {/* <PublicRouter exact path={path.TAGS_FOLLOWER} component={DetailTagPage} />
+        <PublicRouter exact path={path.TAGS_QUESTION_POPULAR} component={DetailTagPage} /> */}
       </Switch>
       <Footer />
     </>
