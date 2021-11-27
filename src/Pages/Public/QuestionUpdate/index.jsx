@@ -8,6 +8,8 @@ import TagApi from "src/Apis/TagApi";
 import ImageApi from "src/Apis/ImageApi";
 import QuestionApi from "src/Apis/QuestionApi";
 import { useHistory, useParams } from "react-router-dom";
+import QuestionsDetail from "../QuestionsDetail";
+import Loading from "src/Components/Loading";
 
 const QuestionUpdate = () => {
   const [title, setTitle] = useState();
@@ -23,7 +25,7 @@ const QuestionUpdate = () => {
   const history = useHistory();
   const [questionDetail, setQuestionDetail] = useState([]);
   const shortId = useParams();
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const listDetailQuestion = async (id) => {
       try {
@@ -31,7 +33,10 @@ const QuestionUpdate = () => {
           id.split("-")[id.split("-").length - 1]
         );
         setQuestionDetail(question);
+        setLoading(false);
+        setTitle(question?.data?.title);
       } catch (error) {
+        setLoading(false);
         console.log(error);
       }
     };
@@ -60,6 +65,7 @@ const QuestionUpdate = () => {
     };
     listImage();
   }, []);
+
   const tagItem = (e) => {
     const arrTag = e.map((item) => {
       return item.value;
@@ -247,7 +253,27 @@ const QuestionUpdate = () => {
   const handelQuestionCancel = () => {
     history.push("/questions");
   };
-
+  // const ContentValue = () => {
+  //   const value = QuestionsDetail?.data?.content;
+  //   setdefaultValueContent(value);
+  // };
+  // ContentValue();
+  // console.log(defaultValueContent);
+  // console.log(questionDetail?.data?.content)
+  // const contentQuestion = () => {
+  //   return (
+  //     <div
+  //       dangerouslySetInnerHTML={{ __html: questionDetail?.data?.content }}
+  //     ></div>
+  //   );
+  // };
+  // console.log(contentQuestion());
+  if (loading)
+    return (
+      <div className="h-screen flex items-center justify-center bg-gray-100">
+        <Loading className="w-[40px] h-[40px] fill-current text-gray-500" />
+      </div>
+    );
   return (
     <div className="mt-[80px] container mx-auto ">
       <div className="">
@@ -255,7 +281,7 @@ const QuestionUpdate = () => {
           type="text"
           className="w-full px-[15px] py-[9px] bg-white rounded-[3px] shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Tiêu đề câu hỏi..."
-          defaultValue={questionDetail?.data?.title}
+          value={title}
           onChange={(e) => handleChangeTitle(e)}
         />
         <span className="text-red-500 text-[12px]">
@@ -337,15 +363,17 @@ const QuestionUpdate = () => {
       </div>
       <div className="mt-[20px] mb-[40px]">
         <div className="text-editor">
-          <ReactQuill
-            theme="snow"
-            modules={modules}
-            formats={formats}
-            defaultValue={questionDetail?.data?.content}
-            onChange={Content}
-            ref={editor}
-            placeholder={"Nhập nội dung câu hỏi tại đây..."}
-          ></ReactQuill>
+          {questionDetail?.data ? (
+            <ReactQuill
+              theme="snow"
+              modules={modules}
+              formats={formats}
+              defaultValue={questionDetail?.data?.content}
+              onChange={Content}
+              ref={editor}
+              placeholder={"Nhập nội dung câu hỏi tại đây..."}
+            ></ReactQuill>
+          ) : null}
         </div>
         <div
           className={
