@@ -7,9 +7,11 @@ import TagAPi from "src/Apis/TagApi";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import FollowApi from "src/Apis/FollowApi";
+import { setLoading } from "src/Redux/Slices/Loading.slice";
 
 const TagsPage = () => {
 
+  const [loading,setLoading] = useState(true);
   const pathName = [
     {
       path: path.TAGS,
@@ -94,7 +96,7 @@ const TagsPage = () => {
                       </div> 
                       }
                     </div>
-                    <div className="col-span-2">
+                    <div className="col-span-2 ml-[10px]">
                       <div className="flex items-center">
                         <h3 className="text-[18px] leading-[20px] ">
                           {item?.name}
