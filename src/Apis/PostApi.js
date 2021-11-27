@@ -2,37 +2,6 @@ import AxiosClient from "./AxiosClient";
 const token = localStorage.getItem("_token_");
 
 const PostApi = {
-<<<<<<< HEAD
-  getPost(endPoint) {
-    const url = `/post/${endPoint}`;
-    return AxiosClient.get(url, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
-  },
-  get(id) {
-    const url = `/posts/${id}`;
-    return AxiosClient.get(url);
-  },
-  add(data) {
-    const url = `/post`;
-    return AxiosClient.post(url, data, {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
-  },
-  getListPublish(params){
-    const url = '/post/publish/list';
-    return AxiosClient.get(url,{
-      params,
-      headers : {
-        authorization : `Bearer ${token}`
-      }
-    })
-  }
-=======
     getPostNew() {
         const url = `/post/newest`;
         return AxiosClient.get(url);
@@ -65,7 +34,6 @@ const PostApi = {
         const url = `/posts`;
         return AxiosClient.post(url, posts);
     },
->>>>>>> hanhnguyen
 };
 
 export default PostApi;
