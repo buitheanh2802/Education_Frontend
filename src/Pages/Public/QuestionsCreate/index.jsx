@@ -8,6 +8,8 @@ import TagApi from "src/Apis/TagApi";
 import PostApi from "src/Apis/PostApi";
 import ImageApi from "src/Apis/ImageApi";
 import QuestionApi from "src/Apis/QuestionApi";
+import { useHistory } from "react-router";
+import Swal from "sweetalert2";
 
 const QuestionsCreate = () => {
   const [title, setTitle] = useState();
@@ -20,7 +22,7 @@ const QuestionsCreate = () => {
   const [validateError, setValidateError] = useState([]);
   const editor = useRef();
   const animatedComponents = makeAnimated();
-  // const history = useHistory();
+  const history = useHistory();
   // {
   //   type: "",
   //   message: "",
@@ -183,6 +185,18 @@ const QuestionsCreate = () => {
   ];
 
   ///react-select
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    background: "#EFF6FF",
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
   const handlerSubmit = async (data) => {
     try {
       var errors = [];
@@ -229,8 +243,17 @@ const QuestionsCreate = () => {
 
       await QuestionApi.add(data);
       // console.log(data);
+
+      await Toast.fire({
+        icon: "success",
+        title: "Đăng câu hỏi thành công",
+      });
     } catch (error) {
       console.log(error);
+      Toast.fire({
+        icon: "error",
+        title: "Đăng câu hỏi thất bại",
+      });
     }
   };
   // const handlerSubmit2 = async () => {
@@ -281,6 +304,9 @@ const QuestionsCreate = () => {
   //     console.log(error);
   //   }
   // };
+  const handelQuestionCancel = () => {
+    history.push("/questions");
+  };
 
   return (
     <div className="mt-[80px] container mx-auto ">
@@ -326,14 +352,14 @@ const QuestionsCreate = () => {
                     ? "relative w-full justify-center bg-blue-500 text-white px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center"
                     : "relative w-full justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
                 }
-                onClick={() => setBoxBtn(!boxBtn)}
+                onClick={() => handlerSubmit()}
               >
                 <Icon.Pen className="fill-current w-[13px]" />
                 <span className="text-[12x] md:text-[16x] ml-1">
                   Xuất bản câu hỏi
                 </span>
               </button>
-              <ul
+              {/* <ul
                 className={
                   boxBtn
                     ? "absolute z-10 text-center w-full mt-[10px] box_btn bg-white top-full left-0 rounded-[3px]"
@@ -354,11 +380,14 @@ const QuestionsCreate = () => {
                   <Icon.Pen className="fill-current w-[13px]" />
                   <span className="ml-2"> Xuất bản bài ngay   </span>
                 </li>
-              </ul>
+              </ul> */}
             </div>
           </div>
           <div className="m-0">
-            <button className="w-full justify-center bg-white text-red-500 px-3  py-[8px] border border-red-500 rounded-[3px] flex items-center hover:bg-red-500 hover:text-white">
+            <button
+              onClick={() => handelQuestionCancel()}
+              className="w-full justify-center bg-white text-red-500 px-3  py-[8px] border border-red-500 rounded-[3px] flex items-center hover:bg-red-500 hover:text-white"
+            >
               <Icon.Close className="fill-current w-[13px]" />
               <span className="text-[12x] md:text-[16x] ml-1">Hủy</span>
             </button>

@@ -5,7 +5,7 @@ import FeaturedAuthor from "../Commons/FeaturedAuthor";
 import TrendingTags from "../Commons/TrendingTags";
 import { path } from "src/Constants/";
 import { Icon } from "src/Components/Icon";
-// import Scrollbar from "react-smooth-scrollbar";
+import Scrollbar from "react-smooth-scrollbar";
 import PostApi from "src/Apis/PostApi";
 import { useLocation } from "react-router";
 
@@ -47,9 +47,17 @@ const PostPage = () => {
   useEffect(() => {
     const listPost = async () => {
       try {
-        const { data: posts } = await PostApi.getPost(
-          location.pathname === "/posts" ? "newest" : "trending"
-        );
+        let endPoint;
+        if (location.pathname === "/posts") {
+          endPoint = "newest";
+        } else if (location.pathname === "/posts/popular") {
+          endPoint = "trending";
+        } else if (location.pathname === "/posts/flow") {
+          endPoint = "following";
+        } else {
+          endPoint = "bookmark";
+        }
+        const { data: posts } = await PostApi.getPost(endPoint);
         setPost(posts);
       } catch (error) {
         console.log("Failed to get data", error.response);
@@ -62,13 +70,13 @@ const PostPage = () => {
     <div className="container mx-auto mt-[55px] py-[20px]">
       <Navigation path={pathName} button={button} />
       <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
-        <div className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded h-screen">
+        <Scrollbar className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded h-screen">
           <PostView posts={posts} />
-        </div>
-        <div className="col-span-10 lg:col-span-3 bg-white shadow rounded h-screen">
+        </Scrollbar>
+        <Scrollbar className="col-span-10 lg:col-span-3 bg-white shadow rounded h-screen">
           <FeaturedAuthor authors={authors} />
           <TrendingTags tags={tags} />
-        </div>
+        </Scrollbar>
       </div>
     </div>
   );

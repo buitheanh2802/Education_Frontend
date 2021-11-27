@@ -6,20 +6,20 @@ import {
 import { path } from '../Constants';
 import SiteLayout from '../Layouts/SiteLayout';
 import PublicRouter from './PublicRouter';
-import Authorization from '../Pages/Auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LocalStorage from 'src/Helpers/Storage';
 import { ActionGetProfile } from 'src/Redux/Actions/Auth.action';
-import Loading from 'src/Components/Loading';
 import queryParam from 'src/Helpers/QueryParams'
 import AdminLayout from 'src/Layouts/AdminLayout';
 import PrivateRouter from './PrivateRouter';
-import AlertMessage from 'src/Components/AlertMessage';
+// import AlertMessage from 'src/Components/';
+import AuthLayout from 'src/Layouts/AuthLayout';
+import Loading from 'src/Components/Loading'
 
 const RootRoute = () => {
     const [isLoading, setIsLoading] = useState(true)
     const dispatch = useDispatch()
-
+    const loading = useSelector(state => state.Loading)
     queryParam("token") && LocalStorage.Set('_token_', queryParam("token"))
 
     useEffect(() => {
@@ -31,13 +31,15 @@ const RootRoute = () => {
         })()
     }, [dispatch])
 
-    if (isLoading) return <div className="h-screen flex items-center justify-center bg-gray-100"><Loading className="w-[40px] h-[40px] fill-current text-gray-500" /></div>
+    if (isLoading) return <div className="h-screen flex items-center justify-center bg-gray-100">
+        <Loading className="w-[40px] h-[40px] fill-current text-gray-500" /></div>
     return (
         <Router>
-            <AlertMessage />
+            {loading && <Loading />}
+            {/* <AlertMessage /> */}
             <Switch>
-                <PublicRouter path={path.AUTH} component={Authorization} />
                 <PrivateRouter path={path.ADMIN} component={AdminLayout} />
+                <PublicRouter path={path.AUTH} component={AuthLayout} />
                 <PublicRouter path={path.HOME} component={SiteLayout} />
             </Switch>
         </Router>
