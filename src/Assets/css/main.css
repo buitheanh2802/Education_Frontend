@@ -2211,7 +2211,7 @@ video {
   background-color: rgba(13, 97, 199, var(--tw-bg-opacity));
 }
 
-.bg-\[\#fff\] {
+.bg-\[\#fff\]{
   --tw-bg-opacity: 1;
   background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
 }
@@ -3636,7 +3636,7 @@ body {
 
 .hover\:bg-blue-500:hover {
   --tw-bg-opacity: 1;
-  background-color: rgba(59, 130, 246, var(--tw-bg-opacity));
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
 }
 
 .hover\:bg-\[\#fff\]:hover {
@@ -3725,7 +3725,7 @@ body {
 
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
-  color: rgba(255, 255, 255, var(--tw-text-opacity));
+  color: rgba(13, 97, 199, var(--tw-text-opacity));
 }
 
 .hover\:text-\[\#0d61c7\]:hover {
@@ -4933,7 +4933,6 @@ body {
     padding-left: 80px;
     padding-right: 80px;
   }
-
   .xl\:px-\[100px\] {
     padding-left: 100px;
     padding-right: 100px;
@@ -4987,6 +4986,10 @@ body {
   }
 
   .\32xl\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .\32xl\:grid-cols-4{
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

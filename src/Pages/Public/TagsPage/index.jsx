@@ -81,18 +81,18 @@ const TagsPage = () => {
             {tags?.map((item, index) => {
               return (
                 <div key={index} className="item md:text-[16px] text-[14px] w-max-[200px] px-[10px] py-[10px]">
-                  <Link className="grid grid-cols-3 gap-[10px] justify-center items-center" to={`/tags/${item?.slug}`} >
-                  <div className="col-span-1">
-                      {item.avatar.avatarUrl ? 
-                      <img
-                      src={item.avatar.avatarUrl}
-                      alt=""
-                      className="w-[80px] " 
-                    /> : <div className="w-[80px] h-[75px] bg-blue-400 flex justify-center items-center ">
-                      <p className="text-white text-[12px]">{item.name}</p>
-                    </div>
+                  <Link className="grid grid-cols-3 gap-[10px] justify-center items-center" to={`/tag/${item?.slug}`} >
+                    <div className="mx-auto">
+                      {item.avatar.avatarUrl ?
+                        <img
+                          src={item.avatar.avatarUrl}
+                          alt=""
+                          className="w-[80px] "
+                        /> :
+                        <div className="w-[80px] h-[75px] bg-blue-400 flex justify-center items-center ">
+                          <p className="text-white text-[12px]">{item.name}</p>
+                        </div>
                       }
-                      
                     </div>
                     <div className="col-span-2 ml-[10px]">
                       <div className="flex items-center">

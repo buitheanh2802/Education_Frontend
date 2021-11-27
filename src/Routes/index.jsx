@@ -12,7 +12,6 @@ import { ActionGetProfile } from 'src/Redux/Actions/Auth.action';
 import queryParam from 'src/Helpers/QueryParams'
 import AdminLayout from 'src/Layouts/AdminLayout';
 import PrivateRouter from './PrivateRouter';
-// import AlertMessage from 'src/Components/';
 import AuthLayout from 'src/Layouts/AuthLayout';
 import Loading from 'src/Components/Loading'
 
