@@ -5,8 +5,8 @@ import { path } from "../../../Constants/index";
 import { Icon } from "../../../Components/Icon";
 import TagAPi from "src/Apis/TagApi";
 import { useLocation } from "react-router";
-import { Link } from "react-router-dom";  
-import {useDispatch } from "react-redux"
+import { Link } from "react-router-dom";
+import FollowApi from "src/Apis/FollowApi";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import Loading from "src/Components/Loading";
 
