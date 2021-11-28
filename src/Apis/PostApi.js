@@ -14,7 +14,7 @@ const PostApi = {
         const url = `/post/following`;
         return AxiosClient.get(url, {
             headers: {
-                Authorization : `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             }
         })
     },
@@ -22,7 +22,7 @@ const PostApi = {
         const url = `/post/bookmark`;
         return AxiosClient.get(url, {
             headers: {
-                Authorization : `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             }
         })
     },
@@ -34,6 +34,15 @@ const PostApi = {
         const url = `/posts`;
         return AxiosClient.post(url, posts);
     },
+    getListPublish(request) {
+        const url = 'post/publish/list';
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            params: request
+        })
+    }
 };
 
 export default PostApi;

@@ -30,7 +30,7 @@ const PheDuyetBaiViet = (props) => {
                 // end call
                 setStartCall(false);
             } catch (error) {
-                console.log(error.response);
+                console.log(error);
                 setStartCall(false);
             }
         }
