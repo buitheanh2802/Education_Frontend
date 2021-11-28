@@ -62,8 +62,8 @@ export const path = {
   ADMIN: '/manager',
   //contact
   CONTACT: "/contact",
-  // Phê duyệt bài viết
-  PHE_DUYET_BAI_VIET: '/manager/publish_post',
+  // Quản trị bài viết
+  POST_MANAGER: '/manager/publish_post',
 
   //profile
   PROFILE: "/profile/:username",

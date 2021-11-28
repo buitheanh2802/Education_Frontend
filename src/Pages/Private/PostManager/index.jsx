@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import PostAPI from './../../../Apis/PostApi';
+import PostAPI from '../../../Apis/PostApi';
 import Header from './components/header';
 import PublishItem from './components/publish-item';
 import queryString from 'query-string';
 import PublishNav from './components/publish-nav';
+import SkeletonGroup from './components/skeleton-group';
 
-const PheDuyetBaiViet = (props) => {
+const PostManager = (props) => {
     // get query params
     const query = queryString.parse(props.location.search, { parseNumbers: true })
     // __state
@@ -26,7 +27,6 @@ const PheDuyetBaiViet = (props) => {
                 if (models && models.length > 0) setPostList(models);
                 // set pagination
                 setPagination(metaData.pagination);
-                console.log(models);
                 // end call
                 setStartCall(false);
             } catch (error) {
@@ -41,6 +41,7 @@ const PheDuyetBaiViet = (props) => {
         <div className="w-full">
             <Header />
             <PublishNav />
+            {startCall && <SkeletonGroup />}
             {postList && postList.map((item,index) => {
                 return (
                     <PublishItem 
@@ -50,6 +51,8 @@ const PheDuyetBaiViet = (props) => {
                         content={item.content}
                         createBy={item.createBy}
                         createAt={item.createdAt}
+                        publishedBy={item.publishedBy}
+                        shortId={item.shortId}
                     />
                 )
             })}
@@ -57,4 +60,4 @@ const PheDuyetBaiViet = (props) => {
     );
 };
 
-export default PheDuyetBaiViet;
+export default PostManager;

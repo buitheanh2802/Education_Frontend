@@ -42,6 +42,14 @@ const PostApi = {
             },
             params: request
         })
+    },
+    publish(request) {
+        const url = `post/publish/${request.shortId}`;
+        return AxiosClient.put(url, request.data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+        })
     }
 };
 
