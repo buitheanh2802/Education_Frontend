@@ -24,6 +24,7 @@
     "react-swipe": "^6.0.4",
     "redux": "^4.1.0",
     "smooth-scrollbar": "^8.6.3",
+    "sweetalert2": "^11.2.1",
     "swipe-js-iso": "^2.1.5",
     "swiper": "^7.0.3",
     "thunk": "^0.0.1",

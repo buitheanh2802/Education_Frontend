@@ -226,3 +226,6 @@ body {
 }
 
 /* ///////// */
+.swal2-toast {
+  margin-top: 70px;
+}

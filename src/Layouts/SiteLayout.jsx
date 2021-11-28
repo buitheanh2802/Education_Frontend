@@ -1,20 +1,19 @@
-import React from 'react';
-import { Switch } from 'react-router-dom';
-import PublicRouter from '../Routes/PublicRouter';
-import { path } from '../Constants'
-import HomePage from '../Pages/Public/HomePage';
-import Header from '../Pages/Public/Commons/Header';
-import PostPage from '../Pages/Public/PostPage';
-import QuestionsPage from '../Pages/Public/QuestionsPage';
-import Notfound from 'src/Pages/Public/Notfound';
-import Footer from 'src/Pages/Public/Commons/Footer';
-import ChallengeCatePage from 'src/Pages/Public/ChallengeCatePage';
-import ChallengePage from 'src/Pages/Public/ChallengePage';
-import QuizPage from 'src/Pages/Public/QuizPage';
-import DetailChallenge from 'src/Pages/Public/DetailChallenge';
-import SolutionPage from 'src/Pages/Public/SolutionPage';
+import React from "react";
+import { Switch } from "react-router-dom";
+import PublicRouter from "../Routes/PublicRouter";
+import { path } from "../Constants";
+import HomePage from "../Pages/Public/HomePage";
+import Header from "../Pages/Public/Commons/Header";
+import PostPage from "../Pages/Public/PostPage";
+import QuestionsPage from "../Pages/Public/QuestionsPage";
+import Notfound from "src/Pages/Public/Notfound";
+import Footer from "src/Pages/Public/Commons/Footer";
+import ChallengeCatePage from "src/Pages/Public/ChallengeCatePage";
+import ChallengePage from "src/Pages/Public/ChallengePage";
+import QuizPage from "src/Pages/Public/QuizPage";
+import DetailChallenge from "src/Pages/Public/DetailChallenge";
+import SolutionPage from "src/Pages/Public/SolutionPage";
 import TagsPage from "../Pages/Public/TagsPage";
-import PostsDetail from "src/Pages/Public/PostsDetail";
 // import ContactPage from "src/Pages/Public/ContactPage";
 import PostsCreate from "src/Pages/Public/PostsCreate";
 // import QuestionsCreate from "src/Pages/Public/QuestionsCreate";
@@ -30,6 +29,8 @@ import EditProfile from "src/Pages/Public/EditProfile";
 import ProfilePage from "src/Pages/Public/ProfilePage";
 import QuestionsDetail from "src/Pages/Public/QuestionsDetail";
 import QuestionsCreate from "src/Pages/Public/QuestionsCreate";
+import QuestionUpdate from "src/Pages/Public/QuestionUpdate";
+import PostsDetail from "src/Pages/Public/PostDetail";
 
 const SiteLayout = () => {
     return (

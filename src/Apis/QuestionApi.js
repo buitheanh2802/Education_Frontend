@@ -14,10 +14,6 @@ const QuestionApi = {
       return AxiosClient.get(url);
     }
   },
-  // getQuestion() {
-  //   const url = `/question`;
-  //   return AxiosClient.get(url);
-  // },
   getId(id) {
     const url = `/question/${id}`;
     return AxiosClient.get(url, {
@@ -29,6 +25,22 @@ const QuestionApi = {
   add(data) {
     const url = `/question`;
     return AxiosClient.post(url, data, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  },
+  remove(id) {
+    const url = `/question/${id}`;
+    return AxiosClient.delete(url, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  },
+  update(id, data) {
+    const url = `/question/update/${id}`;
+    return AxiosClient.put(url, data, {
       headers: {
         authorization: `Bearer ${token}`,
       },

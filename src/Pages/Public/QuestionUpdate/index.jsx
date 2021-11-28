@@ -5,13 +5,13 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Icon } from "src/Components/Icon";
 import TagApi from "src/Apis/TagApi";
-import PostApi from "src/Apis/PostApi";
 import ImageApi from "src/Apis/ImageApi";
 import QuestionApi from "src/Apis/QuestionApi";
-import { useHistory } from "react-router";
-import Swal from "sweetalert2";
+import { useHistory, useParams } from "react-router-dom";
+import QuestionsDetail from "../QuestionsDetail";
+import Loading from "src/Components/Loading";
 
-const QuestionsCreate = () => {
+const QuestionUpdate = () => {
   const [title, setTitle] = useState();
   const [tag, setTag] = useState();
   const [content, setContent] = useState();
@@ -23,14 +23,24 @@ const QuestionsCreate = () => {
   const editor = useRef();
   const animatedComponents = makeAnimated();
   const history = useHistory();
-  // {
-  //   type: "",
-  //   message: "",
-  // }
-  // const token = localStorage.getItem("_token_");
-  // if (token === null) history.push("/auth/login");
-
+  const [questionDetail, setQuestionDetail] = useState([]);
+  const shortId = useParams();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    const listDetailQuestion = async (id) => {
+      try {
+        let { data: question } = await QuestionApi.getId(
+          id.split("-")[id.split("-").length - 1]
+        );
+        setQuestionDetail(question);
+        setLoading(false);
+        setTitle(question?.data?.title);
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
+      }
+    };
+    listDetailQuestion(shortId?.id);
     const listTags = async () => {
       try {
         const { data: tags } = await TagApi.getAll();
@@ -73,6 +83,11 @@ const QuestionsCreate = () => {
         ])
       : setValidateError(validateError.filter((i) => i.type !== "tag"));
   };
+
+  const tagsQuestion = questionDetail?.data?.tags?.map((item) => {
+    return item.name;
+  });
+
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
 
@@ -185,18 +200,6 @@ const QuestionsCreate = () => {
   ];
 
   ///react-select
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 2000,
-    timerProgressBar: true,
-    background: "#EFF6FF",
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
   const handlerSubmit = async (data) => {
     try {
       var errors = [];
@@ -241,73 +244,36 @@ const QuestionsCreate = () => {
         // isDraft: false,
       };
 
-      await QuestionApi.add(data);
-      // console.log(data);
-
-      await Toast.fire({
-        icon: "success",
-        title: "Đăng câu hỏi thành công",
-      });
+      // await QuestionApi.add(data);
+      console.log(data);
     } catch (error) {
       console.log(error);
-      Toast.fire({
-        icon: "error",
-        title: "Đăng câu hỏi thất bại",
-      });
     }
   };
-  // const handlerSubmit2 = async () => {
-  //   try {
-  //     var errors = [];
-  //     if (!title) {
-  //       errors = [
-  //         ...errors,
-  //         {
-  //           type: "t",
-  //           message: "Tiêu đề không được để trống",
-  //         },
-  //       ];
-  //     }
-  //     if (tagId.length <= 0 || tagId.length > 5) {
-  //       errors = [
-  //         ...errors,
-  //         {
-  //           type: "tag",
-  //           message: "Gắn thẻ câu hỏi ít nhất 1 thẻ và không quá 5 thẻ",
-  //         },
-  //       ];
-  //     }
-
-  //     if (!content || validateContent.indexOf(content) !== -1) {
-  //       errors = [
-  //         ...errors,
-  //         {
-  //           type: "c",
-  //           message: "Nội dung không được để trống",
-  //         },
-  //       ];
-  //     }
-
-  //     if (errors.length !== 0) {
-  //       setValidateError(errors);
-  //       return;
-  //     }
-
-  //     let data = {
-  //       title: title,
-  //       tags: tagId,
-  //       content: content,
-  //       isDraft: true,
-  //     };
-  //     await PostApi.add(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   const handelQuestionCancel = () => {
     history.push("/questions");
   };
-
+  // const ContentValue = () => {
+  //   const value = QuestionsDetail?.data?.content;
+  //   setdefaultValueContent(value);
+  // };
+  // ContentValue();
+  // console.log(defaultValueContent);
+  // console.log(questionDetail?.data?.content)
+  // const contentQuestion = () => {
+  //   return (
+  //     <div
+  //       dangerouslySetInnerHTML={{ __html: questionDetail?.data?.content }}
+  //     ></div>
+  //   );
+  // };
+  // console.log(contentQuestion());
+  if (loading)
+    return (
+      <div className="h-screen flex items-center justify-center bg-gray-100">
+        <Loading className="w-[40px] h-[40px] fill-current text-gray-500" />
+      </div>
+    );
   return (
     <div className="mt-[80px] container mx-auto ">
       <div className="">
@@ -315,6 +281,7 @@ const QuestionsCreate = () => {
           type="text"
           className="w-full px-[15px] py-[9px] bg-white rounded-[3px] shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Tiêu đề câu hỏi..."
+          value={title}
           onChange={(e) => handleChangeTitle(e)}
         />
         <span className="text-red-500 text-[12px]">
@@ -330,8 +297,8 @@ const QuestionsCreate = () => {
             closeMenuOnSelect={false}
             components={animatedComponents}
             isMulti
+            defaultValue={tagsQuestion}
             options={tag}
-            // id={}
             placeholder={"Gắn thẻ câu hỏi "}
             onChange={(e) => tagItem(e)}
           />
@@ -356,7 +323,7 @@ const QuestionsCreate = () => {
               >
                 <Icon.Pen className="fill-current w-[13px]" />
                 <span className="text-[12x] md:text-[16x] ml-1">
-                  Xuất bản câu hỏi
+                  Sửa câu hỏi
                 </span>
               </button>
               {/* <ul
@@ -396,14 +363,17 @@ const QuestionsCreate = () => {
       </div>
       <div className="mt-[20px] mb-[40px]">
         <div className="text-editor">
-          <ReactQuill
-            theme="snow"
-            modules={modules}
-            formats={formats}
-            onChange={Content}
-            ref={editor}
-            placeholder={"Nhập nội dung câu hỏi tại đây..."}
-          ></ReactQuill>
+          {questionDetail?.data ? (
+            <ReactQuill
+              theme="snow"
+              modules={modules}
+              formats={formats}
+              defaultValue={questionDetail?.data?.content}
+              onChange={Content}
+              ref={editor}
+              placeholder={"Nhập nội dung câu hỏi tại đây..."}
+            ></ReactQuill>
+          ) : null}
         </div>
         <div
           className={
@@ -473,4 +443,4 @@ const QuestionsCreate = () => {
   );
 };
 
-export default QuestionsCreate;
+export default QuestionUpdate;
