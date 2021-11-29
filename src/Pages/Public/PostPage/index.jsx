@@ -21,10 +21,6 @@ const PostPage = () => {
     { path: path.POSTS_BOOK_MARK, value: "Bookmark của tôi" },
   ];
   const button = { path: path.POSTS_CREATE, icon: Icon.Pen, value: "Viết bài" };
-
-
-
-
   
   // authors
   const authors = [
