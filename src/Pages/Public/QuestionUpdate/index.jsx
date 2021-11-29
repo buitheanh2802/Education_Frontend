@@ -26,6 +26,8 @@ const QuestionUpdate = () => {
   const [questionDetail, setQuestionDetail] = useState([]);
   const shortId = useParams();
   const [loading, setLoading] = useState(true);
+  const [newtag, setNewtag] = useState([]);
+
   useEffect(() => {
     const listDetailQuestion = async (id) => {
       try {
@@ -34,7 +36,18 @@ const QuestionUpdate = () => {
         );
         setQuestionDetail(question);
         setLoading(false);
+        const tagsQuestion = question?.data?.tags?.map((item) => ({
+          ...item,
+          value: item.name,
+          label: item.name,
+        }));
+
+        // const newArrtag = tagsQuestion?.map((item) => {
+        //   return item.value;
+        // });
         setTitle(question?.data?.title);
+        setContent(question?.data?.content);
+        setNewtag(tagsQuestion);
       } catch (error) {
         setLoading(false);
         console.log(error);
@@ -65,12 +78,31 @@ const QuestionUpdate = () => {
     };
     listImage();
   }, []);
+  console.log(tagId);
+  // console.log("tag", tag);
+  // console.log("tagId", tagId);
+  const tagsQuestion = questionDetail?.data?.tags?.map((item) => ({
+    ...item,
+    value: item.name,
+    label: item.name,
+  }));
+
+  // const newArrtag = tagsQuestion?.map((item) => {
+  //   return item.value;
+  // });
+  // console.log(newArrtag);
 
   const tagItem = (e) => {
+    // const newArrtag = tagsQuestion?.map((item) => {
+    //   return item.value;
+    // });
     const arrTag = e.map((item) => {
       return item.value;
     });
-    setTagId(arrTag);
+    // var result = newArrtag.concat(arrTag);
+    setNewtag(arrTag);
+    console.log(arrTag);
+    // console.log(tagId);
 
     arrTag.length <= 0 || arrTag.length > 5
       ? validateError.findIndex((i) => i.type === "tag") === -1 &&
@@ -83,10 +115,6 @@ const QuestionUpdate = () => {
         ])
       : setValidateError(validateError.filter((i) => i.type !== "tag"));
   };
-
-  const tagsQuestion = questionDetail?.data?.tags?.map((item) => {
-    return item.name;
-  });
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -244,30 +272,20 @@ const QuestionUpdate = () => {
         // isDraft: false,
       };
 
-      // await QuestionApi.add(data);
+      // await QuestionApi.update(
+      //   shortId?.id.split("-")[shortId?.id.split("-").length - 1],
+      //   data
+      // );
       console.log(data);
+      // console.log(shortId?.id.split("-")[shortId?.id.split("-").length - 1]);
     } catch (error) {
       console.log(error);
     }
   };
   const handelQuestionCancel = () => {
-    history.push("/questions");
+    history.push(`/question/${shortId.id}`);
   };
-  // const ContentValue = () => {
-  //   const value = QuestionsDetail?.data?.content;
-  //   setdefaultValueContent(value);
-  // };
-  // ContentValue();
-  // console.log(defaultValueContent);
-  // console.log(questionDetail?.data?.content)
-  // const contentQuestion = () => {
-  //   return (
-  //     <div
-  //       dangerouslySetInnerHTML={{ __html: questionDetail?.data?.content }}
-  //     ></div>
-  //   );
-  // };
-  // console.log(contentQuestion());
+
   if (loading)
     return (
       <div className="h-screen flex items-center justify-center bg-gray-100">
@@ -293,15 +311,17 @@ const QuestionUpdate = () => {
       </div>
       <div className="mt-[20px] grid grid-cols-1  lg:grid-cols-[3fr,1fr] gap-5">
         <div className="">
-          <CreatetableSelect
-            closeMenuOnSelect={false}
-            components={animatedComponents}
-            isMulti
-            defaultValue={tagsQuestion}
-            options={tag}
-            placeholder={"Gắn thẻ câu hỏi "}
-            onChange={(e) => tagItem(e)}
-          />
+          {tagId !== undefined ? (
+            <CreatetableSelect
+              closeMenuOnSelect={false}
+              components={animatedComponents}
+              isMulti
+              value={newtag}
+              options={tag}
+              placeholder={"Gắn thẻ câu hỏi "}
+              onChange={(e) => tagItem(e)}
+            />
+          ) : null}
           <span className="text-red-500 text-[12px]">
             {validateError.length !== 0 &&
               validateError.findIndex((i) => i.type === "tag") !== -1 &&
@@ -326,28 +346,6 @@ const QuestionUpdate = () => {
                   Sửa câu hỏi
                 </span>
               </button>
-              {/* <ul
-                className={
-                  boxBtn
-                    ? "absolute z-10 text-center w-full mt-[10px] box_btn bg-white top-full left-0 rounded-[3px]"
-                    : "hidden"
-                }
-              >
-                <li
-                  className="py-3 px-3 text-[12x] flex justify-center items-center md:text-[16x] text-gray-600 cursor-pointer border-b border-gray-100 hover:bg-blue-100"
-                  onClick={() => handlerSubmit()}
-                >
-                  <Icon.HeartFilled className="fill-current w-[13px]" />
-                  <span className="ml-2">Lưu thành bản nháp</span>
-                </li>
-                <li
-                  className="py-3 px-3 text-[12x] md:text-[16x] justify-center items-center text-gray-600 cursor-pointer hover:bg-blue-100 flex"
-                  // onClick={() => handlerSubmit2()}
-                >
-                  <Icon.Pen className="fill-current w-[13px]" />
-                  <span className="ml-2"> Xuất bản bài ngay   </span>
-                </li>
-              </ul> */}
             </div>
           </div>
           <div className="m-0">
@@ -363,12 +361,12 @@ const QuestionUpdate = () => {
       </div>
       <div className="mt-[20px] mb-[40px]">
         <div className="text-editor">
-          {questionDetail?.data ? (
+          {content !== undefined ? (
             <ReactQuill
               theme="snow"
               modules={modules}
               formats={formats}
-              defaultValue={questionDetail?.data?.content}
+              defaultValue={content}
               onChange={Content}
               ref={editor}
               placeholder={"Nhập nội dung câu hỏi tại đây..."}

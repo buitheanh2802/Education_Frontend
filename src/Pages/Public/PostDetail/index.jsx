@@ -23,11 +23,13 @@ const PostsDetail = () => {
   const [postShare, setpostShare] = useState(false);
   const [copyLink, setCopyLink] = useState(false);
   const [postDetail, setPostDetail] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { profile } = useSelector((state) => state.Auth);
   const [render, setRender] = useState(false);
   const history = useHistory();
   const token = localStorage.getItem("_token_");
   const id = shortId.id.split("-")[shortId.id.split("-").length - 1];
+
   useEffect(() => {
     setRender(false);
 
@@ -35,7 +37,9 @@ const PostsDetail = () => {
       try {
         const { data: post } = await PostApi.getPost(id);
         setPostDetail(post);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log(error);
       }
     };
@@ -139,6 +143,12 @@ const PostsDetail = () => {
     setCopyLink(copy);
   };
   // console.log(window.location.href);
+  if (loading)
+    return (
+      <div className="h-screen flex items-center justify-center bg-gray-100">
+        <Loading className="w-[40px] h-[40px] fill-current text-gray-500" />
+      </div>
+    );
   return (
     <>
       {/* {postDetail && (

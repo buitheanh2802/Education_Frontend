@@ -8,10 +8,12 @@ import { Icon } from "src/Components/Icon";
 import Scrollbar from "react-smooth-scrollbar";
 import PostApi from "src/Apis/PostApi";
 import { useLocation } from "react-router";
+import Loading from "src/Components/Loading";
 
 const PostPage = () => {
   const location = useLocation();
   const [posts, setPost] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Navigation
   const pathName = [
@@ -59,13 +61,21 @@ const PostPage = () => {
         }
         const { data: posts } = await PostApi.getPost(endPoint);
         setPost(posts);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log("Failed to get data", error.response);
       }
     };
     listPost();
   }, [location.pathname]);
 
+  if (loading)
+    return (
+      <div className="h-screen flex items-center justify-center bg-gray-100">
+        <Loading className="w-[40px] h-[40px] fill-current text-gray-500" />
+      </div>
+    );
   return (
     <div className="container mx-auto mt-[55px] py-[20px]">
       <Navigation path={pathName} button={button} />

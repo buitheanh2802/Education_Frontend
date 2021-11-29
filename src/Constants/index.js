@@ -27,6 +27,7 @@ export const path = {
   USER_BOOKMARK: "/user/:username/bookmark/post",
   USER_TAG: "/user/:username/tag",
 
+  // question
   QUESTIONS: "/questions",
   QUESTION_ID: "/question/:slug-:id",
   QUESTIONS_CREATE: "/questions/create",
