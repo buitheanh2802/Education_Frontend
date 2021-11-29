@@ -8,10 +8,12 @@ import { Icon } from "src/Components/Icon";
 import Scrollbar from "react-smooth-scrollbar";
 import PostApi from "src/Apis/PostApi";
 import { useLocation } from "react-router";
+import SkeletonGroup from "./components/skeleton-group";
 
 const PostPage = () => {
   const location = useLocation();
   const [posts, setPost] = useState([]);
+  const [loadingPost, setLoadingPost] = useState(false);
 
   // Navigation
   const pathName = [
@@ -21,7 +23,7 @@ const PostPage = () => {
     { path: path.POSTS_BOOK_MARK, value: "Bookmark của tôi" },
   ];
   const button = { path: path.POSTS_CREATE, icon: Icon.Pen, value: "Viết bài" };
-  
+
   // authors
   const authors = [
     {
@@ -57,9 +59,12 @@ const PostPage = () => {
         } else {
           endPoint = "bookmark";
         }
+        setLoadingPost(true);
         const { data: posts } = await PostApi.getPost(endPoint);
         setPost(posts);
+        setLoadingPost(false);
       } catch (error) {
+        setLoadingPost(false);
         console.log("Failed to get data", error.response);
       }
     };
@@ -71,6 +76,7 @@ const PostPage = () => {
       <Navigation path={pathName} button={button} />
       <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
         <Scrollbar className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded h-screen">
+        {loadingPost && <SkeletonGroup />}
           <PostView posts={posts} />
         </Scrollbar>
         <Scrollbar className="col-span-10 lg:col-span-3 bg-white shadow rounded h-screen">
