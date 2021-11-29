@@ -4,10 +4,9 @@ import { Icon } from "src/Components/Icon";
 import { timeFormatter } from "../../../../Helpers/Timer";
 
 const PostView = ({ posts }) => {
-    console.log(posts);
     return (
         <>
-            {posts?.data?.models.length === 0 ? (
+            {posts?.data?.models.length === 0 || posts.length === 0 ? (
                 <div>
                     <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
                         Không có gì ở đây cả

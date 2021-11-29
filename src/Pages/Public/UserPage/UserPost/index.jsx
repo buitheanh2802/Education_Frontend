@@ -15,7 +15,7 @@ const UserPost = ({ userPost }) => {
           {userPost?.map((item, index) => {
             return (
               <>
-                <div className="flex py-[10px] ">
+                <div key={index} className="flex py-[10px] ">
                   <div>
                     {item?.avatar?.avatarUrl ? (
                       <img

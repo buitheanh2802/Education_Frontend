@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Navigation from '../Commons/Navigation'
 import PostView from '../Commons/PostView'
 import FeaturedAuthor from '../Commons/FeaturedAuthor'
 import TrendingTags from '../Commons/TrendingTags'
-import { path } from 'src/Constants/'
 import { Icon } from 'src/Components/Icon'
 import Scrollbar from 'react-smooth-scrollbar'
 import PostApi from "src/Apis/PostApi"

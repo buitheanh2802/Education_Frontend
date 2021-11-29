@@ -81,7 +81,6 @@ const Userpage = (props) => {
 
   useEffect(() => {
     const username = props.match.params.username;
-    console.log(username);
     const userFollowers = async () => {
       try {
         const { data: followerUser } = await ProfileUserApi.getFollowerUser(
@@ -181,9 +180,6 @@ const Userpage = (props) => {
                 <Icon.Star className="w-[18px] mb-[15px] ml-[10px] inline-block" />
                 <p className="text-[#666]">@{user?.username}</p>
               </div>
-              {/* <button className="mt-[10px] bg-[#fff] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#fdfdfd] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
-                + Theo dõi
-              </button> */}
               {user?.isFollowing ?
                 <button onClick={() => handleFollow()} className="mt-[10px] bg-[#0d61c7] border border-[#0d61c7] hover:bg-[#fff] hover:text-[#0d61c7] text-[#fff] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
                   - Bỏ theo dõi
@@ -253,7 +249,7 @@ const Userpage = (props) => {
             <span className="font-bold text-[13px]">{user?.followers}</span>
           </div>
         </div>
-      </div>
+      </div>      
     </div>
   );
 };

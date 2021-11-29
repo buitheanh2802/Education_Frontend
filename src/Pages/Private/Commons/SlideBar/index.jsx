@@ -53,7 +53,7 @@ const SlideBar = () => {
                             <Icon.AdminExercise />
                         </span>
                         <span className="mx-4 text-sm font-normal">
-                            Phê duyệt bài viết
+                            Quản lí bài viết
                         </span>
                     </NavLink>
                 </nav>
