@@ -10,10 +10,9 @@ import UserFollower from "./UserFollower";
 import UserBookMark from "./UserBookMark";
 import UserPost from "./UserPost";
 import UserTag from "./UserTag";
-import Loading from "src/Components/Loading";
-
 import { useDispatch } from "react-redux";
 import FollowApi from "src/Apis/FollowApi";
+import { setLoading } from "src/Redux/Slices/Loading.slice";
 
 const Userpage = (props) => {
   const username = props.match.params.username;
@@ -23,7 +22,6 @@ const Userpage = (props) => {
   const [userBookMark, setUserBookMark] = useState([]);
   const [userPost, setUserPost] = useState([]);
   const [userTag, setUserTag] = useState([]);
-  const [loading,setLoading] = useState(true);
   const dispatch = useDispatch();
 
   const handleFollow = async () => {
@@ -83,7 +81,6 @@ const Userpage = (props) => {
 
   useEffect(() => {
     const username = props.match.params.username;
-    console.log(username);
     const userFollowers = async () => {
       try {
         const { data: followerUser } = await ProfileUserApi.getFollowerUser(
@@ -158,7 +155,7 @@ const Userpage = (props) => {
 
   return (
     <div className="container mx-auto mt-[80px]">
-        <div className="my-[15px] lg:grid lg:grid-cols-4 gap-3">
+      <div className="my-[15px] lg:grid lg:grid-cols-4 gap-3">
         <div className="col-start-1 col-span-3 w-full  rounded">
           <div className="flex py-[30px] px-[10px] mb-[20px] bg-white">
             <div>
@@ -252,7 +249,7 @@ const Userpage = (props) => {
             <span className="font-bold text-[13px]">{user?.followers}</span>
           </div>
         </div>
-      </div>
+      </div>      
     </div>
   );
 };
