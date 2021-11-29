@@ -34,6 +34,14 @@ const PostApi = {
         const url = `/posts`;
         return AxiosClient.post(url, posts);
     },
+    getPost(endPoint) {
+        const url = `/post/${endPoint}`;
+        return AxiosClient.get(url, {
+            headers: {
+                authorization: `Bearer ${token}`,
+            },
+        });
+    },
     getListPublish(request) {
         const url = 'post/publish/list';
         return AxiosClient.get(url, {

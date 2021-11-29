@@ -22,10 +22,6 @@ const PostPage = () => {
   ];
   const button = { path: path.POSTS_CREATE, icon: Icon.Pen, value: "Viết bài" };
 
-
-
-
-  
   // authors
   const authors = [
     {
