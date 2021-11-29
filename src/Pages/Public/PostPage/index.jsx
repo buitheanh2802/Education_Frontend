@@ -1,31 +1,28 @@
 import React, { useState, useEffect } from "react";
-import PostView from '../Commons/PostView'
-import FeaturedAuthor from '../Commons/FeaturedAuthor'
-import TrendingTags from '../Commons/TrendingTags'
-import { Icon } from 'src/Components/Icon'
-import Scrollbar from 'react-smooth-scrollbar'
-import PostApi from "src/Apis/PostApi"
-import { useHistory } from "react-router-dom"
+import Navigation from "../Commons/Navigation";
+import PostView from "../Commons/PostView";
+import FeaturedAuthor from "../Commons/FeaturedAuthor";
+import TrendingTags from "../Commons/TrendingTags";
+import { path } from "src/Constants/";
+import { Icon } from "src/Components/Icon";
+import Scrollbar from "react-smooth-scrollbar";
+import PostApi from "src/Apis/PostApi";
+import { useLocation } from "react-router";
+import Loading from "src/Components/Loading";
+import './index.css';
+import SkeletonGroup from "./components/skeleton-group";
 
 const PostPage = () => {
-    const token = localStorage.getItem('_token_');
-    const history = useHistory()
-    const [dataPost, setDataPost] = useState({
-        newest: [],
-        trendings: []
-    });
-    const [PostUseToken, setPostUseToken] = useState({
-        followings: [],
-        bookmarks: []
-    });
-    const [tab, setTab] = useState(1)
+    const location = useLocation();
+    const [posts, setPost] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     // Navigation
-    const path = [
-        { value: 1, label: "Mới cập nhật" },
-        { value: 2, label: "Thịnh hành" },
-        { value: 3, label: "Đang theo dõi" },
-        { value: 4, label: "Bookmark của tôi" },
+    const pathName = [
+        { path: path.POSTS, value: "Mới cập nhật" },
+        { path: path.POSTS_POPULAR, value: "Thịnh hành" },
+        { path: path.POSTS_FLOW, value: "Đang theo dõi" },
+        { path: path.POSTS_BOOK_MARK, value: "Bookmark của tôi" },
     ];
     const button = { path: path.POSTS_CREATE, icon: Icon.Pen, value: "Viết bài" };
 
@@ -35,77 +32,55 @@ const PostPage = () => {
             path: "/",
             fullname: "Nguyễn Thành Đạt",
             username: "@nguyenthanhdat",
-            avatar: "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
+            avatar:
+                "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
             point: 567,
             question: 234,
-            folow: 345
-        }
-    ]
+            folow: 345,
+        },
+    ];
 
     // tags
     const tags = [
         {
             path: "/",
-            value: "NodeJS"
-        }
-    ]
+            value: "NodeJS",
+        },
+    ];
 
     useEffect(() => {
-        if(token){
-            Promise.all([
-                PostApi.getPostFol(),
-                PostApi.getPostMark() 
-            ]).then(data => {
-                const followings = data[0].data;
-                const bookmarks = data[1].data;
-                setPostUseToken({
-                    followings: followings,
-                    bookmarks: bookmarks
-                })
-            }).catch(error => {
-                console.log(error)
-            }) 
-        }
-        Promise.all([
-            PostApi.getPostNew(),
-            PostApi.getPostTren()
-        ])
-        .then(data => {
-            const newest = data[0].data;
-            const trendings = data[1].data;
-            setDataPost({
-                newest: newest,
-                trendings: trendings
-            })
-        }).catch(error => {
-            console.log(error)
-        })
-    }, [token])
-
+        const listPost = async () => {
+            try {
+                let endPoint;
+                if (location.pathname === "/posts") {
+                    endPoint = "newest";
+                } else if (location.pathname === "/posts/popular") {
+                    endPoint = "trending";
+                } else if (location.pathname === "/posts/flow") {
+                    endPoint = "following";
+                } else {
+                    endPoint = "bookmark";
+                }
+                setLoading(true)
+                const { data: posts } = await PostApi.getPost(endPoint);
+                setPost(posts);
+                setLoading(false);
+            } catch (error) {
+                setLoading(false);
+                console.log("Failed to get data", error.response);
+            }
+        };
+        listPost();
+    }, [location.pathname]);
 
     return (
-        <div className="container mx-auto mt-[55px] py-[25px]">
-            <div className="md:flex md:justify-between sm:grid sm:grid-cols-1 shadow-sm px-[10px] bg-white rounded">
-                <div className=" py-[15px] flex items-center">
-                    {path?.map((item, index) => (
-                        <p key={index} onClick={() => setTab(item.value)}
-                            className={item.value === tab ? "after:absolute after:w-full after:h-[1px] after:rounded after:bottom-[-16px] after:left-0 after:bg-[#1273eb] font-medium text-black relative text-[15px] px-[10px] hover:text-blue-600" : "relative text-[15px] px-[10px] text-gray-600 hover:text-blue-600"} >
-                            {item?.label}
-                        </p>
-                    ))}
-                </div>
-                {button && 
-                <div className="self-center whitespace-nowrap">
-                    <button onClick={() => { history.push(button?.path); button?.event() }} className="flex my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] ">
-                        <div className="self-center"><button.icon className="w-[15px] fill-current" /> </div>
-                        <span className="hidden md:block">{button?.value}</span>
-                    </button>
-                </div>
-                }
-            </div>
+        <div className="container mx-auto mt-[55px] py-[20px]">
+            <Navigation path={pathName} button={button} />
             <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
-                <Scrollbar className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded h-screen">
-                    <PostView posts={ tab === 1 ? dataPost.newest : (tab === 2 ? dataPost.trendings : (tab === 3 ? PostUseToken.followings : PostUseToken.bookmarks)) } />
+                <Scrollbar alwaysShowTracks={true}
+                    className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded h-screen">
+                    {loading && <SkeletonGroup /> }
+                    <PostView posts={posts} />
                 </Scrollbar>
                 <Scrollbar className="col-span-10 lg:col-span-3 bg-white shadow rounded h-screen">
                     <FeaturedAuthor authors={authors} />
@@ -113,7 +88,7 @@ const PostPage = () => {
                 </Scrollbar>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default PostPage;

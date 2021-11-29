@@ -4,7 +4,6 @@ import { Icon } from "src/Components/Icon";
 import { timeFormatter } from "../../../../Helpers/Timer";
 
 const PostView = ({ posts }) => {
-    console.log(posts);
     return (
         <>
             {posts?.data?.models.length === 0 ? (
