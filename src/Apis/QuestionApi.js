@@ -1,3 +1,4 @@
+import axios from "axios";
 import AxiosClient from "./AxiosClient";
 const token = localStorage.getItem("_token_");
 
@@ -54,12 +55,11 @@ const QuestionApi = {
       },
     });
   },
-  questionSpam(id, data) {
-    const url = `/question/spam/${id}`;
-    return AxiosClient.post(
+  questionSpam(id) {
+    const url = `question/spam/${id}`;
+    return AxiosClient.put(
       url,
-      data,
-      // { shortId: id },
+      {},
       {
         headers: {
           authorization: `Bearer ${token}`,

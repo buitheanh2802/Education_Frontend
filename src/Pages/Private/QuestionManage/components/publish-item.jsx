@@ -16,46 +16,24 @@ const PublishItem = (props) => {
     error: false,
     success: false,
   });
-  const [markSpam, setMarkSpam] = useState(true);
-  const [questionDetail, setQuestionDetail] = useState([]);
-
-  useEffect(() => {
-    const list = async (id) => {
-      try {
-        let { data: question } = await QuestionApi.getId(
-          id.split("-")[id.split("-").length - 1]
-        );
-        setQuestionDetail(question);
-      } catch (error) {
-        setLoading(false);
-
-        console.log(error);
-      }
-    };
-    list(_id);
-  }, []);
+  const [spamName, setSpamName] = useState(spam);
 
   const onMarkSpam = async (id) => {
-    const { data } = await QuestionApi.getId(id);
-    console.log(data);
-    // console.log(profile);
-    // try {
-    //     if (boolean) setLoading({ ...loading, success: true });
-    //     else setLoading({ ...loading, error: true });
-    //     const request = {
-    //         _id: _id,
-    //         data: {
-    //             spam: boolean
-    //         }
-    //     }
-    //     const response = await QuestionApi.questionSpam(request);
+    try {
+      if (id) setLoading({ ...loading, success: true });
 
-    // } catch (error) {
-    //     console.log(error);
-    // }
-    // if (boolean) setLoading({ ...loading, success: true });
-    // else setLoading({ ...loading, error: true });
+      await QuestionApi.questionSpam(id);
+      if (spamName === true) {
+        setSpamName(false);
+      } else {
+        setSpamName(true);
+      }
+      if (id) setLoading({ ...loading, success: false });
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   return (
     // <></>
     <div
@@ -76,33 +54,22 @@ const PublishItem = (props) => {
         </Link>
       </div>
       <div className="text-[13px] ">{timeFormatter(createAt)}</div>
-      <button onClick={() => onMarkSpam(_id)} className="bg-red-500"></button>
-      {/* {!published.user ? (
-        <div className="mx-auto flex ">
-          <button
-            disabled={loading.success}
-            onClick={() => onPublish(true)}
-            className="h-[35px] px-[10px] mb-[5px] flex items-center py-[5px] bg-blue-500 disabled:bg-gray-400 mr-[5px] text-white rounded-md "
-          >
-            {loading.success && (
-              <Loading className="w-[20px] fill-current mr-[5px] h-[20px] " />
-            )}
-            Duyệt
-          </button>
-        </div>
-      ) : (
-        <Link className="mx-auto block">
-          {published.isConfirm ? (
-            <span className="block py-[10px] bg-green-400 px-[10px] rounded-md text-white ">
-              Phê duyệt bởi : {published.user.fullname}
-            </span>
-          ) : (
-            <span className="block py-[10px] bg-gray-400 px-[10px] rounded-md text-white ">
-              Hủy bỏ bởi : {published.user.fullname}
-            </span>
+
+      <div className="text-center">
+        <button
+          onClick={() => onMarkSpam(_id)}
+          className={
+            spamName
+              ? "px-[15px] py-[5px] text-white bg-gray-400 rounded-md flex mx-auto "
+              : "px-[15px] py-[5px] text-white bg-red-500 rounded-md flex mx-auto "
+          }
+        >
+          {loading.success && (
+            <Loading className="w-[20px] fill-current mr-[5px] h-[20px] " />
           )}
-        </Link>
-      )} */}
+          {spamName ? "Hủy Spam" : "Spam"}
+        </button>
+      </div>
     </div>
   );
 };

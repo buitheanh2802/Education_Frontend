@@ -17,15 +17,14 @@ const QuesionManage = (props) => {
   const [startCall, setStartCall] = useState(false);
   const [questionList, setQuestionList] = useState(null);
   const [pagination, setPagination] = useState(null);
+  const [render, setRender] = useState(false);
   // __effect
   useEffect(() => {
+    // setRender(false);
     async function getData() {
       try {
         // start call api
         setStartCall(true);
-        // const request = {
-        //   page: query?.page,
-        // };
         const {
           data: {
             data: { models, metaData },
@@ -43,6 +42,7 @@ const QuesionManage = (props) => {
     }
     getData();
   }, []);
+
   // __render data
   return (
     <div className="w-full">
@@ -53,6 +53,7 @@ const QuesionManage = (props) => {
         questionList.map((item, index) => {
           return (
             <PublishItem
+              // onMarkSpam={onMarkSpam}
               index={index + 1}
               key={index}
               title={item.title}

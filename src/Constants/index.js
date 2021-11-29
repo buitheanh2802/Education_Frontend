@@ -38,7 +38,6 @@ export const path = {
   QUESTIONS_FLOW: "/questions/flow",
   QUESTIONS_BOOK_MARK: "/questions/bookmark",
   QUESTIONS_DETAIL: "/question/:id",
-  QUESTIONS_UPDATE: "question/update/:id",
 
   // post
   POSTS: "/posts",
