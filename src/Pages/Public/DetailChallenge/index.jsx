@@ -43,7 +43,9 @@ const DetailChallenge = () => {
             setIsShowModle(true);
         } else {
             if (!profile) return history.push(path.AUTH);
+
             OpenWindownTab(challenge?.resourceUrl);
+            await ChallengeApi.addSubmit(id);
         }
     }
 
@@ -60,7 +62,7 @@ const DetailChallenge = () => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-[20px] mt-[20px]">
                             <div className="rounded bg-green-50 bg-opacity-50 border border-green-200 px-[15px] py-[10px] md:col-span-2">
                                 <h3 className="text-[22px] text-gray-800 font-medium">{challenge?.title}</h3>
-                                <div className="flex text-[14px] gap-[15px]">
+                                <div className="flex text-[14px] gap-[15px] mt-[5px]">
                                     <p className="font-medium">Tương tác: </p>
                                     <div className="flex items-center gap-[5px] text-[#5f5f5f]">
                                         <Icon.DownLoad className="fill-current w-[18px]" />
@@ -72,11 +74,11 @@ const DetailChallenge = () => {
                                     </div>
                                 </div>
 
-                                <p className="mt-[5px] text-gray-600">{challenge?.descriptions}</p>
-
-                                <div className="grid grid-cols-5 gap-[10px] w-1/2 mt-[25px]">
+                                <div className="grid grid-cols-5 gap-[10px] w-1/2 mt-[10px]">
                                     {[...Array(5)].map((arr, index) => <span key={index} className={`${index < challenge?.level ? (challenge?.level > 4 ? "bg-red-500" : challenge?.level > 2 ? "bg-yellow-500" : "bg-green-500") : "bg-gray-300"} h-[5px] rounded-[3px] `}></span>)}
                                 </div>
+
+                                <p className="mt-[20px] text-gray-600">{challenge?.descriptions}</p>
                             </div>
                             <div className="rounded border border-blue-200 px-[15px] py-[10px]">
                                 <h2 className="font-medium text-[18px] text-blue-900">Làm thế nào để bắt đầu thử thách ?</h2>
