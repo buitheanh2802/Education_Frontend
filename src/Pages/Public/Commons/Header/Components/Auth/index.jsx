@@ -6,9 +6,11 @@ import { path } from 'src/Constants/';
 import Notification from '../Notification';
 import { ActionLogout } from 'src/Redux/Actions/Auth.action';
 import Loading from 'src/Components/Loading';
+import { useHistory } from 'react-router-dom';
 
 const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotification, active }) => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const { profile, actionLoading } = useSelector(state => state.Auth);
 
     return (
@@ -63,7 +65,10 @@ const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotificatio
                                 <Link onClick={() => setIsPopup(!isPopup)} to={path.PROFILE_ME}><li className="px-[10px] py-[5px] hover:bg-gray-100 duration-300 rounded-[3px] flex items-center text-[#333]"><Icon.Profile className="w-[20px] h-[20px] fill-current" /> <p className="ml-[10px]">Thông tin cá nhân</p></li></Link>
                                 {profile?.role === "admin" && <Link onClick={() => setIsPopup(!isPopup)} to={path.ADMIN}><li className="px-[10px] py-[5px] hover:bg-gray-100 duration-300 rounded-[3px] flex items-center text-[#333]"><Icon.Admin className="w-[20px] h-[20px] fill-current" /> <p className="ml-[10px]">Trang quản trị</p></li></Link>}
                                 <Link onClick={() => setIsPopup(!isPopup)} to={path.SETTING}><li className="px-[10px] py-[5px] hover:bg-gray-100 duration-300 rounded-[3px] flex items-center text-[#333]"><Icon.Setting className="w-[20px] h-[20px] fill-current" /> <p className="ml-[10px]">Cài đặt</p></li></Link>
-                                <li onClick={() => dispatch(ActionLogout())} className="cursor-pointer px-[10px] py-[5px] hover:bg-gray-100 duration-300 rounded-[3px] flex items-center text-red-600">{actionLoading ? <Loading className="w-[20px] h-[20px] fill-current" /> : <Icon.LogOut className="w-[20px] h-[20px] fill-current" />}  <p className="ml-[10px]">Đăng xuất</p></li>
+                                <li onClick={async () => {
+                                    const { payload } = await dispatch(ActionLogout());
+                                    if (payload?.status) return history.push(path.HOME)
+                                }} className="cursor-pointer px-[10px] py-[5px] hover:bg-gray-100 duration-300 rounded-[3px] flex items-center text-red-600">{actionLoading ? <Loading className="w-[20px] h-[20px] fill-current" /> : <Icon.LogOut className="w-[20px] h-[20px] fill-current" />}  <p className="ml-[10px]">Đăng xuất</p></li>
                             </ul>
                         </div>}
                     </li>

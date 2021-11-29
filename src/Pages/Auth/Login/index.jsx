@@ -20,8 +20,9 @@ const Login = () => {
         reValidateMode: "onBlur"
     });
 
-    const onSubmit = (data) => {
-        dispatch(ActionLogin(data))
+    const onSubmit = async (data) => {
+        const { payload } = await dispatch(ActionLogin(data));
+        if (payload?.status) return history.goBack(1);
     }
 
     error && setTimeout(() => dispatch(resetErrorAuth()), 5000)
