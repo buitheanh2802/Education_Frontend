@@ -77,7 +77,7 @@ const PostPage = () => {
       <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
         <Scrollbar className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded h-screen">
         {loadingPost && <SkeletonGroup />}
-          <PostView posts={posts} />
+        <PostView posts={posts} />
         </Scrollbar>
         <Scrollbar className="col-span-10 lg:col-span-3 bg-white shadow rounded h-screen">
           <FeaturedAuthor authors={authors} />
