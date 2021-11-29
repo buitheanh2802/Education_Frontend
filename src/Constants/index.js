@@ -12,6 +12,9 @@ export const Images = {
 };
 
 export const path = {
+  //HEAD
+  // Website
+  QUESTION_ID: "/question/:slug-:id",
   // Website
   HOME: "/",
   SETTING: "/setting",
@@ -27,16 +30,19 @@ export const path = {
   USER_BOOKMARK: "/user/:username/bookmark/post",
   USER_TAG: "/user/:username/tag",
 
+  // questions
+
+  // question
   QUESTIONS: "/questions",
-  QUESTION_ID: "/question/:slug-:id",
   QUESTIONS_CREATE: "/questions/create",
-  QUESTIONS_UPDATE: "/question/update/:id",
-  QUESTIONS_FLOW: "/questions/follow",
+  QUESTIONS_FLOW: "/questions/flow",
   QUESTIONS_BOOK_MARK: "/questions/bookmark",
+  QUESTIONS_DETAIL: "/question/:id",
+  QUESTIONS_UPDATE: "question/update/:id",
 
   // post
   POSTS: "/posts",
-  POSTS_ID: "/posts/:slug-:id",
+  POSTS_ID: "/posts/:id",
   POSTS_CREATE: "/posts/create",
   POSTS_POPULAR: "/posts/popular",
   POSTS_FLOW: "/posts/flow",
@@ -44,8 +50,9 @@ export const path = {
 
   // tags
   TAGS: "/tags",
-  TAGS_ID: "/tags/:slug",
-  TAGS_FLOW: "/tags/follow",
+  TAGS_ID: "/tag/:slug",
+  TAGS_QUESTION_POPULAR: "/tag/:slug/question",
+  TAGS_FOLLOWER: "tag/:slug/follower",
   TAGS_POPULAR: "/tags/popular",
   // auth
   AUTH: "/auth",
@@ -57,18 +64,12 @@ export const path = {
 
   // Admin
   ADMIN: "/manager",
-  // Phê duyệt bài viết
-  PHE_DUYET_BAI_VIET: "/manager/publish_post",
   //contact
   CONTACT: "/contact",
-
-  //HEAD
-  // questions
-  QUESTIONS_DETAIL: "/questionsDetail",
-
-  // post
-  POSTS_DETAIL: "/postsDetail",
-  // POSTS_CREATE: "/postsCreate",
+  // Quản trị bài viết
+  POST_MANAGER: "/manager/publish_post",
+  // Quản trị câu hỏi
+  QUESTION_MANAGER: "/manager/publish_question",
 
   //profile
   PROFILE: "/profile/:username",
@@ -91,9 +92,8 @@ export const path = {
   //Quiz
   QUIZ: "/quiz",
   QUIZ_CREATE: "/quiz/create",
-  //HEAD
   // Website
-  QUESTION_ID: "/question/:slug-:id",
+  QUESTIONS_UPDATE: "/question/update/:id",
 };
 
 export const regex = {

@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import Navigation from '../Commons/Navigation'
-import { path } from '../../../Constants/index';
 import { Icon } from 'src/Components/Icon'
 import DetailTagView from '../Commons/DetailTagView'
 import FeaturedTag from '../Commons/FeaturedTag'
 import TagAPi from 'src/Apis/TagApi'
 import { useParams } from "react-router-dom";
+import { useHistory } from "react-router"
 import FollowApi from 'src/Apis/FollowApi';
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import FollowerTag from '../Commons/DetailTagView/FollowerTag'
 
 const DetailTagPage = () => {
+    const history = useHistory();
     const { slug } = useParams();
     const [tag, setTag] = useState([]);
     const [tags, setTags] = useState({});
@@ -135,7 +135,7 @@ const DetailTagPage = () => {
                                 </select>
                             </div>
                         </div>
-                        {tab !== 3 ? <DetailTagView data={ tab === 1 ? dataTag.posts : dataTag.questions } /> : <FollowerTag follower={dataTag.followers} />}
+                        {tab !== 3 ? <DetailTagView data={tab === 1 ? dataTag.posts : dataTag.questions} /> : <FollowerTag follower={dataTag.followers} />}
                     </div>
                 </div>
                 <div className=" min-w-100 max-w-100 bg-white shadow rounded">

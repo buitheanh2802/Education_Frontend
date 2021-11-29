@@ -8,12 +8,12 @@ import { Icon } from "src/Components/Icon";
 import Scrollbar from "react-smooth-scrollbar";
 import PostApi from "src/Apis/PostApi";
 import { useLocation } from "react-router";
-import SkeletonGroup from "./components/skeleton-group";
+import Loading from "src/Components/Loading";
 
 const PostPage = () => {
   const location = useLocation();
   const [posts, setPost] = useState([]);
-  const [loadingPost, setLoadingPost] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // Navigation
   const pathName = [
@@ -59,25 +59,29 @@ const PostPage = () => {
         } else {
           endPoint = "bookmark";
         }
-        setLoadingPost(true);
         const { data: posts } = await PostApi.getPost(endPoint);
         setPost(posts);
-        setLoadingPost(false);
+        setLoading(false);
       } catch (error) {
-        setLoadingPost(false);
+        setLoading(false);
         console.log("Failed to get data", error.response);
       }
     };
     listPost();
   }, [location.pathname]);
 
+  if (loading)
+    return (
+      <div className="h-screen flex items-center justify-center bg-gray-100">
+        <Loading className="w-[40px] h-[40px] fill-current text-gray-500" />
+      </div>
+    );
   return (
     <div className="container mx-auto mt-[55px] py-[20px]">
       <Navigation path={pathName} button={button} />
       <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
         <Scrollbar className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded h-screen">
-        {loadingPost && <SkeletonGroup />}
-        <PostView posts={posts} />
+          <PostView posts={posts} />
         </Scrollbar>
         <Scrollbar className="col-span-10 lg:col-span-3 bg-white shadow rounded h-screen">
           <FeaturedAuthor authors={authors} />

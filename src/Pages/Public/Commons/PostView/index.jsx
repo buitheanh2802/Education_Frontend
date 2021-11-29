@@ -1,9 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import BookmarkApi from "src/Apis/BookmarkApi";
 import { Icon } from "src/Components/Icon";
 import { timeFormatter } from "../../../../Helpers/Timer";
 
 const PostView = ({ posts }) => {
+  const handleAddBookmark = async (shortId) => {
+    await BookmarkApi.addBookmarkPost(shortId);
+  }
   return (
     <>
       {posts?.data?.models?.map((item, index) => {
@@ -77,7 +81,7 @@ const PostView = ({ posts }) => {
                     <span>{item?.comments}</span>
                   </div>
                   <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                    <Icon.Bookmark className="fill-current w-[15px]" />
+                    <Icon.Bookmark className="fill-current w-[15px]" onClick={() => handleAddBookmark(item?.shortId)} />
                     <span>{item?.bookmarks}</span>
                   </div>
                 </div>
