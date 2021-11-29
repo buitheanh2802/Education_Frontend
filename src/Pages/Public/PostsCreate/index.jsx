@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import CreatetableSelect from "react-select/creatable";
 import makeAnimated from "react-select/animated";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
+import ImageResize from 'quill-image-resize-module-react';
 import "react-quill/dist/quill.snow.css";
 import { Icon } from "src/Components/Icon";
 import TagApi from "src/Apis/TagApi";
@@ -9,6 +10,7 @@ import PostApi from "src/Apis/PostApi";
 import ImageApi from "src/Apis/ImageApi";
 import Swal from "sweetalert2";
 
+Quill.register('modules/imageResize', ImageResize);
 const PostsCreate = () => {
   const [title, setTitle] = useState();
   const [tag, setTag] = useState();
@@ -29,6 +31,9 @@ const PostsCreate = () => {
   // if (token === null) history.push("/auth/login");
 
   useEffect(() => {
+
+    // register quill modules
+
     const listTags = async () => {
       try {
         const { data: tags } = await TagApi.getAll();
@@ -62,13 +67,13 @@ const PostsCreate = () => {
 
     arrTag.length <= 0 || arrTag.length > 5
       ? validateError.findIndex((i) => i.type === "tag") === -1 &&
-        setValidateError([
-          ...validateError,
-          {
-            type: "tag",
-            message: "Gắn thẻ bài viết ít nhất 1 thẻ và không quá 5 thẻ",
-          },
-        ])
+      setValidateError([
+        ...validateError,
+        {
+          type: "tag",
+          message: "Gắn thẻ bài viết ít nhất 1 thẻ và không quá 5 thẻ",
+        },
+      ])
       : setValidateError(validateError.filter((i) => i.type !== "tag"));
   };
   const handleChangeTitle = (e) => {
@@ -76,13 +81,13 @@ const PostsCreate = () => {
 
     !e.target.value
       ? validateError.findIndex((i) => i.type === "t") === -1 &&
-        setValidateError([
-          ...validateError,
-          {
-            type: "t",
-            message: "Tiêu đề không được để trống",
-          },
-        ])
+      setValidateError([
+        ...validateError,
+        {
+          type: "t",
+          message: "Tiêu đề không được để trống",
+        },
+      ])
       : setValidateError(validateError.filter((i) => i.type !== "t"));
   };
 
@@ -164,6 +169,10 @@ const PostsCreate = () => {
           image: imageHandler,
         },
       },
+      imageResize: {
+        modules: ['Resize', 'DisplaySize'],
+        displaySize: true
+      }
     }),
     []
   );
