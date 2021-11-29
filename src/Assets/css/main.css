@@ -1611,17 +1611,6 @@ video {
 .-translate-y-1\/2 {
   --tw-translate-y: -50%;
   transform: var(--tw-transform);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-}
-
-.translate-y-\[2px\] {
-  --tw-translate-y: 2px;
-  transform: var(--tw-transform);
->>>>>>> e230407ab38c514a46a92e83a559b88daa626850
->>>>>>> QuangVinh
 }
 
 .-translate-x-1\/2 {
@@ -1657,55 +1646,26 @@ video {
 .translate-x-\[-50\%\] {
   --tw-translate-x: -50%;
   transform: var(--tw-transform);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> QuangVinh
 }
 
 .translate-y-\[2px\] {
   --tw-translate-y: 2px;
   transform: var(--tw-transform);
-<<<<<<< HEAD
-=======
-=======
->>>>>>> e230407ab38c514a46a92e83a559b88daa626850
->>>>>>> QuangVinh
 }
 
 .translate-y-\[-55\%\] {
   --tw-translate-y: -55%;
   transform: var(--tw-transform);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> QuangVinh
 }
 
 .rotate-180 {
   --tw-rotate: 180deg;
   transform: var(--tw-transform);
-<<<<<<< HEAD
-=======
-=======
->>>>>>> e230407ab38c514a46a92e83a559b88daa626850
->>>>>>> QuangVinh
 }
 
 .rotate-\[45deg\] {
   --tw-rotate: 45deg;
   transform: var(--tw-transform);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-}
-
-.rotate-180 {
-  --tw-rotate: 180deg;
-  transform: var(--tw-transform);
->>>>>>> e230407ab38c514a46a92e83a559b88daa626850
->>>>>>> QuangVinh
 }
 
 .transform {
@@ -4028,19 +3988,10 @@ body {
   .sm\:translate-y-\[150\%\] {
     --tw-translate-y: 150%;
     transform: var(--tw-transform);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> QuangVinh
   }
 
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-<<<<<<< HEAD
-=======
-=======
->>>>>>> e230407ab38c514a46a92e83a559b88daa626850
->>>>>>> QuangVinh
   }
 
   .sm\:grid-cols-1 {
@@ -4061,22 +4012,6 @@ body {
 
   .sm\:gap-x-\[60px\] {
     column-gap: 60px;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-  }
-
-  .sm\:py-5 {
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
-  }
-
-  .sm\:px-\[5px\] {
-    padding-left: 5px;
-    padding-right: 5px;
->>>>>>> e230407ab38c514a46a92e83a559b88daa626850
->>>>>>> QuangVinh
   }
 
   .sm\:px-\[15px\] {
@@ -4331,20 +4266,6 @@ body {
   .md\:translate-y-\[-70\%\] {
     --tw-translate-y: -70%;
     transform: var(--tw-transform);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-  }
-
-  .md\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .md\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
->>>>>>> e230407ab38c514a46a92e83a559b88daa626850
->>>>>>> QuangVinh
   }
 
   .md\:grid-cols-6 {
