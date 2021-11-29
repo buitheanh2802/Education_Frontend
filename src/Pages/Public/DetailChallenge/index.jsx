@@ -49,7 +49,7 @@ const DetailChallenge = () => {
 
     return (
         <>
-            {isShowModle && <ModalSolution isShowModle={isShowModle} />}
+            {isShowModle && <ModalSolution isShowModle={isShowModle} setIsShowModle={setIsShowModle} />}
             <div className="container mx-auto mt-[55px] py-[20px]">
                 {isLoading ? <Navigation path={pathName} /> : <Skeleton className="h-full py-[15px] border" />}
                 <div className="mt-[20px]">
