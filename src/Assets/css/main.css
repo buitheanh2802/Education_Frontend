@@ -663,6 +663,13 @@ video {
   position: sticky;
 }
 
+.inset-0 {
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
 .top-0 {
   top: 0px;
 }
@@ -737,6 +744,10 @@ video {
 
 .z-\[9999\] {
   z-index: 9999;
+}
+
+.z-10 {
+  z-index: 10;
 }
 
 .col-span-1 {
