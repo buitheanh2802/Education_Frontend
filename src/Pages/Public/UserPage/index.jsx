@@ -10,7 +10,9 @@ import UserFollower from "./UserFollower";
 import UserBookMark from "./UserBookMark";
 import UserPost from "./UserPost";
 import UserTag from "./UserTag";
-
+import { useDispatch } from "react-redux";
+import FollowApi from "src/Apis/FollowApi";
+import { setLoading } from "src/Redux/Slices/Loading.slice";
 
 const Userpage = (props) => {
   const username = props.match.params.username;
@@ -20,7 +22,20 @@ const Userpage = (props) => {
   const [userBookMark, setUserBookMark] = useState([]);
   const [userPost, setUserPost] = useState([]);
   const [userTag, setUserTag] = useState([]);
+  const dispatch = useDispatch();
 
+  const handleFollow = async () => {
+    dispatch(setLoading(true))
+    if (user?.isFollowing) {
+      await FollowApi.unFollow(username);
+      setUser({ ...user, isFollowing: false })
+      dispatch(setLoading(false))
+    } else {
+      await FollowApi.follow(username);
+      setUser({ ...user, isFollowing: true })
+      dispatch(setLoading(false))
+    }
+  }
   const pathName = [
     {
       path: `/user/${username}/post`,
@@ -51,11 +66,10 @@ const Userpage = (props) => {
 
   // authors
   useEffect(() => {
-    
+
     const user = async () => {
       try {
         const { data: users } = await ProfileUserApi.getUser(username);
-        console.log("helooo profile nay", users);
         setUser(users.data);
       } catch (error) {
         console.log(error);
@@ -64,7 +78,7 @@ const Userpage = (props) => {
     user();
   }, []);
 
-  
+
   useEffect(() => {
     const username = props.match.params.username;
     console.log(username);
@@ -73,7 +87,6 @@ const Userpage = (props) => {
         const { data: followerUser } = await ProfileUserApi.getFollowerUser(
           username
         );
-        console.log("helooo follower ", followerUser);
         setUserFollowers(followerUser.userFollower.data.models);
       } catch (error) {
         console.log(error);
@@ -82,7 +95,7 @@ const Userpage = (props) => {
     userFollowers();
   }, []);
 
-  
+
   useEffect(() => {
     const username = props.match.params.username;
     const userFollowing = async () => {
@@ -90,7 +103,6 @@ const Userpage = (props) => {
         const { data: followingUser } = await ProfileUserApi.getFollowingUser(
           username
         );
-        console.log("helooo following ", followingUser);
         setUserFollowing(followingUser.data.models);
       } catch (error) {
         console.log(error);
@@ -99,13 +111,12 @@ const Userpage = (props) => {
     userFollowing();
   }, []);
 
- 
+
   useEffect(() => {
     const username = props.match.params.username;
     const userTag = async () => {
       try {
         const { data: tagUser } = await ProfileUserApi.getTagUser(username);
-        console.log("helooo tagsUser ", tagUser);
         setUserTag(tagUser.data.models);
       } catch (error) {
         console.log(error);
@@ -120,7 +131,6 @@ const Userpage = (props) => {
     const userBookMark = async () => {
       try {
         const { data: bookMarkUser } = await ProfileUserApi.getBookmarkUser(username);
-        console.log("helooo bookmark ", bookMarkUser);
         setUserBookMark(bookMarkUser.data.models);
       } catch (error) {
         console.log(error);
@@ -129,36 +139,35 @@ const Userpage = (props) => {
     userBookMark();
   }, []);
 
- 
+
   useEffect(() => {
     const username = props.match.params.username;
     const userPost = async () => {
       try {
         const { data: postUser } = await ProfileUserApi.getPostUser(username);
-        console.log("helooo Post ", postUser);
         setUserPost(postUser.data.models);
       } catch (error) {
         console.log(error);
       }
     };
     userPost();
-    
+
   }, []);
 
   return (
     <div className="container mx-auto mt-[80px]">
-      <div className="mt-[15px] lg:grid lg:grid-cols-4 gap-3">
+      <div className="my-[15px] lg:grid lg:grid-cols-4 gap-3">
         <div className="col-start-1 col-span-3 w-full  rounded">
           <div className="flex py-[30px] px-[10px] mb-[20px] bg-white">
             <div>
-              {user?.avatar?.avatarUrl ? 
+              {user?.avatar?.avatarUrl ?
                 <img
                   src={user?.avatar?.avatarUrl}
                   className="mx-auto max-h-[70px] rounded-full"
                   width="70px"
                   height="70px"
                 />
-               : 
+                :
                 <div className="py-[12px] text-[#4A5568] mx-auto text-center md:w-[70px] md:h-[70px] rounded-full bg-blue-300 font-bold text-[30px]">
                   {user?.username?.toUpperCase().substring(0, 1)}
                 </div>
@@ -172,9 +181,18 @@ const Userpage = (props) => {
                 <Icon.Star className="w-[18px] mb-[15px] ml-[10px] inline-block" />
                 <p className="text-[#666]">@{user?.username}</p>
               </div>
-              <button className="mt-[10px] bg-[#fff] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#fdfdfd] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
+              {/* <button className="mt-[10px] bg-[#fff] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#fdfdfd] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
                 + Theo dõi
-              </button>
+              </button> */}
+              {user?.isFollowing ?
+                <button onClick={() => handleFollow()} className="mt-[10px] bg-[#0d61c7] border border-[#0d61c7] hover:bg-[#fff] hover:text-[#0d61c7] text-[#fff] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
+                  - Bỏ theo dõi
+                </button>
+                :
+                <button onClick={() => handleFollow()} className="mt-[10px] bg-[#fff] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#BEE3F8] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
+                  + Theo dõi
+                </button>
+              }
             </div>
           </div>
           <div className="w-full shadow-sm bg-white rounded ">
@@ -199,9 +217,9 @@ const Userpage = (props) => {
               <Route
                 exact
                 path={path.USER_BOOKMARK}
-                render={(props) => 
+                render={(props) =>
                   <UserBookMark userBookMark={userBookMark} {...props} />
-                  
+
                 }
               ></Route>
               <Route
@@ -217,7 +235,7 @@ const Userpage = (props) => {
             </Switch>
           </div>
         </div>
-        <div className="min-w-100 max-w-100 bg-white shadow rounded px-[20px] py-[20px] my-[5px] text-[15px] ">
+        <div className="min-w-100 max-w-100 bg-white shadow rounded px-[20px] py-[20px] text-[15px] ">
           <div className="flex justify-between my-[5px] ">
             <p className="text-gray-500">Tổng số bài viết : </p>
             <span className="font-bold text-[13px]">{user?.postCounts}</span>

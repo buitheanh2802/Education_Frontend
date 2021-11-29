@@ -6,7 +6,7 @@ const UserPost = ({ userPost }) => {
     <div>
       {userPost?.length == 0 ? (
         <div>
-          <p className="text-center text-[18px] leading-[30px] my-[10px] py-[35px] font-bold text-gray-500">
+          <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
             Không có gì ở đây cả
           </p>
         </div>

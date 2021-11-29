@@ -7,15 +7,16 @@ import { path } from 'src/Constants/'
 import { Icon } from 'src/Components/Icon'
 import Scrollbar from 'react-smooth-scrollbar'
 import PostApi from "src/Apis/PostApi"
-import { useLocation } from "react-router";
 import { useHistory } from "react-router-dom"
 
 const PostPage = () => {
+    const token = localStorage.getItem('_token_');
     const history = useHistory()
-    const location = useLocation();
     const [dataPost, setDataPost] = useState({
         newest: [],
-        trendings: [],
+        trendings: []
+    });
+    const [PostUseToken, setPostUseToken] = useState({
         followings: [],
         bookmarks: []
     });
@@ -52,35 +53,45 @@ const PostPage = () => {
     ]
 
     useEffect(() => {
+        if(token){
+            Promise.all([
+                PostApi.getPostFol(),
+                PostApi.getPostMark() 
+            ]).then(data => {
+                const followings = data[0].data;
+                const bookmarks = data[1].data;
+                setPostUseToken({
+                    followings: followings,
+                    bookmarks: bookmarks
+                })
+            }).catch(error => {
+                console.log(error)
+            }) 
+        }
         Promise.all([
             PostApi.getPostNew(),
-            PostApi.getPostTren(),
-            PostApi.getPostFol(),
-            PostApi.getPostMark()
-        ]).then(data => {
+            PostApi.getPostTren()
+        ])
+        .then(data => {
             const newest = data[0].data;
             const trendings = data[1].data;
-            const followings = data[2].data;
-            const bookmarks = data[2].data;
             setDataPost({
                 newest: newest,
-                trendings: trendings,
-                followings: followings,
-                bookmarks: bookmarks
+                trendings: trendings
             })
         }).catch(error => {
-            console.log('error')
+            console.log(error)
         })
-    }, [])
+    }, [token])
 
 
     return (
-        <div className="container mx-auto mt-[55px] py-[20px]">
-            <div className="md:flex md:justify-between sm:grid sm:grid-cols-1 shadow-sm px-[10px] bg-white  rounded">
+        <div className="container mx-auto mt-[55px] py-[25px]">
+            <div className="md:flex md:justify-between sm:grid sm:grid-cols-1 shadow-sm px-[10px] bg-white rounded">
                 <div className=" py-[15px] flex items-center">
                     {path?.map((item, index) => (
                         <p key={index} onClick={() => setTab(item.value)}
-                            className={item.value === tab ? "after:absolute after:w-full after:h-[1px] after:rounded after:bottom-[-16px] after:left-0 after:bg-[#1273eb] font-medium text-black relative text-[12px] sm:text-[15px] px-[0px] sm:px-[5px] text-gray-600 hover:text-blue-600 sm:mr-[20px] mr-[15px]" : "relative text-[12px] sm:text-[15px] px-[0px] sm:px-[5px] text-gray-600 hover:text-blue-600 sm:mr-[20px] mr-[15px]"} >
+                            className={item.value === tab ? "after:absolute after:w-full after:h-[1px] after:rounded after:bottom-[-16px] after:left-0 after:bg-[#1273eb] font-medium text-black relative text-[15px] px-[10px] hover:text-blue-600" : "relative text-[15px] px-[10px] text-gray-600 hover:text-blue-600"} >
                             {item?.label}
                         </p>
                     ))}
@@ -96,7 +107,7 @@ const PostPage = () => {
             </div>
             <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
                 <Scrollbar className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded h-screen">
-                    <PostView posts={tab === 1 ? dataPost.newest : (tab === 2 ? dataPost.trendings : (tab === 3 ? dataPost.followings : dataPost.bookmarks))} />
+                    <PostView posts={ tab === 1 ? dataPost.newest : (tab === 2 ? dataPost.trendings : (tab === 3 ? PostUseToken.followings : PostUseToken.bookmarks)) } />
                 </Scrollbar>
                 <Scrollbar className="col-span-10 lg:col-span-3 bg-white shadow rounded h-screen">
                     <FeaturedAuthor authors={authors} />

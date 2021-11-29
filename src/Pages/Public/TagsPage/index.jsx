@@ -76,7 +76,6 @@ const TagsPage = () => {
 
   return (
     <div className="container mx-auto mt-[80px]  ">
-      {/* <Navigation path={pathName} button={button} /> */}
       <div className="flex justify-between mt-[15px]  gap-[30px]">
         <div className="max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px] sm:gap-x-[60px] gap-y-[20px] mb-[30px] pb-[45px] w-full py-[15px] bg-white shadow rounded">
           <div className="grid grid-cols-1 gap-[20px] xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
