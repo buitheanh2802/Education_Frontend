@@ -26,8 +26,6 @@ const QuestionUpdate = () => {
   const [questionDetail, setQuestionDetail] = useState([]);
   const shortId = useParams();
   const [loading, setLoading] = useState(true);
-  const [newtag, setNewtag] = useState([]);
-
   useEffect(() => {
     const listDetailQuestion = async (id) => {
       try {
@@ -42,12 +40,9 @@ const QuestionUpdate = () => {
           label: item.name,
         }));
 
-        // const newArrtag = tagsQuestion?.map((item) => {
-        //   return item.value;
-        // });
         setTitle(question?.data?.title);
         setContent(question?.data?.content);
-        setNewtag(tagsQuestion);
+        setTagId(tagsQuestion);
       } catch (error) {
         setLoading(false);
         console.log(error);
@@ -78,14 +73,13 @@ const QuestionUpdate = () => {
     };
     listImage();
   }, []);
-  console.log(tagId);
   // console.log("tag", tag);
   // console.log("tagId", tagId);
-  const tagsQuestion = questionDetail?.data?.tags?.map((item) => ({
-    ...item,
-    value: item.name,
-    label: item.name,
-  }));
+  // const tagsQuestion = questionDetail?.data?.tags?.map((item) => ({
+  //   ...item,
+  //   value: item.name,
+  //   label: item.name,
+  // }));
 
   // const newArrtag = tagsQuestion?.map((item) => {
   //   return item.value;
@@ -93,16 +87,10 @@ const QuestionUpdate = () => {
   // console.log(newArrtag);
 
   const tagItem = (e) => {
-    // const newArrtag = tagsQuestion?.map((item) => {
-    //   return item.value;
-    // });
     const arrTag = e.map((item) => {
       return item.value;
     });
-    // var result = newArrtag.concat(arrTag);
-    setNewtag(arrTag);
-    console.log(arrTag);
-    // console.log(tagId);
+    setTagId(arrTag);
 
     arrTag.length <= 0 || arrTag.length > 5
       ? validateError.findIndex((i) => i.type === "tag") === -1 &&
@@ -316,7 +304,7 @@ const QuestionUpdate = () => {
               closeMenuOnSelect={false}
               components={animatedComponents}
               isMulti
-              value={newtag}
+              value={tagId}
               options={tag}
               placeholder={"Gắn thẻ câu hỏi "}
               onChange={(e) => tagItem(e)}

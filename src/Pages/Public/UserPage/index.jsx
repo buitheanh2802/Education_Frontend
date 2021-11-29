@@ -10,6 +10,7 @@ import UserFollower from "./UserFollower";
 import UserBookMark from "./UserBookMark";
 import UserPost from "./UserPost";
 import UserTag from "./UserTag";
+import Loading from "src/Components/Loading";
 
 
 const Userpage = (props) => {
@@ -20,6 +21,7 @@ const Userpage = (props) => {
   const [userBookMark, setUserBookMark] = useState([]);
   const [userPost, setUserPost] = useState([]);
   const [userTag, setUserTag] = useState([]);
+  const [loading,setLoading] = useState(true);
 
   const pathName = [
     {
@@ -136,6 +138,7 @@ const Userpage = (props) => {
       try {
         const { data: postUser } = await ProfileUserApi.getPostUser(username);
         console.log("helooo Post ", postUser);
+        setLoading(false);
         setUserPost(postUser.data.models);
       } catch (error) {
         console.log(error);
@@ -147,7 +150,11 @@ const Userpage = (props) => {
 
   return (
     <div className="container mx-auto mt-[80px]">
-      <div className="mt-[15px] lg:grid lg:grid-cols-4 gap-3">
+       {loading && (
+        <Loading className="w-[20px] justify-center"/>
+      )}
+       {!loading && (
+        <div className="mt-[15px] lg:grid lg:grid-cols-4 gap-3">
         <div className="col-start-1 col-span-3 w-full  rounded">
           <div className="flex py-[30px] px-[10px] mb-[20px] bg-white">
             <div>
@@ -236,6 +243,9 @@ const Userpage = (props) => {
           </div>
         </div>
       </div>
+      )}
+
+      
     </div>
   );
 };

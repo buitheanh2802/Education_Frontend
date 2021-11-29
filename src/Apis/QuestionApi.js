@@ -46,6 +46,27 @@ const QuestionApi = {
       },
     });
   },
+  getListPublish() {
+    const url = `/question`;
+    return AxiosClient.get(url, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  },
+  questionSpam(id, data) {
+    const url = `/question/spam/${id}`;
+    return AxiosClient.post(
+      url,
+      data,
+      // { shortId: id },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  },
 };
 
 export default QuestionApi;

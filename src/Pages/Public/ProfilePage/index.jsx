@@ -172,26 +172,6 @@ const ProfilePage = (props) => {
                     </div>
                   </div>
                 </div>
-                {/* <div className="">
-                  <div className="flex flex-wrap">
-                    <h2 className="uppercase text-[#4A5568] font-medium py-[10px] ml-[5px] mr-[10px] text-[14px] xl:text-[16px]">
-                      Các kỹ năng
-                    </h2>
-                    <hr class="filler-line border-t-1 xl:mt-[28px] mt-[25px] border-[#4A5568] overflow-visible h-0 flex-grow" />
-                  </div>
-                  <div className="py-[5px] flex flex-wrap gap-[10px] mx-[10px] text-[14px]">
-                    {profile?.data?.skills?.map((skill, indexSki) => {
-                      return (
-                        <Link
-                          key={indexSki}
-                          className="md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[15px] xl:py-[5px] xl:text-[14px] hover:bg-gray-300 text-[#4A5568] bg-[#BEE3F8] rounded"
-                        >
-                          {skill}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>
