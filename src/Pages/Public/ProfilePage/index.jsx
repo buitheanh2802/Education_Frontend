@@ -31,7 +31,6 @@ const ProfilePage = (props) => {
     const profile = async () => {
       try {
         const { data: profile } = await ProfileApi.getUser(username);
-        console.log('profile',profile)
         setProfile(profile);
       } catch (error) {
         console.log("Failed to get data", error.response);
@@ -40,18 +39,18 @@ const ProfilePage = (props) => {
     profile();
   }, []);
 
-  const [posts, setPost] = useState([]);
-  useEffect(() => {
-    const listPost = async () => {
-      try {
-        // const { data: post } = await ProfileApi.;
-        // setProfile(post);
-      } catch (error) {
-        console.log("Failed to get data", error.response);
-      }
-    };
-    listPost();
-  }, []);
+  // const [posts, setPost] = useState([]);
+  // useEffect(() => {
+  //   const listPost = async () => {
+  //     try {
+  //       // const { data: post } = await ProfileApi.;
+  //       // setProfile(post);
+  //     } catch (error) {
+  //       console.log("Failed to get data", error.response);
+  //     }
+  //   };
+  //   listPost();
+  // }, []);
 
   const pathName = [
     {
@@ -65,11 +64,7 @@ const ProfilePage = (props) => {
     {
       path: path.QUESTIONS_BOOK_MARK,
       value: "Bookmark của tôi",
-    },
-    {
-      path: path.TAGS,
-      value: "Tags",
-    },
+    }
   ];
   const button = {
     path: path.QUESTIONS_CREATE,
@@ -80,7 +75,7 @@ const ProfilePage = (props) => {
   return (
     <div className="container mx-auto mt-[80px]">
       <Navigation path={pathName} button={button} />
-      <div className="mt-[15px] lg:grid lg:grid-cols-4 gap-3">
+      <div className="mt-[15px] mb-[25px] lg:grid lg:grid-cols-4 gap-3">
         <div className=" min-w-100 max-w-100 bg-white shadow rounded">
           <div className="py-[5px] mx-[10px]">
             <div className="py-[10px] bg-[#BEE3F8]">
@@ -112,15 +107,9 @@ const ProfilePage = (props) => {
                     </span>
                   </div>
                   <div className="mt-2 md:text-right">
-                    {profile?.data?.isFollowing ?
-                      <button onClick={() => handleFollow()} className="mt-[10px] bg-[#0d61c7] border border-[#0d61c7] hover:bg-[#fff] hover:text-[#0d61c7] text-[#fff] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
-                        - Bỏ theo dõi
-                      </button>
-                      : 
-                      <button onClick={() => handleFollow()} className="mt-[10px] bg-[#fff] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#BEE3F8] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
-                        + theo dõi
-                      </button>
-                    }      
+                      <Link to={`profile/${profile?.data?.username}/edit`} className="mt-[10px] bg-[#0d61c7] border border-[#0d61c7] hover:bg-[#fff] hover:text-[#0d61c7] text-[#fff] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
+                        Chỉnh sửa
+                      </Link>  
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-4 xl:text-[15px] text-[12px] py-[15px]">
@@ -177,7 +166,7 @@ const ProfilePage = (props) => {
           </div>
         </div>
         <div className="col-start-2 col-span-4 w-full shadow-sm bg-white rounded">
-          {posts?.map((item, index) => {
+          {/* {posts?.map((item, index) => {
             return (
               <div key={index}
                 className="w-full xl:grid-cols-5 md:grid md:grid-cols-4 px-[10px] py-[15px] border-b lg:mt-0 md:mt-3"
@@ -257,7 +246,7 @@ const ProfilePage = (props) => {
                 </div>
               </div>
             );
-          })}
+          })} */}
         </div>
       </div>
     </div>
