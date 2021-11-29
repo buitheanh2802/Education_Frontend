@@ -43,7 +43,7 @@ const DetailChallenge = () => {
             setIsShowModle(true);
         } else {
             if (!profile) return history.push(path.AUTH);
-
+            
             OpenWindownTab(challenge?.resourceUrl);
             await ChallengeApi.addSubmit(id);
         }
@@ -60,7 +60,7 @@ const DetailChallenge = () => {
                     </div>
                     {challenge ?
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-[20px] mt-[20px]">
-                            <div className="rounded bg-green-50 bg-opacity-50 border border-green-200 px-[15px] py-[10px] md:col-span-2">
+                            <div className="rounded bg-opacity-50 border border-green-200 px-[15px] py-[10px] md:col-span-2">
                                 <h3 className="text-[22px] text-gray-800 font-medium">{challenge?.title}</h3>
                                 <div className="flex text-[14px] gap-[15px] mt-[5px]">
                                     <p className="font-medium">Tương tác: </p>
