@@ -190,7 +190,7 @@ const QuestionsCreate = () => {
     position: "top-end",
     showConfirmButton: false,
     timer: 2000,
-    timerProgressBar: true,
+    // timerProgressBar: true,
     background: "#EFF6FF",
     didOpen: (toast) => {
       toast.addEventListener("mouseenter", Swal.stopTimer);
@@ -256,54 +256,7 @@ const QuestionsCreate = () => {
       });
     }
   };
-  // const handlerSubmit2 = async () => {
-  //   try {
-  //     var errors = [];
-  //     if (!title) {
-  //       errors = [
-  //         ...errors,
-  //         {
-  //           type: "t",
-  //           message: "Tiêu đề không được để trống",
-  //         },
-  //       ];
-  //     }
-  //     if (tagId.length <= 0 || tagId.length > 5) {
-  //       errors = [
-  //         ...errors,
-  //         {
-  //           type: "tag",
-  //           message: "Gắn thẻ câu hỏi ít nhất 1 thẻ và không quá 5 thẻ",
-  //         },
-  //       ];
-  //     }
 
-  //     if (!content || validateContent.indexOf(content) !== -1) {
-  //       errors = [
-  //         ...errors,
-  //         {
-  //           type: "c",
-  //           message: "Nội dung không được để trống",
-  //         },
-  //       ];
-  //     }
-
-  //     if (errors.length !== 0) {
-  //       setValidateError(errors);
-  //       return;
-  //     }
-
-  //     let data = {
-  //       title: title,
-  //       tags: tagId,
-  //       content: content,
-  //       isDraft: true,
-  //     };
-  //     await PostApi.add(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   const handelQuestionCancel = () => {
     history.push("/questions");
   };

@@ -7,6 +7,7 @@ import { Icon } from "src/Components/Icon";
 import TagApi from "src/Apis/TagApi";
 import PostApi from "src/Apis/PostApi";
 import ImageApi from "src/Apis/ImageApi";
+import Swal from "sweetalert2";
 
 const PostsCreate = () => {
   const [title, setTitle] = useState();
@@ -182,6 +183,18 @@ const PostsCreate = () => {
   ];
 
   ///react-select
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 2000,
+    // timerProgressBar: true,
+    background: "#EFF6FF",
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
   const handlerSubmit1 = async (data) => {
     try {
       var errors = [];
@@ -223,7 +236,7 @@ const PostsCreate = () => {
         title: title,
         tags: tagId,
         content: content,
-        isDraft: false,
+        isDraft: true,
       };
 
       await PostApi.add(data);
@@ -272,10 +285,18 @@ const PostsCreate = () => {
         title: title,
         tags: tagId,
         content: content,
-        isDraft: true,
+        isDraft: false,
       };
       await PostApi.add(data);
+      await Toast.fire({
+        icon: "success",
+        title: "Đăng câu hỏi thành công",
+      });
     } catch (error) {
+      await Toast.fire({
+        icon: "error",
+        title: "Đăng câu hỏi thất bại",
+      });
       console.log(error);
     }
   };
