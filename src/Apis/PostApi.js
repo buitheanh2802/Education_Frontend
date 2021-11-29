@@ -45,6 +45,7 @@ const PostApi = {
     },
     publish(request) {
         const url = `post/publish/${request.shortId}`;
+        const token = localStorage.getItem("_token_");
         return AxiosClient.put(url, request.data, {
             headers: {
                 Authorization: `Bearer ${token}`
