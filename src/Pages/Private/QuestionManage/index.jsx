@@ -61,7 +61,8 @@ const QuesionManage = (props) => {
               createBy={item.createBy}
               createAt={item.createdAt}
               spam={item.spam}
-              _id={item._id}
+              id={item._id}
+              slug={item.slug}
             />
           );
         })}

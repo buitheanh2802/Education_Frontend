@@ -8,7 +8,7 @@ import QuestionApi from "src/Apis/QuestionApi";
 
 const PublishItem = (props) => {
   // _props
-  const { title, content, index, createBy, createAt, _id, spam } = props;
+  const { title, content, index, createBy, createAt, id, spam, slug } = props;
   // selector
   const { profile } = useSelector((state) => state.Auth);
   // state
@@ -42,7 +42,7 @@ const PublishItem = (props) => {
     >
       <div className="font-medium ">{index}</div>
       <div className="font-medium mr-[30px] text-blue-500 underline ">
-        <Link>{title}</Link>
+        <Link to={`/question/${slug}-${id}`}>{title}</Link>
       </div>
       <div
         dangerouslySetInnerHTML={{ __html: content }}
@@ -57,7 +57,7 @@ const PublishItem = (props) => {
 
       <div className="text-center">
         <button
-          onClick={() => onMarkSpam(_id)}
+          onClick={() => onMarkSpam(id)}
           className={
             spamName
               ? "px-[15px] py-[5px] text-white bg-gray-400 rounded-md flex mx-auto "
