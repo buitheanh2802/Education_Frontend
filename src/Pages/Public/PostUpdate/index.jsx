@@ -30,7 +30,7 @@ const PostUpdate = () => {
   const shortId = useParams();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const listDetailQuestion = async (id) => {
+    const listDetailPost = async (id) => {
       try {
         let { data: post } = await PostApi.getPost(
           id.split("-")[id.split("-").length - 1]
@@ -50,7 +50,7 @@ const PostUpdate = () => {
         console.log(error);
       }
     };
-    listDetailQuestion(shortId?.id);
+    listDetailPost(shortId?.id);
     const listTags = async () => {
       try {
         const { data: tags } = await TagApi.getAll();
