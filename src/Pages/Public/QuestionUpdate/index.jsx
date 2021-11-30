@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import CreatetableSelect from "react-select/creatable";
 import makeAnimated from "react-select/animated";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Icon } from "src/Components/Icon";
 import TagApi from "src/Apis/TagApi";
@@ -10,7 +10,9 @@ import QuestionApi from "src/Apis/QuestionApi";
 import { useHistory, useParams } from "react-router-dom";
 import QuestionsDetail from "../QuestionsDetail";
 import Loading from "src/Components/Loading";
-
+import Swal from "sweetalert2";
+import ImageResize from "quill-image-resize-module-react";
+Quill.register("modules/imageResize", ImageResize);
 const QuestionUpdate = () => {
   const [title, setTitle] = useState();
   const [tag, setTag] = useState();
@@ -35,7 +37,6 @@ const QuestionUpdate = () => {
         setQuestionDetail(question);
         setLoading(false);
         const tagsQuestion = question?.data?.tags?.map((item) => ({
-          ...item,
           value: item.name,
           label: item.name,
         }));
@@ -53,7 +54,7 @@ const QuestionUpdate = () => {
       try {
         const { data: tags } = await TagApi.getAll();
         const newData = tags?.data?.models?.map((item) => ({
-          ...item,
+          // ...item,
           value: item.name,
           label: item.name,
         }));
@@ -73,26 +74,11 @@ const QuestionUpdate = () => {
     };
     listImage();
   }, []);
-  // console.log("tag", tag);
-  // console.log("tagId", tagId);
-  // const tagsQuestion = questionDetail?.data?.tags?.map((item) => ({
-  //   ...item,
-  //   value: item.name,
-  //   label: item.name,
-  // }));
-
-  // const newArrtag = tagsQuestion?.map((item) => {
-  //   return item.value;
-  // });
-  // console.log(newArrtag);
-
+  ////////////
   const tagItem = (e) => {
-    const arrTag = e.map((item) => {
-      return item.value;
-    });
-    setTagId(arrTag);
+    setTagId([...e]);
 
-    arrTag.length <= 0 || arrTag.length > 5
+    e.length <= 0 || e.length > 5
       ? validateError.findIndex((i) => i.type === "tag") === -1 &&
         setValidateError([
           ...validateError,
@@ -197,6 +183,10 @@ const QuestionUpdate = () => {
           image: imageHandler,
         },
       },
+      imageResize: {
+        modules: ["Resize", "DisplaySize"],
+        displaySize: true,
+      },
     }),
     []
   );
@@ -215,7 +205,18 @@ const QuestionUpdate = () => {
     "image",
   ];
 
-  ///react-select
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 2000,
+    // timerProgressBar: true,
+    background: "#EFF6FF",
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
   const handlerSubmit = async (data) => {
     try {
       var errors = [];
@@ -255,18 +256,27 @@ const QuestionUpdate = () => {
 
       let data = {
         title: title,
-        tags: tagId,
+        tags: tagId.map((item) => {
+          return item.value;
+        }),
         content: content,
-        // isDraft: false,
       };
 
-      // await QuestionApi.update(
-      //   shortId?.id.split("-")[shortId?.id.split("-").length - 1],
-      //   data
-      // );
-      console.log(data);
+      await QuestionApi.update(
+        shortId?.id.split("-")[shortId?.id.split("-").length - 1],
+        data
+      );
+      await Toast.fire({
+        icon: "success",
+        title: "Sửa câu hỏi thành công",
+      });
+      // console.log(data);
       // console.log(shortId?.id.split("-")[shortId?.id.split("-").length - 1]);
     } catch (error) {
+      await Toast.fire({
+        icon: "error",
+        title: "Sửa câu hỏi thất bại",
+      });
       console.log(error);
     }
   };

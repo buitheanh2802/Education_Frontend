@@ -8,11 +8,16 @@ import { Icon } from "src/Components/Icon";
 import QuestionApi from "src/Apis/QuestionApi";
 import { useLocation } from "react-router";
 import Loading from "src/Components/Loading";
+import UserApi from "src/Apis/UserApi";
+import TagAPi from "src/Apis/TagApi";
 const QuestionsPage = () => {
   // navigation
   const location = useLocation();
   const [questions, setQuestion] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [featuredAuthor, setFeaturedAuthor] = useState([]);
+  const [tagPopular, setTagPopular] = useState([]);
+
   const pathName = [
     {
       path: path.QUESTIONS,
@@ -32,20 +37,6 @@ const QuestionsPage = () => {
     icon: Icon.questions,
     value: "Đặt câu hỏi",
   };
-
-  // authors
-  const authors = [
-    {
-      path: "/",
-      fullname: "Nguyễn Thành Đạt Phò",
-      username: "@nguyenthanhdat",
-      avatar:
-        "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
-      point: 567,
-      question: 234,
-      folow: 345,
-    },
-  ];
 
   // tags
   const tags = [
@@ -78,6 +69,26 @@ const QuestionsPage = () => {
       }
     };
     listQuestion();
+
+    const listFeaturedAuthor = async () => {
+      try {
+        const { data: FeaturedAuthor } = await UserApi.getFeaturedAuthor();
+        setFeaturedAuthor(FeaturedAuthor?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    listFeaturedAuthor();
+
+    const listTagPopular = async () => {
+      try {
+        const { data: tagsPopular } = await TagAPi.getTagPopular();
+        setTagPopular(tagsPopular?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    listTagPopular();
   }, [location.pathname]);
   if (loading)
     return (
@@ -93,8 +104,8 @@ const QuestionsPage = () => {
           <QuestionView questions={questions} />
         </div>
         <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded">
-          <FeaturedAuthor authors={authors} />
-          <TrendingTags tags={tags} />
+          <FeaturedAuthor authors={featuredAuthor} />
+          <TrendingTags tags={tagPopular} />
         </div>
       </div>
     </div>

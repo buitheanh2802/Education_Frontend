@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import CreatetableSelect from "react-select/creatable";
 import makeAnimated from "react-select/animated";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Icon } from "src/Components/Icon";
 import TagApi from "src/Apis/TagApi";
@@ -10,6 +10,8 @@ import ImageApi from "src/Apis/ImageApi";
 import QuestionApi from "src/Apis/QuestionApi";
 import { useHistory } from "react-router";
 import Swal from "sweetalert2";
+import ImageResize from "quill-image-resize-module-react";
+Quill.register("modules/imageResize", ImageResize);
 
 const QuestionsCreate = () => {
   const [title, setTitle] = useState();
@@ -23,12 +25,6 @@ const QuestionsCreate = () => {
   const editor = useRef();
   const animatedComponents = makeAnimated();
   const history = useHistory();
-  // {
-  //   type: "",
-  //   message: "",
-  // }
-  // const token = localStorage.getItem("_token_");
-  // if (token === null) history.push("/auth/login");
 
   useEffect(() => {
     const listTags = async () => {
@@ -165,6 +161,10 @@ const QuestionsCreate = () => {
         handlers: {
           image: imageHandler,
         },
+      },
+      imageResize: {
+        modules: ["Resize", "DisplaySize"],
+        displaySize: true,
       },
     }),
     []

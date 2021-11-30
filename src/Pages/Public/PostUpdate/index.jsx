@@ -2,21 +2,23 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import CreatetableSelect from "react-select/creatable";
 import makeAnimated from "react-select/animated";
 import ReactQuill, { Quill } from "react-quill";
-import ImageResize from "quill-image-resize-module-react";
 import "react-quill/dist/quill.snow.css";
 import { Icon } from "src/Components/Icon";
 import TagApi from "src/Apis/TagApi";
-import PostApi from "src/Apis/PostApi";
 import ImageApi from "src/Apis/ImageApi";
+import QuestionApi from "src/Apis/QuestionApi";
+import { useHistory, useParams } from "react-router-dom";
+import QuestionsDetail from "../QuestionsDetail";
+import Loading from "src/Components/Loading";
 import Swal from "sweetalert2";
-import { useHistory } from "react-router";
-
+import ImageResize from "quill-image-resize-module-react";
+import PostApi from "src/Apis/PostApi";
 Quill.register("modules/imageResize", ImageResize);
-const PostsCreate = () => {
+const PostUpdate = () => {
   const [title, setTitle] = useState();
   const [tag, setTag] = useState();
   const [content, setContent] = useState();
-  const [boxBtn, setBoxBtn] = useState();
+  //   const [boxBtn, setBoxBtn] = useState();
   const [tagId, setTagId] = useState([]);
   const [images, setImages] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -24,21 +26,36 @@ const PostsCreate = () => {
   const editor = useRef();
   const animatedComponents = makeAnimated();
   const history = useHistory();
-  // {
-  //   type: "",
-  //   message: "",
-  // }
-  // const token = localStorage.getItem("_token_");
-  // if (token === null) history.push("/auth/login");
-
+  const [postDetail, setPostDetail] = useState([]);
+  const shortId = useParams();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    // register quill modules
+    const listDetailPost = async (id) => {
+      try {
+        let { data: post } = await PostApi.getPost(
+          id.split("-")[id.split("-").length - 1]
+        );
+        setPostDetail(post);
+        setLoading(false);
+        const tagspost = post?.data?.tags?.map((item) => ({
+          value: item.name,
+          label: item.name,
+        }));
 
+        setTitle(post?.data?.title);
+        setContent(post?.data?.content);
+        setTagId(tagspost);
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
+      }
+    };
+    listDetailPost(shortId?.id);
     const listTags = async () => {
       try {
         const { data: tags } = await TagApi.getAll();
         const newData = tags?.data?.models?.map((item) => ({
-          ...item,
+          // ...item,
           value: item.name,
           label: item.name,
         }));
@@ -58,24 +75,22 @@ const PostsCreate = () => {
     };
     listImage();
   }, []);
-
+  ////////////
   const tagItem = (e) => {
-    const arrTag = e.map((item) => {
-      return item.value;
-    });
-    setTagId(arrTag);
+    setTagId([...e]);
 
-    arrTag.length <= 0 || arrTag.length > 5
+    e.length <= 0 || e.length > 5
       ? validateError.findIndex((i) => i.type === "tag") === -1 &&
         setValidateError([
           ...validateError,
           {
             type: "tag",
-            message: "Gắn thẻ bài viết ít nhất 1 thẻ và không quá 5 thẻ",
+            message: "Gắn thẻ câu hỏi ít nhất 1 thẻ và không quá 5 thẻ",
           },
         ])
       : setValidateError(validateError.filter((i) => i.type !== "tag"));
   };
+
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
 
@@ -191,7 +206,6 @@ const PostsCreate = () => {
     "image",
   ];
 
-  ///react-select
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -204,7 +218,7 @@ const PostsCreate = () => {
       toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
   });
-  const handlerSubmit1 = async (data) => {
+  const handlerSubmit = async (data) => {
     try {
       var errors = [];
       if (!title) {
@@ -221,7 +235,7 @@ const PostsCreate = () => {
           ...errors,
           {
             type: "tag",
-            message: "Gắn thẻ bài viết ít nhất 1 thẻ và không quá 5 thẻ",
+            message: "Gắn thẻ câu hỏi ít nhất 1 thẻ và không quá 5 thẻ",
           },
         ];
       }
@@ -243,90 +257,46 @@ const PostsCreate = () => {
 
       let data = {
         title: title,
-        tags: tagId,
+        tags: tagId.map((item) => {
+          return item.value;
+        }),
         content: content,
-        isDraft: true,
       };
 
-      await PostApi.add(data);
+      await PostApi.update(
+        shortId?.id.split("-")[shortId?.id.split("-").length - 1],
+        data
+      );
       await Toast.fire({
         icon: "success",
-        title: "Đăng bài viết thành công",
+        title: "Sửa bài viết thành công",
       });
     } catch (error) {
       await Toast.fire({
         icon: "error",
-        title: "Đăng bài viết thất bại",
-      });
-      console.log(error);
-    }
-  };
-  const handlerSubmit2 = async () => {
-    try {
-      var errors = [];
-      if (!title) {
-        errors = [
-          ...errors,
-          {
-            type: "t",
-            message: "Tiêu đề không được để trống",
-          },
-        ];
-      }
-      if (tagId.length <= 0 || tagId.length > 5) {
-        errors = [
-          ...errors,
-          {
-            type: "tag",
-            message: "Gắn thẻ bài viết ít nhất 1 thẻ và không quá 5 thẻ",
-          },
-        ];
-      }
-
-      if (!content || validateContent.indexOf(content) !== -1) {
-        errors = [
-          ...errors,
-          {
-            type: "c",
-            message: "Nội dung không được để trống",
-          },
-        ];
-      }
-
-      if (errors.length !== 0) {
-        setValidateError(errors);
-        return;
-      }
-
-      let data = {
-        title: title,
-        tags: tagId,
-        content: content,
-        isDraft: false,
-      };
-      await PostApi.add(data);
-      await Toast.fire({
-        icon: "success",
-        title: "Đăng bài viết thành công",
-      });
-    } catch (error) {
-      await Toast.fire({
-        icon: "error",
-        title: "Đăng bài viết thất bại",
+        title: "Sửa bài viết thất bại",
       });
       console.log(error);
     }
   };
   const handelPostCancel = () => {
-    history.push("/posts");
+    history.push(`/posts/${shortId.id}`);
   };
+
+  if (loading)
+    return (
+      <div className="h-screen flex items-center justify-center bg-gray-100">
+        <Loading className="w-[40px] h-[40px] fill-current text-gray-500" />
+      </div>
+    );
   return (
     <div className="mt-[80px] container mx-auto ">
       <div className="">
         <input
           type="text"
           className="w-full px-[15px] py-[9px] bg-white rounded-[3px] shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Tiêu đề bài viết..."
+          placeholder="Tiêu đề câu hỏi..."
+          value={title}
           onChange={(e) => handleChangeTitle(e)}
         />
         <span className="text-red-500 text-[12px]">
@@ -338,14 +308,17 @@ const PostsCreate = () => {
       </div>
       <div className="mt-[20px] grid grid-cols-1  lg:grid-cols-[3fr,1fr] gap-5">
         <div className="">
-          <CreatetableSelect
-            closeMenuOnSelect={false}
-            components={animatedComponents}
-            isMulti
-            options={tag}
-            placeholder={"Gắn thẻ bài viết "}
-            onChange={(e) => tagItem(e)}
-          />
+          {tagId !== undefined ? (
+            <CreatetableSelect
+              closeMenuOnSelect={false}
+              components={animatedComponents}
+              isMulti
+              value={tagId}
+              options={tag}
+              placeholder={"Gắn thẻ câu hỏi "}
+              onChange={(e) => tagItem(e)}
+            />
+          ) : null}
           <span className="text-red-500 text-[12px]">
             {validateError.length !== 0 &&
               validateError.findIndex((i) => i.type === "tag") !== -1 &&
@@ -358,40 +331,14 @@ const PostsCreate = () => {
           <div className="m-0">
             <div className="relative">
               <button
-                className={
-                  boxBtn
-                    ? "relative w-full justify-center bg-blue-500 text-white px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center"
-                    : "relative w-full justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
-                }
-                onClick={() => setBoxBtn(!boxBtn)}
+                className="relative w-full justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
+                onClick={() => handlerSubmit()}
               >
                 <Icon.Pen className="fill-current w-[13px]" />
                 <span className="text-[12x] md:text-[16x] ml-1">
-                  Xuất bản bài viết
+                  Sửa bài viết
                 </span>
               </button>
-              <ul
-                className={
-                  boxBtn
-                    ? "absolute z-10 text-center w-full mt-[10px] box_btn bg-white top-full left-0 rounded-[3px]"
-                    : "hidden"
-                }
-              >
-                <li
-                  className="py-3 px-3 text-[12x] flex justify-center items-center md:text-[16x] text-gray-600 cursor-pointer border-b border-gray-100 hover:bg-blue-100"
-                  onClick={() => handlerSubmit1()}
-                >
-                  <Icon.HeartFilled className="fill-current w-[13px]" />
-                  <span className="ml-2">Lưu thành bản nháp</span>
-                </li>
-                <li
-                  className="py-3 px-3 text-[12x] md:text-[16x] justify-center items-center text-gray-600 cursor-pointer hover:bg-blue-100 flex"
-                  onClick={() => handlerSubmit2()}
-                >
-                  <Icon.Pen className="fill-current w-[13px]" />
-                  <span className="ml-2"> Xuất bản bài ngay   </span>
-                </li>
-              </ul>
             </div>
           </div>
           <div className="m-0">
@@ -407,14 +354,17 @@ const PostsCreate = () => {
       </div>
       <div className="mt-[20px] mb-[40px]">
         <div className="text-editor">
-          <ReactQuill
-            theme="snow"
-            modules={modules}
-            formats={formats}
-            onChange={Content}
-            ref={editor}
-            placeholder={"Nhập nội dung bài viết tại đây..."}
-          ></ReactQuill>
+          {content !== undefined ? (
+            <ReactQuill
+              theme="snow"
+              modules={modules}
+              formats={formats}
+              defaultValue={content}
+              onChange={Content}
+              ref={editor}
+              placeholder={"Nhập nội dung câu hỏi tại đây..."}
+            ></ReactQuill>
+          ) : null}
         </div>
         <div
           className={
@@ -484,4 +434,4 @@ const PostsCreate = () => {
   );
 };
 
-export default PostsCreate;
+export default PostUpdate;

@@ -9,11 +9,17 @@ import Scrollbar from "react-smooth-scrollbar";
 import PostApi from "src/Apis/PostApi";
 import { useLocation } from "react-router";
 import Loading from "src/Components/Loading";
+import "./index.css";
+import SkeletonGroup from "./components/skeleton-group";
+import UserApi from "src/Apis/UserApi";
+import TagAPi from "src/Apis/TagApi";
 
 const PostPage = () => {
   const location = useLocation();
   const [posts, setPost] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [featuredAuthor, setFeaturedAuthor] = useState([]);
+  const [tagPopular, setTagPopular] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // Navigation
   const pathName = [
@@ -59,6 +65,7 @@ const PostPage = () => {
         } else {
           endPoint = "bookmark";
         }
+        setLoading(true);
         const { data: posts } = await PostApi.getPost(endPoint);
         setPost(posts);
         setLoading(false);
@@ -68,24 +75,42 @@ const PostPage = () => {
       }
     };
     listPost();
+
+    const listFeaturedAuthor = async () => {
+      try {
+        const { data: FeaturedAuthor } = await UserApi.getFeaturedAuthor();
+        setFeaturedAuthor(FeaturedAuthor?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    listFeaturedAuthor();
+
+    const listTagPopular = async () => {
+      try {
+        const { data: tagsPopular } = await TagAPi.getTagPopular();
+        setTagPopular(tagsPopular?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    listTagPopular();
   }, [location.pathname]);
 
-  if (loading)
-    return (
-      <div className="h-screen flex items-center justify-center bg-gray-100">
-        <Loading className="w-[40px] h-[40px] fill-current text-gray-500" />
-      </div>
-    );
   return (
     <div className="container mx-auto mt-[55px] py-[20px]">
       <Navigation path={pathName} button={button} />
       <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
-        <Scrollbar className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded h-screen">
+        <Scrollbar
+          alwaysShowTracks={true}
+          className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded h-screen"
+        >
+          {loading && <SkeletonGroup />}
           <PostView posts={posts} />
         </Scrollbar>
         <Scrollbar className="col-span-10 lg:col-span-3 bg-white shadow rounded h-screen">
-          <FeaturedAuthor authors={authors} />
-          <TrendingTags tags={tags} />
+          <FeaturedAuthor authors={featuredAuthor} />
+          <TrendingTags tags={tagPopular} />
         </Scrollbar>
       </div>
     </div>

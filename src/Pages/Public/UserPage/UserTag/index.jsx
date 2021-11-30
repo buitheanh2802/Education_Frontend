@@ -7,13 +7,13 @@ const UserTag = ({ userTag }) => {
     <div>
         {userTag.length==0 ? (
             <div>
-            <p className="text-center text-[18px] leading-[30px] my-[10px] py-[35px] font-bold text-gray-500">
+            <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
               Không có gì ở đây cả
             </p>
           </div>
         ) :
-        <div className="flex justify-between  max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px]  sm:gap-x-[60px]  gap-y-[20px] mb-[30px] pb-[45px] w-full  py-[15px] bg-white shadow rounded  ">
-        <div className="grid grid-cols-1 gap-[20px] 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
+        <div className="flex justify-between max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px]  sm:gap-x-[60px]  gap-y-[20px] mb-[30px] pb-[45px] w-full  py-[15px] bg-white shadow rounded  ">
+        <div className="grid grid-cols-1 gap-[30px] 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
           {userTag.map((item, index) => {
             return (
               <div
