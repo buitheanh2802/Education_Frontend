@@ -7,10 +7,12 @@ import { path } from "src/Constants/";
 import { Icon } from "src/Components/Icon";
 import QuestionApi from "src/Apis/QuestionApi";
 import { useLocation } from "react-router";
+import Loading from "src/Components/Loading";
 const QuestionsPage = () => {
   // navigation
   const location = useLocation();
   const [questions, setQuestion] = useState([]);
+  const [loading, setLoading] = useState(true);
   const pathName = [
     {
       path: path.QUESTIONS,
@@ -64,13 +66,25 @@ const QuestionsPage = () => {
           endPoint = "listbookmark";
         }
         const { data: questions } = await QuestionApi.getQuestion(endPoint);
-        setQuestion(questions);
+        const dataNew = questions?.data?.models?.filter(
+          (data) => data.spam === false
+        );
+        // console.log(dataNew);
+        setQuestion(dataNew);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log("Error", error.sesponse);
       }
     };
     listQuestion();
   }, [location.pathname]);
+  if (loading)
+    return (
+      <div className="h-screen flex items-center justify-center bg-gray-100">
+        <Loading className="w-[40px] h-[40px] fill-current text-gray-500" />
+      </div>
+    );
   return (
     <div className="container mx-auto mt-[80px] mb-[20px]">
       <Navigation path={pathName} button={button} />

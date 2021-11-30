@@ -11,7 +11,6 @@ import { setLoading } from "src/Redux/Slices/Loading.slice";
 import FollowerTag from '../Commons/DetailTagView/FollowerTag'
 
 const DetailTagPage = () => {
-    const history = useHistory();
     const { slug } = useParams();
     const [tag, setTag] = useState([]);
     const [tags, setTags] = useState({});

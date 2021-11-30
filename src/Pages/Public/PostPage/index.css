@@ -1,0 +1,9 @@
+.scrollbar-thumb{
+    width: 5px !important;
+    background: #dddddd !important;
+    left: 0px !important;
+}
+.scrollbar-track{
+    background: none !important;
+    margin: 10px 0px !important;
+}

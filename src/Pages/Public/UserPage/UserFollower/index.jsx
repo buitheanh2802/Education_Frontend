@@ -7,7 +7,7 @@ const UserFollower = ({ userFollower }) => {
     <div className="container mx-auto">
       {userFollower.length == 0 ? (
         <div>
-          <p className="text-center text-[18px] leading-[30px] my-[10px] py-[35px] font-bold text-gray-500">
+          <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
             Không có gì ở đây cả
           </p>
         </div>
@@ -16,7 +16,7 @@ const UserFollower = ({ userFollower }) => {
           <div className="flex justify-between items-center gap-[50px]">
             {userFollower.map((item, index) => {
               return (
-                <div className="flex py-[20px] px-[10px] mb-[20px] bg-white">
+                <div key={index} className="flex py-[20px] px-[10px] mb-[20px] bg-white">
                   <div className="">
                     <img
                       src="https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg"

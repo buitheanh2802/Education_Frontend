@@ -39,12 +39,33 @@ const QuestionApi = {
     });
   },
   update(id, data) {
-    const url = `/question/update/${id}`;
+    const url = `/question/${id}`;
     return AxiosClient.put(url, data, {
       headers: {
         authorization: `Bearer ${token}`,
       },
     });
+  },
+  getListPublish() {
+    const url = `/question`;
+    return AxiosClient.get(url, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  },
+  questionSpam(id, data) {
+    const url = `/question/spam/${id}`;
+    return AxiosClient.post(
+      url,
+      data,
+      // { shortId: id },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
   },
 };
 

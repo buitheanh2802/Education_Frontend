@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import cover_img from "../../../Assets/media/pictures/cover_image.png";
 import profile_icon from "../../../Assets/media/pictures/profile.png";
 import contact_icon from "../../../Assets/media/pictures/contact.png";
 import key_icon from "../../../Assets/media/pictures/digital-key.png";
@@ -12,10 +11,10 @@ const EditProfile = () => {
 
   return (
     <>
-      <div className=" mx-auto  ">
-        <div className="flex ">
-          <div className="lg:w-[20%]   md:h-[100vh] pt-[75px]">
-            <div className=" bg-white h-full shadow-lg rounded-[3px]">
+      <div className=" mx-auto">
+        <div className="flex mb-[20px]">
+          <div className="lg:w-[20%] pt-[75px]">
+            <div className=" bg-white h-full shadow-lg rounded-[5px]">
               <div className="w-full">
                 <div className="flex items-center py-[17px] hover:bg-blue-100 px-[20px]">
                   <Icon.Home className="fill-current w-[25px] text-gray-400 " />
@@ -44,7 +43,7 @@ const EditProfile = () => {
                 <ul
                   className={
                     BoxInfo
-                      ? "block w-[200px] lg:w-full  rounded-r-[3px] lg:rounded-[0px] absolute lg:static top-0 left-[100%] bg-white z-10"
+                      ? "block w-[200px] lg:w-full  rounded-r-[5px] lg:rounded-[0px] absolute lg:static top-0 left-[100%] bg-white z-10"
                       : "hidden "
                   }
                 >
@@ -104,7 +103,7 @@ const EditProfile = () => {
             </div>
           </div>
           <div className="w-full lg:w-[80%] px-[15px] md:px-[30px] pt-[75px]">
-            <div className=" max-w-[1100px] mx-auto lg:py-[20px] ">
+            <div className=" max-w-[1100px] mx-auto">
               <div className=" bg-white shadow-lg rounded-[5px] mx-auto">
                 <div className="px-[20px] lg:px-[50px] pt-[15px] pb-[50px]">
                   <div
