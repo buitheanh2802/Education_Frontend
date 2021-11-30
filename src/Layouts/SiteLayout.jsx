@@ -54,7 +54,6 @@ const SiteLayout = () => {
           component={QuestionsDetail}
         />
         <PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
-
         <PublicRouter path={path.TAGS} component={TagsPage} />
         <PublicRouter path={path.USER_ID} component={Userpage} />
         <PublicRouter path={path.INTRO} component={IntroPage} />

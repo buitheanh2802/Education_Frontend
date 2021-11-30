@@ -2,15 +2,16 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import CreatetableSelect from "react-select/creatable";
 import makeAnimated from "react-select/animated";
 import ReactQuill, { Quill } from "react-quill";
-import ImageResize from 'quill-image-resize-module-react';
+import ImageResize from "quill-image-resize-module-react";
 import "react-quill/dist/quill.snow.css";
 import { Icon } from "src/Components/Icon";
 import TagApi from "src/Apis/TagApi";
 import PostApi from "src/Apis/PostApi";
 import ImageApi from "src/Apis/ImageApi";
 import Swal from "sweetalert2";
+import { useHistory } from "react-router";
 
-Quill.register('modules/imageResize', ImageResize);
+Quill.register("modules/imageResize", ImageResize);
 const PostsCreate = () => {
   const [title, setTitle] = useState();
   const [tag, setTag] = useState();
@@ -22,7 +23,7 @@ const PostsCreate = () => {
   const [validateError, setValidateError] = useState([]);
   const editor = useRef();
   const animatedComponents = makeAnimated();
-  // const history = useHistory();
+  const history = useHistory();
   // {
   //   type: "",
   //   message: "",
@@ -31,7 +32,6 @@ const PostsCreate = () => {
   // if (token === null) history.push("/auth/login");
 
   useEffect(() => {
-
     // register quill modules
 
     const listTags = async () => {
@@ -67,13 +67,13 @@ const PostsCreate = () => {
 
     arrTag.length <= 0 || arrTag.length > 5
       ? validateError.findIndex((i) => i.type === "tag") === -1 &&
-      setValidateError([
-        ...validateError,
-        {
-          type: "tag",
-          message: "Gắn thẻ bài viết ít nhất 1 thẻ và không quá 5 thẻ",
-        },
-      ])
+        setValidateError([
+          ...validateError,
+          {
+            type: "tag",
+            message: "Gắn thẻ bài viết ít nhất 1 thẻ và không quá 5 thẻ",
+          },
+        ])
       : setValidateError(validateError.filter((i) => i.type !== "tag"));
   };
   const handleChangeTitle = (e) => {
@@ -81,13 +81,13 @@ const PostsCreate = () => {
 
     !e.target.value
       ? validateError.findIndex((i) => i.type === "t") === -1 &&
-      setValidateError([
-        ...validateError,
-        {
-          type: "t",
-          message: "Tiêu đề không được để trống",
-        },
-      ])
+        setValidateError([
+          ...validateError,
+          {
+            type: "t",
+            message: "Tiêu đề không được để trống",
+          },
+        ])
       : setValidateError(validateError.filter((i) => i.type !== "t"));
   };
 
@@ -170,9 +170,9 @@ const PostsCreate = () => {
         },
       },
       imageResize: {
-        modules: ['Resize', 'DisplaySize'],
-        displaySize: true
-      }
+        modules: ["Resize", "DisplaySize"],
+        displaySize: true,
+      },
     }),
     []
   );
@@ -249,7 +249,15 @@ const PostsCreate = () => {
       };
 
       await PostApi.add(data);
+      await Toast.fire({
+        icon: "success",
+        title: "Đăng bài viết thành công",
+      });
     } catch (error) {
+      await Toast.fire({
+        icon: "error",
+        title: "Đăng bài viết thất bại",
+      });
       console.log(error);
     }
   };
@@ -299,15 +307,18 @@ const PostsCreate = () => {
       await PostApi.add(data);
       await Toast.fire({
         icon: "success",
-        title: "Đăng câu hỏi thành công",
+        title: "Đăng bài viết thành công",
       });
     } catch (error) {
       await Toast.fire({
         icon: "error",
-        title: "Đăng câu hỏi thất bại",
+        title: "Đăng bài viết thất bại",
       });
       console.log(error);
     }
+  };
+  const handelPostCancel = () => {
+    history.push("/posts");
   };
   return (
     <div className="mt-[80px] container mx-auto ">
@@ -384,7 +395,10 @@ const PostsCreate = () => {
             </div>
           </div>
           <div className="m-0">
-            <button className="w-full justify-center bg-white text-red-500 px-3  py-[8px] border border-red-500 rounded-[3px] flex items-center hover:bg-red-500 hover:text-white">
+            <button
+              onClick={() => handelPostCancel()}
+              className="w-full justify-center bg-white text-red-500 px-3  py-[8px] border border-red-500 rounded-[3px] flex items-center hover:bg-red-500 hover:text-white"
+            >
               <Icon.Close className="fill-current w-[13px]" />
               <span className="text-[12x] md:text-[16x] ml-1">Hủy</span>
             </button>
