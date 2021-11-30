@@ -11,10 +11,14 @@ import { useLocation } from "react-router";
 import Loading from "src/Components/Loading";
 import "./index.css";
 import SkeletonGroup from "./components/skeleton-group";
+import UserApi from "src/Apis/UserApi";
+import TagAPi from "src/Apis/TagApi";
 
 const PostPage = () => {
   const location = useLocation();
   const [posts, setPost] = useState([]);
+  const [featuredAuthor, setFeaturedAuthor] = useState([]);
+  const [tagPopular, setTagPopular] = useState([]);
   const [loading, setLoading] = useState(false);
 
   // Navigation
@@ -71,6 +75,26 @@ const PostPage = () => {
       }
     };
     listPost();
+
+    const listFeaturedAuthor = async () => {
+      try {
+        const { data: FeaturedAuthor } = await UserApi.getFeaturedAuthor();
+        setFeaturedAuthor(FeaturedAuthor?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    listFeaturedAuthor();
+
+    const listTagPopular = async () => {
+      try {
+        const { data: tagsPopular } = await TagAPi.getTagPopular();
+        setTagPopular(tagsPopular?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    listTagPopular();
   }, [location.pathname]);
 
   return (
@@ -85,8 +109,8 @@ const PostPage = () => {
           <PostView posts={posts} />
         </Scrollbar>
         <Scrollbar className="col-span-10 lg:col-span-3 bg-white shadow rounded h-screen">
-          <FeaturedAuthor authors={authors} />
-          <TrendingTags tags={tags} />
+          <FeaturedAuthor authors={featuredAuthor} />
+          <TrendingTags tags={tagPopular} />
         </Scrollbar>
       </div>
     </div>
