@@ -25,12 +25,6 @@ const QuestionsCreate = () => {
   const editor = useRef();
   const animatedComponents = makeAnimated();
   const history = useHistory();
-  // {
-  //   type: "",
-  //   message: "",
-  // }
-  // const token = localStorage.getItem("_token_");
-  // if (token === null) history.push("/auth/login");
 
   useEffect(() => {
     const listTags = async () => {
