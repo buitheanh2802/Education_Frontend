@@ -86,7 +86,8 @@ const Userpage = (props) => {
         const { data: followerUser } = await ProfileUserApi.getFollowerUser(
           username
         );
-        setUserFollowers(followerUser.userFollower.data.models);
+        console.log(followerUser.data.models);
+        setUserFollowers(followerUser.data.models);
       } catch (error) {
         console.log(error);
       }

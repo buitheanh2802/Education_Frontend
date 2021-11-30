@@ -626,6 +626,30 @@ video {
   max-width: calc(100% - 30px);
 }
 
+@media (min-width: 768px) {
+  .container {
+    max-width: calc(100% - 70px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 980px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1480px;
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -3589,11 +3613,6 @@ body {
 .after\:h-\[2px\]::after {
   content: "";
   height: 2px;
-}
-
-.after\:h-\[1px\]::after {
-  content: "";
-  height: 1px;
 }
 
 .after\:h-2\/3::after {
