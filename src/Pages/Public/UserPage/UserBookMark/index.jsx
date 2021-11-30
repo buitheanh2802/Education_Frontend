@@ -3,7 +3,16 @@ import { Icon } from "src/Components/Icon";
 import { Link } from "react-router-dom";
 const UserBookMark = ({ userBookMark }) => {
   return (
-    <div className="w-full px-[10px] py-[15px] border-b lg:mt-0 md:mt-3">
+
+    <div className="">
+      {userBookMark?.length==0 ? (
+         <div>
+         <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
+           Không có gì ở đây cả
+         </p>
+       </div>
+      ) : (
+        <div className="w-full px-[10px] py-[15px] border-b lg:mt-0 md:mt-3">
       {userBookMark.map((item, index) => {
         return <>
           <div key={index} className="flex py-[10px] ">
@@ -78,6 +87,12 @@ const UserBookMark = ({ userBookMark }) => {
           </div>
         </>
       })}
+    </div>
+       )
+    }
+
+    
+
     </div>
   );
 };

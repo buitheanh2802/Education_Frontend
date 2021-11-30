@@ -12,12 +12,13 @@ import QuestionsDetail from "../QuestionsDetail";
 import Loading from "src/Components/Loading";
 import Swal from "sweetalert2";
 import ImageResize from "quill-image-resize-module-react";
+import PostApi from "src/Apis/PostApi";
 Quill.register("modules/imageResize", ImageResize);
-const QuestionUpdate = () => {
+const PostUpdate = () => {
   const [title, setTitle] = useState();
   const [tag, setTag] = useState();
   const [content, setContent] = useState();
-  const [boxBtn, setBoxBtn] = useState();
+  //   const [boxBtn, setBoxBtn] = useState();
   const [tagId, setTagId] = useState([]);
   const [images, setImages] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -25,31 +26,31 @@ const QuestionUpdate = () => {
   const editor = useRef();
   const animatedComponents = makeAnimated();
   const history = useHistory();
-  const [questionDetail, setQuestionDetail] = useState([]);
+  const [postDetail, setPostDetail] = useState([]);
   const shortId = useParams();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const listDetailQuestion = async (id) => {
+    const listDetailPost = async (id) => {
       try {
-        let { data: question } = await QuestionApi.getId(
+        let { data: post } = await PostApi.getPost(
           id.split("-")[id.split("-").length - 1]
         );
-        setQuestionDetail(question);
+        setPostDetail(post);
         setLoading(false);
-        const tagsQuestion = question?.data?.tags?.map((item) => ({
+        const tagspost = post?.data?.tags?.map((item) => ({
           value: item.name,
           label: item.name,
         }));
 
-        setTitle(question?.data?.title);
-        setContent(question?.data?.content);
-        setTagId(tagsQuestion);
+        setTitle(post?.data?.title);
+        setContent(post?.data?.content);
+        setTagId(tagspost);
       } catch (error) {
         setLoading(false);
         console.log(error);
       }
     };
-    listDetailQuestion(shortId?.id);
+    listDetailPost(shortId?.id);
     const listTags = async () => {
       try {
         const { data: tags } = await TagApi.getAll();
@@ -262,26 +263,24 @@ const QuestionUpdate = () => {
         content: content,
       };
 
-      await QuestionApi.update(
+      await PostApi.update(
         shortId?.id.split("-")[shortId?.id.split("-").length - 1],
         data
       );
       await Toast.fire({
         icon: "success",
-        title: "Sửa câu hỏi thành công",
+        title: "Sửa bài viết thành công",
       });
-      // console.log(data);
-      // console.log(shortId?.id.split("-")[shortId?.id.split("-").length - 1]);
     } catch (error) {
       await Toast.fire({
         icon: "error",
-        title: "Sửa câu hỏi thất bại",
+        title: "Sửa bài viết thất bại",
       });
       console.log(error);
     }
   };
-  const handelQuestionCancel = () => {
-    history.push(`/question/${shortId.id}`);
+  const handelPostCancel = () => {
+    history.push(`/posts/${shortId.id}`);
   };
 
   if (loading)
@@ -332,23 +331,19 @@ const QuestionUpdate = () => {
           <div className="m-0">
             <div className="relative">
               <button
-                className={
-                  boxBtn
-                    ? "relative w-full justify-center bg-blue-500 text-white px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center"
-                    : "relative w-full justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
-                }
+                className="relative w-full justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
                 onClick={() => handlerSubmit()}
               >
                 <Icon.Pen className="fill-current w-[13px]" />
                 <span className="text-[12x] md:text-[16x] ml-1">
-                  Sửa câu hỏi
+                  Sửa bài viết
                 </span>
               </button>
             </div>
           </div>
           <div className="m-0">
             <button
-              onClick={() => handelQuestionCancel()}
+              onClick={() => handelPostCancel()}
               className="w-full justify-center bg-white text-red-500 px-3  py-[8px] border border-red-500 rounded-[3px] flex items-center hover:bg-red-500 hover:text-white"
             >
               <Icon.Close className="fill-current w-[13px]" />
@@ -439,4 +434,4 @@ const QuestionUpdate = () => {
   );
 };
 
-export default QuestionUpdate;
+export default PostUpdate;

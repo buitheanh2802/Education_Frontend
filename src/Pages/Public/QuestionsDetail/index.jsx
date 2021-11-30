@@ -57,7 +57,6 @@ const QuestionsDetail = () => {
         }
       } catch (error) {
         setLoading(false);
-
         console.log(error);
       }
     };

@@ -35,27 +35,27 @@ const PostPage = () => {
 
     const button = { path: path.POSTS_CREATE, icon: Icon.Pen, value: "Viết bài" };
 
-    // authors
-    const authors = [
-        {
-            path: "/",
-            fullname: "Nguyễn Thành Đạt",
-            username: "@nguyenthanhdat",
-            avatar:
-                "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
-            point: 567,
-            question: 234,
-            folow: 345,
-        },
-    ];
+  // authors
+  const authors = [
+    {
+      path: "/",
+      fullname: "Nguyễn Thành Đạt",
+      username: "@nguyenthanhdat",
+      avatar:
+        "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
+      point: 567,
+      question: 234,
+      folow: 345,
+    },
+  ];
 
-    // tags
-    const tags = [
-        {
-            path: "/",
-            value: "NodeJS",
-        },
-    ];
+  // tags
+  const tags = [
+    {
+      path: "/",
+      value: "NodeJS",
+    },
+  ];
 
     useEffect(() => {
         const listNew = async () => {
