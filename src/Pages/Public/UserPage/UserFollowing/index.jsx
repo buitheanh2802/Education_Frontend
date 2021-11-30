@@ -1,6 +1,5 @@
 import React from "react";
 import { Icon } from "src/Components/Icon";
-import { Link } from "react-router-dom";
 const UserFollowing = ({ userFollowing }) => {
   return (
     <div>

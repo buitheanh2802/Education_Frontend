@@ -2,7 +2,6 @@ import React from "react";
 import { Icon } from "src/Components/Icon";
 import { Link } from "react-router-dom";
 const UserBookMark = ({ userBookMark }) => {
-  console.log("123", userBookMark);
   return (
     <div className="w-full px-[10px] py-[15px] border-b lg:mt-0 md:mt-3">
       {userBookMark.map((item, index) => {

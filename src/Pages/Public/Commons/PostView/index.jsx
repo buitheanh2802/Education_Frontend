@@ -4,18 +4,20 @@ import { Icon } from "src/Components/Icon";
 import { timeFormatter } from "../../../../Helpers/Timer";
 
 const PostView = ({ posts }) => {
+    console.log(posts);
     return (
         <>
-            {posts?.data?.models.length === 0 || posts.length === 0 ? (
-                <div>
-                    <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
-                        Không có gì ở đây cả
-                    </p>
-                </div>
-            )
+            {posts.length === 0 || posts?.models?.length === 0 ?
+                (
+                    <div>
+                        <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
+                            Không có gì ở đây cả
+                        </p>
+                    </div>
+                )
                 : (
                     <div>
-                        {posts?.data?.models?.map((item, index) => {
+                        {posts?.models?.map((item, index) => {
                             return (
                                 <div key={index} className="w-full flex px-[10px] py-[15px] border-b">
                                     <div className="mr-[15px] hidden sm:block">

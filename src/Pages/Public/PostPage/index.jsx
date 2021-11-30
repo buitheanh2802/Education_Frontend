@@ -10,16 +10,21 @@ import { Switch, Route } from "react-router-dom";
 import { path } from "src/Constants/";
 
 const PostPage = () => {
-    const token = localStorage.getItem('_token_');
     const history = useHistory()
-    const [dataPost, setDataPost] = useState({
-        newest: [],
-        trendings: []
-    });
-    const [PostUseToken, setPostUseToken] = useState({
-        followings: [],
-        bookmarks: []
-    });
+    // const [dataPost, setDataPost] = useState({
+    //     newest: [],
+    //     trendings: []
+    // });
+    // const [PostUseToken, setPostUseToken] = useState({
+    //     followings: [],
+    //     bookmarks: []
+    // });
+
+    const [newests, setNewests] = useState([]);
+    const [trendings, setTrendings] = useState([]);
+    const [follows, setFollows] = useState([]);
+    const [bookmarks, setBookmarks] = useState([]);
+
     // Navigation
     const pathName = [
         { path: path.POSTS, value: "Mới cập nhật" },
@@ -52,36 +57,84 @@ const PostPage = () => {
     ]
 
     useEffect(() => {
-        if (token) {
-            Promise.all([
-                PostApi.getPostFol(),
-                PostApi.getPostMark()
-            ]).then(data => {
-                const followings = data[0].data;
-                const bookmarks = data[1].data;
-                setPostUseToken({
-                    followings: followings,
-                    bookmarks: bookmarks
-                })
-            }).catch(error => {
-                console.log(error)
-            })
-        }
-        Promise.all([
-            PostApi.getPostNew(),
-            PostApi.getPostTren()
-        ])
-            .then(data => {
-                const newest = data[0].data;
-                const trendings = data[1].data;
-                setDataPost({
-                    newest: newest,
-                    trendings: trendings
-                })
-            }).catch(error => {
-                console.log(error)
-            })
-    }, [token])
+        const listNew = async () => {
+          try {
+            const { data: newests } = await PostApi.getPostNew()
+            setNewests(newests.data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        listNew();
+      }, []);
+
+      useEffect(() => {
+        const listPop = async () => {
+          try {
+            const { data: trendings } = await PostApi.getPostTren()
+            setTrendings(trendings.data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        listPop();
+      }, []);
+
+      useEffect(() => {
+        const listFol = async () => {
+          try {
+            const { data: follows } = await PostApi.getPostFol()
+            setFollows(follows);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        listFol();
+      }, []);
+
+      useEffect(() => {
+        const listBmark = async () => {
+          try {
+            const { data: bookmarks } = await PostApi.getPostMark()
+            setBookmarks(bookmarks.data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        listBmark();
+      }, []);
+
+    // useEffect(() => {
+    //     if (token) {
+    //         Promise.all([
+    //             PostApi.getPostFol(),
+    //             PostApi.getPostMark()
+    //         ]).then(data => {
+    //             const followings = data[0].data;
+    //             const bookmarks = data[1].data;
+    //             setPostUseToken({
+    //                 followings: followings,
+    //                 bookmarks: bookmarks
+    //             })
+    //         }).catch(error => {
+    //             console.log(error)
+    //         })
+    //     }
+    //     Promise.all([
+    //         PostApi.getPostNew(),
+    //         PostApi.getPostTren()
+    //     ])
+    //         .then(data => {
+    //             const newest = data[0].data;
+    //             const trendings = data[1].data;
+    //             setDataPost({
+    //                 newest: newest,
+    //                 trendings: trendings
+    //             })
+    //         }).catch(error => {
+    //             console.log(error)
+    //         })
+    // }, [token])
 
 
     return (
@@ -116,28 +169,28 @@ const PostPage = () => {
                             exact
                             path={path.POSTS}
                             render={(props) => (
-                                <PostView posts={dataPost.newest} {...props} />
+                                <PostView posts={newests} {...props} />
                             )}
                         ></Route>
                         <Route
                             exact
                             path={path.POSTS_POPULAR}
                             render={(props) => (
-                                <PostView posts={dataPost.trendings} {...props} />
+                                <PostView posts={trendings} {...props} />
                             )}
                         ></Route>
                         <Route
                             exact
                             path={path.POSTS_FOLLOW}
                             render={(props) =>
-                                <PostView posts={PostUseToken.followings} {...props} />
+                                <PostView posts={follows} {...props} />
                             }
                         ></Route>
                         <Route
                             exact
                             path={path.POSTS_BOOK_MARK}
                             render={(props) => (
-                                <PostView posts={PostUseToken.bookmarks} {...props} />
+                                <PostView posts={bookmarks} {...props} />
                             )}
                         ></Route>
                     </Switch>
