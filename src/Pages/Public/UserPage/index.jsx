@@ -215,7 +215,6 @@ const Userpage = (props) => {
                 path={path.USER_BOOKMARK}
                 render={(props) =>
                   <UserBookMark userBookMark={userBookMark} {...props} />
-
                 }
               ></Route>
               <Route

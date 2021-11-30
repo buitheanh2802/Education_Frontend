@@ -1,8 +1,6 @@
 import React from "react";
 import { Icon } from "src/Components/Icon";
-import { Link } from "react-router-dom";
 const UserFollower = ({ userFollower }) => {
-  console.log("userFollower", userFollower);
   return (
     <div className="container mx-auto">
       {userFollower.length == 0 ? (
