@@ -40,9 +40,9 @@ export const path = {
   POSTS: '/posts',
   POSTS_ID: '/posts/:id',
   POSTS_CREATE: '/posts/create',
-  POSTS_POPULAR: '/post/popular',
-  POSTS_FOLLOW: '/post/follow',
-  POSTS_BOOK_MARK: '/post/bookmark',
+  POSTS_POPULAR: '/posts/popular',
+  POSTS_FOLLOW: '/posts/follow',
+  POSTS_BOOK_MARK: '/posts/bookmark',
 
   // tags
   TAGS: '/tags',
