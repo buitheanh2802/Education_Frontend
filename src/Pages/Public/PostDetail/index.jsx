@@ -142,7 +142,10 @@ const PostsDetail = () => {
     const copy = true;
     setCopyLink(copy);
   };
-  // console.log(window.location.href);
+  const handelRemove = async (id) => {
+    await PostApi.remove(id);
+    history.push("/posts");
+  };
   if (loading)
     return (
       <div className="h-screen flex items-center justify-center bg-gray-100">
@@ -274,12 +277,31 @@ const PostsDetail = () => {
                     </li>
                     {postDetail?.data?.createBy?.username ===
                     profile?.username ? (
-                      <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
-                        <Icon.Fix className="fill-current w-[15px] mr-[5px]" />
-                        Sửa bài viết
-                      </li>
+                      <>
+                        <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
+                          <Icon.Fix className="fill-current w-[15px] mr-[5px]" />
+                          <Link
+                            to={`/post/update/${postDetail?.data?.slug}-${postDetail?.data?.shortId}`}
+                            className="block w-full"
+                          >
+                            Sửa bài viết
+                          </Link>
+                        </li>
+                        <li
+                          onClick={() =>
+                            handelRemove(postDetail?.data?.shortId)
+                          }
+                          className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500"
+                        >
+                          <Icon.Can className="fill-current w-[12px] mr-[5px]" />
+                          Xóa bài viết
+                        </li>
+                      </>
                     ) : (
-                      <li className="hidden"></li>
+                      <>
+                        <li className="hidden"></li>
+                        <li className="hidden"></li>
+                      </>
                     )}
                   </ul>
                 </div>

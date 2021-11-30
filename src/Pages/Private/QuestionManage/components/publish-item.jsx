@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Loading from "src/Components/Loading";
+import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import { timeFormatter } from "src/Helpers/Timer";
 import { useSelector } from "react-redux";
 import PostAPI from "../../../../Apis/PostApi";
@@ -65,7 +65,7 @@ const PublishItem = (props) => {
           }
         >
           {loading.success && (
-            <Loading className="w-[20px] fill-current mr-[5px] h-[20px] " />
+            <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
           )}
           {spamName ? "Hủy Spam" : "Spam"}
         </button>

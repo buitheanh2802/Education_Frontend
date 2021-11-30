@@ -1,9 +1,14 @@
-import axios from 'axios';
 import AxiosClient from './AxiosClient';
+const token = localStorage.getItem('_token_');
+
 const ProfileUserApi = {
     getUser(username) {
         const url = `/user/${username}`
-        return AxiosClient.get(url)
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization : `Bearer ${token}`
+            }
+        })
     },
     getPostUser(username) {
         const url = `/user/${username}/post`

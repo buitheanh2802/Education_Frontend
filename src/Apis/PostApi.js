@@ -28,11 +28,31 @@ const PostApi = {
   },
   get(id) {
     const url = `/posts/${id}`;
-    return AxiosClient.get(url);
+    return AxiosClient.get(url, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
   },
   add(posts) {
     const url = `/post`;
     return AxiosClient.post(url, posts, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  },
+  remove(id) {
+    const url = `/post/${id}`;
+    return AxiosClient.delete(url, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  },
+  update(id, data) {
+    const url = `/post/${id}`;
+    return AxiosClient.put(url, data, {
       headers: {
         authorization: `Bearer ${token}`,
       },

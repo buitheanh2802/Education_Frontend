@@ -8,13 +8,10 @@ import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import FollowApi from "src/Apis/FollowApi";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
-import Loading from "src/Components/Loading";
 
 const TagsPage = () => {
-  
-  const [loading,setLoading] = useState(true);
-  const location = useLocation();
 
+  const [loading,setLoading] = useState(true);
   const pathName = [
     {
       path: path.TAGS,
@@ -79,30 +76,23 @@ const TagsPage = () => {
 
   return (
     <div className="container mx-auto mt-[80px]  ">
-      {loading && (
-        <Loading className="w-[20px] items-center"/>
-      )}
-      
-      {!loading && (
-        <>
-        <Navigation path={pathName} button={button} />
-      <div className="flex justify-between mt-[15px]  gap-[30px] ">
-        <div className="flex justify-between  max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px]  sm:gap-x-[60px]  gap-y-[20px] mb-[30px] pb-[45px] w-full  py-[15px] bg-white shadow rounded  ">
-          <div className="grid grid-cols-1 gap-[20px] 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
-            {tags.map((item, index) => {
+      <div className="flex justify-between mt-[15px]  gap-[30px]">
+        <div className="max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px] sm:gap-x-[60px] gap-y-[20px] mb-[30px] pb-[45px] w-full py-[15px] bg-white shadow rounded">
+          <div className="grid grid-cols-1 gap-[20px] xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
+            {tags?.map((item, index) => {
               return (
                 <div key={index} className="item md:text-[16px] text-[14px] w-max-[200px] px-[10px] py-[10px]">
                   <Link className="grid grid-cols-3 gap-[10px] justify-center items-center" to={`/tag/${item?.slug}`} >
                     <div className="mx-auto">
-                      {item.avatar.avatarUrl ?
-                        <img
-                          src={item.avatar.avatarUrl}
-                          alt=""
-                          className="w-[80px] "
-                        /> :
-                        <div className="w-[80px] h-[75px] bg-blue-400 flex justify-center items-center ">
-                          <p className="text-white text-[12px]">{item.name}</p>
-                        </div>
+                      {item.avatar.avatarUrl ? 
+                      <img
+                        src={item.avatar.avatarUrl}
+                        alt=""
+                        className="w-[80px] "
+                      /> : 
+                      <div className="w-[80px] h-[75px] bg-blue-400 flex justify-center items-center ">
+                        <p className="text-white text-[12px]">{item.name}</p>
+                      </div> 
                       }
                     </div>
                     <div className="col-span-2 ml-[10px]">
@@ -155,10 +145,8 @@ const TagsPage = () => {
         <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded hidden lg:block">
           <FeaturedAuthor authors={authors} />
         </div>
-      </div>
-        </>
-      )}
-    </div>
+      </div >
+    </div >
   );
 };
 export default TagsPage;

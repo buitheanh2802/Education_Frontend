@@ -31,6 +31,7 @@ import QuestionsDetail from "src/Pages/Public/QuestionsDetail";
 import QuestionsCreate from "src/Pages/Public/QuestionsCreate";
 import QuestionUpdate from "src/Pages/Public/QuestionUpdate";
 import PostsDetail from "src/Pages/Public/PostDetail";
+import PostUpdate from "src/Pages/Public/PostUpdate";
 
 const SiteLayout = () => {
   return (
@@ -40,6 +41,7 @@ const SiteLayout = () => {
         <PublicRouter exact path={path.TAGS_ID} component={DetailTagPage} />
         <PublicRouter exact path={path.HOME} component={HomePage} />
         <PublicRouter path={path.POSTS_CREATE} component={PostsCreate} />
+        <PublicRouter path={path.POSTS_UPDATE} component={PostUpdate} />
         <PublicRouter exact path={path.POSTS_ID} component={PostsDetail} />
         <PublicRouter path={path.POSTS} component={PostPage} />
         <PublicRouter

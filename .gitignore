@@ -4,13 +4,12 @@
 /node_modules
 /.pnp
 .pnp.js
-/src/Assets/css/main.css
+src/Assets/css/main.css
 
 package-lock.json
 
 # testing
 /coverage
-/src/Assets/css/main.css
 # production
 /build
 
