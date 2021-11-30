@@ -18,6 +18,18 @@ module.exports = {
       addComponents({
         '.container': {
           maxWidth: 'calc(100% - 30px)',
+          '@screen md': {
+            maxWidth: 'calc(100% - 70px)',
+          },
+          '@screen lg': {
+            maxWidth: '980px',
+          },
+          '@screen xl': {
+            maxWidth: '1200px',
+          },
+          '@screen 2xl': {
+            maxWidth: '1480px',
+          },
         }
       })
     }
