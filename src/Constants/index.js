@@ -38,7 +38,7 @@ export const path = {
 
   // post
   POSTS: '/posts',
-  POSTS_ID: '/posts/:id',
+  POSTS_ID: '/posts/:title-:id',
   POSTS_CREATE: '/posts/create',
   POSTS_POPULAR: '/posts/popular',
   POSTS_FOLLOW: '/posts/follow',
