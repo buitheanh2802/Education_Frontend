@@ -15,6 +15,7 @@ import BookmarkApi from "src/Apis/BookmarkApi";
 import LikeApi from "src/Apis/LikeApi";
 import FollowApi from "src/Apis/FollowApi";
 import UserApi from "src/Apis/UserApi";
+import Loading from "src/Components/Loading";
 
 const QuestionsDetail = () => {
   const shortId = useParams();
@@ -25,11 +26,12 @@ const QuestionsDetail = () => {
   const [render, setRender] = useState(false);
   const [user, setUser] = useState([]);
   const [copyLink, setCopyLink] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   const history = useHistory();
   const token = localStorage.getItem("_token_");
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     setRender(false);
     const list = async (id) => {
       try {
@@ -37,6 +39,7 @@ const QuestionsDetail = () => {
           id.split("-")[id.split("-").length - 1]
         );
         setQuestionDetail(question);
+        setLoading(false);
         if (question.data.createBy.username) {
           const CallApi = async () => {
             try {
@@ -44,13 +47,16 @@ const QuestionsDetail = () => {
                 question.data.createBy.username
               );
               setUser(user);
+              setLoading(false);
             } catch (error) {
+              setLoading(false);
               console.log(error);
             }
           };
           CallApi();
         }
       } catch (error) {
+        setLoading(false);
         console.log(error);
       }
     };
@@ -58,7 +64,7 @@ const QuestionsDetail = () => {
   }, [shortId?.id, render]);
   if (Object.keys(questionDetail).length === 0) return null;
 
-  const idQuestion = shortId.id;
+  const idQuestion = shortId.id.split("-")[shortId.id.split("-").length - 1];
   const arrLike = questionDetail?.data?.likes;
   const checkLike = arrLike.some((a) => a === profile?._id);
   const handleLike = async () => {
@@ -168,7 +174,12 @@ const QuestionsDetail = () => {
     history.push("/questions");
     // console.log("id question", id);
   };
-
+  if (loading)
+    return (
+      <div className="h-screen flex items-center justify-center bg-gray-100">
+        <Loading className="w-[40px] h-[40px] fill-current text-gray-500" />
+      </div>
+    );
   return (
     <>
       {/* {postDetail && (
@@ -556,8 +567,6 @@ const QuestionsDetail = () => {
         </div>
       </div>
     </>
-    //   )}
-    // </>
   );
 };
 

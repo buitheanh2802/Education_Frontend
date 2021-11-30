@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import CreatetableSelect from "react-select/creatable";
 import makeAnimated from "react-select/animated";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Icon } from "src/Components/Icon";
 import TagApi from "src/Apis/TagApi";
@@ -10,6 +10,8 @@ import ImageApi from "src/Apis/ImageApi";
 import QuestionApi from "src/Apis/QuestionApi";
 import { useHistory } from "react-router";
 import Swal from "sweetalert2";
+import ImageResize from "quill-image-resize-module-react";
+Quill.register("modules/imageResize", ImageResize);
 
 const QuestionsCreate = () => {
   const [title, setTitle] = useState();
@@ -166,6 +168,10 @@ const QuestionsCreate = () => {
           image: imageHandler,
         },
       },
+      imageResize: {
+        modules: ["Resize", "DisplaySize"],
+        displaySize: true,
+      },
     }),
     []
   );
@@ -190,7 +196,7 @@ const QuestionsCreate = () => {
     position: "top-end",
     showConfirmButton: false,
     timer: 2000,
-    timerProgressBar: true,
+    // timerProgressBar: true,
     background: "#EFF6FF",
     didOpen: (toast) => {
       toast.addEventListener("mouseenter", Swal.stopTimer);
@@ -256,54 +262,7 @@ const QuestionsCreate = () => {
       });
     }
   };
-  // const handlerSubmit2 = async () => {
-  //   try {
-  //     var errors = [];
-  //     if (!title) {
-  //       errors = [
-  //         ...errors,
-  //         {
-  //           type: "t",
-  //           message: "Tiêu đề không được để trống",
-  //         },
-  //       ];
-  //     }
-  //     if (tagId.length <= 0 || tagId.length > 5) {
-  //       errors = [
-  //         ...errors,
-  //         {
-  //           type: "tag",
-  //           message: "Gắn thẻ câu hỏi ít nhất 1 thẻ và không quá 5 thẻ",
-  //         },
-  //       ];
-  //     }
 
-  //     if (!content || validateContent.indexOf(content) !== -1) {
-  //       errors = [
-  //         ...errors,
-  //         {
-  //           type: "c",
-  //           message: "Nội dung không được để trống",
-  //         },
-  //       ];
-  //     }
-
-  //     if (errors.length !== 0) {
-  //       setValidateError(errors);
-  //       return;
-  //     }
-
-  //     let data = {
-  //       title: title,
-  //       tags: tagId,
-  //       content: content,
-  //       isDraft: true,
-  //     };
-  //     await PostApi.add(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   const handelQuestionCancel = () => {
     history.push("/questions");
   };

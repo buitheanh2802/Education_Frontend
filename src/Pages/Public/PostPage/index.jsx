@@ -35,26 +35,27 @@ const PostPage = () => {
 
     const button = { path: path.POSTS_CREATE, icon: Icon.Pen, value: "Viết bài" };
 
-    // authors
-    const authors = [
-        {
-            path: "/",
-            fullname: "Nguyễn Thành Đạt",
-            username: "@nguyenthanhdat",
-            avatar: "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
-            point: 567,
-            question: 234,
-            folow: 345
-        }
-    ]
+  // authors
+  const authors = [
+    {
+      path: "/",
+      fullname: "Nguyễn Thành Đạt",
+      username: "@nguyenthanhdat",
+      avatar:
+        "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
+      point: 567,
+      question: 234,
+      folow: 345,
+    },
+  ];
 
-    // tags
-    const tags = [
-        {
-            path: "/",
-            value: "NodeJS"
-        }
-    ]
+  // tags
+  const tags = [
+    {
+      path: "/",
+      value: "NodeJS",
+    },
+  ];
 
     useEffect(() => {
         const listNew = async () => {
@@ -154,7 +155,7 @@ const PostPage = () => {
                 </div>
                 {button &&
                     <div className="self-center whitespace-nowrap">
-                        <button onClick={() => { history.push(button?.path); button?.event() }}
+                        <button onClick={() => { history.push(button?.path)}}
                             className="flex my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] ">
                             <div className="self-center"><button.icon className="w-[15px] fill-current" /> </div>
                             <span className="hidden md:block">{button?.value}</span>

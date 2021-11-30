@@ -31,6 +31,7 @@ import QuestionsDetail from "src/Pages/Public/QuestionsDetail";
 import QuestionsCreate from "src/Pages/Public/QuestionsCreate";
 import QuestionUpdate from "src/Pages/Public/QuestionUpdate";
 import PostsDetail from "src/Pages/Public/PostDetail";
+import PostUpdate from "src/Pages/Public/PostUpdate";
 
 const SiteLayout = () => {
     return (

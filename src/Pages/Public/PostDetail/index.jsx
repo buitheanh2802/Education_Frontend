@@ -23,11 +23,13 @@ const PostsDetail = () => {
   const [postShare, setpostShare] = useState(false);
   const [copyLink, setCopyLink] = useState(false);
   const [postDetail, setPostDetail] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { profile } = useSelector((state) => state.Auth);
   const [render, setRender] = useState(false);
   const history = useHistory();
   const token = localStorage.getItem("_token_");
   const id = shortId.id.split("-")[shortId.id.split("-").length - 1];
+
   useEffect(() => {
     setRender(false);
 
@@ -35,7 +37,9 @@ const PostsDetail = () => {
       try {
         const { data: post } = await PostApi.getPost(id);
         setPostDetail(post);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log(error);
       }
     };
@@ -138,7 +142,16 @@ const PostsDetail = () => {
     const copy = true;
     setCopyLink(copy);
   };
-  // console.log(window.location.href);
+  const handelRemove = async (id) => {
+    await PostApi.remove(id);
+    history.push("/posts");
+  };
+  if (loading)
+    return (
+      <div className="h-screen flex items-center justify-center bg-gray-100">
+        <Loading className="w-[40px] h-[40px] fill-current text-gray-500" />
+      </div>
+    );
   return (
     <>
       {/* {postDetail && (
@@ -264,12 +277,31 @@ const PostsDetail = () => {
                     </li>
                     {postDetail?.data?.createBy?.username ===
                     profile?.username ? (
-                      <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
-                        <Icon.Fix className="fill-current w-[15px] mr-[5px]" />
-                        Sửa bài viết
-                      </li>
+                      <>
+                        <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
+                          <Icon.Fix className="fill-current w-[15px] mr-[5px]" />
+                          <Link
+                            to={`/post/update/${postDetail?.data?.slug}-${postDetail?.data?.shortId}`}
+                            className="block w-full"
+                          >
+                            Sửa bài viết
+                          </Link>
+                        </li>
+                        <li
+                          onClick={() =>
+                            handelRemove(postDetail?.data?.shortId)
+                          }
+                          className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500"
+                        >
+                          <Icon.Can className="fill-current w-[12px] mr-[5px]" />
+                          Xóa bài viết
+                        </li>
+                      </>
                     ) : (
-                      <li className="hidden"></li>
+                      <>
+                        <li className="hidden"></li>
+                        <li className="hidden"></li>
+                      </>
                     )}
                   </ul>
                 </div>

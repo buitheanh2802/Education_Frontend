@@ -6,7 +6,7 @@ const QuestionView = ({ questions }) => {
   //   console.log(questions.data.);
   return (
     <>
-      {questions?.data?.models?.map((item) => {
+      {questions?.map((item) => {
         return (
           <div
             key={item?._id}
