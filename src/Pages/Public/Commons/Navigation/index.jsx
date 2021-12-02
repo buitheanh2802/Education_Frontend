@@ -3,6 +3,7 @@ import { NavLink, useHistory } from "react-router-dom";
 
 const Navigation = ({ path, button }) => {
   const history = useHistory();
+  const token = localStorage.getItem("_token_");
   return (
     <div className="flex justify-between shadow-sm bg-white px-[10px] rounded gap-[15px] border">
       <div className="py-[15px] flex items-center overflow-x-auto w-full whitespace-nowrap">
@@ -21,9 +22,15 @@ const Navigation = ({ path, button }) => {
       {button && (
         <div className="self-center whitespace-nowrap">
           <button
-            onClick={() => {
-              history.push(button?.path);
-            }}
+            onClick={
+              token == null
+                ? () => {
+                    history.push("/auth/login");
+                  }
+                : () => {
+                    history.push(button?.path);
+                  }
+            }
             className="flex my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] "
           >
             <div className="self-center">

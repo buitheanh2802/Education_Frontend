@@ -76,32 +76,31 @@ const PostView = ({ posts }) => {
                                             })}
                                         </div>
 
-                                        <div className="flex justify-between mt-[5px] ">
-                                            <div className="flex text-[14px] gap-[15px]">
-                                                <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                                                    <Icon.Eye className="fill-current w-[15px]" />
-                                                    <span>{item?.views}</span>
-                                                </div>
-                                                <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                                                    <Icon.Chat className="fill-current w-[15px]" />
-                                                    <span>{item?.comments}</span>
-                                                </div>
-                                                <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                                                    <Icon.Bookmark className="fill-current w-[15px]" />
-                                                    <span>{item?.bookmarks}</span>
-                                                </div>
-                                            </div>
-                                            <Icon.Pen className="fill-current w-[20px] text-[#5f5f5f]" />
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
+                  <div className="flex justify-between mt-[5px] ">
+                    <div className="flex text-[14px] gap-[15px]">
+                      <div className="flex items-center gap-[5px] text-[#5f5f5f]">
+                        <Icon.Eye className="fill-current w-[15px]" />
+                        <span>{item?.views}</span>
+                      </div>
+                      <div className="flex items-center gap-[5px] text-[#5f5f5f]">
+                        <Icon.Chat className="fill-current w-[15px]" />
+                        <span>{item?.comments}</span>
+                      </div>
+                      <div className="flex items-center gap-[5px] text-[#5f5f5f]">
+                        <Icon.Bookmark className="fill-current w-[15px]" />
+                        <span>{item?.bookmarks}</span>
+                      </div>
                     </div>
-                )
-            }
-        </>
-    );
+                    <Icon.Pen className="fill-current w-[20px] text-[#5f5f5f]" />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </>
+  );
 };
 
 export default PostView;
