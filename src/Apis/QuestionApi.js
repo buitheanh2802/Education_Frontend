@@ -1,9 +1,8 @@
-import axios from "axios";
 import AxiosClient from "./AxiosClient";
-const token = localStorage.getItem("_token_");
 
 const QuestionApi = {
   getQuestion(endPoint) {
+    const token = localStorage.getItem("_token_");
     const url = `/question/${endPoint}`;
     if (endPoint === "follow" || endPoint === "listbookmark") {
       return AxiosClient.get(url, {
@@ -16,6 +15,7 @@ const QuestionApi = {
     }
   },
   getId(id) {
+    const token = localStorage.getItem("_token_");
     const url = `/question/${id}`;
     return AxiosClient.get(url, {
       headers: {
@@ -24,6 +24,7 @@ const QuestionApi = {
     });
   },
   add(data) {
+    const token = localStorage.getItem("_token_");
     const url = `/question`;
     return AxiosClient.post(url, data, {
       headers: {
@@ -32,6 +33,7 @@ const QuestionApi = {
     });
   },
   remove(id) {
+    const token = localStorage.getItem("_token_");
     const url = `/question/${id}`;
     return AxiosClient.delete(url, {
       headers: {
@@ -40,6 +42,7 @@ const QuestionApi = {
     });
   },
   update(id, data) {
+    const token = localStorage.getItem("_token_");
     const url = `/question/${id}`;
     return AxiosClient.put(url, data, {
       headers: {
@@ -48,6 +51,7 @@ const QuestionApi = {
     });
   },
   getListPublish() {
+    const token = localStorage.getItem("_token_");
     const url = `/question`;
     return AxiosClient.get(url, {
       headers: {
@@ -56,8 +60,22 @@ const QuestionApi = {
     });
   },
   questionSpam(id) {
+    const token = localStorage.getItem("_token_");
     const url = `question/spam/${id}`;
     return AxiosClient.put(
+      url,
+      {},
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  },
+  view(id) {
+    const token = localStorage.getItem("_token_");
+    const url = `question/${id}/view`;
+    return AxiosClient.post(
       url,
       {},
       {

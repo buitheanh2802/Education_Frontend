@@ -5,11 +5,15 @@ const FollowApi = {
   follow(username) {
     const token = localStorage.getItem("_token_");
     const url = `/follow/${username}`;
-    return AxiosClient.post(url, { username: username }, {
-      headers: {
-        Authorization: `Bearer ${token}`
+    return AxiosClient.post(
+      url,
+      { username: username },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
-    })
+    );
   },
   //unfollow user
   unFollow(username) {
@@ -17,27 +21,31 @@ const FollowApi = {
     const url = `/follow/${username}`;
     return AxiosClient.delete(url, {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+        Authorization: `Bearer ${token}`,
+      },
+    });
   },
   followTag(id) {
     const token = localStorage.getItem("_token_");
     const url = `/follow/${id}`;
-    return AxiosClient.post(url, { _id: id }, {
-      headers: {
-        Authorization: `Bearer ${token}`
+    return AxiosClient.post(
+      url,
+      { _id: id },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
-    })
+    );
   },
   unFollowTag(id) {
     const token = localStorage.getItem("_token_");
     const url = `/follow/${id}`;
     return AxiosClient.delete(url, {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+        Authorization: `Bearer ${token}`,
+      },
+    });
   },
   //unfollow tag
   unfollowTag(id) {
@@ -49,5 +57,5 @@ const FollowApi = {
       },
     });
   },
-}
+};
 export default FollowApi;

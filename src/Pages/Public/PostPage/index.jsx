@@ -81,7 +81,7 @@ const PostPage = () => {
         };
         listNew();
       }, [location.pathname]);
-      
+
     // useEffect(() => {
     //     if (token) {
     //         Promise.all([
