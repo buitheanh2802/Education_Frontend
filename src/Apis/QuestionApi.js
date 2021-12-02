@@ -24,6 +24,7 @@ const QuestionApi = {
     });
   },
   add(data) {
+    const token = localStorage.getItem("_token_");
     const url = `/question`;
     return AxiosClient.post(url, data, {
       headers: {
