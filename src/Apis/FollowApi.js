@@ -1,9 +1,9 @@
 import AxiosClient from './AxiosClient'
-const token = localStorage.getItem('_token_');
 
 const FollowApi = {
   //follow user
   follow(username) {
+    const token = localStorage.getItem("_token_");
     const url = `/follow/${username}`;
     return AxiosClient.post(url, { username: username }, {
       headers: {
@@ -13,6 +13,7 @@ const FollowApi = {
   },
   //unfollow user
   unFollow(username) {
+    const token = localStorage.getItem("_token_");
     const url = `/follow/${username}`;
     return AxiosClient.delete(url, {
       headers: {
@@ -21,6 +22,7 @@ const FollowApi = {
     })
   },
   followTag(id) {
+    const token = localStorage.getItem("_token_");
     const url = `/follow/${id}`;
     return AxiosClient.post(url, { _id: id }, {
       headers: {
@@ -29,6 +31,7 @@ const FollowApi = {
     })
   },
   unFollowTag(id) {
+    const token = localStorage.getItem("_token_");
     const url = `/follow/${id}`;
     return AxiosClient.delete(url, {
       headers: {

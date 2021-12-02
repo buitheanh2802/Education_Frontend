@@ -38,7 +38,7 @@ const Userpage = (props) => {
   }
   const pathName = [
     {
-      path: `/user/${username}/post`,
+      path: `/user/${username}`,
       value: "Bài viết",
     },
     {
@@ -55,14 +55,9 @@ const Userpage = (props) => {
     },
     {
       path: `/user/${username}/tag`,
-      value: "Thẻ",
+      value: "Thẻ đang theo dõi",
     },
   ];
-  const button = {
-    path: path.QUESTIONS_CREATE,
-    icon: Icon.questions,
-    value: "Đặt câu hỏi",
-  };
 
   // authors
   useEffect(() => {
@@ -193,7 +188,7 @@ const Userpage = (props) => {
             </div>
           </div>
           <div className="w-full shadow-sm bg-white rounded ">
-            <Navigation path={pathName} button={button} />
+            <Navigation path={pathName}/>
           </div>
           <div className="w-full shadow-sm bg-white rounded mt-[10px]">
             <Switch>
@@ -220,7 +215,7 @@ const Userpage = (props) => {
               ></Route>
               <Route
                 exact
-                path={path.USER_POST}
+                path={path.USER_ID}
                 render={(props) => <UserPost userPost={userPost} {...props} />}
               ></Route>
               <Route

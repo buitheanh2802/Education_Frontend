@@ -25,7 +25,7 @@ const UserFollowing = ({ userFollowing }) => {
                           height="40px"
                         />
                       ) : (
-                        <div className="py-[12px] text-[#4A5568] mx-auto text-center md:w-[40px] md:h-[40px] rounded-full bg-blue-300 font-bold text-[15px]">
+                        <div className="py-[5px] text-[#4A5568] mx-auto text-center md:w-[40px] md:h-[40px] rounded-full bg-blue-300 font-bold text-[20px]">
                           {item?.followingUserId?.username?.toUpperCase().substring(0, 1)}
                         </div>
                       )}

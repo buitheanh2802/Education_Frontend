@@ -8,9 +8,11 @@ import PostApi from "src/Apis/PostApi"
 import { useHistory, NavLink } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 import { path } from "src/Constants/";
+import { useLocation } from "react-router";
 
 const PostPage = () => {
     const history = useHistory()
+    const location = useLocation();
     // const [dataPost, setDataPost] = useState({
     //     newest: [],
     //     trendings: []
@@ -60,51 +62,26 @@ const PostPage = () => {
     useEffect(() => {
         const listNew = async () => {
           try {
-            const { data: newests } = await PostApi.getPostNew()
-            setNewests(newests.data);
+            if(location.pathname === path.POSTS) {
+              const { data: newests } = await PostApi.getPostNew()
+              setNewests(newests.data);
+            } else if (location.pathname === path.POSTS_POPULAR) {
+              const { data: trendings } = await PostApi.getPostTren()
+              setTrendings(trendings.data);
+            } else if (location.pathname === path.POSTS_FOLLOW) {
+              const { data: follows } = await PostApi.getPostFol()
+              setFollows(follows.data);
+            } else if (location.pathname === path.POSTS_BOOK_MARK) {
+              const { data: bookmarks } = await PostApi.getPostMark()
+              setBookmarks(bookmarks.data);
+            }
           } catch (error) {
             console.log(error);
           }
         };
         listNew();
-      }, []);
-
-      useEffect(() => {
-        const listPop = async () => {
-          try {
-            const { data: trendings } = await PostApi.getPostTren()
-            setTrendings(trendings.data);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        listPop();
-      }, []);
-
-      useEffect(() => {
-        const listFol = async () => {
-          try {
-            const { data: follows } = await PostApi.getPostFol()
-            setFollows(follows);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        listFol();
-      }, []);
-
-      useEffect(() => {
-        const listBmark = async () => {
-          try {
-            const { data: bookmarks } = await PostApi.getPostMark()
-            setBookmarks(bookmarks.data);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        listBmark();
-      }, []);
-
+      }, [location.pathname]);
+      
     // useEffect(() => {
     //     if (token) {
     //         Promise.all([

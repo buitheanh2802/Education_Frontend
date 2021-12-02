@@ -1,11 +1,11 @@
 import AxiosClient from './AxiosClient';
-const token = localStorage.getItem('_token_');
 const TagAPi = {
     getAll() {
         const url = `/tag`;
         return AxiosClient.get(url);
     },
     getDetail(tagname){
+        const token = localStorage.getItem("_token_");
         const url = `/tag/${tagname}`;
         return AxiosClient.get(url,  {
             headers: {

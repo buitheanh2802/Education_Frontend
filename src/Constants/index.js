@@ -58,6 +58,7 @@ export const path = {
   AUTH: "/auth",
   LOGIN: "/auth/login",
   REGISTER: "/auth/register",
+  FORGOTPASSWORD: "/auth/forgot_password",
 
   // error
   NOT_FOUND: "/not-found",

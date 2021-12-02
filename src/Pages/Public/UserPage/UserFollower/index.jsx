@@ -16,12 +16,18 @@ const UserFollower = ({ userFollower }) => {
               return (
                 <div key={index} className="flex py-[20px] px-[10px] mb-[20px] bg-white">
                   <div className="">
-                    <img
-                      src="https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg"
+                    {item?.avatar?.avatarUrl ?
+                      <img
                       className="mx-auto max-h-[40px] rounded-full "
                       width="40px"
                       height="40px"
-                    />
+                        src={item?.avatar?.avatarUrl}
+                        alt={item?.username} />
+                      :
+                      <div className="py-[5px] text-[#4A5568] mx-auto text-center md:w-[40px] md:h-[40px] rounded-full bg-blue-300 font-bold text-[20px]">
+                        {item?.username.toUpperCase().substring(0, 1)}
+                      </div>
+                    }
                   </div>
                   <div className="ml-[12px] my-auto">
                     <div className="">

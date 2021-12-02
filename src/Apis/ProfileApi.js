@@ -1,8 +1,8 @@
 import AxiosClient from './AxiosClient';
-const token = localStorage.getItem('_token_');
 
 const ProfileApi = {
     getUser(username){
+        const token = localStorage.getItem("_token_");
         const url = `user/${username}`;
         return AxiosClient.get(url, {
             headers: {

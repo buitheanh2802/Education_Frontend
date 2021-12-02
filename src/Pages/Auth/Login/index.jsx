@@ -81,7 +81,7 @@ const Login = () => {
                     </div>
                     <div className="flex items-center justify-between text-[14px]">
                         <label htmlFor="remember-me" className="cursor-pointer flex gap-[5px] items-center"><input id="remember-me" type="checkbox" className="cursor-pointer border" /> Ghi nhớ đăng nhập</label>
-                        <button type="button" className="hover:underline hover:text-blue-600 duration-300 text-gray-600">Quên mật khẩu ?</button>
+                        <Link type="button" to={path.FORGOTPASSWORD} className="hover:underline hover:text-blue-600 duration-300 text-gray-600">Quên mật khẩu ?</Link>
                     </div>
 
                     <button
