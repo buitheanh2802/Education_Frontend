@@ -26,6 +26,7 @@ const PostsDetail = () => {
   const [loading, setLoading] = useState(true);
   const { profile } = useSelector((state) => state.Auth);
   const [render, setRender] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const history = useHistory();
   const token = localStorage.getItem("_token_");
   const id = shortId.id.split("-")[shortId.id.split("-").length - 1];
@@ -146,6 +147,12 @@ const PostsDetail = () => {
     await PostApi.remove(id);
     history.push("/posts");
   };
+  const handleCancelBox = () => {
+    setIsModalVisible(false);
+  };
+  const handleViewBox = () => {
+    setIsModalVisible(true);
+  };
   if (loading)
     return (
       <div className="h-screen flex items-center justify-center bg-gray-100">
@@ -177,7 +184,7 @@ const PostsDetail = () => {
               <div className="flex items-center mb-[5px] ">
                 {postDetail?.data?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                   <Link
-                    to=""
+                    to={`/user/${postDetail?.data?.createBy?.fullname}`}
                     className="  border border-gray-300 cursor-pointer select-none w-[55px] h-[55px] rounded-full bg-center bg-cover"
                     style={{
                       backgroundImage: `url(${postDetail?.data?.createBy?.avatar?.avatarUrl})`,
@@ -186,7 +193,7 @@ const PostsDetail = () => {
                   ></Link>
                 ) : (
                   <Link
-                    to=""
+                    to={`/user/${postDetail?.data?.createBy?.fullname}`}
                     className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
                   >
                     {postDetail?.data?.createBy?.fullname
@@ -196,7 +203,7 @@ const PostsDetail = () => {
                 )}
                 <div className="ml-2">
                   <p className="text-blue-500 text-[14px] sm:text-[16px] font-medium flex items-center">
-                    <Link to={postDetail?.data?.createBy?.path}>
+                    <Link to={`/user/${postDetail?.data?.createBy?.fullname}`}>
                       <span className="hover:underline">
                         {postDetail?.data?.createBy?.fullname}
                       </span>
@@ -257,7 +264,10 @@ const PostsDetail = () => {
                 </button>
                 <div className={postmenu ? "post__menu  bg-white" : " hidden"}>
                   <ul className="relative text-[14px] py-[5px]">
-                    <li className="flex items-center cursor-pointer text-gray-700 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
+                    <li
+                      onClick={() => handleViewBox()}
+                      className="flex items-center cursor-pointer text-gray-700 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500"
+                    >
                       <Icon.Flag className="fill-current w-[16px]  mr-[5px]" />
                       Báo cáo
                     </li>
@@ -335,12 +345,13 @@ const PostsDetail = () => {
               <span>
                 {postDetail?.data?.tags?.map((item, index) => {
                   return (
-                    <button
+                    <Link
+                      to={`/tag/${item?.slug}`}
                       className="bg-[#E2E8F0] hover:bg-gray-300 rounded-[3px] px-[5px] py-[2px] text-[12px] ml-2"
                       key={index}
                     >
                       {item.name}
-                    </button>
+                    </Link>
                   );
                 })}
               </span>
@@ -441,7 +452,7 @@ const PostsDetail = () => {
             <div className="flex py-[5px] block-avt justify-center">
               {postDetail?.data?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                 <Link
-                  to=""
+                  to={`/user/${postDetail?.data?.createBy?.fullname}`}
                   className="  border border-gray-300 cursor-pointer select-none w-[45px] h-[45px] rounded-full bg-center bg-cover"
                   style={{
                     backgroundImage: `url(${postDetail?.data?.createBy?.avatar?.avatarUrl})`,
@@ -450,7 +461,7 @@ const PostsDetail = () => {
                 ></Link>
               ) : (
                 <Link
-                  to=""
+                  to={`/user/${postDetail?.data?.createBy?.fullname}`}
                   className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
                 >
                   {postDetail?.data?.createBy?.fullname
@@ -461,7 +472,7 @@ const PostsDetail = () => {
             </div>
             <div className="py-[10px] px-[15px]  border-b border-gray-100 flex justify-between items-center">
               <p className="text-[16px] font-medium ">
-                <Link to={postDetail?.data?.createBy?.path}>
+                <Link to={`/user/${postDetail?.data?.createBy?.fullname}`}>
                   <span className="block hover:underline	">
                     {postDetail?.data?.createBy?.fullname}
                   </span>
@@ -533,6 +544,113 @@ const PostsDetail = () => {
             </div>
           </div>
           <PostsNew />
+        </div>
+      </div>
+      <div
+        className={
+          isModalVisible
+            ? "fixed  top-0 left-0 right-0 bottom-0 bg-gray-500 bg-opacity-70 z-[999999] overflow-auto"
+            : "hidden"
+        }
+      >
+        <div className="max-w-[450px] mx-[15px] mt-[15vh] sm:mx-auto mb-[50px] rounded-[2px] bg-white relative px-[15px]">
+          <button
+            onClick={() => handleCancelBox()}
+            className="absolute top-[18px] right-[15px] "
+          >
+            <Icon.Close className="fill-current w-[11px] text-gray-500 hover:text-gray-700 " />
+          </button>
+          <p className="text-[18px] pt-[15px] text-gray-700">
+            Nội dung báo cáo
+          </p>
+          <div className="mt-[25px] text-[14px] text-gray-700 ">
+            <form action="">
+              <div className="mb-[18px]">
+                <label htmlFor="" className="text-[14px]">
+                  <span className="text-red-500 ">*</span> Lý do báo cáo nội
+                  dung này
+                </label>
+                <div className="mt-[10px] pl-[10px]">
+                  <div className="py-[3px]">
+                    <input
+                      type="radio"
+                      id="spam1"
+                      name="fav_language"
+                      value="1"
+                      className="cursor-pointer"
+                    />
+                    {"  "}
+                    <label for="spam1" className="cursor-pointer">
+                      Nội dung rác
+                    </label>
+                  </div>
+                  <div className="py-[3px]">
+                    <input
+                      type="radio"
+                      id="spam2"
+                      name="fav_language"
+                      value="2"
+                      className="cursor-pointer"
+                    />{" "}
+                    <label for="spam2" className="cursor-pointer">
+                      Vi phạm điều khoản
+                    </label>
+                  </div>
+                  <div className="py-[3px]">
+                    <input
+                      type="radio"
+                      id="spam3"
+                      name="fav_language"
+                      value="3"
+                      className="cursor-pointer"
+                    />{" "}
+                    <label for="spam3" className="cursor-pointer">
+                      Quấy rối, đả kích
+                    </label>
+                  </div>
+                  <div className="py-[3px]">
+                    <input
+                      type="radio"
+                      id="spam4"
+                      name="fav_language"
+                      value="3"
+                      className="cursor-pointer"
+                    />{" "}
+                    <label for="spam4" className="cursor-pointer">
+                      Vi phạm bản quyền
+                    </label>
+                  </div>
+                  <div className="py-[3px]">
+                    <input
+                      type="radio"
+                      id="spam5"
+                      name="fav_language"
+                      value="3"
+                      className="cursor-pointer"
+                    />{" "}
+                    <label for="spam5" className="cursor-pointer">
+                      Bản dịch chất lượng kém
+                    </label>
+                  </div>
+                </div>
+                <div className="mt-[30px]">
+                  <textarea
+                    name=""
+                    id=""
+                    rows="3"
+                    className="w-full px-[10px] text-[14px] py-[3px] border border-gray-400 rounded-[3px] focus:outline-none focus:border focus:border-blue-400 "
+                    placeholder="Nhận xét..."
+                  ></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div className=" pb-[15px] flex justify-end">
+            <button className="border border-gray-400 text-gray-500 text-[14px] hover:bg-blue-50  hover:text-blue-400 rounded-[3px] px-[15px] py-[3px]">
+              Báo cáo
+            </button>
+          </div>
         </div>
       </div>
     </>
