@@ -7,7 +7,7 @@ import { path } from "src/Constants/";
 import { Icon } from "src/Components/Icon";
 import Scrollbar from "react-smooth-scrollbar";
 import PostApi from "src/Apis/PostApi";
-import { useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import Loading from "src/Components/Loading";
 import "./index.css";
 import SkeletonGroup from "./components/skeleton-group";
@@ -20,6 +20,7 @@ const PostPage = () => {
   const [featuredAuthor, setFeaturedAuthor] = useState([]);
   const [tagPopular, setTagPopular] = useState([]);
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   // Navigation
   const pathName = [
