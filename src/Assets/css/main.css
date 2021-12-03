@@ -3696,6 +3696,11 @@ body {
   height: 2px;
 }
 
+.after\:h-\[1px\]::after {
+  content: "";
+  height: 1px;
+}
+
 .after\:h-2\/3::after {
   content: "";
   height: 66.666667%;
@@ -4344,6 +4349,10 @@ body {
     height: 40px;
   }
 
+  .md\:h-\[100vh\] {
+    height: 100vh;
+  }
+
   .md\:w-\[310px\] {
     width: 310px;
   }
@@ -4824,6 +4833,11 @@ body {
   .lg\:py-0 {
     padding-top: 0px;
     padding-bottom: 0px;
+  }
+
+  .lg\:py-\[20px\] {
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   .lg\:pb-\[77px\] {
