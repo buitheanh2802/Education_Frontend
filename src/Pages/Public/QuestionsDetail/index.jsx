@@ -186,6 +186,7 @@ const QuestionsDetail = () => {
     setIsModalVisible(false);
   };
   const handleViewBox = () => {
+    if (token === null) history.push("/auth/login");
     setIsModalVisible(true);
   };
 
@@ -201,7 +202,7 @@ const QuestionsDetail = () => {
       toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
   });
-  const testSpam = async (e) => {
+  const handelReportSpam = async () => {
     var checkbox = document.getElementsByClassName("cursor-pointer");
     for (var i = 0; i < checkbox.length; i++) {
       if (checkbox[i].checked === true) {
@@ -759,7 +760,7 @@ const QuestionsDetail = () => {
 
           <div className=" pb-[15px] flex justify-end">
             <button
-              onClick={() => testSpam()}
+              onClick={() => handelReportSpam()}
               className=" border border-gray-400 text-gray-500 text-[14px] hover:bg-blue-50  hover:text-blue-400 rounded-[3px] px-[15px] py-[3px]"
             >
               Báo cáo
