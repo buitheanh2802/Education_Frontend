@@ -1,8 +1,6 @@
 import React from "react";
 import { Icon } from "src/Components/Icon";
-import { Link } from "react-router-dom";
 const UserFollowing = ({ userFollowing }) => {
-  console.log("props:", userFollowing);
   return (
     <div>
       {userFollowing.length == 0 ? (

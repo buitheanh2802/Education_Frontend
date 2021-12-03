@@ -34,52 +34,33 @@ import PostsDetail from "src/Pages/Public/PostDetail";
 import PostUpdate from "src/Pages/Public/PostUpdate";
 
 const SiteLayout = () => {
-  return (
-    <>
-      <Header />
-      <Switch>
-        <PublicRouter exact path={path.TAGS_ID} component={DetailTagPage} />
-        <PublicRouter exact path={path.HOME} component={HomePage} />
-        <PublicRouter path={path.POSTS_CREATE} component={PostsCreate} />
-        <PublicRouter path={path.POSTS_UPDATE} component={PostUpdate} />
-        <PublicRouter exact path={path.POSTS_ID} component={PostsDetail} />
-        <PublicRouter path={path.POSTS} component={PostPage} />
-        <PublicRouter
-          path={path.QUESTIONS_CREATE}
-          component={QuestionsCreate}
-        />
-        <PublicRouter path={path.QUESTIONS_UPDATE} component={QuestionUpdate} />
-        <PublicRouter
-          path={path.QUESTIONS_DETAIL}
-          component={QuestionsDetail}
-        />
-        <PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
-        <PublicRouter path={path.TAGS} component={TagsPage} />
-        <PublicRouter path={path.USER_ID} component={Userpage} />
-        <PublicRouter path={path.INTRO} component={IntroPage} />
-        <PublicRouter exact path={path.EDIT_PROFILE} component={EditProfile} />
-        <PublicRouter exact path={path.PROFILE} component={ProfilePage} />
-        <PublicRouter
-          exact
-          path={path.CHALLENGE}
-          component={ChallengeCatePage}
-        />
-        <PublicRouter
-          exact
-          path={path.CHALLENGE_CATE_ID}
-          component={ChallengePage}
-        />
-        <PublicRouter path={path.CHALLENGE_ID} component={DetailChallenge} />
-        <PublicRouter path={path.QUIZ} component={QuizPage} />
-        <PublicRouter
-          path={path.CHALLENGE_SOLUTION_CHALLENGE_ID}
-          component={SolutionPage}
-        />
-        <PublicRouter path="*" component={Notfound} />
-      </Switch>
-      <Footer />
-    </>
-  );
+    return (
+        <>
+            <Header />
+            <Switch>
+                <PublicRouter exact path={path.TAGS_ID} component={DetailTagPage} />
+                <PublicRouter exact path={path.HOME} component={HomePage} />
+                <PublicRouter path={path.QUESTIONS_DETAIL} component={QuestionsDetail} />
+                <PublicRouter path={path.QUESTIONS_CREATE} component={QuestionsCreate} />
+                <PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
+                <PublicRouter path={path.POSTS_CREATE} component={PostsCreate} />
+                <PublicRouter exact path={path.POSTS_ID} component={PostsDetail} />
+                <PublicRouter path={path.POSTS} component={PostPage} />
+                <PublicRouter path={path.TAGS} component={TagsPage} />
+                <PublicRouter path={path.USER_ID} component={Userpage} />
+                <PublicRouter path={path.INTRO} component={IntroPage} />
+                <PublicRouter exact path={path.EDIT_PROFILE} component={EditProfile} />
+                <PublicRouter exact path={path.PROFILE} component={ProfilePage} />
+                <PublicRouter exact path={path.CHALLENGE} component={ChallengeCatePage} />
+                <PublicRouter exact path={path.CHALLENGE_CATE_ID} component={ChallengePage} />
+                <PublicRouter path={path.CHALLENGE_ID} component={DetailChallenge} />
+                <PublicRouter path={path.QUIZ} component={QuizPage} />
+                <PublicRouter path={path.CHALLENGE_SOLUTION_CHALLENGE_ID} component={SolutionPage}/>
+                <PublicRouter path="*" component={Notfound} />
+            </Switch>
+            <Footer />
+        </>
+    );
 };
 
 export default SiteLayout;
