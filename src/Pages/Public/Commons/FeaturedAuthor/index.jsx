@@ -15,7 +15,7 @@ const FeaturedAuthor = ({ authors }) => {
             <div key={index} className="flex items-center">
               {item?.avatar?.avatarUrl?.length > 0 ? (
                 <Link
-                  to={`/user/${item?.fullname}`}
+                  to={`/user/${item?.username}`}
                   className="mt-[5px] mr-[15px] border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
                   style={{
                     backgroundImage: `url(${item?.avatar?.avatarUrl})`,
@@ -24,7 +24,7 @@ const FeaturedAuthor = ({ authors }) => {
                 ></Link>
               ) : (
                 <Link
-                  to={`/user/${item?.fullname}`}
+                  to={`/user/${item?.username}`}
                   className="mt-[5px] mr-[15px] flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
                 >
                   {item?.fullname?.slice(0, 1)?.toUpperCase()}
@@ -33,7 +33,7 @@ const FeaturedAuthor = ({ authors }) => {
               <div className="border-b py-[15px]">
                 <div className="flex flex-wrap text-[#707885] items-center gap-[5px] mb-[5px]">
                   <Link
-                    to={`/user/${item?.fullname}`}
+                    to={`/user/${item?.username}`}
                     className="text-[#2d6ff7] hover:underline"
                   >
                     {item?.fullname}
