@@ -11,7 +11,7 @@ import { setLoading } from "src/Redux/Slices/Loading.slice";
 
 const TagsPage = () => {
 
-  const [loading,setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const pathName = [
     {
       path: path.TAGS,
@@ -66,7 +66,6 @@ const TagsPage = () => {
       try {
         const { data: tags } = await TagAPi.getAll();
         setTags(tags.data.models);
-        console.log(tags);
       } catch (error) {
         console.log(error);
       }
@@ -84,15 +83,15 @@ const TagsPage = () => {
                 <div key={index} className="item md:text-[16px] text-[14px] w-max-[200px] px-[10px] py-[10px]">
                   <Link className="grid grid-cols-3 gap-[10px] justify-center items-center" to={`/tag/${item?.slug}`} >
                     <div className="mx-auto">
-                      {item.avatar.avatarUrl ? 
-                      <img
-                        src={item.avatar.avatarUrl}
-                        alt=""
-                        className="w-[80px] "
-                      /> : 
-                      <div className="w-[80px] h-[75px] bg-blue-400 flex justify-center items-center ">
-                        <p className="text-white text-[12px]">{item.name}</p>
-                      </div> 
+                      {item?.avatar?.avatarUrl ?
+                        <img
+                          src={item?.avatar?.avatarUrl}
+                          alt=""
+                          className="w-[80px] rounded-[5px]"
+                        /> :
+                        <div className="w-[80px] h-[80px] bg-blue-400 flex justify-center items-center rounded-[5px]">
+                          <p className="text-white text-[12px]">{item?.name?.toUpperCase().substring(0, 1)}</p>
+                        </div>
                       }
                     </div>
                     <div className="col-span-2 ml-[10px]">
@@ -123,14 +122,14 @@ const TagsPage = () => {
                     </div>
                   </Link>
                   {item?.isFollowing ? (
-                    <div onClick={() => handleUnFollow(item._id)} className="mt-[10px] xl:[mx-10px] text-center my-auto border border-[#6C91F0] font-bold rounded text-[15px] bg-[#1273eb] :text-white">
+                    <div onClick={() => handleUnFollow(item._id)} className="mt-[10px] xl:[mx-10px] text-center my-auto text-white border border-[#6C91F0] font-bold rounded text-[15px] bg-[#1273eb] hover:bg-blue-200 hover:text-[#6C91F0]">
                       <button className="font-bold  px-[20px] md:px-[30px] py-[5px] ">
                         {" "}
                         - Bỏ theo dõi
                       </button>
                     </div>
                   ) : (
-                    <div onClick={() => handleFollow(item._id)} className="mt-[10px] xl:[mx-10px] text-center my-auto text-[#6C91F0] border border-[#6C91F0] font-bold rounded   text-[15px] hover:bg-[#1273eb] hover:text-white">
+                    <div onClick={() => handleFollow(item._id)} className="mt-[10px] xl:[mx-10px] text-center my-auto text-[#6C91F0] border border-[#6C91F0] font-bold rounded text-[15px] hover:bg-[#1273eb] hover:text-white">
                       <button className="font-bold px-[20px] md:px-[30px] py-[5px] ">
                         {" "}
                         + Theo dõi

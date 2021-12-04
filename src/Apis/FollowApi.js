@@ -5,15 +5,11 @@ const FollowApi = {
   follow(username) {
     const token = localStorage.getItem("_token_");
     const url = `/follow/${username}`;
-    return AxiosClient.post(
-      url,
-      { username: username },
-      {
+    return AxiosClient.post( url, { username: username }, {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+        }
+    });
   },
   //unfollow user
   unFollow(username) {

@@ -5,7 +5,7 @@ import { path } from "src/Constants/";
 import { Icon } from "src/Components/Icon";
 import ProfileUserApi from "src/Apis/ProfileUserApi";
 import UserFollowing from "./UserFollowing";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import UserFollower from "./UserFollower";
 import UserBookMark from "./UserBookMark";
 import UserPost from "./UserPost";
@@ -23,9 +23,15 @@ const Userpage = (props) => {
   const [userPost, setUserPost] = useState([]);
   const [userTag, setUserTag] = useState([]);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const token = localStorage.getItem("_token_");
 
   const handleFollow = async () => {
     dispatch(setLoading(true))
+    if (token === null) {
+      history.push("/auth/login");
+      dispatch(setLoading(false))
+    }
     if (user?.isFollowing) {
       await FollowApi.unFollow(username);
       setUser({ ...user, isFollowing: false })
@@ -64,8 +70,10 @@ const Userpage = (props) => {
 
     const user = async () => {
       try {
+        dispatch(setLoading(true))
         const { data: users } = await ProfileUserApi.getUser(username);
         setUser(users.data);
+        dispatch(setLoading(false))
       } catch (error) {
         console.log(error);
       }
@@ -78,11 +86,12 @@ const Userpage = (props) => {
     const username = props.match.params.username;
     const userFollowers = async () => {
       try {
+        dispatch(setLoading(true))
         const { data: followerUser } = await ProfileUserApi.getFollowerUser(
           username
         );
-        console.log(followerUser.data.models);
         setUserFollowers(followerUser.data.models);
+        dispatch(setLoading(false))
       } catch (error) {
         console.log(error);
       }
@@ -95,10 +104,12 @@ const Userpage = (props) => {
     const username = props.match.params.username;
     const userFollowing = async () => {
       try {
+        dispatch(setLoading(true))
         const { data: followingUser } = await ProfileUserApi.getFollowingUser(
           username
         );
         setUserFollowing(followingUser.data.models);
+        dispatch(setLoading(false))
       } catch (error) {
         console.log(error);
       }
@@ -111,8 +122,10 @@ const Userpage = (props) => {
     const username = props.match.params.username;
     const userTag = async () => {
       try {
+        dispatch(setLoading(true))
         const { data: tagUser } = await ProfileUserApi.getTagUser(username);
         setUserTag(tagUser.data.models);
+        dispatch(setLoading(false))
       } catch (error) {
         console.log(error);
       }
@@ -125,8 +138,10 @@ const Userpage = (props) => {
     const username = props.match.params.username;
     const userBookMark = async () => {
       try {
+        dispatch(setLoading(true))
         const { data: bookMarkUser } = await ProfileUserApi.getBookmarkUser(username);
         setUserBookMark(bookMarkUser.data.models);
+        dispatch(setLoading(false))
       } catch (error) {
         console.log(error);
       }
@@ -139,8 +154,10 @@ const Userpage = (props) => {
     const username = props.match.params.username;
     const userPost = async () => {
       try {
+        dispatch(setLoading(true))
         const { data: postUser } = await ProfileUserApi.getPostUser(username);
         setUserPost(postUser.data.models);
+        dispatch(setLoading(false))
       } catch (error) {
         console.log(error);
       }
@@ -163,7 +180,7 @@ const Userpage = (props) => {
                   height="70px"
                 />
                 :
-                <div className="py-[12px] text-[#4A5568] mx-auto text-center md:w-[70px] md:h-[70px] rounded-full bg-blue-300 font-bold text-[30px]">
+                <div className="py-[12px] text-[#4A5568] mx-auto text-center w-[70px] h-[70px] rounded-full bg-blue-300 font-bold text-[30px]">
                   {user?.username?.toUpperCase().substring(0, 1)}
                 </div>
               }
@@ -188,7 +205,7 @@ const Userpage = (props) => {
             </div>
           </div>
           <div className="w-full shadow-sm bg-white rounded ">
-            <Navigation path={pathName}/>
+            <Navigation path={pathName} />
           </div>
           <div className="w-full shadow-sm bg-white rounded mt-[10px]">
             <Switch>
@@ -244,7 +261,7 @@ const Userpage = (props) => {
             <span className="font-bold text-[13px]">{user?.followers}</span>
           </div>
         </div>
-      </div>      
+      </div>
     </div>
   );
 };
