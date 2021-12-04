@@ -9,6 +9,7 @@ import { useHistory, NavLink } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 import { path } from "src/Constants/";
 import { useLocation } from "react-router";
+import SkeletonGroup from "./components/skeleton-group";
 
 const PostPage = () => {
     const history = useHistory()
@@ -26,6 +27,7 @@ const PostPage = () => {
     const [trendings, setTrendings] = useState([]);
     const [follows, setFollows] = useState([]);
     const [bookmarks, setBookmarks] = useState([]);
+    const [loading,setLoading] = useState(false)
 
     // Navigation
     const pathName = [
@@ -62,6 +64,7 @@ const PostPage = () => {
     useEffect(() => {
         const listNew = async () => {
           try {
+            setLoading(true)
             if(location.pathname === path.POSTS) {
               const { data: newests } = await PostApi.getPostNew()
               setNewests(newests.data);
@@ -75,7 +78,9 @@ const PostPage = () => {
               const { data: bookmarks } = await PostApi.getPostMark()
               setBookmarks(bookmarks.data);
             }
+            setLoading(false);
           } catch (error) {
+            setLoading(false)
             console.log(error);
           }
         };
@@ -142,36 +147,37 @@ const PostPage = () => {
             </div>
             <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
                 <Scrollbar className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded h-screen">
+                    {loading ? <SkeletonGroup /> : 
                     <Switch>
-                        <Route
-                            exact
-                            path={path.POSTS}
-                            render={(props) => (
-                                <PostView posts={newests} {...props} />
-                            )}
-                        ></Route>
-                        <Route
-                            exact
-                            path={path.POSTS_POPULAR}
-                            render={(props) => (
-                                <PostView posts={trendings} {...props} />
-                            )}
-                        ></Route>
-                        <Route
-                            exact
-                            path={path.POSTS_FOLLOW}
-                            render={(props) =>
-                                <PostView posts={follows} {...props} />
-                            }
-                        ></Route>
-                        <Route
-                            exact
-                            path={path.POSTS_BOOK_MARK}
-                            render={(props) => (
-                                <PostView posts={bookmarks} {...props} />
-                            )}
-                        ></Route>
-                    </Switch>
+                    <Route
+                        exact
+                        path={path.POSTS}
+                        render={(props) => (
+                            <PostView posts={newests} {...props} />
+                        )}
+                    ></Route>
+                    <Route
+                        exact
+                        path={path.POSTS_POPULAR}
+                        render={(props) => (
+                            <PostView posts={trendings} {...props} />
+                        )}
+                    ></Route>
+                    <Route
+                        exact
+                        path={path.POSTS_FOLLOW}
+                        render={(props) =>
+                            <PostView posts={follows} {...props} />
+                        }
+                    ></Route>
+                    <Route
+                        exact
+                        path={path.POSTS_BOOK_MARK}
+                        render={(props) => (
+                            <PostView posts={bookmarks} {...props} />
+                        )}
+                    ></Route>
+                </Switch>}
                 </Scrollbar>
                 <Scrollbar className="col-span-10 lg:col-span-3 bg-white shadow rounded h-screen">
                     <FeaturedAuthor authors={authors} />
