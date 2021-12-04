@@ -39,14 +39,15 @@ export const path = {
   QUESTIONS_BOOK_MARK: "/questions/bookmark",
   QUESTIONS_DETAIL: "/question/:id",
   QUESTIONS_UPDATE: "/question/update/:id",
+  QUESTIONS_TRENDING: "/questions/trending",
 
   // post
-  POSTS: '/posts',
-  POSTS_ID: '/posts/:title-:id',
-  POSTS_CREATE: '/posts/create',
-  POSTS_POPULAR: '/posts/popular',
-  POSTS_FOLLOW: '/posts/follow',
-  POSTS_BOOK_MARK: '/posts/bookmark',
+  POSTS: "/posts",
+  POSTS_ID: "/posts/:title-:id",
+  POSTS_CREATE: "/posts/create",
+  POSTS_POPULAR: "/posts/popular",
+  POSTS_FOLLOW: "/posts/follow",
+  POSTS_BOOK_MARK: "/posts/bookmark",
   POSTS_UPDATE: "/post/update/:id",
 
   // tags
@@ -92,7 +93,7 @@ export const path = {
 
   //Quiz
   QUIZ: "/quiz",
-  QUIZ_CREATE: "/quiz/create"
+  QUIZ_CREATE: "/quiz/create",
 };
 
 export const regex = {

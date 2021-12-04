@@ -24,6 +24,10 @@ const QuestionsPage = () => {
       value: "Mới cập nhật",
     },
     {
+      path: path.QUESTIONS_TRENDING,
+      value: "Câu hỏi nổi bật",
+    },
+    {
       path: path.QUESTIONS_FLOW,
       value: "Đang theo dõi",
     },
@@ -51,6 +55,8 @@ const QuestionsPage = () => {
         let endPoint;
         if (location.pathname === "/questions") {
           endPoint = "";
+        } else if (location.pathname === "/questions/trending") {
+          endPoint = "trending";
         } else if (location.pathname === "/questions/follow") {
           endPoint = "follow";
         } else {
