@@ -60,6 +60,7 @@ export const path = {
   LOGIN: "/auth/login",
   REGISTER: "/auth/register",
   FORGOTPASSWORD: "/auth/forgot_password",
+  RESETPASSWORD: "/auth/reset_password/:token",
 
   // error
   NOT_FOUND: "/not-found",

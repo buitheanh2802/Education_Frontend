@@ -22,7 +22,7 @@ const UserTag = ({ userTag }) => {
               >
                 <Link
                   className="grid grid-cols-3  justify-center items-center"
-                  to={`/tags/${item?.slug}`}
+                  to={`/tag/${item?.slug}`}
                 >
                   <div className="col-span-1">
                     {item.avatar.avatarUrl ? (

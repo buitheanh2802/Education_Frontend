@@ -3,25 +3,22 @@ import PostView from '../Commons/PostView'
 import FeaturedAuthor from '../Commons/FeaturedAuthor'
 import TrendingTags from '../Commons/TrendingTags'
 import { Icon } from 'src/Components/Icon'
-import Scrollbar from 'react-smooth-scrollbar'
 import PostApi from "src/Apis/PostApi"
 import { useHistory, NavLink } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 import { path } from "src/Constants/";
 import { useLocation } from "react-router";
+import TagAPi from "src/Apis/TagApi";
+import UserApi from "src/Apis/UserApi";
+import { useDispatch } from "react-redux";
+import { setLoading } from "src/Redux/Slices/Loading.slice";
 
 const PostPage = () => {
+    const dispatch = useDispatch();
     const history = useHistory()
     const location = useLocation();
-    // const [dataPost, setDataPost] = useState({
-    //     newest: [],
-    //     trendings: []
-    // });
-    // const [PostUseToken, setPostUseToken] = useState({
-    //     followings: [],
-    //     bookmarks: []
-    // });
-
+    const [featuredAuthors, setFeaturedAuthor] = useState([]);
+    const [tagPopulars, setTagPopular] = useState([]);
     const [newests, setNewests] = useState([]);
     const [trendings, setTrendings] = useState([]);
     const [follows, setFollows] = useState([]);
@@ -37,49 +34,59 @@ const PostPage = () => {
 
     const button = { path: path.POSTS_CREATE, icon: Icon.Pen, value: "Viết bài" };
 
-  // authors
-  const authors = [
-    {
-      path: "/",
-      fullname: "Nguyễn Thành Đạt",
-      username: "@nguyenthanhdat",
-      avatar:
-        "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
-      point: 567,
-      question: 234,
-      folow: 345,
-    },
-  ];
-
-  // tags
-  const tags = [
-    {
-      path: "/",
-      value: "NodeJS",
-    },
-  ];
-
     useEffect(() => {
         const listNew = async () => {
           try {
+            dispatch(setLoading(true))
             if(location.pathname === path.POSTS) {
               const { data: newests } = await PostApi.getPostNew()
               setNewests(newests.data);
+              dispatch(setLoading(false))
             } else if (location.pathname === path.POSTS_POPULAR) {
               const { data: trendings } = await PostApi.getPostTren()
               setTrendings(trendings.data);
+              dispatch(setLoading(false))
             } else if (location.pathname === path.POSTS_FOLLOW) {
-              const { data: follows } = await PostApi.getPostFol()
-              setFollows(follows.data);
+              const token = localStorage.getItem("_token_");
+              if(token) {
+                const { data: follows } = await PostApi.getPostFol()
+                setFollows(follows.data);
+                dispatch(setLoading(false))
+              }
             } else if (location.pathname === path.POSTS_BOOK_MARK) {
-              const { data: bookmarks } = await PostApi.getPostMark()
-              setBookmarks(bookmarks.data);
+              const token = localStorage.getItem("_token_");
+              if(token) {
+                const { data: bookmarks } = await PostApi.getPostMark()
+                setBookmarks(bookmarks.data);
+                dispatch(setLoading(false))
+              }
             }
           } catch (error) {
             console.log(error);
           }
         };
         listNew();
+
+
+        const listFeaturedAuthor = async () => {
+          try {
+            const { data: FeaturedAuthor } = await UserApi.getFeaturedAuthor();
+            setFeaturedAuthor(FeaturedAuthor?.data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        listFeaturedAuthor();
+    
+        const listTagPopular = async () => {
+          try {
+            const { data: tagsPopular } = await TagAPi.getTagPopular();
+            setTagPopular(tagsPopular?.data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        listTagPopular();
       }, [location.pathname]);
 
     // useEffect(() => {
@@ -141,7 +148,7 @@ const PostPage = () => {
                 }
             </div>
             <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
-                <Scrollbar className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded h-screen">
+                <div className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded">
                     <Switch>
                         <Route
                             exact
@@ -172,11 +179,11 @@ const PostPage = () => {
                             )}
                         ></Route>
                     </Switch>
-                </Scrollbar>
-                <Scrollbar className="col-span-10 lg:col-span-3 bg-white shadow rounded h-screen">
-                    <FeaturedAuthor authors={authors} />
-                    <TrendingTags tags={tags} />
-                </Scrollbar>
+                </div>
+                <div className="col-span-10 lg:col-span-3 bg-white shadow rounded">
+                    <FeaturedAuthor authors={featuredAuthors} />
+                    <TrendingTags tags={tagPopulars} />
+                </div>
             </div>
         </div>
     )

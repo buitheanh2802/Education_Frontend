@@ -33,7 +33,7 @@ const FollowerTag = ({ follower }) => {
                                             </Link>
                                         </div>
                                         <div className="w-full">
-                                            <Link to={item?.username} className="text-[#2d6ff7] hover:underline font-medium text-[15px]" >{item?.fullname}</Link>
+                                            <Link to={`/user/${item?.username}`} className="text-[#2d6ff7] hover:underline font-medium text-[15px]" >{item?.fullname}</Link>
                                             <h3 className="pr-[50px] my-[5px]">
                                                 <Link to={item?.username} className="font-medium text-[18px] hover:underline">{item?.email}</Link>
                                             </h3>

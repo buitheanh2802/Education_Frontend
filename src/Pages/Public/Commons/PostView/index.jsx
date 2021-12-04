@@ -31,7 +31,7 @@ const PostView = ({ posts }) => {
                                             ></Link>
                                         ) : (
                                             <Link
-                                                to=""
+                                                to={`/user/${item?.createBy?.username}`}
                                                 className="mt-[5px] flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
                                             >
                                                 {item?.createBy?.fullname?.slice(0, 1)?.toUpperCase()}
@@ -40,7 +40,7 @@ const PostView = ({ posts }) => {
                                     </div>
                                     <div className="w-full">
                                         <Link
-                                            to={item?.createBy?.path}
+                                            to={`/user/${item?.createBy?.username}`}
                                             className="text-[#2d6ff7] hover:underline font-medium text-[15px]"
                                         >
                                             {item?.createBy?.fullname}
@@ -76,31 +76,31 @@ const PostView = ({ posts }) => {
                                             })}
                                         </div>
 
-                  <div className="flex justify-between mt-[5px] ">
-                    <div className="flex text-[14px] gap-[15px]">
-                      <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                        <Icon.Eye className="fill-current w-[15px]" />
-                        <span>{item?.views}</span>
-                      </div>
-                      <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                        <Icon.Chat className="fill-current w-[15px]" />
-                        <span>{item?.comments}</span>
-                      </div>
-                      <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                        <Icon.Bookmark className="fill-current w-[15px]" />
-                        <span>{item?.bookmarks}</span>
-                      </div>
+                                        <div className="flex justify-between mt-[5px] ">
+                                            <div className="flex text-[14px] gap-[15px]">
+                                                <div className="flex items-center gap-[5px] text-[#5f5f5f]">
+                                                    <Icon.Eye className="fill-current w-[15px]" />
+                                                    <span>{item?.views}</span>
+                                                </div>
+                                                <div className="flex items-center gap-[5px] text-[#5f5f5f]">
+                                                    <Icon.Chat className="fill-current w-[15px]" />
+                                                    <span>{item?.comments}</span>
+                                                </div>
+                                                <div className="flex items-center gap-[5px] text-[#5f5f5f]">
+                                                    <Icon.Bookmark className="fill-current w-[15px]" />
+                                                    <span>{item?.bookmarks}</span>
+                                                </div>
+                                            </div>
+                                            <Icon.Pen className="fill-current w-[20px] text-[#5f5f5f]" />
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
-                    <Icon.Pen className="fill-current w-[20px] text-[#5f5f5f]" />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </>
-  );
+                )}
+        </>
+    );
 };
 
 export default PostView;
