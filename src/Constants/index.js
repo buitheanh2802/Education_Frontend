@@ -73,6 +73,8 @@ export const path = {
   POST_MANAGER: "/manager/publish_post",
   // Quản trị câu hỏi
   QUESTION_MANAGER: "/manager/publish_question",
+  // Quản trị tài khoản
+  ACCOUNT_MANAGER: "/manager/account",
 
   //profile
   PROFILE: "/profile/:username",

@@ -26,7 +26,7 @@ const FollowerTag = ({ follower }) => {
                                                         src={item?.avatar?.avatarUrl}
                                                         alt={item?.fullname} />
                                                     :
-                                                    <div className="py-[8px] text-[#4A5568] mx-auto text-center md:w-[55px] md:h-[55px] rounded-full bg-[#707885] font-bold text-[28px]">
+                                                    <div className="py-[8px] text-[#4A5568] mx-auto text-center md:w-[55px] md:h-[55px] rounded-full bg-blue-300 font-bold text-[28px]">
                                                         {item?.fullname.toUpperCase().substring(0, 1)}
                                                     </div>
                                                 }

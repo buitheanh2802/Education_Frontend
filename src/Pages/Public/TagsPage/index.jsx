@@ -1,33 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../Commons/Navigation";
 import FeaturedAuthor from "../Commons/FeaturedAuthor";
-import { path } from "../../../Constants/index";
 import { Icon } from "../../../Components/Icon";
 import TagAPi from "src/Apis/TagApi";
-import { useLocation } from "react-router";
+import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import FollowApi from "src/Apis/FollowApi";
+import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 
 const TagsPage = () => {
-
-  const [loading, setLoading] = useState(true);
-  const pathName = [
-    {
-      path: path.TAGS,
-      value: "Mới cập nhật",
-    },
-    {
-      path: path.TAGS_POPULAR,
-      value: "Thịnh hành",
-    }
-  ];
-
-  const button = {
-    path: path.QUESTIONS_CREATE,
-    icon: Icon.questions,
-    value: "Đặt câu hỏi",
-  };
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("_token_");
+  const history = useHistory();
 
   // authors
   const authors = [
@@ -54,10 +39,39 @@ const TagsPage = () => {
   ];
 
   const handleUnFollow = async (id) => {
-
+    if (token === null) {
+      history.push("/auth/login");
+      dispatch(setLoading(false))
+    }
+    dispatch(setLoading(true))
+    await FollowApi.unFollowTag(id);
+    const tagClone = [...tags];
+    tagClone.map((tag) => {
+      if (tag._id === id) {
+        tag.isFollowing = false;
+      }
+      return tag;
+    })
+    setTags(tagClone);
+    dispatch(setLoading(false))
   }
-  const handleFollow = async (id) => {
 
+  const handleFollow = async (id) => {
+    if (token === null) {
+      history.push("/auth/login");
+      dispatch(setLoading(false))
+    }
+    dispatch(setLoading(true))
+    await FollowApi.followTag(id);
+    const tagClone = [...tags];
+    tagClone.map((tag) => {
+      if (tag._id === id) {
+        tag.isFollowing = true;
+      }
+      return tag;
+    })
+    setTags(tagClone);
+    dispatch(setLoading(false))
   }
 
   const [tags, setTags] = useState([]);
@@ -123,7 +137,7 @@ const TagsPage = () => {
                   </Link>
                   {item?.isFollowing ? (
                     <div onClick={() => handleUnFollow(item._id)} className="mt-[10px] xl:[mx-10px] text-center my-auto text-white border border-[#6C91F0] font-bold rounded text-[15px] bg-[#1273eb] hover:bg-blue-200 hover:text-[#6C91F0]">
-                      <button className="font-bold  px-[20px] md:px-[30px] py-[5px] ">
+                      <button className="font-bold px-[20px] md:px-[30px] py-[5px] ">
                         {" "}
                         - Bỏ theo dõi
                       </button>
