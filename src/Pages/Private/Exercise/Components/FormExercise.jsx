@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useForm } from 'react-hook-form';
 import { Icon } from 'src/Components/Icon';
 import Loading from 'src/Components/Loading';
 
 const FormExercise = ({ isShowModle, setIsShowModle }) => {
     const [actionLoading, setActionLoading] = useState(false);
+    const { register, handleSubmit, formState: { error } } = useForm()
+
+    const handleOnSubMit = async (data) => {
+        try {
+
+        } catch (error) {
+
+        }
+    }
+
     if (!isShowModle) return
     return createPortal(
         <>
@@ -21,6 +32,12 @@ const FormExercise = ({ isShowModle, setIsShowModle }) => {
                                 className="block text-gray-600 text-[14px] mb-[5px]"
                                 htmlFor="">Dạng thử thách</label>
                             <input
+                                {...register('title', {
+                                    required: {
+                                        value: true,
+                                        message: "Yêu cầu nhập trường này"
+                                    }
+                                })}
                                 className="text-gray-800 block border border-gray-500 h-[40px] rounded outline-none focus:border-blue-400 focus:shadow duration-300 w-full px-[10px] py-[5px]"
                                 type="text" />
                         </div>
@@ -36,6 +53,12 @@ const FormExercise = ({ isShowModle, setIsShowModle }) => {
                                 className="block text-gray-600 text-[14px] mb-[5px]"
                                 htmlFor="">Mô tả dạng thử thách</label>
                             <textarea
+                                {...register('descriptions', {
+                                    required: {
+                                        value: true,
+                                        message: "Yêu cầu nhập trường này"
+                                    }
+                                })}
                                 className="text-gray-800 block border border-gray-500 h-[100px] rounded outline-none focus:border-blue-400 focus:shadow duration-300 w-full px-[10px] py-[5px]"
                             ></textarea>
                         </div>
@@ -46,7 +69,7 @@ const FormExercise = ({ isShowModle, setIsShowModle }) => {
                                 {actionLoading
                                     ? <Loading className="fill-current w-[20px]" />
                                     : <Icon.Save className="fill-current w-[15px]" />}
-                                Thêm dạng bài tập
+                                Cập nhât dạng bài tập
                             </button>
                         </div>
                     </div>

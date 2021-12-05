@@ -1,19 +1,32 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useForm } from 'react-hook-form';
 import { Icon } from 'src/Components/Icon';
 import Loading from 'src/Components/Loading';
 
-const EditExercise = ({ isShowModle, setIsShowModle }) => {
+const EditExercise = ({ isEdit, setIsEdit }) => {
     const [actionLoading, setActionLoading] = useState(false);
-    if (!isShowModle) return
+    const { register, handleSubmit, formState: { error } } = useForm({
+        defaultValues: isEdit
+    })
+
+    const handleOnSubMit = async (data) => {
+        try {
+
+        } catch (error) {
+
+        }
+    }
+
+    if (!isEdit) return
     return createPortal(
         <>
-            <div onClick={() => setIsShowModle(null)} className="fixed z-[99999] inset-0 bg-black bg-opacity-80"></div>
+            <div onClick={() => setIsEdit(null)} className="fixed z-[99999] inset-0 bg-black bg-opacity-80"></div>
             <div className="fixed z-[999999] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90vw] lg:w-[60vw]">
-                <form className="w-full h-full relative bg-white rounded">
+                <form onSubmit={handleSubmit(handleOnSubMit)} className="w-full h-full relative bg-white rounded">
                     <div className="flex justify-between p-[10px] border-b">
                         <p className="text-[20px] font-medium">Chỉnh sửa thể loại thử thách</p>
-                        <button onClick={() => setIsShowModle(null)}><Icon.Close className="w-[20px] h-[20px] hover:text-red-500 fill-current" /></button>
+                        <button onClick={() => setIsEdit(null)}><Icon.Close className="w-[20px] h-[20px] hover:text-red-500 fill-current" /></button>
                     </div>
                     <div className="p-5">
                         <div className="mb-5">
@@ -21,6 +34,12 @@ const EditExercise = ({ isShowModle, setIsShowModle }) => {
                                 className="block text-gray-600 text-[14px] mb-[5px]"
                                 htmlFor="">Dạng thử thách</label>
                             <input
+                                {...register('title', {
+                                    required: {
+                                        value: true,
+                                        message: "Yêu cầu nhập trường này"
+                                    }
+                                })}
                                 className="text-gray-800 block border border-gray-500 h-[40px] rounded outline-none focus:border-blue-400 focus:shadow duration-300 w-full px-[10px] py-[5px]"
                                 type="text" />
                         </div>
@@ -36,6 +55,12 @@ const EditExercise = ({ isShowModle, setIsShowModle }) => {
                                 className="block text-gray-600 text-[14px] mb-[5px]"
                                 htmlFor="">Mô tả dạng thử thách</label>
                             <textarea
+                                {...register('descriptions', {
+                                    required: {
+                                        value: true,
+                                        message: "Yêu cầu nhập trường này"
+                                    }
+                                })}
                                 className="text-gray-800 block border border-gray-500 h-[100px] rounded outline-none focus:border-blue-400 focus:shadow duration-300 w-full px-[10px] py-[5px]"
                             ></textarea>
                         </div>

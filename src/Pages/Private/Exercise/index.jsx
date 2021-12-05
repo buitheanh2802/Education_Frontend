@@ -10,19 +10,14 @@ const Exercise = () => {
     const dispatch = useDispatch();
     const { challengeCates, pagination } = useSelector(state => state.ChallengeCate);
     const [isShowModle, setIsShowModle] = useState(null);
+    const [isEdit, setIsEdit] = useState(null);
     useEffect(() => {
         dispatch(ActionGetsChallengeCate())
     }, [dispatch]);
     return (
         <>
-            {isShowModle === "add"
-                ? <FormExercise
-                    isShowModle={isShowModle}
-                    setIsShowModle={setIsShowModle} />
-                : isShowModle === "edit"
-                && <EditExercise
-                    isShowModle={isShowModle}
-                    setIsShowModle={setIsShowModle} />}
+            {isShowModle && <FormExercise isShowModle={isShowModle} setIsShowModle={setIsShowModle} />}
+            {isEdit && <EditExercise isEdit={isEdit} setIsEdit={setIsEdit} />}
             <div className="w-full">
                 <div className="mb-4 mx-0 sm:ml-4 xl:mr-4">
                     <div className="rounded-2xl bg-white dark:bg-gray-700 w-full">
@@ -54,7 +49,7 @@ const Exercise = () => {
                                         </li>
                                         <li className="w-full">{item?.title}</li>
                                         <li className="whitespace-nowrap min-w-[50px] text-center">
-                                            <button onClick={() => setIsShowModle("edit")} className="p-2 bg-yellow-500 rounded">
+                                            <button onClick={() => setIsEdit(item)} className="p-2 bg-yellow-500 rounded">
                                                 <Icon.Pen className="fill-current w-[15px] text-white" />
                                             </button>
                                         </li>
