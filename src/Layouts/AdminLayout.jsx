@@ -21,15 +21,9 @@ const AdminLayout = () => {
             <div className="flex flex-col flex-wrap sm:flex-row ">
               <Switch>
                 <PrivateRouter path={path.ACCOUNT_MANAGER} component={AccountManager} />
-                <PrivateRouter
-                  path={path.POST_MANAGER}
-                  component={PostManager}
-                />
-                <PrivateRouter
-                  path={path.QUESTION_MANAGER}
-                  component={QuesionManage}
-                />
-                <PrivateRouter path="/exercise" component={Exercise} />
+                <PrivateRouter path={path.POST_MANAGER} component={PostManager} />
+                <PrivateRouter path={path.QUESTION_MANAGER}  component={QuesionManage} />
+                <PrivateRouter path={path.SULOTION_MANAGER} component={Exercise} />
                 <PrivateRouter exact path={path.ADMIN} component={Dashboard} />
               </Switch>
             </div>
