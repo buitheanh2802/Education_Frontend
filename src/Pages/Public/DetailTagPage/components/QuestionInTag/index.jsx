@@ -2,16 +2,17 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Icon } from 'src/Components/Icon'
 
-const DetailTagView = ({ data }) => {
+const QuestionInTag = ({ data }) => {
     return (
         <>
-            {data?.length === 0 ? (
-                <div>
-                    <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
-                        Không có gì ở đây cả
-                    </p>
-                </div>
-            )
+            {data?.length === 0 ?
+                (
+                    <div>
+                        <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
+                            Không có gì ở đây cả
+                        </p>
+                    </div>
+                )
                 : (
                     <div>
                         {data?.map((item, index) => {
@@ -89,4 +90,4 @@ const DetailTagView = ({ data }) => {
     )
 }
 
-export default DetailTagView
+export default QuestionInTag

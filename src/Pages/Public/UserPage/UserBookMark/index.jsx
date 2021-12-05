@@ -36,7 +36,7 @@ const UserBookMark = (props) => {
         <div className="w-full px-[10px] py-[15px] border-b lg:mt-0 md:mt-3">
           {userBookMark.map((item, index) => {
             return <>
-              <div key={index} className="flex pb-[10px]">
+              <div key={index} className="flex py-[10px] border-b">
                 <div>
                   {item?.avatar?.avatarUrl ?
                     <img
@@ -67,7 +67,7 @@ const UserBookMark = (props) => {
                     </div>
                   </div>
                   <h3 className="pr-[50px] my-[2px]">
-                    <Link className="font-medium text-[18px] hover:underline">
+                    <Link to={`/posts/${item?.slug}-${item?.shortId}`} className="font-medium text-[18px] hover:underline">
                       {item?.title}
                     </Link>
                     <span className="px-[5px]">-</span>

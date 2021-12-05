@@ -52,9 +52,10 @@ export const path = {
   // tags
   TAGS: "/tags",
   TAGS_ID: "/tag/:slug",
-  TAGS_QUESTION_POPULAR: "/tag/:slug/question",
+  TAGS_QUESTION: "/tag/:slug/question",
   TAGS_FOLLOWER: "/tag/:slug/follower",
   TAGS_POPULAR: "/tags/popular",
+  
   // auth
   AUTH: "/auth",
   LOGIN: "/auth/login",
@@ -75,7 +76,8 @@ export const path = {
   QUESTION_MANAGER: "/manager/publish_question",
   // Quản trị tài khoản
   ACCOUNT_MANAGER: "/manager/account",
-
+  // Quản lý Tags 
+  TAG_MANAGER: "/manager/tag",
   //profile
   PROFILE: "/profile/:username",
   EDIT_PROFILE: "/profile/:id/edit",

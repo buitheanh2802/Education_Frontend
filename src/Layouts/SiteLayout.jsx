@@ -38,7 +38,7 @@ const SiteLayout = () => {
         <>
             <Header />
             <Switch>
-                <PublicRouter exact path={path.TAGS_ID} component={DetailTagPage} />
+                <PublicRouter path={path.TAGS_ID} component={DetailTagPage} />
                 <PublicRouter exact path={path.HOME} component={HomePage} />
                 <PublicRouter path={path.QUESTIONS_DETAIL} component={QuestionsDetail} />
                 <PublicRouter path={path.QUESTIONS_CREATE} component={QuestionsCreate} />

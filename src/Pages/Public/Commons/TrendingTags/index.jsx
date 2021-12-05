@@ -8,7 +8,7 @@ const TrendingTags = ({ tags }) => {
         {" "}
         Các tag nổi bật
       </h2>
-      <div className="py-[5px] flex flex-wrap gap-[5px] mx-[10px] text-[14px]">
+      <div className="py-[10px] flex flex-wrap gap-[10px] mx-[10px] text-[14px]">
         {tags?.map((item, index) => (
           <Link
             key={index}
@@ -24,10 +24,3 @@ const TrendingTags = ({ tags }) => {
 };
 
 export default TrendingTags;
-
-// const tags = [
-//     {
-//         path: "/",
-//         value: "NodeJS"
-//     }
-// ]

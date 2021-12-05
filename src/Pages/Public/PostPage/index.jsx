@@ -4,8 +4,7 @@ import FeaturedAuthor from '../Commons/FeaturedAuthor'
 import TrendingTags from '../Commons/TrendingTags'
 import { Icon } from 'src/Components/Icon'
 import PostApi from "src/Apis/PostApi"
-import { useHistory, NavLink } from "react-router-dom";
-import { Switch, Route } from "react-router-dom";
+import { useHistory, NavLink, Switch, Route } from "react-router-dom";
 import { path } from "src/Constants/";
 import { useLocation } from "react-router";
 import TagAPi from "src/Apis/TagApi";

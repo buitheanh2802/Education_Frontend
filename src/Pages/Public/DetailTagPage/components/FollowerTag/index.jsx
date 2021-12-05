@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom'
 const FollowerTag = ({ follower }) => {
     return (
         <>
-            {follower?.length === 0 ? (
-                <div>
-                    <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
-                        Không có gì ở đây cả
-                    </p>
-                </div>
-            )
+            {follower?.length === 0 ?
+                (
+                    <div>
+                        <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
+                            Không có gì ở đây cả
+                        </p>
+                    </div>
+                )
                 : (
                     <div>
                         {follower?.map((item, index) => {

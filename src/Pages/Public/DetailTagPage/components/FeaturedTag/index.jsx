@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const FeaturedTag = ({ tag, popTag }) => {
     return (
-        <div className="py-[5px] mx-[10px]">
+        <div className="bg-white py-[5px] mx-[10px]">
             <div className=" divide-y divide-light-blue-400 pb-[10px]">
                 <div className="flex flex-wrap">
                     <h2 className="uppercase text-[#4A5568] font-medium py-[10px] ml-[5px] mr-[10px] text-[14px] xl:text-[16px]">{tag?.name}</h2>
@@ -37,7 +37,7 @@ const FeaturedTag = ({ tag, popTag }) => {
                 </div>
                 <div className="py-[10px]">
                     <div className="flex flex-wrap">
-                        <h2 className="uppercase text-[#4A5568] font-medium py-[10px] ml-[5px] mr-[10px] text-[14px] xl:text-[16px]">Thẻ phổ biến</h2>
+                        <h2 className="uppercase text-[#4A5568] font-medium py-[10px] ml-[5px] mr-[10px] text-[14px] xl:text-[16px]">Tag phổ biến</h2>
                         <hr class="filler-line border-t-1 xl:mt-[28px] mt-[25px] border-[#4A5568] overflow-visible h-0 flex-grow" />
                     </div>
                     <div className="py-[5px] flex flex-wrap gap-[10px] mb-[5px] mx-[5px] text-[14px]">
