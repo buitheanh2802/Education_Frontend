@@ -42,13 +42,6 @@ const QuestionsPage = () => {
     value: "Đặt câu hỏi",
   };
 
-  // tags
-  const tags = [
-    {
-      path: "/",
-      value: "NodeJS",
-    },
-  ];
   useEffect(() => {
     const listQuestion = async () => {
       try {

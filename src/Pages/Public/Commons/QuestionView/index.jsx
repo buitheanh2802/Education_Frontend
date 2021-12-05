@@ -15,16 +15,16 @@ const QuestionView = ({ questions }) => {
             <div className="mr-[15px] ">
               {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                 <Link
-                  to={`/user/${item?.createBy?.fullname}`}
+                  to={`/user/${item?.createBy?._id}`}
                   className="mt-[5px]  border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
                   style={{
-                    backgroundImage: `url(${item?.createBy?.avatar?.avatarUrl})`,
+                    backgroundImage: `url(${item?.createBy?.avatar?.username})`,
                   }}
                   alt={item?.createBy?.fullname}
                 ></Link>
               ) : (
                 <Link
-                  to={`/user/${item?.createBy?.fullname}`}
+                  to={`/user/${item?.createBy?.username}`}
                   className="mt-[5px] flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
                 >
                   {item?.createBy?.fullname?.slice(0, 1)?.toUpperCase()}
@@ -33,7 +33,7 @@ const QuestionView = ({ questions }) => {
             </div>
             <div className="w-full">
               <Link
-                to={`/user/${item?.createBy?.fullname}`}
+                to={`/user/${item?.createBy?.username}`}
                 className="text-[#2d6ff7] hover:underline font-medium text-[15px]"
               >
                 {item?.createBy?.fullname}
