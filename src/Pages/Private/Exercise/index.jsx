@@ -3,18 +3,26 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
 import { Icon } from 'src/Components/Icon';
 import { ActionGetsChallengeCate } from 'src/Redux/Actions/ChallengeCate.action';
+import EditExercise from './Components/EditExercise';
 import FormExercise from './Components/FormExercise';
 
 const Exercise = () => {
     const dispatch = useDispatch();
     const { challengeCates, pagination } = useSelector(state => state.ChallengeCate);
-    const [isShowModle, setIsShowModle] = useState(false);
+    const [isShowModle, setIsShowModle] = useState(null);
     useEffect(() => {
         dispatch(ActionGetsChallengeCate())
     }, [dispatch]);
     return (
         <>
-            {isShowModle && <FormExercise isShowModle={isShowModle} setIsShowModle={setIsShowModle} />}
+            {isShowModle === "add"
+                ? <FormExercise
+                    isShowModle={isShowModle}
+                    setIsShowModle={setIsShowModle} />
+                : isShowModle === "edit"
+                && <EditExercise
+                    isShowModle={isShowModle}
+                    setIsShowModle={setIsShowModle} />}
             <div className="w-full">
                 <div className="mb-4 mx-0 sm:ml-4 xl:mr-4">
                     <div className="rounded-2xl bg-white dark:bg-gray-700 w-full">
@@ -26,7 +34,7 @@ const Exercise = () => {
                                 </span>
                             </p>
 
-                            <button onClick={() => setIsShowModle(true)} className="flex my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] ">Thêm danh mục</button>
+                            <button onClick={() => setIsShowModle("add")} className="flex my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] ">Thêm danh mục</button>
                         </div>
                         <div className="text-sm">
                             <ul className="flex items-center gap-5 text-gray-600 dark:text-gray-200 border-b-2 border-gray-100 dark:border-gray-800 px-[20px] font-bold py-3">
@@ -46,7 +54,7 @@ const Exercise = () => {
                                         </li>
                                         <li className="w-full">{item?.title}</li>
                                         <li className="whitespace-nowrap min-w-[50px] text-center">
-                                            <button className="p-2 bg-yellow-500 rounded">
+                                            <button onClick={() => setIsShowModle("edit")} className="p-2 bg-yellow-500 rounded">
                                                 <Icon.Pen className="fill-current w-[15px] text-white" />
                                             </button>
                                         </li>

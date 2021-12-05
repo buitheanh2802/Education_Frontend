@@ -860,6 +860,11 @@ video {
   margin-bottom: 10px;
 }
 
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -1022,6 +1027,10 @@ video {
 
 .ml-\[15px\] {
   margin-left: 15px;
+}
+
+.mb-5 {
+  margin-bottom: 1.25rem;
 }
 
 .block {
@@ -1318,6 +1327,18 @@ video {
 
 .max-w-\[100px\] {
   max-width: 100px;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+.flex-\[2\] {
+  flex: 2;
+}
+
+.flex-\[3\] {
+  flex: 3;
 }
 
 .-translate-y-1\/2 {
@@ -1886,6 +1907,10 @@ video {
 
 .p-\[20px\] {
   padding: 20px;
+}
+
+.p-5 {
+  padding: 1.25rem;
 }
 
 .px-\[15px\] {
