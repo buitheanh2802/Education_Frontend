@@ -16,6 +16,8 @@ import LikeApi from "src/Apis/LikeApi";
 import FollowApi from "src/Apis/FollowApi";
 import UserApi from "src/Apis/UserApi";
 import Loading from "src/Components/Loading";
+import SpamApi from "src/Apis/SpamApi";
+import Swal from "sweetalert2";
 
 const QuestionsDetail = () => {
   const shortId = useParams();
@@ -28,18 +30,17 @@ const QuestionsDetail = () => {
   const [copyLink, setCopyLink] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [contentSpam, setContentSpam] = useState("");
 
   const history = useHistory();
   const token = localStorage.getItem("_token_");
-
+  const idQuestion = shortId.id.split("-")[shortId.id.split("-").length - 1];
   useEffect(() => {
     setRender(false);
     const list = async (id) => {
       try {
-        await QuestionApi.view(id.split("-")[id.split("-").length - 1]);
-        let { data: question } = await QuestionApi.getId(
-          id.split("-")[id.split("-").length - 1]
-        );
+        await QuestionApi.view(idQuestion);
+        let { data: question } = await QuestionApi.getId(idQuestion);
         setQuestionDetail(question);
         setLoading(false);
         if (question.data.createBy.username) {
@@ -62,7 +63,7 @@ const QuestionsDetail = () => {
         console.log(error);
       }
     };
-    list(shortId?.id);
+    list(idQuestion);
 
     // window.addEventListener("scroll", function (event) {
     //   const scroll = this.scrollY;
@@ -70,10 +71,9 @@ const QuestionsDetail = () => {
     //     console.log("haha");
     //   }
     // });
-  }, [shortId?.id, render]);
+  }, [idQuestion, render]);
   if (Object.keys(questionDetail).length === 0) return null;
 
-  const idQuestion = shortId.id.split("-")[shortId.id.split("-").length - 1];
   const arrLike = questionDetail?.data?.likes;
   const checkLike = arrLike.some((a) => a === profile?._id);
   const handleLike = async () => {
@@ -186,7 +186,69 @@ const QuestionsDetail = () => {
     setIsModalVisible(false);
   };
   const handleViewBox = () => {
+    if (token === null) history.push("/auth/login");
     setIsModalVisible(true);
+  };
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 2000,
+    // timerProgressBar: true,
+    background: "#EFF6FF",
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+  const handelReportSpam = async () => {
+    var checkbox = document.getElementsByClassName("cursor-pointer");
+    for (var i = 0; i < checkbox.length; i++) {
+      if (checkbox[i].checked === true) {
+        var reason = checkbox[i].value;
+      }
+    }
+
+    if (reason === undefined || contentSpam === "") {
+      if (reason === undefined) {
+        document.querySelector("#errEasonSpam").innerHTML =
+          "* Vui lòng chọn một lý do";
+      } else {
+        document.querySelector("#errEasonSpam").innerHTML = "";
+      }
+      if (contentSpam === "") {
+        document.querySelector("#errContentSpam").innerHTML =
+          "* Vui lòng cho biết lý do";
+      } else {
+        document.querySelector("#errContentSpam").innerHTML = "";
+      }
+
+      return;
+    }
+    document.querySelector("#errEasonSpam").innerHTML = "";
+    document.querySelector("#errContentSpam").innerHTML = "";
+
+    const dataSpam = {
+      reason: reason,
+      content: contentSpam,
+      referenceTo: idQuestion,
+      type: "questions",
+    };
+    // console.log(dataSpam);
+    try {
+      await SpamApi.reportSpamQuestion(dataSpam);
+      await Toast.fire({
+        icon: "success",
+        title: "Báo cáo thành công",
+      });
+    } catch (error) {
+      await Toast.fire({
+        icon: "error",
+        title: "Báo cáo thất bại",
+      });
+      console.log(error);
+    }
   };
 
   if (loading)
@@ -590,7 +652,7 @@ const QuestionsDetail = () => {
       <div
         className={
           isModalVisible
-            ? "fixed  top-0 left-0 right-0 bottom-0 bg-gray-500 bg-opacity-70 z-[999999] overflow-auto"
+            ? "fixed  top-0 left-0 right-0 bottom-0 bg-gray-500 bg-opacity-70 z-[999] overflow-auto"
             : "hidden"
         }
       >
@@ -612,6 +674,10 @@ const QuestionsDetail = () => {
                   dung này
                 </label>
                 <div className="mt-[10px] pl-[10px]">
+                  <spam
+                    id="errEasonSpam"
+                    className="text-[12px] text-red-500"
+                  ></spam>
                   <div className="py-[3px]">
                     <input
                       type="radio"
@@ -654,7 +720,7 @@ const QuestionsDetail = () => {
                       type="radio"
                       id="spam4"
                       name="fav_language"
-                      value="3"
+                      value="4"
                       className="cursor-pointer"
                     />{" "}
                     <label for="spam4" className="cursor-pointer">
@@ -666,7 +732,7 @@ const QuestionsDetail = () => {
                       type="radio"
                       id="spam5"
                       name="fav_language"
-                      value="3"
+                      value="5"
                       className="cursor-pointer"
                     />{" "}
                     <label for="spam5" className="cursor-pointer">
@@ -676,6 +742,7 @@ const QuestionsDetail = () => {
                 </div>
                 <div className="mt-[30px]">
                   <textarea
+                    onChange={(e) => setContentSpam(e.target.value)}
                     name=""
                     id=""
                     rows="3"
@@ -683,12 +750,19 @@ const QuestionsDetail = () => {
                     placeholder="Nhận xét..."
                   ></textarea>
                 </div>
+                <spam
+                  id="errContentSpam"
+                  className="text-[12px] text-red-500"
+                ></spam>
               </div>
             </form>
           </div>
 
           <div className=" pb-[15px] flex justify-end">
-            <button className="border border-gray-400 text-gray-500 text-[14px] hover:bg-blue-50  hover:text-blue-400 rounded-[3px] px-[15px] py-[3px]">
+            <button
+              onClick={() => handelReportSpam()}
+              className=" border border-gray-400 text-gray-500 text-[14px] hover:bg-blue-50  hover:text-blue-400 rounded-[3px] px-[15px] py-[3px]"
+            >
               Báo cáo
             </button>
           </div>

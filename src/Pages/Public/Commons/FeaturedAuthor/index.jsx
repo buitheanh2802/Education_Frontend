@@ -80,15 +80,3 @@ const FeaturedAuthor = ({ authors }) => {
 
 export default FeaturedAuthor;
 
-// const authors = [
-//     {
-//         path: "/",
-//         fullname: "Nguyễn Thành Đạt",
-//         username: "@nguyenthanhdat",
-//         avatar: "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
-//         point: 567,
-//         post: 234,
-//         question: 456,
-//         folow: 345
-//     }
-// ]
