@@ -36,6 +36,7 @@ const Userpage = (props) => {
       dispatch(setLoading(false))
     }
   }
+  
   const pathName = [
     {
       path: `/user/${username}`,

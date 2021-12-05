@@ -56,7 +56,6 @@ const UserFollower = (props) => {
                 dispatch(setLoading(true))
                 const { data: followerUser } = await ProfileUserApi.getFollowerUser(username);
                 setUserFollowers(followerUser.data.models);
-                console.log(followerUser);
                 dispatch(setLoading(false))
             } catch (error) {
                 console.log(error);
@@ -68,7 +67,7 @@ const UserFollower = (props) => {
 
     return (
         <div className="container mx-auto">
-            {userFollowers.length == 0 ? (
+            {userFollowers?.length == 0 ? (
                 <div>
                     <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
                         Không có gì ở đây cả
@@ -77,7 +76,7 @@ const UserFollower = (props) => {
             ) : (
                 <div className="flex grid-cols-4 ">
                     <div className="flex justify-between flex-wrap gap-[20px]">
-                        {userFollowers.map((item, index) => {
+                        {userFollowers?.map((item, index) => {
                             return (
                                 <div key={index} className="flex py-[20px] px-[10px] mb-[20px] bg-white">
                                     <div className="">

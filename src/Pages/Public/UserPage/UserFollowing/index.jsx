@@ -54,8 +54,8 @@ const UserFollowing = (props) => {
         const userFollowing = async () => {
             try {
                 dispatch(setLoading(true))
-                const { data: followingUser } = await ProfileUserApi.getFollowingUser(username);
-                setUserFollowing(followingUser.data.models);
+                const { data: userFollowing } = await ProfileUserApi.getFollowingUser(username);
+                setUserFollowing(userFollowing.data.models);
                 dispatch(setLoading(false))
             } catch (error) {
                 console.log(error);
@@ -66,7 +66,7 @@ const UserFollowing = (props) => {
 
     return (
         <div>
-            {userFollowing.length == 0 ? (
+            {userFollowing?.length == 0 ? (
                 <div>
                     <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
                         Không có gì ở đây cả

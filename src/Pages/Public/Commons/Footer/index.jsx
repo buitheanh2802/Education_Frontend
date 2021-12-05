@@ -31,6 +31,7 @@ const Footer = () => {
                 <ul className="xl:flex-[1] mt-[20px] md:order-3">
                     <li className="font-bold mb-[24px] text-[18px]">Sản phẩm</li>
                     <li className="mb-[15px] text-gray-800"><Link className="hover:text-blue-700" to={path.NOT_FOUND}>Devstar</Link></li>
+                    <li className="mb-[15px] text-gray-800"><Link className="hover:text-blue-700" to={path.TAGS}>Tags</Link></li>
                     <li className="mb-[15px] text-gray-800"><Link className="hover:text-blue-700" to={path.NOT_FOUND}>Cộng đồng</Link></li>
                 </ul>
                 <ul className="xl:flex-[1] mt-[20px] md:order-5 xl:order-4">

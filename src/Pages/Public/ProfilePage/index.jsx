@@ -122,7 +122,7 @@ const ProfilePage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-start-2 col-span-4 w-full shadow-sm bg-white rounded">
+                <div className="col-start-2 col-span-4 w-full shadow-sm bg-white rounded lg:mt-[0px] md:mt-[10px] sm:mt-[10px]">
                     <div className="w-full px-[10px] py-[15px] border-b">
                         <h2 className="font-bold text-[20px]">Thông tin tài khoản</h2>
                     </div>

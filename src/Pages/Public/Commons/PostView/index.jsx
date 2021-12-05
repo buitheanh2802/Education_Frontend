@@ -6,15 +6,13 @@ import { timeFormatter } from "../../../../Helpers/Timer";
 const PostView = ({ posts }) => {
     return (
         <>
-            {posts.length === 0 || posts?.models?.length === 0 ?
-                (
-                    <div>
-                        <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
-                            Không có gì ở đây cả
-                        </p>
-                    </div>
-                )
-                : (
+            {posts?.models?.length === 0 ?
+                <div>
+                    <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
+                        Không có gì ở đây cả
+                    </p>
+                </div>
+                : (posts.length !== 0 ?
                     <div>
                         {posts?.models?.map((item, index) => {
                             return (
@@ -98,7 +96,14 @@ const PostView = ({ posts }) => {
                             );
                         })}
                     </div>
-                )}
+                    :
+                    <div>
+                        <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
+                            Vui lòng đăng nhập
+                        </p>
+                    </div>
+                )
+            }
         </>
     );
 };

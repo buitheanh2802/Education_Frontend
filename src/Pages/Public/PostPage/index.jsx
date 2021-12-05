@@ -53,6 +53,7 @@ const PostPage = () => {
                         setFollows(follows.data);
                         dispatch(setLoading(false))
                     }
+                        dispatch(setLoading(false))
                 } else if (location.pathname === path.POSTS_BOOK_MARK) {
                     const token = localStorage.getItem("_token_");
                     if (token) {
@@ -60,6 +61,7 @@ const PostPage = () => {
                         setBookmarks(bookmarks.data);
                         dispatch(setLoading(false))
                     }
+                    dispatch(setLoading(false))
                 }
             } catch (error) {
                 console.log(error);
