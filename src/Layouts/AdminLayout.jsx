@@ -8,6 +8,7 @@ import { path } from "../Constants";
 import Exercise from "src/Pages/Private/Exercise";
 import PostManager from "src/Pages/Private/PostManager";
 import QuesionManage from "src/Pages/Private/QuestionManage";
+import AccountManager from "src/Pages/Private/AccountManager";
 
 const AdminLayout = () => {
   return (
@@ -19,6 +20,7 @@ const AdminLayout = () => {
           <div className="overflow-auto h-screen pb-24 pt-2 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
             <div className="flex flex-col flex-wrap sm:flex-row ">
               <Switch>
+                <PrivateRouter path={path.ACCOUNT_MANAGER} component={AccountManager} />
                 <PrivateRouter
                   path={path.POST_MANAGER}
                   component={PostManager}

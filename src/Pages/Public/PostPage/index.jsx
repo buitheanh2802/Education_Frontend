@@ -15,7 +15,7 @@ import { setLoading } from "src/Redux/Slices/Loading.slice";
 
 const PostPage = () => {
     const dispatch = useDispatch();
-    const history = useHistory()
+    const history = useHistory();
     const location = useLocation();
     const [featuredAuthors, setFeaturedAuthor] = useState([]);
     const [tagPopulars, setTagPopular] = useState([]);
@@ -37,93 +37,57 @@ const PostPage = () => {
 
     useEffect(() => {
         const listNew = async () => {
-          try {
-            dispatch(setLoading(true))
-            if(location.pathname === path.POSTS) {
-              const { data: newests } = await PostApi.getPostNew()
-              setNewests(newests.data);
-              dispatch(setLoading(false))
-            } else if (location.pathname === path.POSTS_POPULAR) {
-              const { data: trendings } = await PostApi.getPostTren()
-              setTrendings(trendings.data);
-              dispatch(setLoading(false))
-            } else if (location.pathname === path.POSTS_FOLLOW) {
-              const token = localStorage.getItem("_token_");
-              if(token) {
-                const { data: follows } = await PostApi.getPostFol()
-                setFollows(follows.data);
-                dispatch(setLoading(false))
-              }
-            } else if (location.pathname === path.POSTS_BOOK_MARK) {
-              const token = localStorage.getItem("_token_");
-              if(token) {
-                const { data: bookmarks } = await PostApi.getPostMark()
-                setBookmarks(bookmarks.data);
-                dispatch(setLoading(false))
-              }
+            try {
+                dispatch(setLoading(true))
+                if (location.pathname === path.POSTS) {
+                    const { data: newests } = await PostApi.getPostNew()
+                    setNewests(newests.data);
+                    dispatch(setLoading(false))
+                } else if (location.pathname === path.POSTS_POPULAR) {
+                    const { data: trendings } = await PostApi.getPostTren()
+                    setTrendings(trendings.data);
+                    dispatch(setLoading(false))
+                } else if (location.pathname === path.POSTS_FOLLOW) {
+                    const token = localStorage.getItem("_token_");
+                    if (token) {
+                        const { data: follows } = await PostApi.getPostFol()
+                        setFollows(follows.data);
+                        dispatch(setLoading(false))
+                    }
+                } else if (location.pathname === path.POSTS_BOOK_MARK) {
+                    const token = localStorage.getItem("_token_");
+                    if (token) {
+                        const { data: bookmarks } = await PostApi.getPostMark()
+                        setBookmarks(bookmarks.data);
+                        dispatch(setLoading(false))
+                    }
+                }
+            } catch (error) {
+                console.log(error);
             }
-            setLoading(false);
-          } catch (error) {
-            setLoading(false)
-            console.log(error);
-          }
         };
         listNew();
 
-
         const listFeaturedAuthor = async () => {
-          try {
-            const { data: FeaturedAuthor } = await UserApi.getFeaturedAuthor();
-            setFeaturedAuthor(FeaturedAuthor?.data);
-          } catch (error) {
-            console.log(error);
-          }
+            try {
+                const { data: FeaturedAuthor } = await UserApi.getFeaturedAuthor();
+                setFeaturedAuthor(FeaturedAuthor?.data);
+            } catch (error) {
+                console.log(error);
+            }
         };
         listFeaturedAuthor();
-    
+
         const listTagPopular = async () => {
-          try {
-            const { data: tagsPopular } = await TagAPi.getTagPopular();
-            setTagPopular(tagsPopular?.data);
-          } catch (error) {
-            console.log(error);
-          }
+            try {
+                const { data: tagsPopular } = await TagAPi.getTagPopular();
+                setTagPopular(tagsPopular?.data);
+            } catch (error) {
+                console.log(error);
+            }
         };
         listTagPopular();
-      }, [location.pathname]);
-
-    // useEffect(() => {
-    //     if (token) {
-    //         Promise.all([
-    //             PostApi.getPostFol(),
-    //             PostApi.getPostMark()
-    //         ]).then(data => {
-    //             const followings = data[0].data;
-    //             const bookmarks = data[1].data;
-    //             setPostUseToken({
-    //                 followings: followings,
-    //                 bookmarks: bookmarks
-    //             })
-    //         }).catch(error => {
-    //             console.log(error)
-    //         })
-    //     }
-    //     Promise.all([
-    //         PostApi.getPostNew(),
-    //         PostApi.getPostTren()
-    //     ])
-    //         .then(data => {
-    //             const newest = data[0].data;
-    //             const trendings = data[1].data;
-    //             setDataPost({
-    //                 newest: newest,
-    //                 trendings: trendings
-    //             })
-    //         }).catch(error => {
-    //             console.log(error)
-    //         })
-    // }, [token])
-
+    }, [location.pathname]);
 
     return (
         <div className="container mx-auto mt-[55px] py-[25px]">
@@ -142,7 +106,7 @@ const PostPage = () => {
                 </div>
                 {button &&
                     <div className="self-center whitespace-nowrap">
-                        <button onClick={() => { history.push(button?.path)}}
+                        <button onClick={() => { history.push(button?.path) }}
                             className="flex my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] ">
                             <div className="self-center"><button.icon className="w-[15px] fill-current" /> </div>
                             <span className="hidden md:block">{button?.value}</span>

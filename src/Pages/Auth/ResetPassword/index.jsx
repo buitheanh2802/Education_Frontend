@@ -28,7 +28,9 @@ const ResetPassword = () => {
                 message: "Đổi mật khẩu thành công",
                 isLoading: false
             })
-            reset()
+            setTimeout(() => {
+                history.push('/auth/login')
+            }, 2000);
         } catch (error) {
             setResponse({
                 ...response,
