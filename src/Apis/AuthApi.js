@@ -29,11 +29,12 @@ const AuthApi = {
         })
     },
 
-    async profile() {
-        const url = '/auth/profile/me';
+    profile() {
+        const token = localStorage.getItem("_token_");
+        const url = '/auth/profile/me/info-detail';
         return AxiosClient.get(url, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                Authorization: `Bearer ${token}`
             }
         })
     },
@@ -45,6 +46,16 @@ const AuthApi = {
                 Authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
+    },
+
+    async forgotPassword(email) {
+        const url = '/auth/reset-password';
+        return AxiosClient.post(url, email)
+    },
+
+    async resetPassword(password) {
+        const url = '/auth/reset-password/confirm';
+        return AxiosClient.post(url, password)
     }
 }
 

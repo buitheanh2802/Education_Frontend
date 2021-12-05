@@ -1,8 +1,13 @@
 import AxiosClient from './AxiosClient';
 const TagAPi = {
     getAll() {
+        const token = localStorage.getItem("_token_");
         const url = `/tag`;
-        return AxiosClient.get(url);
+        return AxiosClient.get(url,  {
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        });
     },
     getDetail(tagname){
         const token = localStorage.getItem("_token_");
