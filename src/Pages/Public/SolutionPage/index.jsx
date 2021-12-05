@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navigation from 'src/Pages/Public/Commons/Navigation'
 import { useParams } from 'react-router'
 import { path } from 'src/Constants/';
+import SulotionApi from 'src/Apis/SulotionApi';
 
 const SolutionPage = () => {
     const { challengeId } = useParams();
+    const [sulotin, setSulotion] = useState(null);
+
+    useEffect(() => {
+        (async function () {
+            try {
+                const { data: response } = await SulotionApi.gets(challengeId);
+                const { data, status } = response;
+                if (!status) return
+                setSulotion(data.modles)
+            } catch (error) {
+                console.log(error)
+            }
+        })();
+    })
 
     const pathName = [
         { path: `${path.CHALLENGE}/detail/${challengeId}`, value: "Chi tiết bài tập" },

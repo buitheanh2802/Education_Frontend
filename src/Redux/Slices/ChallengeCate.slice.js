@@ -11,6 +11,7 @@ const mySlice = createSlice({
         pagination: null
     },
     extraReducers: (builder) => {
+        // gets
         builder.addCase(ActionGetsChallengeCate.pending, (state) => {
             state.isLoading = true;
         })
@@ -31,6 +32,8 @@ const mySlice = createSlice({
                 console.log(message)
             }
         })
+
+        // post
     }
 })
 
