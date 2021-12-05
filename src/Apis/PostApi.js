@@ -32,7 +32,7 @@ const PostApi = {
     const url = `/posts/${id}`;
     return AxiosClient.get(url, {
       headers: {
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
   },
@@ -41,7 +41,7 @@ const PostApi = {
     const url = `/post`;
     return AxiosClient.post(url, posts, {
       headers: {
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
   },
@@ -50,7 +50,7 @@ const PostApi = {
     const url = `/post/${id}`;
     return AxiosClient.delete(url, {
       headers: {
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
   },
@@ -59,7 +59,7 @@ const PostApi = {
     const url = `/post/${id}`;
     return AxiosClient.put(url, data, {
       headers: {
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
   },
@@ -68,7 +68,7 @@ const PostApi = {
     const url = `/post/${endPoint}`;
     return AxiosClient.get(url, {
       headers: {
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
   },

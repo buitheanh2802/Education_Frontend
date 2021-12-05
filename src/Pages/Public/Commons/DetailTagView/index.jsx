@@ -27,14 +27,14 @@ const DetailTagView = ({ data }) => {
                                                         src={item?.createBy?.avatar?.avatarUrl}
                                                         alt={item?.createBy?.username} />
                                                     :
-                                                    <div className="py-[8px] text-[#4A5568] mx-auto text-center md:w-[55px] md:h-[55px] rounded-full bg-[#707885] font-bold text-[28px]">
+                                                    <div className="py-[8px] text-[#4A5568] mx-auto text-center md:w-[55px] md:h-[55px] rounded-full bg-blue-300 font-bold text-[28px]">
                                                         {item?.createBy?.fullname.toUpperCase().substring(0, 1)}
                                                     </div>
                                                 }
                                             </Link>
                                         </div>
                                         <div className="w-full">
-                                            <Link to={item?.createBy?.username} className="text-[#2d6ff7] inline-block hover:underline font-medium text-[15px]" >{item?.createBy?.fullname}</Link>
+                                            <Link to={`/user/${item?.createBy?.username}`} className="text-[#2d6ff7] inline-block hover:underline font-medium text-[15px]" >{item?.createBy?.fullname}</Link>
                                             <span className="px-[5px]  inline-block">-</span>
                                             <div className=" inline-block">
                                                 <div className=" inline-block mr-[5px] pt-[0px]">

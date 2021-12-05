@@ -1,19 +1,15 @@
-import AxiosClient from "./AxiosClient";
+import AxiosClient from './AxiosClient'
 
 const FollowApi = {
   //follow user
   follow(username) {
     const token = localStorage.getItem("_token_");
     const url = `/follow/${username}`;
-    return AxiosClient.post(
-      url,
-      { username: username },
-      {
+    return AxiosClient.post( url, { username: username }, {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+        }
+    });
   },
   //unfollow user
   unFollow(username) {

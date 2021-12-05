@@ -26,14 +26,14 @@ const FollowerTag = ({ follower }) => {
                                                         src={item?.avatar?.avatarUrl}
                                                         alt={item?.fullname} />
                                                     :
-                                                    <div className="py-[8px] text-[#4A5568] mx-auto text-center md:w-[55px] md:h-[55px] rounded-full bg-[#707885] font-bold text-[28px]">
+                                                    <div className="py-[8px] text-[#4A5568] mx-auto text-center md:w-[55px] md:h-[55px] rounded-full bg-blue-300 font-bold text-[28px]">
                                                         {item?.fullname.toUpperCase().substring(0, 1)}
                                                     </div>
                                                 }
                                             </Link>
                                         </div>
                                         <div className="w-full">
-                                            <Link to={item?.username} className="text-[#2d6ff7] hover:underline font-medium text-[15px]" >{item?.fullname}</Link>
+                                            <Link to={`/user/${item?.username}`} className="text-[#2d6ff7] hover:underline font-medium text-[15px]" >{item?.fullname}</Link>
                                             <h3 className="pr-[50px] my-[5px]">
                                                 <Link to={item?.username} className="font-medium text-[18px] hover:underline">{item?.email}</Link>
                                             </h3>

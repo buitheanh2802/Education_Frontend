@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-
 import Navigation from "../Commons/Navigation";
 import { path } from "src/Constants/";
 import { Icon } from "src/Components/Icon";
 import ProfileUserApi from "src/Apis/ProfileUserApi";
 import UserFollowing from "./UserFollowing";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import UserFollower from "./UserFollower";
 import UserBookMark from "./UserBookMark";
 import UserPost from "./UserPost";
@@ -17,15 +16,16 @@ import { setLoading } from "src/Redux/Slices/Loading.slice";
 const Userpage = (props) => {
   const username = props.match.params.username;
   const [user, setUser] = useState(null);
-  const [userFollowers, setUserFollowers] = useState([]);
-  const [userFollowing, setUserFollowing] = useState([]);
-  const [userBookMark, setUserBookMark] = useState([]);
-  const [userPost, setUserPost] = useState([]);
-  const [userTag, setUserTag] = useState([]);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const token = localStorage.getItem("_token_");
 
   const handleFollow = async () => {
     dispatch(setLoading(true))
+    if (token === null) {
+      history.push("/auth/login");
+      dispatch(setLoading(false))
+    }
     if (user?.isFollowing) {
       await FollowApi.unFollow(username);
       setUser({ ...user, isFollowing: false })
@@ -38,7 +38,7 @@ const Userpage = (props) => {
   }
   const pathName = [
     {
-      path: `/user/${username}/post`,
+      path: `/user/${username}`,
       value: "Bài viết",
     },
     {
@@ -55,22 +55,19 @@ const Userpage = (props) => {
     },
     {
       path: `/user/${username}/tag`,
-      value: "Thẻ",
+      value: "Thẻ đang theo dõi",
     },
   ];
-  const button = {
-    path: path.QUESTIONS_CREATE,
-    icon: Icon.questions,
-    value: "Đặt câu hỏi",
-  };
 
   // authors
   useEffect(() => {
 
     const user = async () => {
       try {
+        dispatch(setLoading(true))
         const { data: users } = await ProfileUserApi.getUser(username);
         setUser(users.data);
+        dispatch(setLoading(false))
       } catch (error) {
         console.log(error);
       }
@@ -78,81 +75,7 @@ const Userpage = (props) => {
     user();
   }, []);
 
-
-  useEffect(() => {
-    const username = props.match.params.username;
-    const userFollowers = async () => {
-      try {
-        const { data: followerUser } = await ProfileUserApi.getFollowerUser(
-          username
-        );
-        setUserFollowers(followerUser.userFollower.data.models);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    userFollowers();
-  }, []);
-
-
-  useEffect(() => {
-    const username = props.match.params.username;
-    const userFollowing = async () => {
-      try {
-        const { data: followingUser } = await ProfileUserApi.getFollowingUser(
-          username
-        );
-        setUserFollowing(followingUser.data.models);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    userFollowing();
-  }, []);
-
-
-  useEffect(() => {
-    const username = props.match.params.username;
-    const userTag = async () => {
-      try {
-        const { data: tagUser } = await ProfileUserApi.getTagUser(username);
-        setUserTag(tagUser.data.models);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    userTag();
-  }, []);
-
-
-  useEffect(() => {
-    const username = props.match.params.username;
-    const userBookMark = async () => {
-      try {
-        const { data: bookMarkUser } = await ProfileUserApi.getBookmarkUser(username);
-        setUserBookMark(bookMarkUser.data.models);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    userBookMark();
-  }, []);
-
-
-  useEffect(() => {
-    const username = props.match.params.username;
-    const userPost = async () => {
-      try {
-        const { data: postUser } = await ProfileUserApi.getPostUser(username);
-        setUserPost(postUser.data.models);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    userPost();
-
-  }, []);
-
+  
   return (
     <div className="container mx-auto mt-[80px]">
       <div className="my-[15px] lg:grid lg:grid-cols-4 gap-3">
@@ -167,7 +90,7 @@ const Userpage = (props) => {
                   height="70px"
                 />
                 :
-                <div className="py-[12px] text-[#4A5568] mx-auto text-center md:w-[70px] md:h-[70px] rounded-full bg-blue-300 font-bold text-[30px]">
+                <div className="py-[12px] text-[#4A5568] mx-auto text-center w-[70px] h-[70px] rounded-full bg-blue-300 font-bold text-[30px]">
                   {user?.username?.toUpperCase().substring(0, 1)}
                 </div>
               }
@@ -192,7 +115,7 @@ const Userpage = (props) => {
             </div>
           </div>
           <div className="w-full shadow-sm bg-white rounded ">
-            <Navigation path={pathName} button={button} />
+            <Navigation path={pathName} />
           </div>
           <div className="w-full shadow-sm bg-white rounded mt-[10px]">
             <Switch>
@@ -200,32 +123,32 @@ const Userpage = (props) => {
                 exact
                 path={path.USER_FOLLOWING}
                 render={(props) => (
-                  <UserFollowing userFollowing={userFollowing} {...props} />
+                  <UserFollowing {...props} />
                 )}
               ></Route>
               <Route
                 exact
                 path={path.USER_FOLLOWER}
                 render={(props) => (
-                  <UserFollower userFollower={userFollowers} {...props} />
+                  <UserFollower {...props} />
                 )}
               ></Route>
               <Route
                 exact
                 path={path.USER_BOOKMARK}
                 render={(props) =>
-                  <UserBookMark userBookMark={userBookMark} {...props} />
+                  <UserBookMark {...props} />
                 }
               ></Route>
               <Route
                 exact
-                path={path.USER_POST}
-                render={(props) => <UserPost userPost={userPost} {...props} />}
+                path={path.USER_ID}
+                render={(props) => <UserPost {...props} />}
               ></Route>
               <Route
                 exact
                 path={path.USER_TAG}
-                render={(props) => <UserTag userTag={userTag} {...props} />}
+                render={(props) => <UserTag {...props} />}
               ></Route>
             </Switch>
           </div>
@@ -248,7 +171,7 @@ const Userpage = (props) => {
             <span className="font-bold text-[13px]">{user?.followers}</span>
           </div>
         </div>
-      </div>      
+      </div>
     </div>
   );
 };

@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "src/Components/Icon";
-import { Link } from "react-router-dom";
-const UserPost = ({ userPost }) => {
+import ProfileUserApi from "src/Apis/ProfileUserApi";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLoading } from "src/Redux/Slices/Loading.slice";
+
+const UserPost = (props) => {    
+  const username = props.match.params.username;
+  const [userPost, setUserPost] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userPost = async () => {
+      try {
+        dispatch(setLoading(true))
+        const { data: postUser } = await ProfileUserApi.getPostUser(username);
+        setUserPost(postUser.data.models);
+        dispatch(setLoading(false))
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    userPost();
+  }, []);
+
   return (
     <div>
       {userPost?.length == 0 ? (
@@ -15,7 +37,7 @@ const UserPost = ({ userPost }) => {
           {userPost?.map((item, index) => {
             return (
               <>
-                <div key={index} className="flex py-[10px] ">
+                <div key={index} className="flex pb-[10px]">
                   <div>
                     {item?.avatar?.avatarUrl ? (
                       <img
@@ -25,14 +47,14 @@ const UserPost = ({ userPost }) => {
                         height="40px"
                       />
                     ) : (
-                      <div className="py-[12px] text-[#4A5568] mx-auto text-center md:w-[40px] md:h-[40px] rounded-full bg-blue-300 font-bold text-[15px]">
-                        {item?.createBy?.username.toUpperCase().substring(0, 1)}
+                      <div className="py-[5px] text-[#4A5568] mx-auto text-center w-[40px] w-[40px] rounded-full bg-blue-300 font-bold text-[20px]">
+                        {item?.createBy?.fullname?.toUpperCase().substring(0, 1)}
                       </div>
                     )}
                   </div>
                   <div className="w-full ml-[10px]">
-                    <Link className="text-[#2d6ff7] inline-block hover:underline font-medium text-[15px]">
-                      {item.createBy.fullname}
+                    <Link to={`/user/${item?.createBy?.username}`} className="text-[#2d6ff7] inline-block hover:underline font-medium text-[15px]">
+                      {item?.createBy?.fullname}
                     </Link>
                     <span className="px-[5px]  inline-block">-</span>
                     <div className=" inline-block">
@@ -41,13 +63,13 @@ const UserPost = ({ userPost }) => {
                       </div>
                       <div className=" inline-block">
                         <span className="col-span-4 text-[13px] text-[#707885]">
-                          5h trước
+                          {item?.createdAt}
                         </span>
                       </div>
                     </div>
                     <h3 className="pr-[50px] my-[2px]">
                       <Link className="font-medium text-[18px] hover:underline">
-                        {item.title}
+                        {item?.title}
                       </Link>
                       <span className="px-[5px]">-</span>
                       <button className="translate-y-[2px]">
@@ -56,11 +78,11 @@ const UserPost = ({ userPost }) => {
                       </button>
                     </h3>
                     <div className="flex  gap-[5px] my-[5px]">
-                      {item.tags.map((tag, index) => {
+                      {item?.tags.map((tag, index) => {
                         return (
-                          <div>
+                          <div key={index}>
                             <Link className="block mx-0 hover:bg-gray-300 bg-[#e7e7e7] px-[10px] py-[2px] text-[#5f5f5f] lg:text-[12px] rounded-[3px]">
-                              {tag.name}
+                              {tag?.name}
                             </Link>
                           </div>
                         );
@@ -70,15 +92,15 @@ const UserPost = ({ userPost }) => {
                       <div className="flex text-[14px] gap-[15px]">
                         <div className="flex items-center gap-[5px] text-[#5f5f5f]">
                           <Icon.Eye className="fill-current w-[15px]" />
-                          <span>12</span>
+                          <span>{item?.views}</span>
                         </div>
                         <div className="flex items-center gap-[5px] text-[#5f5f5f]">
                           <Icon.Chat className="fill-current w-[15px]" />
-                          <span>{item.comments}</span>
+                          <span>{item?.comments}</span>
                         </div>
                         <div className="flex items-center gap-[5px] text-[#5f5f5f]">
                           <Icon.Bookmark className="fill-current w-[15px]" />
-                          <span>{item.bookmarks}</span>
+                          <span>{item?.bookmarks}</span>
                         </div>
                       </div>
                       <Icon.Questions className="fill-current w-[20px] text-[#5f5f5f]" />

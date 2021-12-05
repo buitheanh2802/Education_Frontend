@@ -47,7 +47,7 @@ const Register = () => {
     return (
         <div className="container mx-auto rounded grid grid-cols-1 lg:grid-cols-2 items-center h-screen">
             <button
-                className="px-[10px] py-[5px] fixed bg-gray-50 top-0 left-0 hidden lg:flex items-center gap-[5px] text-gray-600 hover:text-blue-600"
+                className="px-[10px] py-[5px] fixed bg-gray-50 top-[10px] left-[10px] hidden lg:flex items-center gap-[5px] text-gray-600 hover:text-blue-600"
                 onClick={() => history.goBack()}>
                 <Icon.Undo className="fill-current w-[15px]" /> Quay lại
             </button>

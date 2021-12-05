@@ -29,7 +29,7 @@ const Login = () => {
     return (
         <div className="container mx-auto rounded grid grid-cols-1 lg:grid-cols-2 items-center h-screen">
             <button
-                className="px-[10px] py-[5px] fixed bg-gray-50 top-0 left-0 hidden lg:flex items-center gap-[5px] text-gray-600 hover:text-blue-600"
+                className="px-[10px] py-[5px] fixed top-[10px] left-[10px] bg-gray-50 hidden lg:flex items-center gap-[5px] text-gray-600 hover:text-blue-600"
                 onClick={() => history.goBack()}>
                 <Icon.Undo className="fill-current w-[15px]" /> Quay lại
             </button>
@@ -81,7 +81,7 @@ const Login = () => {
                     </div>
                     <div className="flex items-center justify-between text-[14px]">
                         <label htmlFor="remember-me" className="cursor-pointer flex gap-[5px] items-center"><input id="remember-me" type="checkbox" className="cursor-pointer border" /> Ghi nhớ đăng nhập</label>
-                        <button type="button" className="hover:underline hover:text-blue-600 duration-300 text-gray-600">Quên mật khẩu ?</button>
+                        <Link type="button" to={path.FORGOTPASSWORD} className="hover:underline hover:text-blue-600 duration-300 text-gray-600">Quên mật khẩu ?</Link>
                     </div>
 
                     <button

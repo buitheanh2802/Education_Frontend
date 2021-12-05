@@ -3,14 +3,14 @@ import { Icon } from 'src/Components/Icon'
 import DetailTagView from '../Commons/DetailTagView'
 import FeaturedTag from '../Commons/FeaturedTag'
 import TagAPi from 'src/Apis/TagApi'
-import { useParams } from "react-router-dom";
-import { useHistory } from "react-router"
 import FollowApi from 'src/Apis/FollowApi';
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import FollowerTag from '../Commons/DetailTagView/FollowerTag'
+import { useParams, useHistory, useLocation } from "react-router-dom";
 
 const DetailTagPage = () => {
+    const location = useLocation();
     const { slug } = useParams();
     const [tag, setTag] = useState([]);
     const [tags, setTags] = useState({});
@@ -20,14 +20,17 @@ const DetailTagPage = () => {
         questions: [],
         followers: []
     });
-    const [tab, setTab] = useState(1)
+    const [tab, setTab] = useState(1);
+    const history = useHistory();
+    const token = localStorage.getItem("_token_");
 
     useEffect(() => {
         const detailTag = async () => {
             try {
-                console.log(slug);
+                dispatch(setLoading(true))
                 const { data: tag } = await TagAPi.getDetail(slug);
                 setTag(tag.data);
+                dispatch(setLoading(false))
             } catch (error) {
                 console.log("Failed to get data", error);
             }
@@ -43,14 +46,16 @@ const DetailTagPage = () => {
             }
         };
         popTag();
-    }, []);
+    }, [location.pathname]);
 
     useEffect(() => {
+        dispatch(setLoading(true))
         Promise.all([
             TagAPi.getPostInTag(slug),
             TagAPi.getQuestionInTag(slug),
-            TagAPi.getFollowInTag(slug)
+            TagAPi.getFollowInTag(slug),
         ]).then(data => {
+            console.log(data);
             const postTags = data[0].data.data.models;
             const questions = data[1].data.data.models;
             const followers = data[2].data.data.models;
@@ -59,13 +64,18 @@ const DetailTagPage = () => {
                 questions: questions,
                 followers: followers
             })
+            dispatch(setLoading(false))
         }).catch(error => {
-            console.log('error')
+            console.log(error)
         })
     }, [slug])
 
     const handleFollow = async (id) => {
         dispatch(setLoading(true))
+        if (token === null) {
+            history.push("/auth/login");
+            dispatch(setLoading(false))
+        }
         if (tag?.isFollowing) {
             await FollowApi.unFollowTag(id);
             setTag({ ...tag, isFollowing: false })
@@ -98,7 +108,16 @@ const DetailTagPage = () => {
                 <div className="col-start-1 col-span-3 w-full  rounded">
                     <div className="flex py-[30px] px-[10px] mb-[20px] bg-white">
                         <div>
-                            <img width="150px" src={tag?.avatar?.avatarUrl} alt={tag?.name} />
+                            {tag?.avatar?.avatarUrl ?
+                                <img
+                                    src={tag?.avatar?.avatarUrl}
+                                    alt={tag?.name}
+                                    className="w-[150px] rounded-[5px]"
+                                /> :
+                                <div className="w-[150px] h-[150px] bg-blue-400 flex justify-center items-center rounded-[5px]">
+                                    <p className="text-white text-[32px]">{tag?.name?.toUpperCase().substring(0, 1)}</p>
+                                </div>
+                            }
                         </div>
                         <div className="ml-[30px] my-auto">
                             <div className="">

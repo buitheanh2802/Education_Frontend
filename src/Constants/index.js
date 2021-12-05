@@ -54,12 +54,14 @@ export const path = {
   TAGS: "/tags",
   TAGS_ID: "/tag/:slug",
   TAGS_QUESTION_POPULAR: "/tag/:slug/question",
-  TAGS_FOLLOWER: "tag/:slug/follower",
+  TAGS_FOLLOWER: "/tag/:slug/follower",
   TAGS_POPULAR: "/tags/popular",
   // auth
   AUTH: "/auth",
   LOGIN: "/auth/login",
   REGISTER: "/auth/register",
+  FORGOTPASSWORD: "/auth/forgot_password",
+  RESETPASSWORD: "/auth/reset_password/:token",
 
   // error
   NOT_FOUND: "/not-found",
@@ -72,6 +74,8 @@ export const path = {
   POST_MANAGER: "/manager/publish_post",
   // Quản trị câu hỏi
   QUESTION_MANAGER: "/manager/publish_question",
+  // Quản trị tài khoản
+  ACCOUNT_MANAGER: "/manager/account",
 
   //profile
   PROFILE: "/profile/:username",

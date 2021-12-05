@@ -1,8 +1,8 @@
 import AxiosClient from './AxiosClient';
-const token = localStorage.getItem('_token_');
 
 const ProfileUserApi = {
     getUser(username) {
+        const token = localStorage.getItem("_token_");
         const url = `/user/${username}`
         return AxiosClient.get(url, {
             headers: {
@@ -15,16 +15,31 @@ const ProfileUserApi = {
         return AxiosClient.get(url)
     },
     getFollowerUser(username) {
+        const token = localStorage.getItem("_token_");
         const url = `/user/${username}/follower`
-        return AxiosClient.get(url)
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization : `Bearer ${token}`
+            }
+        })
     },
     getFollowingUser(username) {
+        const token = localStorage.getItem("_token_");
         const url = `/user/${username}/following`
-        return AxiosClient.get(url)
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization : `Bearer ${token}`
+            }
+        })
     },
     getTagUser(username) {
+        const token = localStorage.getItem("_token_");
         const url = `/user/${username}/tag`
-        return AxiosClient.get(url)
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization : `Bearer ${token}`
+            }
+        })
     },
     getBookmarkUser(username) {
         const url = `/user/${username}/bookmark/post`
