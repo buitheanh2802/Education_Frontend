@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { Icon } from 'src/Components/Icon';
 import Loading from 'src/Components/Loading';
+import { ActionOPostChallengCate } from 'src/Redux/Actions/ChallengeCate.action';
 
 const FormExercise = ({ isShowModle, setIsShowModle }) => {
     const [actionLoading, setActionLoading] = useState(false);
+    const dispatch = useDispatch();
     const { register, handleSubmit, formState: { error } } = useForm()
 
     const handleOnSubMit = async (data) => {
-        try {
-
-        } catch (error) {
-
-        }
+        const { payload } = await dispatch(ActionOPostChallengCate(data));
+        console.log(payload)
     }
 
     if (!isShowModle) return
@@ -21,7 +21,7 @@ const FormExercise = ({ isShowModle, setIsShowModle }) => {
         <>
             <div onClick={() => setIsShowModle(null)} className="fixed z-[99999] inset-0 bg-black bg-opacity-80"></div>
             <div className="fixed z-[999999] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90vw] lg:w-[60vw]">
-                <form className="w-full h-full relative bg-white rounded">
+                <form onSubmit={handleSubmit(handleOnSubMit)} className="w-full h-full relative bg-white rounded">
                     <div className="flex justify-between p-[10px] border-b">
                         <p className="text-[20px] font-medium">Tạo thể loại thử thách</p>
                         <button onClick={() => setIsShowModle(null)}><Icon.Close className="w-[20px] h-[20px] hover:text-red-500 fill-current" /></button>
@@ -46,6 +46,12 @@ const FormExercise = ({ isShowModle, setIsShowModle }) => {
                                 className="block text-gray-600 text-[14px] mb-[5px]"
                                 htmlFor="">Mô tả dạng thử thách</label>
                             <input
+                                {...register('avatar', {
+                                    required: {
+                                        value: true,
+                                        message: "Yêu cầu nhập trường này"
+                                    }
+                                })}
                                 type="file" />
                         </div>
                         <div className="mb-5">

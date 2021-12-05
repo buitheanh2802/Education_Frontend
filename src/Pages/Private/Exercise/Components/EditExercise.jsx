@@ -48,6 +48,12 @@ const EditExercise = ({ isEdit, setIsEdit }) => {
                                 className="block text-gray-600 text-[14px] mb-[5px]"
                                 htmlFor="">Mô tả dạng thử thách</label>
                             <input
+                                // {...register('avatar', {
+                                //     required: {
+                                //         value: true,
+                                //         message: "Yêu cầu nhập trường này"
+                                //     }
+                                // })}
                                 type="file" />
                         </div>
                         <div className="mb-5">

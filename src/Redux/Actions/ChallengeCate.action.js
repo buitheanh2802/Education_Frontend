@@ -19,9 +19,9 @@ export const ActionGetsChallengeCate = createAsyncThunk('challengeCate/find', as
     }
 })
 
-export const ActionOPostChallengCate = createAsyncThunk('challengeCate/create', async () => {
+export const ActionOPostChallengCate = createAsyncThunk('challengeCate/create', async (req) => {
     try {
-        const { data } = await ChallengeCateApi.gets();
+        const { data } = await ChallengeCateApi.post(req);
         return data
     } catch (error) {
         return error.response.data
