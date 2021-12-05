@@ -1,7 +1,69 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { path } from "src/Constants/";
 import { Icon } from "src/Components/Icon";
-const UserFollowing = ({ userFollowing }) => {
+import ProfileUserApi from "src/Apis/ProfileUserApi";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import FollowApi from "src/Apis/FollowApi";
+import { setLoading } from "src/Redux/Slices/Loading.slice";
+
+const UserFollowing = (props) => {
+    const username = props.match.params.username;
+    const [userFollowing, setUserFollowing] = useState([]);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const token = localStorage.getItem("_token_");
+
+    const handleUnFollow = async (username) => {
+        if (token === null) {
+            history.push("/auth/login");
+            dispatch(setLoading(false))
+        }
+        dispatch(setLoading(true))
+        await FollowApi.unFollowTag(username);
+        const folClone = [...userFollowing];
+        folClone.map((fol) => {
+            if (fol.username === username) {
+                fol.isFollowing = false;
+            }
+            return fol;
+        })
+        setUserFollowing(folClone);
+        dispatch(setLoading(false))
+    }
+
+    const handleFollow = async (username) => {
+        if (token === null) {
+            history.push("/auth/login");
+            dispatch(setLoading(false))
+        }
+        dispatch(setLoading(true))
+        await FollowApi.followTag(username);
+        const folClone = [...userFollowing];
+        folClone.map((fol) => {
+            if (fol.username === username) {
+                fol.isFollowing = true;
+            }
+            return fol;
+        })
+        setUserFollowing(folClone);
+        dispatch(setLoading(false))
+    }
+
+    useEffect(() => {
+        const userFollowing = async () => {
+            try {
+                dispatch(setLoading(true))
+                const { data: followingUser } = await ProfileUserApi.getFollowingUser(username);
+                setUserFollowing(followingUser.data.models);
+                dispatch(setLoading(false))
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        userFollowing();
+    }, []);
+
     return (
         <div>
             {userFollowing.length == 0 ? (
@@ -64,9 +126,21 @@ const UserFollowing = ({ userFollowing }) => {
                                                 </p>
                                             </div>
                                         </div>
-                                        <button className="mt-[5px] mx-[20px] bg-[#fff] max-h-[35px] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#fdfdfd] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[12px] ">
-                                            + Theo dõi
-                                        </button>
+                                        {item?.followingUserId?.isFollowing ? (
+                                            <div onClick={() => handleUnFollow(item?.followingUserId?.username)} className="mx-[10px] text-center my-auto text-white border border-[#6C91F0] font-bold rounded text-[15px] bg-[#1273eb] hover:bg-blue-200 hover:text-[#6C91F0]">
+                                                <button className="font-bold px-[10px] py-[5px] ">
+                                                    {" "}
+                                                    - Bỏ theo dõi
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <div onClick={() => handleFollow(item?.followingUserId?.username)} className="mx-[10px] text-center my-auto text-[#6C91F0] border border-[#6C91F0] font-bold rounded text-[15px] hover:bg-[#1273eb] hover:text-white">
+                                                <button className="font-bold px-[10px] py-[5px] ">
+                                                    {" "}
+                                                    + Theo dõi
+                                                </button>
+                                            </div>
+                                        )}
                                     </div>
                                 );
                             })}

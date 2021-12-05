@@ -7,9 +7,10 @@ import FollowApi from 'src/Apis/FollowApi';
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import FollowerTag from '../Commons/DetailTagView/FollowerTag'
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, useLocation } from "react-router-dom";
 
 const DetailTagPage = () => {
+    const location = useLocation();
     const { slug } = useParams();
     const [tag, setTag] = useState([]);
     const [tags, setTags] = useState({});
@@ -45,7 +46,7 @@ const DetailTagPage = () => {
             }
         };
         popTag();
-    }, []);
+    }, [location.pathname]);
 
     useEffect(() => {
         dispatch(setLoading(true))
@@ -110,11 +111,11 @@ const DetailTagPage = () => {
                             {tag?.avatar?.avatarUrl ?
                                 <img
                                     src={tag?.avatar?.avatarUrl}
-                                    alt=""
+                                    alt={tag?.name}
                                     className="w-[150px] rounded-[5px]"
                                 /> :
                                 <div className="w-[150px] h-[150px] bg-blue-400 flex justify-center items-center rounded-[5px]">
-                                    <p className="text-white text-[12px]">{tag?.name?.toUpperCase().substring(0, 1)}</p>
+                                    <p className="text-white text-[32px]">{tag?.name?.toUpperCase().substring(0, 1)}</p>
                                 </div>
                             }
                         </div>

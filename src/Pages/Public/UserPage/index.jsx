@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import Navigation from "../Commons/Navigation";
 import { path } from "src/Constants/";
 import { Icon } from "src/Components/Icon";
@@ -17,11 +16,6 @@ import { setLoading } from "src/Redux/Slices/Loading.slice";
 const Userpage = (props) => {
   const username = props.match.params.username;
   const [user, setUser] = useState(null);
-  const [userFollowers, setUserFollowers] = useState([]);
-  const [userFollowing, setUserFollowing] = useState([]);
-  const [userBookMark, setUserBookMark] = useState([]);
-  const [userPost, setUserPost] = useState([]);
-  const [userTag, setUserTag] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
   const token = localStorage.getItem("_token_");
@@ -81,91 +75,7 @@ const Userpage = (props) => {
     user();
   }, []);
 
-
-  useEffect(() => {
-    const username = props.match.params.username;
-    const userFollowers = async () => {
-      try {
-        dispatch(setLoading(true))
-        const { data: followerUser } = await ProfileUserApi.getFollowerUser(
-          username
-        );
-        setUserFollowers(followerUser.data.models);
-        dispatch(setLoading(false))
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    userFollowers();
-  }, []);
-
-
-  useEffect(() => {
-    const username = props.match.params.username;
-    const userFollowing = async () => {
-      try {
-        dispatch(setLoading(true))
-        const { data: followingUser } = await ProfileUserApi.getFollowingUser(
-          username
-        );
-        setUserFollowing(followingUser.data.models);
-        dispatch(setLoading(false))
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    userFollowing();
-  }, []);
-
-
-  useEffect(() => {
-    const username = props.match.params.username;
-    const userTag = async () => {
-      try {
-        dispatch(setLoading(true))
-        const { data: tagUser } = await ProfileUserApi.getTagUser(username);
-        setUserTag(tagUser.data.models);
-        dispatch(setLoading(false))
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    userTag();
-  }, []);
-
-
-  useEffect(() => {
-    const username = props.match.params.username;
-    const userBookMark = async () => {
-      try {
-        dispatch(setLoading(true))
-        const { data: bookMarkUser } = await ProfileUserApi.getBookmarkUser(username);
-        setUserBookMark(bookMarkUser.data.models);
-        dispatch(setLoading(false))
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    userBookMark();
-  }, []);
-
-
-  useEffect(() => {
-    const username = props.match.params.username;
-    const userPost = async () => {
-      try {
-        dispatch(setLoading(true))
-        const { data: postUser } = await ProfileUserApi.getPostUser(username);
-        setUserPost(postUser.data.models);
-        dispatch(setLoading(false))
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    userPost();
-
-  }, []);
-
+  
   return (
     <div className="container mx-auto mt-[80px]">
       <div className="my-[15px] lg:grid lg:grid-cols-4 gap-3">
@@ -213,32 +123,32 @@ const Userpage = (props) => {
                 exact
                 path={path.USER_FOLLOWING}
                 render={(props) => (
-                  <UserFollowing userFollowing={userFollowing} {...props} />
+                  <UserFollowing {...props} />
                 )}
               ></Route>
               <Route
                 exact
                 path={path.USER_FOLLOWER}
                 render={(props) => (
-                  <UserFollower userFollower={userFollowers} {...props} />
+                  <UserFollower {...props} />
                 )}
               ></Route>
               <Route
                 exact
                 path={path.USER_BOOKMARK}
                 render={(props) =>
-                  <UserBookMark userBookMark={userBookMark} {...props} />
+                  <UserBookMark {...props} />
                 }
               ></Route>
               <Route
                 exact
                 path={path.USER_ID}
-                render={(props) => <UserPost userPost={userPost} {...props} />}
+                render={(props) => <UserPost {...props} />}
               ></Route>
               <Route
                 exact
                 path={path.USER_TAG}
-                render={(props) => <UserTag userTag={userTag} {...props} />}
+                render={(props) => <UserTag {...props} />}
               ></Route>
             </Switch>
           </div>

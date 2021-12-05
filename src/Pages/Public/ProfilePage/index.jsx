@@ -129,7 +129,7 @@ const ProfilePage = () => {
                     <div className="w-full px-[10px] py-[15px]">
                         <div className="py-[5px]">
                             <span className="inline-block"><Icon.Profile className="fill-current w-[16px] mb-[-2px] mr-[5px]" /> </span>
-                            <span className="inline-block"> {profile?.descriptions}.</span>
+                            <span className="inline-block"> {profile?.descriptions}</span>
                         </div>
                         <div className="py-[5px]">
                             <span className="font-bold text-gray-800">Phone: </span> {profile?.phoneNumber}
