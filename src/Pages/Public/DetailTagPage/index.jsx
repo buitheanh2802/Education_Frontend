@@ -49,7 +49,7 @@ const DetailTagPage = () => {
         const list = async () => {
             try {
                 dispatch(setLoading(true))
-                if (location.pathname === `/tag/${slug}/`) {
+                if (location.pathname === `/tag/${slug}`) {
                     const { data: posts } = await TagAPi.getPostInTag(slug)
                     setPosts(posts.data.models);
                     dispatch(setLoading(false))
@@ -88,7 +88,7 @@ const DetailTagPage = () => {
     }
 
     const pathName = [
-        { path: `/tag/${slug}/`, value: "Bài viết" },
+        { path: `/tag/${slug}`, value: "Bài viết" },
         { path: `/tag/${slug}/question`, value: "Câu hỏi" },
         { path: `/tag/${slug}/follower`, value: "Người theo dõi" },
     ];
@@ -96,8 +96,8 @@ const DetailTagPage = () => {
     return (
         <div className="container mx-auto mt-[80px]">
             <div className="mt-[15px] lg:grid lg:grid-cols-4 gap-3">
-                <div className="col-start-1 col-span-3 w-full  rounded">
-                    <div className="flex py-[30px] px-[10px] mb-[20px] bg-white">
+                <div className="col-start-1 col-span-3 w-full mb-[20px] rounded">
+                    <div className="flex py-[30px] px-[10px] bg-white">
                         <div>
                             {tag?.avatar?.avatarUrl ?
                                 <img

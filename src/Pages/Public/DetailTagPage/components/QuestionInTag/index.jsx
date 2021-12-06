@@ -46,7 +46,11 @@ const QuestionInTag = ({ data }) => {
                                                 </div>
                                             </div>
                                             <h3 className="pr-[50px] my-[5px]">
-                                                <Link to={item?.slug} className="font-medium text-[18px] hover:underline">{item?.title}</Link>
+                                                <Link
+                                                    to={`/question/${item?.slug}-${item?._id}`}
+                                                    className="font-medium text-[18px] hover:underline">
+                                                    {item?.title}
+                                                </Link>
                                                 <span className="px-[5px]">-</span>
                                                 <button className="translate-y-[2px]"> <Icon.Link className="w-[14px] fill-current text-[#666]" /></button>
                                             </h3>
