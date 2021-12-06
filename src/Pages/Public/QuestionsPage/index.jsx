@@ -10,13 +10,21 @@ import { useLocation } from "react-router";
 import Loading from "src/Components/Loading";
 import UserApi from "src/Apis/UserApi";
 import TagAPi from "src/Apis/TagApi";
+import { useDispatch } from "react-redux";
+import { Switch, Route } from "react-router-dom";
+import { setLoading } from "src/Redux/Slices/Loading.slice";
+
 const QuestionsPage = () => {
   // navigation
   const location = useLocation();
   const [questions, setQuestion] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [featuredAuthor, setFeaturedAuthor] = useState([]);
   const [tagPopular, setTagPopular] = useState([]);
+  const [newests, setNewests] = useState([]);
+  const [trendings, setTrendings] = useState([]);
+  const [follows, setFollows] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
+  const dispatch = useDispatch();
 
   const pathName = [
     {
@@ -45,26 +53,32 @@ const QuestionsPage = () => {
   useEffect(() => {
     const listQuestion = async () => {
       try {
-        let endPoint;
-        if (location.pathname === "/questions") {
-          endPoint = "";
-        } else if (location.pathname === "/questions/trending") {
-          endPoint = "trending";
-        } else if (location.pathname === "/questions/follow") {
-          endPoint = "follow";
-        } else {
-          endPoint = "listbookmark";
+        dispatch(setLoading(true));
+        if (location.pathname === path.QUESTIONS) {
+          const { data: newests } = await QuestionApi.getQuestion();
+          setNewests(newests.data);
+          dispatch(setLoading(false));
+        } else if (location.pathname === path.QUESTIONS_TRENDING) {
+          const { data: trendings } = await QuestionApi.getQuestionTren();
+          setTrendings(trendings.data);
+          dispatch(setLoading(false));
+        } else if (location.pathname === path.QUESTIONS_FLOW) {
+          const token = localStorage.getItem("_token_");
+          if (token) {
+            const { data: follows } = await QuestionApi.getQuestionFol();
+            setFollows(follows.data);
+            dispatch(setLoading(false));
+          }
+        } else if (location.pathname === path.QUESTIONS_BOOK_MARK) {
+          const token = localStorage.getItem("_token_");
+          if (token) {
+            const { data: bookmarks } = await QuestionApi.getQuestionBookmark();
+            setBookmarks(bookmarks.data);
+            dispatch(setLoading(false));
+          }
         }
-        const { data: questions } = await QuestionApi.getQuestion(endPoint);
-        const dataNew = questions?.data?.models?.filter(
-          (data) => data.spam === false
-        );
-        // console.log(dataNew);
-        setQuestion(dataNew);
-        setLoading(false);
       } catch (error) {
-        setLoading(false);
-        console.log("Error", error.sesponse);
+        console.log(error);
       }
     };
     listQuestion();
@@ -89,18 +103,42 @@ const QuestionsPage = () => {
     };
     listTagPopular();
   }, [location.pathname]);
-  if (loading)
-    return (
-      <div className="h-screen flex items-center justify-center bg-gray-100">
-        <Loading className="w-[40px] h-[40px] fill-current text-gray-500" />
-      </div>
-    );
+
   return (
     <div className="container mx-auto mt-[80px] mb-[20px]">
       <Navigation path={pathName} button={button} />
       <div className="mt-[15px] gap-[15px] flex justify-between">
         <div className="w-full shadow-sm bg-white px-[5px] rounded">
-          <QuestionView questions={questions} />
+          <Switch>
+            <Route
+              exact
+              path={path.QUESTIONS}
+              render={(props) => (
+                <QuestionView questions={newests} {...props} />
+              )}
+            ></Route>
+            <Route
+              exact
+              path={path.QUESTIONS_TRENDING}
+              render={(props) => (
+                <QuestionView questions={trendings} {...props} />
+              )}
+            ></Route>
+            <Route
+              exact
+              path={path.QUESTIONS_FLOW}
+              render={(props) => (
+                <QuestionView questions={follows} {...props} />
+              )}
+            ></Route>
+            <Route
+              exact
+              path={path.QUESTIONS_BOOK_MARK}
+              render={(props) => (
+                <QuestionView questions={bookmarks} {...props} />
+              )}
+            ></Route>
+          </Switch>
         </div>
         <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded">
           <FeaturedAuthor authors={featuredAuthor} />
