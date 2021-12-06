@@ -80,7 +80,9 @@ const UserBookMark = (props) => {
                     {item?.tags.map((tag, index) => {
                       return (
                         <div key={index}>
-                          <Link className="block mx-0 hover:bg-gray-300 bg-[#e7e7e7] px-[10px] py-[2px] text-[#5f5f5f] lg:text-[12px] rounded-[3px]">
+                          <Link
+                            to={`/tag/${tag?.slug}`}
+                            className="block mx-0 hover:bg-gray-300 bg-[#e7e7e7] px-[10px] py-[2px] text-[#5f5f5f] lg:text-[12px] rounded-[3px]">
                             {tag?.name}
                           </Link>
                         </div>
@@ -109,7 +111,7 @@ const UserBookMark = (props) => {
             </>
           })}
         </div>
-      ) }
+      )}
     </div>
   );
 };
