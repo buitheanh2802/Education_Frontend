@@ -5,9 +5,7 @@ const Store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        // ignoredActionPaths: ['payload.socketModel'],
-      },
+      serializableCheck: false,
     }),
 });
 

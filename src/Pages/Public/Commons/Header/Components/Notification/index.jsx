@@ -1,9 +1,31 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Icon } from 'src/Components/Icon'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Icon } from 'src/Components/Icon';
+import { timeFormatter } from './../../../../../../Helpers/Timer';
+import Loading from 'src/Components/Loading/LoadingIcon';
+import { notificationReadMore } from 'src/Redux/Actions/Notification.action';
+import { useDispatch } from 'react-redux';
+import LocalStorage from 'src/Helpers/Storage';
 
 const Notification = ({ className, setIsNotification }) => {
-    const [isList, setIsList] = useState(false)
+    const [isList, setIsList] = useState(false);
+    const { models, pagination,process } = useSelector(state => state.Notification);
+    const [currentPage, setCurrentPage] = useState(null);
+    const [totalPage, setTotalPage] = useState(null);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (models) {
+            setCurrentPage(pagination.currentPage);
+            setTotalPage(pagination.totalPage);
+        }
+    }, [models, pagination]);
+    const onReadMore = () => {
+        dispatch(notificationReadMore(LocalStorage.Get('_token_'), {
+            page: currentPage + 1
+        }))
+    }
     return (
         <div className={`${className} lg:shadow-lg lg:border lg:border-solid lg:border-gray-300 pr-[5px] py-[15px] bg-white text-black text-[16px] rounded-[3px]`}>
             <div className="notification h-full lg:max-h-[50vh] overflow-y-scroll">
@@ -16,19 +38,31 @@ const Notification = ({ className, setIsNotification }) => {
                         <li className="px-[15px] py-[7px] hover:bg-gray-100 rounded-[3px] duration-300 cursor-pointer flex items-center"><Icon.Detele className="w-[20px] h-[20px]" /> <p className="ml-[10px]">Xóa tất cả thông báo</p></li>
                     </ul>}
                 </div>
-                <div className="px-[5px]">
+                <div className="px-[5px] flex flex-col ">
                     <ul className="text-black">
-                        <Link to="/">
-                            <li className="py-[5px] px-[10px] hover:bg-gray-100 rounded-[3px] duration-300 flex">
-                                <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(https://i.pinimg.com/originals/a3/0c/67/a30c6752c8eab249cb7b924116f4127d.jpg)` }}></i>
-                                <div className="pl-[15px]">
-                                    <p className="leading-[20px]">Giảng viên <span className="font-medium">Nguyễn Thành Đạt</span> vừa tạo một bài mới cho khoá học <span className="font-medium">javascrit (cơ bản)</span>.</p>
-                                    <p className="text-[#FF0000] text-[14px]">1 phút trước</p>
-                                </div>
-                            </li>
-                        </Link>
+                        {models && models.map((item, index) => {
+                            return (
+                                <Link to="/hello" key={index} className={`block mb-[10px] ${!item.isRead && 'bg-gray-100'} `}>
+                                    <li className="py-[5px] px-[10px] hover:bg-gray-100 rounded-[3px] duration-300 flex">
+                                        {item?.sender?.avatar?.avatarUrl !== "" ?
+                                            <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${item?.sender?.avatar?.avatarUrl})` }}></i>
+                                            : <p className="bg-gray-200 border flex h-[40px] items-center justify-center right-0 rounded-full select-none text-gray-500 w-[40px]"> {item?.sender?.fullname?.slice(0, 1)?.toUpperCase()} </p>}
+                                        <div className="pl-[15px]">
+                                            <p dangerouslySetInnerHTML={{ __html: item.title }} className="leading-[20px]"></p>
+                                            <p className="text-[#FF0000] text-[14px]">{timeFormatter(item.createdAt)}</p>
+                                        </div>
+                                    </li>
+                                </Link>
+                            )
+                        })}
                     </ul>
-                    <span>Xem thêm</span>
+                    {models && (currentPage < totalPage ? (
+                        <button disabled={process.actionLoading.readMore} onClick={onReadMore} 
+                        className="py-[5px] flex items-center justify-center relative bg-gray-100 hover:bg-gray-200 ">
+                           {process.actionLoading.readMore && <Loading className="w-[15px] h-[15px] " />}
+                           <span className="ml-[8px]">Xem thêm</span>
+                        </button>
+                    ) : null)}
                 </div>
             </div>
         </div>
