@@ -40,7 +40,7 @@ const Notification = ({ className, setIsNotification }) => {
                 </div>
                 <div className="px-[5px] flex flex-col ">
                     <ul className="text-black">
-                        {models && models.map((item, index) => {
+                        {models && models?.length !== 0 ? models.map((item, index) => {
                             return (
                                 <Link to="/hello" key={index} className={`block mb-[10px] ${!item.isRead && 'bg-gray-100'} `}>
                                     <li className="py-[5px] px-[10px] hover:bg-gray-100 rounded-[3px] duration-300 flex">
@@ -54,7 +54,7 @@ const Notification = ({ className, setIsNotification }) => {
                                     </li>
                                 </Link>
                             )
-                        })}
+                        }) : <span className="text-[#818181] block p-[15px] ">Bạn chưa có thông báo nào !</span>}
                     </ul>
                     {models && (currentPage < totalPage ? (
                         <button disabled={process.actionLoading.readMore} onClick={onReadMore} 
