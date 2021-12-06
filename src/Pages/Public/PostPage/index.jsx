@@ -22,7 +22,6 @@ const PostPage = () => {
     const [trendings, setTrendings] = useState([]);
     const [follows, setFollows] = useState([]);
     const [bookmarks, setBookmarks] = useState([]);
-    // const [loading,setLoading] = useState(false)
 
     // Navigation
     const pathName = [
