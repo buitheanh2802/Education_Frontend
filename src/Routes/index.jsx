@@ -9,11 +9,12 @@ import PublicRouter from './PublicRouter';
 import { useDispatch, useSelector } from 'react-redux';
 import LocalStorage from 'src/Helpers/Storage';
 import { ActionGetProfile } from 'src/Redux/Actions/Auth.action';
+import { notificationGets } from 'src/Redux/Actions/Notification.action';
 import queryParam from 'src/Helpers/QueryParams'
 import AdminLayout from 'src/Layouts/AdminLayout';
 import PrivateRouter from './PrivateRouter';
 import AuthLayout from 'src/Layouts/AuthLayout';
-import Loading from 'src/Components/Loading'
+import Loading from 'src/Components/Loading';
 
 const RootRoute = () => {
     const [isLoading, setIsLoading] = useState(true)
@@ -26,7 +27,10 @@ const RootRoute = () => {
             LocalStorage.Get('_token_')
                 ? await dispatch(ActionGetProfile())
                 && setIsLoading(false)
-                : setIsLoading(false)
+                : setIsLoading(false);
+            if (LocalStorage.Get('_token_')) {
+                dispatch(notificationGets(LocalStorage.Get('_token_')))
+            }
         })()
     }, [dispatch])
 
