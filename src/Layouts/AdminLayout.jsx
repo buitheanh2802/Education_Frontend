@@ -9,6 +9,7 @@ import Exercise from "src/Pages/Private/Exercise";
 import PostManager from "src/Pages/Private/PostManager";
 import QuesionManage from "src/Pages/Private/QuestionManage";
 import AccountManager from "src/Pages/Private/AccountManager";
+import DetailExercise from "src/Pages/Private/Exercise/DetailExercise";
 
 const AdminLayout = () => {
   return (
@@ -23,6 +24,7 @@ const AdminLayout = () => {
                 <PrivateRouter path={path.ACCOUNT_MANAGER} component={AccountManager} />
                 <PrivateRouter path={path.POST_MANAGER} component={PostManager} />
                 <PrivateRouter path={path.QUESTION_MANAGER}  component={QuesionManage} />
+                <PrivateRouter path={path.SULOTION_MANAGER_ID} component={DetailExercise} />
                 <PrivateRouter path={path.SULOTION_MANAGER} component={Exercise} />
                 <PrivateRouter exact path={path.ADMIN} component={Dashboard} />
               </Switch>
