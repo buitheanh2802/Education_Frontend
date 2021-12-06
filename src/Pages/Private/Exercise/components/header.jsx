@@ -42,12 +42,9 @@ const Header = () => {
                                                 clipRule="evenodd"
                                             />
                                         </svg>
-                                        <Link
-                                            to="/manager/publish_post"
-                                            className="text-gray-700 hover:text-gray-900 ml-1 md:ml-2 text-sm font-medium"
-                                        >
+                                        <p className="text-gray-700 hover:text-gray-900 ml-1 md:ml-2 text-sm font-medium" >
                                             Danh sách thể loại bài tập
-                                        </Link>
+                                        </p>
                                     </div>
                                 </li>
                             </ol>
