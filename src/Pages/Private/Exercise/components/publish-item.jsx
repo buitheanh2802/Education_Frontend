@@ -17,8 +17,11 @@ const PublishItem = ({ data, index }) => {
             <div className="font-medium mr-[30px] text-blue-800 text-base">{data?.title}</div>
             <div className="text-[13px]">{timeFormatter(data?.createdAt)}</div>
             <div className="text-[13px] flex justify-center">
-                <button onClick={() => history.push(`${path.SULOTION_MANAGER}/${data?._id}`)} className="h-[35px] px-2 flex items-center disabled:bg-gray-400 mr-[5px] text-gray-400 hover:text-blue-600 rounded-md" title="Chỉnh sửa">
+                <button onClick={() => history.push(`${path.SULOTION_MANAGER}/${data?._id}`)} className="h-[35px] px-2 flex items-center disabled:bg-gray-400 mr-[5px] text-gray-400 hover:text-blue-600 rounded-md" title="Chi tiết">
                     <Icon.Form className="w-[25px] fill-current" />
+                </button>
+                <button className="h-[35px] px-2 flex items-center disabled:bg-gray-400 mr-[5px] text-yellow-400 hover:text-blue-600 rounded-md" title="Chỉnh sửa">
+                    <Icon.Pen className="w-[20px] fill-current" />
                 </button>
             </div>
         </div>

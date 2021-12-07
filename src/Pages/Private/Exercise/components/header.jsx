@@ -156,7 +156,7 @@ const Header = () => {
                             </button>
                         </div>
 
-                        <button className="bg-green-500 text-white whitespace-nowrap h-[35px] px-5 rounded">+ Thêm thể loại</button>
+                        <button onClick={() => setIsModals(true)} className="bg-green-500 text-white whitespace-nowrap h-[35px] px-5 rounded">+ Thêm thể loại</button>
                     </div>
                 </div>
             </div>

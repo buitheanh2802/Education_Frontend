@@ -10,6 +10,7 @@ const DetailExercise = () => {
     const { id } = useParams();
     const [challengeCate, setChallengeCate] = useState(null);
     const [challenge, setChallenge] = useState(null);
+    console.log(challenge)
 
     useEffect(() => {
         // call category
@@ -27,7 +28,7 @@ const DetailExercise = () => {
                 if (status) setChallenge(data.data)
             } catch (error) { }
         })();
-        
+
     }, []);
 
     return (
@@ -35,6 +36,7 @@ const DetailExercise = () => {
             <Header name={challengeCate?.title} />
             <PublishNav />
             {challenge?.models?.map((item, index) => <PublishItem key={index} index={index} data={item} />)}
+            {challenge?.models?.length === 0 && <div className="text-center py-[20vh] select-none"> <p className="font-light text-gray-400">Hãy thêm bài tập đầu tiên</p> </div>}
         </div>
     )
 }

@@ -35,6 +35,14 @@ const ChallengeApi = {
                 Authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
+    },
+    async solutionSubmited(id) {
+        const url = `/challenges/solution-submited/${id}`;
+        return AxiosClient.post(url, {}, {
+            headers: {
+                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
     }
 }
 

@@ -17,6 +17,7 @@ const DetailChallenge = () => {
     const { profile } = useSelector(state => state.Auth);
     const [challenge, setChallenge] = useState(null);
     const [isDownLoad, setIsDownLoad] = useState(null);
+    const [isSubmit, setIsSubmit] = useState(null);
     const [isShowModle, setIsShowModle] = useState(false);
     const { id } = useParams();
 
@@ -32,6 +33,7 @@ const DetailChallenge = () => {
             if (status) return (() => {
                 setChallenge(data)
                 setIsDownLoad(data?.submitedBy?.includes(profile?._id));
+                setIsSubmit(data?.solutionSubmitedBy?.includes(profile?._id))
                 setIsLoading(true);
             })();
             history.push(path.NOT_FOUND)
@@ -43,7 +45,7 @@ const DetailChallenge = () => {
             setIsShowModle(true);
         } else {
             if (!profile) return history.push(path.AUTH);
-
+            setIsDownLoad(true);
             OpenWindownTab(challenge?.resourceUrl);
             await ChallengeApi.addSubmit(id);
         }
@@ -92,12 +94,12 @@ const DetailChallenge = () => {
                                     {isDownLoad && <button onClick={() => OpenWindownTab(challenge?.figmaUrl)} className="flex items-center justify-center gap-[10px] border border-yellow-600 text-yellow-600 w-full rounded-[3px] py-[6px] mb-[5px]">
                                         <img className="w-[15px] rounded-[3px]" src="https://devchallenges.io/figma.png" /> Thiết kế
                                     </button>}
-                                    <button onClick={handleSubmit} className="flex items-center justify-center gap-[10px] bg-blue-600 bg-opacity-80 text-white w-full rounded-[3px] py-[8px]">
+                                    {!isSubmit && <button onClick={handleSubmit} className="flex items-center justify-center gap-[10px] bg-blue-600 bg-opacity-80 text-white w-full rounded-[3px] py-[8px]">
                                         {isDownLoad
                                             ? <><Icon.LightBulb className="w-[15px] fill-current" /> Gửi giải pháp</>
                                             : <><Icon.DownLoad className="w-[15px] fill-current" /> Bắt đầu và tải xuống</>
                                         }
-                                    </button>
+                                    </button>}
                                 </div>
                             </div>
                         </div> :

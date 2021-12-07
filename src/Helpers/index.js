@@ -1,3 +1,5 @@
+import ImageApi from "src/Apis/ImageApi";
+
 // capitalize the head
 export const UpperCaseOneKey = (key) => {
     const string = key.trim();
@@ -32,4 +34,18 @@ export const SplitString = (string, number) => {
     if (typeof string !== "string") return
     if (string?.length > number) return string.split(0, number) + "...";
     return string
+}
+
+export const UploadImage = async (form) => {
+    try {
+        const { data } = await ImageApi.addImage(form);
+        return {
+            url: data.data.photo.photoUrl,
+            status: true
+        }
+    } catch (error) {
+        return {
+            status: false
+        }
+    }
 }
