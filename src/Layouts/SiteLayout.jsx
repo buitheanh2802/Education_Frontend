@@ -49,8 +49,8 @@ const SiteLayout = () => {
                 <PublicRouter path={path.TAGS} component={TagsPage} />
                 <PublicRouter path={path.USER_ID} component={Userpage} />
                 <PublicRouter path={path.INTRO} component={IntroPage} />
-                <PublicRouter exact path={path.EDIT_PROFILE} component={EditProfile} />
-                <PublicRouter exact path={path.PROFILE} component={ProfilePage} />
+                <PublicRouter path={path.PROFILE_CHANGE} component={EditProfile} />
+                <PublicRouter exact path={path.PROFILE_ME} component={ProfilePage} />
                 <PublicRouter exact path={path.CHALLENGE} component={ChallengeCatePage} />
                 <PublicRouter exact path={path.CHALLENGE_CATE_ID} component={ChallengePage} />
                 <PublicRouter path={path.CHALLENGE_ID} component={DetailChallenge} />

@@ -19,8 +19,11 @@ export const path = {
   HOME: "/",
   SETTING: "/setting",
 
+  //profile-me
   PROFILE_ME: "/profile/me",
-  PROFILE_USER: "/profile/:id",
+  PROFILE_CHANGE: "/profile/me/change-info",
+  CHANGE_PERSONAL: "/profile/me/change-info/personal",
+  CHANGE_PASSWORD: "/profile/me/change-info/password",
 
   //Profile_user
   USER_ID: "/user/:username",
@@ -78,12 +81,6 @@ export const path = {
   ACCOUNT_MANAGER: "/manager/account",
   // Quản lý Tags 
   TAG_MANAGER: "/manager/tag",
-  //profile
-  PROFILE: "/profile/:username",
-  EDIT_PROFILE: "/profile/:id/edit",
-  PROFILE_PERSONAL: "/profile/:id/edit/personal",
-  PROFILE_CONTACT: "/profile/:id/edit/contact",
-  PROFILE_PASSWORD: "/profile/:id/edit/password",
 
   //intro
   INTRO: "/intro",
