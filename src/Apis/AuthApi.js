@@ -31,7 +31,7 @@ const AuthApi = {
 
     profile() {
         const token = localStorage.getItem("_token_");
-        const url = '/auth/profile/me/info-detail';
+        const url = '/auth/profile/me';
         return AxiosClient.get(url, {
             headers: {
                 Authorization: `Bearer ${token}`
