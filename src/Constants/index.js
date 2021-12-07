@@ -116,6 +116,10 @@ export const regex = {
     value: /^(?=[a-zA-Z0-9]{8,20}$)(?!.*[.]{2})[^.].*[^.]$/,
     message: "Tên tài khoản không hợp lệ",
   },
+  PHONE: {
+    value: /((09|03|07|08|05)+([0-9]{8})\b)/g,
+    message: "Số điện thoại không hợp lệ",
+  },
 
   REQUIRED: {
     value: true,

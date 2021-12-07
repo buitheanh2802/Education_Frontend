@@ -145,6 +145,7 @@ const ContactPage = () => {
               }}
               {...register("phone", {
                 required: regex.REQUIRED,
+                pattern: regex.PHONE,
               })}
               disabled={isLoading}
               autoComplete="off"
