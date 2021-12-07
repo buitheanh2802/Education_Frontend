@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import Sidebar from "./../Sidebar";
+import { useHistory } from 'react-router-dom'
 
 const ChangePersonal = ({ profile }) => {
+    const history = useHistory();
 
     return (
         <>
@@ -26,14 +28,12 @@ const ChangePersonal = ({ profile }) => {
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
-                                <span className="text-red-600 font-bold mr-[5px]">*</span>
                                 Tên tài khoản:
                             </p>
                             <input disabled className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]" />
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
-                                <span className="text-red-600 font-bold mr-[5px]">*</span>
                                 Email:
                             </p>
                             <input disabled className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]" />
@@ -72,6 +72,21 @@ const ChangePersonal = ({ profile }) => {
                                 Kỹ năng:
                             </p>
                             <input type="text" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
+                        </div>
+                        <div className="text-right">
+                            <button
+                                onClick={() => {history.push('/profile/me/change-info')}}
+                                className="mx-[10px] bg-blue-200 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-gray-200 hover:text-blue-600 focus:border-blue-600"
+                                type="submit"
+                            >
+                                hủy bỏ
+                            </button>
+                            <button
+                                className="bg-blue-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-blue-800 focus:border-blue-600"
+                                type="submit"
+                            >
+                                Cập nhật
+                            </button>
                         </div>
                     </form>
                 </div>

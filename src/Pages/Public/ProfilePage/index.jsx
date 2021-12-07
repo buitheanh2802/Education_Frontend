@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import AuthApi from "src/Apis/AuthApi";
+import { path } from "src/Constants/";
 const ProfilePage = () => {
     const dispatch = useDispatch();
     const [profile, setProfile] = useState([]);
@@ -62,7 +63,7 @@ const ProfilePage = () => {
                                         </div>
                                     </div>
                                     <div className="flex items-center justify-end">
-                                        <Link to={`/profile/me/change-info`}
+                                        <Link to={path.PROFILE_CHANGE}
                                             className="bg-[#0d61c7] border border-[#0d61c7] hover:bg-[#fff] hover:text-[#0d61c7] text-[#fff] rounded md:px-[10px] md:py-[5px] md:text-[14px]
                                              px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px]">
                                             Chỉnh sửa

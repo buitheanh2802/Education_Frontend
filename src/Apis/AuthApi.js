@@ -66,6 +66,16 @@ const AuthApi = {
                 Authorization: `Bearer ${token}`
             }
         })
+    },
+
+    async changeInfo(data) {
+        const token = localStorage.getItem("_token_");
+        const url = '/auth/profile/me/change-info';
+        return AxiosClient.post(url, data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
     }
 }
 

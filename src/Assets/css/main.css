@@ -3880,9 +3880,18 @@ body {
   border-width: 0px;
 }
 
+.hover\:border:hover {
+  border-width: 1px;
+}
+
 .hover\:border-\[\#67d4a8\]:hover {
   --tw-border-opacity: 1;
   border-color: rgba(103, 212, 168, var(--tw-border-opacity));
+}
+
+.hover\:border-blue-600:hover {
+  --tw-border-opacity: 1;
+  border-color: rgba(37, 99, 235, var(--tw-border-opacity));
 }
 
 .hover\:bg-blue-50:hover {
@@ -3968,6 +3977,11 @@ body {
 .hover\:bg-\[\#67d4a8\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(103, 212, 168, var(--tw-bg-opacity));
+}
+
+.hover\:bg-white:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
 }
 
 .hover\:from-\[\#0051b5\]:hover {

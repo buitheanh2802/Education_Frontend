@@ -33,7 +33,7 @@ const EditProfile = () => {
             <div className="mx-auto">
                 <div className="flex mb-[20px]">
                     <div className="lg:w-[20%] pt-[75px]">
-                        <Sidebar />
+                        <Sidebar profile={profile} />
                     </div>
                     <div className="w-full lg:w-[80%] px-[15px] md:px-[30px] pt-[75px]">
                         <div className=" max-w-[1100px] mx-auto">
@@ -59,7 +59,7 @@ const EditProfile = () => {
                                                                 src={profile?.avatar?.avatarUrl}
                                                                 alt={profile?.username} />
                                                             :
-                                                            <div className="leading-[95px] lg:leading-[110px] text-[#4A5568] mx-auto text-center w-[95px] h-[95px] lg:w-[110px] lg:h-[110px] rounded-full bg-blue-200 font-bold lg:text-[62px] text-[56px]">
+                                                            <div className="leading-[95px] lg:leading-[110px] text-white mx-auto text-center w-[95px] h-[95px] lg:w-[110px] lg:h-[110px] rounded-full bg-blue-200 font-bold lg:text-[62px] text-[56px]">
                                                                 {profile?.username?.toUpperCase().substring(0, 1)}
                                                             </div>
                                                         }
