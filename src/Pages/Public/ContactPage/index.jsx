@@ -6,7 +6,7 @@ import inner_page_banner from "../../../Assets/media/pictures/contact-image.png"
 import { useForm } from "react-hook-form";
 import { path, regex } from "src/Constants/";
 import ContactApi from "src/Apis/ContactApi";
-import ResponseMessage from "src/Constants/ResponseMessage";
+// import ResponseMessage from "src/Constants/ResponseMessage";
 import Swal from "sweetalert2";
 
 const ContactPage = () => {

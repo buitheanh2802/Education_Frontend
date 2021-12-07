@@ -56,24 +56,36 @@ const QuestionsPage = () => {
         dispatch(setLoading(true));
         if (location.pathname === path.QUESTIONS) {
           const { data: newests } = await QuestionApi.getQuestion();
-          setNewests(newests.data);
+          const dataNew = newests?.data?.models?.filter(
+            (data) => data.spam === false
+          );
+          setNewests(dataNew);
           dispatch(setLoading(false));
         } else if (location.pathname === path.QUESTIONS_TRENDING) {
           const { data: trendings } = await QuestionApi.getQuestionTren();
-          setTrendings(trendings.data);
+          const dataNew = trendings?.data?.models?.filter(
+            (data) => data.spam === false
+          );
+          setTrendings(dataNew);
           dispatch(setLoading(false));
         } else if (location.pathname === path.QUESTIONS_FLOW) {
           const token = localStorage.getItem("_token_");
           if (token) {
             const { data: follows } = await QuestionApi.getQuestionFol();
-            setFollows(follows.data);
+            const dataNew = follows?.data?.models?.filter(
+              (data) => data.spam === false
+            );
+            setFollows(dataNew);
             dispatch(setLoading(false));
           }
         } else if (location.pathname === path.QUESTIONS_BOOK_MARK) {
           const token = localStorage.getItem("_token_");
           if (token) {
             const { data: bookmarks } = await QuestionApi.getQuestionBookmark();
-            setBookmarks(bookmarks.data);
+            const dataNew = bookmarks?.data?.models?.filter(
+              (data) => data.spam === false
+            );
+            setBookmarks(dataNew);
             dispatch(setLoading(false));
           }
         }

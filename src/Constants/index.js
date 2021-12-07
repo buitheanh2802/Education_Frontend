@@ -76,6 +76,10 @@ export const path = {
   QUESTION_MANAGER: "/manager/publish_question",
   // Quản trị tài khoản
   ACCOUNT_MANAGER: "/manager/account",
+  SULOTION_MANAGER: "/manager/exercise",
+  SULOTION_MANAGER_ID: "/manager/exercise/:id",
+  // Quản trị liên hệ
+  CONTACT_MANAGER: "/manager/contact",
 
   //profile
   PROFILE: "/profile/:username",

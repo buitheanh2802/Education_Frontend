@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
 import { timeFormatter } from "../../../../Helpers/Timer";
 const QuestionView = ({ questions }) => {
-  const token = localStorage.getItem("_token_");
+  console.log(questions);
   return (
     <>
-      {questions.length === 0 || questions?.models?.length === 0 ? (
+      {questions.length === 0 || questions?.length === 0 ? (
         <div>
           <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
             Không có gì ở đây cả
@@ -14,7 +14,7 @@ const QuestionView = ({ questions }) => {
         </div>
       ) : (
         <>
-          {questions?.models?.map((item) => {
+          {questions?.map((item) => {
             return (
               <div
                 key={item?._id}
@@ -58,7 +58,7 @@ const QuestionView = ({ questions }) => {
                       {item?.title}
                     </Link>
                     <span className="px-[5px]">-</span>
-                    <button className="translate-y-[2px]">
+                    <button className="translate-y-[2px] relative">
                       {" "}
                       <Icon.Link className="w-[14px] fill-current text-[#666]" />
                     </button>
