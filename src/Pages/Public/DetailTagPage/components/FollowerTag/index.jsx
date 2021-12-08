@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom'
 const FollowerTag = ({ follower }) => {
     return (
         <>
-            {follower?.length === 0 ? (
-                <div>
-                    <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
-                        Không có gì ở đây cả
-                    </p>
-                </div>
-            )
+            {follower?.length === 0 ?
+                (
+                    <div>
+                        <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
+                            Không có gì ở đây cả
+                        </p>
+                    </div>
+                )
                 : (
                     <div>
                         {follower?.map((item, index) => {
@@ -35,7 +36,7 @@ const FollowerTag = ({ follower }) => {
                                         <div className="w-full">
                                             <Link to={`/user/${item?.username}`} className="text-[#2d6ff7] hover:underline font-medium text-[15px]" >{item?.fullname}</Link>
                                             <h3 className="pr-[50px] my-[5px]">
-                                                <Link to={item?.username} className="font-medium text-[18px] hover:underline">{item?.email}</Link>
+                                                <Link to={`/user/${item?.username}`} className="font-medium text-[18px] hover:underline">{item?.email}</Link>
                                             </h3>
                                         </div>
                                     </div>

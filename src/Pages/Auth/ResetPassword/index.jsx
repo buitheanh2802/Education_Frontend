@@ -52,7 +52,7 @@ const ResetPassword = () => {
                 <span className="text-[38px] font-bold ml-[5px]">DevStar</span>
             </Link>
             <form onSubmit={handleSubmit(onSubmit)} className="shadow-xl rounded-[8px] border border-[#f2f2f2] mx-auto lg:w-[55%] md:w-[80%] sm:w-[90%] bg-[#ffffff] px-[20px] pt-[20px] pb-[35px]">
-                <p className="text-gray-800 text-[23px] pb-[5px]">Đặt lại mật khẩu</p>
+                <p className="text-gray-800 font-bold text-[23px] pb-[5px]">Đặt lại mật khẩu</p>
                 <p className="text-gray-800 text-[15px] py-[10px]">
                     Đổi mật khẩu để hoàn tất. Bạn nên tạo một mật khẩu mạnh để ngăn truy cập trái phép vào tài khoản của mình.
                 </p>

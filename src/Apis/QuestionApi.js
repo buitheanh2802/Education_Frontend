@@ -1,18 +1,44 @@
 import AxiosClient from "./AxiosClient";
 
 const QuestionApi = {
-  getQuestion(endPoint) {
+  // getQuestion(endPoint) {
+  //   const token = localStorage.getItem("_token_");
+  //   const url = `/question/${endPoint}`;
+  //   if (endPoint === "follow" || endPoint === "listbookmark") {
+  //     return AxiosClient.get(url, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //   } else {
+  //     return AxiosClient.get(url);
+  //   }
+  // },
+  getQuestion() {
+    const url = `/question`;
+    return AxiosClient.get(url);
+  },
+  getQuestionTren() {
+    const url = `/question/trending`;
+    return AxiosClient.get(url);
+  },
+  getQuestionFol() {
     const token = localStorage.getItem("_token_");
-    const url = `/question/${endPoint}`;
-    if (endPoint === "follow" || endPoint === "listbookmark") {
-      return AxiosClient.get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    } else {
-      return AxiosClient.get(url);
-    }
+    const url = `/question/follow`;
+    return AxiosClient.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
+  getQuestionBookmark() {
+    const token = localStorage.getItem("_token_");
+    const url = `/question/listbookmark`;
+    return AxiosClient.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   },
   getId(id) {
     const token = localStorage.getItem("_token_");

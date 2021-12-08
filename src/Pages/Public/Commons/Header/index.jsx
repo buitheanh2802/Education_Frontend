@@ -39,10 +39,11 @@ const Header = () => {
       )}
       {/* end */}
       <div
-        className={`${active
+        className={`${
+          active
             ? "bg-white text-gray-900 shadow-sm"
             : "pt-[15px] border-transparent text-white"
-          } border-b border-solid duration-300 fixed top-0 left-0 right-0 z-[999]`}
+        } border-b border-solid duration-300 fixed top-0 left-0 right-0 z-[999]`}
       >
         <nav className="container mx-auto select-none flex justify-between items-center py-[10px]">
           <h1 className="mr-[80px]">
@@ -64,24 +65,27 @@ const Header = () => {
             {profile && (
               <i
                 onClick={() => setIsNotification(!isNotification)}
-                className={`${active
+                className={`${
+                  active
                     ? "text-gray-500 hover:text-blue-600"
                     : "text-white hover:text-[#51ffb9]"
-                  } lg:hidden`}
+                } lg:hidden`}
               >
                 <Icon.Bell className="cursor-pointer w-[25px] h-[25px] fill-current" />
               </i>
             )}
             <button onClick={() => setIsMenu(true)} className="lg:hidden">
               <Icon.Menu
-                className={`fill-current w-[20px] sm:w-[25px] ${active ? "text-black" : "text-white"
-                  }`}
+                className={`fill-current w-[20px] sm:w-[25px] ${
+                  active ? "text-black" : "text-white"
+                }`}
               />
             </button>
           </div>
           <div
-            className={`${isMenu ? "ml-0 sm:ml-[50%] md:ml-[60%]" : "ml-[100%] lg:ml-0"
-              } menu_top lg:flex w-full lg:justify-between font-medium text-[14px] sm:text-[16px] lg:transform lg:translate-y-[2px]`}
+            className={`${
+              isMenu ? "ml-0 sm:ml-[50%] md:ml-[60%]" : "ml-[100%] lg:ml-0"
+            } menu_top lg:flex w-full lg:justify-between font-medium text-[14px] sm:text-[16px] lg:transform lg:translate-y-[2px]`}
           >
             <ul className="flex justify-between lg:hidden  py-[10px] border-b px-[15px] lg:px-0">
               {profile ? (
