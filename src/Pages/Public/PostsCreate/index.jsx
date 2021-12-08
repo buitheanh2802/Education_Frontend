@@ -253,6 +253,7 @@ const PostsCreate = () => {
         icon: "success",
         title: "Đăng bài viết thành công",
       });
+      history.push("/posts");
     } catch (error) {
       await Toast.fire({
         icon: "error",
@@ -307,8 +308,9 @@ const PostsCreate = () => {
       await PostApi.add(data);
       await Toast.fire({
         icon: "success",
-        title: "Đăng bài viết thành công",
+        title: "Đăng bài viết thành công, đợi phê duyệt",
       });
+      history.push("/posts");
     } catch (error) {
       await Toast.fire({
         icon: "error",

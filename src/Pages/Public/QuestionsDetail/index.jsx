@@ -39,7 +39,7 @@ const QuestionsDetail = () => {
     setRender(false);
     const list = async (id) => {
       try {
-        await QuestionApi.view(idQuestion);
+        // await QuestionApi.view(idQuestion);
         let { data: question } = await QuestionApi.getId(idQuestion);
         setQuestionDetail(question);
         setLoading(false);
@@ -119,7 +119,6 @@ const QuestionsDetail = () => {
   const arrBookmark = questionDetail?.data?.bookmarks;
   const checkBookmark = arrBookmark.some((a) => a === profile?._id);
   const handleBookmark = async () => {
-    setRender(true);
     if (token === null) history.push("/auth/login");
 
     if (checkBookmark === false) {
@@ -128,12 +127,14 @@ const QuestionsDetail = () => {
         ...questionDetail,
         data: { ...questionDetail.data },
       });
+      setRender(true);
     } else {
       await BookmarkApi.delBookmarkQuestion(idQuestion);
       setQuestionDetail({
         ...questionDetail,
         data: { ...questionDetail.data },
       });
+      setRender(true);
     }
   };
 
