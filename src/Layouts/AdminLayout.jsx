@@ -11,6 +11,7 @@ import QuesionManage from "src/Pages/Private/QuestionManage";
 import AccountManager from "src/Pages/Private/AccountManager";
 import ContactManager from "src/Pages/Private/ContactManager";
 import TagManager from "src/Pages/Private/TagManager";
+import DetailExercise from "src/Pages/Private/DetailExercise";
 
 const AdminLayout = () => {
   return (
@@ -43,7 +44,7 @@ const AdminLayout = () => {
                   path={path.QUESTION_MANAGER}
                   component={QuesionManage}
                 />
-                <PrivateRouter path="/exercise" component={Exercise} />
+                <PrivateRouter path={path.SULOTION_MANAGER_ID} component={DetailExercise} />
                 <PrivateRouter exact path={path.ADMIN} component={Dashboard} />
               </Switch>
             </div>
