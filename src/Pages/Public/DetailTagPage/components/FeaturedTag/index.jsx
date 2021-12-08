@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const FeaturedTag = ({ tag, popTag }) => {
     return (
-        <div className="py-[5px] mx-[10px]">
+        <div className="bg-white py-[5px] mx-[10px]">
             <div className=" divide-y divide-light-blue-400 pb-[10px]">
                 <div className="flex flex-wrap">
                     <h2 className="uppercase text-[#4A5568] font-medium py-[10px] ml-[5px] mr-[10px] text-[14px] xl:text-[16px]">{tag?.name}</h2>
@@ -37,19 +37,16 @@ const FeaturedTag = ({ tag, popTag }) => {
                 </div>
                 <div className="py-[10px]">
                     <div className="flex flex-wrap">
-                        <h2 className="uppercase text-[#4A5568] font-medium py-[10px] ml-[5px] mr-[10px] text-[14px] xl:text-[16px]">Thẻ phổ biến</h2>
+                        <h2 className="uppercase text-[#4A5568] font-medium py-[10px] ml-[5px] mr-[10px] text-[14px] xl:text-[16px]">Tag phổ biến</h2>
                         <hr class="filler-line border-t-1 xl:mt-[28px] mt-[25px] border-[#4A5568] overflow-visible h-0 flex-grow" />
                     </div>
                     <div className="py-[5px] flex flex-wrap gap-[10px] mb-[5px] mx-[5px] text-[14px]">
                         {popTag?.data?.map((pop, index) => {
                             return (
                                 <div key={index}>
-                                    <Link to={pop?.slug} className="inline-block md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[15px] xl:py-[5px] xl:text-[14px] hover:bg-gray-300 text-[#4A5568] bg-[#BEE3F8]">
+                                    <Link to={pop?.slug} className="inline-block md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[15px] xl:py-[5px] xl:text-[14px] hover:bg-gray-300 text-[#4A5568] bg-[#BEE3F8] rounded-[3px]">
                                         {pop?.name}
                                     </Link>
-                                    <div className="text-center inline-block bg-[#2C5282] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[15px] xl:py-[5px] xl:text-[14px] text-[#fff] gap-[5px]">
-                                        <span>{pop?.followers}</span>
-                                    </div>
                                 </div>
                             )
                         })}

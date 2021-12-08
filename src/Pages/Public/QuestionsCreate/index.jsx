@@ -11,6 +11,7 @@ import QuestionApi from "src/Apis/QuestionApi";
 import { useHistory } from "react-router";
 import Swal from "sweetalert2";
 import ImageResize from "quill-image-resize-module-react";
+import { set } from "react-hook-form";
 Quill.register("modules/imageResize", ImageResize);
 
 const QuestionsCreate = () => {
@@ -22,11 +23,13 @@ const QuestionsCreate = () => {
   const [images, setImages] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [validateError, setValidateError] = useState([]);
+  const [render, setRender] = useState(false);
   const editor = useRef();
   const animatedComponents = makeAnimated();
   const history = useHistory();
 
   useEffect(() => {
+    setRender(false);
     const listTags = async () => {
       try {
         const { data: tags } = await TagApi.getAll();
@@ -50,7 +53,7 @@ const QuestionsCreate = () => {
       }
     };
     listImage();
-  }, []);
+  }, [render]);
 
   const tagItem = (e) => {
     const arrTag = e.map((item) => {
@@ -242,12 +245,12 @@ const QuestionsCreate = () => {
       };
 
       await QuestionApi.add(data);
-      // console.log(data);
 
       await Toast.fire({
         icon: "success",
         title: "Đăng câu hỏi thành công",
       });
+      history.push("/questions");
     } catch (error) {
       console.log(error);
       Toast.fire({
@@ -284,7 +287,6 @@ const QuestionsCreate = () => {
             components={animatedComponents}
             isMulti
             options={tag}
-            // id={}
             placeholder={"Gắn thẻ câu hỏi "}
             onChange={(e) => tagItem(e)}
           />
@@ -312,28 +314,6 @@ const QuestionsCreate = () => {
                   Xuất bản câu hỏi
                 </span>
               </button>
-              {/* <ul
-                className={
-                  boxBtn
-                    ? "absolute z-10 text-center w-full mt-[10px] box_btn bg-white top-full left-0 rounded-[3px]"
-                    : "hidden"
-                }
-              >
-                <li
-                  className="py-3 px-3 text-[12x] flex justify-center items-center md:text-[16x] text-gray-600 cursor-pointer border-b border-gray-100 hover:bg-blue-100"
-                  onClick={() => handlerSubmit()}
-                >
-                  <Icon.HeartFilled className="fill-current w-[13px]" />
-                  <span className="ml-2">Lưu thành bản nháp</span>
-                </li>
-                <li
-                  className="py-3 px-3 text-[12x] md:text-[16x] justify-center items-center text-gray-600 cursor-pointer hover:bg-blue-100 flex"
-                  // onClick={() => handlerSubmit2()}
-                >
-                  <Icon.Pen className="fill-current w-[13px]" />
-                  <span className="ml-2"> Xuất bản bài ngay   </span>
-                </li>
-              </ul> */}
             </div>
           </div>
           <div className="m-0">

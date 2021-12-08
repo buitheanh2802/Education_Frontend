@@ -155,7 +155,7 @@ const TagsPage = () => {
             })}
           </div >
         </div >
-        <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded hidden lg:block">
+        <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded hidden lg:block mb-[30px]">
           <FeaturedAuthor authors={authors} />
         </div>
       </div >

@@ -17,7 +17,7 @@ const Exercise = () => {
         <div className="w-full">
             <Header />
             <PublishNav />
-            {challengeCates?.map((item, index) => <PublishItem index={index} data={item} />)}
+            {challengeCates?.map((item, index) => <PublishItem key={index} index={index} data={item} />)}
         </div>
     )
 }

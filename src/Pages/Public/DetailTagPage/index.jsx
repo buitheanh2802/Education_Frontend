@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { Icon } from 'src/Components/Icon'
-import DetailTagView from '../Commons/DetailTagView'
-import FeaturedTag from '../Commons/FeaturedTag'
+import PostInTag from './components/PostInTag'
+import FeaturedTag from './components/FeaturedTag'
 import TagAPi from 'src/Apis/TagApi'
 import FollowApi from 'src/Apis/FollowApi';
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
-import FollowerTag from '../Commons/DetailTagView/FollowerTag'
-import { useParams, useHistory, useLocation } from "react-router-dom";
+import FollowerTag from './components/FollowerTag'
+import { useParams, useHistory, useLocation, Switch, Route, NavLink } from "react-router-dom";
+import QuestionInTag from './components/QuestionInTag'
+import { path } from 'src/Constants/'
 
 const DetailTagPage = () => {
     const location = useLocation();
@@ -15,12 +17,9 @@ const DetailTagPage = () => {
     const [tag, setTag] = useState([]);
     const [tags, setTags] = useState({});
     const dispatch = useDispatch();
-    const [dataTag, setDataTag] = useState({
-        posts: [],
-        questions: [],
-        followers: []
-    });
-    const [tab, setTab] = useState(1);
+    const [posts, setPosts] = useState([]);
+    const [questions, setQuestions] = useState([]);
+    const [followers, setFollowers] = useState([]);
     const history = useHistory();
     const token = localStorage.getItem("_token_");
 
@@ -46,29 +45,30 @@ const DetailTagPage = () => {
             }
         };
         popTag();
-    }, [location.pathname]);
 
-    useEffect(() => {
-        dispatch(setLoading(true))
-        Promise.all([
-            TagAPi.getPostInTag(slug),
-            TagAPi.getQuestionInTag(slug),
-            TagAPi.getFollowInTag(slug),
-        ]).then(data => {
-            console.log(data);
-            const postTags = data[0].data.data.models;
-            const questions = data[1].data.data.models;
-            const followers = data[2].data.data.models;
-            setDataTag({
-                posts: postTags,
-                questions: questions,
-                followers: followers
-            })
-            dispatch(setLoading(false))
-        }).catch(error => {
-            console.log(error)
-        })
-    }, [slug])
+        const list = async () => {
+            try {
+                dispatch(setLoading(true))
+                if (location.pathname === `/tag/${slug}`) {
+                    const { data: posts } = await TagAPi.getPostInTag(slug)
+                    setPosts(posts.data.models);
+                    dispatch(setLoading(false))
+                } else if (location.pathname === `/tag/${slug}/question`) {
+                    const { data: questions } = await TagAPi.getQuestionInTag(slug)
+                    setQuestions(questions.data.models);
+                    dispatch(setLoading(false))
+                } else if (location.pathname === `/tag/${slug}/follower`) {
+                    const { data: followers } = await TagAPi.getFollowInTag(slug)
+                    setFollowers(followers.data.models);
+                    dispatch(setLoading(false))
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        list();
+        
+    }, [location.pathname]);
 
     const handleFollow = async (id) => {
         dispatch(setLoading(true))
@@ -87,26 +87,17 @@ const DetailTagPage = () => {
         }
     }
 
-    const path = [
-        {
-            label: "Bài viết",
-            value: 1
-        },
-        {
-            label: "Câu hỏi",
-            value: 2
-        },
-        {
-            label: "Người theo dõi",
-            value: 3
-        }
-    ]
+    const pathName = [
+        { path: `/tag/${slug}`, value: "Bài viết" },
+        { path: `/tag/${slug}/question`, value: "Câu hỏi" },
+        { path: `/tag/${slug}/follower`, value: "Người theo dõi" },
+    ];
 
     return (
         <div className="container mx-auto mt-[80px]">
             <div className="mt-[15px] lg:grid lg:grid-cols-4 gap-3">
-                <div className="col-start-1 col-span-3 w-full  rounded">
-                    <div className="flex py-[30px] px-[10px] mb-[20px] bg-white">
+                <div className="col-start-1 col-span-3 w-full mb-[20px] rounded">
+                    <div className="flex py-[30px] px-[10px] bg-white">
                         <div>
                             {tag?.avatar?.avatarUrl ?
                                 <img
@@ -138,25 +129,47 @@ const DetailTagPage = () => {
                     <div className="w-full shadow-sm bg-white rounded">
                         <div className="md:flex md:justify-between sm:grid sm:grid-cols-1 shadow-sm bg-white px-[5px] rounded">
                             <div className=" py-[15px] flex items-center">
-                                {path?.map((item, index) => (
-                                    <p key={index} onClick={() => setTab(item.value)}
-                                        className={item.value === tab ? "after:absolute after:w-full after:h-[2px] after:rounded after:bottom-[-16px] after:left-0 after:bg-[#1273eb] font-medium text-black relative text-[12px] sm:text-[15px] px-[0px] sm:px-[5px] text-gray-600 hover:text-blue-600 sm:mr-[20px] mr-[15px]" : "relative text-[12px] sm:text-[15px] px-[0px] sm:px-[5px] text-gray-600 hover:text-blue-600 sm:mr-[20px] mr-[15px]"} >
-                                        {item?.label}
-                                    </p>
+                                {pathName?.map((item, index) => (
+                                    <NavLink
+                                        exact
+                                        key={index}
+                                        to={item?.path}
+                                        activeClassName="after:absolute after:w-full after:h-[2px] after:rounded after:bottom-[-16px] after:left-0 after:bg-[#1273eb] font-medium text-black"
+                                        className="relative text-[15px] px-[10px] text-gray-600 hover:text-blue-600" >
+                                        {item?.value}
+                                    </NavLink>
                                 ))}
                             </div>
-                            <div className="self-center">
-                                <select name="" className="border border-[#707885] rounded px-[10px] py-[5px]">
-                                    <option value="">Tất cả</option>
-                                    <option value="">Xem nhiều nhất</option>
-                                    <option value="">Mới nhất</option>
-                                </select>
-                            </div>
                         </div>
-                        {tab !== 3 ? <DetailTagView data={tab === 1 ? dataTag.posts : dataTag.questions} /> : <FollowerTag follower={dataTag.followers} />}
+                        <Switch>
+                            <Route
+                                exact
+                                path={path.TAGS_ID}
+                                render={(props) => (
+                                    <PostInTag data={posts} {...props} />
+                                )}
+                            >
+                            </Route>
+                            <Route
+                                exact
+                                path={path.TAGS_QUESTION}
+                                render={(props) => (
+                                    <QuestionInTag data={questions} {...props} />
+                                )}
+                            >  
+                            </Route>
+                            <Route
+                                exact
+                                path={path.TAGS_FOLLOWER}
+                                render={(props) =>
+                                    <FollowerTag follower={followers} {...props} />
+                                }
+                            >
+                            </Route>
+                        </Switch>
                     </div>
                 </div>
-                <div className=" min-w-100 max-w-100 bg-white shadow rounded">
+                <div className="min-w-100 max-w-100 bg-white shadow rounded mb-[20px]">
                     <FeaturedTag tag={tag} popTag={tags}></FeaturedTag>
                 </div>
             </div>

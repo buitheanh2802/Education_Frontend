@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router';
 import SulotionApi from 'src/Apis/SulotionApi';
 import { Icon } from 'src/Components/Icon';
-import Loading from 'src/Components/Loading';
 
 const ModalSolution = ({ isShowModle, setIsShowModle }) => {
     const history = useHistory();
@@ -112,7 +111,7 @@ const ModalSolution = ({ isShowModle, setIsShowModle }) => {
                                 disabled={actionLoading}
                                 className="bg-blue-500 text-white flex items-center gap-[5px] rounded h-[40px] px-[20px]">
                                 {actionLoading
-                                    ? <Loading className="fill-current w-[20px]" />
+                                    ? <Icon.Loading className="fill-current w-[20px]" />
                                     : <Icon.Save className="fill-current w-[15px]" />}
                                 Gửi
                             </button>

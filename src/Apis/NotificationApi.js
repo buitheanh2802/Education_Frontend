@@ -1,12 +1,13 @@
 import AxiosClient from './AxiosClient';
 
 const NotificationApi = {
-    gets(token){
+    gets(token,params){
         const url = '/notification';
         return AxiosClient.get(url,{
             headers : {
                 authorization : `Bearer ${token}`
-            }
+            },
+            params : params
         })
     }
 }

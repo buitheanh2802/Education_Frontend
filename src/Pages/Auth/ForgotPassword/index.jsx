@@ -49,7 +49,7 @@ const ForgotPassword = () => {
                 <span className="text-[38px] font-bold ml-[5px]">DevStar</span>
             </Link>
             <form onSubmit={handleSubmit(onSubmit)} className="shadow-xl rounded-[8px] border border-[#f2f2f2] mx-auto lg:w-[55%] md:w-[80%] sm:w-[90%] bg-[#ffffff] px-[20px] pt-[20px] pb-[35px]">
-                <p className="text-gray-800 text-[23px] pb-[5px]">Quên mật khẩu</p>
+                <p className="text-gray-800 font-bold text-[23px] pb-[5px]">Quên mật khẩu</p>
                 <p className="text-gray-800 text-[15px] py-[10px]">
                     Bạn quên mật khẩu của mình? Đừng lo lắng! Hãy cung cấp cho chúng tôi email bạn sử dụng để đăng ký tài khoản Viblo. Chúng tôi sẽ gửi cho bạn một liên kết để đặt lại mật khẩu của bạn qua email đó.
                 </p>

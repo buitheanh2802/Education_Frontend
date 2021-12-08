@@ -6,15 +6,13 @@ import { timeFormatter } from "../../../../Helpers/Timer";
 const PostView = ({ posts }) => {
     return (
         <>
-            {posts.length === 0 || posts?.models?.length === 0 ?
-                (
-                    <div>
-                        <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
-                            Không có gì ở đây cả
-                        </p>
-                    </div>
-                )
-                : (
+            {posts?.models?.length === 0 ?
+                <div>
+                    <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
+                        Không có gì ở đây cả
+                    </p>
+                </div>
+                : (posts.length !== 0 ?
                     <div>
                         {posts?.models?.map((item, index) => {
                             return (
@@ -65,9 +63,9 @@ const PostView = ({ posts }) => {
                                         <div className="flex flex-wrap items-center gap-[10px] my-[10px]">
                                             {item?.tags?.map((tag, indexTag) => {
                                                 return (
-                                                    <Link
+                                                    <Link 
+                                                        to={`/tag/${tag?.slug}`}
                                                         key={indexTag}
-                                                        to={tag?.path}
                                                         className="block hover:bg-gray-300 bg-[#e7e7e7] px-[10px] py-[2px] text-[#5f5f5f] text-[12px] rounded-[3px]"
                                                     >
                                                         {tag?.name}
@@ -98,7 +96,14 @@ const PostView = ({ posts }) => {
                             );
                         })}
                     </div>
-                )}
+                    :
+                    <div>
+                        <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
+                            Vui lòng đăng nhập
+                        </p>
+                    </div>
+                )
+            }
         </>
     );
 };
