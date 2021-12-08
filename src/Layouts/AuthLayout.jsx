@@ -3,9 +3,10 @@ import { path } from '../Constants';
 import Login from '../Pages/Auth/Login';
 import Register from '../Pages/Auth/Register';
 import { useSelector } from 'react-redux';
-import { Route, Switch, Redirect } from 'react-router';
+import {  Switch, Redirect } from 'react-router';
 import ForgotPassword from '../Pages/Auth/ForgotPassword';
 import ResetPassword from '../Pages/Auth/ResetPassword';
+import PublicRouter from 'src/Routes/PublicRouter';
 
 const AuthLayout = () => {
     const { profile } = useSelector(state => state.Auth)
@@ -13,10 +14,11 @@ const AuthLayout = () => {
     if (profile) return <Redirect to={path.HOME} />
     return (
         <Switch>
-            <Route path={path.LOGIN} component={Login} />
-            <Route path={path.REGISTER} component={Register} />
-            <Route path={path.FORGOTPASSWORD} component={ForgotPassword} />
-            <Route path={path.RESETPASSWORD} component={ResetPassword} />
+            <PublicRouter path={path.LOGIN} component={Login} />
+            <PublicRouter path={path.REGISTER} component={Register} />
+            <PublicRouter path={path.FORGOTPASSWORD} component={ForgotPassword} />
+            <PublicRouter path={path.RESETPASSWORD} component={ResetPassword} />
+            <PublicRouter path='*' component={Login}/>
         </Switch>
     );
 };

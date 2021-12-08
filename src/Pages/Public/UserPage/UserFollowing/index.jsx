@@ -6,9 +6,11 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import FollowApi from "src/Apis/FollowApi";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
+import { useSelector } from "react-redux";
 
 const UserFollowing = (props) => {
     const username = props.match.params.username;
+    const { profile } = useSelector((state) => state.Auth);
     const [userFollowing, setUserFollowing] = useState([]);
     const dispatch = useDispatch();
     const history = useHistory();
@@ -54,8 +56,8 @@ const UserFollowing = (props) => {
         const userFollowing = async () => {
             try {
                 dispatch(setLoading(true))
-                const { data: followingUser } = await ProfileUserApi.getFollowingUser(username);
-                setUserFollowing(followingUser.data.models);
+                const { data: userFollowing } = await ProfileUserApi.getFollowingUser(username);
+                setUserFollowing(userFollowing.data.models);
                 dispatch(setLoading(false))
             } catch (error) {
                 console.log(error);
@@ -66,7 +68,7 @@ const UserFollowing = (props) => {
 
     return (
         <div>
-            {userFollowing.length == 0 ? (
+            {userFollowing?.length == 0 ? (
                 <div>
                     <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
                         Không có gì ở đây cả
@@ -126,21 +128,27 @@ const UserFollowing = (props) => {
                                                 </p>
                                             </div>
                                         </div>
-                                        {item?.followingUserId?.isFollowing ? (
-                                            <div onClick={() => handleUnFollow(item?.followingUserId?.username)} className="mx-[10px] text-center my-auto text-white border border-[#6C91F0] font-bold rounded text-[15px] bg-[#1273eb] hover:bg-blue-200 hover:text-[#6C91F0]">
-                                                <button className="font-bold px-[10px] py-[5px] ">
-                                                    {" "}
-                                                    - Bỏ theo dõi
-                                                </button>
+                                        {item?.followingUserId?.username === profile?.username ?
+                                            <div>
+
                                             </div>
-                                        ) : (
-                                            <div onClick={() => handleFollow(item?.followingUserId?.username)} className="mx-[10px] text-center my-auto text-[#6C91F0] border border-[#6C91F0] font-bold rounded text-[15px] hover:bg-[#1273eb] hover:text-white">
-                                                <button className="font-bold px-[10px] py-[5px] ">
-                                                    {" "}
-                                                    + Theo dõi
-                                                </button>
-                                            </div>
-                                        )}
+                                            :
+                                            item?.followingUserId?.isFollowing ? (
+                                                <div onClick={() => handleUnFollow(item?.followingUserId?.username)} className="mx-[10px] text-center my-auto text-white border border-[#6C91F0] font-bold rounded text-[15px] bg-[#1273eb] hover:bg-blue-200 hover:text-[#6C91F0]">
+                                                    <button className="font-bold px-[10px] py-[5px] ">
+                                                        {" "}
+                                                        - Bỏ theo dõi
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                <div onClick={() => handleFollow(item?.followingUserId?.username)} className="mx-[10px] text-center my-auto text-[#6C91F0] border border-[#6C91F0] font-bold rounded text-[15px] hover:bg-[#1273eb] hover:text-white">
+                                                    <button className="font-bold px-[10px] py-[5px] ">
+                                                        {" "}
+                                                        + Theo dõi
+                                                    </button>
+                                                </div>
+                                            )
+                                        }
                                     </div>
                                 );
                             })}

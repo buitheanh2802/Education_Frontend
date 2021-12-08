@@ -56,6 +56,26 @@ const AuthApi = {
     async resetPassword(password) {
         const url = '/auth/reset-password/confirm';
         return AxiosClient.post(url, password)
+    },
+
+    async changePassword(password) {
+        const token = localStorage.getItem("_token_");
+        const url = '/auth/profile/me/change-password';
+        return AxiosClient.post(url, password, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    },
+
+    async changeInfo(data) {
+        const token = localStorage.getItem("_token_");
+        const url = '/auth/profile/me/change-info';
+        return AxiosClient.post(url, data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
     }
 }
 

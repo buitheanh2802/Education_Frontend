@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import PostView from "../Commons/PostView";
-import FeaturedAuthor from "../Commons/FeaturedAuthor";
-import TrendingTags from "../Commons/TrendingTags";
-import { Icon } from "src/Components/Icon";
-import PostApi from "src/Apis/PostApi";
-import { useHistory, NavLink } from "react-router-dom";
-import { Switch, Route } from "react-router-dom";
+import PostView from '../Commons/PostView'
+import FeaturedAuthor from '../Commons/FeaturedAuthor'
+import TrendingTags from '../Commons/TrendingTags'
+import { Icon } from 'src/Components/Icon'
+import PostApi from "src/Apis/PostApi"
+import { useHistory, NavLink, Switch, Route } from "react-router-dom";
 import { path } from "src/Constants/";
 import { useLocation } from "react-router";
 import TagAPi from "src/Apis/TagApi";
@@ -14,16 +13,15 @@ import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 
 const PostPage = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const location = useLocation();
-  const [featuredAuthors, setFeaturedAuthor] = useState([]);
-  const [tagPopulars, setTagPopular] = useState([]);
-  const [newests, setNewests] = useState([]);
-  const [trendings, setTrendings] = useState([]);
-  const [follows, setFollows] = useState([]);
-  const [bookmarks, setBookmarks] = useState([]);
-  // const [loading,setLoading] = useState(false)
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const location = useLocation();
+    const [featuredAuthors, setFeaturedAuthor] = useState([]);
+    const [tagPopulars, setTagPopular] = useState([]);
+    const [newests, setNewests] = useState([]);
+    const [trendings, setTrendings] = useState([]);
+    const [follows, setFollows] = useState([]);
+    const [bookmarks, setBookmarks] = useState([]);
 
   // Navigation
   const pathName = [
@@ -35,38 +33,40 @@ const PostPage = () => {
 
   const button = { path: path.POSTS_CREATE, icon: Icon.Pen, value: "Viết bài" };
 
-  useEffect(() => {
-    const listNew = async () => {
-      try {
-        dispatch(setLoading(true));
-        if (location.pathname === path.POSTS) {
-          const { data: newests } = await PostApi.getPostNew();
-          setNewests(newests.data);
-          dispatch(setLoading(false));
-        } else if (location.pathname === path.POSTS_POPULAR) {
-          const { data: trendings } = await PostApi.getPostTren();
-          setTrendings(trendings.data);
-          dispatch(setLoading(false));
-        } else if (location.pathname === path.POSTS_FOLLOW) {
-          const token = localStorage.getItem("_token_");
-          if (token) {
-            const { data: follows } = await PostApi.getPostFol();
-            setFollows(follows.data);
-            dispatch(setLoading(false));
-          }
-        } else if (location.pathname === path.POSTS_BOOK_MARK) {
-          const token = localStorage.getItem("_token_");
-          if (token) {
-            const { data: bookmarks } = await PostApi.getPostMark();
-            setBookmarks(bookmarks.data);
-            dispatch(setLoading(false));
-          }
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    listNew();
+    useEffect(() => {
+        const listNew = async () => {
+            try {
+                dispatch(setLoading(true))
+                if (location.pathname === path.POSTS) {
+                    const { data: newests } = await PostApi.getPostNew()
+                    setNewests(newests.data);
+                    dispatch(setLoading(false))
+                } else if (location.pathname === path.POSTS_POPULAR) {
+                    const { data: trendings } = await PostApi.getPostTren()
+                    setTrendings(trendings.data);
+                    dispatch(setLoading(false))
+                } else if (location.pathname === path.POSTS_FOLLOW) {
+                    const token = localStorage.getItem("_token_");
+                    if (token) {
+                        const { data: follows } = await PostApi.getPostFol()
+                        setFollows(follows.data);
+                        dispatch(setLoading(false))
+                    }
+                        dispatch(setLoading(false))
+                } else if (location.pathname === path.POSTS_BOOK_MARK) {
+                    const token = localStorage.getItem("_token_");
+                    if (token) {
+                        const { data: bookmarks } = await PostApi.getPostMark()
+                        setBookmarks(bookmarks.data);
+                        dispatch(setLoading(false))
+                    }
+                    dispatch(setLoading(false))
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        listNew();
 
     const listFeaturedAuthor = async () => {
       try {

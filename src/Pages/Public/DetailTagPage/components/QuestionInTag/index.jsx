@@ -2,16 +2,17 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Icon } from 'src/Components/Icon'
 
-const DetailTagView = ({ data }) => {
+const QuestionInTag = ({ data }) => {
     return (
         <>
-            {data?.length === 0 ? (
-                <div>
-                    <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
-                        Không có gì ở đây cả
-                    </p>
-                </div>
-            )
+            {data?.length === 0 ?
+                (
+                    <div>
+                        <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
+                            Không có gì ở đây cả
+                        </p>
+                    </div>
+                )
                 : (
                     <div>
                         {data?.map((item, index) => {
@@ -45,7 +46,11 @@ const DetailTagView = ({ data }) => {
                                                 </div>
                                             </div>
                                             <h3 className="pr-[50px] my-[5px]">
-                                                <Link to={item?.slug} className="font-medium text-[18px] hover:underline">{item?.title}</Link>
+                                                <Link
+                                                    to={`/question/${item?.slug}-${item?._id}`}
+                                                    className="font-medium text-[18px] hover:underline">
+                                                    {item?.title}
+                                                </Link>
                                                 <span className="px-[5px]">-</span>
                                                 <button className="translate-y-[2px]"> <Icon.Link className="w-[14px] fill-current text-[#666]" /></button>
                                             </h3>
@@ -89,4 +94,4 @@ const DetailTagView = ({ data }) => {
     )
 }
 
-export default DetailTagView
+export default QuestionInTag

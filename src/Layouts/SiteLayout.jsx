@@ -39,8 +39,6 @@ const SiteLayout = () => {
     <>
       <Header />
       <Switch>
-        <PublicRouter exact path={path.TAGS_ID} component={DetailTagPage} />
-        <PublicRouter exact path={path.HOME} component={HomePage} />
         <PublicRouter exact path={path.CONTACT} component={ContactPage} />
         <PublicRouter
           path={path.QUESTIONS_DETAIL}
@@ -50,8 +48,6 @@ const SiteLayout = () => {
           path={path.QUESTIONS_CREATE}
           component={QuestionsCreate}
         />
-        <PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
-        <PublicRouter path={path.POSTS_CREATE} component={PostsCreate} />
         <PublicRouter exact path={path.POSTS_ID} component={PostsDetail} />
         <PublicRouter path={path.POSTS} component={PostPage} />
         <PublicRouter path={path.TAGS} component={TagsPage} />
@@ -59,22 +55,17 @@ const SiteLayout = () => {
         <PublicRouter path={path.INTRO} component={IntroPage} />
         <PublicRouter exact path={path.EDIT_PROFILE} component={EditProfile} />
         <PublicRouter exact path={path.PROFILE} component={ProfilePage} />
-        <PublicRouter
-          exact
-          path={path.CHALLENGE}
-          component={ChallengeCatePage}
-        />
-        <PublicRouter
-          exact
-          path={path.CHALLENGE_CATE_ID}
-          component={ChallengePage}
-        />
         <PublicRouter path={path.CHALLENGE_ID} component={DetailChallenge} />
+        <PublicRouter path={path.TAGS_ID} component={DetailTagPage} />
+        <PublicRouter exact path={path.HOME} component={HomePage} />
+        <PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
+        <PublicRouter path={path.POSTS_CREATE} component={PostsCreate} />
+        <PublicRouter path={path.PROFILE_CHANGE} component={EditProfile} />
+        <PublicRouter exact path={path.PROFILE_ME} component={ProfilePage} />
+        <PublicRouter exact path={path.CHALLENGE} component={ChallengeCatePage} />
+        <PublicRouter exact path={path.CHALLENGE_CATE_ID} component={ChallengePage} />
         <PublicRouter path={path.QUIZ} component={QuizPage} />
-        <PublicRouter
-          path={path.CHALLENGE_SOLUTION_CHALLENGE_ID}
-          component={SolutionPage}
-        />
+        <PublicRouter path={path.CHALLENGE_SOLUTION_CHALLENGE_ID} component={SolutionPage} />
         <PublicRouter path="*" component={Notfound} />
       </Switch>
       <Footer />

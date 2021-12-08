@@ -5,9 +5,7 @@ import { Icon } from "src/Components/Icon";
 const FeaturedAuthor = ({ authors }) => {
   return (
     <div>
-      <h2 className="px-[5px] uppercase font-medium py-[10px] border-b mx-[5px] ">
-        {" "}
-        Các tác giả nổi bật
+      <h2 className="px-[5px] uppercase font-medium py-[10px] border-b mx-[5px] "> Các tác giả nổi bật
       </h2>
       <div className="py-[5px] mx-[10px]">
         {authors?.map((item, index) => {
@@ -16,7 +14,7 @@ const FeaturedAuthor = ({ authors }) => {
               {item?.avatar?.avatarUrl?.length > 0 ? (
                 <Link
                   to={`/user/${item?.username}`}
-                  className="mt-[5px] mr-[15px] border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
+                  className="mt-[5px] mr-[15px] border border-gray-300 cursor-pointer select-none min-w-[40px] max-w-[40px] min-h-[40px] max-h-[40px] rounded-full bg-center bg-cover"
                   style={{
                     backgroundImage: `url(${item?.avatar?.avatarUrl})`,
                   }}
@@ -25,7 +23,7 @@ const FeaturedAuthor = ({ authors }) => {
               ) : (
                 <Link
                   to={`/user/${item?.username}`}
-                  className="mt-[5px] mr-[15px] flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
+                  className="mt-[5px] mr-[15px] flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none min-w-[40px] max-w-[40px] min-h-[40px] max-h-[40px] rounded-full"
                 >
                   {item?.fullname?.slice(0, 1)?.toUpperCase()}
                 </Link>
@@ -37,8 +35,8 @@ const FeaturedAuthor = ({ authors }) => {
                     className="text-[#2d6ff7] hover:underline"
                   >
                     {item?.fullname}
-                  </Link>{" "}
-                  <span>-</span>{" "}
+                  </Link>
+                  <span>-</span>
                   <span className="text-[13px] text-[#707885] ">
                     {item?.username}
                   </span>
