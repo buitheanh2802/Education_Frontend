@@ -7,13 +7,13 @@ const SlideBar = () => {
   return (
     <div className="h-screen hidden lg:block shadow-lg relative w-80">
       <div className="bg-white h-full rounded-2xl dark:bg-gray-700">
-        <Link to={path.HOME} className="flex items-center pt-6 px-4">
+        <Link to={path.HOME} className="flex items-center py-6 px-4 border-b">
           <Icon.Logo className="sm:w-[30px] w-[24px]" />
           <span className="sm:text-[23px] text-[20px] font-bold ml-[5px]">
             DevStar
           </span>
         </Link>
-        <nav className="mt-6">
+        <nav className="">
           <NavLink
             exact
             activeClassName="text-blue-500 bg-gradient-to-r from-white to-blue-100 border-r-4 border-blue-500 dark:from-gray-700 dark:to-gray-800"
@@ -84,6 +84,12 @@ const SlideBar = () => {
               <Icon.AdminExercise />
             </span>
             <span className="mx-4 text-sm font-normal">Quản lý liên hệ</span>
+          </NavLink>
+          <NavLink to="/manager/tag">
+            <span className="text-left">
+              <Icon.AdminExercise />
+            </span>
+            <span className="mx-4 text-sm font-normal">Quản lý tag</span>
           </NavLink>
         </nav>
       </div>

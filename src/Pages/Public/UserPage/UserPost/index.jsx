@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 
-const UserPost = (props) => {    
+const UserPost = (props) => {
   const username = props.match.params.username;
   const [userPost, setUserPost] = useState([]);
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const UserPost = (props) => {
           {userPost?.map((item, index) => {
             return (
               <>
-                <div key={index} className="flex pb-[10px]">
+                <div key={index} className="flex py-[10px] border-b">
                   <div>
                     {item?.avatar?.avatarUrl ? (
                       <img
@@ -68,7 +68,7 @@ const UserPost = (props) => {
                       </div>
                     </div>
                     <h3 className="pr-[50px] my-[2px]">
-                      <Link className="font-medium text-[18px] hover:underline">
+                      <Link to={`/posts/${item?.slug}-${item?.shortId}`} className="font-medium text-[18px] hover:underline">
                         {item?.title}
                       </Link>
                       <span className="px-[5px]">-</span>
@@ -81,7 +81,9 @@ const UserPost = (props) => {
                       {item?.tags.map((tag, index) => {
                         return (
                           <div key={index}>
-                            <Link className="block mx-0 hover:bg-gray-300 bg-[#e7e7e7] px-[10px] py-[2px] text-[#5f5f5f] lg:text-[12px] rounded-[3px]">
+                            <Link
+                              to={`/tag/${tag?.slug}`}
+                              className="block mx-0 hover:bg-gray-300 bg-[#e7e7e7] px-[10px] py-[2px] text-[#5f5f5f] lg:text-[12px] rounded-[3px]">
                               {tag?.name}
                             </Link>
                           </div>
