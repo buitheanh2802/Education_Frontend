@@ -160,7 +160,7 @@ const Register = () => {
                     </div>
 
                     <button type="submit" className="w-full focus:outline-none rounded-[5px] h-[40px] bg-blue-600 hover:bg-blue-800 duration-300 text-white font-medium my-[25px]">
-                        {isLoading ? <Loading className="fill-current w-[30px] mx-auto" /> : "Đăng ký"}
+                        {isLoading ? <Icon.Loading className="fill-current w-[30px] mx-auto" /> : "Đăng ký"}
                     </button>
 
                     <p className="text-gray-600 text-center text-[12px]">- HOẶC -</p>

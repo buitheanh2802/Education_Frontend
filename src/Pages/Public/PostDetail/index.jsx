@@ -580,7 +580,7 @@ const PostsDetail = () => {
                       className="cursor-pointer"
                     />
                     {"  "}
-                    <label for="spam1" className="cursor-pointer">
+                    <label htmlFor="spam1" className="cursor-pointer">
                       Nội dung rác
                     </label>
                   </div>
@@ -592,7 +592,7 @@ const PostsDetail = () => {
                       value="2"
                       className="cursor-pointer"
                     />{" "}
-                    <label for="spam2" className="cursor-pointer">
+                    <label htmlFor="spam2" className="cursor-pointer">
                       Vi phạm điều khoản
                     </label>
                   </div>
@@ -604,7 +604,7 @@ const PostsDetail = () => {
                       value="3"
                       className="cursor-pointer"
                     />{" "}
-                    <label for="spam3" className="cursor-pointer">
+                    <label htmlFor="spam3" className="cursor-pointer">
                       Quấy rối, đả kích
                     </label>
                   </div>
@@ -616,7 +616,7 @@ const PostsDetail = () => {
                       value="3"
                       className="cursor-pointer"
                     />{" "}
-                    <label for="spam4" className="cursor-pointer">
+                    <label htmlFor="spam4" className="cursor-pointer">
                       Vi phạm bản quyền
                     </label>
                   </div>
@@ -628,7 +628,7 @@ const PostsDetail = () => {
                       value="3"
                       className="cursor-pointer"
                     />{" "}
-                    <label for="spam5" className="cursor-pointer">
+                    <label htmlFor="spam5" className="cursor-pointer">
                       Bản dịch chất lượng kém
                     </label>
                   </div>

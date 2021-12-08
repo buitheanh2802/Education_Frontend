@@ -58,6 +58,7 @@ const UserFollowing = (props) => {
                 dispatch(setLoading(true))
                 const { data: userFollowing } = await ProfileUserApi.getFollowingUser(username);
                 setUserFollowing(userFollowing.data.models);
+                console.log(userFollowing);
                 dispatch(setLoading(false))
             } catch (error) {
                 console.log(error);

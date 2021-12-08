@@ -52,7 +52,7 @@ const PostPage = () => {
                         setFollows(follows.data);
                         dispatch(setLoading(false))
                     }
-                        dispatch(setLoading(false))
+                    dispatch(setLoading(false))
                 } else if (location.pathname === path.POSTS_BOOK_MARK) {
                     const token = localStorage.getItem("_token_");
                     if (token) {
@@ -99,20 +99,27 @@ const PostPage = () => {
                             key={index}
                             to={item?.path}
                             activeClassName="after:absolute after:w-full after:h-[2px] after:rounded after:bottom-[-16px] after:left-0 after:bg-[#1273eb] font-medium text-black"
-                            className="relative text-[15px] px-[10px] text-gray-600 hover:text-blue-600" >
+                            className="relative text-[15px] px-[10px] text-gray-600 hover:text-blue-600"
+                        >
                             {item?.value}
                         </NavLink>
                     ))}
                 </div>
-                {button &&
+                {button && (
                     <div className="self-center whitespace-nowrap">
-                        <button onClick={() => { history.push(button?.path) }}
-                            className="flex my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] ">
-                            <div className="self-center"><button.icon className="w-[15px] fill-current" /> </div>
+                        <button
+                            onClick={() => {
+                                history.push(button?.path);
+                            }}
+                            className="flex my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] "
+                        >
+                            <div className="self-center">
+                                <button.icon className="w-[15px] fill-current" />{" "}
+                            </div>
                             <span className="hidden md:block">{button?.value}</span>
                         </button>
                     </div>
-                }
+                )}
             </div>
             <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
                 <div className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded">
@@ -120,30 +127,22 @@ const PostPage = () => {
                         <Route
                             exact
                             path={path.POSTS}
-                            render={(props) => (
-                                <PostView posts={newests} {...props} />
-                            )}
+                            render={(props) => <PostView posts={newests} {...props} />}
                         ></Route>
                         <Route
                             exact
                             path={path.POSTS_POPULAR}
-                            render={(props) => (
-                                <PostView posts={trendings} {...props} />
-                            )}
+                            render={(props) => <PostView posts={trendings} {...props} />}
                         ></Route>
                         <Route
                             exact
                             path={path.POSTS_FOLLOW}
-                            render={(props) =>
-                                <PostView posts={follows} {...props} />
-                            }
+                            render={(props) => <PostView posts={follows} {...props} />}
                         ></Route>
                         <Route
                             exact
                             path={path.POSTS_BOOK_MARK}
-                            render={(props) => (
-                                <PostView posts={bookmarks} {...props} />
-                            )}
+                            render={(props) => <PostView posts={bookmarks} {...props} />}
                         ></Route>
                     </Switch>
                 </div>
@@ -153,7 +152,7 @@ const PostPage = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default PostPage;

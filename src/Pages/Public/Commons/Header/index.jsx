@@ -30,12 +30,14 @@ const Header = () => {
 
   return (
     <>
+      {/* Mobile */}
       {isNotification && (
         <Notification
           setIsNotification={setIsNotification}
           className="z-[999] fixed top-0 left-0 bottom-0 right-0 lg:hidden"
         />
       )}
+      {/* end */}
       <div
         className={`${
           active

@@ -5,7 +5,6 @@ import { path, Images } from 'src/Constants/'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { ActionLogin } from 'src/Redux/Actions/Auth.action'
-import Loading from 'src/Components/Loading'
 import ErrorMessage from 'src/Components/ErrorMessage'
 import { regex } from 'src/Constants/'
 import Oauthentication from '../Components/Oauthentication'
@@ -20,8 +19,9 @@ const Login = () => {
         reValidateMode: "onBlur"
     });
 
-    const onSubmit = (data) => {
-        dispatch(ActionLogin(data))
+    const onSubmit = async (data) => {
+        const { payload } = await dispatch(ActionLogin(data));
+        if (payload?.status) return history.goBack(1);
     }
 
     error && setTimeout(() => dispatch(resetErrorAuth()), 5000)
@@ -88,7 +88,7 @@ const Login = () => {
                         type="submit"
                         disabled={isLoading}
                         className="w-full focus:outline-none rounded-[5px] h-[40px] bg-blue-600 hover:bg-blue-800 duration-300 text-white font-medium my-[30px]">
-                        {isLoading ? <Loading className="fill-current w-[30px] mx-auto" /> : "Đăng nhập"}
+                        {isLoading ? <Icon.Loading className="fill-current w-[30px] mx-auto" /> : "Đăng nhập"}
                     </button>
 
                     <p className="text-gray-600 text-center text-[12px]">- HOẶC -</p>
