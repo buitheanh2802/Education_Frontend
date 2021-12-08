@@ -9,11 +9,22 @@ const AxiosClient = axios.create({
     paramsSerializer: (params) => queryString.stringify(params)
 });
 
-AxiosClient.interceptors.response.use(res => res,(err => {
+AxiosClient.interceptors.response.use(res => res,(async err => {
     const res = err.response.data;
-    console.log(res);
     if (res.message[0] === 'EXPIRED_TOKEN' && res.message[1] === 'RETRY_TOKEN') {
-
+        const config = err.response.config;
+        try {
+            const { data } = await AxiosClient.get('/auth/profile/me/refreshtoken', { withCredentials: true });
+            localStorage.setItem('_token_',data.data);
+            config.headers.Authorization = `Bearer ${data.data}`;
+            return AxiosClient(config)
+        } catch (error) {
+            const handleError = error.response.data.message[0];
+            if (handleError === "EMPTY_TOKEN" || handleError === "EXPIRED_TOKEN") {
+                localStorage.removeItem('_token_');
+                return Promise.reject(err)
+            }
+        }
     }
     return Promise.reject(err)
 }))
