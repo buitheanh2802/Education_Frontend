@@ -21,6 +21,7 @@ const CreateCateChallen = ({ isModal, setIsModals }) => {
 
     const handleOnChangeFile = async (e) => {
         setIsUpLoad(true);
+        setImage(null)
         const formData = new FormData();
         formData.append("image", e.target.files[0])
         const { url, status } = await UploadImage(formData)

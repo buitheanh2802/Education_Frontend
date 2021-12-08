@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Navigation from 'src/Pages/Public/Commons/Navigation'
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import { path } from 'src/Constants/';
 import SulotionApi from 'src/Apis/SulotionApi';
 import { Icon } from 'src/Components/Icon';
 import DetailSulotion from './Components/DetailSulotion';
+import { useSelector } from 'react-redux';
 
 const SolutionPage = () => {
     const { challengeId } = useParams();
     const [sulotion, setSulotion] = useState(null);
     const [isModel, setIsModel] = useState(null);
+    const { profile } = useSelector(state => state.Auth);
+    const history = useHistory();
 
     useEffect(() => {
         (async () => {
@@ -51,7 +54,10 @@ const SolutionPage = () => {
                                     <button onClick={() => setIsModel(item?._id)} className="flex gap-[10px] flex-1 justify-center items-center bg-gray-100 hover:bg-gray-300 duration-300 hover:shadow text-blue-900 text-xs rounded h-[40px]">
                                         <Icon.Eye className="fill-current w-[12px]" /> Xem trước
                                     </button>
-                                    <button className="flex gap-[10px] flex-1 justify-center items-center bg-gray-100 hover:bg-gray-300 duration-300 hover:shadow text-blue-900 text-xs rounded h-[40px]">
+                                    <button
+                                        onClick={() => {
+                                            !profile && history.push(path.AUTH)
+                                        }} className="flex gap-[10px] flex-1 justify-center items-center bg-gray-100 hover:bg-gray-300 duration-300 hover:shadow text-blue-900 text-xs rounded h-[40px]">
                                         <Icon.Chat className="fill-current w-[12px]" /> Phản hồi
                                     </button>
                                 </div>
