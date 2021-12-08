@@ -16,7 +16,7 @@ AxiosClient.interceptors.response.use(res => res,(async err => {
         try {
             const { data } = await AxiosClient.get('/auth/profile/me/refreshtoken', { withCredentials: true });
             localStorage.setItem('_token_',data.data);
-            config.headers.Authorization = `Bearer ${data.data}`;
+            config.headers.authorization = `Bearer ${data.data}`;
             return AxiosClient(config)
         } catch (error) {
             const handleError = error.response.data.message[0];
