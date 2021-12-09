@@ -7,6 +7,7 @@ import TagApi from 'src/Apis/TagApi'
 import swal from 'sweetalert'
 
 const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo }) => {
+    
     const { register, handleSubmit, formState: { errors }, clearErrors, getValues } = useForm({
         mode: "onSubmit",
         reValidateMode: "onBlur",
@@ -20,7 +21,8 @@ const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo }) => {
         try {
             const uploads = new FormData();
             uploads.append("name", data.name);
-            uploads.append("photo", data.photo);
+            console.log(data.photo);
+            uploads.append("photo", data.photo[0]);
             await TagApi.editTag(slug, uploads);
             swal("Sửa tag thành công!");
         } catch (error) {
