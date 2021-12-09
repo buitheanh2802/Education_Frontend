@@ -231,7 +231,6 @@ body {
   z-index: 9999;
 }
 
-
 /* alert message */
 
 .message_animation {
@@ -248,15 +247,16 @@ body {
 
 @keyframes message {
   0% {
-      opacity: 0;
-      margin-left: 0;
+    opacity: 0;
+    margin-left: 0;
   }
-  85%, 10% {
-      opacity: 1;
-      margin-left: calc(100% + 30px);
+  85%,
+  10% {
+    opacity: 1;
+    margin-left: calc(100% + 30px);
   }
   100% {
-      opacity: 0;
-      margin-left: 0;
+    opacity: 0;
+    margin-left: 0;
   }
 }
