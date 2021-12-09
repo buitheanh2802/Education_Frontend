@@ -25,7 +25,8 @@ const AuthApi = {
         return AxiosClient.get(url, {
             headers: {
                 authorization: `Bearer ${LocalStorage.Get('_token_')}`
-            }
+            },
+            withCredentials: true
         })
     },
 
