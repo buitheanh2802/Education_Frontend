@@ -67,7 +67,7 @@ const Header = () => {
                             />
                         </div>
                     </form>
-                    <div className="flex items-center sm:justify-end w-full">
+                    <div className="flex items-center w-full">
                         <div className="hidden md:flex pl-2 space-x-1">
                             <a
                                 href="#"
@@ -135,6 +135,7 @@ const Header = () => {
                             </a>
                         </div>
                     </div>
+                    <button className="bg-green-500 text-white whitespace-nowrap h-[38px] leading-[38px] px-5 rounded"> Thêm tag </button>
                 </div>
             </div>
         </div>

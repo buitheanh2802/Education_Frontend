@@ -33,6 +33,16 @@ const TagAPi = {
     getFollowInTag(tagname){
         const url = `/tag/${tagname}/follower`;
         return AxiosClient.get(url)
+    },
+    deleteTag(slug){
+        const token = localStorage.getItem("_token_");
+        const url = `/tag/${slug}`;
+        return AxiosClient.delete(url, {
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        });
     }
+    
 }
 export default TagAPi;

@@ -1423,6 +1423,10 @@ video {
   height: 15px;
 }
 
+.h-\[38px\] {
+  height: 38px;
+}
+
 .max-h-\[110px\] {
   max-height: 110px;
 }
@@ -1820,6 +1824,10 @@ video {
 
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-cols-\[60px\2c 1\.5fr\2c 1fr\2c 0\.75fr\2c 0\.75fr\2c 1\.2fr\] {
+  grid-template-columns: 60px 1.5fr 1fr 0.75fr 0.75fr 1.2fr;
 }
 
 .flex-col {
@@ -3239,6 +3247,14 @@ video {
 
 .leading-\[120px\] {
   line-height: 120px;
+}
+
+.leading-\[35px\] {
+  line-height: 35px;
+}
+
+.leading-\[38px\] {
+  line-height: 38px;
 }
 
 .text-green-500 {

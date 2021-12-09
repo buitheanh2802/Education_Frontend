@@ -9,13 +9,13 @@ import SuccessMessage from 'src/Components/SuccessMessage'
 import { path, regex } from 'src/Constants/'
 import ResponseMessage from 'src/Constants/ResponseMessage'
 const ChangePassword = () => {
+    
     const [response, setResponse] = useState({ isLoading: false, error: null, message: null })
     const { isLoading, error, message } = response;
-    const { register, handleSubmit, formState: { errors }, clearErrors, getValues, reset } = useForm({
+    const { register, handleSubmit, formState: { errors }, clearErrors, getValues } = useForm({
         mode: "onSubmit",
         reValidateMode: "onBlur"
     });
-
 
     const onSubmit = async (data) => {
         try {
