@@ -20,7 +20,7 @@ const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo }) => {
         try {
             const uploads = new FormData();
             uploads.append("name", data.name);
-            uploads.append("photo", data.newPhoto);
+            uploads.append("photo", data.photo);
             await TagApi.editTag(slug, uploads);
             swal("Sửa tag thành công!");
         } catch (error) {
