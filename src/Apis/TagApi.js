@@ -34,6 +34,24 @@ const TagAPi = {
         const url = `/tag/${tagname}/follower`;
         return AxiosClient.get(url)
     },
+    addTag(data){
+        const token = localStorage.getItem("_token_");
+        const url = `/tag`;
+        return AxiosClient.post(url, data, {
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        });
+    },
+    editTag(slug, data){
+        const token = localStorage.getItem("_token_");
+        const url = `/tag/${slug}`;
+        return AxiosClient.post(url, data, {
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        });
+    },
     deleteTag(slug){
         const token = localStorage.getItem("_token_");
         const url = `/tag/${slug}`;

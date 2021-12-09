@@ -6,6 +6,8 @@ import PublishItem from "./components/publish-item";
 import queryString from "query-string";
 import SkeletonGroup from "./components/skeleton-group";
 import TagAPi from "src/Apis/TagApi";
+import ModalAdd from './components/ModalAdd';
+import UseModal from './components/useModal'
 
 const TagManager = (props) => {
     const query = queryString.parse(props.location.search, {
@@ -17,7 +19,7 @@ const TagManager = (props) => {
         const getData = async () => {
             try {
                 setStartCall(true);
-                const { data: tagLists} = await TagAPi.getAll();
+                const { data: tagLists } = await TagAPi.getAll();
                 setTagList(tagLists.data.models);
                 setStartCall(false);
             } catch (error) {
@@ -27,10 +29,18 @@ const TagManager = (props) => {
         }
         getData();
     }, []);
+    const { isShowing, toggle } = UseModal();
 
     return (
         <div className="w-full">
+            <ModalAdd
+                isShowing={isShowing}
+                hide={toggle}
+            />
             <Header />
+            <div className="bg-white w-[100%] flex justify-end">
+                <button onClick={toggle} className="bg-green-500 hover:bg-green-800 text-white whitespace-nowrap h-[38px] leading-[38px] px-5 my-[10px] rounded"> Thêm tag </button>
+            </div>
             <PublishNav />
             {startCall && <SkeletonGroup />}
             {tagList &&

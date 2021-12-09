@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 const Header = () => {
     return (
         <div className="p-4 bg-white block w-full sm:flex items-center justify-between border-b border-gray-200">
@@ -135,7 +134,6 @@ const Header = () => {
                             </a>
                         </div>
                     </div>
-                    <button className="bg-green-500 text-white whitespace-nowrap h-[38px] leading-[38px] px-5 rounded"> Thêm tag </button>
                 </div>
             </div>
         </div>
