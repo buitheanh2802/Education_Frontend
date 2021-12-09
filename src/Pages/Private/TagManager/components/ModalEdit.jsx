@@ -20,7 +20,7 @@ const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo }) => {
         try {
             const uploads = new FormData();
             uploads.append("name", data.name);
-            uploads.append("photo", data.newPhoto);
+            uploads.append("photo", data.photo);
             await TagApi.editTag(slug, uploads);
             swal("Sửa tag thành công!");
         } catch (error) {
@@ -53,7 +53,7 @@ const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo }) => {
                                     })}
                                     className="outline-none px-[6px] w-[100%] py-[8px] border border-gray-500 rounded-[5px] my-[5px]"
                                 />
-                                <span className="text-red-500 text-[12px]"></span>
+                                <span className="text-red-500 text-[12px]">{errors?.name && errors?.name?.message}</span>
                             </div>
                             <div className="py-[5px]">
                                 <p className="text-gray-800 text-[15px] py-[5px]">
@@ -61,8 +61,8 @@ const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo }) => {
                                     Ảnh:
                                 </p>
                                 <input type="file"
-                                    onChangeCapture={() => { clearErrors('newPhoto') }}
-                                    {...register('newPhoto', {
+                                    onChangeCapture={() => { clearErrors('photo') }}
+                                    {...register('photo', {
                                         required: regex.REQUIRED,
                                     })}
                                     className="outline-none px-[6px] w-[100%] py-[8px] border border-gray-500 rounded-[5px] my-[5px]"
@@ -72,7 +72,7 @@ const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo }) => {
                                     :
                                     <div> </div>
                                 }
-                                <span className="text-red-500 text-[12px]"></span>
+                                <span className="text-red-500 text-[12px]">{errors?.photo && errors?.photo?.message}</span>
                             </div>
                             <div className="text-right">
                                 <button type="submit"
