@@ -76,10 +76,10 @@ const UserFollower = (props) => {
                 </div>
             ) : (
                 <div className="flex grid-cols-4 ">
-                    <div className="flex justify-between flex-wrap gap-[20px]">
+                    <div className="gap-x-[20px] grid lg:grid-cols-3 md:grid-cols-2">
                         {userFollowers?.map((item, index) => {
                             return (
-                                <div key={index} className="flex py-[20px] px-[10px] mb-[20px] bg-white">
+                                <div key={index} className="flex items-center py-[20px] px-[10px] mb-[20px] bg-white">
                                     <div className="">
                                         {item?.avatar?.avatarUrl ?
                                             <img

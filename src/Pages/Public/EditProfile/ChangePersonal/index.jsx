@@ -9,7 +9,7 @@ import SuccessMessage from 'src/Components/SuccessMessage'
 import { path, regex } from 'src/Constants/'
 import ResponseMessage from 'src/Constants/ResponseMessage'
 import AuthApi from "src/Apis/AuthApi"
-
+import ImageApi from 'src/Apis/ImageApi'
 const ChangePersonal = ({ profile }) => {
     const history = useHistory();
     const [response, setResponse] = useState({ isLoading: false, error: null, message: null })
@@ -28,16 +28,23 @@ const ChangePersonal = ({ profile }) => {
         }
     });
 
+    const addImg = async(image) => {
+        const uploads = new FormData();
+        uploads.append("image", image)
+        const response = await ImageApi.addImage(uploads);
+        console.log('res',response);
+    }
+
     const onSubmit = async (data) => {
         try {
-            // setResponse({ ...response, isLoading: true })
+            setResponse({ ...response, isLoading: true })
+            addImg(data.image);
             // await AuthApi.changeInfo(data);
             // setResponse({
             //     ...response,
             //     message: "Cập nhật thông tin thành công",
             //     isLoading: false
             // })
-            console.log(data);
         } catch (error) {
             setResponse({
                 ...response,
@@ -67,7 +74,8 @@ const ChangePersonal = ({ profile }) => {
                                     Choose image
                                 </div>
                             }
-                            <input className="mx-auto my-[5px] w-[100%] outline-none" type="file" />
+                            <input className="mx-auto my-[5px] w-[100%] outline-none" type="file"  
+                            onChangeCapture={() => { clearErrors('image') }} />
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
@@ -83,30 +91,20 @@ const ChangePersonal = ({ profile }) => {
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
-                                <span className="text-red-600 font-bold mr-[5px]">*</span>
                                 Ngày sinh:
                             </p>
                             <input type="date" defaultValue={profile.birthday}
                                 onChangeCapture={() => { clearErrors('birthday') }}
-                                {...register('birthday', {
-                                    required: regex.REQUIRED,
-                                })}
                                 disabled={isLoading} className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
-                            <span className="text-red-500 text-[12px]">{errors?.birthday && errors?.birthday?.message}</span>
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
-                                <span className="text-red-600 font-bold mr-[5px]">*</span>
                                 Địa chỉ:
                             </p>
                             <input type="text" defaultValue={profile.address}
                                 onChangeCapture={() => { clearErrors('address') }}
-                                {...register('address', {
-                                    required: regex.REQUIRED,
-                                })}
                                 disabled={isLoading}
                                 className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
-                            <span className="text-red-500 text-[12px]">{errors?.address && errors?.address?.message}</span>
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
@@ -115,15 +113,10 @@ const ChangePersonal = ({ profile }) => {
                             </p>
                             <textarea defaultValue={profile.description}
                                 onChangeCapture={() => { clearErrors('description') }}
-                                {...register('description', {
-                                    required: regex.REQUIRED,
-                                })}
                                 disabled={isLoading} className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
-                            <span className="text-red-500 text-[12px]">{errors?.description && errors?.description?.message}</span>
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
-                                <span className="text-red-600 font-bold mr-[5px]">*</span>
                                 Sở thích:
                             </p>
                             <div className="grid grid-cols-3">
@@ -155,7 +148,6 @@ const ChangePersonal = ({ profile }) => {
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
-                                <span className="text-red-600 font-bold mr-[5px]">*</span>
                                 Kỹ năng:
                             </p>
                             <div className="grid grid-cols-3">

@@ -19,8 +19,8 @@ const TagManager = (props) => {
         const getData = async () => {
             try {
                 setStartCall(true);
-                const { data: tagLists } = await TagAPi.getAll();
-                setTagList(tagLists.data.models);
+                const { data: listTag } = await TagAPi.getAll();
+                setTagList(listTag.data.models);
                 setStartCall(false);
             } catch (error) {
                 console.log(error);
@@ -29,11 +29,19 @@ const TagManager = (props) => {
         }
         getData();
     }, []);
+
+    const onRemove = (slug) => {
+        setTagList(tagList.filter((item) => item.slug !== slug))
+    }
+    const onAdd = () => {
+        setTagList(tagList.map((item) => item))
+    }
     const { isShowing, toggle } = UseModal();
 
     return (
         <div className="w-full">
-            <ModalAdd
+            <ModalAdd 
+                onAdd={onAdd}
                 isShowing={isShowing}
                 hide={toggle}
             />
@@ -46,7 +54,8 @@ const TagManager = (props) => {
             {tagList &&
                 tagList.map((item, index) => {
                     return (
-                        <PublishItem
+                        <PublishItem 
+                            onRemove={onRemove}
                             index={index + 1}
                             key={item._id}
                             id={item._id}
@@ -55,6 +64,7 @@ const TagManager = (props) => {
                             post={item.postCounts}
                             question={item.questionCounts}
                             slug={item.slug}
+                            photo={item?.avatar?.avatarUrl}
                         />
                     );
                 })}

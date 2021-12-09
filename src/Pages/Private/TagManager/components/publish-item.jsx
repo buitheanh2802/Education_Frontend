@@ -6,9 +6,11 @@ import TagAPi from 'src/Apis/TagApi';
 import SuccessMessage from 'src/Components/SuccessMessage';
 import ErrorMessage from 'src/Components/ErrorMessage';
 import swal from 'sweetalert'
+import ModalEdit from './ModalEdit';
+import UseModal from './useModal'
 
 const PublishItem = (props) => {
-    const { name, index, follow, post, question, id, slug } = props;
+    const { name, index, follow, post, question, id, slug, photo, onRemove } = props;
     const { profile } = useSelector((state) => state.Auth);
     const [loading, setLoading] = useState({
         error: false,
@@ -18,8 +20,9 @@ const PublishItem = (props) => {
         try {
             const removePro = window.confirm("Bạn có chắc chắn muốn xoá không?");
             if (removePro) {
-                if (slug) setLoading({ ...loading, success: true });    
+                if (slug) setLoading({ ...loading, success: true });
                 await TagAPi.deleteTag(slug);
+                onRemove(slug);
                 if (slug) setLoading({ ...loading, success: false });
                 swal("Xóa tag thành công!");
             }
@@ -27,6 +30,8 @@ const PublishItem = (props) => {
             swal("Xóa tag thất bại!");
         }
     }
+
+    const { isShowingEdit, toggleEdit } = UseModal();
 
     return (
         <div>
@@ -38,13 +43,21 @@ const PublishItem = (props) => {
                 <div className="text-[13px]">{follow}</div>
                 <div className="text-[13px]">{post}</div>
                 <div className="text-[13px]">{question}</div>
-                <div className="text-center flex">
+                <div className="flex">
                     <button onClick={() => handleDelete(slug)} className="px-[15px] py-[5px] text-white bg-red-500 hover:bg-red-800 rounded-md mx-auto" >
                         Xóa
                     </button>
-                    <button className="px-[15px] py-[5px] text-white bg-blue-300 hover:bg-blue-600 rounded-md mx-auto" >
+                    <button onClick={toggleEdit} className="px-[15px] py-[5px] text-white bg-blue-300 hover:bg-blue-600 rounded-md mx-auto" >
                         Sửa
                     </button>
+                    <ModalEdit
+                        isShowingEdit={isShowingEdit}
+                        hide={toggleEdit}
+                        id={id}
+                        photo={photo}
+                        name={name}
+                        slug={slug}
+                    />
                 </div>
             </div>
         </div>

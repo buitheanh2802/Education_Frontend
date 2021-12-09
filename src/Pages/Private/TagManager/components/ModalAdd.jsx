@@ -6,7 +6,7 @@ import { path, regex } from 'src/Constants/'
 import TagAPi from "src/Apis/TagApi"
 import swal from "sweetalert";
 
-const Modal = ({ isShowing, hide }) => {
+const Modal = ({ isShowing, hide, onAdd }) => {
     const { register, handleSubmit, formState: { errors }, clearErrors } = useForm({
         mode: "onSubmit",
         reValidateMode: "onBlur"
@@ -16,17 +16,19 @@ const Modal = ({ isShowing, hide }) => {
         try {
             const uploads = new FormData();
             uploads.append("name", data.name);
-            // uploads.append()
-            // await TagAPi.addTag(uploads);
-            // swal("Thêm tag thành công!");
+            uploads.append("photo", data.photo)
+            await TagAPi.addTag(uploads);
+            onAdd();
+            swal("Thêm tag thành công!");
         } catch (error) {
             console.log(error);
+            swal("Thêm tag thất bại!");
         }
     }
 
     return (
         isShowing ? (
-            <div className="w-[60%] mx-auto fixed left-[30%] top-[20%] bg-white shadow-lg border border-green-500 rounded z-10">
+            <div className="w-[60%] mx-auto fixed left-[28%] top-[20%] bg-white shadow-lg border border-green-500 rounded z-10">
                 <div className="px-[20px] py-[20px]">
                     <div className="flex justify-between border-b border-gray-500">
                         <span className="mb-[20px] font-bold text-green-500 text-[26px]">Thêm tag</span>
@@ -56,13 +58,13 @@ const Modal = ({ isShowing, hide }) => {
                                     Ảnh:
                                 </p>
                                 <input type="file"
-                                    onChangeCapture={() => { clearErrors('avatar') }}
-                                    {...register('avatar', {
+                                    onChangeCapture={() => { clearErrors('photo') }}
+                                    {...register('photo', {
                                         required: regex.REQUIRED,
                                     })}
                                     className="outline-none px-[6px] w-[100%] py-[8px] border border-gray-500 rounded-[5px] my-[5px]"
                                 />
-                                <span className="text-red-500 text-[12px]">{errors?.avatar && errors?.avatar?.message}</span>
+                                <span className="text-red-500 text-[12px]">{errors?.photo && errors?.photo?.message}</span>
                             </div>
                             <div className="text-right">
                                 <button

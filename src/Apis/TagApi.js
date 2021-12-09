@@ -43,10 +43,10 @@ const TagAPi = {
             }
         });
     },
-    editTag(slug, data){
+    editTag(slug, data) {
         const token = localStorage.getItem("_token_");
         const url = `/tag/${slug}`;
-        return AxiosClient.post(url, data, {
+        return AxiosClient.put(url, data, {
             headers: {
                 authorization: `Bearer ${token}`
             }

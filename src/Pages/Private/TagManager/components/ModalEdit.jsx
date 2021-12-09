@@ -4,20 +4,34 @@ import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice"
 import { path, regex } from 'src/Constants/'
 import TagApi from 'src/Apis/TagApi'
+import swal from 'sweetalert'
 
-const ModalEdit = ({ isShowing, hide }) => {
+const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo }) => {
     const { register, handleSubmit, formState: { errors }, clearErrors, getValues } = useForm({
         mode: "onSubmit",
-        reValidateMode: "onBlur"
+        reValidateMode: "onBlur",
+        defaultValue: {
+            name: name,
+            phtoto: photo
+        }
     });
 
     const onSubmit = async (data) => {
-       
+        try {
+            const uploads = new FormData();
+            uploads.append("name", data.name);
+            uploads.append("photo", data.newPhoto);
+            await TagApi.editTag(slug, uploads);
+            swal("Sửa tag thành công!");
+        } catch (error) {
+            console.log(error);
+            swal("Sửa tag thất bại!");
+        }
     }
 
     return (
-        isShowing ? (
-            <div className="w-[60%] mx-auto fixed left-[30%] top-[20%] bg-white shadow-lg border border-green-500 rounded z-10">
+        isShowingEdit ? (
+            <div className="w-[60%] fixed left-[28%] top-[20%] bg-white shadow-lg border border-green-500 rounded z-10">
                 <div className="px-[20px] py-[20px]">
                     <div className="flex justify-between border-b border-gray-500">
                         <span className="mb-[20px] font-bold text-green-500 text-[26px]">Sửa tag</span>
@@ -32,7 +46,11 @@ const ModalEdit = ({ isShowing, hide }) => {
                                     <span className="text-red-600 font-bold mr-[5px]">*</span>
                                     Sửa tag:
                                 </p>
-                                <input type="text"
+                                <input type="text" defaultValue={name}
+                                    onChangeCapture={() => { clearErrors('name') }}
+                                    {...register('name', {
+                                        required: regex.REQUIRED,
+                                    })}
                                     className="outline-none px-[6px] w-[100%] py-[8px] border border-gray-500 rounded-[5px] my-[5px]"
                                 />
                                 <span className="text-red-500 text-[12px]"></span>
@@ -43,14 +61,22 @@ const ModalEdit = ({ isShowing, hide }) => {
                                     Ảnh:
                                 </p>
                                 <input type="file"
+                                    onChangeCapture={() => { clearErrors('newPhoto') }}
+                                    {...register('newPhoto', {
+                                        required: regex.REQUIRED,
+                                    })}
                                     className="outline-none px-[6px] w-[100%] py-[8px] border border-gray-500 rounded-[5px] my-[5px]"
                                 />
+                                {photo ?
+                                    <img className="mx-auto w-[100px] rounded-full" src={photo} alt="Avatar" />
+                                    :
+                                    <div> </div>
+                                }
                                 <span className="text-red-500 text-[12px]"></span>
                             </div>
                             <div className="text-right">
-                                <button
+                                <button type="submit"
                                     className="bg-green-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-green-800 focus:border-blue-600"
-                                    type="submit"
                                 >
                                     Sửa tag
                                 </button>
