@@ -51,7 +51,7 @@ const SlideBar = () => {
             to="/manager/publish_post"
           >
             <span className="text-left">
-              <Icon.AdminExercise />
+              <Icon.Pen className="fill-current w-[20px]" />
             </span>
             <span className="mx-4 text-sm font-normal">Quản lý bài viết</span>
           </NavLink>
@@ -61,7 +61,7 @@ const SlideBar = () => {
             to="/manager/publish_question"
           >
             <span className="text-left">
-              <Icon.AdminExercise />
+              <Icon.Questions className="fill-current w-[20px]" />
             </span>
             <span className="mx-4 text-sm font-normal">Quản lý câu hỏi</span>
           </NavLink>
@@ -71,7 +71,7 @@ const SlideBar = () => {
             to="/manager/contact"
           >
             <span className="text-left">
-              <Icon.AdminExercise />
+              <Icon.Form className="fill-current w-[20px]" />
             </span>
             <span className="mx-4 text-sm font-normal">Quản lý liên hệ</span>
           </NavLink>
@@ -81,7 +81,7 @@ const SlideBar = () => {
             to="/manager/tag"
           >
             <span className="text-left">
-              <Icon.AdminExercise />
+              <Icon.Tags className="fill-current w-[20px]" />
             </span>
             <span className="mx-4 text-sm font-normal">Quản lý tag</span>
           </NavLink>
@@ -91,7 +91,7 @@ const SlideBar = () => {
             to="/manager/account"
           >
             <span className="text-left">
-              <Icon.AdminExercise />
+              <Icon.User className="fill-current w-[20px]" />
             </span>
             <span className="mx-4 text-sm font-normal">Quản lý tài khoản</span>
           </NavLink>

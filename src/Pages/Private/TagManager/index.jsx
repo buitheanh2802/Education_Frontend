@@ -15,6 +15,7 @@ const TagManager = (props) => {
     });
     const [startCall, setStartCall] = useState(false);
     const [tagList, setTagList] = useState([]);
+    const [reConnect, setReConnect] = useState(false);
     useEffect(() => {
         const getData = async () => {
             try {
@@ -28,19 +29,25 @@ const TagManager = (props) => {
             }
         }
         getData();
-    }, []);
+    }, [reConnect]);
 
     const onRemove = (slug) => {
         setTagList(tagList.filter((item) => item.slug !== slug))
     }
-    const onAdd = () => {
-        setTagList(tagList.map((item) => item))
+
+    const onAdd = (data) => {
+        setTagList([data, ...tagList])
     }
+
+    const onEdit = () => {
+        setReConnect(!reConnect);
+    }
+
     const { isShowing, toggle } = UseModal();
 
     return (
         <div className="w-full">
-            <ModalAdd 
+            <ModalAdd
                 onAdd={onAdd}
                 isShowing={isShowing}
                 hide={toggle}
@@ -54,7 +61,8 @@ const TagManager = (props) => {
             {tagList &&
                 tagList.map((item, index) => {
                     return (
-                        <PublishItem 
+                        <PublishItem
+                            onEdit={onEdit}
                             onRemove={onRemove}
                             index={index + 1}
                             key={item._id}

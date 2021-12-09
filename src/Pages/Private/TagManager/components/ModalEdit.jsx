@@ -5,9 +5,14 @@ import { setLoading } from "src/Redux/Slices/Loading.slice"
 import { path, regex } from 'src/Constants/'
 import TagApi from 'src/Apis/TagApi'
 import swal from 'sweetalert'
+import { isFulfilled } from "@reduxjs/toolkit";
+import LoadingIcon from "src/Components/Loading/LoadingIcon";
 
-const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo }) => {
-    
+const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo, onEdit }) => {
+    const [loading, setLoading] = useState({
+        error: false,
+        success: false,
+    });
     const { register, handleSubmit, formState: { errors }, clearErrors, getValues } = useForm({
         mode: "onSubmit",
         reValidateMode: "onBlur",
@@ -19,12 +24,24 @@ const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo }) => {
 
     const onSubmit = async (data) => {
         try {
+            if (data) setLoading({ ...loading, success: true });
             const uploads = new FormData();
-            uploads.append("name", data.name);
-            console.log(data.photo);
-            uploads.append("photo", data.photo[0]);
-            await TagApi.editTag(slug, uploads);
-            swal("Sửa tag thành công!");
+            if (!data.photo) {
+                uploads.append("name", data.name);
+                const response = await TagApi.editTag(slug, uploads);
+                onEdit();
+                if (data) setLoading({ ...loading, success: false });
+                hide();
+                swal("Sửa tag thành công!");
+            } else {
+                uploads.append("name", data.name);
+                uploads.append("photo", data.photo[0])
+                const response = await TagApi.editTag(slug, uploads);
+                onEdit();
+                if (data) setLoading({ ...loading, success: false });
+                hide();
+                swal("Sửa tag thành công!");
+            }
         } catch (error) {
             console.log(error);
             swal("Sửa tag thất bại!");
@@ -64,9 +81,7 @@ const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo }) => {
                                 </p>
                                 <input type="file"
                                     onChangeCapture={() => { clearErrors('photo') }}
-                                    {...register('photo', {
-                                        required: regex.REQUIRED,
-                                    })}
+                                    {...register('photo')}
                                     className="outline-none px-[6px] w-[100%] py-[8px] border border-gray-500 rounded-[5px] my-[5px]"
                                 />
                                 {photo ?
@@ -76,10 +91,13 @@ const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo }) => {
                                 }
                                 <span className="text-red-500 text-[12px]">{errors?.photo && errors?.photo?.message}</span>
                             </div>
-                            <div className="text-right">
+                            <div className="flex justify-end">
                                 <button type="submit"
-                                    className="bg-green-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-green-800 focus:border-blue-600"
+                                    className="flex bg-green-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-green-800 focus:border-blue-600"
                                 >
+                                    {loading.success && (
+                                        <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                                    )}
                                     Sửa tag
                                 </button>
                             </div>

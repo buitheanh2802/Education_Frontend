@@ -39,12 +39,7 @@ const ChangePersonal = ({ profile }) => {
         try {
             setResponse({ ...response, isLoading: true })
             addImg(data.image);
-            // await AuthApi.changeInfo(data);
-            // setResponse({
-            //     ...response,
-            //     message: "Cập nhật thông tin thành công",
-            //     isLoading: false
-            // })
+            
         } catch (error) {
             setResponse({
                 ...response,
@@ -95,6 +90,7 @@ const ChangePersonal = ({ profile }) => {
                             </p>
                             <input type="date" defaultValue={profile.birthday}
                                 onChangeCapture={() => { clearErrors('birthday') }}
+                                {...register('birthday')}
                                 disabled={isLoading} className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
                         </div>
                         <div className="py-[5px]">
@@ -103,6 +99,7 @@ const ChangePersonal = ({ profile }) => {
                             </p>
                             <input type="text" defaultValue={profile.address}
                                 onChangeCapture={() => { clearErrors('address') }}
+                                {...register('address')}
                                 disabled={isLoading}
                                 className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
                         </div>
@@ -113,6 +110,7 @@ const ChangePersonal = ({ profile }) => {
                             </p>
                             <textarea defaultValue={profile.description}
                                 onChangeCapture={() => { clearErrors('description') }}
+                                {...register('description')}
                                 disabled={isLoading} className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
                         </div>
                         <div className="py-[5px]">

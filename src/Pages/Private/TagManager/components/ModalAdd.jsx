@@ -5,8 +5,14 @@ import { setLoading } from "src/Redux/Slices/Loading.slice"
 import { path, regex } from 'src/Constants/'
 import TagAPi from "src/Apis/TagApi"
 import swal from "sweetalert";
+import LoadingIcon from "src/Components/Loading/LoadingIcon";
 
 const Modal = ({ isShowing, hide, onAdd }) => {
+    const [loading, setLoading] = useState({
+        error: false,
+        success: false,
+    });
+
     const { register, handleSubmit, formState: { errors }, clearErrors } = useForm({
         mode: "onSubmit",
         reValidateMode: "onBlur"
@@ -14,11 +20,14 @@ const Modal = ({ isShowing, hide, onAdd }) => {
 
     const onSubmit = async (data) => {
         try {
+            if (data) setLoading({ ...loading, success: true });
             const uploads = new FormData();
             uploads.append("name", data.name);
-            uploads.append("photo", data.photo)
-            await TagAPi.addTag(uploads);
-            onAdd();
+            uploads.append("photo", data.photo[0]);
+            const {data: tag} = await TagAPi.addTag(uploads);
+            onAdd(tag.data);
+            if (data) setLoading({ ...loading, success: false });
+            hide();
             swal("Thêm tag thành công!");
         } catch (error) {
             console.log(error);
@@ -66,11 +75,14 @@ const Modal = ({ isShowing, hide, onAdd }) => {
                                 />
                                 <span className="text-red-500 text-[12px]">{errors?.photo && errors?.photo?.message}</span>
                             </div>
-                            <div className="text-right">
+                            <div className="flex justify-end">
                                 <button
-                                    className="bg-green-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-green-800 focus:border-blue-600"
+                                    className="flex bg-green-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-green-800 focus:border-blue-600"
                                     type="submit"
                                 >
+                                    {loading.success && (
+                                        <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                                    )}
                                     Thêm tag
                                 </button>
                             </div>

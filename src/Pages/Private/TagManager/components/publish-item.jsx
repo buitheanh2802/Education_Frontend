@@ -10,7 +10,7 @@ import ModalEdit from './ModalEdit';
 import UseModal from './useModal'
 
 const PublishItem = (props) => {
-    const { name, index, follow, post, question, id, slug, photo, onRemove } = props;
+    const { name, index, follow, post, question, id, slug, photo, onRemove, onEdit } = props;
     const { profile } = useSelector((state) => state.Auth);
     const [loading, setLoading] = useState({
         error: false,
@@ -44,13 +44,19 @@ const PublishItem = (props) => {
                 <div className="text-[13px]">{post}</div>
                 <div className="text-[13px]">{question}</div>
                 <div className="flex">
-                    <button onClick={() => handleDelete(slug)} className="px-[15px] py-[5px] text-white bg-red-500 hover:bg-red-800 rounded-md mx-auto" >
+                    <button onClick={() => handleDelete(slug)}
+                        className="px-[15px] py-[5px] text-white bg-red-500 hover:bg-red-800 rounded-md flex mx-auto" >
+                        {loading.success && (
+                            <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                        )}
                         Xóa
                     </button>
-                    <button onClick={toggleEdit} className="px-[15px] py-[5px] text-white bg-blue-300 hover:bg-blue-600 rounded-md mx-auto" >
+                    <button onClick={toggleEdit}
+                        className="px-[15px] py-[5px] text-white bg-blue-300 hover:bg-blue-600 rounded-md mx-auto" >
                         Sửa
                     </button>
                     <ModalEdit
+                        onEdit={onEdit}
                         isShowingEdit={isShowingEdit}
                         hide={toggleEdit}
                         id={id}
