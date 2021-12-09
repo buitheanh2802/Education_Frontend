@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Form from '../Modals/Form';
 
-const Header = () => {
+const Header = ({ name }) => {
     const [isModals, setIsModals] = useState(false);
     return (
         <>
@@ -42,16 +42,34 @@ const Header = () => {
                                                 clipRule="evenodd"
                                             />
                                         </svg>
-                                        <p className="text-gray-700 hover:text-gray-900 ml-1 md:ml-2 text-sm font-medium" >
-                                            Danh sách thể loại bài tập
-                                        </p>
+                                        <Link
+                                            to="/manager/exercise"
+                                            className="text-gray-700 hover:text-gray-900 ml-1 md:ml-2 text-sm font-medium"
+                                        >
+                                            Thể loại bài tập
+                                        </Link>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div className="flex items-center">
+                                        <svg
+                                            className="w-6 h-6 text-gray-400"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                clipRule="evenodd"
+                                            />
+                                        </svg>
+                                        <p className="text-gray-700 hover:text-gray-900 ml-1 md:ml-2 text-sm font-medium" > {name} </p>
                                     </div>
                                 </li>
                             </ol>
                         </nav>
-                        <h1 className="text-xl sm:text-2xl font-semibold text-gray-900">
-                            Tất cả thể loại bài tập
-                        </h1>
+                        <h1 className="text-xl sm:text-2xl font-semibold text-gray-900">{name}</h1>
                     </div>
                     <div className="block sm:flex items-center md:divide-x md:divide-gray-100">
                         <form className="sm:pr-3 mb-4 sm:mb-0" action="#" method="GET">

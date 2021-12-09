@@ -31,7 +31,15 @@ const ChallengeApi = {
 
     async post(data) {
         const url = `/challenges/`;
-        return AxiosClient.post(url, data, {    
+        return AxiosClient.post(url, data, {
+            headers: {
+                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
+    },
+    async put(data) {
+        const url = `/challenges/${data?._id}`;
+        return AxiosClient.put(url, data, {
             headers: {
                 Authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
@@ -48,6 +56,14 @@ const ChallengeApi = {
     async solutionSubmited(id) {
         const url = `/challenges/solution-submited/${id}`;
         return AxiosClient.post(url, {}, {
+            headers: {
+                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
+    },
+    async UploadFile(data) {
+        const url = 'challenges/upload-file';
+        return AxiosClient.post(url, data, {
             headers: {
                 Authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }

@@ -1,3 +1,4 @@
+import ChallengeApi from "src/Apis/ChallengeApi";
 import ImageApi from "src/Apis/ImageApi";
 
 // capitalize the head
@@ -41,6 +42,20 @@ export const UploadImage = async (form) => {
         const { data } = await ImageApi.addImage(form);
         return {
             url: data.data.photo.photoUrl,
+            status: true
+        }
+    } catch (error) {
+        return {
+            status: false
+        }
+    }
+}
+
+export const UpLoadFile = async (form) => {
+    try {
+        const { data } = await ChallengeApi.UploadFile(form);
+        return {
+            url: data.data.webContentLink,
             status: true
         }
     } catch (error) {

@@ -1,31 +1,26 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useHistory, useParams } from 'react-router'
+import { useHistory } from 'react-router'
 import ChallengeApi from 'src/Apis/ChallengeApi'
 import { Icon } from 'src/Components/Icon'
 import { path } from 'src/Constants/'
 import { UpLoadFile } from 'src/Helpers/'
 import { UploadImage } from 'src/Helpers/'
 
-const Form = ({ isModals, setIsModals }) => {
-    const { id } = useParams()
+const FormEdit = ({ isModals, setIsModals }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isUpImage, setIsUpImage] = useState(false)
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState(isModals.avatar)
     const history = useHistory();
 
     const { register, handleSubmit, formState: { errors }, setValue } = useForm({
-        defaultValues: {
-            challengeCategoryId: id,
-            submitedBy: [],
-            solutionSubmitedBy: []
-        }
+        defaultValues: { ...isModals, level: Number(isModals.level) }
     });
 
     const handleOnSubmit = async (dataForm) => {
         try {
             setIsLoading(true)
-            const { status } = await ChallengeApi.post(dataForm);
+            const { status } = await ChallengeApi.put(dataForm);
             if (!status) return
             history.push(path.SULOTION_MANAGER)
             setIsLoading(false)
@@ -60,7 +55,7 @@ const Form = ({ isModals, setIsModals }) => {
             <div onClick={() => setIsModals(false)} className="fixed z-[99999] inset-0 bg-black bg-opacity-50"></div>
             <div className="fixed z-[999999] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90vw]  lg:w-[60vw]">
                 <form onSubmit={handleSubmit(handleOnSubmit)} className="w-full h-full relative bg-white rounded ">
-                    <h3 className="text-xl font-medium p-5">Bắt đầu tạo thử thách</h3>
+                    <h3 className="text-xl font-medium p-5">Cập nhật thử thách</h3>
                     <div className="mx-5 mb-5 border border-gray-100 rounded shadow-sm px-5 pb-2  h-[70vh] overflow-auto">
                         <div className="filed my-5 grid grid-cols-2 gap-8">
                             <div>
@@ -129,7 +124,7 @@ const Form = ({ isModals, setIsModals }) => {
                                         }
                                     })}
                                     value="1"
-                                    className="cursor-pointer" type="radio" name="level" id="lv1" /> Cấp 1</label>
+                                    className="cursor-pointer" type="radio" id="lv1" /> Cấp 1</label>
                                 <label className="flex items-center gap-2 cursor-pointer" htmlFor="lv2"><input
                                     {...register('level', {
                                         required: {
@@ -138,7 +133,7 @@ const Form = ({ isModals, setIsModals }) => {
                                         }
                                     })}
                                     value="2"
-                                    className="cursor-pointer" type="radio" name="level" id="lv2" /> Cấp 2</label>
+                                    className="cursor-pointer" type="radio" id="lv2" /> Cấp 2</label>
                                 <label className="flex items-center gap-2 cursor-pointer" htmlFor="lv3"><input
                                     {...register('level', {
                                         required: {
@@ -147,7 +142,7 @@ const Form = ({ isModals, setIsModals }) => {
                                         }
                                     })}
                                     value="3"
-                                    className="cursor-pointer" type="radio" name="level" id="lv3" /> Cấp 3</label>
+                                    className="cursor-pointer" type="radio" id="lv3" /> Cấp 3</label>
                                 <label className="flex items-center gap-2 cursor-pointer" htmlFor="lv4"><input
                                     {...register('level', {
                                         required: {
@@ -156,7 +151,7 @@ const Form = ({ isModals, setIsModals }) => {
                                         }
                                     })}
                                     value="4"
-                                    className="cursor-pointer" type="radio" name="level" id="lv4" /> Cấp 4</label>
+                                    className="cursor-pointer" type="radio" id="lv4" /> Cấp 4</label>
                                 <label className="flex items-center gap-2 cursor-pointer" htmlFor="lv5"><input
                                     {...register('level', {
                                         required: {
@@ -165,7 +160,7 @@ const Form = ({ isModals, setIsModals }) => {
                                         }
                                     })}
                                     value="5"
-                                    className="cursor-pointer" type="radio" name="level" id="lv5" /> Cấp 5</label>
+                                    className="cursor-pointer" type="radio" id="lv5" /> Cấp 5</label>
                             </div>
                             <span className="text-[12px] text-red-500">{errors?.level && errors?.level?.message}</span>
                         </div>
@@ -198,4 +193,4 @@ const Form = ({ isModals, setIsModals }) => {
     )
 }
 
-export default Form
+export default FormEdit
