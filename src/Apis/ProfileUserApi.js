@@ -6,7 +6,7 @@ const ProfileUserApi = {
         const url = `/user/${username}`
         return AxiosClient.get(url, {
             headers: {
-                Authorization : `Bearer ${token}`
+                authorization : `Bearer ${token}`
             }
         })
     },

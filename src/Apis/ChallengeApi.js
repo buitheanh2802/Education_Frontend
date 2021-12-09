@@ -6,7 +6,7 @@ const ChallengeApi = {
         const url = `/challenges/${challengeId}`;
         return AxiosClient.get(url, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     },
@@ -15,7 +15,7 @@ const ChallengeApi = {
         const url = `/challenges/${cateid}/challenge-categories`;
         return AxiosClient.get(url, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     },
@@ -24,7 +24,7 @@ const ChallengeApi = {
         const url = `/challenges/${id}`;
         return AxiosClient.put(url, data, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     },
@@ -32,7 +32,7 @@ const ChallengeApi = {
         const url = `/challenges/submited-user/${id}`;
         return AxiosClient.post(url, {}, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     }
