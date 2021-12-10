@@ -7,7 +7,7 @@ const FollowApi = {
     const url = `/follow/${username}`;
     return AxiosClient.post( url, { username: username }, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          authorization: `Bearer ${token}`,
         }
     });
   },
@@ -17,7 +17,7 @@ const FollowApi = {
     const url = `/follow/${username}`;
     return AxiosClient.delete(url, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`,
       },
     });
   },
@@ -29,7 +29,7 @@ const FollowApi = {
       { _id: id },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          authorization: `Bearer ${token}`,
         },
       }
     );
@@ -39,7 +39,7 @@ const FollowApi = {
     const url = `/follow/${id}`;
     return AxiosClient.delete(url, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`,
       },
     });
   },

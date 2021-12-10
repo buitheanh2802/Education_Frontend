@@ -1,0 +1,13 @@
+.ql-editor {
+    padding-right: 40px;
+}
+.ql-snow{
+    border: none !important;
+    box-shadow: none !important;
+}
+*{
+    animation: unset;
+}
+.ql-toolbar{
+    border-bottom: 1px solid #e3e3e3 !important;
+}

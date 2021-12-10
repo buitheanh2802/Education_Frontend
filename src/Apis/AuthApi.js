@@ -6,7 +6,7 @@ const AuthApi = {
         const url = '/auth/signin';
         return AxiosClient.post(url, data, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     },
@@ -15,7 +15,7 @@ const AuthApi = {
         const url = '/auth/signup';
         return AxiosClient.post(url, data, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     },
@@ -24,8 +24,9 @@ const AuthApi = {
         const url = '/auth/signout';
         return AxiosClient.get(url, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
-            }
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            },
+            withCredentials: true
         })
     },
 
@@ -34,7 +35,7 @@ const AuthApi = {
         const url = '/auth/profile/me';
         return AxiosClient.get(url, {
             headers: {
-                Authorization: `Bearer ${token}`
+                authorization: `Bearer ${token}`
             }
         })
     },
@@ -43,7 +44,7 @@ const AuthApi = {
         const url = '/auth/profile/role';
         return AxiosClient.get(url, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     },
@@ -63,7 +64,7 @@ const AuthApi = {
         const url = '/auth/profile/me/change-password';
         return AxiosClient.post(url, password, {
             headers: {
-                Authorization: `Bearer ${token}`
+                authorization: `Bearer ${token}`
             }
         })
     },
@@ -73,7 +74,7 @@ const AuthApi = {
         const url = '/auth/profile/me/change-info';
         return AxiosClient.post(url, data, {
             headers: {
-                Authorization: `Bearer ${token}`
+                authorization: `Bearer ${token}`
             }
         })
     }

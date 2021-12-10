@@ -6,7 +6,7 @@ const SulotionApi = {
         const url = `/solution`;
         return AxiosClient.get(url, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     },
@@ -24,7 +24,7 @@ const SulotionApi = {
         const url = `/solution`;
         return AxiosClient.post(url, data, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     }
