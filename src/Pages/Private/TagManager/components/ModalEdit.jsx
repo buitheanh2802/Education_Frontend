@@ -30,7 +30,7 @@ const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo, onEdit }) => {
                 uploads.append("name", data.name);
                 const response = await TagApi.editTag(slug, uploads);
                 onEdit();
-                if (data) setLoading({ ...loading, success: false });
+                if (response) setLoading({ ...loading, success: false });
                 hide();
                 swal("Sửa tag thành công!");
             } else {
@@ -38,7 +38,7 @@ const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo, onEdit }) => {
                 uploads.append("photo", data.photo[0])
                 const response = await TagApi.editTag(slug, uploads);
                 onEdit();
-                if (data) setLoading({ ...loading, success: false });
+                if (response) setLoading({ ...loading, success: false });
                 hide();
                 swal("Sửa tag thành công!");
             }

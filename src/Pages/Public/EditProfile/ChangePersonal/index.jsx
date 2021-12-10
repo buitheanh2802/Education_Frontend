@@ -20,7 +20,7 @@ const ChangePersonal = ({ profile }) => {
     const [response, setResponse] = useState({ isLoading: false, error: null, message: null })
     const { isLoading, error, message } = response;
     const [profileMe, setProfMe] = useState([]);
-    const { register, handleSubmit, reset, formState: { errors }, clearErrors, getValues } = useForm({
+    const { register, handleSubmit, handleChange, reset, formState: { errors }, clearErrors, getValues } = useForm({
         defaultValue: {
             fullname: profile.fullname,
             avatar: profile.avatar.avatarUrl,
@@ -34,10 +34,23 @@ const ChangePersonal = ({ profile }) => {
     });
 
     const handleAddHobby = () => {
-
+        let hobbies = []
+        let checkHob = document.querySelectorAll('input[type=checkbox]:checked')
+        for (var i = 0; i < checkHob.length; i++) {
+            hobbies.push(checkHob[i].value)
+        }
+        document.getElementById('hobbies').onchange = function(e){
+            if(checkHob){
+                alert("checked")
+            }
+        }
     }
     const handleAddSkill = () => {
-
+        let skills = []
+        let checkSkill = document.querySelectorAll('input[type=checkbox]:checked')
+        for (var i = 0; i < checkSkill.length; i++) {
+            skills.push(checkSkill[i].value)
+        }
     }
 
     const onSubmit = async (data) => {
@@ -133,7 +146,7 @@ const ChangePersonal = ({ profile }) => {
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Sở thích:
                             </p>
-                            <form onSubmit={handleSubmit(handleAddHobby)} className="grid grid-cols-3">
+                            <form id="hobbies" onchange={() => handleAddHobby()} className="grid grid-cols-3">
                                 <div className="flex my-[5px]">
                                     <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Ăn uống" id="eat" />
                                     <span>Ăn uống</span>
@@ -164,7 +177,7 @@ const ChangePersonal = ({ profile }) => {
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Kỹ năng:
                             </p>
-                            <form onSubmit={handleSubmit(handleAddSkill)} className="grid grid-cols-3">
+                            <form id="skills" onchange={() => handleAddSkill()} className="grid grid-cols-3">
                                 <div className="flex my-[5px]">
                                     <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Front-End" id="front" />
                                     <span>Front-End</span>
