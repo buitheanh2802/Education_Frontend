@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import { timeFormatter } from "src/Helpers/Timer";
 import { useSelector } from "react-redux";
-import PostAPI from "../../../../Apis/PostApi";
 import QuestionApi from "src/Apis/QuestionApi";
 
 const PublishItem = (props) => {

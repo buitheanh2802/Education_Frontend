@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useForm } from 'react-hook-form'
-import { useDispatch } from "react-redux"
 import { useHistory } from 'react-router-dom'
-import { setLoading } from "src/Redux/Slices/Loading.slice"
-import { Icon } from "src/Components/Icon"
 import ErrorMessage from 'src/Components/ErrorMessage'
 import SuccessMessage from 'src/Components/SuccessMessage'
-import { path, regex } from 'src/Constants/'
 import ResponseMessage from 'src/Constants/ResponseMessage'
 import AuthApi from "src/Apis/AuthApi"
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
@@ -19,8 +15,7 @@ const ChangePersonal = ({ profile }) => {
     const history = useHistory();
     const [response, setResponse] = useState({ isLoading: false, error: null, message: null })
     const { isLoading, error, message } = response;
-    const [profileMe, setProfMe] = useState([]);
-    const { register, handleSubmit, handleChange, reset, formState: { errors }, clearErrors, getValues } = useForm({
+    const { register, handleSubmit, formState: { errors }, clearErrors, getValues } = useForm({
         defaultValue: {
             fullname: profile?.fullname,
             avatar: profile?.avatar?.avatarUrl,
@@ -43,16 +38,21 @@ const ChangePersonal = ({ profile }) => {
         }
     }
 
-    const handleAddSkill = () => {
-
+    const handleAddSkill = (e) => {
+        if (e.target.checked) {
+            skills.push(e.target.value)
+        } else {
+            skills = skills.filter(item => item !== e.target.value)
+        }
     }
 
     const onSubmit = async (data) => {
         try {
             setResponse({ isLoading: false, error: null, message: null })
             if (data) setLoading({ ...loading, success: true });
-            // const { data: res } = await ;
-            // if (res) setLoading({ ...loading, success: false });
+            const dataSend = { ...data, hobbies, skills }
+            const { data: res } = await AuthApi.changeInfo(dataSend);
+            if (res) setLoading({ ...loading, success: false });
             setResponse({
                 ...response,
                 error: null,
@@ -60,7 +60,7 @@ const ChangePersonal = ({ profile }) => {
             })
             setTimeout(() => {
                 history.push('/profile/me/change-info')
-            }, 1000);
+            }, 2000);
         } catch (error) {
             setResponse({
                 ...response,
@@ -69,7 +69,6 @@ const ChangePersonal = ({ profile }) => {
             })
         }
     }
-
 
     return (
         <>
@@ -128,10 +127,9 @@ const ChangePersonal = ({ profile }) => {
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
-                                <span className="text-red-600 font-bold mr-[5px]">*</span>
                                 Mô tả:
                             </p>
-                            <textarea defaultValue={profile.description}
+                            <textarea defaultValue={profile.description} rows={6}
                                 onChangeCapture={() => { clearErrors('description') }}
                                 {...register('description')}
                                 disabled={isLoading} className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
@@ -194,7 +192,7 @@ const ChangePersonal = ({ profile }) => {
                                 </div>
                             </form>
                         </div>
-                        <div className="text-right">
+                        <div className="flex justify-end">
                             <button
                                 onClick={() => { history.push('/profile/me/change-info') }}
                                 className="mx-[10px] bg-blue-200 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-gray-200 hover:text-blue-600 focus:border-blue-600"
@@ -203,7 +201,7 @@ const ChangePersonal = ({ profile }) => {
                                 hủy bỏ
                             </button>
                             <button
-                                className="bg-blue-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-blue-800 focus:border-blue-600"
+                                className="flex bg-blue-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-blue-800 focus:border-blue-600"
                                 type="submit"
                             >
                                 {loading.success && (

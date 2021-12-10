@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from 'react-hook-form'
-import { useDispatch } from "react-redux";
-import { setLoading } from "src/Redux/Slices/Loading.slice";
 import AuthApi from "src/Apis/AuthApi";
 import { Icon } from "src/Components/Icon";
 import ErrorMessage from 'src/Components/ErrorMessage'
 import SuccessMessage from 'src/Components/SuccessMessage'
-import { path, regex } from 'src/Constants/'
+import { regex } from 'src/Constants/'
 import ResponseMessage from 'src/Constants/ResponseMessage'
 import { useHistory } from "react-router-dom";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { path } from "src/Constants/";
 import { Icon } from "src/Components/Icon";
 import ProfileUserApi from "src/Apis/ProfileUserApi";
 import { Link, useHistory } from "react-router-dom";

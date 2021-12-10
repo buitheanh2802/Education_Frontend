@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import PostAPI from "../../../Apis/PostApi";
 import Header from "./components/header";
 import PublishItem from "./components/publish-item";
 import queryString from "query-string";

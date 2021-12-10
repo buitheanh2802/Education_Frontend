@@ -35,9 +35,9 @@ const IntroPage = () => {
                 CHÚNG TÔI LÀ AI?
               </h3>
               <p className="mt-2 lg:text-[16px] sm:text-[13px]  text-[16px] lg:leading-[24px] text-justify">
-                Eduford là một hệ thống và nền tảng tương tác trực tuyến cho
+                DevStar là một hệ thống và nền tảng tương tác trực tuyến cho
                 phép người dùng học, thực hành và đánh giá kỹ năng lập trình của
-                mình thông qua các bài tập thực hành, các cuộc thi viếtcode với
+                mình thông qua các bài tập thực hành, các cuộc thi viết code với
                 chức năng tự động chấm điểm để người dùng có thể cải thiện kỹ
                 năng và tăng năng suất.
               </p>
@@ -53,7 +53,7 @@ const IntroPage = () => {
               Chúng tôi tập trung vào việc phát triển một hệ sinh thái toàn diện
               với các khóa học từ cơ bản đến nâng cao và thực hành các thử thách
               phù hợp với tất cả mọi người. Với các khóa học và thử thách phong
-              phú, đa dạng hỗ trợ nhiều ngôn ngữ lập trình khác nhau, CodeLearn
+              phú, đa dạng hỗ trợ nhiều ngôn ngữ lập trình khác nhau, DevStar
               giúp người dùng học và thực hành lập trình một cách dễ dàng và
               hiệu quả.
               <br />
@@ -162,7 +162,7 @@ const IntroPage = () => {
                 CHÚNG TÔI ĐÃ BẮT ĐẦU NHƯ THẾ NÀO
               </h3>
               <p className="pt-[20px] text-[18px] leading-[27px] sm:text-[16px] text-justify">
-                Eduford thành lập nên giúp bạn khám phá giới hạn của chính mình.
+                DevStar thành lập nên giúp bạn khám phá giới hạn của chính mình.
                 Chúng tôi hứa hẹn sẽ mang đến một kênh chia sẻ kiến ​​thức về
                 các ngôn ngữ lập trình cho các nhà phát triển không chỉ ở Việt
                 Nam mà còn vươn xa hơn.
@@ -226,59 +226,6 @@ const IntroPage = () => {
           </div>
         </div>
       </div>
-
-      {/* <div className="mt-[70px]  container mx-auto  ">
-        <div className="grid lg:gap-[63px]  lg:grid-cols-2 sm:grid-cols-1 ">
-          <div className="">
-            <div className="px-[20px] sm:px-0">
-              <h3 className="text-[36px] leading-[54px] font-bold">CHÚNG TÔI ĐÃ BẮT ĐẦU NHƯ THẾ NÀO</h3>
-              <p className="pt-[20px] text-[18px] leading-[27px]">Eduford thành lập nên giúp bạn khám phá giới hạn của chính
-                mình. Chúng tôi hứa hẹn sẽ mang đến một kênh chia sẻ kiến ​​thức về các ngôn ngữ lập trình cho các nhà phát
-                triển không chỉ ở Việt Nam mà còn vươn xa hơn.</p>
-            </div>
-            <h4 className="text-center mt-[65px] text-[18px] leading-[27px] font-bold mb-[13px]">Tháng 9 năm 2021</h4>
-            <div className="relative bg-cover bg-no-repeat   mx-auto h-[520px] w-[520px]  justify-items-center mb-[70px] "
-              style={{ backgroundImage: `url(${batdau1_img})` }}>
-              <div className="absolute top-[30%] text-center pl-[77px] pr-[91px]  text-[#FFFFFF] ">
-                <div className="bg-[#C53030] bg-opacity-75 px-[31px] pb-[46px] pt-[35px]">
-                  <h4 className=" text-[24px] leading-[36px] font-bold">Giới thiệu</h4>
-                  <p className=" pt-[13px] text-[14px] leading-[21px]">Hệ thống hiện có tên chính thức là Eduford
-                    và được các thành viên trong dự án dần hoàn thiện.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="">
-            <h4 className="text-center text-[18px] leading-[27px] font-bold mb-[13px]">Tháng 7 năm 2021</h4>
-            <div className="relative bg-cover bg-conter  mx-auto h-[520px] w-[520px] justify-items-center"
-              style={{ backgroundImage: `url(${batdau2_img})` }}>
-              <div className="absolute  text-center pl-[77px] pr-[91px] pt-[160px] pb-[140px] text-[#FFFFFF] ">
-                <div className="bg-[#C53030] bg-opacity-75 px-[15px] items-center">
-                  <h4 className="pt-[50px] text-[24px] leading-[36px] font-bold">Ý tưởng đầu tiên</h4>
-                  <p className=" pt-[4px] text-[14px] leading-[21px]">Giữa năm 2021, những ý tưởng đầu tiên về hệ thống vừa
-                    học vừa làm đã đến với chúng tôi.</p>
-                  <p className="pb-[35px]  text-[14px] leading-[21px]">Chúng tôi bắt đầu đặt viên gạch đầu tiên xây dựng hệ
-                    thống vào tháng 7/2021.</p>
-                </div>
-              </div>
-            </div>
-
-            <h4 className="text-center text-[18px] leading-[27px] font-bold mb-[13px] mt-[60px]">Tháng 12 năm 2021</h4>
-            <div className="relative bg-cover bg-conter  mx-auto h-[520px] w-[520px] justify-items-center   mb-[120px]"
-              style={{ backgroundImage: `url(${batdau3_img})` }}>
-              <div className="absolute  text-center pl-[77px] pr-[91px] py-[170px]  text-[#FFFFFF] ">
-                <div className="bg-[#C53030] bg-opacity-75 px-[15px] items-center">
-                  <h4 className="pt-[45px] text-[24px] leading-[36px] font-bold">Ra mắt</h4>
-                  <p className="  text-[14px] leading-[21px] pb-[48px]">Sau 2 tháng phát triển, nhóm đã cho ra đời phiên
-                    bản thử nghiệm đầu tiên với hơn 100 người dùng.</p>
-
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };

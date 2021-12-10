@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
 
-const Sidebar = ({ profile }) => {
+const Sidebar = () => {
     const [BoxInfo, setBoxInfo] = useState(false);
     const [BoxSecurity, setBoxSecurity] = useState(false);
     return (
@@ -15,7 +15,6 @@ const Sidebar = ({ profile }) => {
                     <p className="ml-3 text-[15px] hidden lg:block">Trang Chủ</p>
                 </NavLink>
             </div>
-
             <div className="w-full relative ">
                 <div
                     className="flex items-center justify-between py-[17px] hover:bg-blue-100 px-[20px]"
@@ -51,7 +50,6 @@ const Sidebar = ({ profile }) => {
                             Thông Tin Cá Nhân
                         </span>
                     </NavLink>
-
                 </ul>
             </div>
             <div className="w-full relative">

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from 'react-hook-form'
-import { useDispatch } from "react-redux";
-import { setLoading } from "src/Redux/Slices/Loading.slice"
-import { path, regex } from 'src/Constants/'
+import { regex } from 'src/Constants/'
 import TagAPi from "src/Apis/TagApi"
 import swal from "sweetalert";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";

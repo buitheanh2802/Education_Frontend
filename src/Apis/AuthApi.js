@@ -40,6 +40,16 @@ const AuthApi = {
         })
     },
 
+    profileDetail() {
+        const token = localStorage.getItem("_token_");
+        const url = '/auth/profile/me/info-detail';
+        return AxiosClient.get(url, {
+            headers: {
+                authorization : `Bearer ${token}`
+            }
+        })
+    },
+
     async role() {
         const url = '/auth/profile/role';
         return AxiosClient.get(url, {
@@ -78,6 +88,7 @@ const AuthApi = {
             }
         })
     }
+
 }
 
 export default AuthApi

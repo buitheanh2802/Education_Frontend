@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from 'react-hook-form'
-import { useDispatch } from "react-redux";
-import { setLoading } from "src/Redux/Slices/Loading.slice"
-import { path, regex } from 'src/Constants/'
+import { regex } from 'src/Constants/'
 import TagApi from 'src/Apis/TagApi'
 import swal from 'sweetalert'
-import { isFulfilled } from "@reduxjs/toolkit";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
 
 const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo, onEdit }) => {

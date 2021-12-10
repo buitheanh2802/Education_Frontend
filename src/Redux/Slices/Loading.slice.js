@@ -1,7 +1,3 @@
-import ResponseMessage from "src/Constants/ResponseMessage";
-import LocalStorage from "src/Helpers/Storage";
-import { ActionGetProfile, ActionLogin, ActionLogout } from "../Actions/Auth.action";
-
 const { createSlice } = require("@reduxjs/toolkit");
 
 const mySlice = createSlice({
