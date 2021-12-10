@@ -55,12 +55,16 @@ const ProfilePage = () => {
                                         <span className="py-[5px] lg:text-[13px] xl:text-[16px] sm:text-[14px] text-[#4A5568] ">
                                             @{profile?.username?.substring(0, 16)}...
                                         </span>
-                                        <div className="py-[5px]">
-                                            <span className="inline-block mr-[5px] pt-[0px]">
-                                                <Icon.Calendar className="fill-current w-[13px] " />
-                                            </span>
-                                            {profile?.birthday}
-                                        </div>
+                                        {profile?.birthday ?
+                                            <div className="py-[5px]">
+                                                <span className="inline-block mr-[5px] pt-[0px]">
+                                                    <Icon.Calendar className="fill-current w-[13px] " />
+                                                </span>
+                                                {profile?.birthday}
+                                            </div>
+                                            :
+                                            <div></div>
+                                        }
                                     </div>
                                     <div className="flex items-center justify-end">
                                         <Link to={path.PROFILE_CHANGE}
@@ -128,43 +132,67 @@ const ProfilePage = () => {
                         <h2 className="font-bold text-[20px]">Thông tin tài khoản</h2>
                     </div>
                     <div className="w-full px-[10px] py-[15px]">
-                        <div className="py-[5px]">
-                            <span className="inline-block"><Icon.Profile className="fill-current w-[16px] mb-[-2px] mr-[5px]" /> </span>
-                            <span className="inline-block"> {profile?.descriptions}</span>
-                        </div>
-                        <div className="py-[5px]">
-                            <span className="font-bold text-gray-800">Phone: </span> {profile?.phoneNumber}
+                        {profile?.descriptions ?
+                            <div className="py-[5px]">
+                                <span className="inline-block"><Icon.Profile className="fill-current w-[16px] mb-[-2px] mr-[5px]" /> </span>
+                                <span className="inline-block"> {profile?.descriptions}</span>
                             </div>
-                        <div className="py-[5px]">
-                            <span className="font-bold text-gray-800">Address: </span> {profile?.address}
+                            :
+                            <div></div>
+                        }
+                        {profile?.phoneNumber ?
+                            <div className="py-[5px]">
+                                <span className="font-bold text-gray-800">Phone: </span> {profile?.phoneNumber}
                             </div>
-                        <div className="py-[5px]">
-                            <span className="font-bold text-gray-800">Email: </span> {profile?.email}
-                        </div>
-                        <div className="py-[5px]">
-                            <span className="font-bold text-gray-800">Hobbies: </span>
-                            {profile?.hobbies?.map((hob, index) => {
-                                return (
-                                    <>
-                                        <div className="font-bold mx-[5px] px-[5px] inline-block border-r border-black last:border-0" key={index}>
-                                            {hob}
-                                        </div>
-                                    </>
-                                )
-                            })}
-                        </div>
-                        <div className="py-[5px]">
-                            <span className="font-bold text-gray-800">Skills: </span>
-                            {profile?.skills?.map((ski, index) => {
-                                return (
-                                    <>
-                                        <div className="font-bold mx-[5px] inline-block md:px-[10px] px-[10px] py-[5px] lg:px-[8px] text-[12px] xl:px-[15px] hover:bg-gray-300 text-[#4A5568] bg-[#BEE3F8]" key={index}>
-                                            {ski}
-                                        </div>
-                                    </>
-                                )
-                            })}
-                        </div>
+                            :
+                            <div></div>
+                        }
+                        {profile?.address ?
+                            <div className="py-[5px]">
+                                <span className="font-bold text-gray-800">Address: </span> {profile?.address}
+                            </div>
+                            :
+                            <div></div>
+                        }
+                        {profile?.email ?
+                            <div className="py-[5px]">
+                                <span className="font-bold text-gray-800">Email: </span> {profile?.email}
+                            </div>
+                            :
+                            <div></div>
+                        }
+                        {profile?.hobbies ?
+                            <div className="py-[5px]">
+                                <span className="font-bold text-gray-800">Hobbies: </span>
+                                {profile?.hobbies?.map((hob, index) => {
+                                    return (
+                                        <>
+                                            <div className="font-bold mx-[5px] px-[5px] inline-block border-r border-black last:border-0" key={index}>
+                                                {hob}
+                                            </div>
+                                        </>
+                                    )
+                                })}
+                            </div>
+                            :
+                            <div></div>
+                        }
+                        {profile?.skills ?
+                            <div className="py-[5px]">
+                                <span className="font-bold text-gray-800">Skills: </span>
+                                {profile?.skills?.map((ski, index) => {
+                                    return (
+                                        <>
+                                            <div className="font-bold mx-[5px] inline-block md:px-[10px] px-[10px] py-[5px] lg:px-[8px] text-[12px] xl:px-[15px] hover:bg-gray-300 text-[#4A5568] bg-[#BEE3F8]" key={index}>
+                                                {ski}
+                                            </div>
+                                        </>
+                                    )
+                                })}
+                            </div>
+                            :
+                            <div></div>
+                        }
                     </div>
                 </div>
             </div>

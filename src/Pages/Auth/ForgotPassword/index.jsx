@@ -7,9 +7,13 @@ import SuccessMessage from 'src/Components/SuccessMessage'
 import { path, regex } from 'src/Constants/'
 import ResponseMessage from 'src/Constants/ResponseMessage'
 import { useForm } from 'react-hook-form'
+import LoadingIcon from "src/Components/Loading/LoadingIcon";
 
 const ForgotPassword = () => {
-
+    const [loading, setLoading] = useState({
+        error: false,
+        success: false,
+    });
     const history = useHistory();
     const [response, setResponse] = useState({ isLoading: false, error: null, message: null })
     const { isLoading, error, message } = response;
@@ -20,19 +24,22 @@ const ForgotPassword = () => {
 
     const onSubmit = async (data) => {
         try {
-            setResponse({ ...response, isLoading: true })
-            await AuthApi.forgotPassword(data);
+            setResponse({isLoading: false, error: null, message: null})
+            if (data) setLoading({ ...loading, success: true });
+            const { data : response} = await AuthApi.forgotPassword(data);
+            if (response) setLoading({ ...loading, success: false });
             setResponse({
                 ...response,
+                error: null,
                 message: "Chúng tôi đã gửi một email có liên kết để đặt lại mật khẩu của bạn. Có thể mất từ ​​1 đến 2 phút để hoàn thành. Vui lòng kiểm tra hộp thư của bạn.",
-                isLoading: false
             })
             reset()
         } catch (error) {
+            setLoading({ ...loading, success: false });
             setResponse({
                 ...response,
+                message: null,
                 error: ResponseMessage(error?.response?.data?.message[0]),
-                isLoading: false
             })
         }
     }
@@ -58,7 +65,7 @@ const ForgotPassword = () => {
                     {message && <SuccessMessage message={message} />}
                     <p className="text-gray-800 text-[15px] py-[5px]">
                         <span className="text-red-600 font-bold mr-[5px]">*</span>
-                        Địa chỉ email của bạn: 
+                        Địa chỉ email của bạn:
                     </p>
                     <input type="email" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" placeholder="Nhập email của bạn..."
                         onChangeCapture={() => { clearErrors('email') }}
@@ -69,10 +76,13 @@ const ForgotPassword = () => {
                         disabled={isLoading}
                     />
                     <span className="text-red-500 text-[12px]">{errors?.email && errors?.email?.message}</span>
-                    <div className="text-right">
-                        <button className="bg-blue-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-blue-800 focus:border-blue-600"
+                    <div className="flex justify-end">
+                        <button className="flex bg-blue-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-blue-800 focus:border-blue-600"
                             type="submit"
                         >
+                            {loading.success && (
+                                <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                            )}
                             Gửi email cho tôi
                         </button>
                     </div>
