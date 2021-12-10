@@ -70,14 +70,14 @@ const ContactManager = (props) => {
             <PublishItem
               index={index + 1}
               key={index}
-              title={item.title}
-              content={item.content}
-              name={item.name}
-              email={item.email}
-              createAt={item.createdAt}
-              id={item._id}
-              feedback={item.feedback}
-              fullName={item.submittedBy.fullname}
+              title={item?.title}
+              content={item?.content}
+              name={item?.name}
+              email={item?.email}
+              createAt={item?.createdAt}
+              id={item?._id}
+              feedback={item?.feedback}
+              fullName={item?.submittedBy?.fullname}
               handelRemoveContact={handelRemoveContact}
               handelFeedbackContact={handelFeedbackContact}
             />
