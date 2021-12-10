@@ -748,6 +748,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 1.5rem;
 }
 
+.mx-\[20px\] {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .my-\[10px\] {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -806,11 +811,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mx-\[2px\] {
   margin-left: 2px;
   margin-right: 2px;
-}
-
-.mx-\[20px\] {
-  margin-left: 20px;
-  margin-right: 20px;
 }
 
 .mt-\[20px\] {

@@ -22,30 +22,29 @@ const ChangePersonal = ({ profile }) => {
     const [profileMe, setProfMe] = useState([]);
     const { register, handleSubmit, handleChange, reset, formState: { errors }, clearErrors, getValues } = useForm({
         defaultValue: {
-            fullname: profile.fullname,
-            avatar: profile.avatar.avatarUrl,
-            email: profile.email,
-            birthday: profile.birthday,
-            address: profile.address,
-            description: profile.description,
-            hobbies: profile.hobbies,
-            skills: profile.skills
+            fullname: profile?.fullname,
+            avatar: profile?.avatar?.avatarUrl,
+            email: profile?.email,
+            birthday: profile?.birthday,
+            address: profile?.address,
+            description: profile?.description,
+            hobbies: profile?.hobbies,
+            skills: profile?.skills
         }
     });
+    let hobbies = [];
+    let skills = []
 
-    const handleAddHobby = () => {
-        let hobbies = []
-        let checkHob = document.querySelectorAll('input[type=checkbox]:checked')
-        for (var i = 0; i < checkHob.length; i++) {
-            hobbies.push(checkHob[i].value)
+    const handleAddHobby = (e) => {
+        if (e.target.checked) {
+            hobbies.push(e.target.value)
+        } else {
+            hobbies = hobbies.filter(item => item !== e.target.value)
         }
     }
+
     const handleAddSkill = () => {
-        // let skills = []
-        // let checkSkill = document.querySelectorAll('input[type=checkbox]:checked')
-        // for (var i = 0; i < checkSkill.length; i++) {
-        //     skills.push(checkSkill[i].value)
-        // }
+
     }
 
     const onSubmit = async (data) => {
@@ -141,29 +140,29 @@ const ChangePersonal = ({ profile }) => {
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Sở thích:
                             </p>
-                            <form id="hobbies" onchange={() => handleAddHobby()} className="grid grid-cols-3">
+                            <form id="hobbies" className="grid grid-cols-3">
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Ăn uống" id="eat" />
+                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Ăn uống" id="eat" />
                                     <span>Ăn uống</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Nghe nhạc" id="music" />
-                                    <span> Nghe nhạc</span>
+                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Nghe nhạc" id="music" />
+                                    <span>Nghe nhạc</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Chơi game" id="game" />
+                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Chơi game" id="game" />
                                     <span>Chơi game</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mua sắm" id="shopping" />
+                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mua sắm" id="shopping" />
                                     <span>Mua sắm</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Chơi thể thao" id="sport" />
+                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Chơi thể thao" id="sport" />
                                     <span>Chơi thể thao</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Đọc sách" id="reading" />
+                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Đọc sách" id="reading" />
                                     <span>Đọc sách</span>
                                 </div>
                             </form>
@@ -172,25 +171,25 @@ const ChangePersonal = ({ profile }) => {
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Kỹ năng:
                             </p>
-                            <form id="skills" onchange={() => handleAddSkill()} className="grid grid-cols-3">
+                            <form id="skills" className="grid grid-cols-3">
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Front-End" id="front" />
+                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Front-End" id="front" />
                                     <span>Front-End</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Back-End" id="back" />
+                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Back-End" id="back" />
                                     <span>Back-End</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mobile App(IOS)" id="ios" />
+                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mobile App(IOS)" id="ios" />
                                     <span>Mobile App(IOS)</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mobile App(Android)" id="android" />
+                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mobile App(Android)" id="android" />
                                     <span>Mobile App(Android)</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Xử lí dữ liệu" id="pend-data" />
+                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Xử lí dữ liệu" id="pend-data" />
                                     <span>Xử lí dữ liệu</span>
                                 </div>
                             </form>
