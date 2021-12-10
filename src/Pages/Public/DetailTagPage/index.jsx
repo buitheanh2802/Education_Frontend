@@ -75,6 +75,7 @@ const DetailTagPage = () => {
         if (token === null) {
             history.push("/auth/login");
             dispatch(setLoading(false))
+            return;
         }
         if (tag?.isFollowing) {
             await FollowApi.unFollowTag(id);

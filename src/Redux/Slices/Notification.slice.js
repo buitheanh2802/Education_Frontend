@@ -5,6 +5,7 @@ const mySlice = createSlice({
     initialState: {
         models: null,
         pagination: {},
+        counter : 0,
         process: {
             listLoading: false,
             actionLoading: {
@@ -27,12 +28,16 @@ const mySlice = createSlice({
             state.models = data.models;
             state.process.listLoading = false;
         },
+        hasNotification(state){
+            state.counter += 1;
+        },
         readMore(state, action) {
             const { data } = action.payload;
             state.models = [...state.models, ...data.models];
             state.pagination = data.metaData.pagination;
             state.process.actionLoading.readMore = false;
         },
+
         catchError(state, action) {
             const { callType, errors } = action.payload;
             if (callType === 'list') {
@@ -46,5 +51,5 @@ const mySlice = createSlice({
 })
 
 const { reducer, actions } = mySlice;
-export const { startCall, catchError, gets, readMore } = actions;
+export const { startCall, catchError, gets, readMore,hasNotification } = actions;
 export default reducer;
