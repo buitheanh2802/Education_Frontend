@@ -7,7 +7,7 @@ const QuestionApi = {
   //   if (endPoint === "follow" || endPoint === "listbookmark") {
   //     return AxiosClient.get(url, {
   //       headers: {
-  //         Authorization: `Bearer ${token}`,
+  //         authorization: `Bearer ${token}`,
   //       },
   //     });
   //   } else {
@@ -27,7 +27,7 @@ const QuestionApi = {
     const url = `/question/follow`;
     return AxiosClient.get(url, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`,
       },
     });
   },
@@ -36,7 +36,7 @@ const QuestionApi = {
     const url = `/question/listbookmark`;
     return AxiosClient.get(url, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`,
       },
     });
   },

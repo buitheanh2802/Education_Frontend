@@ -30,7 +30,7 @@ const QuillReact = (Content) => {
       const token = localStorage.getItem("_token_");
       fetch("http://localhost:4000/api/picture", {
         method: "POST",
-        headers: { Authorization: "Bearer " + token },
+        headers: { authorization: "Bearer " + token },
         body: formData,
       })
         .then((response) => response.json())

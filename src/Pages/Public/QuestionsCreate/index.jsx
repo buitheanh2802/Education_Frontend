@@ -1,18 +1,13 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import CreatetableSelect from "react-select/creatable";
 import makeAnimated from "react-select/animated";
-import ReactQuill, { Quill } from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import { Icon } from "src/Components/Icon";
 import TagApi from "src/Apis/TagApi";
-import PostApi from "src/Apis/PostApi";
 import ImageApi from "src/Apis/ImageApi";
 import QuestionApi from "src/Apis/QuestionApi";
 import { useHistory } from "react-router";
 import Swal from "sweetalert2";
-import ImageResize from "quill-image-resize-module-react";
-import { set } from "react-hook-form";
-Quill.register("modules/imageResize", ImageResize);
+import Editor from "../Commons/Editor";
 
 const QuestionsCreate = () => {
   const [title, setTitle] = useState();
@@ -46,8 +41,8 @@ const QuestionsCreate = () => {
     listTags();
     const listImage = async () => {
       try {
-        const { data: images } = await ImageApi.getImage();
-        setImages(images);
+        const { data : { data } } = await ImageApi.getImage();
+        setImages(data);
       } catch (error) {
         console.log(error);
       }
@@ -129,11 +124,12 @@ const QuestionsCreate = () => {
 
     const CallApi = async () => {
       try {
-        const { data } = await ImageApi.addImage(formData);
-        const url = data.data.photo.photoUrl;
+        const { data : { data } } = await ImageApi.addImage(formData);
+        const url = data.photo.photoUrl;
         const targetEditor = editor.current.getEditor();
         const curentSpace = targetEditor.getSelection(true);
         targetEditor.insertEmbed(curentSpace.index, "image", url);
+        setImages([...images,data])
         setIsModalVisible(false);
       } catch (error) {
         console.log(error);
@@ -149,43 +145,6 @@ const QuestionsCreate = () => {
     targetEditor.insertEmbed(curentSpace.index, "image", photoUrl);
     setIsModalVisible(false);
   };
-  const modules = useMemo(
-    () => ({
-      toolbar: {
-        container: [
-          [{ header: [1, 2, 3, 4, 5, 6, false] }],
-          ["bold", "italic", "underline"],
-          [{ list: "ordered" }, { list: "bullet" }],
-          [{ align: [] }],
-          ["link", "image"],
-          ["clean"],
-          [{ color: [] }],
-        ],
-        handlers: {
-          image: imageHandler,
-        },
-      },
-      imageResize: {
-        modules: ["Resize", "DisplaySize"],
-        displaySize: true,
-      },
-    }),
-    []
-  );
-
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-  ];
 
   ///react-select
   const Toast = Swal.mixin({
@@ -329,14 +288,11 @@ const QuestionsCreate = () => {
       </div>
       <div className="mt-[20px] mb-[40px]">
         <div className="text-editor">
-          <ReactQuill
-            theme="snow"
-            modules={modules}
-            formats={formats}
+          <Editor
             onChange={Content}
-            ref={editor}
-            placeholder={"Nhập nội dung câu hỏi tại đây..."}
-          ></ReactQuill>
+            editorInstance={editor}
+            imageHandler={imageHandler}
+          />
         </div>
         <div
           className={
@@ -370,7 +326,7 @@ const QuestionsCreate = () => {
                 className="grid grid-cols-2 md:grid-cols-6 gap-x-[40px] gap-y-[20px] mt-[20px] overflow-y-auto "
                 style={{ maxHeight: "calc(80vh - 250px)" }}
               >
-                {images?.data?.map((image) => {
+                {images?.map((image) => {
                   return (
                     // <div className="w-full" key={image._id}>
                     <img

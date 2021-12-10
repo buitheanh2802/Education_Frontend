@@ -39,6 +39,7 @@ const SiteLayout = () => {
     <>
       <Header />
       <Switch>
+        <PublicRouter exact path={path.POSTS_CREATE} component={PostsCreate} />
         <PublicRouter exact path={path.CONTACT} component={ContactPage} />
         <PublicRouter
           path={path.QUESTIONS_DETAIL}
@@ -59,10 +60,19 @@ const SiteLayout = () => {
         <PublicRouter exact path={path.HOME} component={HomePage} />
         <PublicRouter path={path.QUESTIONS} component={QuestionsPage} />
         <PublicRouter path={path.POSTS_CREATE} component={PostsCreate} />
+        <PublicRouter path={path.POSTS} component={PostPage} />
         <PublicRouter path={path.PROFILE_CHANGE} component={EditProfile} />
         <PublicRouter exact path={path.PROFILE_ME} component={ProfilePage} />
-        <PublicRouter exact path={path.CHALLENGE} component={ChallengeCatePage} />
-        <PublicRouter exact path={path.CHALLENGE_CATE_ID} component={ChallengePage} />
+        <PublicRouter
+          exact
+          path={path.CHALLENGE}
+          component={ChallengeCatePage}
+        />
+        <PublicRouter
+          exact
+          path={path.CHALLENGE_CATE_ID}
+          component={ChallengePage}
+        />
         <PublicRouter path={path.QUIZ} component={QuizPage} />
         <PublicRouter path={path.CHALLENGE_SOLUTION_CHALLENGE_ID} component={SolutionPage} />
         <PublicRouter path={path.POSTS} component={PostPage} />
