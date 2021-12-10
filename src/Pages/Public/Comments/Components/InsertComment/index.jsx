@@ -1,16 +1,25 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { Icon } from 'src/Components/Icon'
 import { path } from 'src/Constants/'
+import { ActionPostComment } from 'src/Redux/Actions/Comments.action'
+import IntroUser from '../IntroUser'
 
-const InsertComment = ({ shortId }) => {
+const InsertComment = ({ shortId, focus, parentId }) => {
     const history = useHistory();
+    const dispatch = useDispatch();
     const [isShow, setIsShow] = useState(false);
     const { profile } = useSelector(state => state.Auth);
-    const { register, handleSubmit, formState: { errors }, clearErrors } = useForm({
-        defaultValues: {
+    const [sendComment, setSendComment] = useState(false);
+
+    const { register, handleSubmit, formState: { errors }, clearErrors, reset } = useForm({
+        defaultValues: parentId ? {
+            postOrQuestionId: shortId,
+            parentId: parentId
+        } : {
             postOrQuestionId: shortId
         },
         mode: "onSubmit",
@@ -18,7 +27,11 @@ const InsertComment = ({ shortId }) => {
     });
 
     const handleOnSubmit = async (data) => {
-        console.log(data)
+        setSendComment(true);
+        const { payload } = await dispatch(ActionPostComment(data));
+        setSendComment(false);
+        if (!payload.status) return
+        reset();
     }
 
     return (
@@ -31,14 +44,16 @@ const InsertComment = ({ shortId }) => {
                             message: "Yêu cầu nhập trường này"
                         }
                     })}
+                    autoFocus={focus}
+                    disabled={sendComment}
                     onInput={() => clearErrors("content")}
                     onBlur={() => clearErrors("content")}
                     onFocus={(e) => {
-                        e.target.style.height = "80px";
+                        e.target.style.height = "100px";
                         setIsShow(true)
                         if (!profile) return history.push(path.AUTH)
                     }}
-                    className={`block w-full h-[36px] overflow-y-hidden resize-none outline-none text-sm px-3 py-2 focus:ring-1 focus:ring-blue-200 ${errors?.content && "focus:ring-red-200"} duration-300 rounded-t`}
+                    className={`block w-full h-[40px] overflow-y-hidden resize-none outline-none text-[15px] px-3 py-2 focus:ring-1 focus:ring-blue-200 ${errors?.content && "focus:ring-red-200"} duration-300 rounded-t`}
                     placeholder="Ý kiến của bạn"
                 ></textarea>
                 {(errors?.content) && <span
@@ -46,15 +61,19 @@ const InsertComment = ({ shortId }) => {
                     {errors?.content?.message}
                 </span>}
             </div>
-            {(profile && isShow) && <div className="flex justify-between items-center p-1 border-t border-solid border-gray-200 mt-[0.5px] duration-300">
+            {(profile && isShow) && <div className="flex justify-end gap-10 items-center p-1 border-t border-solid border-gray-200 mt-[0.5px] duration-300">
                 <div className="flex gap-2 items-center">
-                    <span className="w-[28px] h-[28px] rounded-full border border-solid border-gray-300 flex items-center justify-center text-sm text-gray-500 bg-gray-200 font-bold overflow-hidden">
-                        {profile?.avatar?.avatarUrl?.length > 0 ? <img className="w-full h-full object-cover" src={profile?.avatar?.avatarUrl} /> : profile?.fullname?.slice(0, 1)?.toUpperCase()}
-                    </span>
+                    <IntroUser className="w-[28px] h-[28px]" avatarUrl={profile?.avatar?.avatarUrl} fullname={profile?.fullname} />
                     <p className="text-sm font-medium">Nguyễn Thành Đạt</p>
                 </div>
+
                 <div className="flex items-center gap-3">
-                    <button className="bg-blue-500 text-white rounded-sm px-3 md:px-5 text-sm h-[30px] flex items-center gap-2"> <Icon.Send className="fill-current w-[10px] h-[10px] md:w-[12px] md:h-[12px]" /> <span className="hidden md:block">Gửi</span></button>
+                    <button disabled={sendComment} className="bg-blue-500 text-white rounded-sm px-3 md:px-5 text-sm h-[30px] flex items-center gap-2">
+                        {sendComment
+                            ? <Icon.Loading className="fill-current w-[10px] h-[10px] md:w-[12px] md:h-[12px]" />
+                            : <Icon.Send className="fill-current w-[10px] h-[10px] md:w-[12px] md:h-[12px]" />}
+                        <span className="hidden md:block">Gửi</span>
+                    </button>
                 </div>
             </div>}
         </form>

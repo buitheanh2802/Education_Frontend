@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import ContentComment from './Components/ContentComment'
 import InsertComment from './Components/InsertComment'
+import { ActionGetsComment } from 'src/Redux/Actions/Comments.action'
 
-const Comments = () => {
+const Comments = ({ shortId }) => {
+    const dispatch = useDispatch();
+    const Comments = useSelector(state => state.Comments);
+
+    useEffect(() => dispatch(ActionGetsComment(shortId)), [dispatch, shortId])
+
     return (
-        <div className="w-1/2 m-10">
-            <h3 className="font-medium text-lg my-3">Tổng số thảo luận (10)</h3>
-            <InsertComment />
+        <div className="comments w-full">
+            <h3 className="font-medium text-lg my-3">Tổng số thảo luận <span className="font-normal text-base">({Comments?.pagination?.countDocuments})</span></h3>
+            <InsertComment shortId={shortId} />
+            <ContentComment Comments={Comments} shortId={shortId} />
         </div>
     )
 }

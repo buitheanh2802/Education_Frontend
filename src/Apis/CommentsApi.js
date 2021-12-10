@@ -1,6 +1,7 @@
+import LocalStorage from "src/Helpers/Storage";
 import AxiosClient from "./AxiosClient";
 
-const ContactApi = {
+const CommentsApi = {
     async gets(shortId) {
         const url = `/comment/${shortId}`;
         return AxiosClient.get(url, {
@@ -25,7 +26,7 @@ const ContactApi = {
             }
         })
     },
-    async put(id) {
+    async delete(id) {
         const url = `/comment/${id}`;
         return AxiosClient.delete(url, {
             headers: {
@@ -50,4 +51,4 @@ const ContactApi = {
         })
     }
 };
-export default ContactApi;
+export default CommentsApi;

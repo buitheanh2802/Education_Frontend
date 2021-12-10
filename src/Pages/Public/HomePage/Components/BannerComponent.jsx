@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { ParticleNetwork } from 'src/Helpers/Canvas';
-import Comments from '../../Comments';
 
 const BannerComponent = () => {
     useEffect(() => {
@@ -24,7 +23,6 @@ const BannerComponent = () => {
                     </div>
                 </div>
             </div>
-            <Comments />
         </>
     )
 }
