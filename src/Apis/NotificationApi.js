@@ -9,6 +9,14 @@ const NotificationApi = {
             },
             params : params
         })
+    },
+    create(token,body,sendToUserId){
+        const url = `/notification/${sendToUserId}`;
+        return AxiosClient.post(url,body,{
+            headers : {
+                authorization : `Bearer ${token}`
+            },
+        })
     }
 }
 

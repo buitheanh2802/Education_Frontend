@@ -17,9 +17,10 @@ const TagsPage = () => {
   const [featuredAuthors, setFeaturedAuthor] = useState([]);
 
   const handleUnFollow = async (id) => {
-    if (token === null) {
+    if (!token) {
       history.push("/auth/login");
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
+      return;
     }
     dispatch(setLoading(true))
     await FollowApi.unFollowTag(id);
@@ -35,9 +36,10 @@ const TagsPage = () => {
   }
 
   const handleFollow = async (id) => {
-    if (token === null) {
+    if (!token) {
       history.push("/auth/login");
       dispatch(setLoading(false))
+      return;
     }
     dispatch(setLoading(true))
     await FollowApi.followTag(id);
@@ -63,7 +65,7 @@ const TagsPage = () => {
       }
     };
     tag();
-
+    
     const listFeaturedAuthor = async () => {
       try {
         const { data: featuredAuthors } = await UserApi.getFeaturedAuthor();
