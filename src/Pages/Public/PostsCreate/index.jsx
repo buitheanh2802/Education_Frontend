@@ -1,17 +1,14 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import CreatetableSelect from "react-select/creatable";
 import makeAnimated from "react-select/animated";
-import ReactQuill, { Quill } from "react-quill";
-import ImageResize from "quill-image-resize-module-react";
-import "react-quill/dist/quill.snow.css";
 import { Icon } from "src/Components/Icon";
 import TagApi from "src/Apis/TagApi";
 import PostApi from "src/Apis/PostApi";
 import ImageApi from "src/Apis/ImageApi";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router";
+import Editor from "../Commons/Editor";
 
-Quill.register("modules/imageResize", ImageResize);
 const PostsCreate = () => {
   const [title, setTitle] = useState();
   const [tag, setTag] = useState();
@@ -24,12 +21,6 @@ const PostsCreate = () => {
   const editor = useRef();
   const animatedComponents = makeAnimated();
   const history = useHistory();
-  // {
-  //   type: "",
-  //   message: "",
-  // }
-  // const token = localStorage.getItem("_token_");
-  // if (token === null) history.push("/auth/login");
 
   useEffect(() => {
     // register quill modules
@@ -116,7 +107,7 @@ const PostsCreate = () => {
 
     setContent(e);
   };
-
+  
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -153,43 +144,6 @@ const PostsCreate = () => {
     targetEditor.insertEmbed(curentSpace.index, "image", photoUrl);
     setIsModalVisible(false);
   };
-  const modules = useMemo(
-    () => ({
-      toolbar: {
-        container: [
-          [{ header: [1, 2, 3, 4, 5, 6, false] }],
-          ["bold", "italic", "underline"],
-          [{ list: "ordered" }, { list: "bullet" }],
-          [{ align: [] }],
-          ["link", "image"],
-          ["clean"],
-          [{ color: [] }],
-        ],
-        handlers: {
-          image: imageHandler,
-        },
-      },
-      imageResize: {
-        modules: ["Resize", "DisplaySize"],
-        displaySize: true,
-      },
-    }),
-    []
-  );
-
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-  ];
 
   ///react-select
   const Toast = Swal.mixin({
@@ -409,14 +363,11 @@ const PostsCreate = () => {
       </div>
       <div className="mt-[20px] mb-[40px]">
         <div className="text-editor">
-          <ReactQuill
-            theme="snow"
-            modules={modules}
-            formats={formats}
-            onChange={Content}
-            ref={editor}
-            placeholder={"Nhập nội dung bài viết tại đây..."}
-          ></ReactQuill>
+          <Editor
+              onChange={Content}
+              editorInstance={editor}
+              imageHandler={imageHandler}
+          />
         </div>
         <div
           className={
