@@ -33,6 +33,7 @@ import QuestionUpdate from "src/Pages/Public/QuestionUpdate";
 import PostsDetail from "src/Pages/Public/PostDetail";
 import PostUpdate from "src/Pages/Public/PostUpdate";
 import ContactPage from "src/Pages/Public/ContactPage";
+import SearchPage from "src/Pages/Public/Search";
 
 const SiteLayout = () => {
   return (
@@ -40,6 +41,7 @@ const SiteLayout = () => {
       <Header />
       <Switch>
         <PublicRouter exact path={path.CONTACT} component={ContactPage} />
+        <PublicRouter exact path={path.SEARCH} component={SearchPage} />
         <PublicRouter
           path={path.QUESTIONS_DETAIL}
           component={QuestionsDetail}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useHistory, useLocation } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
 import { path } from "src/Constants/";
 import Notification from "./Components/Notification";
@@ -14,6 +14,9 @@ const Header = () => {
   const [isNotification, setIsNotification] = useState(false);
   const { profile } = useSelector((state) => state.Auth);
   const [isSearch, setIsSearch] = useState(false);
+  const [searchKey, setSearchKey] = useState("");
+  const history = useHistory();
+
   useEffect(() => {
     const fixedTop = () =>
       window.pageYOffset > 300 ? isActive(true) : isActive(false);
@@ -27,6 +30,12 @@ const Header = () => {
     isActive(true);
     window.addEventListener("scroll", () => isActive(true));
   }, [pathname]);
+
+  const EnterEvent = (e) => {
+    e.preventDefault();
+    setIsSearch(false);
+    history.push(`/search?keyword=${searchKey}`);
+  };
 
   return (
     <>
@@ -220,12 +229,16 @@ const Header = () => {
               <Icon.Close className="fill-current cursor-pointer w-[15px] text-gray-500 hover:text-gray-700 " />
             </button>
           </div>
-          <form action="" className="px-[50px] pt-[50px] pb-[40px]">
+          <form
+            className="px-[50px] pt-[50px] pb-[40px]"
+            onSubmit={(e) => EnterEvent(e)}
+          >
             <div className="w-full relative">
               <input
                 type="text"
                 className="w-full text-[14px] pl-[20px] pr-[50px] py-[10px] border rounded-[3px] focus:outline-none focus:border focus:border-gray-600"
                 placeholder="Tìm kiếm trên DevStart"
+                onChange={(e) => setSearchKey(e.target.value)}
               />
               <button
                 type="submit"

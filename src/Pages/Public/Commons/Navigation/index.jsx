@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 
 const Navigation = ({ path, button }) => {
+  console.log(path);
   const history = useHistory();
   const token = localStorage.getItem("_token_");
   return (

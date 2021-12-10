@@ -943,11 +943,6 @@ video {
   margin-right: 2px;
 }
 
-.mx-\[30px\] {
-  margin-left: 30px;
-  margin-right: 30px;
-}
-
 .mt-\[20px\] {
   margin-top: 20px;
 }
@@ -1268,10 +1263,6 @@ video {
   margin-left: 8px;
 }
 
-.mr-\[60px\] {
-  margin-right: 60px;
-}
-
 .block {
   display: block;
 }
@@ -1420,6 +1411,10 @@ video {
   height: 85px;
 }
 
+.h-\[22px\] {
+  height: 22px;
+}
+
 .h-\[25px\] {
   height: 25px;
 }
@@ -1428,12 +1423,8 @@ video {
   height: 16px;
 }
 
-.h-\[22px\] {
-  height: 22px;
-}
-
-.h-\[42\.5px\] {
-  height: 42.5px;
+.h-\[43px\] {
+  height: 43px;
 }
 
 .h-\[3px\] {
@@ -1454,10 +1445,6 @@ video {
 
 .h-\[15px\] {
   height: 15px;
-}
-
-.h-\[43px\] {
-  height: 43px;
 }
 
 .max-h-\[110px\] {
@@ -1660,10 +1647,6 @@ video {
   width: 22px;
 }
 
-.w-\[600px\] {
-  width: 600px;
-}
-
 .w-\[43px\] {
   width: 43px;
 }
@@ -1698,10 +1681,6 @@ video {
 
 .w-\[280px\] {
   width: 280px;
-}
-
-.w-\[650px\] {
-  width: 650px;
 }
 
 .min-w-\[170px\] {
@@ -2829,6 +2808,11 @@ video {
   padding-right: 1.25rem;
 }
 
+.px-\[50px\] {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
 .px-\[0px\] {
   padding-left: 0px;
   padding-right: 0px;
@@ -2857,11 +2841,6 @@ video {
 .py-\[13px\] {
   padding-top: 13px;
   padding-bottom: 13px;
-}
-
-.px-\[50px\] {
-  padding-left: 50px;
-  padding-right: 50px;
 }
 
 .pt-\[10px\] {
@@ -3594,10 +3573,6 @@ video {
 
 .duration-200 {
   transition-duration: 200ms;
-}
-
-.ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @-webkit-keyframes newTab {
@@ -4661,11 +4636,6 @@ body {
     margin-right: 30px;
   }
 
-  .md\:mx-\[0\] {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
   .md\:ml-4 {
     margin-left: 1rem;
   }
@@ -4730,12 +4700,12 @@ body {
     width: auto;
   }
 
-  .md\:w-\[55px\] {
-    width: 55px;
-  }
-
   .md\:w-\[650px\] {
     width: 650px;
+  }
+
+  .md\:w-\[55px\] {
+    width: 55px;
   }
 
   .md\:translate-y-\[-70\%\] {
@@ -5037,12 +5007,12 @@ body {
     width: 60vw;
   }
 
-  .lg\:w-full {
-    width: 100%;
-  }
-
   .lg\:w-\[650px\] {
     width: 650px;
+  }
+
+  .lg\:w-full {
+    width: 100%;
   }
 
   .lg\:max-w-\[55\%\] {

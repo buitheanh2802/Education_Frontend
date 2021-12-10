@@ -44,7 +44,10 @@ const AdminLayout = () => {
                   path={path.QUESTION_MANAGER}
                   component={QuesionManage}
                 />
-                <PrivateRouter path={path.SULOTION_MANAGER_ID} component={DetailExercise} />
+                <PrivateRouter
+                  path={path.SULOTION_MANAGER_ID}
+                  component={DetailExercise}
+                />
                 <PrivateRouter exact path={path.ADMIN} component={Dashboard} />
               </Switch>
             </div>
