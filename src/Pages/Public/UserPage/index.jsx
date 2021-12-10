@@ -4,7 +4,7 @@ import { path } from "src/Constants/";
 import { Icon } from "src/Components/Icon";
 import ProfileUserApi from "src/Apis/ProfileUserApi";
 import UserFollowing from "./UserFollowing";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 import UserFollower from "./UserFollower";
 import UserBookMark from "./UserBookMark";
 import UserPost from "./UserPost";
@@ -18,6 +18,7 @@ const Userpage = (props) => {
     const [user, setUser] = useState(null);
     const dispatch = useDispatch();
     const history = useHistory();
+    const location = useLocation();
     const token = localStorage.getItem("_token_");
 
     const handleFollow = async () => {
@@ -74,8 +75,7 @@ const Userpage = (props) => {
             }
         };
         user();
-    }, []);
-
+    }, [location.pathname]);
 
     return (
         <div className="container mx-auto mt-[80px]">

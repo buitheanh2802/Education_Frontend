@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
 import { timeFormatter } from "../../../../Helpers/Timer";
 const QuestionView = ({ questions }) => {
-  console.log(questions);
   return (
     <>
       {questions?.length === 0 || questions?.length === 0 ? (

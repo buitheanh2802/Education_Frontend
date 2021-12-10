@@ -60,7 +60,7 @@ const ForgotPassword = () => {
                         <span className="text-red-600 font-bold mr-[5px]">*</span>
                         Địa chỉ email của bạn: 
                     </p>
-                    <input type="email" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]" placeholder="Nhập email của bạn..."
+                    <input type="email" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" placeholder="Nhập email của bạn..."
                         onChangeCapture={() => { clearErrors('email') }}
                         {...register('email', {
                             required: regex.REQUIRED,
