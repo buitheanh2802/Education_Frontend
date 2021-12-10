@@ -57,8 +57,10 @@ const TagsPage = () => {
   useEffect(() => {
     const tag = async () => {
       try {
+        dispatch(setLoading(true))
         const { data: tags } = await TagAPi.getAll();
         setTags(tags.data.models);
+        dispatch(setLoading(false))
       } catch (error) {
         console.log(error);
       }

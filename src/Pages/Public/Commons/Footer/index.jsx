@@ -90,7 +90,7 @@ const Footer = () => {
           <li className="mb-[15px] text-gray-500 mt-[60px] hidden xl:block">
             © {date.getFullYear()}{" "}
             <Link to={path.HOME} className="text-blue-500 hover:text-blue-700">
-              eduford
+              DevStar
             </Link>{" "}
             đăng ký bản quyền
           </li>
@@ -98,12 +98,12 @@ const Footer = () => {
         <ul className="xl:flex-[1] mt-[20px] md:order-2">
           <li className="font-bold mb-[24px] text-[18px]">Chúng tôi</li>
           <li className="mb-[15px] text-gray-800">
-            <Link className="hover:text-blue-700" to={path.NOT_FOUND}>
+            <Link className="hover:text-blue-700" to={path.INTRO}>
               Giới thiệu
             </Link>
           </li>
           <li className="mb-[15px] text-gray-800">
-            <Link className="hover:text-blue-700" to={path.NOT_FOUND}>
+            <Link className="hover:text-blue-700" to={path.CONTACT}>
               Liên hệ
             </Link>
           </li>
@@ -116,7 +116,7 @@ const Footer = () => {
         <ul className="xl:flex-[1] mt-[20px] md:order-3">
           <li className="font-bold mb-[24px] text-[18px]">Sản phẩm</li>
           <li className="mb-[15px] text-gray-800">
-            <Link className="hover:text-blue-700" to={path.NOT_FOUND}>
+            <Link className="hover:text-blue-700" to={path.HOME}>
               Devstar
             </Link>
           </li>

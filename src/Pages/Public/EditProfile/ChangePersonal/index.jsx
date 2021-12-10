@@ -18,11 +18,11 @@ const ChangePersonal = ({ profile }) => {
     const { register, handleSubmit, formState: { errors }, clearErrors, getValues } = useForm({
         defaultValue: {
             fullname: profile?.fullname,
-            avatar: profile?.avatar?.avatarUrl,
+            photo: profile?.avatar?.avatarUrl,
             email: profile?.email,
             birthday: profile?.birthday,
             address: profile?.address,
-            description: profile?.description,
+            description: profile?.descriptions,
             hobbies: profile?.hobbies,
             skills: profile?.skills
         }
@@ -50,8 +50,14 @@ const ChangePersonal = ({ profile }) => {
         try {
             setResponse({ isLoading: false, error: null, message: null })
             if (data) setLoading({ ...loading, success: true });
-            const dataSend = { ...data, hobbies, skills }
-            const { data: res } = await AuthApi.changeInfo(dataSend);
+            const uploads = new FormData();
+            uploads.append("photo", data.photo);
+            uploads.append("birthday", data.birthday);
+            uploads.append("address", data.address);
+            uploads.append("descriptions", data.descriptions);
+            uploads.append("hobbies", hobbies);
+            uploads.append("skills", skills);
+            const { data: res } = await AuthApi.changeInfo(uploads);
             if (res) setLoading({ ...loading, success: false });
             setResponse({
                 ...response,
@@ -98,19 +104,19 @@ const ChangePersonal = ({ profile }) => {
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Tên tài khoản:
                             </p>
-                            <input defaultValue={profile.fullname} disabled className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]" />
+                            <input defaultValue={profile?.fullname} disabled className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]" />
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Email:
                             </p>
-                            <input defaultValue={profile.email} disabled className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]" />
+                            <input defaultValue={profile?.email} disabled className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]" />
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Ngày sinh:
                             </p>
-                            <input type="date" defaultValue={profile.birthday}
+                            <input type="date" defaultValue={profile?.birthday}
                                 onChangeCapture={() => { clearErrors('birthday') }}
                                 {...register('birthday')}
                                 disabled={isLoading} className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
@@ -119,7 +125,7 @@ const ChangePersonal = ({ profile }) => {
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Địa chỉ:
                             </p>
-                            <input type="text" defaultValue={profile.address}
+                            <input type="text" defaultValue={profile?.address}
                                 onChangeCapture={() => { clearErrors('address') }}
                                 {...register('address')}
                                 disabled={isLoading}
@@ -129,9 +135,10 @@ const ChangePersonal = ({ profile }) => {
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Mô tả:
                             </p>
-                            <textarea defaultValue={profile.description} rows={6}
-                                onChangeCapture={() => { clearErrors('description') }}
-                                {...register('description')}
+                            <textarea defaultValue={profile?.descriptions}
+                                rows={6}
+                                onChangeCapture={() => { clearErrors('descriptions') }}
+                                {...register('descriptions')}
                                 disabled={isLoading} className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
                         </div>
                         <div className="py-[5px]">

@@ -13,7 +13,7 @@ const ProfilePage = () => {
         const proDetail = async () => {
             try {
                 dispatch(setLoading(true))
-                const { data : profileDetail } = await AuthApi.profileDetail();
+                const { data: profileDetail } = await AuthApi.profileDetail();
                 setProfileDetail(profileDetail.data)
                 dispatch(setLoading(false))
             } catch (error) {
@@ -168,7 +168,9 @@ const ProfilePage = () => {
                                 {profileDetail?.hobbies?.map((hob, index) => {
                                     return (
                                         <>
-                                            <div className="font-bold mx-[5px] px-[5px] inline-block border-r border-black last:border-0" key={index}>
+                                            <div className="font-bold mx-[5px] px-[5px] inline-block border-r border-black last:border-0"
+                                                key={index}
+                                            >
                                                 {hob}
                                             </div>
                                         </>
@@ -184,7 +186,7 @@ const ProfilePage = () => {
                                 {profileDetail?.skills?.map((ski, index) => {
                                     return (
                                         <>
-                                            <div className="font-bold mx-[5px] inline-block md:px-[10px] px-[10px] py-[5px] lg:px-[8px] text-[12px] xl:px-[15px] hover:bg-gray-300 text-[#4A5568] bg-[#BEE3F8]" key={index}>
+                                            <div className="font-bold mx-[5px] inline-block md:px-[10px] px-[10px] py-[5px] lg:px-[8px] xl:px-[15px] hover:bg-gray-300 text-[#4A5568] bg-[#BEE3F8]" key={index}>
                                                 {ski}
                                             </div>
                                         </>
