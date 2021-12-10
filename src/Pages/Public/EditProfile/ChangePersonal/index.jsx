@@ -39,18 +39,13 @@ const ChangePersonal = ({ profile }) => {
         for (var i = 0; i < checkHob.length; i++) {
             hobbies.push(checkHob[i].value)
         }
-        document.getElementById('hobbies').onchange = function(e){
-            if(checkHob){
-                alert("checked")
-            }
-        }
     }
     const handleAddSkill = () => {
-        let skills = []
-        let checkSkill = document.querySelectorAll('input[type=checkbox]:checked')
-        for (var i = 0; i < checkSkill.length; i++) {
-            skills.push(checkSkill[i].value)
-        }
+        // let skills = []
+        // let checkSkill = document.querySelectorAll('input[type=checkbox]:checked')
+        // for (var i = 0; i < checkSkill.length; i++) {
+        //     skills.push(checkSkill[i].value)
+        // }
     }
 
     const onSubmit = async (data) => {
