@@ -6,7 +6,7 @@ const QuestionView = ({ questions }) => {
   console.log(questions);
   return (
     <>
-      {questions.length === 0 || questions?.length === 0 ? (
+      {questions?.length === 0 || questions?.length === 0 ? (
         <div>
           <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
             Không có gì ở đây cả

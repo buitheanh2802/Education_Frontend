@@ -13,7 +13,7 @@ const Header = () => {
   const [isPopup, setIsPopup] = useState(false);
   const [isNotification, setIsNotification] = useState(false);
   const { profile } = useSelector((state) => state.Auth);
-
+  const [isSearch, setIsSearch] = useState(false);
   useEffect(() => {
     const fixedTop = () =>
       window.pageYOffset > 300 ? isActive(true) : isActive(false);
@@ -62,6 +62,12 @@ const Header = () => {
             </Link>
           </h1>
           <div className="flex items-center gap-[15px]">
+            <button
+              onClick={() => setIsSearch(!isSearch)}
+              className="block lg:hidden pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
+            >
+              <Icon.Search className="w-[22px] h-[22px] mr-[3px] cursor-pointer  fill-current" />
+            </button>
             {profile && (
               <i
                 onClick={() => setIsNotification(!isNotification)}
@@ -179,16 +185,57 @@ const Header = () => {
                 </NavLink>
               </li>
             </ul>
-            <Auth
-              isNotification={isNotification}
-              setIsNotification={setIsNotification}
-              isPopup={isPopup}
-              setIsMenu={setIsMenu}
-              setIsPopup={setIsPopup}
-              active={active}
-            />
+            <div className="flex items-center">
+              <button
+                onClick={() => setIsSearch(!isSearch)}
+                className="hidden lg:block pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
+              >
+                <Icon.Search className="w-[22px] h-[22px] mr-[3px] cursor-pointer  fill-current" />
+              </button>
+              <Auth
+                isNotification={isNotification}
+                setIsNotification={setIsNotification}
+                isPopup={isPopup}
+                setIsMenu={setIsMenu}
+                setIsPopup={setIsPopup}
+                active={active}
+              />
+            </div>
           </div>
         </nav>
+      </div>
+      <div
+        className={
+          isSearch
+            ? "fixed  z-[9999999] translate-y-[0] transition w-full px-[30px] md:px-[0] md:w-[650px]  rounded-b-[3px] top-0 left-[50%] translate-x-[-50%]"
+            : "fixed  z-[9999999] translate-y-[-100%]  lg:w-[650px] transition   rounded-b-[3px] top-0 left-[50%] translate-x-[-50%]"
+        }
+      >
+        <div className="bg-blue-200">
+          <div className="flex justify-end ">
+            <button
+              onClick={() => setIsSearch(!isSearch)}
+              className="mr-[17px] mt-[17px]"
+            >
+              <Icon.Close className="fill-current cursor-pointer w-[15px] text-gray-500 hover:text-gray-700 " />
+            </button>
+          </div>
+          <form action="" className="px-[50px] pt-[50px] pb-[40px]">
+            <div className="w-full relative">
+              <input
+                type="text"
+                className="w-full text-[14px] pl-[20px] pr-[50px] py-[10px] border rounded-[3px] focus:outline-none focus:border focus:border-gray-600"
+                placeholder="Tìm kiếm trên DevStart"
+              />
+              <button
+                type="submit"
+                className="absolute top-0 right-0 w-[43px] flex bg-blue-500 h-[43px]"
+              >
+                <Icon.SearchLarge className="fill-current m-auto cursor-pointer w-[20px] text-white hover:text-gray-700 " />
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );
