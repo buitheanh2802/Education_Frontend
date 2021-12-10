@@ -41,8 +41,8 @@ const PostsCreate = () => {
     listTags();
     const listImage = async () => {
       try {
-        const { data: images } = await ImageApi.getImage();
-        setImages(images);
+        const { data: { data } } = await ImageApi.getImage();
+        setImages(data);
       } catch (error) {
         console.log(error);
       }
@@ -124,11 +124,12 @@ const PostsCreate = () => {
 
     const CallApi = async () => {
       try {
-        const { data } = await ImageApi.addImage(formData);
-        const url = data.data.photo.photoUrl;
+        const { data : { data } } = await ImageApi.addImage(formData);
+        const url = data.photo.photoUrl;
         const targetEditor = editor.current.getEditor();
         const curentSpace = targetEditor.getSelection(true);
         targetEditor.insertEmbed(curentSpace.index, "image", url);
+        setImages([...images,data])
         setIsModalVisible(false);
       } catch (error) {
         console.log(error);
@@ -401,7 +402,7 @@ const PostsCreate = () => {
                 className="grid grid-cols-2 md:grid-cols-6 gap-x-[40px] gap-y-[20px] mt-[20px] overflow-y-auto "
                 style={{ maxHeight: "calc(80vh - 250px)" }}
               >
-                {images?.data?.map((image) => {
+                {images?.map((image) => {
                   return (
                     // <div className="w-full" key={image._id}>
                     <img
