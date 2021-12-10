@@ -24,7 +24,7 @@ const ChallengeCateApi = {
         const url = `/challenge-categories/${data._id}`;
         return AxiosClient.put(url, data, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     },
@@ -33,7 +33,7 @@ const ChallengeCateApi = {
         const url = `/challenge-categories/`;
         return AxiosClient.post(url, data, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     },
