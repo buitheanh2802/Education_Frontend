@@ -34,7 +34,8 @@ const Userpage = (props) => {
         const notificationRequest = {
             title : `
             <div>
-                <a href="/user/${profile.username}">${profile.fullname}</a>
+                <a class="font-medium cursor-pointer hover:text-blue-500 " 
+                href="/user/${profile.username}">${profile.fullname}</a>
                 đã ${user?.isFollowing ? "bỏ theo dõi bạn." : "theo dõi bạn."} 
             </div>`,
             url : ""
