@@ -235,7 +235,7 @@ const ContactPage = () => {
                 <Icon.Facebook className="fill-current w-[30px]" />
               </span>
               <p className="text-[16px] font-medium text-[#000] pt-[10px]">
-                Instagram
+                Facebook
               </p>
               <p className=" text-[14px] underline text-blue-400 cursor-pointer">
                 https://www.facebook.com/groups/devstar

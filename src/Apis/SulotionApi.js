@@ -11,6 +11,15 @@ const SulotionApi = {
         })
     },
 
+    async get(id) {
+        const url = `/solution/${id}`;
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
+    },
+
     async post(data) {
         const url = `/solution`;
         return AxiosClient.post(url, data, {

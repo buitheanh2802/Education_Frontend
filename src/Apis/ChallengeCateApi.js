@@ -19,6 +19,24 @@ const ChallengeCateApi = {
             }
         })
     },
+
+    async put(data) {
+        const url = `/challenge-categories/${data._id}`;
+        return AxiosClient.put(url, data, {
+            headers: {
+                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
+    },
+
+    async post(data) {
+        const url = `/challenge-categories/`;
+        return AxiosClient.post(url, data, {
+            headers: {
+                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
+    },
 }
 
 export default ChallengeCateApi

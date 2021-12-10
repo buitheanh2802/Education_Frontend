@@ -8,35 +8,13 @@ import { Link } from "react-router-dom";
 import FollowApi from "src/Apis/FollowApi";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
+import UserApi from "src/Apis/UserApi";
 
 const TagsPage = () => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("_token_");
   const history = useHistory();
-
-  // authors
-  const authors = [
-    {
-      path: "/",
-      fullname: "Nguyễn Thành Đạt",
-      username: "@nguyenthanhdat",
-      avatar:
-        "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
-      point: 567,
-      question: 234,
-      folow: 345,
-    },
-    {
-      path: "/",
-      fullname: "Nguyễn Thành Đạt",
-      username: "@nguyenthanhdat",
-      avatar:
-        "https://images.viblo.asia/avatar/afc7299e-8b69-48e5-a2e4-8bd52b38123e.jpg",
-      point: 567,
-      question: 234,
-      folow: 345,
-    },
-  ];
+  const [featuredAuthors, setFeaturedAuthor] = useState([]);
 
   const handleUnFollow = async (id) => {
     if (token === null) {
@@ -85,6 +63,16 @@ const TagsPage = () => {
       }
     };
     tag();
+
+    const listFeaturedAuthor = async () => {
+      try {
+        const { data: featuredAuthors } = await UserApi.getFeaturedAuthor();
+        setFeaturedAuthor(featuredAuthors?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    listFeaturedAuthor();
   }, []);
 
   return (
@@ -156,7 +144,7 @@ const TagsPage = () => {
           </div >
         </div >
         <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded hidden lg:block mb-[30px]">
-          <FeaturedAuthor authors={authors} />
+          <FeaturedAuthor authors={featuredAuthors} />
         </div>
       </div >
     </div >
