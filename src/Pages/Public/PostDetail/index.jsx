@@ -50,7 +50,7 @@ const PostsDetail = () => {
 
   const handleLike = async () => {
     setRender(true);
-    if (token === null) history.push("/auth/login");
+    if (token === null) return history.push("/auth/login");
 
     if (postDetail?.data?.isLike) {
       await LikeApi.likePost(id);
@@ -66,27 +66,27 @@ const PostsDetail = () => {
       });
     }
   };
-  const handleDisLike = async () => {
-    setRender(true);
-    if (token === null) history.push("/auth/login");
+  // const handleDisLike = async () => {
+  //   setRender(true);
+  //   if (token === null) history.push("/auth/login");
 
-    if (postDetail?.data?.isDislike) {
-      await LikeApi.disLikePost(id);
-      setPostDetail({
-        ...postDetail,
-        data: { ...postDetail.data, isDislike: false },
-      });
-    } else {
-      await LikeApi.disLikePost(id);
-      setPostDetail({
-        ...postDetail,
-        data: { ...postDetail.data, isDislike: true },
-      });
-    }
-  };
+  //   if (postDetail?.data?.isDislike) {
+  //     await LikeApi.disLikePost(id);
+  //     setPostDetail({
+  //       ...postDetail,
+  //       data: { ...postDetail.data, isDislike: false },
+  //     });
+  //   } else {
+  //     await LikeApi.disLikePost(id);
+  //     setPostDetail({
+  //       ...postDetail,
+  //       data: { ...postDetail.data, isDislike: true },
+  //     });
+  //   }
+  // };
 
   const handleBookmark = async () => {
-    if (token === null) history.push("/auth/login");
+    if (token === null) return history.push("/auth/login");
 
     if (postDetail?.data?.isBookmark) {
       await BookmarkApi.addBookmarkPost(id);
@@ -105,7 +105,7 @@ const PostsDetail = () => {
 
   const username = postDetail?.data?.createBy?.username;
   const handleFollow = async () => {
-    if (token === null) history.push("/auth/login");
+    if (token === null) return history.push("/auth/login");
 
     if (postDetail?.data?.createBy?.isFollowing) {
       await FollowApi.unFollow(username);
@@ -377,10 +377,10 @@ const PostsDetail = () => {
                 >
                   <Icon.Like className="fill-current w-[13px]" />
                   <span className="text-[12x] md:text-[14x] ml-1">
-                    {postDetail?.data?.likes} Like
+                    {postDetail?.data?.likes} Vote
                   </span>
                 </button>
-                <button
+                {/* <button
                   onClick={() => handleDisLike()}
                   className={
                     postDetail?.data?.isDislike
@@ -392,7 +392,7 @@ const PostsDetail = () => {
                   <span className="text-[12x] md:text-[14x] ml-1">
                     {postDetail?.data?.dislikes} Dislikes
                   </span>
-                </button>
+                </button> */}
                 <div className="relative">
                   <button
                     className={

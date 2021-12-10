@@ -2,6 +2,7 @@
 import { createPortal } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router';
+import ChallengeApi from 'src/Apis/ChallengeApi';
 import SulotionApi from 'src/Apis/SulotionApi';
 import { Icon } from 'src/Components/Icon';
 
@@ -16,6 +17,7 @@ const ModalSolution = ({ isShowModle, setIsShowModle }) => {
         try {
             setActionLoading(true)
             await SulotionApi.post(data)
+            await ChallengeApi.solutionSubmited(id);
             history.push(`/challenge/solution/${id}`);
             setActionLoading(false)
         } catch (error) {

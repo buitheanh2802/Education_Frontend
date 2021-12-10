@@ -64,7 +64,7 @@ const ResetPassword = () => {
                             <span className="text-red-600 font-bold mr-[5px]">*</span>
                             Địa chỉ email của bạn:
                         </p>
-                        <input type="email" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]"
+                        <input type="email" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none"
                             onChangeCapture={() => { clearErrors('email') }}
                             {...register('email', {
                                 required: regex.REQUIRED,
@@ -78,7 +78,7 @@ const ResetPassword = () => {
                             <span className="text-red-600 font-bold mr-[5px]">*</span>
                             Mật khẩu mới:
                         </p>
-                        <input type="password" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]"
+                        <input type="password" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none"
                             onChangeCapture={() => { clearErrors('newPassword') }}
                             {...register('newPassword', {
                                 required: regex.REQUIRED,
@@ -96,7 +96,7 @@ const ResetPassword = () => {
                             <span className="text-red-600 font-bold mr-[5px]">*</span>
                             Nhập lại mật khẩu:
                         </p>
-                        <input type="password" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]"
+                        <input type="password" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none"
                             onChangeCapture={() => { clearErrors('newPasswordConfirm') }}
                             {...register('newPasswordConfirm', {
                                 required: regex.REQUIRED,

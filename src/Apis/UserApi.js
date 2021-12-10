@@ -6,7 +6,7 @@ const UserApi = {
     const url = `/user/${userId}`;
     return AxiosClient.get(url, {
       headers: {
-        Authorization: `Bearer ${LocalStorage.Get("_token_")}`,
+        authorization: `Bearer ${LocalStorage.Get("_token_")}`,
       },
     });
   },
@@ -15,7 +15,7 @@ const UserApi = {
     const url = `/user/${userId}`;
     return AxiosClient.update(url, {
       headers: {
-        Authorization: `Bearer ${LocalStorage.Get("_token_")}`,
+        authorization: `Bearer ${LocalStorage.Get("_token_")}`,
       },
     });
   },
@@ -23,7 +23,7 @@ const UserApi = {
     const url = `/user/featured-author`;
     return AxiosClient.get(url, {
       headers: {
-        Authorization: `Bearer ${LocalStorage.Get("_token_")}`,
+        authorization: `Bearer ${LocalStorage.Get("_token_")}`,
       },
     });
   },

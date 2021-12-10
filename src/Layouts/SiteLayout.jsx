@@ -40,6 +40,7 @@ const SiteLayout = () => {
     <>
       <Header />
       <Switch>
+        <PublicRouter exact path={path.POSTS_CREATE} component={PostsCreate} />
         <PublicRouter exact path={path.CONTACT} component={ContactPage} />
         <PublicRouter exact path={path.SEARCH} component={SearchPage} />
         <PublicRouter
@@ -75,10 +76,8 @@ const SiteLayout = () => {
           component={ChallengePage}
         />
         <PublicRouter path={path.QUIZ} component={QuizPage} />
-        <PublicRouter
-          path={path.CHALLENGE_SOLUTION_CHALLENGE_ID}
-          component={SolutionPage}
-        />
+        <PublicRouter path={path.CHALLENGE_SOLUTION_CHALLENGE_ID} component={SolutionPage} />
+        <PublicRouter path={path.POSTS} component={PostPage} />
         <PublicRouter path="*" component={Notfound} />
       </Switch>
       <Footer />

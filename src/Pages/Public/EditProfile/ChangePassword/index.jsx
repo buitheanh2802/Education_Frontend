@@ -9,13 +9,13 @@ import SuccessMessage from 'src/Components/SuccessMessage'
 import { path, regex } from 'src/Constants/'
 import ResponseMessage from 'src/Constants/ResponseMessage'
 const ChangePassword = () => {
+
     const [response, setResponse] = useState({ isLoading: false, error: null, message: null })
     const { isLoading, error, message } = response;
-    const { register, handleSubmit, formState: { errors }, clearErrors, getValues, reset } = useForm({
+    const { register, handleSubmit, formState: { errors }, clearErrors, getValues } = useForm({
         mode: "onSubmit",
         reValidateMode: "onBlur"
     });
-
 
     const onSubmit = async (data) => {
         try {
@@ -51,7 +51,7 @@ const ChangePassword = () => {
                                 <span className="text-red-600 font-bold mr-[5px]">*</span>
                                 Mật khẩu cũ:
                             </p>
-                            <input type="password" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]"
+                            <input type="password" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none"
                                 onChangeCapture={() => { clearErrors('currentPassword') }}
                                 {...register('currentPassword', {
                                     required: regex.REQUIRED,
@@ -65,7 +65,7 @@ const ChangePassword = () => {
                                 <span className="text-red-600 font-bold mr-[5px]">*</span>
                                 Mật khẩu mới:
                             </p>
-                            <input type="password" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]"
+                            <input type="password" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none"
                                 onChangeCapture={() => { clearErrors('newPassword') }}
                                 {...register('newPassword', {
                                     required: regex.REQUIRED,
@@ -82,7 +82,7 @@ const ChangePassword = () => {
                                 <span className="text-red-600 font-bold mr-[5px]">*</span>
                                 Nhập lại mật khẩu:
                             </p>
-                            <input type="password" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]"
+                            <input type="password" className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none"
                                 onChangeCapture={() => { clearErrors('newPasswordConfirm') }}
                                 {...register('newPasswordConfirm', {
                                     required: regex.REQUIRED,

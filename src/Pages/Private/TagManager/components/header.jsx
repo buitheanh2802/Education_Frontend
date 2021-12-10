@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 const Header = () => {
     return (
         <div className="p-4 bg-white block w-full sm:flex items-center justify-between border-b border-gray-200">
@@ -67,7 +66,7 @@ const Header = () => {
                             />
                         </div>
                     </form>
-                    <div className="flex items-center sm:justify-end w-full">
+                    <div className="flex items-center w-full">
                         <div className="hidden md:flex pl-2 space-x-1">
                             <a
                                 href="#"

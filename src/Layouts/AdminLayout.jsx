@@ -35,10 +35,6 @@ const AdminLayout = () => {
                   path={path.CONTACT_MANAGER}
                   component={ContactManager}
                 />
-                <PrivateRouter
-                  path={path.SULOTION_MANAGER}
-                  component={Exercise}
-                />
                 <PrivateRouter path={path.TAG_MANAGER} component={TagManager} />
                 <PrivateRouter
                   path={path.QUESTION_MANAGER}
@@ -47,6 +43,10 @@ const AdminLayout = () => {
                 <PrivateRouter
                   path={path.SULOTION_MANAGER_ID}
                   component={DetailExercise}
+                />
+                <PrivateRouter
+                  path={path.SULOTION_MANAGER}
+                  component={Exercise}
                 />
                 <PrivateRouter exact path={path.ADMIN} component={Dashboard} />
               </Switch>

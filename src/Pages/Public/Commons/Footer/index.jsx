@@ -121,6 +121,11 @@ const Footer = () => {
             </Link>
           </li>
           <li className="mb-[15px] text-gray-800">
+            <Link className="hover:text-blue-700" to={path.TAGS}>
+              Tag
+            </Link>
+          </li>
+          <li className="mb-[15px] text-gray-800">
             <Link className="hover:text-blue-700" to={path.NOT_FOUND}>
               Cộng đồng
             </Link>

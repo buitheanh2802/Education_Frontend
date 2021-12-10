@@ -37,11 +37,17 @@ body {
 .notification::-webkit-scrollbar-thumb {
   background-color: #c0bfbf;
 }
-
+.ql-syntax{
+  background-color: #23241f;
+    color: #f8f8f2;
+    overflow: visible;
+}
 /* Menu */
 @media (min-width: 1024px) {
-  .ql-container.ql-snow {
-    height: 63vh;
+  .text-editor {
+    min-height: 63vh;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
+    background: white;
   }
 }
 @media (max-width: 1024px) {
@@ -55,8 +61,10 @@ body {
     color: black;
     transition-duration: 0.3s;
   }
-  .ql-container.ql-snow {
-    height: 57vh;
+  .text-editor {
+    min-height: 57vh;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
+    background: white;
   }
 }
 
@@ -258,5 +266,22 @@ body {
   100% {
     opacity: 0;
     margin-left: 0;
+  }
+}
+
+.animation_preview{
+  animation: animation_preview ease 0.5s;
+}
+
+@keyframes animation_preview {
+  0%{
+    position: relative;
+    width: 50%;
+    height: 50%;
+  }
+  100%{
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
 }

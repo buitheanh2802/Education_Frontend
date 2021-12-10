@@ -64,13 +64,6 @@ const QuestionsDetail = () => {
       }
     };
     list(idQuestion);
-
-    // window.addEventListener("scroll", function (event) {
-    //   const scroll = this.scrollY;
-    //   if (scroll >= 300) {
-    //     console.log("haha");
-    //   }
-    // });
   }, [idQuestion, render]);
   if (Object.keys(questionDetail).length === 0) return null;
 
@@ -78,7 +71,8 @@ const QuestionsDetail = () => {
   const checkLike = arrLike.some((a) => a === profile?._id);
   const handleLike = async () => {
     setRender(true);
-    if (token === null) history.push("/auth/login");
+    if (token === null) return history.push("/auth/login");
+
     if (checkLike === false) {
       await LikeApi.likeQuestion(idQuestion);
       setQuestionDetail({
@@ -96,30 +90,30 @@ const QuestionsDetail = () => {
   ///////////////
   const arrDisLike = questionDetail?.data?.dislike;
   const checkDisLike = arrDisLike.some((a) => a === profile?._id);
-  const handleDisLike = async () => {
-    setRender(true);
-    if (token === null) history.push("/auth/login");
+  // const handleDisLike = async () => {
+  //   setRender(true);
+  //   if (token === null) history.push("/auth/login");
 
-    if (checkDisLike === false) {
-      await LikeApi.disLikeQuestion(idQuestion);
-      setQuestionDetail({
-        ...questionDetail,
-        data: { ...questionDetail.data },
-      });
-    } else {
-      await LikeApi.delDisLikeQuestion(idQuestion);
-      setQuestionDetail({
-        ...questionDetail,
-        data: { ...questionDetail.data },
-      });
-    }
-  };
+  //   if (checkDisLike === false) {
+  //     await LikeApi.disLikeQuestion(idQuestion);
+  //     setQuestionDetail({
+  //       ...questionDetail,
+  //       data: { ...questionDetail.data },
+  //     });
+  //   } else {
+  //     await LikeApi.delDisLikeQuestion(idQuestion);
+  //     setQuestionDetail({
+  //       ...questionDetail,
+  //       data: { ...questionDetail.data },
+  //     });
+  //   }
+  // };
 
   /////////
   const arrBookmark = questionDetail?.data?.bookmarks;
   const checkBookmark = arrBookmark.some((a) => a === profile?._id);
   const handleBookmark = async () => {
-    if (token === null) history.push("/auth/login");
+    if (token === null) return history.push("/auth/login");
 
     if (checkBookmark === false) {
       await BookmarkApi.addBookmarkQuestion(idQuestion);
@@ -140,7 +134,7 @@ const QuestionsDetail = () => {
 
   ////////
   const handleFollow = async () => {
-    if (token === null) history.push("/auth/login");
+    if (token === null) return history.push("/auth/login");
 
     if (user.data.isFollowing) {
       setRender(true);
@@ -187,7 +181,7 @@ const QuestionsDetail = () => {
     setIsModalVisible(false);
   };
   const handleViewBox = () => {
-    if (token === null) history.push("/auth/login");
+    if (token === null) return history.push("/auth/login");
     setIsModalVisible(true);
   };
 
@@ -236,13 +230,13 @@ const QuestionsDetail = () => {
       referenceTo: idQuestion,
       type: "questions",
     };
-    // console.log(dataSpam);
     try {
       await SpamApi.reportSpamQuestion(dataSpam);
       await Toast.fire({
         icon: "success",
         title: "Báo cáo thành công",
       });
+      setIsModalVisible(false);
     } catch (error) {
       await Toast.fire({
         icon: "error",
@@ -479,10 +473,10 @@ const QuestionsDetail = () => {
                   >
                     <Icon.Like className="fill-current w-[13px]" />
                     <span className="text-[12x] md:text-[14x] ml-1">
-                      {questionDetail?.data?.countLikes} Like
+                      {questionDetail?.data?.countLikes} Vote
                     </span>
                   </button>
-                  <button
+                  {/* <button
                     onClick={() => handleDisLike()}
                     className={
                       checkDisLike
@@ -494,7 +488,7 @@ const QuestionsDetail = () => {
                     <span className="text-[12x] md:text-[14x] ml-1">
                       {questionDetail?.data?.countDislike} Dislikes
                     </span>
-                  </button>
+                  </button> */}
                   <div className="relative">
                     <button
                       className={
