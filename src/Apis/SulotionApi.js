@@ -15,7 +15,7 @@ const SulotionApi = {
         const url = `/solution/${id}`;
         return AxiosClient.get(url, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     },

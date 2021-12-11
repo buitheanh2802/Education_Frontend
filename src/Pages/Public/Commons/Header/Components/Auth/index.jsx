@@ -1,16 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import { Icon } from 'src/Components/Icon';
 import { path } from 'src/Constants/';
 import Notification from '../Notification';
 import { ActionLogout } from 'src/Redux/Actions/Auth.action';
+import { hasNotification } from 'src/Redux/Slices/Notification.slice';
+import { notificationGets } from 'src/Redux/Actions/Notification.action';
 import Loading from 'src/Components/Loading';
 
 const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotification, active }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const { profile, actionLoading } = useSelector(state => state.Auth);
+    const { counter } = useSelector(state => state.Notification);
+    const { socket } = useSelector(state => state.SocketService);
+
+    // listen notification 
+    useEffect(() => {
+        socket.on('responseForJoin', (data) => { });
+        socket.on('responseForSendTo', () => {
+            dispatch(hasNotification());
+            dispatch(notificationGets(localStorage.getItem("_token_")))
+        })
+    }, []);
 
     return (
         <>
@@ -51,10 +64,16 @@ const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotificatio
                             className="cursor-pointer py-[10px] flex items-center text-red-600">{actionLoading ? <Loading className="w-[20px] h-[20px] fill-current" /> : <Icon.LogOut className="w-[20px] h-[20px] fill-current" />} <p className="ml-[10px]">Đăng xuất</p></li>
                     </ul>
                     <ul className="lg:flex lg:gap-[5px] px-[15px] lg:px-0 items-center">
-                        <li className="px-[15px] menu-after relative hidden lg:block">
-                            <i onClick={() => setIsNotification(!isNotification)} className={active ? 'text-gray-500 hover:text-blue-600' : 'text-white hover:text-[#51ffb9]'}><Icon.Bell className="cursor-pointer w-[20px] h-[20px] fill-current" /></i>
-
-
+                        <li className="px-[15px] menu-after relative hidden lg:block cursor-pointer ">
+                            <i onClick={() => setIsNotification(!isNotification)} className={active ? 'text-gray-500 hover:text-blue-600' : 'text-white hover:text-[#51ffb9]'}>
+                                <Icon.Bell className=" w-[20px] h-[20px] fill-current" /></i>
+                            {counter !== 0 ?
+                                <span
+                                    className='absolute top-[-10px] right-[10px] rounded-full leading-[15px] text-center
+                            text-white bg-red-500 w-[18px] h-[18px] text-[10px]
+                        '>
+                                    {counter}
+                                </span> : null}
                             {isNotification && <div className="absolute top-full right-0 w-[400px] pt-[12px]">
                                 <span className="absolute w-[10px] h-[10px] block border-t border-l bg-white border-gray-300 transform rotate-[45deg] -translate-y-1/2 right-[20px]"></span>
                                 <Notification className="hidden lg:block font-normal" />

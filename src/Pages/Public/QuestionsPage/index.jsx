@@ -7,7 +7,6 @@ import { path } from "src/Constants/";
 import { Icon } from "src/Components/Icon";
 import QuestionApi from "src/Apis/QuestionApi";
 import { useLocation } from "react-router";
-import Loading from "src/Components/Loading";
 import UserApi from "src/Apis/UserApi";
 import TagAPi from "src/Apis/TagApi";
 import { useDispatch } from "react-redux";

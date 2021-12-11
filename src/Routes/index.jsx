@@ -19,9 +19,10 @@ import Loading from 'src/Components/Loading';
 const RootRoute = () => {
     const [isLoading, setIsLoading] = useState(true)
     const dispatch = useDispatch()
-    const loading = useSelector(state => state.Loading)
+    const loading = useSelector(state => state.Loading);
+    const { profile } = useSelector(state => state.Auth);
+    const { socket } = useSelector(state => state.SocketService);
     queryParam("token") && LocalStorage.Set('_token_', queryParam("token"))
-
     useEffect(() => {
         (async () => {
             LocalStorage.Get('_token_')
@@ -33,7 +34,13 @@ const RootRoute = () => {
             }
         })()
     }, [dispatch])
-
+    // connect to socket.io
+    useEffect(() => {
+        if (profile?._id) {
+            socket.emit("join",profile._id)
+        }
+    }, [profile?._id])
+    // render 
     if (isLoading) return <div className="h-screen flex items-center justify-center bg-gray-100">
         <Loading className="w-[40px] h-[40px] fill-current text-gray-500" /></div>
     return (

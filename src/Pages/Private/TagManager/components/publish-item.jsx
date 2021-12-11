@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import { useSelector } from "react-redux";
 import TagAPi from 'src/Apis/TagApi';
-import SuccessMessage from 'src/Components/SuccessMessage';
-import ErrorMessage from 'src/Components/ErrorMessage';
 import swal from 'sweetalert'
 import ModalEdit from './ModalEdit';
 import UseModal from './useModal'

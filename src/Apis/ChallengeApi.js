@@ -24,7 +24,7 @@ const ChallengeApi = {
         const url = `/challenges/${cateid}/challenge-categories`;
         return AxiosClient.get(url, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     },
@@ -33,7 +33,7 @@ const ChallengeApi = {
         const url = `/challenges/`;
         return AxiosClient.post(url, data, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     },
@@ -57,7 +57,7 @@ const ChallengeApi = {
         const url = `/challenges/solution-submited/${id}`;
         return AxiosClient.post(url, {}, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     },
@@ -65,7 +65,7 @@ const ChallengeApi = {
         const url = 'challenges/upload-file';
         return AxiosClient.post(url, data, {
             headers: {
-                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
     }

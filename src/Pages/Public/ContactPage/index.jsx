@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
-import { Images } from "src/Constants/";
 import inner_page_banner from "../../../Assets/media/pictures/contact-image.png";
 import { useForm } from "react-hook-form";
-import { path, regex } from "src/Constants/";
+import {regex } from "src/Constants/";
 import ContactApi from "src/Apis/ContactApi";
-// import ResponseMessage from "src/Constants/ResponseMessage";
 import Swal from "sweetalert2";
 
 const ContactPage = () => {

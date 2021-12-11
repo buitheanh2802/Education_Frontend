@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import profile_icon from "../../../Assets/media/pictures/profile.png";
 import key_icon from "../../../Assets/media/pictures/digital-key.png";
-import { Link, Route, Switch } from "react-router-dom";
-import { Icon } from "src/Components/Icon";
+import { Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import AuthApi from "src/Apis/AuthApi";
@@ -12,20 +11,21 @@ import ChangePassword from "./ChangePassword";
 
 const EditProfile = () => {
     const dispatch = useDispatch();
-    const [profile, setProfile] = useState([]);
+    const [profileDetail, setProfileDetail] = useState([]);
 
     useEffect(() => {
-        const profile = async () => {
+        const proDetail = async () => {
             try {
                 dispatch(setLoading(true))
-                const { data: profile } = await AuthApi.profile();
-                setProfile(profile.data);
+                const { data : profileDetail } = await AuthApi.profileDetail();
+                setProfileDetail(profileDetail.data)
                 dispatch(setLoading(false))
             } catch (error) {
-                console.log("Failed to get data", error.response);
+                console.log(error.response);
             }
-        };
-        profile();
+        }
+        proDetail();
+
     }, []);
 
     return (
@@ -33,7 +33,7 @@ const EditProfile = () => {
             <div className="mx-auto">
                 <div className="flex mb-[20px]">
                     <div className="lg:w-[20%] pt-[75px]">
-                        <Sidebar profile={profile} />
+                        <Sidebar profile={profileDetail} />
                     </div>
                     <div className="w-full lg:w-[80%] px-[15px] md:px-[30px] pt-[75px]">
                         <div className=" max-w-[1100px] mx-auto">
@@ -53,19 +53,19 @@ const EditProfile = () => {
                                                 </div>
                                                 <div className="lg:flex">
                                                     <div className="w-[95px] h-[95px] lg:w-[110px] lg:h-[110px] rounded-full translate-y-[-50%] mx-auto lg:mx-0 lg:ml-10  overflow-hidden cursor-pointer">
-                                                        {profile?.avatar?.avatarUrl ?
+                                                        {profileDetail?.avatar?.avatarUrl ?
                                                             <img
                                                                 className="mx-auto max-h-[110px] w-[95px] h-[95px] lg:w-[110px] lg:h-[110px] rounded-full"
-                                                                src={profile?.avatar?.avatarUrl}
-                                                                alt={profile?.username} />
+                                                                src={profileDetail?.avatar?.avatarUrl}
+                                                                alt={profileDetail?.username} />
                                                             :
                                                             <div className="leading-[95px] lg:leading-[110px] text-white mx-auto text-center w-[95px] h-[95px] lg:w-[110px] lg:h-[110px] rounded-full bg-blue-200 font-bold lg:text-[62px] text-[56px]">
-                                                                {profile?.username?.toUpperCase().substring(0, 1)}
+                                                                {profileDetail?.username?.toUpperCase().substring(0, 1)}
                                                             </div>
                                                         }
                                                     </div>
                                                     <p className="text-[20px] font-bold leading-[25px] lg:ml-6 text-center lg:text-left mt-[12px]">
-                                                        Chào mừng, {profile?.fullname}<br />
+                                                        Chào mừng, {profileDetail?.fullname}<br />
                                                         <span className="text-[14px] md:text-[16px] font-normal">
                                                             Quản lý thông tin cá nhân của bạn và bảo mật với DevStar
                                                         </span>
@@ -96,18 +96,19 @@ const EditProfile = () => {
                                         exact
                                         path={`/profile/me/change-info/personal`}
                                         render={() => (
-                                            <ChangePersonal profile={profile} />
+                                            <ChangePersonal profile={profileDetail} />
                                         )}
-                                    ></Route>
+                                    >
+                                    </Route>
                                     <Route
                                         exact
                                         path={`/profile/me/change-info/password`}
                                         render={() =>
-                                            <ChangePassword profile={profile} />
+                                            <ChangePassword profile={profileDetail} />
                                         }
-                                    ></Route>
+                                    >
+                                    </Route>
                                 </Switch>
-
                             </div>
                         </div>
                     </div>

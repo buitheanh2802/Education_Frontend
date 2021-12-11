@@ -9,9 +9,10 @@ import UserFollower from "./UserFollower";
 import UserBookMark from "./UserBookMark";
 import UserPost from "./UserPost";
 import UserTag from "./UserTag";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FollowApi from "src/Apis/FollowApi";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
+import NotificationApi from "src/Apis/NotificationApi";
 
 const Userpage = (props) => {
     const username = props.match.params.username;
@@ -20,24 +21,40 @@ const Userpage = (props) => {
     const history = useHistory();
     const location = useLocation();
     const token = localStorage.getItem("_token_");
+    const { socket } = useSelector(state => state.SocketService);
+    const { profile } = useSelector(state => state.Auth);
 
     const handleFollow = async () => {
         dispatch(setLoading(true))
         if (token === null) {
             history.push("/auth/login");
             dispatch(setLoading(false))
+            return;
+        }
+        const notificationRequest = {
+            title : `
+            <div>
+                <a class="font-medium cursor-pointer hover:text-blue-500 " 
+                href="/user/${profile.username}">${profile.fullname}</a>
+                đã ${user?.isFollowing ? "bỏ theo dõi bạn." : "theo dõi bạn."} 
+            </div>`,
+            url : ""
         }
         if (user?.isFollowing) {
             await FollowApi.unFollow(username);
+            const { data : { data }} = await NotificationApi.create(token,notificationRequest,user._id);
+            socket.emit('sendTo',{...data,sendToId : user._id});
             setUser({ ...user, isFollowing: false })
             dispatch(setLoading(false))
         } else {
             await FollowApi.follow(username);
-            setUser({ ...user, isFollowing: true })
+            const { data : { data }} = await NotificationApi.create(token,notificationRequest,user._id);
+            socket.emit('sendTo',{...data,sendToId : user._id});
+            setUser({ ...user, isFollowing: true });
             dispatch(setLoading(false))
         }
     }
-
+    
     const pathName = [
         {
             path: `/user/${username}`,
