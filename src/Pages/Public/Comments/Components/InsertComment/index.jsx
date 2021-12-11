@@ -8,7 +8,7 @@ import { path } from 'src/Constants/'
 import { ActionPostComment } from 'src/Redux/Actions/Comments.action'
 import IntroUser from '../IntroUser'
 
-const InsertComment = ({ shortId, focus, parentId }) => {
+const InsertComment = ({ shortId, focus, parentId, setIsRepComment }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const [isShow, setIsShow] = useState(false);
@@ -32,6 +32,7 @@ const InsertComment = ({ shortId, focus, parentId }) => {
         setSendComment(false);
         if (!payload.status) return
         reset();
+        setIsRepComment && setIsRepComment(false)
     }
 
     return (

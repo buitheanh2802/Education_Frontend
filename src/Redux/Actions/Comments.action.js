@@ -13,7 +13,7 @@ export const ActionGetsComment = createAsyncThunk('comments/gets', async (shortI
 export const ActionPostComment = createAsyncThunk('comments/post', async (comment) => {
     try {
         const { data } = await CommentsApi.post(comment);
-        return data
+        return { ...data, comment }
     } catch (error) {
         return error.response.data
     }

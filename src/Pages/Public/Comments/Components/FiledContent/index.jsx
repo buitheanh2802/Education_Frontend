@@ -5,6 +5,7 @@ import InsertComment from '../InsertComment'
 
 const FiledContent = ({ data, shortId }) => {
     const [isRepComment, setIsRepComment] = useState(false)
+    console.log(data)
     return (
         <div className="flex my-[20px] gap-3">
             <IntroUser className="max-w-[35px] max-h-[35px] min-w-[35px] min-h-[35px]" avatarUrl={data?.createBy?.avatar?.avatarUrl} fullname={data?.createBy?.fullname} />
@@ -21,7 +22,7 @@ const FiledContent = ({ data, shortId }) => {
                 {data?.replyComments && <>
                     {data?.replyComments?.map((item, index) => {
                         return (
-                            <div className="flex mt-[20px] gap-3">
+                            <div key={index} className="flex mt-[20px] gap-3">
                                 <IntroUser className="max-w-[35px] max-h-[35px] min-w-[35px] min-h-[35px] " avatarUrl={item?.createBy?.avatar?.avatarUrl} fullname={item?.createBy?.fullname} />
                                 <div className="w-full">
                                     <div>
@@ -39,7 +40,7 @@ const FiledContent = ({ data, shortId }) => {
                     })}
                 </>}
                 {isRepComment && <div className="insertRepCommnet mt-3 duration-300">
-                    <InsertComment parentId={data?._id} focus={true} shortId={shortId} />
+                    <InsertComment parentId={data?._id} focus={true} shortId={shortId} setIsRepComment={setIsRepComment} />
                 </div>}
             </div>
         </div>

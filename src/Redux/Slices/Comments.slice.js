@@ -41,9 +41,20 @@ const mySlice = createSlice({
             AlartMessage(false, ResponseMessage("ERROR_SERVER"));
         });
         builder.addCase(ActionPostComment.fulfilled, (state, action) => {
-            const { status, data, message } = action?.payload;
+            const { status, data, message, comment } = action?.payload;
             state.actionLoading = false;
             if (status) {
+                if (comment?.parentId) {
+                    state.models.map(item => {
+                        if (item?._id === comment?.parentId) {
+                            if (item.replyComments) return item.replyComments.push(data)
+                            item.replyComments = [data]
+                        }
+                        return item
+                    })
+                    return
+                }
+
                 state.models = [data, ...state.models];
                 state.pagination.countDocuments = state?.pagination?.countDocuments + 1;
             }
