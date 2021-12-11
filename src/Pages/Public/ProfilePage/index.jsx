@@ -31,7 +31,7 @@ const ProfilePage = () => {
                 <div className=" min-w-100 max-w-100 bg-white shadow rounded">
                     <div className="py-[5px] mx-[10px]">
                         <div className="py-[10px] bg-[#BEE3F8]">
-                            <Link className="block">
+                            <div className="block">
                                 {profileDetail?.avatar?.avatarUrl ?
                                     <img
                                         className="mx-auto max-h-[70px] rounded-full"
@@ -43,16 +43,15 @@ const ProfilePage = () => {
                                         {profileDetail?.username?.toUpperCase().substring(0, 1)}
                                     </div>
                                 }
-                            </Link>
+                            </div>
                         </div>
                         <div>
                             <div className=" divide-y divide-light-blue-400 pb-[10px]">
                                 <div className="grid grid-cols-3 lg:gap-[3px] md:gap-[10px] my-[20px]">
                                     <div class="col-span-2">
-                                        <Link className="py-[5px] font-semibold text-[#2D3748] md:text-[16px] sm:text-[16px] xl:text-[18px] lg:text-[14px] hover:underline">
+                                        <p className="py-[5px] font-semibold text-[#2D3748] md:text-[16px] sm:text-[16px] xl:text-[18px] lg:text-[14px] hover:underline">
                                             {profileDetail?.fullname}
-                                        </Link>
-                                        <br />
+                                        </p>
                                         <span className="py-[5px] lg:text-[13px] xl:text-[16px] sm:text-[14px] text-[#4A5568] ">
                                             @{profileDetail?.username?.substring(0, 16)}...
                                         </span>

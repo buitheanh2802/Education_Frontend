@@ -27,22 +27,39 @@ const ChangePersonal = ({ profile }) => {
             skills: profile?.skills
         }
     });
-    let hobbies = [];
-    let skills = []
 
-    const handleAddHobby = (e) => {
+    let hobbies = [];
+    let skills = [];
+
+    let listHobbies = [
+        { "label": "Ăn uống", "value": "1" },
+        { "label": "Mua sắm", "value": "2" },
+        { "label": "Chơi game", "value": "3" },
+        { "label": "Đọc sách", "value": "4" },
+        { "label": "Chơi thể thao", "value": "5" },
+        { "label": "Nghe nhạc", "value": "6" }
+    ]
+    let listSkills = [
+        { "label": "Front-End", "value": "1" },
+        { "label": "Back-End", "value": "2" },
+        { "label": "Mobile App(IOS)", "value": "3" },
+        { "label": "Mobile App(Android)", "value": "4" },
+        { "label": "Xử lí dữ liệu", "value": "5" }
+    ]
+
+    const handleAddHobby = (e, hobby) => {
         if (e.target.checked) {
-            hobbies.push(e.target.value)
+            hobbies.push(hobby)
         } else {
-            hobbies = hobbies.filter(item => item !== e.target.value)
+            hobbies = hobbies.filter(item => item !== hobby)
         }
     }
 
-    const handleAddSkill = (e) => {
+    const handleAddSkill = (e, skill) => {
         if (e.target.checked) {
-            skills.push(e.target.value)
+            skills.push(skill)
         } else {
-            skills = skills.filter(item => item !== e.target.value)
+            skills = skills.filter(item => item !== skill)
         }
     }
 
@@ -50,7 +67,7 @@ const ChangePersonal = ({ profile }) => {
         try {
             setResponse({ isLoading: false, error: null, message: null })
             if (data) setLoading({ ...loading, success: true });
-            const uploads = new FormData();
+            let uploads = new FormData();
             uploads.append("photo", data.photo);
             uploads.append("birthday", data.birthday);
             uploads.append("address", data.address);
@@ -119,7 +136,7 @@ const ChangePersonal = ({ profile }) => {
                             <input type="date" defaultValue={profile?.birthday}
                                 onChangeCapture={() => { clearErrors('birthday') }}
                                 {...register('birthday')}
-                                disabled={isLoading} className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
+                                className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
@@ -128,7 +145,6 @@ const ChangePersonal = ({ profile }) => {
                             <input type="text" defaultValue={profile?.address}
                                 onChangeCapture={() => { clearErrors('address') }}
                                 {...register('address')}
-                                disabled={isLoading}
                                 className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
                         </div>
                         <div className="py-[5px]">
@@ -139,37 +155,21 @@ const ChangePersonal = ({ profile }) => {
                                 rows={6}
                                 onChangeCapture={() => { clearErrors('descriptions') }}
                                 {...register('descriptions')}
-                                disabled={isLoading} className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
+                                className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Sở thích:
                             </p>
                             <form id="hobbies" className="grid grid-cols-3">
-                                <div className="flex my-[5px]">
-                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Ăn uống" id="eat" />
-                                    <span>Ăn uống</span>
-                                </div>
-                                <div className="flex my-[5px]">
-                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Nghe nhạc" id="music" />
-                                    <span>Nghe nhạc</span>
-                                </div>
-                                <div className="flex my-[5px]">
-                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Chơi game" id="game" />
-                                    <span>Chơi game</span>
-                                </div>
-                                <div className="flex my-[5px]">
-                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mua sắm" id="shopping" />
-                                    <span>Mua sắm</span>
-                                </div>
-                                <div className="flex my-[5px]">
-                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Chơi thể thao" id="sport" />
-                                    <span>Chơi thể thao</span>
-                                </div>
-                                <div className="flex my-[5px]">
-                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Đọc sách" id="reading" />
-                                    <span>Đọc sách</span>
-                                </div>
+                                {listHobbies.map(item => {
+                                    return (
+                                        <div className="flex my-[5px]">
+                                            <input type="checkbox" value={item.value} onChange={(e) => handleAddHobby(e, item.label)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" id="" />
+                                            <span>{item.label}</span>
+                                        </div>
+                                    )
+                                })}
                             </form>
                         </div>
                         <div className="py-[5px]">
@@ -177,26 +177,14 @@ const ChangePersonal = ({ profile }) => {
                                 Kỹ năng:
                             </p>
                             <form id="skills" className="grid grid-cols-3">
-                                <div className="flex my-[5px]">
-                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Front-End" id="front" />
-                                    <span>Front-End</span>
-                                </div>
-                                <div className="flex my-[5px]">
-                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Back-End" id="back" />
-                                    <span>Back-End</span>
-                                </div>
-                                <div className="flex my-[5px]">
-                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mobile App(IOS)" id="ios" />
-                                    <span>Mobile App(IOS)</span>
-                                </div>
-                                <div className="flex my-[5px]">
-                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mobile App(Android)" id="android" />
-                                    <span>Mobile App(Android)</span>
-                                </div>
-                                <div className="flex my-[5px]">
-                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Xử lí dữ liệu" id="pend-data" />
-                                    <span>Xử lí dữ liệu</span>
-                                </div>
+                                {listSkills.map(item => {
+                                    return (
+                                        <div className="flex my-[5px]">
+                                            <input type="checkbox" value={item.value} onChange={(e) => handleAddSkill(e, item.label)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" id="" />
+                                            <span>{item.label}</span>
+                                        </div>
+                                    )
+                                })}
                             </form>
                         </div>
                         <div className="flex justify-end">
