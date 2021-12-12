@@ -52,7 +52,7 @@ const EditProfile = () => {
                                                 >
                                                 </div>
                                                 <div className="lg:flex">
-                                                    <div className="w-[95px] h-[95px] lg:w-[110px] lg:h-[110px] rounded-full translate-y-[-50%] mx-auto lg:mx-0 lg:ml-10  overflow-hidden cursor-pointer">
+                                                    <Link to="/profile/me" className="w-[95px] h-[95px] lg:w-[110px] lg:h-[110px] rounded-full translate-y-[-50%] mx-auto lg:mx-0 lg:ml-10  overflow-hidden cursor-pointer">
                                                         {profileDetail?.avatar?.avatarUrl ?
                                                             <img
                                                                 className="mx-auto max-h-[110px] w-[95px] h-[95px] lg:w-[110px] lg:h-[110px] rounded-full"
@@ -63,9 +63,9 @@ const EditProfile = () => {
                                                                 {profileDetail?.username?.toUpperCase().substring(0, 1)}
                                                             </div>
                                                         }
-                                                    </div>
+                                                    </Link>
                                                     <p className="text-[20px] font-bold leading-[25px] lg:ml-6 text-center lg:text-left mt-[12px]">
-                                                        Chào mừng, {profileDetail?.fullname}
+                                                        Chào mừng, <Link to="/profile/me">{profileDetail?.fullname}</Link>
                                                         <p className="text-[14px] md:text-[16px] font-normal">
                                                             Quản lý thông tin cá nhân của bạn và bảo mật với DevStar
                                                         </p>
