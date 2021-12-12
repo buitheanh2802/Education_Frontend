@@ -28,8 +28,8 @@ const ChangePersonal = ({ profile }) => {
         }
     });
 
-    let hobbies = [];
-    let skills = [];
+    let hobbies = profile?.hobbies;
+    let skills = profile?.skills;
 
     let listHobbies = [
         { "label": "Ăn uống", "value": "1" },
@@ -68,12 +68,28 @@ const ChangePersonal = ({ profile }) => {
             setResponse({ isLoading: false, error: null, message: null })
             if (data) setLoading({ ...loading, success: true });
             let uploads = new FormData();
-            uploads.append("photo", data.photo);
-            uploads.append("birthday", data.birthday);
-            uploads.append("address", data.address);
-            uploads.append("descriptions", data.descriptions);
-            uploads.append("hobbies", hobbies);
-            uploads.append("skills", skills);
+            if (!data.photo) {
+                uploads.append("birthday", data.birthday);
+                uploads.append("address", data.address);
+                uploads.append("descriptions", data.descriptions);
+                hobbies.map((item) => {
+                    uploads.append("hobbies[]", item);
+                });
+                skills.map((item) => {
+                    uploads.append("skills[]", item);
+                });
+            } else {
+                uploads.append("photo", data.photo[0]);
+                uploads.append("birthday", data.birthday);
+                uploads.append("address", data.address);
+                uploads.append("descriptions", data.descriptions);
+                hobbies.map((item) => {
+                    uploads.append("hobbies[]", item);
+                });
+                skills.map((item) => {
+                    uploads.append("skills[]", item);
+                });
+            }
             const { data: res } = await AuthApi.changeInfo(uploads);
             if (res) setLoading({ ...loading, success: false });
             setResponse({
@@ -90,6 +106,7 @@ const ChangePersonal = ({ profile }) => {
                 error: ResponseMessage(error?.response?.data?.message[0]),
                 message: null
             })
+            setLoading({ ...loading, success: false });
         }
     }
 
@@ -112,9 +129,10 @@ const ChangePersonal = ({ profile }) => {
                                     Choose image
                                 </div>
                             }
-                            <input className="mx-auto my-[5px] w-[100%] outline-none" type="file"
+                            <input type="file"
                                 onChangeCapture={() => { clearErrors('photo') }}
                                 {...register('photo')}
+                                className="mx-auto my-[5px] w-[100%] outline-none"
                             />
                         </div>
                         <div className="py-[5px]">

@@ -15,7 +15,7 @@ const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo, onEdit }) => {
         reValidateMode: "onBlur",
         defaultValue: {
             name: name,
-            phtoto: photo
+            photo: photo
         }
     });
 
