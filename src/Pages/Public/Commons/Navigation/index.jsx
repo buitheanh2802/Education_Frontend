@@ -25,7 +25,7 @@ const Navigation = ({ path, button }) => {
             onClick={
               token == null
                 ? () => {
-                    history.push("/auth/login");
+                    return history.push("/auth/login");
                   }
                 : () => {
                     history.push(button?.path);
