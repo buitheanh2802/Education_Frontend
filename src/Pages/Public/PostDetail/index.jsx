@@ -16,6 +16,7 @@ import LikeApi from "src/Apis/LikeApi";
 import BookmarkApi from "src/Apis/BookmarkApi";
 import FollowApi from "src/Apis/FollowApi";
 import Loading from "src/Components/Loading";
+import Comments from "../Comments";
 const PostsDetail = () => {
   const shortId = useParams();
   const idParam = shortId.id;
@@ -286,7 +287,7 @@ const PostsDetail = () => {
                         : "Sao chép link bài viết"}
                     </li>
                     {postDetail?.data?.createBy?.username ===
-                    profile?.username ? (
+                      profile?.username ? (
                       <>
                         <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
                           <Icon.Fix className="fill-current w-[15px] mr-[5px]" />
@@ -445,6 +446,9 @@ const PostsDetail = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="my-[20px]">
+            <Comments shortId={id} />
           </div>
         </div>
         <div className="hidden lg:block">
