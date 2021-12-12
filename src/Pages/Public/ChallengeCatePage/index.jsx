@@ -26,7 +26,7 @@ const ChallengeCatePage = () => {
         <div className="container mx-auto mt-[55px] py-[20px]">
             <Navigation path={pathName} />
             <div className="mt-[25px]">
-                <h3 className="text-[20px] font-bold text-blue-900">Quy trình làm việc</h3>
+                <h3 className="text-[20px] md:text-[25px] font-bold text-blue-900">Quy trình làm việc</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-[10px]">
                     <div className="shadow-sm hover:shadow-md duration-300 bg-white rounded  course-item p-[25px] relative border" >
                         <div className="w-full h-[220px] bg-no-repeat bg-cover  bg-center rounded" style={{ backgroundImage: `url(${Images?.Step1})` }}> </div>
@@ -58,7 +58,7 @@ const ChallengeCatePage = () => {
                 </div>
             </div>
             <div className="mt-[50px]" >
-                <h3 className="text-[20px] font-bold text-blue-900">Bắt đầu thực hành với devstar</h3>
+                <h3 className="text-[20px] md:text-[30px] lg:text-[35px] font-bold text-blue-900">Bắt đầu thực hành với devstar</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-[10px]">
                     {isLoading &&
                         <>

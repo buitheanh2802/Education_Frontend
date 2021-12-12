@@ -8,6 +8,9 @@ import PathContent from '../Commons/PathContent';
 import Skeleton from 'react-loading-skeleton'
 import { ActionGetChallengeCate } from 'src/Redux/Actions/ChallengeCate.action';
 import { SplitString } from 'src/Helpers/';
+import { UpperCaseOneKey } from 'src/Helpers/';
+import { Link } from 'react-router-dom';
+import { CompactText } from 'src/Helpers/';
 
 const ChallengePage = () => {
     const dispatch = useDispatch();
@@ -36,7 +39,35 @@ const ChallengePage = () => {
 
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
-            {routeName ? <PathContent path={pathName} /> : <Skeleton className="h-full py-[15px] border" />}
+            <div className="flex justify-between gap-[15px] mb-3">
+                <div className="py-[10px] flex items-center overflow-x-auto w-full whitespace-nowrap">
+                    {pathName?.map((item, index) => {
+                        if (index === 0) return (
+                            <Link
+                                key={index}
+                                to={item.path}
+                                className="relative after:absolute after:top-1/2 after:transform after:translate-y-[-45%] after:h-2/3 after:right-[-5px] after:w-[1px] after:bg-gray-500 after:rotate-[-20deg] text-[22px] px-[5px] text-gray-600 mr-[10px] font-medium hover:text-blue-600">
+                                {UpperCaseOneKey(item.value, 3, 2)}
+                            </Link>
+                        )
+
+                        return (
+                            <Link
+                                key={index}
+                                to={item.path}
+                                className="text-[16px] font-light px-[5px] text-blue-600">
+                                {UpperCaseOneKey(item?.value)}
+                            </Link>
+                        )
+                    })}
+                </div>
+            </div>
+            {/* {routeName ? <PathContent path={pathName} /> : <Skeleton className="h-full py-[15px] border" />} */}
+
+            <div className='w-full h-[200px] filter sepia-0'>
+                <img className='w-full h-full object-cover rounded grayscale-[20%]' src="https://drive.google.com/uc?id=1jMaHlFfIUPnLrjuoNjSoAUaJGYMbDOFl" />
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-[20px]">
                 {isLoading && (
                     <>
