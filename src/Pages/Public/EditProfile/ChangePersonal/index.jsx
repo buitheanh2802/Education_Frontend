@@ -27,9 +27,8 @@ const ChangePersonal = ({ profile }) => {
             skills: profile?.skills
         }
     });
-
-    let hobbies = [];
-    let skills = [];
+    const [ hobbies, setHobbies ] = useState(profile?.hobbies);
+    const  [ skills, setSkills ] = useState(profile?.skills);
 
     let listHobbies = [
         { "label": "Ăn uống", "value": "1" },
@@ -47,23 +46,57 @@ const ChangePersonal = ({ profile }) => {
         { "label": "Xử lí dữ liệu", "value": "5" }
     ]
 
-    const handleAddHobby = (e, hobby) => {
-        if (e.target.checked) {
-            hobbies.push(hobby)
-        } else {
-            hobbies = hobbies.filter(item => item !== hobby)
-        }
-    }
+    const renderHobbies = useCallback(() => {
+        return (
+            <>
+                {listHobbies.map(item => {
+                    return (
+                        <div className="flex my-[5px]">
+                            <input type="checkbox" value={item.value} onChange={(e) => handleAddHobby(e, item.label)}
+                                defaultChecked={hobbies?.find(ele => ele.toLowerCase() === item.label.toLowerCase())}
+                                className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" id="" />
+                            <span>{item.label}</span>
+                        </div>
+                    )
+                })}
+            </>
+        )
+    }, [hobbies])
 
-    const handleAddSkill = (e, skill) => {
-        if (e.target.checked) {
-            skills.push(skill)
-        } else {
-            skills = skills.filter(item => item !== skill)
-        }
-    }
+    const renderSkills = useCallback(() => {
+        return (
+            <>
+                {listSkills.map(item => {
+                    return (
+                        <div className="flex my-[5px]">
+                            <input type="checkbox" value={item.value} onChange={(e) => handleAddSkill(e, item.label)}
+                                defaultChecked={skills?.find(ele => ele.toLowerCase() === item.label.toLowerCase())}
+                                className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" id="" />
+                            <span>{item.label}</span>
+                        </div>
+                    )
+                })}
+            </>
+        )
+    }, [skills])
 
-    const onSubmit = useCallback(async (data) => {
+    const handleAddHobby = useCallback ((e, hobby) => {
+        if (e.target.checked) {
+            setHobbies([...hobbies, hobby]);
+        } else {
+            setHobbies(hobbies.filter(item => item !== hobby));
+        }
+    }, [hobbies])
+
+    const handleAddSkill = useCallback((e, skill) => {
+        if (e.target.checked) {
+            setSkills([...skills, skill])
+        } else {
+            setSkills(skills.filter(item => item !== skill))
+        }
+    }, [skills])
+
+    const onSubmit = async (data) => {
         try {
             setResponse({ isLoading: false, error: null, message: null })
             if (data) setLoading({ ...loading, success: true });
@@ -72,8 +105,8 @@ const ChangePersonal = ({ profile }) => {
             if (data.birthday) { uploads.append("birthday", data.birthday) }
             if (data.address) { uploads.append("address", data.address) }
             if (data.descriptions) { uploads.append("descriptions", data.descriptions) }
-            hobbies.map((item) => { uploads.append("hobbies[]", item) });
-            skills.map((item) => { uploads.append("skills[]", item) });
+            if (hobbies) { uploads.append("hobbies", hobbies) };
+            if (skills) { uploads.append("skills", skills) };
             const { data: res } = await AuthApi.changeInfo(uploads);
             if (res) setLoading({ ...loading, success: false });
             setResponse({
@@ -92,7 +125,7 @@ const ChangePersonal = ({ profile }) => {
             })
             setLoading({ ...loading, success: false });
         }
-    }, [hobbies, skills])
+    }
 
     return (
         <>
@@ -107,7 +140,7 @@ const ChangePersonal = ({ profile }) => {
                         {message && <SuccessMessage message={message} />}
                         <div className="mx-auto w-[220px]">
                             {profile?.avatar?.avatarUrl ?
-                                <img className="mx-auto rounded-full" src={profile?.avatar?.avatarUrl} alt="Image" />
+                                <img className="w-[120px] h-[120px] mx-auto rounded-full" src={profile?.avatar?.avatarUrl} alt="Image" />
                                 :
                                 <div className="w-[120px] h-[120px] leading-[120px] text-white mx-auto rounded-full px-[8px] bg-blue-200">
                                     Choose image
@@ -164,14 +197,7 @@ const ChangePersonal = ({ profile }) => {
                                 Sở thích:
                             </p>
                             <form id="hobbies" className="grid grid-cols-3">
-                                {listHobbies.map(item => {
-                                    return (
-                                        <div className="flex my-[5px]">
-                                            <input type="checkbox" value={item.value} onChange={(e) => handleAddHobby(e, item.label)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" id="" />
-                                            <span>{item.label}</span>
-                                        </div>
-                                    )
-                                })}
+                                {renderHobbies()}
                             </form>
                         </div>
                         <div className="py-[5px]">
@@ -179,14 +205,7 @@ const ChangePersonal = ({ profile }) => {
                                 Kỹ năng:
                             </p>
                             <form id="skills" className="grid grid-cols-3">
-                                {listSkills.map(item => {
-                                    return (
-                                        <div className="flex my-[5px]">
-                                            <input type="checkbox" value={item.value} onChange={(e) => handleAddSkill(e, item.label)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" id="" />
-                                            <span>{item.label}</span>
-                                        </div>
-                                    )
-                                })}
+                                {renderSkills()}
                             </form>
                         </div>
                         <div className="flex justify-end">
