@@ -16,7 +16,8 @@ const UserTag = (props) => {
   const handleUnFollow = async (id) => {
     if (token === null) {
       history.push("/auth/login");
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
+      return;
     }
     dispatch(setLoading(true))
     await FollowApi.unFollowTag(id);
@@ -35,6 +36,7 @@ const UserTag = (props) => {
     if (token === null) {
       history.push("/auth/login");
       dispatch(setLoading(false))
+      return;
     }
     dispatch(setLoading(true))
     await FollowApi.followTag(id);

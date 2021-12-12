@@ -68,28 +68,18 @@ const ChangePersonal = ({ profile }) => {
             setResponse({ isLoading: false, error: null, message: null })
             if (data) setLoading({ ...loading, success: true });
             let uploads = new FormData();
-            if (!data.photo) {
-                uploads.append("birthday", data.birthday);
-                uploads.append("address", data.address);
-                uploads.append("descriptions", data.descriptions);
-                hobbies.map((item) => {
-                    uploads.append("hobbies[]", item);
-                });
-                skills.map((item) => {
-                    uploads.append("skills[]", item);
-                });
-            } else {
+            if (data.photo) {
                 uploads.append("photo", data.photo[0]);
-                uploads.append("birthday", data.birthday);
-                uploads.append("address", data.address);
-                uploads.append("descriptions", data.descriptions);
-                hobbies.map((item) => {
-                    uploads.append("hobbies[]", item);
-                });
-                skills.map((item) => {
-                    uploads.append("skills[]", item);
-                });
             }
+            uploads.append("birthday", data.birthday);
+            uploads.append("address", data.address);
+            uploads.append("descriptions", data.descriptions);
+            hobbies.map((item) => {
+                uploads.append("hobbies[]", item);
+            });
+            skills.map((item) => {
+                uploads.append("skills[]", item);
+            });
             const { data: res } = await AuthApi.changeInfo(uploads);
             if (res) setLoading({ ...loading, success: false });
             setResponse({
