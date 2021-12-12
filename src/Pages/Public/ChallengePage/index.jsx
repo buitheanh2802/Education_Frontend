@@ -39,7 +39,7 @@ const ChallengePage = () => {
 
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
-            <div className="flex justify-between gap-[15px] mb-3">
+            {routeName && <div className="flex justify-between gap-[15px] mb-3">
                 <div className="py-[10px] flex items-center overflow-x-auto w-full whitespace-nowrap">
                     {pathName?.map((item, index) => {
                         if (index === 0) return (
@@ -61,12 +61,10 @@ const ChallengePage = () => {
                         )
                     })}
                 </div>
-            </div>
-            {/* {routeName ? <PathContent path={pathName} /> : <Skeleton className="h-full py-[15px] border" />} */}
-
-            <div className='w-full h-[200px] filter sepia-0'>
+            </div>}
+            {routeName ? <div className='w-full h-[200px] filter sepia-0'>
                 <img className='w-full h-full object-cover rounded grayscale-[20%]' src="https://drive.google.com/uc?id=1jMaHlFfIUPnLrjuoNjSoAUaJGYMbDOFl" />
-            </div>
+            </div> : <Skeleton className="h-[200px] py-[15px] border" />}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[20px] mt-[20px]">
                 {isLoading && (
