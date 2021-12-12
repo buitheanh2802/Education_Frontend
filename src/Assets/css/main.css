@@ -1826,6 +1826,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.grid-cols-\[60px\2c 1fr\2c 2fr\2c 0\.5fr\2c 0\.5fr\2c 1\.2fr\] {
+  grid-template-columns: 60px 1fr 2fr 0.5fr 0.5fr 1.2fr;
+}
+
+.grid-cols-\[60px\2c 1fr\2c 1\.5fr\2c 1\.5fr\2c 0\.5fr\2c 1fr\] {
+  grid-template-columns: 60px 1fr 1.5fr 1.5fr 0.5fr 1fr;
+}
+
+.grid-cols-\[60px\2c 1fr\2c 1\.5fr\2c 1\.5fr\2c 1fr\2c 1fr\] {
+  grid-template-columns: 60px 1fr 1.5fr 1.5fr 1fr 1fr;
+}
+
+.grid-cols-\[60px\2c 1fr\2c 1\.5fr\2c 1\.5fr\2c 0\.8fr\2c 0\.8fr\] {
+  grid-template-columns: 60px 1fr 1.5fr 1.5fr 0.8fr 0.8fr;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -2572,6 +2588,21 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(18 115 235 / 0));
 }
 
+.from-\[\#a1f0f9\] {
+  --tw-gradient-from: #a1f0f9;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(161 240 249 / 0));
+}
+
+.from-\[\#b662ee\] {
+  --tw-gradient-from: #b662ee;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(182 98 238 / 0));
+}
+
+.from-\[\#a1ddf5\] {
+  --tw-gradient-from: #a1ddf5;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(161 221 245 / 0));
+}
+
 .via-\[\#4193aa\] {
   --tw-gradient-stops: var(--tw-gradient-from), #4193aa, var(--tw-gradient-to, rgb(65 147 170 / 0));
 }
@@ -2594,6 +2625,22 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .to-\[\#0051b5\] {
   --tw-gradient-to: #0051b5;
+}
+
+.to-\[\#79a3f9\] {
+  --tw-gradient-to: #79a3f9;
+}
+
+.to-\[\#6295f5\] {
+  --tw-gradient-to: #6295f5;
+}
+
+.to-\[\#a1ddf5\] {
+  --tw-gradient-to: #a1ddf5;
+}
+
+.to-\[\#b662ee\] {
+  --tw-gradient-to: #b662ee;
 }
 
 .bg-cover {
@@ -3484,6 +3531,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .opacity-0 {
   opacity: 0;
+}
+
+.opacity-\[0\.8\] {
+  opacity: 0.8;
 }
 
 .shadow-sm {
