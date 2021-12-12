@@ -9,7 +9,7 @@ const PublishNav = () => {
             <div >Số người theo dõi</div>
             <div >Số bài viết</div>
             <div >Số câu hỏi</div>
-            <div className="text-center ">Action</div>
+            <div className="text-center">Hành động</div>
         </div>
     );
 };

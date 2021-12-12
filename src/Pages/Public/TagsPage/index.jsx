@@ -16,7 +16,7 @@ const TagsPage = () => {
   const [featuredAuthors, setFeaturedAuthor] = useState([]);
 
   const handleUnFollow = async (id) => {
-    if (!token) {
+    if (token === null) {
       history.push("/auth/login");
       dispatch(setLoading(false));
       return;
@@ -35,7 +35,7 @@ const TagsPage = () => {
   }
 
   const handleFollow = async (id) => {
-    if (!token) {
+    if (token === null) {
       history.push("/auth/login");
       dispatch(setLoading(false))
       return;
