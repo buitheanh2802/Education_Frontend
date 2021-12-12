@@ -22,9 +22,9 @@ const Modal = ({ isShowing, hide, onAdd }) => {
             const uploads = new FormData();
             uploads.append("name", data.name);
             uploads.append("photo", data.photo[0]);
-            const {data: tag} = await TagAPi.addTag(uploads);
-            onAdd(tag.data);
-            if (data) setLoading({ ...loading, success: false });
+            const tag = await TagAPi.addTag(uploads);
+            onAdd();
+            if (tag) setLoading({ ...loading, success: false });
             hide();
             swal("Thêm tag thành công!");
         } catch (error) {

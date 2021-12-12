@@ -1,6 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-const Header = () => {
+import ModalAdd from './ModalAdd';
+import UseModal from './useModal'
+
+const Header = ({ onAdd }) => {
+    const { isShowing, toggle } = UseModal();
+
     return (
         <div className="p-4 bg-white block w-full sm:flex items-center justify-between border-b border-gray-200">
             <div className="mb-1 w-full">
@@ -133,6 +138,14 @@ const Header = () => {
                                 </svg>
                             </a>
                         </div>
+                    </div>
+                    <ModalAdd
+                        onAdd={onAdd}
+                        isShowing={isShowing}
+                        hide={toggle}
+                    />
+                    <div className="bg-white w-[100%] flex justify-end">
+                        <button onClick={toggle} className="mx-[20px] bg-green-500 hover:bg-green-800 text-white whitespace-nowrap h-[38px] leading-[38px] px-5 my-[10px] rounded"> Thêm tag </button>
                     </div>
                 </div>
             </div>

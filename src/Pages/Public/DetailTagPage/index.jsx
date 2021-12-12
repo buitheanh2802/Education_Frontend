@@ -98,7 +98,7 @@ const DetailTagPage = () => {
         <div className="container mx-auto mt-[80px]">
             <div className="mt-[15px] lg:grid lg:grid-cols-4 gap-3">
                 <div className="col-start-1 col-span-3 w-full mb-[20px] rounded">
-                    <div className="flex py-[30px] px-[10px] bg-white">
+                    <div className="flex py-[30px] px-[10px] bg-white rounded mb-[15px]">
                         <div>
                             {tag?.avatar?.avatarUrl ?
                                 <img

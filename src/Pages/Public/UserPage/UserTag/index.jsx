@@ -57,6 +57,7 @@ const UserTag = (props) => {
         dispatch(setLoading(true))
         const { data: tagUser } = await ProfileUserApi.getTagUser(username);
         setUserTag(tagUser.data.models);
+        console.log(tagUser.data.models);
         dispatch(setLoading(false))
       } catch (error) {
         console.log(error);
@@ -87,9 +88,9 @@ const UserTag = (props) => {
                   to={`/tag/${item?.slug}`}
                 >
                   <div className="col-span-1">
-                    {item.avatar.avatarUrl ? (
+                    {item?.avatar?.avatarUrl ? (
                       <img
-                        src={item.avatar.avatarUrl}
+                        src={item?.avatar?.avatarUrl}
                         alt=""
                         className="w-[80px] "
                       />

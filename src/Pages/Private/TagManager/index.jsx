@@ -5,8 +5,6 @@ import PublishItem from "./components/publish-item";
 import queryString from "query-string";
 import SkeletonGroup from "./components/skeleton-group";
 import TagAPi from "src/Apis/TagApi";
-import ModalAdd from './components/ModalAdd';
-import UseModal from './components/useModal'
 
 const TagManager = (props) => {
     const query = queryString.parse(props.location.search, {
@@ -15,6 +13,7 @@ const TagManager = (props) => {
     const [startCall, setStartCall] = useState(false);
     const [tagList, setTagList] = useState([]);
     const [reConnect, setReConnect] = useState(false);
+    
     useEffect(() => {
         const getData = async () => {
             try {
@@ -34,27 +33,17 @@ const TagManager = (props) => {
         setTagList(tagList.filter((item) => item.slug !== slug))
     }
 
-    const onAdd = (data) => {
-        setTagList([data, ...tagList])
+    const onAdd = () => {
+        setReConnect(!reConnect)
     }
 
     const onEdit = () => {
         setReConnect(!reConnect);
     }
 
-    const { isShowing, toggle } = UseModal();
-
     return (
         <div className="w-full">
-            <ModalAdd
-                onAdd={onAdd}
-                isShowing={isShowing}
-                hide={toggle}
-            />
-            <Header />
-            <div className="bg-white w-[100%] flex justify-end">
-                <button onClick={toggle} className="mx-[20px] bg-green-500 hover:bg-green-800 text-white whitespace-nowrap h-[38px] leading-[38px] px-5 my-[10px] rounded"> Thêm tag </button>
-            </div>
+            <Header onAdd={onAdd} />
             <PublishNav />
             {startCall && <SkeletonGroup />}
             {tagList &&
