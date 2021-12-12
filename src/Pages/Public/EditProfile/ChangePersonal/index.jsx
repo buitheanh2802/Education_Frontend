@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useCallback } from "react"
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
 import ErrorMessage from 'src/Components/ErrorMessage'
@@ -22,14 +22,14 @@ const ChangePersonal = ({ profile }) => {
             email: profile?.email,
             birthday: profile?.birthday,
             address: profile?.address,
-            description: profile?.descriptions,
+            descriptions: profile?.descriptions,
             hobbies: profile?.hobbies,
             skills: profile?.skills
         }
     });
 
-    let hobbies = profile?.hobbies;
-    let skills = profile?.skills;
+    let hobbies = [];
+    let skills = [];
 
     let listHobbies = [
         { "label": "Ăn uống", "value": "1" },
@@ -63,23 +63,17 @@ const ChangePersonal = ({ profile }) => {
         }
     }
 
-    const onSubmit = async (data) => {
+    const onSubmit = useCallback(async (data) => {
         try {
             setResponse({ isLoading: false, error: null, message: null })
             if (data) setLoading({ ...loading, success: true });
             let uploads = new FormData();
-            if (data.photo) {
-                uploads.append("photo", data.photo[0]);
-            }
-            uploads.append("birthday", data.birthday);
-            uploads.append("address", data.address);
-            uploads.append("descriptions", data.descriptions);
-            hobbies.map((item) => {
-                uploads.append("hobbies[]", item);
-            });
-            skills.map((item) => {
-                uploads.append("skills[]", item);
-            });
+            if (data.photo) { uploads.append("photo", data.photo[0]) }
+            if (data.birthday) { uploads.append("birthday", data.birthday) }
+            if (data.address) { uploads.append("address", data.address) }
+            if (data.descriptions) { uploads.append("descriptions", data.descriptions) }
+            hobbies.map((item) => { uploads.append("hobbies[]", item) });
+            skills.map((item) => { uploads.append("skills[]", item) });
             const { data: res } = await AuthApi.changeInfo(uploads);
             if (res) setLoading({ ...loading, success: false });
             setResponse({
@@ -98,7 +92,7 @@ const ChangePersonal = ({ profile }) => {
             })
             setLoading({ ...loading, success: false });
         }
-    }
+    }, [hobbies, skills])
 
     return (
         <>
