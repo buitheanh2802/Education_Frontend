@@ -345,6 +345,13 @@ textarea {
 2. Set the default placeholder color to the user's configured gray 400 color.
 */
 
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
+}
+
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   opacity: 1;
   /* 1 */
@@ -1660,56 +1667,67 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .-translate-y-1\/2 {
   --tw-translate-y: -50%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .-translate-x-1\/2 {
   --tw-translate-x: -50%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-y-\[-50\%\] {
   --tw-translate-y: -50%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-x-\[-50\%\] {
   --tw-translate-x: -50%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-y-\[0\] {
   --tw-translate-y: 0;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-y-\[-100\%\] {
   --tw-translate-y: -100%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-y-\[2px\] {
   --tw-translate-y: 2px;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-y-\[-55\%\] {
   --tw-translate-y: -55%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .rotate-\[45deg\] {
   --tw-rotate: 45deg;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .rotate-180 {
   --tw-rotate: 180deg;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .transform {
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .cursor-pointer {
@@ -1875,7 +1893,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .gap-x-\[40px\] {
-  column-gap: 40px;
+  -webkit-column-gap: 40px;
+          column-gap: 40px;
 }
 
 .gap-y-\[20px\] {
@@ -1883,7 +1902,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .gap-x-\[30px\] {
-  column-gap: 30px;
+  -webkit-column-gap: 30px;
+          column-gap: 30px;
 }
 
 .gap-y-\[15px\] {
@@ -1891,7 +1911,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .gap-x-\[43px\] {
-  column-gap: 43px;
+  -webkit-column-gap: 43px;
+          column-gap: 43px;
 }
 
 .gap-y-\[37px\] {
@@ -1899,7 +1920,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .gap-x-\[20px\] {
-  column-gap: 20px;
+  -webkit-column-gap: 20px;
+          column-gap: 20px;
 }
 
 .space-x-12 > :not([hidden]) ~ :not([hidden]) {
@@ -3474,7 +3496,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .filter {
-  filter: var(--tw-filter);
+  -webkit-filter: var(--tw-filter);
+          filter: var(--tw-filter);
 }
 
 .transition-colors {
@@ -3484,9 +3507,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .transition {
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -3497,6 +3520,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .duration-200 {
   transition-duration: 200ms;
+}
+
+@-webkit-keyframes newTab {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes newTab {
@@ -3510,7 +3543,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 * {
-  animation: newTab 0.3s ease;
+  -webkit-animation: newTab 0.3s ease;
+          animation: newTab 0.3s ease;
 }
 
 *::-webkit-scrollbar {
@@ -3609,8 +3643,27 @@ body {
 
 .icon-error {
   position: relative;
-  animation: shaky 0.2s ease;
+  -webkit-animation: shaky 0.2s ease;
+          animation: shaky 0.2s ease;
   transition-delay: 0.2s;
+}
+
+@-webkit-keyframes shaky {
+  0%,
+  33%,
+  67%,
+  100% {
+    right: 0;
+  }
+
+  17%,
+  83% {
+    right: 5px;
+  }
+
+  50% {
+    right: -5px;
+  }
 }
 
 @keyframes shaky {
@@ -3640,8 +3693,21 @@ body {
   right: -0.5px;
   width: 1px;
   height: 65%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   background: #51ffb9;
+}
+
+@-webkit-keyframes mymove {
+  from {
+    top: 50%;
+    opacity: 0;
+  }
+
+  to {
+    top: 100%;
+    opacity: 1;
+  }
 }
 
 @keyframes mymove {
@@ -3658,7 +3724,8 @@ body {
 
 .box_btn {
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 20%);
-  animation: mymove 0.2s ease-in;
+  -webkit-animation: mymove 0.2s ease-in;
+          animation: mymove 0.2s ease-in;
 }
 
 .box_btn::before {
@@ -3671,7 +3738,8 @@ body {
   border-bottom: 7px solid white;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  transform: translateY(-104%);
+  -webkit-transform: translateY(-104%);
+          transform: translateY(-104%);
 }
 
 /* custem ReactSelect */
@@ -3710,9 +3778,11 @@ body {
 .post__menu {
   width: 200px;
   position: absolute;
-  animation: mymove 0.2s ease-in;
+  -webkit-animation: mymove 0.2s ease-in;
+          animation: mymove 0.2s ease-in;
   right: 0;
-  transform: translatex(10px);
+  -webkit-transform: translatex(10px);
+          transform: translatex(10px);
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 20%);
   border-radius: 5px;
   /* padding: 5px 0; */
@@ -3728,13 +3798,15 @@ body {
   border-bottom: 7px solid white;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
 }
 
 .post__share {
   width: 190px;
   position: absolute;
-  animation: mymove 0.2s ease-in;
+  -webkit-animation: mymove 0.2s ease-in;
+          animation: mymove 0.2s ease-in;
   /* left: 0; */
   top: 100%;
   /* margin-top: 13px; */
@@ -3768,8 +3840,28 @@ body {
   left: calc(-100% - 15px);
   border-radius: 3px;
   bottom: 30px;
-  animation: message ease 6s;
-  animation-delay: 0.3s;
+  -webkit-animation: message ease 6s;
+          animation: message ease 6s;
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+
+@-webkit-keyframes message {
+  0% {
+    opacity: 0;
+    margin-left: 0;
+  }
+
+  85%,
+  10% {
+    opacity: 1;
+    margin-left: calc(100% + 30px);
+  }
+
+  100% {
+    opacity: 0;
+    margin-left: 0;
+  }
 }
 
 @keyframes message {
@@ -3791,7 +3883,22 @@ body {
 }
 
 .animation_preview{
-  animation: animation_preview ease 0.5s;
+  -webkit-animation: animation_preview ease 0.5s;
+          animation: animation_preview ease 0.5s;
+}
+
+@-webkit-keyframes animation_preview {
+  0%{
+    position: relative;
+    width: 50%;
+    height: 50%;
+  }
+
+  100%{
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 @keyframes animation_preview {
@@ -3881,19 +3988,22 @@ body {
 .before\:translate-x-\[-50\%\]::before {
   content: var(--tw-content);
   --tw-translate-x: -50%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .before\:translate-y-\[-50\%\]::before {
   content: var(--tw-content);
   --tw-translate-y: -50%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .before\:rotate-\[45deg\]::before {
   content: var(--tw-content);
   --tw-rotate: 45deg;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .before\:bg-blue-400::before {
@@ -3967,18 +4077,21 @@ body {
 .after\:translate-y-\[-45\%\]::after {
   content: var(--tw-content);
   --tw-translate-y: -45%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .after\:rotate-\[-20deg\]::after {
   content: var(--tw-content);
   --tw-rotate: -20deg;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .after\:transform::after {
   content: var(--tw-content);
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .after\:rounded::after {
@@ -4507,7 +4620,8 @@ body {
   }
 
   .sm\:gap-x-\[60px\] {
-    column-gap: 60px;
+    -webkit-column-gap: 60px;
+            column-gap: 60px;
   }
 
   .sm\:px-\[35px\] {
@@ -4738,7 +4852,8 @@ body {
 
   .md\:translate-y-\[-70\%\] {
     --tw-translate-y: -70%;
-    transform: var(--tw-transform);
+    -webkit-transform: var(--tw-transform);
+            transform: var(--tw-transform);
   }
 
   .md\:grid-cols-6 {
@@ -4778,7 +4893,8 @@ body {
   }
 
   .md\:gap-x-\[50px\] {
-    column-gap: 50px;
+    -webkit-column-gap: 50px;
+            column-gap: 50px;
   }
 
   .md\:space-y-4 > :not([hidden]) ~ :not([hidden]) {
@@ -5047,11 +5163,13 @@ body {
 
   .lg\:translate-y-\[2px\] {
     --tw-translate-y: 2px;
-    transform: var(--tw-transform);
+    -webkit-transform: var(--tw-transform);
+            transform: var(--tw-transform);
   }
 
   .lg\:transform {
-    transform: var(--tw-transform);
+    -webkit-transform: var(--tw-transform);
+            transform: var(--tw-transform);
   }
 
   .lg\:grid-cols-2 {
@@ -5387,11 +5505,13 @@ body {
   }
 
   .xl\:gap-x-\[95px\] {
-    column-gap: 95px;
+    -webkit-column-gap: 95px;
+            column-gap: 95px;
   }
 
   .xl\:gap-x-\[30px\] {
-    column-gap: 30px;
+    -webkit-column-gap: 30px;
+            column-gap: 30px;
   }
 
   .xl\:px-\[8px\] {
