@@ -15,7 +15,6 @@ const AccountManager = () => {
                 setStartCall(true);
                 const { data: listUser } = await UserApi.getListUser();
                 setListUsers(listUser.data.models);
-                console.log(listUser.data.models);
                 setStartCall(false);
             } catch (error) {
                 console.log(error);

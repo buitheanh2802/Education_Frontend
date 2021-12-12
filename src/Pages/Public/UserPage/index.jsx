@@ -187,12 +187,12 @@ const Userpage = (props) => {
                         <span className="font-bold text-[13px]">{user?.questionCounts}</span>
                     </div>
                     <div className="flex justify-between my-[5px]">
-                        <p className="text-gray-500">Bookmark : </p>
-                        <span className="font-bold text-[13px]">@</span>
+                        <p className="text-gray-500">Số người theo dõi {user?.fullname}: </p>
+                        <span className="font-bold text-[13px]">{user?.followers}</span>
                     </div>
                     <div className="flex justify-between my-[5px]">
-                        <p className="text-gray-500">Số người theo dõi : </p>
-                        <span className="font-bold text-[13px]">{user?.followers}</span>
+                        <p className="text-gray-500">Số người {user?.fullname} theo dõi: </p>
+                        <span className="font-bold text-[13px]">{user?.followingCounts}</span>
                     </div>
                 </div>
             </div>
