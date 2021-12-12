@@ -11,7 +11,7 @@ const Header = () => {
     const { profile, actionLoading } = useSelector(state => state.Auth);
     const [isPopup, setIsPopup] = useState(false);
     return (
-        <header className="w-full bg-white dark:bg-gray-700 items-center h-16 rounded-xl z-40">
+        <header className="w-full bg-white items-center h-16 rounded-xl z-40">
             <div className="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
                 <div className="relative items-center pl-1 flex w-full lg:max-w-68 sm:pr-2 sm:ml-0">
                     <div className="container relative left-0 z-50 flex w-3/4 h-full">
@@ -24,7 +24,7 @@ const Header = () => {
                                 <path d="M12.9 14.32a8 8 0 111.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 108 2a6 6 0 000 12z"></path>
                             </svg>
                             <input type="text"
-                                className="block w-full py-1.5 pl-10 pr-4 leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 dark:bg-gray-800 text-gray-400 aa-input"
+                                className="block w-full py-1.5 pl-10 pr-4 leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 text-gray-400 aa-input"
                                 placeholder="Search" />
                         </div>
                     </div>

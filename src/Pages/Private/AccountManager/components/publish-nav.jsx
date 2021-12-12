@@ -9,7 +9,7 @@ const PublishNav = () => {
             <div >Username</div>
             <div >Email</div>
             <div >Thời gian tạo</div>
-            <div className="text-center ">Action</div>
+            <div className="text-center ">Hành động</div>
         </div>
     );
 };

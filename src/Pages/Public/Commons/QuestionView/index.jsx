@@ -22,13 +22,13 @@ const QuestionView = ({ questions }) => {
                 <div className="mr-[15px] ">
                   {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                     <Link
-                      to={`/user/${item?.createBy?._id}`}
-                      className="mt-[5px]  border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
-                      style={{
-                        backgroundImage: `url(${item?.createBy?.avatar?.username})`,
-                      }}
-                      alt={item?.createBy?.fullname}
-                    ></Link>
+                      to={`/user/${item?.createBy?.username}`} >
+                      <img
+                        className="mx-auto max-h-[40px] rounded-full"
+                        width="40px" height="40px"
+                        src={item?.createBy?.avatar?.avatarUrl}
+                        alt="Avatar" />
+                    </Link>
                   ) : (
                     <Link
                       to={`/user/${item?.createBy?.username}`}

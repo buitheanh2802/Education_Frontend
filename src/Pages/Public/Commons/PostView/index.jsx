@@ -20,13 +20,13 @@ const PostView = ({ posts }) => {
                                     <div className="mr-[15px] hidden sm:block">
                                         {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                                             <Link
-                                                to=""
-                                                className="mt-[5px]  border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
-                                                style={{
-                                                    backgroundImage: `url(${item?.createBy?.avatar?.avatarUrl})`,
-                                                }}
-                                                alt={item?.createBy?.fullname}
-                                            ></Link>
+                                                to={`/user/${item?.createBy?.username}`} >
+                                                <img
+                                                    className="mx-auto max-h-[40px] rounded-full"
+                                                    width="40px" height="40px"
+                                                    src={item?.createBy?.avatar?.avatarUrl}
+                                                    alt="Avatar" />
+                                            </Link>
                                         ) : (
                                             <Link
                                                 to={`/user/${item?.createBy?.username}`}
@@ -63,7 +63,7 @@ const PostView = ({ posts }) => {
                                         <div className="flex flex-wrap items-center gap-[10px] my-[10px]">
                                             {item?.tags?.map((tag, indexTag) => {
                                                 return (
-                                                    <Link 
+                                                    <Link
                                                         to={`/tag/${tag?.slug}`}
                                                         key={indexTag}
                                                         className="block hover:bg-gray-300 bg-[#e7e7e7] px-[10px] py-[2px] text-[#5f5f5f] text-[12px] rounded-[3px]"
