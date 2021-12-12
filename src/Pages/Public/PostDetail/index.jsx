@@ -17,6 +17,8 @@ import BookmarkApi from "src/Apis/BookmarkApi";
 import FollowApi from "src/Apis/FollowApi";
 import Loading from "src/Components/Loading";
 import Comments from "../Comments";
+import LoadingIcon from "src/Components/Loading/LoadingIcon";
+
 const PostsDetail = () => {
   const shortId = useParams();
   const idParam = shortId.id;
@@ -31,6 +33,9 @@ const PostsDetail = () => {
   const history = useHistory();
   const token = localStorage.getItem("_token_");
   const id = shortId.id.split("-")[shortId.id.split("-").length - 1];
+  const [loadingLike, setLoadingLike] = useState(false);
+  const [loadingFollow, setLoadingFollow] = useState(false);
+  const [loadingBookmark, setLoadingBookmark] = useState(false);
 
   useEffect(() => {
     setRender(false);
@@ -51,8 +56,8 @@ const PostsDetail = () => {
 
   const handleLike = async () => {
     setRender(true);
-    if (token === null) history.push("/auth/login");
-
+    if (token === null) return history.push("/auth/login");
+    setLoadingLike(true);
     if (postDetail?.data?.isLike) {
       await LikeApi.likePost(id);
       setPostDetail({
@@ -66,29 +71,30 @@ const PostsDetail = () => {
         data: { ...postDetail.data, isLike: true },
       });
     }
+    setLoadingLike(false);
   };
-  const handleDisLike = async () => {
-    setRender(true);
-    if (token === null) history.push("/auth/login");
+  // const handleDisLike = async () => {
+  //   setRender(true);
+  //   if (token === null) history.push("/auth/login");
 
-    if (postDetail?.data?.isDislike) {
-      await LikeApi.disLikePost(id);
-      setPostDetail({
-        ...postDetail,
-        data: { ...postDetail.data, isDislike: false },
-      });
-    } else {
-      await LikeApi.disLikePost(id);
-      setPostDetail({
-        ...postDetail,
-        data: { ...postDetail.data, isDislike: true },
-      });
-    }
-  };
+  //   if (postDetail?.data?.isDislike) {
+  //     await LikeApi.disLikePost(id);
+  //     setPostDetail({
+  //       ...postDetail,
+  //       data: { ...postDetail.data, isDislike: false },
+  //     });
+  //   } else {
+  //     await LikeApi.disLikePost(id);
+  //     setPostDetail({
+  //       ...postDetail,
+  //       data: { ...postDetail.data, isDislike: true },
+  //     });
+  //   }
+  // };
 
   const handleBookmark = async () => {
-    if (token === null) history.push("/auth/login");
-
+    if (token === null) return history.push("/auth/login");
+    setLoadingBookmark(true);
     if (postDetail?.data?.isBookmark) {
       await BookmarkApi.addBookmarkPost(id);
       setPostDetail({
@@ -102,12 +108,13 @@ const PostsDetail = () => {
         data: { ...postDetail.data, isBookmark: true },
       });
     }
+    setLoadingBookmark(false);
   };
 
   const username = postDetail?.data?.createBy?.username;
   const handleFollow = async () => {
-    if (token === null) history.push("/auth/login");
-
+    if (token === null) return history.push("/auth/login");
+    setLoadingFollow(true);
     if (postDetail?.data?.createBy?.isFollowing) {
       await FollowApi.unFollow(username);
       setPostDetail({
@@ -127,6 +134,7 @@ const PostsDetail = () => {
         },
       });
     }
+    setLoadingFollow(false);
   };
 
   const url = window.location.href;
@@ -287,7 +295,7 @@ const PostsDetail = () => {
                         : "Sao chép link bài viết"}
                     </li>
                     {postDetail?.data?.createBy?.username ===
-                      profile?.username ? (
+                    profile?.username ? (
                       <>
                         <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
                           <Icon.Fix className="fill-current w-[15px] mr-[5px]" />
@@ -376,12 +384,15 @@ const PostsDetail = () => {
                       : " text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  hover:bg-blue-300 hover:text-white"
                   }
                 >
+                  {loadingLike && (
+                    <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                  )}
                   <Icon.Like className="fill-current w-[13px]" />
                   <span className="text-[12x] md:text-[14x] ml-1">
-                    {postDetail?.data?.likes} Like
+                    {postDetail?.data?.likes} Vote
                   </span>
                 </button>
-                <button
+                {/* <button
                   onClick={() => handleDisLike()}
                   className={
                     postDetail?.data?.isDislike
@@ -393,7 +404,7 @@ const PostsDetail = () => {
                   <span className="text-[12x] md:text-[14x] ml-1">
                     {postDetail?.data?.dislikes} Dislikes
                   </span>
-                </button>
+                </button> */}
                 <div className="relative">
                   <button
                     className={
@@ -489,10 +500,13 @@ const PostsDetail = () => {
                 onClick={() => handleFollow()}
                 className={
                   postDetail?.data?.createBy?.isFollowing
-                    ? "border border-blue-500 px-4 py-[3px] text-[14px] rounded-[3px] bg-blue-500 text-white"
-                    : "border border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
+                    ? "border flex items-center border-blue-500 px-4 py-[3px] text-[14px] rounded-[3px] bg-blue-500 text-white"
+                    : "border flex items-center border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
                 }
               >
+                {loadingFollow && (
+                  <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                )}
                 {postDetail?.data?.createBy?.isFollowing
                   ? "- Đã theo dõi"
                   : "+ Theo dõi"}
@@ -538,6 +552,9 @@ const PostsDetail = () => {
                     : "text-blue-500 w-full  py-[3px] border border-blue-500 rounded-[3px] flex justify-center items-center hover:bg-blue-500 hover:text-white"
                 }
               >
+                {loadingBookmark && (
+                  <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                )}
                 <Icon.Bookmark className="fill-current w-[13px]" />
                 <span className="text-[14x] ml-1">
                   {postDetail?.data?.isBookmark

@@ -2,11 +2,11 @@ import React from "react";
 import hljs from "highlight.js";
 import ReactQuill, { Quill } from "react-quill";
 import ImageResize from "quill-image-resize-module-react";
-import * as Emoji from 'quill-emoji'
+import * as Emoji from "quill-emoji";
 import "react-quill/dist/quill.snow.css";
 import "highlight.js/styles/monokai-sublime.css";
 import "quill-emoji/dist/quill-emoji.css";
-import "./index.css"
+import "./index.css";
 
 class Editor extends React.Component {
   constructor(props) {
@@ -19,12 +19,12 @@ class Editor extends React.Component {
           container: [
             ["bold", "italic", "underline", "strike"],
             ["blockquote"],
-            [{ header: 1 }, { header: 2 }],
+            // [{ header: 1 }, { header: 2 }],
             [{ list: "ordered" }, { list: "bullet" }],
             [{ script: "sub" }, { script: "super" }],
             [{ indent: "-1" }, { indent: "+1" }],
             [{ direction: "rtl" }],
-            [{ size: ["small", false, "large", "huge"] }],
+            // [{ size: ["small", false, "large", "huge"] }],
             [{ header: [1, 2, 3, 4, 5, 6, false] }],
             [{ color: [] }, { background: [] }],
             [{ font: [] }],
@@ -33,9 +33,9 @@ class Editor extends React.Component {
             ["link", "image"],
             ["clean"],
           ],
-          handlers : {
-             'image' : this.props.imageHandler
-          }
+          handlers: {
+            image: this.props.imageHandler,
+          },
         },
         imageResize: {
           parchment: Quill.import("parchment"),
@@ -63,7 +63,7 @@ class Editor extends React.Component {
   //   render modules
   render() {
     return (
-      <ReactQuill   
+      <ReactQuill
         onChange={this.props.onChange}
         modules={this.state.modules}
         theme="snow"

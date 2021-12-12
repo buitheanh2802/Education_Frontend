@@ -38,7 +38,7 @@ export const path = {
   // question
   QUESTIONS: "/questions",
   QUESTIONS_CREATE: "/questions/create",
-  QUESTIONS_FLOW: "/questions/flow",
+  QUESTIONS_FOLLOWING: "/questions/fllowing",
   QUESTIONS_BOOK_MARK: "/questions/bookmark",
   QUESTIONS_DETAIL: "/question/:id",
   QUESTIONS_UPDATE: "/question/update/:id",
@@ -59,7 +59,7 @@ export const path = {
   TAGS_QUESTION: "/tag/:slug/question",
   TAGS_FOLLOWER: "/tag/:slug/follower",
   TAGS_POPULAR: "/tags/popular",
-  
+
   // auth
   AUTH: "/auth",
   LOGIN: "/auth/login",
@@ -91,7 +91,7 @@ export const path = {
   PROFILE_PERSONAL: "/profile/:id/edit/personal",
   PROFILE_CONTACT: "/profile/:id/edit/contact",
   PROFILE_PASSWORD: "/profile/:id/edit/password",
-  // Quản lý Tags 
+  // Quản lý Tags
   TAG_MANAGER: "/manager/tag",
 
   //intro
@@ -110,6 +110,9 @@ export const path = {
   //Quiz
   QUIZ: "/quiz",
   QUIZ_CREATE: "/quiz/create",
+
+  //search
+  SEARCH: "/search",
 };
 
 export const regex = {
