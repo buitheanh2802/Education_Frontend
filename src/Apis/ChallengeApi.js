@@ -11,14 +11,23 @@ const ChallengeApi = {
     });
   },
 
-  async gets(cateid) {
-    const url = `/challenges/${cateid}/challenge-categories`;
-    return AxiosClient.get(url, {
-      headers: {
-        authorization: `Bearer ${LocalStorage.Get("_token_")}`,
-      },
-    });
-  },
+    async delete(challengeId) {
+        const url = `/challenges/${challengeId}`;
+        return AxiosClient.delete(url, {
+            headers: {
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
+    },
+
+    async gets(cateid) {
+        const url = `/challenges/${cateid}/challenge-categories`;
+        return AxiosClient.get(url, {
+            headers: {
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
+    },
 
   // async gets(cateid) {
   //     const url = `/challenges/${cateid}/challenge-categories`;
