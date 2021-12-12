@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import profile_icon from "../../../Assets/media/pictures/profile.png";
 import key_icon from "../../../Assets/media/pictures/digital-key.png";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import AuthApi from "src/Apis/AuthApi";
@@ -65,29 +65,29 @@ const EditProfile = () => {
                                                         }
                                                     </div>
                                                     <p className="text-[20px] font-bold leading-[25px] lg:ml-6 text-center lg:text-left mt-[12px]">
-                                                        Chào mừng, {profileDetail?.fullname}<br />
-                                                        <span className="text-[14px] md:text-[16px] font-normal">
+                                                        Chào mừng, {profileDetail?.fullname}
+                                                        <p className="text-[14px] md:text-[16px] font-normal">
                                                             Quản lý thông tin cá nhân của bạn và bảo mật với DevStar
-                                                        </span>
+                                                        </p>
                                                     </p>
                                                 </div>
                                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[30px] gap-y-[15px] mt-10">
-                                                    <div className="bg-gradient-to-r from-[#a1f0f0]  to-[#79a3f1]  text-center pt-5 pb-7 rounded-[5px] cursor-pointer card-item ">
+                                                    <Link to="/profile/me/change-info/personal" className="bg-gradient-to-r from-[#a1f0f0]  to-[#79a3f1]  text-center pt-5 pb-7 rounded-[5px] cursor-pointer card-item ">
                                                         <div className=" w-[50px] h-[50px] sm:w-[75px] sm:h-[75px] mx-auto">
                                                             <img src={profile_icon} alt="" />
                                                         </div>
-                                                        <p className="text-[20px] md:text-[24px] font-medium mt-3 text-white">
+                                                        <div className="text-[20px] md:text-[24px] font-medium mt-3 text-white">
                                                             Thông tin cá nhân
-                                                        </p>
-                                                    </div>
-                                                    <div className="bg-gradient-to-r from-[#a1f0f0]  to-[#79a3f1]  pt-5 pb-7 text-center rounded-[5px] cursor-pointer card-item">
+                                                        </div>
+                                                    </Link>
+                                                    <Link to="/profile/me/change-info/password" className="bg-gradient-to-r from-[#a1f0f0]  to-[#79a3f1]  pt-5 pb-7 text-center rounded-[5px] cursor-pointer card-item">
                                                         <div className="w-[50px] h-[50px] sm:w-[75px] sm:h-[75px] mx-auto">
                                                             <img src={key_icon} alt="" />
                                                         </div>
-                                                        <p className="text-[20px] md:text-[24px] font-medium mt-3 text-white">
+                                                        <div className="text-[20px] md:text-[24px] font-medium mt-3 text-white">
                                                             Mật khẩu
-                                                        </p>
-                                                    </div>
+                                                        </div>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         )}

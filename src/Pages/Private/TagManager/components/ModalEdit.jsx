@@ -23,22 +23,15 @@ const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo, onEdit }) => {
         try {
             if (data) setLoading({ ...loading, success: true });
             const uploads = new FormData();
-            if (!data.photo) {
-                uploads.append("name", data.name);
-                const response = await TagApi.editTag(slug, uploads);
-                onEdit();
-                if (response) setLoading({ ...loading, success: false });
-                hide();
-                swal("Sửa tag thành công!");
-            } else {
-                uploads.append("name", data.name);
+            uploads.append("name", data.name);
+            if (data.photo) {
                 uploads.append("photo", data.photo[0])
-                const response = await TagApi.editTag(slug, uploads);
-                onEdit();
-                if (response) setLoading({ ...loading, success: false });
-                hide();
-                swal("Sửa tag thành công!");
             }
+            const response = await TagApi.editTag(slug, uploads);
+            onEdit();
+            if (response) setLoading({ ...loading, success: false });
+            hide();
+            swal("Sửa tag thành công!");
         } catch (error) {
             console.log(error);
             swal("Sửa tag thất bại!");
