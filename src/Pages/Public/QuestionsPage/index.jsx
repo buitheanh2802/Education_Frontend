@@ -36,7 +36,7 @@ const QuestionsPage = () => {
       value: "Câu hỏi nổi bật",
     },
     {
-      path: path.QUESTIONS_FLOW,
+      path: path.QUESTIONS_FOLLOWING,
       value: "Đang theo dõi",
     },
     {
@@ -68,7 +68,7 @@ const QuestionsPage = () => {
           );
           setTrendings(dataNew);
           dispatch(setLoading(false));
-        } else if (location.pathname === path.QUESTIONS_FLOW) {
+        } else if (location.pathname === path.QUESTIONS_FOLLOWING) {
           const token = localStorage.getItem("_token_");
           if (token) {
             const { data: follows } = await QuestionApi.getQuestionFol();
@@ -138,7 +138,7 @@ const QuestionsPage = () => {
             ></Route>
             <Route
               exact
-              path={path.QUESTIONS_FLOW}
+              path={path.QUESTIONS_FOLLOWING}
               render={(props) => (
                 <QuestionView questions={follows} {...props} />
               )}

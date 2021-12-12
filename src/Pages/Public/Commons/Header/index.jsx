@@ -71,12 +71,25 @@ const Header = () => {
             </Link>
           </h1>
           <div className="flex items-center gap-[15px]">
-            <button
-              onClick={() => setIsSearch(!isSearch)}
-              className="block lg:hidden pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
-            >
-              <Icon.Search className="w-[22px] h-[22px] mr-[3px] cursor-pointer  fill-current" />
-            </button>
+            <form className="relative ">
+              <input
+                type="text"
+                className={
+                  isSearch
+                    ? "absolute block lg:hidden top-0 right-full translate-x-[25px] translate-y-[-2px] text-[14px] transition text-gray-700 focus:outline-none rounded-[5px] pl-[10px] py-[3px] opacity-100 w-[250px] border border-gray-300"
+                    : "absolute block lg:hidden top-0 right-full translate-x-[25px] translate-y-[-2px] text-[14px] transition focus:outline-none rounded-[5px] pl-[10px] py-[3px] opacity-0 w-[30px] border border-gray-300"
+                }
+                // className="absolute top-0 right-full translate-x-[25px] translate-y-[-2px] text-[14px] rounded-[10px] pl-[10px] py-[3px] w-[250px] border border-gray-300"
+                placeholder="Tìm kiếm..."
+              />
+              <span
+                onClick={() => setIsSearch(!isSearch)}
+                className="block lg:hidden pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
+              >
+                <Icon.Search className="w-[22px] h-[22px] mr-[3px] cursor-pointer  fill-current" />
+              </span>
+            </form>
+
             {profile && (
               <i
                 onClick={() => setIsNotification(!isNotification)}
@@ -194,13 +207,26 @@ const Header = () => {
                 </NavLink>
               </li>
             </ul>
-            <div className="flex items-center">
-              <button
-                onClick={() => setIsSearch(!isSearch)}
-                className="hidden lg:block pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
-              >
-                <Icon.Search className="w-[22px] h-[22px] mr-[3px] cursor-pointer  fill-current" />
-              </button>
+            <div className=" flex items-center">
+              <form onSubmit={(e) => EnterEvent(e)} className="relative ">
+                <input
+                  type="text"
+                  onChange={(e) => setSearchKey(e.target.value)}
+                  className={
+                    isSearch
+                      ? "absolute top-0 right-full hidden lg:block translate-x-[25px] translate-y-[-3px] text-[14px] transition text-gray-700 focus:outline-none rounded-[5px] pl-[10px] py-[3px] opacity-100 w-[250px] border border-gray-600"
+                      : "absolute top-0 right-full hidden lg:block translate-x-[25px] translate-y-[-3px] text-[14px] transition focus:outline-none rounded-[5px] pl-[10px] py-[3px] opacity-0 w-[30px] border border-gray-300"
+                  }
+                  // className="absolute top-0 right-full translate-x-[25px] translate-y-[-2px] text-[14px] rounded-[10px] pl-[10px] py-[3px] w-[250px] border border-gray-300"
+                  placeholder="Tìm kiếm..."
+                />
+                <span
+                  onClick={() => setIsSearch(!isSearch)}
+                  className="hidden  lg:block pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
+                >
+                  <Icon.Search className="w-[22px] h-[22px] mr-[3px] cursor-pointer  fill-current" />
+                </span>
+              </form>
               <Auth
                 isNotification={isNotification}
                 setIsNotification={setIsNotification}
@@ -213,7 +239,7 @@ const Header = () => {
           </div>
         </nav>
       </div>
-      <div
+      {/* <div
         className={
           isSearch
             ? "fixed  z-[9999999] translate-y-[0] transition w-full px-[30px] md:px-[0] md:w-[650px]  rounded-b-[3px] top-0 left-[50%] translate-x-[-50%]"
@@ -249,7 +275,7 @@ const Header = () => {
             </div>
           </form>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
