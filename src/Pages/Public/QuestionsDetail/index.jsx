@@ -18,6 +18,7 @@ import UserApi from "src/Apis/UserApi";
 import Loading from "src/Components/Loading";
 import SpamApi from "src/Apis/SpamApi";
 import Swal from "sweetalert2";
+import LoadingIcon from "src/Components/Loading/LoadingIcon";
 
 const QuestionsDetail = () => {
   const shortId = useParams();
@@ -31,6 +32,9 @@ const QuestionsDetail = () => {
   const [loading, setLoading] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [contentSpam, setContentSpam] = useState("");
+  const [loadingLike, setLoadingLike] = useState(false);
+  const [loadingFollow, setLoadingFollow] = useState(false);
+  const [loadingBookmark, setLoadingBookmark] = useState(false);
 
   const history = useHistory();
   const token = localStorage.getItem("_token_");
@@ -64,13 +68,6 @@ const QuestionsDetail = () => {
       }
     };
     list(idQuestion);
-
-    // window.addEventListener("scroll", function (event) {
-    //   const scroll = this.scrollY;
-    //   if (scroll >= 300) {
-    //     console.log("haha");
-    //   }
-    // });
   }, [idQuestion, render]);
   if (Object.keys(questionDetail).length === 0) return null;
 
@@ -78,7 +75,8 @@ const QuestionsDetail = () => {
   const checkLike = arrLike.some((a) => a === profile?._id);
   const handleLike = async () => {
     setRender(true);
-    if (token === null) history.push("/auth/login");
+    if (token === null) return history.push("/auth/login");
+    setLoadingLike(true);
     if (checkLike === false) {
       await LikeApi.likeQuestion(idQuestion);
       setQuestionDetail({
@@ -92,35 +90,36 @@ const QuestionsDetail = () => {
         data: { ...questionDetail.data },
       });
     }
+    setLoadingLike(false);
   };
   ///////////////
   const arrDisLike = questionDetail?.data?.dislike;
   const checkDisLike = arrDisLike.some((a) => a === profile?._id);
-  const handleDisLike = async () => {
-    setRender(true);
-    if (token === null) history.push("/auth/login");
+  // const handleDisLike = async () => {
+  //   setRender(true);
+  //   if (token === null) history.push("/auth/login");
 
-    if (checkDisLike === false) {
-      await LikeApi.disLikeQuestion(idQuestion);
-      setQuestionDetail({
-        ...questionDetail,
-        data: { ...questionDetail.data },
-      });
-    } else {
-      await LikeApi.delDisLikeQuestion(idQuestion);
-      setQuestionDetail({
-        ...questionDetail,
-        data: { ...questionDetail.data },
-      });
-    }
-  };
+  //   if (checkDisLike === false) {
+  //     await LikeApi.disLikeQuestion(idQuestion);
+  //     setQuestionDetail({
+  //       ...questionDetail,
+  //       data: { ...questionDetail.data },
+  //     });
+  //   } else {
+  //     await LikeApi.delDisLikeQuestion(idQuestion);
+  //     setQuestionDetail({
+  //       ...questionDetail,
+  //       data: { ...questionDetail.data },
+  //     });
+  //   }
+  // };
 
   /////////
   const arrBookmark = questionDetail?.data?.bookmarks;
   const checkBookmark = arrBookmark.some((a) => a === profile?._id);
   const handleBookmark = async () => {
-    if (token === null) history.push("/auth/login");
-
+    if (token === null) return history.push("/auth/login");
+    setLoadingBookmark(true);
     if (checkBookmark === false) {
       await BookmarkApi.addBookmarkQuestion(idQuestion);
       setQuestionDetail({
@@ -136,12 +135,13 @@ const QuestionsDetail = () => {
       });
       setRender(true);
     }
+    setLoadingBookmark(false);
   };
 
   ////////
   const handleFollow = async () => {
-    if (token === null) history.push("/auth/login");
-
+    if (token === null) return history.push("/auth/login");
+    setLoadingFollow(true);
     if (user.data.isFollowing) {
       setRender(true);
       await FollowApi.unFollow(user.data.username);
@@ -161,6 +161,7 @@ const QuestionsDetail = () => {
         },
       });
     }
+    setLoadingFollow(false);
   };
   const url = window.location.href;
 
@@ -187,7 +188,7 @@ const QuestionsDetail = () => {
     setIsModalVisible(false);
   };
   const handleViewBox = () => {
-    if (token === null) history.push("/auth/login");
+    if (token === null) return history.push("/auth/login");
     setIsModalVisible(true);
   };
 
@@ -236,13 +237,13 @@ const QuestionsDetail = () => {
       referenceTo: idQuestion,
       type: "questions",
     };
-    // console.log(dataSpam);
     try {
       await SpamApi.reportSpamQuestion(dataSpam);
       await Toast.fire({
         icon: "success",
         title: "Báo cáo thành công",
       });
+      setIsModalVisible(false);
     } catch (error) {
       await Toast.fire({
         icon: "error",
@@ -477,12 +478,15 @@ const QuestionsDetail = () => {
                         : " text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  hover:bg-blue-300 hover:text-white"
                     }
                   >
+                    {loadingLike && (
+                      <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                    )}
                     <Icon.Like className="fill-current w-[13px]" />
                     <span className="text-[12x] md:text-[14x] ml-1">
-                      {questionDetail?.data?.countLikes} Like
+                      {questionDetail?.data?.countLikes} Vote
                     </span>
                   </button>
-                  <button
+                  {/* <button
                     onClick={() => handleDisLike()}
                     className={
                       checkDisLike
@@ -494,7 +498,7 @@ const QuestionsDetail = () => {
                     <span className="text-[12x] md:text-[14x] ml-1">
                       {questionDetail?.data?.countDislike} Dislikes
                     </span>
-                  </button>
+                  </button> */}
                   <div className="relative">
                     <button
                       className={
@@ -597,10 +601,13 @@ const QuestionsDetail = () => {
                 onClick={() => handleFollow()}
                 className={
                   user?.data?.isFollowing
-                    ? "border border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
-                    : "border border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
+                    ? "border flex items-center border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
+                    : "border flex items-center border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
                 }
               >
+                {loadingFollow && (
+                  <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                )}
                 {user?.data?.isFollowing ? "- Đã theo dõi" : "+ Theo dõi"}
               </button>
             </div>
@@ -638,6 +645,9 @@ const QuestionsDetail = () => {
                     : "text-blue-500 w-full  py-[3px] border border-blue-500 rounded-[3px] flex justify-center items-center hover:bg-blue-500 hover:text-white"
                 }
               >
+                {loadingBookmark && (
+                  <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                )}
                 <Icon.Bookmark className="fill-current w-[13px]" />
                 <span className="text-[14x] ml-1">
                   {checkBookmark

@@ -134,7 +134,7 @@ const Header = () => {
                 </svg>
               </a>
             </div>
-            <button
+            {/* <button
               type="button"
               data-modal-toggle="add-product-modal"
               className="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium inline-flex items-center rounded-lg text-sm px-3 py-2 text-center sm:ml-auto"
@@ -152,7 +152,7 @@ const Header = () => {
                 />
               </svg>
               Add product
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
