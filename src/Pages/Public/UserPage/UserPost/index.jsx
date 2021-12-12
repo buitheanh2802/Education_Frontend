@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "src/Components/Icon";
 import ProfileUserApi from "src/Apis/ProfileUserApi";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 

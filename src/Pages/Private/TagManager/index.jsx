@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 import Header from "./components/header";
 import PublishNav from "./components/publish-nav";
 import PublishItem from "./components/publish-item";
@@ -54,7 +53,7 @@ const TagManager = (props) => {
             />
             <Header />
             <div className="bg-white w-[100%] flex justify-end">
-                <button onClick={toggle} className="bg-green-500 hover:bg-green-800 text-white whitespace-nowrap h-[38px] leading-[38px] px-5 my-[10px] rounded"> Thêm tag </button>
+                <button onClick={toggle} className="mx-[20px] bg-green-500 hover:bg-green-800 text-white whitespace-nowrap h-[38px] leading-[38px] px-5 my-[10px] rounded"> Thêm tag </button>
             </div>
             <PublishNav />
             {startCall && <SkeletonGroup />}

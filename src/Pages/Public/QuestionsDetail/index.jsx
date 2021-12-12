@@ -18,6 +18,7 @@ import UserApi from "src/Apis/UserApi";
 import Loading from "src/Components/Loading";
 import SpamApi from "src/Apis/SpamApi";
 import Swal from "sweetalert2";
+import LoadingIcon from "src/Components/Loading/LoadingIcon";
 
 const QuestionsDetail = () => {
   const shortId = useParams();
@@ -31,6 +32,9 @@ const QuestionsDetail = () => {
   const [loading, setLoading] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [contentSpam, setContentSpam] = useState("");
+  const [loadingLike, setLoadingLike] = useState(false);
+  const [loadingFollow, setLoadingFollow] = useState(false);
+  const [loadingBookmark, setLoadingBookmark] = useState(false);
 
   const history = useHistory();
   const token = localStorage.getItem("_token_");
@@ -72,7 +76,7 @@ const QuestionsDetail = () => {
   const handleLike = async () => {
     setRender(true);
     if (token === null) return history.push("/auth/login");
-
+    setLoadingLike(true);
     if (checkLike === false) {
       await LikeApi.likeQuestion(idQuestion);
       setQuestionDetail({
@@ -86,6 +90,7 @@ const QuestionsDetail = () => {
         data: { ...questionDetail.data },
       });
     }
+    setLoadingLike(false);
   };
   ///////////////
   const arrDisLike = questionDetail?.data?.dislike;
@@ -114,7 +119,7 @@ const QuestionsDetail = () => {
   const checkBookmark = arrBookmark.some((a) => a === profile?._id);
   const handleBookmark = async () => {
     if (token === null) return history.push("/auth/login");
-
+    setLoadingBookmark(true);
     if (checkBookmark === false) {
       await BookmarkApi.addBookmarkQuestion(idQuestion);
       setQuestionDetail({
@@ -130,12 +135,13 @@ const QuestionsDetail = () => {
       });
       setRender(true);
     }
+    setLoadingBookmark(false);
   };
 
   ////////
   const handleFollow = async () => {
     if (token === null) return history.push("/auth/login");
-
+    setLoadingFollow(true);
     if (user.data.isFollowing) {
       setRender(true);
       await FollowApi.unFollow(user.data.username);
@@ -155,6 +161,7 @@ const QuestionsDetail = () => {
         },
       });
     }
+    setLoadingFollow(false);
   };
   const url = window.location.href;
 
@@ -471,6 +478,9 @@ const QuestionsDetail = () => {
                         : " text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center  hover:bg-blue-300 hover:text-white"
                     }
                   >
+                    {loadingLike && (
+                      <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                    )}
                     <Icon.Like className="fill-current w-[13px]" />
                     <span className="text-[12x] md:text-[14x] ml-1">
                       {questionDetail?.data?.countLikes} Vote
@@ -591,10 +601,13 @@ const QuestionsDetail = () => {
                 onClick={() => handleFollow()}
                 className={
                   user?.data?.isFollowing
-                    ? "border border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
-                    : "border border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
+                    ? "border flex items-center border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
+                    : "border flex items-center border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
                 }
               >
+                {loadingFollow && (
+                  <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                )}
                 {user?.data?.isFollowing ? "- Đã theo dõi" : "+ Theo dõi"}
               </button>
             </div>
@@ -632,6 +645,9 @@ const QuestionsDetail = () => {
                     : "text-blue-500 w-full  py-[3px] border border-blue-500 rounded-[3px] flex justify-center items-center hover:bg-blue-500 hover:text-white"
                 }
               >
+                {loadingBookmark && (
+                  <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                )}
                 <Icon.Bookmark className="fill-current w-[13px]" />
                 <span className="text-[14x] ml-1">
                   {checkBookmark

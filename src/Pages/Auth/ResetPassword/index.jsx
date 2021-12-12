@@ -7,9 +7,14 @@ import SuccessMessage from 'src/Components/SuccessMessage'
 import { path, regex } from 'src/Constants/'
 import ResponseMessage from 'src/Constants/ResponseMessage'
 import { useForm } from 'react-hook-form'
+import LoadingIcon from "src/Components/Loading/LoadingIcon";
 
 const ResetPassword = () => {
     const history = useHistory();
+    const [loading, setLoading] = useState({
+        error: false,
+        success: false,
+    });
     const [response, setResponse] = useState({ isLoading: false, error: null, message: null })
     const { isLoading, error, message } = response;
     const { register, handleSubmit, formState: { errors }, clearErrors, getValues, reset } = useForm({
@@ -20,22 +25,25 @@ const ResetPassword = () => {
 
     const onSubmit = async (data) => {
         try {
+            setResponse({isLoading: false, error: null, message: null})
             const dataSend = {...data, token }
-            setResponse({ ...response, isLoading: true })
-            await AuthApi.resetPassword(dataSend);
+            if (data) setLoading({ ...loading, success: true });
+            const { data: res } = await AuthApi.resetPassword(dataSend);
+            if (res) setLoading({ ...loading, success: false });
             setResponse({
                 ...response,
+                error: null,
                 message: "Đổi mật khẩu thành công",
-                isLoading: false
             })
             setTimeout(() => {
                 history.push('/auth/login')
             }, 2000);
         } catch (error) {
+            setLoading({ ...loading, success: false });
             setResponse({
                 ...response,
                 error: ResponseMessage(error?.response?.data?.message[0]),
-                isLoading: false
+                message: null
             })
         }
     }
@@ -110,10 +118,13 @@ const ResetPassword = () => {
                         />
                         <span className="text-red-500 text-[12px]">{errors?.newPasswordConfirm && errors?.newPasswordConfirm?.message}</span>
                     </div>
-                    <div className="text-right">
-                        <button className="bg-blue-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-blue-800 focus:border-blue-600"
+                    <div className="flex justify-end">
+                        <button className="flex bg-blue-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-blue-800 focus:border-blue-600"
                             type="submit"
                         >
+                            {loading.success && (
+                                <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                            )}
                             Đổi mật khẩu
                         </button>
                     </div>

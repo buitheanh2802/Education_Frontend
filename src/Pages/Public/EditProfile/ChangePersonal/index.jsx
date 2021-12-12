@@ -1,54 +1,80 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useForm } from 'react-hook-form'
-import { useDispatch } from "react-redux"
 import { useHistory } from 'react-router-dom'
-import { setLoading } from "src/Redux/Slices/Loading.slice"
-import { Icon } from "src/Components/Icon"
 import ErrorMessage from 'src/Components/ErrorMessage'
 import SuccessMessage from 'src/Components/SuccessMessage'
-import { path, regex } from 'src/Constants/'
 import ResponseMessage from 'src/Constants/ResponseMessage'
 import AuthApi from "src/Apis/AuthApi"
-import ImageApi from 'src/Apis/ImageApi'
+import LoadingIcon from "src/Components/Loading/LoadingIcon";
+
 const ChangePersonal = ({ profile }) => {
+    const [loading, setLoading] = useState({
+        error: false,
+        success: false,
+    });
     const history = useHistory();
     const [response, setResponse] = useState({ isLoading: false, error: null, message: null })
     const { isLoading, error, message } = response;
-    const [profileMe, setProfMe] = useState([]);
-    const { register, handleSubmit, reset, formState: { errors }, clearErrors, getValues } = useForm({
+    const { register, handleSubmit, formState: { errors }, clearErrors, getValues } = useForm({
         defaultValue: {
-            fullname: profile.fullname,
-            avatar: profile.avatar.avatarUrl,
-            email: profile.email,
-            birthday: profile.birthday,
-            address: profile.address,
-            description: profile.description,
-            hobbies: profile.hobbies,
-            skills: profile.skills
+            fullname: profile?.fullname,
+            photo: profile?.avatar?.avatarUrl,
+            email: profile?.email,
+            birthday: profile?.birthday,
+            address: profile?.address,
+            description: profile?.descriptions,
+            hobbies: profile?.hobbies,
+            skills: profile?.skills
         }
     });
+    let hobbies = [];
+    let skills = []
 
-    const addImg = async(image) => {
-        const uploads = new FormData();
-        uploads.append("image", image)
-        const response = await ImageApi.addImage(uploads);
-        console.log('res',response);
+    const handleAddHobby = (e) => {
+        if (e.target.checked) {
+            hobbies.push(e.target.value)
+        } else {
+            hobbies = hobbies.filter(item => item !== e.target.value)
+        }
+    }
+
+    const handleAddSkill = (e) => {
+        if (e.target.checked) {
+            skills.push(e.target.value)
+        } else {
+            skills = skills.filter(item => item !== e.target.value)
+        }
     }
 
     const onSubmit = async (data) => {
         try {
-            setResponse({ ...response, isLoading: true })
-            addImg(data.image);
-            
+            setResponse({ isLoading: false, error: null, message: null })
+            if (data) setLoading({ ...loading, success: true });
+            const uploads = new FormData();
+            uploads.append("photo", data.photo);
+            uploads.append("birthday", data.birthday);
+            uploads.append("address", data.address);
+            uploads.append("descriptions", data.descriptions);
+            uploads.append("hobbies", hobbies);
+            uploads.append("skills", skills);
+            const { data: res } = await AuthApi.changeInfo(uploads);
+            if (res) setLoading({ ...loading, success: false });
+            setResponse({
+                ...response,
+                error: null,
+                message: "Đổi thông tin thành công",
+            })
+            setTimeout(() => {
+                history.push('/profile/me/change-info')
+            }, 2000);
         } catch (error) {
             setResponse({
                 ...response,
                 error: ResponseMessage(error?.response?.data?.message[0]),
-                isLoading: false
+                message: null
             })
         }
     }
-
 
     return (
         <>
@@ -63,32 +89,34 @@ const ChangePersonal = ({ profile }) => {
                         {message && <SuccessMessage message={message} />}
                         <div className="mx-auto w-[220px]">
                             {profile?.avatar?.avatarUrl ?
-                                <img className="mx-auto rounded-full" src={profile?.avatar?.avatarUrl} alt="Avatar" />
+                                <img className="mx-auto rounded-full" src={profile?.avatar?.avatarUrl} alt="Image" />
                                 :
                                 <div className="w-[120px] h-[120px] leading-[120px] text-white mx-auto rounded-full px-[8px] bg-blue-200">
                                     Choose image
                                 </div>
                             }
-                            <input className="mx-auto my-[5px] w-[100%] outline-none" type="file"  
-                            onChangeCapture={() => { clearErrors('image') }} />
+                            <input className="mx-auto my-[5px] w-[100%] outline-none" type="file"
+                                onChangeCapture={() => { clearErrors('photo') }}
+                                {...register('photo')}
+                            />
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Tên tài khoản:
                             </p>
-                            <input defaultValue={profile.fullname} disabled className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]" />
+                            <input defaultValue={profile?.fullname} disabled className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]" />
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Email:
                             </p>
-                            <input defaultValue={profile.email} disabled className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]" />
+                            <input defaultValue={profile?.email} disabled className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px]" />
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Ngày sinh:
                             </p>
-                            <input type="date" defaultValue={profile.birthday}
+                            <input type="date" defaultValue={profile?.birthday}
                                 onChangeCapture={() => { clearErrors('birthday') }}
                                 {...register('birthday')}
                                 disabled={isLoading} className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
@@ -97,7 +125,7 @@ const ChangePersonal = ({ profile }) => {
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Địa chỉ:
                             </p>
-                            <input type="text" defaultValue={profile.address}
+                            <input type="text" defaultValue={profile?.address}
                                 onChangeCapture={() => { clearErrors('address') }}
                                 {...register('address')}
                                 disabled={isLoading}
@@ -105,73 +133,73 @@ const ChangePersonal = ({ profile }) => {
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
-                                <span className="text-red-600 font-bold mr-[5px]">*</span>
                                 Mô tả:
                             </p>
-                            <textarea defaultValue={profile.description}
-                                onChangeCapture={() => { clearErrors('description') }}
-                                {...register('description')}
+                            <textarea defaultValue={profile?.descriptions}
+                                rows={6}
+                                onChangeCapture={() => { clearErrors('descriptions') }}
+                                {...register('descriptions')}
                                 disabled={isLoading} className="px-[6px] w-[100%] py-[8px] border rounded-[5px] my-[5px] outline-none" />
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Sở thích:
                             </p>
-                            <div className="grid grid-cols-3">
+                            <form id="hobbies" className="grid grid-cols-3">
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Ăn uống" />
+                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Ăn uống" id="eat" />
                                     <span>Ăn uống</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Nghe nhạc" />
-                                    <span> Nghe nhạc</span>
+                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Nghe nhạc" id="music" />
+                                    <span>Nghe nhạc</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Chơi game" />
+                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Chơi game" id="game" />
                                     <span>Chơi game</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mua sắm" />
+                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mua sắm" id="shopping" />
                                     <span>Mua sắm</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Chơi thể thao" />
+                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Chơi thể thao" id="sport" />
                                     <span>Chơi thể thao</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Đọc sách" />
+                                    <input type="checkbox" onChange={(e) => handleAddHobby(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Đọc sách" id="reading" />
                                     <span>Đọc sách</span>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                         <div className="py-[5px]">
                             <p className="text-gray-800 text-[15px] py-[5px]">
                                 Kỹ năng:
                             </p>
-                            <div className="grid grid-cols-3">
+                            <form id="skills" className="grid grid-cols-3">
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Front-End" />
+                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Front-End" id="front" />
                                     <span>Front-End</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Back-End" />
+                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Back-End" id="back" />
                                     <span>Back-End</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mobile App(IOS)" />
+                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mobile App(IOS)" id="ios" />
                                     <span>Mobile App(IOS)</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mobile App(Android)" />
+                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Mobile App(Android)" id="android" />
                                     <span>Mobile App(Android)</span>
                                 </div>
                                 <div className="flex my-[5px]">
-                                    <input type="checkbox" className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Xử lí dữ liệu" />
+                                    <input type="checkbox" onChange={(e) => handleAddSkill(e)} className="px-[6px] py-[8px] mx-[10px] border rounded-[5px] my-[5px] outline-none" value="Xử lí dữ liệu" id="pend-data" />
                                     <span>Xử lí dữ liệu</span>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                        <div className="text-right">
+                        <div className="flex justify-end">
                             <button
                                 onClick={() => { history.push('/profile/me/change-info') }}
                                 className="mx-[10px] bg-blue-200 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-gray-200 hover:text-blue-600 focus:border-blue-600"
@@ -180,9 +208,12 @@ const ChangePersonal = ({ profile }) => {
                                 hủy bỏ
                             </button>
                             <button
-                                className="bg-blue-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-blue-800 focus:border-blue-600"
+                                className="flex bg-blue-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-blue-800 focus:border-blue-600"
                                 type="submit"
                             >
+                                {loading.success && (
+                                    <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                                )}
                                 Cập nhật
                             </button>
                         </div>

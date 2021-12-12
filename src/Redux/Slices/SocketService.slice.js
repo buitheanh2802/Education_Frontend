@@ -8,5 +8,6 @@ const mySlice = createSlice({
     }
 })
 
-const { reducer } = mySlice;
+const { reducer,actions } = mySlice;
+export const { notificationStartJoin } = actions;
 export default reducer;

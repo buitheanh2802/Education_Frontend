@@ -7,20 +7,21 @@ import AuthApi from "src/Apis/AuthApi";
 import { path } from "src/Constants/";
 const ProfilePage = () => {
     const dispatch = useDispatch();
-    const [profile, setProfile] = useState([]);
+    const [profileDetail, setProfileDetail] = useState([]);
 
     useEffect(() => {
-        const profile = async () => {
+        const proDetail = async () => {
             try {
                 dispatch(setLoading(true))
-                const { data: profile } = await AuthApi.profile();
-                setProfile(profile.data);
+                const { data: profileDetail } = await AuthApi.profileDetail();
+                setProfileDetail(profileDetail.data)
                 dispatch(setLoading(false))
             } catch (error) {
-                console.log("Failed to get data", error.response);
+                console.log(error.response);
             }
-        };
-        profile();
+        }
+        proDetail();
+
     }, []);
 
 
@@ -31,15 +32,15 @@ const ProfilePage = () => {
                     <div className="py-[5px] mx-[10px]">
                         <div className="py-[10px] bg-[#BEE3F8]">
                             <Link className="block">
-                                {profile?.avatar?.avatarUrl ?
+                                {profileDetail?.avatar?.avatarUrl ?
                                     <img
                                         className="mx-auto max-h-[70px] rounded-full"
                                         width="70px" height="70px"
-                                        src={profile?.avatar?.avatarUrl}
-                                        alt={profile?.username} />
+                                        src={profileDetail?.avatar?.avatarUrl}
+                                        alt={profileDetail?.username} />
                                     :
                                     <div className="py-[12px] text-[#4A5568] mx-auto text-center w-[70px] h-[70px] rounded-full bg-white font-bold text-[30px]">
-                                        {profile?.username?.toUpperCase().substring(0, 1)}
+                                        {profileDetail?.username?.toUpperCase().substring(0, 1)}
                                     </div>
                                 }
                             </Link>
@@ -49,18 +50,22 @@ const ProfilePage = () => {
                                 <div className="grid grid-cols-3 lg:gap-[3px] md:gap-[10px] my-[20px]">
                                     <div class="col-span-2">
                                         <Link className="py-[5px] font-semibold text-[#2D3748] md:text-[16px] sm:text-[16px] xl:text-[18px] lg:text-[14px] hover:underline">
-                                            {profile?.fullname}
+                                            {profileDetail?.fullname}
                                         </Link>
                                         <br />
                                         <span className="py-[5px] lg:text-[13px] xl:text-[16px] sm:text-[14px] text-[#4A5568] ">
-                                            @{profile?.username?.substring(0, 16)}...
+                                            @{profileDetail?.username?.substring(0, 16)}...
                                         </span>
-                                        <div className="py-[5px]">
-                                            <span className="inline-block mr-[5px] pt-[0px]">
-                                                <Icon.Calendar className="fill-current w-[13px] " />
-                                            </span>
-                                            {profile?.birthday}
-                                        </div>
+                                        {profileDetail?.birthday ?
+                                            <div className="py-[5px]">
+                                                <span className="inline-block mr-[5px] pt-[0px]">
+                                                    <Icon.Calendar className="fill-current w-[13px] " />
+                                                </span>
+                                                {profileDetail?.birthday}
+                                            </div>
+                                            :
+                                            <div></div>
+                                        }
                                     </div>
                                     <div className="flex items-center justify-end">
                                         <Link to={path.PROFILE_CHANGE}
@@ -77,7 +82,7 @@ const ProfilePage = () => {
                                                 <Icon.Point className="fill-current w-[13px] mr-[5px]" />
                                                 <span>Điểm</span>
                                             </div>
-                                            <span>{profile?.points}</span>
+                                            <span>{profileDetail?.points}</span>
                                         </div>
                                     </div>
                                     <div className="mx-auto">
@@ -86,7 +91,7 @@ const ProfilePage = () => {
                                                 <Icon.Pen className="fill-current w-[13px] mr-[5px]" />
                                                 <span>Bài viết</span>
                                             </div>
-                                            <span>{profile?.postCounts}</span>
+                                            <span>{profileDetail?.postCounts}</span>
                                         </div>
                                     </div>
                                     <div className="mx-auto">
@@ -95,7 +100,7 @@ const ProfilePage = () => {
                                                 <Icon.questions className="fill-current w-[13px] mr-[5px]" />
                                                 <span>Câu hỏi</span>
                                             </div>
-                                            <span>{profile?.questionCounts}</span>
+                                            <span>{profileDetail?.questionCounts}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +109,7 @@ const ProfilePage = () => {
                                         <div className="text-center gap-[5px] text-[#4A5568]">
                                             <div className="flex items-center">
                                                 <Icon.User className="fill-current w-[13px] mr-[5px]" />
-                                                <span>Có {profile?.followers}</span>
+                                                <span>Có {profileDetail?.followers}</span>
                                             </div>
                                             <span>người theo dõi</span>
                                         </div>
@@ -115,7 +120,7 @@ const ProfilePage = () => {
                                                 <Icon.Username className="fill-current w-[13px] mr-[5px]" />
                                                 <span>Theo dõi</span>
                                             </div>
-                                            <span>{profile?.followingCounts} người dùng</span>
+                                            <span>{profileDetail?.followingCounts} người dùng</span>
                                         </div>
                                     </div>
                                 </div>
@@ -128,43 +133,69 @@ const ProfilePage = () => {
                         <h2 className="font-bold text-[20px]">Thông tin tài khoản</h2>
                     </div>
                     <div className="w-full px-[10px] py-[15px]">
-                        <div className="py-[5px]">
-                            <span className="inline-block"><Icon.Profile className="fill-current w-[16px] mb-[-2px] mr-[5px]" /> </span>
-                            <span className="inline-block"> {profile?.descriptions}</span>
-                        </div>
-                        <div className="py-[5px]">
-                            <span className="font-bold text-gray-800">Phone: </span> {profile?.phoneNumber}
+                        {profileDetail?.descriptions ?
+                            <div className="py-[5px]">
+                                <span className="inline-block"><Icon.Profile className="fill-current w-[16px] mb-[-2px] mr-[5px]" /> </span>
+                                <span className="inline-block"> {profileDetail?.descriptions}</span>
                             </div>
-                        <div className="py-[5px]">
-                            <span className="font-bold text-gray-800">Address: </span> {profile?.address}
+                            :
+                            <div></div>
+                        }
+                        {profileDetail?.phoneNumber ?
+                            <div className="py-[5px]">
+                                <span className="font-bold text-gray-800">Phone: </span> {profileDetail?.phoneNumber}
                             </div>
-                        <div className="py-[5px]">
-                            <span className="font-bold text-gray-800">Email: </span> {profile?.email}
-                        </div>
-                        <div className="py-[5px]">
-                            <span className="font-bold text-gray-800">Hobbies: </span>
-                            {profile?.hobbies?.map((hob, index) => {
-                                return (
-                                    <>
-                                        <div className="font-bold mx-[5px] px-[5px] inline-block border-r border-black last:border-0" key={index}>
-                                            {hob}
-                                        </div>
-                                    </>
-                                )
-                            })}
-                        </div>
-                        <div className="py-[5px]">
-                            <span className="font-bold text-gray-800">Skills: </span>
-                            {profile?.skills?.map((ski, index) => {
-                                return (
-                                    <>
-                                        <div className="font-bold mx-[5px] inline-block md:px-[10px] px-[10px] py-[5px] lg:px-[8px] text-[12px] xl:px-[15px] hover:bg-gray-300 text-[#4A5568] bg-[#BEE3F8]" key={index}>
-                                            {ski}
-                                        </div>
-                                    </>
-                                )
-                            })}
-                        </div>
+                            :
+                            <div></div>
+                        }
+                        {profileDetail?.address ?
+                            <div className="py-[5px]">
+                                <span className="font-bold text-gray-800">Address: </span> {profileDetail?.address}
+                            </div>
+                            :
+                            <div></div>
+                        }
+                        {profileDetail?.email ?
+                            <div className="py-[5px]">
+                                <span className="font-bold text-gray-800">Email: </span> {profileDetail?.email}
+                            </div>
+                            :
+                            <div></div>
+                        }
+                        {profileDetail?.hobbies ?
+                            <div className="py-[5px]">
+                                <span className="font-bold text-gray-800">Hobbies: </span>
+                                {profileDetail?.hobbies?.map((hob, index) => {
+                                    return (
+                                        <>
+                                            <div className="font-bold mx-[5px] px-[5px] inline-block border-r border-black last:border-0"
+                                                key={index}
+                                            >
+                                                {hob}
+                                            </div>
+                                        </>
+                                    )
+                                })}
+                            </div>
+                            :
+                            <div></div>
+                        }
+                        {profileDetail?.skills ?
+                            <div className="py-[5px]">
+                                <span className="font-bold text-gray-800">Skills: </span>
+                                {profileDetail?.skills?.map((ski, index) => {
+                                    return (
+                                        <>
+                                            <div className="font-bold mx-[5px] inline-block md:px-[10px] px-[10px] py-[5px] lg:px-[8px] xl:px-[15px] hover:bg-gray-300 text-[#4A5568] bg-[#BEE3F8]" key={index}>
+                                                {ski}
+                                            </div>
+                                        </>
+                                    )
+                                })}
+                            </div>
+                            :
+                            <div></div>
+                        }
                     </div>
                 </div>
             </div>

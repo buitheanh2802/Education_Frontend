@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import CreatetableSelect from "react-select/creatable";
 import makeAnimated from "react-select/animated";
 import { Icon } from "src/Components/Icon";

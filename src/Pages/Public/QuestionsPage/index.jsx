@@ -7,7 +7,6 @@ import { path } from "src/Constants/";
 import { Icon } from "src/Components/Icon";
 import QuestionApi from "src/Apis/QuestionApi";
 import { useLocation } from "react-router";
-import Loading from "src/Components/Loading";
 import UserApi from "src/Apis/UserApi";
 import TagAPi from "src/Apis/TagApi";
 import { useDispatch } from "react-redux";
@@ -78,6 +77,7 @@ const QuestionsPage = () => {
             setFollows(dataNew);
             dispatch(setLoading(false));
           }
+          dispatch(setLoading(false));
         } else if (location.pathname === path.QUESTIONS_BOOK_MARK) {
           const token = localStorage.getItem("_token_");
           if (token) {
@@ -88,6 +88,7 @@ const QuestionsPage = () => {
             setBookmarks(dataNew);
             dispatch(setLoading(false));
           }
+          dispatch(setLoading(false));
         }
       } catch (error) {
         console.log(error);
