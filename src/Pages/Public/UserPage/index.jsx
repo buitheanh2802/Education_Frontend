@@ -32,29 +32,29 @@ const Userpage = (props) => {
             return;
         }
         const notificationRequest = {
-            title : `
+            title: `
             <div>
                 <a class="font-medium cursor-pointer hover:text-blue-500 " 
                 href="/user/${profile.username}">${profile.fullname}</a>
                 đã ${user?.isFollowing ? "bỏ theo dõi bạn." : "theo dõi bạn."} 
             </div>`,
-            url : ""
+            url: ""
         }
         if (user?.isFollowing) {
             await FollowApi.unFollow(username);
-            const { data : { data }} = await NotificationApi.create(token,notificationRequest,user._id);
-            socket.emit('sendTo',{...data,sendToId : user._id});
+            const { data: { data } } = await NotificationApi.create(token, notificationRequest, user._id);
+            socket.emit('sendTo', { ...data, sendToId: user._id });
             setUser({ ...user, isFollowing: false })
             dispatch(setLoading(false))
         } else {
             await FollowApi.follow(username);
-            const { data : { data }} = await NotificationApi.create(token,notificationRequest,user._id);
-            socket.emit('sendTo',{...data,sendToId : user._id});
+            const { data: { data } } = await NotificationApi.create(token, notificationRequest, user._id);
+            socket.emit('sendTo', { ...data, sendToId: user._id });
             setUser({ ...user, isFollowing: true });
             dispatch(setLoading(false))
         }
     }
-    
+
     const pathName = [
         {
             path: `/user/${username}`,
@@ -78,7 +78,6 @@ const Userpage = (props) => {
         },
     ];
 
-    // authors
     useEffect(() => {
 
         const user = async () => {
@@ -121,14 +120,21 @@ const Userpage = (props) => {
                                 <Icon.Star className="w-[18px] mb-[15px] ml-[10px] inline-block" />
                                 <p className="text-[#666]">@{user?.username}</p>
                             </div>
-                            {user?.isFollowing ?
-                                <button onClick={() => handleFollow()} className="mt-[10px] bg-[#0d61c7] border border-[#0d61c7] hover:bg-[#fff] hover:text-[#0d61c7] text-[#fff] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
-                                    - Bỏ theo dõi
-                                </button>
+                            {user?.username === profile?.username ?
+                                <div>
+                                    <button onClick={() => history.push('/profile/me')} className="mt-[10px] bg-[#0d61c7] border border-[#0d61c7] hover:bg-[#fff] hover:text-[#0d61c7] text-[#fff] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
+                                        Xem thông tin
+                                    </button>
+                                </div>
                                 :
-                                <button onClick={() => handleFollow()} className="mt-[10px] bg-[#fff] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#BEE3F8] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
-                                    + Theo dõi
-                                </button>
+                                user?.isFollowing ?
+                                    <button onClick={() => handleFollow()} className="mt-[10px] bg-[#0d61c7] border border-[#0d61c7] hover:bg-[#fff] hover:text-[#0d61c7] text-[#fff] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
+                                        - Bỏ theo dõi
+                                    </button>
+                                    :
+                                    <button onClick={() => handleFollow()} className="mt-[10px] bg-[#fff] border border-[#0d61c7] hover:bg-[#0d61c7] hover:text-[#BEE3F8] text-[#0d61c7] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
+                                        + Theo dõi
+                                    </button>
                             }
                         </div>
                     </div>
