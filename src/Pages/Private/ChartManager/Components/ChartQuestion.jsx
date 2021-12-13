@@ -98,7 +98,7 @@ const ChartQuestion = () => {
     return (
         <div className="w-full border">
             <div className="flex items-center justify-between p-5 border-b">
-                <p className="tw-text-[18px] tw-font-medium xl:tw-font-normal md:tw-text-[16px] tw-leading-[35px] font-medium flex items-center gap-2 text-blue-900"><Icon.Pen className="fill-current w-[20px]" /> Thống kê bài viết</p>
+                <p className="tw-text-[18px] tw-font-medium xl:tw-font-normal md:tw-text-[16px] tw-leading-[35px] font-medium flex items-center gap-2 text-blue-900"><Icon.Questions className="fill-current w-[20px]" /> Thống kê câu hỏi</p>
                 <select name="type" onChangeCapture={handelFilterData} className="border h-[35px] w-[200px] text-center rounded text-gray-600 cursor-pointer text-sm outline-none focus:ring-1 focus:ring-blue-300">
                     <option value="7">7 ngày qua</option>
                     <option value="30">1 tháng qua</option>
