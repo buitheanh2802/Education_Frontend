@@ -345,6 +345,13 @@ textarea {
 2. Set the default placeholder color to the user's configured gray 400 color.
 */
 
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
+}
+
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   opacity: 1;
   /* 1 */
@@ -426,19 +433,19 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.divide-y > *, .border, .border-0, .border-\[1px\], .border-b, .border-b-2, .border-l-4, .border-t, .border-r, .border-l, .border-r-4, .border-l-\[3px\], .last\:border-0, .focus\:border, .md\:divide-x > *, .lg\:border {
+.divide-y > *, .border, .border-0, .border-\[1px\], .border-4, .border-t, .border-b, .border-b-2, .border-l-4, .border-r, .border-l, .border-r-4, .border-l-\[3px\], .last\:border-0, .focus\:border, .md\:divide-x > *, .lg\:border {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
-.shadow-xl, .shadow-lg, .shadow-sm, .shadow, .hover\:shadow-md, .hover\:shadow, .focus\:shadow, .lg\:shadow-lg {
+.shadow-lg, .shadow-sm, .shadow, .shadow-xl, .hover\:shadow-md, .hover\:shadow, .focus\:shadow, .lg\:shadow-lg {
   --tw-ring-offset-shadow: 0 0 #0000;
   --tw-ring-shadow: 0 0 #0000;
   --tw-shadow: 0 0 #0000;
   --tw-shadow-colored: 0 0 #0000;
 }
 
-.ring-2, .focus\:ring-2, .focus\:ring-4, .focus\:ring-1 {
+.ring-2, .focus\:ring-1, .focus\:ring-2, .focus\:ring-4 {
   --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
   --tw-ring-offset-width: 0px;
   --tw-ring-offset-color: #fff;
@@ -530,6 +537,42 @@ Ensure the default browser behavior of the `hidden` attribute.
   left: 0px;
 }
 
+.top-\[calc\(100\%\+10px\)\] {
+  top: calc(100% + 10px);
+}
+
+.left-1 {
+  left: 0.25rem;
+}
+
+.top-0 {
+  top: 0px;
+}
+
+.top-\[90\%\] {
+  top: 90%;
+}
+
+.right-\[15px\] {
+  right: 15px;
+}
+
+.right-0 {
+  right: 0px;
+}
+
+.left-0 {
+  left: 0px;
+}
+
+.bottom-0 {
+  bottom: 0px;
+}
+
+.top-\[18px\] {
+  top: 18px;
+}
+
 .top-\[10px\] {
   top: 10px;
 }
@@ -538,16 +581,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   left: 10px;
 }
 
-.left-0 {
-  left: 0px;
-}
-
 .top-1\/2 {
   top: 50%;
-}
-
-.bottom-0 {
-  bottom: 0px;
 }
 
 .left-1\/2 {
@@ -558,24 +593,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   bottom: 15px;
 }
 
-.right-0 {
-  right: 0px;
-}
-
-.top-0 {
-  top: 0px;
-}
-
-.top-\[18px\] {
-  top: 18px;
-}
-
-.right-\[15px\] {
-  right: 15px;
-}
-
 .top-full {
   top: 100%;
+}
+
+.left-\[-30px\] {
+  left: -30px;
 }
 
 .top-\[calc\(100\%\+15px\)\] {
@@ -606,24 +629,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   left: 100%;
 }
 
-.top-\[calc\(100\%\+10px\)\] {
-  top: calc(100% + 10px);
-}
-
-.left-1 {
-  left: 0.25rem;
-}
-
 .top-\[-10px\] {
   top: -10px;
 }
 
 .right-\[20px\] {
   right: 20px;
-}
-
-.top-\[90\%\] {
-  top: 90%;
 }
 
 .z-0 {
@@ -662,16 +673,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   z-index: 9999999;
 }
 
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
 
 .col-span-2 {
   grid-column: span 2 / span 2;
-}
-
-.col-span-3 {
-  grid-column: span 3 / span 3;
 }
 
 .col-span-10 {
@@ -690,12 +701,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-column-start: 2;
 }
 
+.m-0 {
+  margin: 0px;
+}
+
 .m-auto {
   margin: auto;
 }
 
-.m-0 {
-  margin: 0px;
+.my-\[20px\] {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .mx-auto {
@@ -703,9 +724,24 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: auto;
 }
 
+.my-\[15px\] {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .my-\[5px\] {
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.mx-\[15px\] {
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .my-\[8px\] {
@@ -748,49 +784,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 1.5rem;
 }
 
-.mx-\[20px\] {
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-.my-\[10px\] {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.my-3 {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
-.mx-\[15px\] {
-  margin-left: 15px;
-  margin-right: 15px;
-}
-
-.my-auto {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
 .mx-\[10px\] {
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.my-\[20px\] {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.mx-\[5px\] {
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
-.my-\[15px\] {
-  margin-top: 15px;
-  margin-bottom: 15px;
+.my-\[10px\] {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .my-2 {
@@ -808,6 +809,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 1.25rem;
 }
 
+.mx-\[20px\] {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.mx-\[5px\] {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .my-\[2px\] {
   margin-top: 2px;
   margin-bottom: 2px;
@@ -818,8 +829,104 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 2px;
 }
 
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
 .mt-\[20px\] {
   margin-top: 20px;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mt-\[0\.5px\] {
+  margin-top: 0.5px;
+}
+
+.ml-\[10px\] {
+  margin-left: 10px;
+}
+
+.mb-\[10px\] {
+  margin-bottom: 10px;
+}
+
+.mr-\[5px\] {
+  margin-right: 5px;
+}
+
+.ml-\[8px\] {
+  margin-left: 8px;
+}
+
+.mt-\[80px\] {
+  margin-top: 80px;
+}
+
+.mb-\[20px\] {
+  margin-bottom: 20px;
+}
+
+.ml-\[30px\] {
+  margin-left: 30px;
+}
+
+.mb-\[15px\] {
+  margin-bottom: 15px;
+}
+
+.mt-\[10px\] {
+  margin-top: 10px;
+}
+
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
+.mb-\[5px\] {
+  margin-bottom: 5px;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.mt-\[3px\] {
+  margin-top: 3px;
+}
+
+.mt-\[8px\] {
+  margin-top: 8px;
+}
+
+.mr-\[3px\] {
+  margin-right: 3px;
+}
+
+.mt-\[15vh\] {
+  margin-top: 15vh;
+}
+
+.mb-\[50px\] {
+  margin-bottom: 50px;
+}
+
+.mt-\[25px\] {
+  margin-top: 25px;
+}
+
+.mb-\[18px\] {
+  margin-bottom: 18px;
+}
+
+.mt-\[30px\] {
+  margin-top: 30px;
 }
 
 .mb-\[40px\] {
@@ -828,10 +935,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .ml-\[5px\] {
   margin-left: 5px;
-}
-
-.mr-\[5px\] {
-  margin-right: 5px;
 }
 
 .mt-\[15px\] {
@@ -846,20 +949,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 1.5rem;
 }
 
-.ml-2 {
-  margin-left: 0.5rem;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
 .mt-4 {
   margin-top: 1rem;
-}
-
-.ml-1 {
-  margin-left: 0.25rem;
 }
 
 .mr-4 {
@@ -874,14 +965,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 55px;
 }
 
-.mt-\[25px\] {
-  margin-top: 25px;
-}
-
-.mt-\[10px\] {
-  margin-top: 10px;
-}
-
 .mt-\[12px\] {
   margin-top: 12px;
 }
@@ -894,6 +977,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 50px;
 }
 
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+
+.mr-\[10px\] {
+  margin-right: 10px;
+}
+
 .mb-\[80px\] {
   margin-bottom: 80px;
 }
@@ -904,14 +995,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mt-\[6px\] {
   margin-top: 6px;
-}
-
-.mt-\[30px\] {
-  margin-top: 30px;
-}
-
-.mb-\[15px\] {
-  margin-bottom: 15px;
 }
 
 .mt-\[90px\] {
@@ -934,32 +1017,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 5px;
 }
 
-.mb-\[5px\] {
-  margin-bottom: 5px;
-}
-
-.mt-\[80px\] {
-  margin-top: 80px;
-}
-
-.mb-\[20px\] {
-  margin-bottom: 20px;
-}
-
-.ml-\[30px\] {
-  margin-left: 30px;
-}
-
-.ml-\[10px\] {
-  margin-left: 10px;
-}
-
 .mt-10 {
   margin-top: 2.5rem;
-}
-
-.mt-3 {
-  margin-top: 0.75rem;
 }
 
 .mt-\[-100px\] {
@@ -1014,34 +1073,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 85px;
 }
 
-.mt-1 {
-  margin-top: 0.25rem;
-}
-
-.mt-\[3px\] {
-  margin-top: 3px;
-}
-
-.mt-\[8px\] {
-  margin-top: 8px;
-}
-
-.mr-\[3px\] {
-  margin-right: 3px;
-}
-
-.mt-\[15vh\] {
-  margin-top: 15vh;
-}
-
-.mb-\[50px\] {
-  margin-bottom: 50px;
-}
-
-.mb-\[18px\] {
-  margin-bottom: 18px;
-}
-
 .mb-\[25px\] {
   margin-bottom: 25px;
 }
@@ -1066,6 +1097,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 0.625rem;
 }
 
+.mr-\[30px\] {
+  margin-right: 30px;
+}
+
 .ml-4 {
   margin-left: 1rem;
 }
@@ -1082,16 +1117,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 20px;
 }
 
-.mr-\[30px\] {
-  margin-right: 30px;
-}
-
 .mb-\[24px\] {
   margin-bottom: 24px;
-}
-
-.mb-\[10px\] {
-  margin-bottom: 10px;
 }
 
 .mr-\[80px\] {
@@ -1104,10 +1131,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .ml-\[100\%\] {
   margin-left: 100%;
-}
-
-.mr-\[10px\] {
-  margin-right: 10px;
 }
 
 .mr-\[17px\] {
@@ -1124,18 +1147,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .ml-\[12px\] {
   margin-left: 12px;
-}
-
-.mt-\[0\.5px\] {
-  margin-top: 0.5px;
-}
-
-.ml-\[8px\] {
-  margin-left: 8px;
-}
-
-.mb-3 {
-  margin-bottom: 0.75rem;
 }
 
 .block {
@@ -1166,16 +1177,52 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.h-screen {
-  height: 100vh;
+.h-\[12px\] {
+  height: 12px;
 }
 
 .h-\[40px\] {
   height: 40px;
 }
 
+.h-\[28px\] {
+  height: 28px;
+}
+
+.h-\[30px\] {
+  height: 30px;
+}
+
+.h-\[10px\] {
+  height: 10px;
+}
+
+.h-full {
+  height: 100%;
+}
+
 .h-\[20px\] {
   height: 20px;
+}
+
+.h-\[15px\] {
+  height: 15px;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.h-\[70px\] {
+  height: 70px;
+}
+
+.h-\[55px\] {
+  height: 55px;
+}
+
+.h-\[45px\] {
+  height: 45px;
 }
 
 .h-\[35px\] {
@@ -1190,16 +1237,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 0.5rem;
 }
 
-.h-full {
-  height: 100%;
-}
-
 .h-10 {
   height: 2.5rem;
-}
-
-.h-\[38px\] {
-  height: 38px;
 }
 
 .h-\[220px\] {
@@ -1246,22 +1285,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 75px;
 }
 
-.h-\[55px\] {
-  height: 55px;
-}
-
-.h-\[45px\] {
-  height: 45px;
-}
-
-.h-\[70px\] {
-  height: 70px;
-}
-
-.h-\[30px\] {
-  height: 30px;
-}
-
 .h-\[80px\] {
   height: 80px;
 }
@@ -1278,10 +1301,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 4rem;
 }
 
-.h-\[10px\] {
-  height: 10px;
-}
-
 .h-\[85px\] {
   height: 85px;
 }
@@ -1296,6 +1315,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-\[85\%\] {
   height: 85%;
+}
+
+.h-\[38px\] {
+  height: 38px;
 }
 
 .h-\[22px\] {
@@ -1322,14 +1345,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 120px;
 }
 
-.h-\[12px\] {
-  height: 12px;
-}
-
-.h-\[28px\] {
-  height: 28px;
-}
-
 .h-0 {
   height: 0px;
 }
@@ -1346,44 +1361,60 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 18px;
 }
 
-.h-\[15px\] {
-  height: 15px;
-}
-
-.max-h-\[110px\] {
-  max-height: 110px;
-}
-
-.max-h-\[70px\] {
-  max-height: 70px;
+.max-h-\[35px\] {
+  max-height: 35px;
 }
 
 .max-h-\[40px\] {
   max-height: 40px;
 }
 
+.max-h-\[70px\] {
+  max-height: 70px;
+}
+
+.max-h-\[110px\] {
+  max-height: 110px;
+}
+
 .max-h-\[55px\] {
   max-height: 55px;
-}
-
-.max-h-\[35px\] {
-  max-height: 35px;
-}
-
-.min-h-\[50px\] {
-  min-height: 50px;
-}
-
-.min-h-\[40px\] {
-  min-height: 40px;
 }
 
 .min-h-\[35px\] {
   min-height: 35px;
 }
 
+.min-h-\[40px\] {
+  min-height: 40px;
+}
+
+.min-h-\[50px\] {
+  min-height: 50px;
+}
+
 .w-full {
   width: 100%;
+}
+
+.w-\[12px\] {
+  width: 12px;
+}
+
+.w-\[28px\] {
+  width: 28px;
+}
+
+.w-\[10px\] {
+  width: 10px;
+}
+
+.w-\[20px\] {
+  width: 20px;
+}
+
+.w-\[280px\] {
+  width: 280px;
 }
 
 .w-\[40px\] {
@@ -1394,16 +1425,48 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 15px;
 }
 
+.w-\[70px\] {
+  width: 70px;
+}
+
+.w-\[18px\] {
+  width: 18px;
+}
+
+.w-\[250px\] {
+  width: 250px;
+}
+
+.w-\[55px\] {
+  width: 55px;
+}
+
+.w-\[200px\] {
+  width: 200px;
+}
+
+.w-\[13px\] {
+  width: 13px;
+}
+
+.w-\[16px\] {
+  width: 16px;
+}
+
+.w-\[45px\] {
+  width: 45px;
+}
+
+.w-\[11px\] {
+  width: 11px;
+}
+
 .w-\[24px\] {
   width: 24px;
 }
 
 .w-\[100\%\] {
   width: 100%;
-}
-
-.w-\[20px\] {
-  width: 20px;
 }
 
 .w-\[30px\] {
@@ -1434,10 +1497,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 66.666667%;
 }
 
-.w-\[18px\] {
-  width: 18px;
-}
-
 .w-\[150px\] {
   width: 150px;
 }
@@ -1466,42 +1525,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 50%;
 }
 
-.w-\[250px\] {
-  width: 250px;
-}
-
-.w-\[55px\] {
-  width: 55px;
-}
-
-.w-\[12px\] {
-  width: 12px;
-}
-
-.w-\[200px\] {
-  width: 200px;
-}
-
-.w-\[13px\] {
-  width: 13px;
-}
-
-.w-\[16px\] {
-  width: 16px;
-}
-
-.w-\[45px\] {
-  width: 45px;
-}
-
-.w-\[11px\] {
-  width: 11px;
-}
-
-.w-\[70px\] {
-  width: 70px;
-}
-
 .w-\[350px\] {
   width: 350px;
 }
@@ -1528,10 +1551,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-1\/4 {
   width: 25%;
-}
-
-.w-\[10px\] {
-  width: 10px;
 }
 
 .w-80 {
@@ -1586,10 +1605,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 120px;
 }
 
-.w-\[28px\] {
-  width: 28px;
-}
-
 .w-\[98vw\] {
   width: 98vw;
 }
@@ -1598,8 +1613,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 400px;
 }
 
-.w-\[280px\] {
-  width: 280px;
+.min-w-\[35px\] {
+  min-width: 35px;
+}
+
+.min-w-\[40px\] {
+  min-width: 40px;
 }
 
 .min-w-\[170px\] {
@@ -1610,12 +1629,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   min-width: 350px;
 }
 
-.min-w-\[40px\] {
-  min-width: 40px;
+.max-w-\[35px\] {
+  max-width: 35px;
 }
 
-.min-w-\[35px\] {
-  min-width: 35px;
+.max-w-\[80\%\] {
+  max-width: 80%;
+}
+
+.max-w-\[40px\] {
+  max-width: 40px;
+}
+
+.max-w-\[450px\] {
+  max-width: 450px;
 }
 
 .max-w-\[1100px\] {
@@ -1626,10 +1653,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-width: 300px;
 }
 
-.max-w-\[450px\] {
-  max-width: 450px;
-}
-
 .max-w-\[650px\] {
   max-width: 650px;
 }
@@ -1638,20 +1661,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-width: 350px;
 }
 
-.max-w-\[40px\] {
-  max-width: 40px;
-}
-
 .max-w-\[55px\] {
   max-width: 55px;
-}
-
-.max-w-\[35px\] {
-  max-width: 35px;
-}
-
-.max-w-\[80\%\] {
-  max-width: 80%;
 }
 
 .flex-1 {
@@ -1668,79 +1679,93 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .-translate-y-1\/2 {
   --tw-translate-y: -50%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .-translate-x-1\/2 {
   --tw-translate-x: -50%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-y-\[-50\%\] {
   --tw-translate-y: -50%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-x-\[-50\%\] {
   --tw-translate-x: -50%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-y-\[2px\] {
   --tw-translate-y: 2px;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-x-\[25px\] {
   --tw-translate-x: 25px;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-y-\[-2px\] {
   --tw-translate-y: -2px;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-y-\[-3px\] {
   --tw-translate-y: -3px;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-y-\[0\] {
   --tw-translate-y: 0;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-y-\[-100\%\] {
   --tw-translate-y: -100%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .translate-y-\[-55\%\] {
   --tw-translate-y: -55%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .rotate-\[45deg\] {
   --tw-rotate: 45deg;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .rotate-180 {
   --tw-rotate: 180deg;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .transform {
-  transform: var(--tw-transform);
-}
-
-.cursor-text {
-  cursor: text;
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.cursor-text {
+  cursor: text;
 }
 
 .select-none {
@@ -1755,6 +1780,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .resize {
   resize: both;
+}
+
+.appearance-none {
+  -webkit-appearance: none;
+          appearance: none;
 }
 
 .grid-cols-1 {
@@ -1781,12 +1811,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-template-columns: 5fr 2fr;
 }
 
-.grid-cols-\[60px\2c 1fr\2c 2\.5fr\2c 0\.5fr\2c 0\.5fr\2c 1\.2fr\] {
-  grid-template-columns: 60px 1fr 2.5fr 0.5fr 0.5fr 1.2fr;
+.grid-cols-\[60px\2c 1\.5fr\2c 1\.5fr\2c 1\.5fr\2c 0\.6fr\2c 0\.6fr\2c 0\.8fr\] {
+  grid-template-columns: 60px 1.5fr 1.5fr 1.5fr 0.6fr 0.6fr 0.8fr;
 }
 
-.grid-cols-\[60px\2c 1fr\2c 1\.5fr\2c 2fr\2c 0\.5fr\2c 1\.2fr\] {
-  grid-template-columns: 60px 1fr 1.5fr 2fr 0.5fr 1.2fr;
+.grid-cols-\[60px\2c 1fr\2c 2\.5fr\2c 0\.5fr\2c 0\.5fr\2c 1\.2fr\] {
+  grid-template-columns: 60px 1fr 2.5fr 0.5fr 0.5fr 1.2fr;
 }
 
 .grid-cols-\[60px\2c 0\.9fr\2c 1\.7fr\2c 0\.7fr\2c 0\.9fr\2c 0\.6fr\2c 1\.2fr\] {
@@ -1845,6 +1875,30 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-items: center;
 }
 
+.gap-3 {
+  gap: 0.75rem;
+}
+
+.gap-5 {
+  gap: 1.25rem;
+}
+
+.gap-1 {
+  gap: 0.25rem;
+}
+
+.gap-10 {
+  gap: 2.5rem;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-\[30px\] {
+  gap: 30px;
+}
+
 .gap-\[5px\] {
   gap: 5px;
 }
@@ -1865,22 +1919,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   gap: 50px;
 }
 
-.gap-3 {
-  gap: 0.75rem;
-}
-
-.gap-\[30px\] {
-  gap: 30px;
-}
-
-.gap-2 {
-  gap: 0.5rem;
-}
-
-.gap-5 {
-  gap: 1.25rem;
-}
-
 .gap-4 {
   gap: 1rem;
 }
@@ -1889,16 +1927,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   gap: 2rem;
 }
 
-.gap-1 {
-  gap: 0.25rem;
-}
-
-.gap-10 {
-  gap: 2.5rem;
-}
-
 .gap-x-\[30px\] {
-  column-gap: 30px;
+  -webkit-column-gap: 30px;
+          column-gap: 30px;
 }
 
 .gap-y-\[15px\] {
@@ -1906,7 +1937,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .gap-x-\[43px\] {
-  column-gap: 43px;
+  -webkit-column-gap: 43px;
+          column-gap: 43px;
 }
 
 .gap-y-\[37px\] {
@@ -1914,7 +1946,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .gap-x-\[40px\] {
-  column-gap: 40px;
+  -webkit-column-gap: 40px;
+          column-gap: 40px;
 }
 
 .gap-y-\[20px\] {
@@ -1922,7 +1955,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .gap-x-\[20px\] {
-  column-gap: 20px;
+  -webkit-column-gap: 20px;
+          column-gap: 20px;
 }
 
 .space-x-12 > :not([hidden]) ~ :not([hidden]) {
@@ -2001,32 +2035,40 @@ Ensure the default browser behavior of the `hidden` attribute.
   white-space: nowrap;
 }
 
-.rounded-2xl {
-  border-radius: 1rem;
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.rounded-sm {
+  border-radius: 0.125rem;
 }
 
 .rounded-\[3px\] {
   border-radius: 3px;
 }
 
-.rounded-\[8px\] {
-  border-radius: 8px;
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.rounded-2xl {
+  border-radius: 1rem;
 }
 
 .rounded-\[5px\] {
   border-radius: 5px;
 }
 
-.rounded {
-  border-radius: 0.25rem;
+.rounded-\[2px\] {
+  border-radius: 2px;
+}
+
+.rounded-\[8px\] {
+  border-radius: 8px;
 }
 
 .rounded-xl {
   border-radius: 0.75rem;
-}
-
-.rounded-full {
-  border-radius: 9999px;
 }
 
 .rounded-md {
@@ -2037,20 +2079,17 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-radius: 100px;
 }
 
-.rounded-\[2px\] {
-  border-radius: 2px;
-}
-
-.rounded-sm {
-  border-radius: 0.125rem;
-}
-
 .rounded-lg {
   border-radius: 0.5rem;
 }
 
 .rounded-\[10px\] {
   border-radius: 10px;
+}
+
+.rounded-t {
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
 }
 
 .rounded-t-\[3px\] {
@@ -2073,11 +2112,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-bottom-right-radius: 3px;
 }
 
-.rounded-t {
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-}
-
 .border {
   border-width: 1px;
 }
@@ -2090,6 +2124,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-width: 1px;
 }
 
+.border-4 {
+  border-width: 4px;
+}
+
+.border-t {
+  border-top-width: 1px;
+}
+
 .border-b {
   border-bottom-width: 1px;
 }
@@ -2100,10 +2142,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .border-l-4 {
   border-left-width: 4px;
-}
-
-.border-t {
-  border-top-width: 1px;
 }
 
 .border-r {
@@ -2134,9 +2172,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-style: none;
 }
 
-.border-\[\#f2f2f2\] {
+.border-gray-200 {
   --tw-border-opacity: 1;
-  border-color: rgb(242 242 242 / var(--tw-border-opacity));
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
 .border-gray-500 {
@@ -2144,19 +2182,24 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 
-.border-gray-200 {
+.border-\[\#0d61c7\] {
   --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity));
+  border-color: rgb(13 97 199 / var(--tw-border-opacity));
 }
 
-.border-red-400 {
+.border-gray-300 {
   --tw-border-opacity: 1;
-  border-color: rgb(248 113 113 / var(--tw-border-opacity));
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
-.border-green-600 {
+.border-blue-500 {
   --tw-border-opacity: 1;
-  border-color: rgb(22 163 74 / var(--tw-border-opacity));
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+}
+
+.border-blue-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(147 197 253 / var(--tw-border-opacity));
 }
 
 .border-gray-100 {
@@ -2169,14 +2212,19 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(156 163 175 / var(--tw-border-opacity));
 }
 
-.border-blue-500 {
+.border-\[\#f2f2f2\] {
   --tw-border-opacity: 1;
-  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+  border-color: rgb(242 242 242 / var(--tw-border-opacity));
 }
 
-.border-gray-300 {
+.border-red-400 {
   --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  border-color: rgb(248 113 113 / var(--tw-border-opacity));
+}
+
+.border-green-600 {
+  --tw-border-opacity: 1;
+  border-color: rgb(22 163 74 / var(--tw-border-opacity));
 }
 
 .border-\[\#e1e1e1\] {
@@ -2199,16 +2247,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(202 138 4 / var(--tw-border-opacity));
 }
 
-.border-\[\#0d61c7\] {
-  --tw-border-opacity: 1;
-  border-color: rgb(13 97 199 / var(--tw-border-opacity));
-}
-
-.border-blue-300 {
-  --tw-border-opacity: 1;
-  border-color: rgb(147 197 253 / var(--tw-border-opacity));
-}
-
 .border-red-500 {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
@@ -2222,6 +2260,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-\[\#6C91F0\] {
   --tw-border-opacity: 1;
   border-color: rgb(108 145 240 / var(--tw-border-opacity));
+}
+
+.border-green-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(134 239 172 / var(--tw-border-opacity));
 }
 
 .border-green-500 {
@@ -2253,19 +2296,64 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(74 85 104 / var(--tw-border-opacity));
 }
 
-.bg-green-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 252 231 / var(--tw-bg-opacity));
-}
-
 .bg-red-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 226 226 / var(--tw-bg-opacity));
 }
 
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.bg-gray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.bg-blue-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(147 197 253 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#0d61c7\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(13 97 199 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#fff\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-blue-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#E2E8F0\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+}
+
+.bg-gray-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+
+.bg-green-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 252 231 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#2d6ff7\] {
@@ -2283,11 +2371,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-blue-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
-}
-
 .bg-transparent {
   background-color: transparent;
 }
@@ -2295,21 +2378,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-blue-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
-}
-
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-blue-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(219 234 254 / var(--tw-bg-opacity));
-}
-
-.bg-gray-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
 .bg-purple-500 {
@@ -2372,16 +2440,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(96 165 250 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#0d61c7\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(13 97 199 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#fff\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
 .bg-blue-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(191 219 254 / var(--tw-bg-opacity));
@@ -2417,16 +2475,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(245 101 101 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#E2E8F0\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
-}
-
-.bg-gray-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
-}
-
 .bg-\[\#1273eb\] {
   --tw-bg-opacity: 1;
   background-color: rgb(18 115 235 / var(--tw-bg-opacity));
@@ -2435,11 +2483,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-\[\#e7e7e7\] {
   --tw-bg-opacity: 1;
   background-color: rgb(231 231 231 / var(--tw-bg-opacity));
-}
-
-.bg-blue-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(147 197 253 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#dceafe\] {
@@ -2482,6 +2525,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(42 142 199 / var(--tw-bg-opacity));
 }
 
+.bg-opacity-95 {
+  --tw-bg-opacity: 0.95;
+}
+
+.bg-opacity-70 {
+  --tw-bg-opacity: 0.7;
+}
+
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
 }
@@ -2494,16 +2545,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 85%;
 }
 
-.bg-opacity-70 {
-  --tw-bg-opacity: 0.7;
-}
-
 .bg-opacity-10 {
   --tw-bg-opacity: 0.1;
-}
-
-.bg-opacity-95 {
-  --tw-bg-opacity: 0.95;
 }
 
 .bg-gradient-to-r {
@@ -2520,6 +2563,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+
+.from-\[\#a1ddf5\] {
+  --tw-gradient-from: #a1ddf5;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(161 221 245 / 0));
 }
 
 .from-\[\#a1f0f0\] {
@@ -2549,6 +2597,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .via-\[\#4193aa\] {
   --tw-gradient-stops: var(--tw-gradient-from), #4193aa, var(--tw-gradient-to, rgb(65 147 170 / 0));
+}
+
+.to-\[\#b662ee\] {
+  --tw-gradient-to: #b662ee;
 }
 
 .to-\[\#79a3f1\] {
@@ -2591,6 +2643,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   object-fit: cover;
 }
 
+.p-0 {
+  padding: 0px;
+}
+
+.p-1 {
+  padding: 0.25rem;
+}
+
+.p-\[5px\] {
+  padding: 5px;
+}
+
+.p-\[15px\] {
+  padding: 15px;
+}
+
 .p-4 {
   padding: 1rem;
 }
@@ -2599,20 +2667,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 0.5rem;
 }
 
-.p-1 {
-  padding: 0.25rem;
-}
-
 .p-\[25px\] {
   padding: 25px;
-}
-
-.p-\[15px\] {
-  padding: 15px;
-}
-
-.p-0 {
-  padding: 0px;
 }
 
 .p-2\.5 {
@@ -2623,16 +2679,37 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 10px;
 }
 
-.p-\[5px\] {
-  padding: 5px;
-}
-
 .p-5 {
   padding: 1.25rem;
 }
 
 .p-\[20px\] {
   padding: 20px;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.py-\[15px\] {
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .px-\[15px\] {
@@ -2645,9 +2722,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 5px;
 }
 
-.py-\[25px\] {
-  padding-top: 25px;
-  padding-bottom: 25px;
+.py-\[7px\] {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.px-\[5px\] {
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .px-\[10px\] {
@@ -2655,9 +2737,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-right: 10px;
 }
 
-.py-\[15px\] {
-  padding-top: 15px;
-  padding-bottom: 15px;
+.py-\[30px\] {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.py-\[12px\] {
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 .px-\[20px\] {
@@ -2665,9 +2752,39 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-right: 20px;
 }
 
+.py-\[20px\] {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 .py-\[10px\] {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.py-\[1px\] {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.py-\[2px\] {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-\[3px\] {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.py-\[25px\] {
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 
 .px-\[6px\] {
@@ -2685,29 +2802,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 6px;
 }
 
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
-
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-}
-
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 .px-1 {
@@ -2720,29 +2817,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 20vh;
 }
 
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
-.py-\[20px\] {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
 .py-\[50px\] {
   padding-top: 50px;
   padding-bottom: 50px;
-}
-
-.px-\[5px\] {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.py-\[30px\] {
-  padding-top: 30px;
-  padding-bottom: 30px;
 }
 
 .py-\[9px\] {
@@ -2750,39 +2827,19 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 9px;
 }
 
-.py-\[3px\] {
-  padding-top: 3px;
-  padding-bottom: 3px;
-}
-
 .px-\[16px\] {
   padding-left: 16px;
   padding-right: 16px;
 }
 
-.py-\[1px\] {
-  padding-top: 1px;
-  padding-bottom: 1px;
-}
-
-.py-\[2px\] {
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
-
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-}
-
-.py-\[12px\] {
-  padding-top: 12px;
-  padding-bottom: 12px;
-}
-
 .py-\[35px\] {
   padding-top: 35px;
   padding-bottom: 35px;
+}
+
+.px-\[8px\] {
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .py-1\.5 {
@@ -2800,6 +2857,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-right: 30px;
 }
 
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
 .px-\[50px\] {
   padding-left: 50px;
   padding-right: 50px;
@@ -2810,16 +2872,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-right: 0px;
 }
 
-.py-\[7px\] {
-  padding-top: 7px;
-  padding-bottom: 7px;
-}
-
-.px-\[8px\] {
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
 .py-\[17px\] {
   padding-top: 17px;
   padding-bottom: 17px;
@@ -2828,6 +2880,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-\[13px\] {
   padding-top: 13px;
   padding-bottom: 13px;
+}
+
+.pr-\[5px\] {
+  padding-right: 5px;
+}
+
+.pl-\[15px\] {
+  padding-left: 15px;
 }
 
 .pl-0 {
@@ -2848,6 +2908,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pl-2 {
   padding-left: 0.5rem;
+}
+
+.pt-\[15px\] {
+  padding-top: 15px;
+}
+
+.pl-\[10px\] {
+  padding-left: 10px;
+}
+
+.pb-\[15px\] {
+  padding-bottom: 15px;
 }
 
 .pt-\[20px\] {
@@ -2888,10 +2960,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pt-\[75px\] {
   padding-top: 75px;
-}
-
-.pt-\[15px\] {
-  padding-top: 15px;
 }
 
 .pb-\[50px\] {
@@ -2962,14 +3030,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 27px;
 }
 
-.pl-\[10px\] {
-  padding-left: 10px;
-}
-
-.pb-\[15px\] {
-  padding-bottom: 15px;
-}
-
 .pt-\[30px\] {
   padding-top: 30px;
 }
@@ -2988,6 +3048,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pb-\[45px\] {
   padding-bottom: 45px;
+}
+
+.pl-\[30px\] {
+  padding-left: 30px;
 }
 
 .pl-1 {
@@ -3010,14 +3074,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-right: 15px;
 }
 
-.pl-\[15px\] {
-  padding-left: 15px;
-}
-
-.pr-\[5px\] {
-  padding-right: 5px;
-}
-
 .text-left {
   text-align: left;
 }
@@ -3030,28 +3086,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-align: justify;
 }
 
-.text-\[14px\] {
-  font-size: 14px;
-}
-
-.text-\[38px\] {
-  font-size: 38px;
-}
-
-.text-\[23px\] {
-  font-size: 23px;
-}
-
-.text-\[15px\] {
-  font-size: 15px;
-}
-
-.text-\[12px\] {
-  font-size: 12px;
-}
-
-.text-\[25px\] {
-  font-size: 25px;
+.align-middle {
+  vertical-align: middle;
 }
 
 .text-sm {
@@ -3059,22 +3095,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1.25rem;
 }
 
+.text-\[15px\] {
+  font-size: 15px;
+}
+
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
-.text-\[20px\] {
-  font-size: 20px;
-}
-
-.text-\[16px\] {
-  font-size: 16px;
 }
 
 .text-lg {
@@ -3087,24 +3114,61 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1.5rem;
 }
 
-.text-\[40px\] {
-  font-size: 40px;
-}
-
-.text-\[24px\] {
-  font-size: 24px;
-}
-
-.text-\[30px\] {
-  font-size: 30px;
+.text-\[16px\] {
+  font-size: 16px;
 }
 
 .text-\[22px\] {
   font-size: 22px;
 }
 
+.text-\[14px\] {
+  font-size: 14px;
+}
+
+.text-\[30px\] {
+  font-size: 30px;
+}
+
+.text-\[13px\] {
+  font-size: 13px;
+}
+
+.text-\[12px\] {
+  font-size: 12px;
+}
+
 .text-\[18px\] {
   font-size: 18px;
+}
+
+.text-\[38px\] {
+  font-size: 38px;
+}
+
+.text-\[23px\] {
+  font-size: 23px;
+}
+
+.text-\[25px\] {
+  font-size: 25px;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-\[20px\] {
+  font-size: 20px;
+}
+
+.text-\[40px\] {
+  font-size: 40px;
+}
+
+.text-\[24px\] {
+  font-size: 24px;
 }
 
 .text-\[32px\] {
@@ -3123,10 +3187,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 10px;
 }
 
-.text-\[13px\] {
-  font-size: 13px;
-}
-
 .text-\[35px\] {
   font-size: 35px;
 }
@@ -3135,12 +3195,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 28px;
 }
 
-.font-bold {
-  font-weight: 700;
-}
-
 .font-medium {
   font-weight: 500;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.font-bold {
+  font-weight: 700;
 }
 
 .font-semibold {
@@ -3149,10 +3213,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .font-light {
   font-weight: 300;
-}
-
-.font-normal {
-  font-weight: 400;
 }
 
 .font-thin {
@@ -3175,8 +3235,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-style: italic;
 }
 
-.leading-\[38px\] {
-  line-height: 38px;
+.leading-\[20px\] {
+  line-height: 20px;
 }
 
 .leading-\[24px\] {
@@ -3203,10 +3263,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 25px;
 }
 
-.leading-\[20px\] {
-  line-height: 20px;
-}
-
 .leading-\[40px\] {
   line-height: 40px;
 }
@@ -3227,6 +3283,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1.5;
 }
 
+.leading-\[38px\] {
+  line-height: 38px;
+}
+
 .leading-\[15px\] {
   line-height: 15px;
 }
@@ -3235,14 +3295,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 120px;
 }
 
-.text-green-500 {
+.text-gray-600 {
   --tw-text-opacity: 1;
-  color: rgb(34 197 94 / var(--tw-text-opacity));
-}
-
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 .text-gray-500 {
@@ -3250,9 +3305,64 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
-.text-gray-600 {
+.text-red-500 {
   --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.text-\[\#FF0000\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 0 0 / var(--tw-text-opacity));
+}
+
+.text-\[\#818181\] {
+  --tw-text-opacity: 1;
+  color: rgb(129 129 129 / var(--tw-text-opacity));
+}
+
+.text-\[\#4A5568\] {
+  --tw-text-opacity: 1;
+  color: rgb(74 85 104 / var(--tw-text-opacity));
+}
+
+.text-\[\#666\] {
+  --tw-text-opacity: 1;
+  color: rgb(102 102 102 / var(--tw-text-opacity));
+}
+
+.text-\[\#fff\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-\[\#0d61c7\] {
+  --tw-text-opacity: 1;
+  color: rgb(13 97 199 / var(--tw-text-opacity));
+}
+
+.text-blue-500 {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.text-gray-700 {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.text-green-500 {
+  --tw-text-opacity: 1;
+  color: rgb(34 197 94 / var(--tw-text-opacity));
 }
 
 .text-gray-800 {
@@ -3265,11 +3375,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .text-blue-600 {
   --tw-text-opacity: 1;
   color: rgb(37 99 235 / var(--tw-text-opacity));
@@ -3278,11 +3383,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
-}
-
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .text-yellow-500 {
@@ -3298,16 +3398,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-red-400 {
   --tw-text-opacity: 1;
   color: rgb(248 113 113 / var(--tw-text-opacity));
-}
-
-.text-gray-700 {
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
-}
-
-.text-blue-500 {
-  --tw-text-opacity: 1;
-  color: rgb(59 130 246 / var(--tw-text-opacity));
 }
 
 .text-green-700 {
@@ -3360,24 +3450,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(95 95 95 / var(--tw-text-opacity));
 }
 
-.text-\[\#fff\] {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-\[\#0d61c7\] {
-  --tw-text-opacity: 1;
-  color: rgb(13 97 199 / var(--tw-text-opacity));
-}
-
 .text-\[\#FFFFFF\] {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-\[\#4A5568\] {
-  --tw-text-opacity: 1;
-  color: rgb(74 85 104 / var(--tw-text-opacity));
 }
 
 .text-\[\#2D3748\] {
@@ -3393,11 +3468,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-\[\#707885\] {
   --tw-text-opacity: 1;
   color: rgb(112 120 133 / var(--tw-text-opacity));
-}
-
-.text-\[\#666\] {
-  --tw-text-opacity: 1;
-  color: rgb(102 102 102 / var(--tw-text-opacity));
 }
 
 .text-purple-400 {
@@ -3435,16 +3505,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(29 78 216 / var(--tw-text-opacity));
 }
 
-.text-\[\#FF0000\] {
-  --tw-text-opacity: 1;
-  color: rgb(255 0 0 / var(--tw-text-opacity));
-}
-
-.text-\[\#818181\] {
-  --tw-text-opacity: 1;
-  color: rgb(129 129 129 / var(--tw-text-opacity));
-}
-
 .underline {
   text-decoration: underline;
 }
@@ -3459,12 +3519,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .opacity-0 {
   opacity: 0;
-}
-
-.shadow-xl {
-  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .shadow-lg {
@@ -3482,6 +3536,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-xl {
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -3507,16 +3567,27 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .grayscale-\[20\%\] {
   --tw-grayscale: grayscale(20%);
-  filter: var(--tw-filter);
+  -webkit-filter: var(--tw-filter);
+          filter: var(--tw-filter);
 }
 
 .sepia-0 {
   --tw-sepia: sepia(0);
-  filter: var(--tw-filter);
+  -webkit-filter: var(--tw-filter);
+          filter: var(--tw-filter);
 }
 
 .filter {
-  filter: var(--tw-filter);
+  -webkit-filter: var(--tw-filter);
+          filter: var(--tw-filter);
+}
+
+.transition {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
 .transition-colors {
@@ -3525,20 +3596,30 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 150ms;
 }
 
-.transition {
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
 .duration-300 {
   transition-duration: 300ms;
 }
 
+.duration-500 {
+  transition-duration: 500ms;
+}
+
 .duration-200 {
   transition-duration: 200ms;
+}
+
+.ease-in {
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+@-webkit-keyframes newTab {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes newTab {
@@ -3552,7 +3633,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 * {
-  animation: newTab 0.3s ease;
+  -webkit-animation: newTab 0.3s ease;
+          animation: newTab 0.3s ease;
 }
 
 *::-webkit-scrollbar {
@@ -3583,6 +3665,17 @@ body {
   background-color: #23241f;
   color: #f8f8f2;
   overflow: visible;
+}
+
+.toggle-checkbox:checked {
+  @apply: right-0 border-green-400;
+  right: 0;
+  border-color: #68D391;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+  @apply: bg-green-400;
+  background-color: #68D391;
 }
 
 /* Menu */
@@ -3647,12 +3740,35 @@ body {
   color: #3182ce;
 }
 
+.ql-syntax{
+  white-space: pre-line;
+}
+
 /* error */
 
 .icon-error {
   position: relative;
-  animation: shaky 0.2s ease;
+  -webkit-animation: shaky 0.2s ease;
+          animation: shaky 0.2s ease;
   transition-delay: 0.2s;
+}
+
+@-webkit-keyframes shaky {
+  0%,
+  33%,
+  67%,
+  100% {
+    right: 0;
+  }
+
+  17%,
+  83% {
+    right: 5px;
+  }
+
+  50% {
+    right: -5px;
+  }
 }
 
 @keyframes shaky {
@@ -3682,8 +3798,21 @@ body {
   right: -0.5px;
   width: 1px;
   height: 65%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   background: #51ffb9;
+}
+
+@-webkit-keyframes mymove {
+  from {
+    top: 50%;
+    opacity: 0;
+  }
+
+  to {
+    top: 100%;
+    opacity: 1;
+  }
 }
 
 @keyframes mymove {
@@ -3700,7 +3829,8 @@ body {
 
 .box_btn {
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 20%);
-  animation: mymove 0.2s ease-in;
+  -webkit-animation: mymove 0.2s ease-in;
+          animation: mymove 0.2s ease-in;
 }
 
 .box_btn::before {
@@ -3713,7 +3843,8 @@ body {
   border-bottom: 7px solid white;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  transform: translateY(-104%);
+  -webkit-transform: translateY(-104%);
+          transform: translateY(-104%);
 }
 
 /* custem ReactSelect */
@@ -3752,9 +3883,11 @@ body {
 .post__menu {
   width: 200px;
   position: absolute;
-  animation: mymove 0.2s ease-in;
+  -webkit-animation: mymove 0.2s ease-in;
+          animation: mymove 0.2s ease-in;
   right: 0;
-  transform: translatex(10px);
+  -webkit-transform: translatex(10px);
+          transform: translatex(10px);
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 20%);
   border-radius: 5px;
   /* padding: 5px 0; */
@@ -3770,13 +3903,15 @@ body {
   border-bottom: 7px solid white;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
 }
 
 .post__share {
   width: 190px;
   position: absolute;
-  animation: mymove 0.2s ease-in;
+  -webkit-animation: mymove 0.2s ease-in;
+          animation: mymove 0.2s ease-in;
   /* left: 0; */
   top: 100%;
   /* margin-top: 13px; */
@@ -3810,8 +3945,28 @@ body {
   left: calc(-100% - 15px);
   border-radius: 3px;
   bottom: 30px;
-  animation: message ease 6s;
-  animation-delay: 0.3s;
+  -webkit-animation: message ease 6s;
+          animation: message ease 6s;
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+
+@-webkit-keyframes message {
+  0% {
+    opacity: 0;
+    margin-left: 0;
+  }
+
+  85%,
+  10% {
+    opacity: 1;
+    margin-left: calc(100% + 30px);
+  }
+
+  100% {
+    opacity: 0;
+    margin-left: 0;
+  }
 }
 
 @keyframes message {
@@ -3833,7 +3988,22 @@ body {
 }
 
 .animation_preview {
-  animation: animation_preview ease 0.5s;
+  -webkit-animation: animation_preview ease 0.5s;
+          animation: animation_preview ease 0.5s;
+}
+
+@-webkit-keyframes animation_preview {
+  0% {
+    position: relative;
+    width: 50%;
+    height: 50%;
+  }
+
+  100% {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 @keyframes animation_preview {
@@ -3853,6 +4023,16 @@ body {
 .before\:absolute::before {
   content: var(--tw-content);
   position: absolute;
+}
+
+.before\:top-\[-5px\]::before {
+  content: var(--tw-content);
+  top: -5px;
+}
+
+.before\:left-\[5px\]::before {
+  content: var(--tw-content);
+  left: 5px;
 }
 
 .before\:top-\[60px\]::before {
@@ -3875,19 +4055,14 @@ body {
   top: 50%;
 }
 
-.before\:top-\[-5px\]::before {
-  content: var(--tw-content);
-  top: -5px;
-}
-
-.before\:left-\[5px\]::before {
-  content: var(--tw-content);
-  left: 5px;
-}
-
 .before\:inline-block::before {
   content: var(--tw-content);
   display: inline-block;
+}
+
+.before\:h-\[10px\]::before {
+  content: var(--tw-content);
+  height: 10px;
 }
 
 .before\:h-\[5px\]::before {
@@ -3900,9 +4075,9 @@ body {
   height: 60%;
 }
 
-.before\:h-\[10px\]::before {
+.before\:w-\[10px\]::before {
   content: var(--tw-content);
-  height: 10px;
+  width: 10px;
 }
 
 .before\:w-\[100px\]::before {
@@ -3915,27 +4090,31 @@ body {
   width: 0.5px;
 }
 
-.before\:w-\[10px\]::before {
-  content: var(--tw-content);
-  width: 10px;
-}
-
 .before\:translate-x-\[-50\%\]::before {
   content: var(--tw-content);
   --tw-translate-x: -50%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .before\:translate-y-\[-50\%\]::before {
   content: var(--tw-content);
   --tw-translate-y: -50%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .before\:rotate-\[45deg\]::before {
   content: var(--tw-content);
   --tw-rotate: 45deg;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
+}
+
+.before\:bg-red-100::before {
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
 }
 
 .before\:bg-blue-400::before {
@@ -3950,12 +4129,6 @@ body {
   background-color: rgb(81 255 185 / var(--tw-bg-opacity));
 }
 
-.before\:bg-red-100::before {
-  content: var(--tw-content);
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
-}
-
 .before\:content-\[\'\'\]::before {
   --tw-content: '';
   content: var(--tw-content);
@@ -3964,16 +4137,6 @@ body {
 .after\:absolute::after {
   content: var(--tw-content);
   position: absolute;
-}
-
-.after\:bottom-\[-16px\]::after {
-  content: var(--tw-content);
-  bottom: -16px;
-}
-
-.after\:left-0::after {
-  content: var(--tw-content);
-  left: 0px;
 }
 
 .after\:top-1\/2::after {
@@ -3986,9 +4149,14 @@ body {
   right: -5px;
 }
 
-.after\:h-\[2px\]::after {
+.after\:bottom-\[-16px\]::after {
   content: var(--tw-content);
-  height: 2px;
+  bottom: -16px;
+}
+
+.after\:left-0::after {
+  content: var(--tw-content);
+  left: 0px;
 }
 
 .after\:h-2\/3::after {
@@ -3996,9 +4164,9 @@ body {
   height: 66.666667%;
 }
 
-.after\:w-full::after {
+.after\:h-\[2px\]::after {
   content: var(--tw-content);
-  width: 100%;
+  height: 2px;
 }
 
 .after\:w-\[1px\]::after {
@@ -4006,21 +4174,29 @@ body {
   width: 1px;
 }
 
+.after\:w-full::after {
+  content: var(--tw-content);
+  width: 100%;
+}
+
 .after\:translate-y-\[-45\%\]::after {
   content: var(--tw-content);
   --tw-translate-y: -45%;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .after\:rotate-\[-20deg\]::after {
   content: var(--tw-content);
   --tw-rotate: -20deg;
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .after\:transform::after {
   content: var(--tw-content);
-  transform: var(--tw-transform);
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
 }
 
 .after\:rounded::after {
@@ -4028,16 +4204,16 @@ body {
   border-radius: 0.25rem;
 }
 
-.after\:bg-\[\#1273eb\]::after {
-  content: var(--tw-content);
-  --tw-bg-opacity: 1;
-  background-color: rgb(18 115 235 / var(--tw-bg-opacity));
-}
-
 .after\:bg-gray-500::after {
   content: var(--tw-content);
   --tw-bg-opacity: 1;
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+
+.after\:bg-\[\#1273eb\]::after {
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(18 115 235 / var(--tw-bg-opacity));
 }
 
 .last\:border-0:last-child {
@@ -4049,19 +4225,14 @@ body {
   border-color: rgb(103 212 168 / var(--tw-border-opacity));
 }
 
-.hover\:bg-blue-800:hover {
+.hover\:bg-gray-200:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(30 64 175 / var(--tw-bg-opacity));
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-green-800:hover {
+.hover\:bg-gray-100:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(22 101 52 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-\[\#25d8ed\]:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(37 216 237 / var(--tw-bg-opacity));
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-\[\#fff\]:hover {
@@ -4072,11 +4243,6 @@ body {
 .hover\:bg-\[\#0d61c7\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(13 97 199 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-\[\#C53030\]:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(197 48 48 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-blue-500:hover {
@@ -4104,6 +4270,21 @@ body {
   background-color: rgb(239 246 255 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-blue-800:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 64 175 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-\[\#25d8ed\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 216 237 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-\[\#C53030\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(197 48 48 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-red-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
@@ -4119,16 +4300,6 @@ body {
   background-color: rgb(18 115 235 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-gray-200:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-gray-100:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
-
 .hover\:bg-cyan-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(14 116 144 / var(--tw-bg-opacity));
@@ -4137,6 +4308,11 @@ body {
 .hover\:bg-green-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-green-800:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 101 52 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-red-800:hover {
@@ -4166,16 +4342,6 @@ body {
 
 .hover\:to-\[\#1273eb\]:hover {
   --tw-gradient-to: #1273eb;
-}
-
-.hover\:text-blue-600:hover {
-  --tw-text-opacity: 1;
-  color: rgb(37 99 235 / var(--tw-text-opacity));
-}
-
-.hover\:text-blue-800:hover {
-  --tw-text-opacity: 1;
-  color: rgb(30 64 175 / var(--tw-text-opacity));
 }
 
 .hover\:text-blue-500:hover {
@@ -4208,6 +4374,16 @@ body {
   color: rgb(96 165 250 / var(--tw-text-opacity));
 }
 
+.hover\:text-blue-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
+}
+
+.hover\:text-blue-800:hover {
+  --tw-text-opacity: 1;
+  color: rgb(30 64 175 / var(--tw-text-opacity));
+}
+
 .hover\:text-\[\#6C91F0\]:hover {
   --tw-text-opacity: 1;
   color: rgb(108 145 240 / var(--tw-text-opacity));
@@ -4216,6 +4392,11 @@ body {
 .hover\:text-gray-900:hover {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.hover\:text-red-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 
 .hover\:text-gray-400:hover {
@@ -4243,11 +4424,6 @@ body {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.hover\:text-red-600:hover {
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity));
-}
-
 .hover\:underline:hover {
   text-decoration: underline;
 }
@@ -4268,6 +4444,11 @@ body {
   border-width: 1px;
 }
 
+.focus\:border-blue-400:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(96 165 250 / var(--tw-border-opacity));
+}
+
 .focus\:border-blue-600:focus {
   --tw-border-opacity: 1;
   border-color: rgb(37 99 235 / var(--tw-border-opacity));
@@ -4276,11 +4457,6 @@ body {
 .focus\:border-gray-600:focus {
   --tw-border-opacity: 1;
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
-}
-
-.focus\:border-blue-400:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(96 165 250 / var(--tw-border-opacity));
 }
 
 .focus\:border-cyan-600:focus {
@@ -4303,6 +4479,12 @@ body {
   outline-offset: 2px;
 }
 
+.focus\:ring-1:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
 .focus\:ring-2:focus {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -4315,10 +4497,14 @@ body {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
-.focus\:ring-1:focus {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+.focus\:ring-blue-200:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(191 219 254 / var(--tw-ring-opacity));
+}
+
+.focus\:ring-red-200:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(254 202 202 / var(--tw-ring-opacity));
 }
 
 .focus\:ring-blue-500:focus {
@@ -4331,19 +4517,14 @@ body {
   --tw-ring-color: rgb(8 145 178 / var(--tw-ring-opacity));
 }
 
+.focus\:ring-blue-300:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(147 197 253 / var(--tw-ring-opacity));
+}
+
 .focus\:ring-cyan-200:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(165 243 252 / var(--tw-ring-opacity));
-}
-
-.focus\:ring-blue-200:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(191 219 254 / var(--tw-ring-opacity));
-}
-
-.focus\:ring-red-200:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(254 202 202 / var(--tw-ring-opacity));
 }
 
 .disabled\:bg-gray-400:disabled {
@@ -4354,48 +4535,6 @@ body {
 .group:hover .group-hover\:text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
-}
-
-@media (prefers-color-scheme: dark) {
-  .dark\:border-gray-800 {
-    --tw-border-opacity: 1;
-    border-color: rgb(31 41 55 / var(--tw-border-opacity));
-  }
-
-  .dark\:bg-gray-700 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(55 65 81 / var(--tw-bg-opacity));
-  }
-
-  .dark\:bg-gray-800 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
-  }
-
-  .dark\:text-white {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-  }
-
-  .dark\:text-gray-100 {
-    --tw-text-opacity: 1;
-    color: rgb(243 244 246 / var(--tw-text-opacity));
-  }
-
-  .dark\:text-gray-300 {
-    --tw-text-opacity: 1;
-    color: rgb(209 213 219 / var(--tw-text-opacity));
-  }
-
-  .dark\:text-gray-200 {
-    --tw-text-opacity: 1;
-    color: rgb(229 231 235 / var(--tw-text-opacity));
-  }
-
-  .dark\:text-gray-500 {
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
-  }
 }
 
 @media (min-width: 640px) {
@@ -4412,12 +4551,12 @@ body {
     margin-right: auto;
   }
 
-  .sm\:ml-4 {
-    margin-left: 1rem;
-  }
-
   .sm\:mt-0 {
     margin-top: 0px;
+  }
+
+  .sm\:ml-4 {
+    margin-left: 1rem;
   }
 
   .sm\:mt-\[10px\] {
@@ -4480,6 +4619,14 @@ body {
     height: 20px;
   }
 
+  .sm\:w-\[15px\] {
+    width: 15px;
+  }
+
+  .sm\:w-\[13px\] {
+    width: 13px;
+  }
+
   .sm\:w-\[30px\] {
     width: 30px;
   }
@@ -4498,14 +4645,6 @@ body {
 
   .sm\:w-\[75px\] {
     width: 75px;
-  }
-
-  .sm\:w-\[15px\] {
-    width: 15px;
-  }
-
-  .sm\:w-\[13px\] {
-    width: 13px;
   }
 
   .sm\:w-64 {
@@ -4545,7 +4684,13 @@ body {
   }
 
   .sm\:gap-x-\[60px\] {
-    column-gap: 60px;
+    -webkit-column-gap: 60px;
+            column-gap: 60px;
+  }
+
+  .sm\:px-\[15px\] {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .sm\:px-\[35px\] {
@@ -4561,11 +4706,6 @@ body {
   .sm\:py-\[5px\] {
     padding-top: 5px;
     padding-bottom: 5px;
-  }
-
-  .sm\:px-\[15px\] {
-    padding-left: 15px;
-    padding-right: 15px;
   }
 
   .sm\:px-\[5px\] {
@@ -4589,12 +4729,20 @@ body {
     padding-right: 0.5rem;
   }
 
-  .sm\:text-\[30px\] {
-    font-size: 30px;
-  }
-
   .sm\:text-\[14px\] {
     font-size: 14px;
+  }
+
+  .sm\:text-\[16px\] {
+    font-size: 16px;
+  }
+
+  .sm\:text-\[24px\] {
+    font-size: 24px;
+  }
+
+  .sm\:text-\[30px\] {
+    font-size: 30px;
   }
 
   .sm\:text-\[20px\] {
@@ -4607,10 +4755,6 @@ body {
 
   .sm\:text-\[28px\] {
     font-size: 28px;
-  }
-
-  .sm\:text-\[16px\] {
-    font-size: 16px;
   }
 
   .sm\:text-\[15px\] {
@@ -4627,10 +4771,6 @@ body {
 
   .sm\:text-\[12px\] {
     font-size: 12px;
-  }
-
-  .sm\:text-\[24px\] {
-    font-size: 24px;
   }
 
   .sm\:text-2xl {
@@ -4742,6 +4882,10 @@ body {
     height: 55px;
   }
 
+  .md\:w-\[12px\] {
+    width: 12px;
+  }
+
   .md\:w-\[80\%\] {
     width: 80%;
   }
@@ -4762,17 +4906,14 @@ body {
     width: 650px;
   }
 
-  .md\:w-\[12px\] {
-    width: 12px;
-  }
-
   .md\:w-\[55px\] {
     width: 55px;
   }
 
   .md\:translate-y-\[-70\%\] {
     --tw-translate-y: -70%;
-    transform: var(--tw-transform);
+    -webkit-transform: var(--tw-transform);
+            transform: var(--tw-transform);
   }
 
   .md\:grid-cols-3 {
@@ -4812,7 +4953,8 @@ body {
   }
 
   .md\:gap-x-\[50px\] {
-    column-gap: 50px;
+    -webkit-column-gap: 50px;
+            column-gap: 50px;
   }
 
   .md\:space-y-4 > :not([hidden]) ~ :not([hidden]) {
@@ -4842,6 +4984,21 @@ body {
     padding: 0.5rem;
   }
 
+  .md\:px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .md\:px-\[10px\] {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .md\:py-\[5px\] {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
   .md\:px-3 {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
@@ -4857,16 +5014,6 @@ body {
     padding-bottom: 30px;
   }
 
-  .md\:px-\[10px\] {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .md\:py-\[5px\] {
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-
   .md\:px-\[30px\] {
     padding-left: 30px;
     padding-right: 30px;
@@ -4875,11 +5022,6 @@ body {
   .md\:py-\[8px\] {
     padding-top: 8px;
     padding-bottom: 8px;
-  }
-
-  .md\:px-5 {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
   }
 
   .md\:px-\[0\] {
@@ -4907,16 +5049,24 @@ body {
     text-align: left;
   }
 
+  .md\:text-\[14px\] {
+    font-size: 14px;
+  }
+
+  .md\:text-\[25px\] {
+    font-size: 25px;
+  }
+
+  .md\:text-\[30px\] {
+    font-size: 30px;
+  }
+
   .md\:text-\[28px\] {
     font-size: 28px;
   }
 
   .md\:text-\[26px\] {
     font-size: 26px;
-  }
-
-  .md\:text-\[14px\] {
-    font-size: 14px;
   }
 
   .md\:text-\[16px\] {
@@ -4935,16 +5085,8 @@ body {
     font-size: 18px;
   }
 
-  .md\:text-\[30px\] {
-    font-size: 30px;
-  }
-
   .md\:text-\[36px\] {
     font-size: 36px;
-  }
-
-  .md\:text-\[25px\] {
-    font-size: 25px;
   }
 
   .md\:leading-\[54px\] {
@@ -5085,19 +5227,13 @@ body {
 
   .lg\:translate-y-\[2px\] {
     --tw-translate-y: 2px;
-    transform: var(--tw-transform);
+    -webkit-transform: var(--tw-transform);
+            transform: var(--tw-transform);
   }
 
   .lg\:transform {
-    transform: var(--tw-transform);
-  }
-
-  .lg\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .lg\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    -webkit-transform: var(--tw-transform);
+            transform: var(--tw-transform);
   }
 
   .lg\:grid-cols-4 {
@@ -5106,6 +5242,14 @@ body {
 
   .lg\:grid-cols-\[2\.8fr\2c 1\.2fr\] {
     grid-template-columns: 2.8fr 1.2fr;
+  }
+
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-\[3fr\2c 1fr\] {
@@ -5156,6 +5300,11 @@ body {
     border-style: none;
   }
 
+  .lg\:border-gray-300 {
+    --tw-border-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  }
+
   .lg\:border-\[\#fff0\] {
     border-color: #fff0;
   }
@@ -5170,18 +5319,8 @@ body {
     border-color: rgb(255 255 255 / var(--tw-border-opacity));
   }
 
-  .lg\:border-gray-300 {
-    --tw-border-opacity: 1;
-    border-color: rgb(209 213 219 / var(--tw-border-opacity));
-  }
-
   .lg\:bg-transparent {
     background-color: transparent;
-  }
-
-  .lg\:px-3 {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
   }
 
   .lg\:px-\[8px\] {
@@ -5192,6 +5331,11 @@ body {
   .lg\:py-\[5px\] {
     padding-top: 5px;
     padding-bottom: 5px;
+  }
+
+  .lg\:px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 
   .lg\:px-\[50px\] {
@@ -5247,6 +5391,10 @@ body {
     font-size: 10px;
   }
 
+  .lg\:text-\[35px\] {
+    font-size: 35px;
+  }
+
   .lg\:text-\[62px\] {
     font-size: 62px;
   }
@@ -5273,10 +5421,6 @@ body {
 
   .lg\:text-\[12px\] {
     font-size: 12px;
-  }
-
-  .lg\:text-\[35px\] {
-    font-size: 35px;
   }
 
   .lg\:leading-\[110px\] {
@@ -5429,11 +5573,13 @@ body {
   }
 
   .xl\:gap-x-\[95px\] {
-    column-gap: 95px;
+    -webkit-column-gap: 95px;
+            column-gap: 95px;
   }
 
   .xl\:gap-x-\[30px\] {
-    column-gap: 30px;
+    -webkit-column-gap: 30px;
+            column-gap: 30px;
   }
 
   .xl\:px-\[8px\] {
@@ -5456,14 +5602,14 @@ body {
     padding-right: 100px;
   }
 
-  .xl\:px-\[15px\] {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
   .xl\:px-\[45px\] {
     padding-left: 45px;
     padding-right: 45px;
+  }
+
+  .xl\:px-\[15px\] {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .xl\:text-left {

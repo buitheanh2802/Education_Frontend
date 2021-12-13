@@ -16,6 +16,7 @@ const UserBookMark = (props) => {
         dispatch(setLoading(true))
         const { data: bookMarkUser } = await ProfileUserApi.getBookmarkUser(username);
         setUserBookMark(bookMarkUser.data.models);
+        console.log(bookMarkUser.data.models);
         dispatch(setLoading(false))
       } catch (error) {
         console.log(error);
@@ -38,9 +39,9 @@ const UserBookMark = (props) => {
             return <>
               <div key={index} className="flex py-[10px] border-b">
                 <div>
-                  {item?.avatar?.avatarUrl ?
+                  {item?.createBy?.avatar?.avatarUrl ?
                     <img
-                      src={item?.avatar?.avatarUrl}
+                      src={item?.createBy?.avatar?.avatarUrl}
                       className="mx-auto max-h-[40px] rounded-full"
                       width="40px"
                       height="40px"

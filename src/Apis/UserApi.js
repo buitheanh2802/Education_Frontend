@@ -19,6 +19,7 @@ const UserApi = {
       },
     });
   },
+
   getFeaturedAuthor() {
     const url = `/user/featured-author`;
     return AxiosClient.get(url, {
@@ -27,6 +28,27 @@ const UserApi = {
       },
     });
   },
+
+  getListUser() {
+    const token = localStorage.getItem("_token_");
+    const url = `/user/manager/list?page=1`;
+    return AxiosClient.get(url, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+  },
+
+  editManagerUser(username, data) {
+    const token = localStorage.getItem("_token_");
+    const url =  `/user/manager/edit/${username}`;
+    return AxiosClient.put(url, data, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+  }
+
 };
 
 export default UserApi;

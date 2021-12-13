@@ -5,7 +5,7 @@ const Dashboard = () => {
         <>
             <div className="w-full sm:w-1/2 xl:w-1/3">
                 <div className="mb-4">
-                    <div className="shadow-lg rounded-2xl p-4 bg-white dark:bg-gray-700 w-full">
+                    <div className="shadow-lg rounded-2xl p-4 bg-white w-full">
                         <div className="flex items-center justify-between mb-6">
                             <div className="flex items-center">
                                 <span className="rounded-xl relative p-2 bg-blue-100">
@@ -30,10 +30,10 @@ const Dashboard = () => {
                                     </svg>
                                 </span>
                                 <div className="flex flex-col">
-                                    <span className="font-bold text-md text-black dark:text-white ml-2">
+                                    <span className="font-bold text-md text-black ml-2">
                                         Google
                                     </span>
-                                    <span className="text-sm text-gray-500 dark:text-white ml-2">
+                                    <span className="text-sm text-gray-500 ml-2">
                                         Google Inc.
                                     </span>
                                 </div>
@@ -70,9 +70,9 @@ const Dashboard = () => {
                         </div>
                         <div className="block m-auto">
                             <div>
-                                <span className="text-sm inline-block text-gray-500 dark:text-gray-100">
+                                <span className="text-sm inline-block text-gray-500">
                                     Task done :
-                                    <span className="text-gray-700 dark:text-white font-bold">
+                                    <span className="text-gray-700 font-bold">
                                         25
                                     </span>
                                     /50
@@ -119,7 +119,7 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="mb-4">
-                    <div className="shadow-lg rounded-2xl p-4 bg-white dark:bg-gray-700 w-full">
+                    <div className="shadow-lg rounded-2xl p-4 bg-white w-full">
                         <div className="flex items-center justify-between mb-6">
                             <div className="flex items-center">
                                 <span className="rounded-xl relative p-2 bg-blue-100">
@@ -146,10 +146,10 @@ const Dashboard = () => {
                                     </svg>
                                 </span>
                                 <div className="flex flex-col">
-                                    <span className="font-bold text-md text-black dark:text-white ml-2">
+                                    <span className="font-bold text-md text-black ml-2">
                                         Slack
                                     </span>
-                                    <span className="text-sm text-gray-500 dark:text-white ml-2">
+                                    <span className="text-sm text-gray-500 ml-2">
                                         Slack corporation
                                     </span>
                                 </div>
@@ -186,9 +186,9 @@ const Dashboard = () => {
                         </div>
                         <div className="block m-auto">
                             <div>
-                                <span className="text-sm inline-block text-gray-500 dark:text-gray-100">
+                                <span className="text-sm inline-block text-gray-500">
                                     Task done :
-                                    <span className="text-gray-700 dark:text-white font-bold">
+                                    <span className="text-gray-700 font-bold">
                                         50
                                     </span>
                                     /50
@@ -237,16 +237,16 @@ const Dashboard = () => {
             </div>
             <div className="w-full sm:w-1/2 xl:w-1/3">
                 <div className="mb-4 mx-0 sm:ml-4 xl:mr-4">
-                    <div className="shadow-lg rounded-2xl bg-white dark:bg-gray-700 w-full">
-                        <p className="font-bold text-md p-4 text-black dark:text-white">
+                    <div className="shadow-lg rounded-2xl bg-white w-full">
+                        <p className="font-bold text-md p-4 text-black">
                             My Tasks
-                            <span className="text-sm text-gray-500 dark:text-gray-300 dark:text-white ml-2">
+                            <span className="text-sm text-gray-500 ml-2">
                                 (05)
                             </span>
                         </p>
                         <ul>
                             <li
-                                className="flex items-center text-gray-600 dark:text-gray-200 justify-between py-3 border-b-2 border-gray-100 dark:border-gray-800">
+                                className="flex items-center text-gray-600 justify-between py-3 border-b-2 border-gray-100">
                                 <div className="flex items-center justify-start text-sm">
                                     <span className="mx-4">
                                         01
@@ -256,7 +256,7 @@ const Dashboard = () => {
                                     </span>
                                 </div>
                                 <svg width="20" height="20" fill="currentColor"
-                                    className="mx-4 text-gray-400 dark:text-gray-300" viewBox="0 0 1024 1024">
+                                    className="mx-4 text-gray-400" viewBox="0 0 1024 1024">
                                     <path
                                         d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
                                         fill="currentColor">
@@ -268,7 +268,7 @@ const Dashboard = () => {
                                 </svg>
                             </li>
                             <li
-                                className="flex items-center text-gray-600 dark:text-gray-200 justify-between py-3 border-b-2 border-gray-100 dark:border-gray-800">
+                                className="flex items-center text-gray-600 justify-between py-3 border-b-2 border-gray-100 ">
                                 <div className="flex items-center justify-start text-sm">
                                     <span className="mx-4">
                                         02
@@ -277,7 +277,7 @@ const Dashboard = () => {
                                         Dashboard design
                                     </span>
                                     <span
-                                        className="lg:ml-6 ml-2 flex items-center text-gray-400 dark:text-gray-300">
+                                        className="lg:ml-6 ml-2 flex items-center text-gray-400">
                                         3
                                         <svg width="15" height="15" fill="currentColor" className="ml-1"
                                             viewBox="0 0 512 512">
@@ -287,7 +287,7 @@ const Dashboard = () => {
                                             </path>
                                         </svg>
                                     </span>
-                                    <span className="mx-4 flex items-center text-gray-400 dark:text-gray-300">
+                                    <span className="mx-4 flex items-center text-gray-400">
                                         3
                                         <svg width="15" height="15" className="ml-1" fill="currentColor"
                                             viewBox="0 0 384 512">
@@ -299,7 +299,7 @@ const Dashboard = () => {
                                     </span>
                                 </div>
                                 <svg width="20" height="20" fill="currentColor"
-                                    className="mx-4 text-gray-400 dark:text-gray-300" viewBox="0 0 1024 1024">
+                                    className="mx-4 text-gray-400" viewBox="0 0 1024 1024">
                                     <path
                                         d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
                                         fill="currentColor">
@@ -311,7 +311,7 @@ const Dashboard = () => {
                                 </svg>
                             </li>
                             <li
-                                className="flex items-center text-gray-600 dark:text-gray-200 justify-between py-3 border-b-2 border-gray-100 dark:border-gray-800">
+                                className="flex items-center text-gray-600 justify-between py-3 border-b-2 border-gray-100">
                                 <div className="flex items-center justify-start text-sm">
                                     <span className="mx-4">
                                         03
@@ -320,7 +320,7 @@ const Dashboard = () => {
                                         Components card
                                     </span>
                                     <span
-                                        className="lg:ml-6 ml-2 flex items-center text-gray-400 dark:text-gray-300">
+                                        className="lg:ml-6 ml-2 flex items-center text-gray-400">
                                         3
                                         <svg width="15" height="15" fill="currentColor" className="ml-1"
                                             viewBox="0 0 512 512">
@@ -332,7 +332,7 @@ const Dashboard = () => {
                                     </span>
                                 </div>
                                 <svg width="20" height="20" fill="currentColor"
-                                    className="mx-4 text-gray-400 dark:text-gray-300" viewBox="0 0 1024 1024">
+                                    className="mx-4 text-gray-400" viewBox="0 0 1024 1024">
                                     <path
                                         d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
                                         fill="currentColor">
@@ -344,7 +344,7 @@ const Dashboard = () => {
                                 </svg>
                             </li>
                             <li
-                                className="flex items-center text-gray-400 justify-between py-3 border-b-2 border-gray-100 dark:border-gray-800">
+                                className="flex items-center text-gray-400 justify-between py-3 border-b-2 border-gray-100">
                                 <div className="flex items-center justify-start text-sm">
                                     <span className="mx-4">
                                         04
@@ -362,7 +362,7 @@ const Dashboard = () => {
                                 </svg>
                             </li>
                             <li
-                                className="flex items-center text-gray-400  justify-between py-3 border-b-2 border-gray-100 dark:border-gray-800">
+                                className="flex items-center text-gray-400  justify-between py-3 border-b-2 border-gray-100">
                                 <div className="flex items-center justify-start text-sm">
                                     <span className="mx-4">
                                         05
@@ -380,7 +380,7 @@ const Dashboard = () => {
                                 </svg>
                             </li>
                             <li
-                                className="flex items-center text-gray-600 dark:text-gray-200 justify-between py-3 border-b-2 border-gray-100 dark:border-gray-800">
+                                className="flex items-center text-gray-600 justify-between py-3 border-b-2 border-gray-100">
                                 <div className="flex items-center justify-start text-sm">
                                     <span className="mx-4">
                                         06
@@ -389,7 +389,7 @@ const Dashboard = () => {
                                         International
                                     </span>
                                     <span
-                                        className="lg:ml-6 ml-2 flex items-center text-gray-400 dark:text-gray-300">
+                                        className="lg:ml-6 ml-2 flex items-center text-gray-400">
                                         3
                                         <svg width="15" height="15" fill="currentColor" className="ml-1"
                                             viewBox="0 0 512 512">
@@ -399,7 +399,7 @@ const Dashboard = () => {
                                             </path>
                                         </svg>
                                     </span>
-                                    <span className="mx-4 flex items-center text-gray-400 dark:text-gray-300">
+                                    <span className="mx-4 flex items-center text-gray-400">
                                         3
                                         <svg width="15" height="15" className="ml-1" fill="currentColor"
                                             viewBox="0 0 384 512">
@@ -411,7 +411,7 @@ const Dashboard = () => {
                                     </span>
                                 </div>
                                 <svg width="20" height="20" fill="currentColor"
-                                    className="mx-4 text-gray-400 dark:text-gray-300" viewBox="0 0 1024 1024">
+                                    className="mx-4 text-gray-400" viewBox="0 0 1024 1024">
                                     <path
                                         d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
                                         fill="currentColor">
@@ -423,7 +423,7 @@ const Dashboard = () => {
                                 </svg>
                             </li>
                             <li
-                                className="flex items-center text-gray-600 dark:text-gray-200 justify-between py-3">
+                                className="flex items-center text-gray-600 justify-between py-3">
                                 <div className="flex items-center justify-start text-sm">
                                     <span className="mx-4">
                                         07
@@ -433,7 +433,7 @@ const Dashboard = () => {
                                     </span>
                                 </div>
                                 <svg width="20" height="20" fill="currentColor"
-                                    className="mx-4 text-gray-400 dark:text-gray-300" viewBox="0 0 1024 1024">
+                                    className="mx-4 text-gray-400" viewBox="0 0 1024 1024">
                                     <path
                                         d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"
                                         fill="currentColor">
@@ -448,9 +448,9 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="mb-4 sm:ml-4 xl:mr-4">
-                    <div className="shadow-lg rounded-2xl bg-white dark:bg-gray-700 w-full">
+                    <div className="shadow-lg rounded-2xl bg-white w-full">
                         <div className="flex items-center p-4 justify-between">
-                            <p className="font-bold text-md text-black dark:text-white">
+                            <p className="font-bold text-md text-black">
                                 Google
                             </p>
                             <button className="text-sm p-1 text-gray-400 border rounded border-gray-400 mr-4">
@@ -465,8 +465,8 @@ const Dashboard = () => {
                             </button>
                         </div>
                         <div
-                            className="py-2 px-4 bg-blue-100 dark:bg-gray-800 text-gray-600 border-l-4 border-blue-500 flex items-center justify-between">
-                            <p className="text-xs flex items-center dark:text-white">
+                            className="py-2 px-4 bg-blue-100 text-gray-600 border-l-4 border-blue-500 flex items-center justify-between">
+                            <p className="text-xs flex items-center">
                                 <svg width="20" height="20" fill="currentColor" className="text-blue-500 mr-2"
                                     viewBox="0 0 24 24">
                                     <g fill="none">
@@ -479,7 +479,7 @@ const Dashboard = () => {
                                 Create wireframe
                             </p>
                             <div className="flex items-center">
-                                <span className="font-bold text-xs dark:text-gray-200 mr-2 ml-2 md:ml-4">
+                                <span className="font-bold text-xs mr-2 ml-2 md:ml-4">
                                     25 min 20s
                                 </span>
                                 <button className="text-sm p-1 text-gray-400 border rounded bg-blue-500 mr-4">
@@ -496,7 +496,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                         <div className="flex items-center p-4 justify-between border-b-2 border-gray-100">
-                            <p className="font-bold text-md text-black dark:text-white">
+                            <p className="font-bold text-md text-black">
                                 Slack
                             </p>
                             <button className="text-sm p-1 text-gray-400 border rounded border-gray-400 mr-4">
@@ -512,7 +512,7 @@ const Dashboard = () => {
                         </div>
                         <div
                             className="py-2 px-4 text-gray-600 flex items-center justify-between border-b-2 border-gray-100">
-                            <p className="text-xs flex items-center dark:text-white">
+                            <p className="text-xs flex items-center">
                                 <svg width="20" height="20" fill="currentColor" className="mr-2"
                                     viewBox="0 0 24 24">
                                     <g fill="none">
@@ -543,7 +543,7 @@ const Dashboard = () => {
                         </div>
                         <div
                             className="py-2 px-4 text-gray-600 flex items-center justify-between border-b-2 border-gray-100">
-                            <p className="text-xs flex items-center dark:text-white">
+                            <p className="text-xs flex items-center">
                                 <svg width="20" height="20" fill="currentColor" className="mr-2"
                                     viewBox="0 0 24 24">
                                     <g fill="none">
@@ -573,7 +573,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                         <div className="py-2 px-4 text-gray-600 flex items-center justify-between">
-                            <p className="text-xs flex items-center dark:text-white">
+                            <p className="text-xs flex items-center">
                                 <svg width="20" height="20" fill="currentColor" className="mr-2"
                                     viewBox="0 0 24 24">
                                     <g fill="none">
@@ -607,11 +607,11 @@ const Dashboard = () => {
             </div>
             <div className="w-full sm:w-1/2 xl:w-1/3">
                 <div className="mb-4">
-                    <div className="shadow-lg rounded-2xl p-4 bg-white dark:bg-gray-700">
+                    <div className="shadow-lg rounded-2xl p-4 bg-white">
                         <div className="flex flex-wrap overflow-hidden">
                             <div className="w-full rounded shadow-sm">
                                 <div className="flex items-center justify-between mb-4">
-                                    <div className="text-left font-bold text-xl text-black dark:text-white">
+                                    <div className="text-left font-bold text-xl text-black">
                                         Dec 2021
                                     </div>
                                     <div className="flex space-x-4">
@@ -634,7 +634,7 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                                 <div className="-mx-2">
-                                    <table className="w-full dark:text-white">
+                                    <table className="w-full">
                                         <thead>
                                             <tr>
                                                 <th className="py-3 px-2 md:px-3 ">
@@ -661,29 +661,29 @@ const Dashboard = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr className="text-gray-400 dark:text-gray-500">
+                                            <tr className="text-gray-400">
                                                 <td
-                                                    className="py-3 px-2 md:px-3  text-center text-gray-300 dark:text-gray-500">
+                                                    className="py-3 px-2 md:px-3  text-center text-gray-300">
                                                     25
                                                 </td>
                                                 <td
-                                                    className="py-3 px-2 md:px-3  text-center text-gray-300 dark:text-gray-500">
+                                                    className="py-3 px-2 md:px-3  text-center text-gray-300">
                                                     26
                                                 </td>
                                                 <td
-                                                    className="py-3 px-2 md:px-3  text-center text-gray-300 dark:text-gray-500">
+                                                    className="py-3 px-2 md:px-3  text-center text-gray-300">
                                                     27
                                                 </td>
                                                 <td
-                                                    className="py-3 px-2 md:px-3  text-center text-gray-300 dark:text-gray-500">
+                                                    className="py-3 px-2 md:px-3  text-center text-gray-300">
                                                     28
                                                 </td>
                                                 <td
-                                                    className="py-3 px-2 md:px-3  text-center text-gray-300 dark:text-gray-500">
+                                                    className="py-3 px-2 md:px-3  text-center text-gray-300">
                                                     29
                                                 </td>
                                                 <td
-                                                    className="py-3 px-2 md:px-3  text-center text-gray-300 dark:text-gray-500">
+                                                    className="py-3 px-2 md:px-3  text-center text-gray-300">
                                                     30
                                                 </td>
                                                 <td
@@ -850,8 +850,8 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="mb-4">
-                    <div className="shadow-lg rounded-2xl p-4 bg-white dark:bg-gray-700 w-full">
-                        <p className="font-bold text-md text-black dark:text-white">
+                    <div className="shadow-lg rounded-2xl p-4 bg-white">
+                        <p className="font-bold text-md text-black">
                             Messages
                         </p>
                         <ul>
@@ -861,10 +861,10 @@ const Dashboard = () => {
                                         className="mx-auto object-cover rounded-full h-10 w-10 " />
                                 </a>
                                 <div className="flex flex-col">
-                                    <span className="text-sm text-gray-900 font-semibold dark:text-white ml-2">
+                                    <span className="text-sm text-gray-900 font-semibold ml-2">
                                         Charlie Rabiller
                                     </span>
-                                    <span className="text-sm text-gray-400 dark:text-gray-300 ml-2">
+                                    <span className="text-sm text-gray-400 ml-2">
                                         Hey John ! Do you read the NextJS doc ?
                                     </span>
                                 </div>
@@ -875,10 +875,10 @@ const Dashboard = () => {
                                         className="mx-auto object-cover rounded-full h-10 w-10 " />
                                 </a>
                                 <div className="flex flex-col">
-                                    <span className="text-sm text-gray-900 font-semibold dark:text-white ml-2">
+                                    <span className="text-sm text-gray-900 font-semibold ml-2">
                                         Marie Lou
                                     </span>
-                                    <span className="text-sm text-gray-400 dark:text-gray-300 ml-2">
+                                    <span className="text-sm text-gray-400 ml-2">
                                         No I think the dog is better...
                                     </span>
                                 </div>
@@ -889,10 +889,10 @@ const Dashboard = () => {
                                         className="mx-auto object-cover rounded-full h-10 w-10 " />
                                 </a>
                                 <div className="flex flex-col">
-                                    <span className="text-sm text-gray-900 font-semibold dark:text-white ml-2">
+                                    <span className="text-sm text-gray-900 font-semibold ml-2">
                                         Ivan Buck
                                     </span>
-                                    <span className="text-sm text-gray-400 dark:text-gray-300 ml-2">
+                                    <span className="text-sm text-gray-400 ml-2">
                                         Seriously ? haha Bob is not a child !
                                     </span>
                                 </div>
@@ -903,10 +903,10 @@ const Dashboard = () => {
                                         className="mx-auto object-cover rounded-full h-10 w-10 " />
                                 </a>
                                 <div className="flex flex-col">
-                                    <span className="text-sm text-gray-900 font-semibold dark:text-white ml-2">
+                                    <span className="text-sm text-gray-900 font-semibold ml-2">
                                         Marina Farga
                                     </span>
-                                    <span className="text-sm text-gray-400 dark:text-gray-300 ml-2">
+                                    <span className="text-sm text-gray-400 ml-2">
                                         Do you need that design ?
                                     </span>
                                 </div>
