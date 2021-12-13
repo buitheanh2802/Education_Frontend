@@ -60,8 +60,8 @@ const SearchPage = () => {
       listTagPopular();
     } catch (error) { }
   }, [keyword]);
-  console.log("post", dataSearchPost);
-  console.log("question", dataSearchQuestion);
+  // console.log("post", dataSearchPost);
+  // console.log("question", dataSearchQuestion);
 
   const handleActivePost = () => {
     setTabPost(true);

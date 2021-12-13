@@ -10,7 +10,7 @@ const DetailExercise = () => {
     const { id } = useParams();
     const [challengeCate, setChallengeCate] = useState(null);
     const [challenge, setChallenge] = useState(null);
-    console.log(challenge)
+    // console.log(challenge)
 
     useEffect(() => {
         // call category

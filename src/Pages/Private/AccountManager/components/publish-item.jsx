@@ -21,7 +21,7 @@ const PublishItem = (props) => {
             if (dataSend) setLoading({ ...loading, success: true });
             const { data: user } = await UserApi.editManagerUser(username, dataSend);
             if (user) setLoading({ ...loading, success: false });
-            console.log("Thành công!");
+            // console.log("Thành công!");
         } catch (error) {
             console.log("Thất bại");
         }
@@ -35,7 +35,7 @@ const PublishItem = (props) => {
             }
             const { data: user } = await UserApi.editManagerUser(username, dataSend);
             if (user) reCall();
-            console.log("Thành công!");
+            // console.log("Thành công!");
         } catch (error) {
             console.log("Thất bại");
         }
