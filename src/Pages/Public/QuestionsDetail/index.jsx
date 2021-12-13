@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Icon } from "src/Components/Icon";
 import { Link, useParams, useHistory } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
-import PostsNew from "../Commons/PostNew";
 import { timeFormatter } from "src/Helpers/Timer";
 import { useSelector } from "react-redux";
 import QuestionApi from "src/Apis/QuestionApi";
@@ -19,6 +18,7 @@ import Loading from "src/Components/Loading";
 import SpamApi from "src/Apis/SpamApi";
 import Swal from "sweetalert2";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
+import PostRelated from "../Commons/PostRelated";
 
 const QuestionsDetail = () => {
   const shortId = useParams();
@@ -657,7 +657,7 @@ const QuestionsDetail = () => {
               </button>
             </div>
           </div>
-          <PostsNew />
+          {/* <PostRelated /> */}
         </div>
       </div>
       <div

@@ -91,6 +91,10 @@ const PostApi = {
       },
     });
   },
+  otherPost(userId) {
+    const url = `/user/other-post/same-author/${userId}`;
+    return AxiosClient.get(url);
+  },
 };
 
 export default PostApi;

@@ -3,7 +3,7 @@ import { Icon } from 'src/Components/Icon'
 import IntroUser from '../IntroUser'
 import InsertComment from '../InsertComment'
 
-const FiledContent = ({ data, shortId }) => {
+const FiledContent = ({ data, shortId,userId }) => {
     const [isRepComment, setIsRepComment] = useState(false)
     console.log(data)
     return (
@@ -40,7 +40,7 @@ const FiledContent = ({ data, shortId }) => {
                     })}
                 </>}
                 {isRepComment && <div className="insertRepCommnet mt-3 duration-300">
-                    <InsertComment parentId={data?._id} focus={true} shortId={shortId} setIsRepComment={setIsRepComment} />
+                    <InsertComment userId={userId} parentId={data?._id} focus={true} shortId={shortId} setIsRepComment={setIsRepComment} />
                 </div>}
             </div>
         </div>

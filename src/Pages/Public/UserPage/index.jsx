@@ -32,13 +32,9 @@ const Userpage = (props) => {
             return;
         }
         const notificationRequest = {
-            title: `
-            <div>
-                <a class="font-medium cursor-pointer hover:text-blue-500 " 
-                href="/user/${profile.username}">${profile.fullname}</a>
-                đã ${user?.isFollowing ? "bỏ theo dõi bạn." : "theo dõi bạn."} 
-            </div>`,
-            url: ""
+            title: user?.isFollowing ? "đã bỏ theo dõi bạn." : "đã theo dõi bạn.",
+            url: "",
+            type : "follow"
         }
         if (user?.isFollowing) {
             await FollowApi.unFollow(username);
@@ -187,12 +183,12 @@ const Userpage = (props) => {
                         <span className="font-bold text-[13px]">{user?.questionCounts}</span>
                     </div>
                     <div className="flex justify-between my-[5px]">
-                        <p className="text-gray-500">Bookmark : </p>
-                        <span className="font-bold text-[13px]">@</span>
+                        <p className="text-gray-500">Số người theo dõi {user?.fullname}: </p>
+                        <span className="font-bold text-[13px]">{user?.followers}</span>
                     </div>
                     <div className="flex justify-between my-[5px]">
-                        <p className="text-gray-500">Số người theo dõi : </p>
-                        <span className="font-bold text-[13px]">{user?.followers}</span>
+                        <p className="text-gray-500">Số người {user?.fullname} theo dõi: </p>
+                        <span className="font-bold text-[13px]">{user?.followingCounts}</span>
                     </div>
                 </div>
             </div>

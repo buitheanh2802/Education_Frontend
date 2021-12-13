@@ -95,7 +95,6 @@ const QuestionsPage = () => {
       }
     };
     listQuestion();
-
     const listFeaturedAuthor = async () => {
       try {
         const { data: FeaturedAuthor } = await UserApi.getFeaturedAuthor();

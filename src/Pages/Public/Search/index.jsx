@@ -1,15 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link, NavLink, useHistory, useParams } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import SearchApi from "src/Apis/SearchApi";
 import Loading from "src/Components/Loading";
-import { path } from "src/Constants/";
-import Navigation from "../Commons/Navigation";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import QuestionView from "../Commons/QuestionView";
-import PostView from "../Commons/PostView";
 import FeaturedAuthor from "../Commons/FeaturedAuthor";
 import TrendingTags from "../Commons/TrendingTags";
 import UserApi from "src/Apis/UserApi";
@@ -63,8 +60,8 @@ const SearchPage = () => {
       listTagPopular();
     } catch (error) {}
   }, [keyword]);
-  // console.log("post", dataSearchPost);
-  // console.log("question", dataSearchQuestion);
+  console.log("post", dataSearchPost);
+  console.log("question", dataSearchQuestion);
 
   const handleActivePost = () => {
     setTabPost(true);
@@ -187,12 +184,12 @@ const SearchPage = () => {
                                     <span>{item?.views}</span>
                                   </div>
                                   <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                                    <Icon.Chat className="fill-current w-[15px]" />
-                                    <span>{item?.comments}</span>
+                                    <Icon.Like className="fill-current w-[15px]" />
+                                    <span>{item?.countLikes}</span>
                                   </div>
                                   <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                                    <Icon.Bookmark className="fill-current w-[15px]" />
-                                    <span>{item?.bookmarks}</span>
+                                    <Icon.Bookmark className="fill-current w-[14px]" />
+                                    <span>{item?.countBookmarks}</span>
                                   </div>
                                 </div>
                                 <Icon.Pen className="fill-current w-[20px] text-[#5f5f5f]" />

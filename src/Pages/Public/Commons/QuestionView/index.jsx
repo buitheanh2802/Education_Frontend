@@ -88,8 +88,8 @@ const QuestionView = ({ questions }) => {
                         <span>{item?.countLikes}</span>
                       </div>
                       <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                        <Icon.Dislike className="fill-current w-[15px]" />
-                        <span>{item?.countDislike}</span>
+                        <Icon.Bookmark className="fill-current w-[14px]" />
+                        <span>{item?.countBookmarks}</span>
                       </div>
                     </div>
                     <Icon.Questions className="fill-current w-[20px] text-[#5f5f5f]" />
