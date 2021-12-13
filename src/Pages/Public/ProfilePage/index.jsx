@@ -94,7 +94,7 @@ const ProfilePage = () => {
                                             <span>{profileDetail?.postCounts}</span>
                                         </div>
                                     </Link>
-                                    <div className="mx-auto">
+                                    <Link to={`/user/${profileDetail?.username}/question`} className="mx-auto">
                                         <div className="text-center gap-[5px] text-[#4A5568]">
                                             <div className="flex items-center">
                                                 <Icon.questions className="fill-current w-[13px] mr-[5px]" />
@@ -102,7 +102,7 @@ const ProfilePage = () => {
                                             </div>
                                             <span>{profileDetail?.questionCounts}</span>
                                         </div>
-                                    </div>
+                                    </Link>
                                 </div>
                                 <div className="grid grid-cols-2 gap-[30px] xl:text-[15px] py-[15px] text-[13px]">
                                     <Link to={`/user/${profileDetail?.username}/following`} className="mx-auto">

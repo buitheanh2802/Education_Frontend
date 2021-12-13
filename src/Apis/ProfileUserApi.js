@@ -14,6 +14,11 @@ const ProfileUserApi = {
         const url = `/user/${username}/post`
         return AxiosClient.get(url)
     },
+    getQuestionUser(username) {
+        const url = `/user/${username}/question`
+        return AxiosClient.get(url)
+    },
+
     getFollowerUser(username) {
         const token = localStorage.getItem("_token_");
         const url = `/user/${username}/follower`
