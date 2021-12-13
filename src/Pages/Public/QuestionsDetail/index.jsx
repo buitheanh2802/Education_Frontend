@@ -19,6 +19,7 @@ import Loading from "src/Components/Loading";
 import SpamApi from "src/Apis/SpamApi";
 import Swal from "sweetalert2";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
+import Comments from "../Comments";
 
 const QuestionsDetail = () => {
   const shortId = useParams();
@@ -279,7 +280,7 @@ const QuestionsDetail = () => {
             <div className="block lg:hidden">
               <div className="flex items-center mb-[5px] ">
                 {questionDetail?.data?.createBy?.avatar?.avatarUrl?.length >
-                0 ? (
+                  0 ? (
                   <Link
                     to={`/user/${questionDetail?.data?.createBy?.fullname}`}
                     className="  border border-gray-300 cursor-pointer select-none w-[55px] h-[55px] rounded-full bg-center bg-cover"
@@ -388,7 +389,7 @@ const QuestionsDetail = () => {
                         : "Sao chép link câu hỏi"}
                     </li>
                     {questionDetail?.data?.createBy?.username ===
-                    profile?.username ? (
+                      profile?.username ? (
                       <>
                         <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
                           <Icon.Fix className="fill-current w-[15px] mr-[5px]" />
@@ -561,6 +562,9 @@ const QuestionsDetail = () => {
                 </button>
               </div>
             </div>
+          </div>
+          <div className="my-[20px]">
+            <Comments userId={questionDetail?.data?.createBy?._id} shortId={idQuestion} />
           </div>
         </div>
         <div className="hidden lg:block">
