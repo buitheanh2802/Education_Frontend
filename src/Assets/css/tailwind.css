@@ -109,7 +109,9 @@ body {
 .input:active + label {
   color: #3182ce;
 }
-
+.ql-syntax{
+  white-space: pre-line;
+}
 /* error */
 
 .icon-error {
