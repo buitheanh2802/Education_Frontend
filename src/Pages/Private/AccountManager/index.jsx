@@ -8,14 +8,14 @@ import PublishItem from "./components/publish-item";
 const AccountManager = () => {
     const [startCall, setStartCall] = useState(false);
     const [listUsers, setListUsers] = useState([]);
-    
+    const [reConnect, setReConnect] = useState(false);
+
     useEffect(() => {
         const getData = async () => {
             try {
                 setStartCall(true);
                 const { data: listUser } = await UserApi.getListUser();
                 setListUsers(listUser.data.models);
-                console.log(listUser.data.models);
                 setStartCall(false);
             } catch (error) {
                 console.log(error);
@@ -23,7 +23,11 @@ const AccountManager = () => {
             }
         }
         getData();
-    }, [])
+    }, [reConnect])
+
+    const reCall = () => {
+        setReConnect(!reConnect)
+    }
 
     return (
         <div className="w-full">
@@ -34,6 +38,7 @@ const AccountManager = () => {
                 listUsers.map((item, index) => {
                     return (
                         <PublishItem
+                            reCall={reCall}
                             index={index + 1}
                             key={item._id}
                             id={item._id}
@@ -44,7 +49,7 @@ const AccountManager = () => {
                             role={item.role}
                             type={item.socialType}
                         />
-                    );
+                    )
                 })
             }
         </div>

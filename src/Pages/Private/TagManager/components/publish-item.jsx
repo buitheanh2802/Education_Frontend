@@ -35,8 +35,8 @@ const PublishItem = (props) => {
         <div>
             <div className="nav bg-white border-b text-[15px] p-[10px] grid grid-cols-[60px,1.5fr,1fr,0.75fr,0.75fr,1.2fr]">
                 <div className="font-medium ">{index}</div>
-                <div className="font-medium mr-[30px] text-blue-500 underline ">
-                    <Link to={`/tag/${slug}`}>{name}</Link>
+                <div className="font-medium mr-[30px]">
+                    <Link className="hover:underline text-blue-500" to={`/tag/${slug}`}>{name}</Link>
                 </div>
                 <div className="text-[13px]">{follow}</div>
                 <div className="text-[13px]">{post}</div>

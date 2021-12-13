@@ -89,7 +89,6 @@ export const path = {
   PROFILE: "/profile/:username",
   EDIT_PROFILE: "/profile/:id/edit",
   PROFILE_PERSONAL: "/profile/:id/edit/personal",
-  PROFILE_CONTACT: "/profile/:id/edit/contact",
   PROFILE_PASSWORD: "/profile/:id/edit/password",
   // Quản lý Tags
   TAG_MANAGER: "/manager/tag",
