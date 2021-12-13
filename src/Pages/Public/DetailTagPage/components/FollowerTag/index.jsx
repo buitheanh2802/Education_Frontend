@@ -19,7 +19,7 @@ const FollowerTag = ({ follower }) => {
                                 <div key={index} className="w-full px-[10px] py-[15px] border-b lg:mt-0 md:mt-3">
                                     <div className="flex">
                                         <div className="mx-[10px]">
-                                            <Link to={item?.fullname} >
+                                            <Link to={`/user/${item?.username}`} >
                                                 {item?.avatar?.avatarUrl ?
                                                     <img
                                                         className="mx-auto max-h-[70px] rounded-full"
@@ -34,9 +34,9 @@ const FollowerTag = ({ follower }) => {
                                             </Link>
                                         </div>
                                         <div className="w-full">
-                                            <Link to={`/user/${item?.username}`} className="text-[#2d6ff7] hover:underline font-medium text-[15px]" >{item?.fullname}</Link>
+                                            <Link to={`/user/${item?.username}`} className="text-[#2d6ff7] hover:underline font-medium text-[18px]" >{item?.fullname}</Link>
                                             <h3 className="pr-[50px] my-[5px]">
-                                                <Link to={`/user/${item?.username}`} className="font-medium text-[18px] hover:underline">{item?.email}</Link>
+                                                <Link to={`/user/${item?.username}`} className="font-medium text-[15px] hover:underline">{item?.email}</Link>
                                             </h3>
                                         </div>
                                     </div>

@@ -2,17 +2,20 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { useHistory } from 'react-router'
+import { useHistory,useLocation } from 'react-router'
 import { Icon } from 'src/Components/Icon'
 import { path } from 'src/Constants/'
 import { ActionPostComment } from 'src/Redux/Actions/Comments.action'
-import IntroUser from '../IntroUser'
+import IntroUser from '../IntroUser';
+import NotificationApi from "src/Apis/NotificationApi";
 
-const InsertComment = ({ shortId, focus, parentId, setIsRepComment }) => {
+const InsertComment = ({ shortId, focus, parentId, setIsRepComment,userId }) => {
     const history = useHistory();
+    const location = useLocation();
     const dispatch = useDispatch();
     const [isShow, setIsShow] = useState(false);
     const { profile } = useSelector(state => state.Auth);
+    const { socket } = useSelector(state => state.SocketService);
     const [sendComment, setSendComment] = useState(false);
 
     const { register, handleSubmit, formState: { errors }, clearErrors, reset } = useForm({
@@ -29,8 +32,17 @@ const InsertComment = ({ shortId, focus, parentId, setIsRepComment }) => {
     const handleOnSubmit = async (data) => {
         setSendComment(true);
         const { payload } = await dispatch(ActionPostComment(data));
+         // send notifaction
+        const notificationRequest = {
+            title: "đã bình luận về bài viết của bạn",
+            url: `${location.pathname}#comment-${userId}`,
+            type: "comment",
+        };
+        const token = localStorage.getItem("_token_");
+        const { data: { data : notificationData } } = await NotificationApi.create(token, notificationRequest,userId);
+        socket.emit('sendTo', { ...notificationData, sendToId: userId });
         setSendComment(false);
-        if (!payload.status) return
+        if (!payload.status) return;
         reset();
         setIsRepComment && setIsRepComment(false)
     }
@@ -65,7 +77,7 @@ const InsertComment = ({ shortId, focus, parentId, setIsRepComment }) => {
             {(profile && isShow) && <div className="flex justify-end gap-10 items-center p-1 border-t border-solid border-gray-200 mt-[0.5px] duration-300">
                 <div className="flex gap-2 items-center">
                     <IntroUser className="w-[28px] h-[28px]" avatarUrl={profile?.avatar?.avatarUrl} fullname={profile?.fullname} />
-                    <p className="text-sm font-medium">Nguyễn Thành Đạt</p>
+                    <p className="text-sm font-medium">{profile?.fullname}</p>
                 </div>
 
                 <div className="flex items-center gap-3">

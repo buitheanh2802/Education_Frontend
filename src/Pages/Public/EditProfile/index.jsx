@@ -45,10 +45,7 @@ const EditProfile = () => {
                                         render={() => (
                                             <div className="px-[20px] lg:px-[50px] pt-[15px] pb-[50px]">
                                                 <div
-                                                    className="h-[130px] lg:h-[150px]  rounded-[5px] bg-center bg-cover bg-no-repeat cursor-pointer"
-                                                    style={{
-                                                        backgroundImage: `url(https://phunugioi.com/wp-content/uploads/2020/02/mau-background-dep.jpg)`,
-                                                    }}
+                                                    className="bg-gradient-to-r from-[#a1ddf5] to-[#b662ee] h-[130px] lg:h-[150px] rounded-[5px] bg-center bg-cover bg-no-repeat cursor-pointer"
                                                 >
                                                 </div>
                                                 <div className="lg:flex">
@@ -72,7 +69,7 @@ const EditProfile = () => {
                                                     </p>
                                                 </div>
                                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[30px] gap-y-[15px] mt-10">
-                                                    <Link to="/profile/me/change-info/personal" className="bg-gradient-to-r from-[#a1f0f0]  to-[#79a3f1]  text-center pt-5 pb-7 rounded-[5px] cursor-pointer card-item ">
+                                                    <Link to="/profile/me/change-info/personal" className="bg-gradient-to-r from-[#a1f0f0] to-[#79a3f1] text-center pt-5 pb-7 rounded-[5px] cursor-pointer card-item ">
                                                         <div className=" w-[50px] h-[50px] sm:w-[75px] sm:h-[75px] mx-auto">
                                                             <img src={profile_icon} alt="" />
                                                         </div>
@@ -80,7 +77,7 @@ const EditProfile = () => {
                                                             Thông tin cá nhân
                                                         </div>
                                                     </Link>
-                                                    <Link to="/profile/me/change-info/password" className="bg-gradient-to-r from-[#a1f0f0]  to-[#79a3f1]  pt-5 pb-7 text-center rounded-[5px] cursor-pointer card-item">
+                                                    <Link to="/profile/me/change-info/password" className="bg-gradient-to-r from-[#a1f0f0] to-[#79a3f1] pt-5 pb-7 text-center rounded-[5px] cursor-pointer card-item">
                                                         <div className="w-[50px] h-[50px] sm:w-[75px] sm:h-[75px] mx-auto">
                                                             <img src={key_icon} alt="" />
                                                         </div>

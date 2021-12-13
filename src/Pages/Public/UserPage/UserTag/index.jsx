@@ -87,9 +87,9 @@ const UserTag = (props) => {
                   to={`/tag/${item?.slug}`}
                 >
                   <div className="col-span-1">
-                    {item.avatar.avatarUrl ? (
+                    {item?.avatar?.avatarUrl ? (
                       <img
-                        src={item.avatar.avatarUrl}
+                        src={item?.avatar?.avatarUrl}
                         alt=""
                         className="w-[80px] "
                       />

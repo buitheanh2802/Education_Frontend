@@ -89,7 +89,6 @@ export const path = {
   PROFILE: "/profile/:username",
   EDIT_PROFILE: "/profile/:id/edit",
   PROFILE_PERSONAL: "/profile/:id/edit/personal",
-  PROFILE_CONTACT: "/profile/:id/edit/contact",
   PROFILE_PASSWORD: "/profile/:id/edit/password",
   // Quản lý Tags
   TAG_MANAGER: "/manager/tag",
@@ -106,6 +105,7 @@ export const path = {
   CHALLENGE_SOLUTION_DETAIL: "/challenge/solution-detail",
   CHALLENGE_SOLUTION_DETAIL_ID: "/challenge/solution-detail/:solutionId",
   CHALLENGE_SOLUTION_CHALLENGE_ID: "/challenge/solution/:challengeId",
+  MANAGER_CHART: "/manager/chart",
 
   //Quiz
   QUIZ: "/quiz",

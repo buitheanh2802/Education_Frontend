@@ -1,15 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link, NavLink, useHistory, useParams } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import SearchApi from "src/Apis/SearchApi";
 import Loading from "src/Components/Loading";
-import { path } from "src/Constants/";
-import Navigation from "../Commons/Navigation";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import QuestionView from "../Commons/QuestionView";
-import PostView from "../Commons/PostView";
 import FeaturedAuthor from "../Commons/FeaturedAuthor";
 import TrendingTags from "../Commons/TrendingTags";
 import UserApi from "src/Apis/UserApi";
@@ -61,7 +58,7 @@ const SearchPage = () => {
         }
       };
       listTagPopular();
-    } catch (error) {}
+    } catch (error) { }
   }, [keyword]);
   console.log("post", dataSearchPost);
   console.log("question", dataSearchQuestion);
@@ -124,13 +121,13 @@ const SearchPage = () => {
                             <div className="mr-[15px] hidden sm:block">
                               {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                                 <Link
-                                  to=""
-                                  className="mt-[5px]  border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
-                                  style={{
-                                    backgroundImage: `url(${item?.createBy?.avatar?.avatarUrl})`,
-                                  }}
-                                  alt={item?.createBy?.fullname}
-                                ></Link>
+                                  to={`/user/${item?.createBy?.username}`} >
+                                  <img
+                                    className="mx-auto max-h-[40px] rounded-full"
+                                    width="40px" height="40px"
+                                    src={item?.createBy?.avatar?.avatarUrl}
+                                    alt="Avatar" />
+                                </Link>
                               ) : (
                                 <Link
                                   to={`/user/${item?.createBy?.username}`}
