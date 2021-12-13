@@ -44,7 +44,7 @@ const FeaturedTag = ({ tag, popTag }) => {
                         {popTag?.data?.map((pop, index) => {
                             return (
                                 <div key={index}>
-                                    <Link to={pop?.slug} className="inline-block md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[15px] xl:py-[5px] xl:text-[14px] hover:bg-gray-300 text-[#4A5568] bg-[#BEE3F8] rounded-[3px]">
+                                    <Link to={`/tag/${pop?.slug}`} className="inline-block md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[15px] xl:py-[5px] xl:text-[14px] hover:bg-gray-300 text-[#4A5568] bg-[#BEE3F8] rounded-[3px]">
                                         {pop?.name}
                                     </Link>
                                 </div>
