@@ -24,6 +24,7 @@ const mySlice = createSlice({
         },
         gets(state, action) {
             const { data } = action.payload;
+            state.counter = data.models.filter(item => item.isRead === false).length;
             state.pagination = data.metaData.pagination;
             state.models = data.models;
             state.process.listLoading = false;

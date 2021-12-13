@@ -13,9 +13,8 @@ const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotificatio
     const dispatch = useDispatch()
     const history = useHistory()
     const { profile, actionLoading } = useSelector(state => state.Auth);
-    const { counter } = useSelector(state => state.Notification);
+    const { counter,models } = useSelector(state => state.Notification);
     const { socket } = useSelector(state => state.SocketService);
-
     // listen notification 
     useEffect(() => {
         socket.on('responseForJoin', (data) => { });
@@ -24,7 +23,10 @@ const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotificatio
             dispatch(notificationGets(localStorage.getItem("_token_")))
         })
     }, []);
-
+    // set counter notification
+    useEffect(() => {
+        console.log(models);
+    },[isNotification,models]);
     return (
         <>
             {profile ?
