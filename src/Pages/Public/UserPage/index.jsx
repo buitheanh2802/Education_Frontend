@@ -32,13 +32,9 @@ const Userpage = (props) => {
             return;
         }
         const notificationRequest = {
-            title: `
-            <div>
-                <a class="font-medium cursor-pointer hover:text-blue-500 " 
-                href="/user/${profile.username}">${profile.fullname}</a>
-                đã ${user?.isFollowing ? "bỏ theo dõi bạn." : "theo dõi bạn."} 
-            </div>`,
-            url: ""
+            title: user?.isFollowing ? "đã bỏ theo dõi bạn." : "đã theo dõi bạn.",
+            url: "",
+            type : "follow"
         }
         if (user?.isFollowing) {
             await FollowApi.unFollow(username);
