@@ -6,12 +6,14 @@ import FollowApi from "src/Apis/FollowApi";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import UserApi from "src/Apis/UserApi";
+import { useSelector } from "react-redux";
 
 const ListUserPage = () => {
     const [users, setUsers] = useState([])
     const dispatch = useDispatch();
     const token = localStorage.getItem("_token_");
     const history = useHistory();
+    const { profile } = useSelector((state) => state.Auth);
 
     const handleUnFollow = async (username) => {
         if (token === null) {
@@ -141,21 +143,28 @@ const ListUserPage = () => {
                                             </div>
                                         </div>
                                     </Link>
-                                    {item?.isFollowing ? (
-                                        <div onClick={() => handleUnFollow(item.username)} className="w-[80%] mt-[10px] mx-auto text-center my-auto text-white border border-[#6C91F0] font-bold rounded text-[15px] bg-[#1273eb] hover:bg-blue-200 hover:text-[#6C91F0]">
-                                            <button className="font-bold px-[20px] md:px-[30px] py-[5px]">
-                                                {" "}
-                                                - Bỏ theo dõi
+                                    {item?.username === profile?.username ?
+                                        <div className="w-[80%] mt-[10px] mx-auto text-center my-auto text-white border border-[#6C91F0] font-bold rounded text-[15px] bg-[#1273eb] hover:bg-blue-200 hover:text-[#6C91F0]">
+                                            <button onClick={() => history.push('/profile/me')} className="font-bold px-[10px] py-[5px]">
+                                                Xem thông tin
                                             </button>
                                         </div>
-                                    ) : (
-                                        <div onClick={() => handleFollow(item.username)} className="w-[80%] mt-[10px] mx-auto text-center my-auto text-[#6C91F0] border border-[#6C91F0] font-bold rounded text-[15px] hover:bg-[#1273eb] hover:text-white">
-                                            <button className="font-bold px-[20px] md:px-[30px] py-[5px]">
-                                                {" "}
-                                                + Theo dõi
-                                            </button>
-                                        </div>
-                                    )}
+                                        :
+                                        item?.isFollowing ? (
+                                            <div onClick={() => handleUnFollow(item.username)} className="w-[80%] mt-[10px] mx-auto text-center my-auto text-white border border-[#6C91F0] font-bold rounded text-[15px] bg-[#1273eb] hover:bg-blue-200 hover:text-[#6C91F0]">
+                                                <button className="font-bold px-[20px] md:px-[30px] py-[5px]">
+                                                    {" "}
+                                                    - Bỏ theo dõi
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <div onClick={() => handleFollow(item.username)} className="w-[80%] mt-[10px] mx-auto text-center my-auto text-[#6C91F0] border border-[#6C91F0] font-bold rounded text-[15px] hover:bg-[#1273eb] hover:text-white">
+                                                <button className="font-bold px-[20px] md:px-[30px] py-[5px]">
+                                                    {" "}
+                                                    + Theo dõi
+                                                </button>
+                                            </div>
+                                        )}
                                 </div>
                             )
                         })}
