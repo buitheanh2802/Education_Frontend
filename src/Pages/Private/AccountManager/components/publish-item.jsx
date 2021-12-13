@@ -80,7 +80,7 @@ const PublishItem = (props) => {
                     className='border py-[5px] px-[8px] border-green-300 rounded' name="role"
                 >
                     <option value="user">User</option>
-                    <option value="collaborator">Collaborator</option>
+                    <option value="collaborators">Collaborator</option>
                     <option value="admin">Admin</option>
                 </select>
             </div>
