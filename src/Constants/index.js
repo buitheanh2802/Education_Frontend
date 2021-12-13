@@ -25,6 +25,8 @@ export const path = {
   CHANGE_PERSONAL: "/profile/me/change-info/personal",
   CHANGE_PASSWORD: "/profile/me/change-info/password",
 
+  //list user
+  USERS: "/users",
   //Profile_user
   USER_ID: "/user/:username",
   USER_POST: "/user/:username/post",

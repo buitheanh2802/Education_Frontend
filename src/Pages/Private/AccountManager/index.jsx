@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "./components/header";
 import PublishNav from "./components/publish-nav";
 import SkeletonGroup from "./components/skeleton-group";
@@ -9,12 +9,12 @@ const AccountManager = () => {
     const [startCall, setStartCall] = useState(false);
     const [listUsers, setListUsers] = useState([]);
     const [reConnect, setReConnect] = useState(false);
-
+    const timeout = useRef(null);
     useEffect(() => {
         const getData = async () => {
             try {
                 setStartCall(true);
-                const { data: listUser } = await UserApi.getListUser();
+                const { data: listUser } = await UserApi.getListUserAdmin();
                 setListUsers(listUser.data.models);
                 setStartCall(false);
             } catch (error) {
@@ -29,9 +29,21 @@ const AccountManager = () => {
         setReConnect(!reConnect)
     }
 
+    const handleSearch = async (e) => {
+        try {
+            if (timeout.current) { clearTimeout(timeout.current) }
+            timeout.current = setTimeout(async () => {
+                const { data: resultSearch } = await UserApi.searchUser(e.target.value);
+                setListUsers(resultSearch.data);
+            }, 1000)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className="w-full">
-            <Header />
+            <Header handleSearch={handleSearch} />
             <PublishNav />
             {startCall && <SkeletonGroup />}
             {listUsers &&
