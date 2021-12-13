@@ -29,9 +29,19 @@ const UserApi = {
     });
   },
 
-  getListUser() {
+  getListUserAdmin() {
     const token = localStorage.getItem("_token_");
-    const url = `/user/manager/list?page=1`;
+    const url = `/user/manager/list`;
+    return AxiosClient.get(url, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+  },
+
+  getListUser(filter){
+    const token = localStorage.getItem("_token_");
+    const url = `/user/featured-author/list?filter=${filter}`;
     return AxiosClient.get(url, {
       headers: {
         authorization: `Bearer ${token}`
@@ -41,12 +51,17 @@ const UserApi = {
 
   editManagerUser(username, data) {
     const token = localStorage.getItem("_token_");
-    const url =  `/user/manager/edit/${username}`;
+    const url = `/user/manager/edit/${username}`;
     return AxiosClient.put(url, data, {
       headers: {
         authorization: `Bearer ${token}`
       }
     })
+  },
+
+  searchUser(keySearch) {
+    const url = `/user/manager/filter?keyword=${keySearch}`;
+    return AxiosClient.post(url);
   }
 
 };

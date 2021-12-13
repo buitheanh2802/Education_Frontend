@@ -101,10 +101,10 @@ const UserFollowing = (props) => {
                                                 {item?.followingUserId?.fullname}
                                             </Link>
                                         </div>
-                                        <div className=" flex">
-                                            <p className="text-center  ">
+                                        <div className="flex">
+                                            <p className="text-center">
                                                 <span className="flex items-center text-[14px] text-gray-500">
-                                                    <Icon.Point className="fill-current w-[10px] " />
+                                                    <Icon.Point className="fill-current w-[10px]" />
                                                     <span className="text-[13px] mx-[2px]">
                                                         {item?.followingUserId?.points}
                                                     </span>
@@ -112,7 +112,7 @@ const UserFollowing = (props) => {
                                             </p>
                                             <p className="text-center ml-[10px] ">
                                                 <span className="flex items-center text-[14px] text-gray-500">
-                                                    <Icon.Pen className="fill-current w-[10px]  " />
+                                                    <Icon.Pen className="fill-current w-[10px]" />
                                                     <span className="text-[13px] mx-[2px]">
                                                         {item?.followingUserId?.postCounts}
                                                     </span>
@@ -120,7 +120,7 @@ const UserFollowing = (props) => {
                                             </p>{" "}
                                             <p className="text-center ml-[10px]">
                                                 <span className="flex items-center text-[14px] text-gray-500">
-                                                    <Icon.Questions className="fill-current w-[10px]  mx-[2px]" />
+                                                    <Icon.Questions className="fill-current w-[10px] mx-[2px]" />
                                                     <span className="text-[13px] mx-[2px]">
                                                         {item?.followingUserId?.questionCounts}
                                                     </span>

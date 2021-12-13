@@ -43,7 +43,7 @@ const SlideBar = () => {
             <span className="text-left">
               <Icon.AdminExercise />
             </span>
-            <span className="mx-4 text-sm font-normal">Quản trị bài tập</span>
+            <span className="mx-4 text-sm font-normal">Quản lý bài tập</span>
           </NavLink>
           <NavLink
             activeClassName="text-blue-500 bg-gradient-to-r from-white to-blue-100 border-r-4 border-blue-500"
@@ -78,22 +78,22 @@ const SlideBar = () => {
           <NavLink
             activeClassName="text-blue-500 bg-gradient-to-r from-white to-blue-100 border-r-4 border-blue-500"
             className="w-full font-thin uppercase text-gray-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
-            to="/manager/tag"
-          >
-            <span className="text-left">
-              <Icon.Tags className="fill-current w-[20px]" />
-            </span>
-            <span className="mx-4 text-sm font-normal">Quản lý tag</span>
-          </NavLink>
-          <NavLink
-            activeClassName="text-blue-500 bg-gradient-to-r from-white to-blue-100 border-r-4 border-blue-500"
-            className="w-full font-thin uppercase text-gray-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
             to="/manager/account"
           >
             <span className="text-left">
               <Icon.User className="fill-current w-[20px]" />
             </span>
             <span className="mx-4 text-sm font-normal">Quản lý tài khoản</span>
+          </NavLink>
+          <NavLink
+            activeClassName="text-blue-500 bg-gradient-to-r from-white to-blue-100 border-r-4 border-blue-500"
+            className="w-full font-thin uppercase text-gray-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
+            to="/manager/tag"
+          >
+            <span className="text-left">
+              <Icon.Tags className="fill-current w-[20px]" />
+            </span>
+            <span className="mx-4 text-sm font-normal">Quản lý tag</span>
           </NavLink>
         </nav>
       </div>
