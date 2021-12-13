@@ -4,7 +4,7 @@ import ContentComment from './Components/ContentComment'
 import InsertComment from './Components/InsertComment'
 import { ActionGetsComment } from 'src/Redux/Actions/Comments.action'
 
-const Comments = ({ shortId,userId }) => {
+const Comments = ({ shortId, userId }) => {
     const dispatch = useDispatch();
     const Comments = useSelector(state => state.Comments);
     useEffect(() => dispatch(ActionGetsComment(shortId)), [dispatch, shortId])
@@ -12,8 +12,11 @@ const Comments = ({ shortId,userId }) => {
     return (
         <div className="comments w-full">
             <h3 className="font-medium text-lg my-3">Tổng số thảo luận <span className="font-normal text-base">({Comments?.pagination?.countDocuments})</span></h3>
-            <InsertComment userId={userId} shortId={shortId} />
-            <ContentComment userId={userId} Comments={Comments} shortId={shortId} />
+            {shortId && <>
+                <InsertComment userId={userId} shortId={shortId} />
+                <ContentComment userId={userId} Comments={Comments} shortId={shortId} />
+            </>
+            }
         </div>
     )
 }
