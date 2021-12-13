@@ -59,7 +59,7 @@ export const path = {
   TAGS_QUESTION: "/tag/:slug/question",
   TAGS_FOLLOWER: "/tag/:slug/follower",
   TAGS_POPULAR: "/tags/popular",
-  
+
   // auth
   AUTH: "/auth",
   LOGIN: "/auth/login",
@@ -106,6 +106,7 @@ export const path = {
   CHALLENGE_SOLUTION_DETAIL: "/challenge/solution-detail",
   CHALLENGE_SOLUTION_DETAIL_ID: "/challenge/solution-detail/:solutionId",
   CHALLENGE_SOLUTION_CHALLENGE_ID: "/challenge/solution/:challengeId",
+  MANAGER_CHART: "/manager/chart",
 
   //Quiz
   QUIZ: "/quiz",
