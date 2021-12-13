@@ -14,7 +14,6 @@ const Notification = ({ className, setIsNotification }) => {
     const [currentPage, setCurrentPage] = useState(null);
     const [totalPage, setTotalPage] = useState(null);
     const dispatch = useDispatch();
-
     useEffect(() => {
         if (models) {
             setCurrentPage(pagination.currentPage);
@@ -34,7 +33,6 @@ const Notification = ({ className, setIsNotification }) => {
                     <h4 className="font-bold text-[22px]">Thông báo</h4>
                     <button onClick={() => setIsList(!isList)} className="hover:bg-gray-200 p-[5px] rounded-[3px] duration-300"><Icon.List className="w-[20px] h-[20px]" /></button>
                     {isList && <ul className="absolute top-[90%] w-[280px] right-[15px] rounded-[3px] bg-white shadow-lg p-[5px] border border-solid border-gray-200">
-                        <li className="px-[15px] py-[7px] hover:bg-gray-100 rounded-[3px] duration-300 cursor-pointer flex items-center"><Icon.Checked className="w-[20px] h-[20px]" /> <p className="ml-[10px]">Đánh dấu tất cả đã đọc</p></li>
                         <li className="px-[15px] py-[7px] hover:bg-gray-100 rounded-[3px] duration-300 cursor-pointer flex items-center"><Icon.Detele className="w-[20px] h-[20px]" /> <p className="ml-[10px]">Xóa tất cả thông báo</p></li>
                     </ul>}
                 </div>
@@ -47,13 +45,13 @@ const Notification = ({ className, setIsNotification }) => {
                                         hover:bg-gray-100 rounded-[3px] duration-300 flex`}>
                                         {item?.sender?.avatar?.avatarUrl !== "" ?
                                             <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${item?.sender?.avatar?.avatarUrl})` }}></i>
-                                            : <p className="bg-gray-200 border flex h-[40px] items-center justify-center right-0 rounded-full select-none text-gray-500 w-[40px]"> {item?.sender?.fullname?.slice(0, 1)?.toUpperCase()} </p>}
+                                            : <p className="bg-gray-200 border flex h-[40px] items-center justify-center right-0 rounded-full select-none text-gray-500 min-w-[40px]"> {item?.sender?.fullname?.slice(0, 1)?.toUpperCase()} </p>}
                                         <div className="pl-[15px]">
                                             <p className="leading-[20px]">
                                                 <Link className='mr-[5px] font-medium hover:text-blue-500 ' to={`/user/${item.sender.username}`}>{item.sender.fullname}</Link>
                                                 <Link to={item.url}>{item.title}</Link>
                                             </p>
-                                            <p className="text-[#FF0000] text-[14px]">{timeFormatter(item.createdAt)}</p>
+                                            <p className="text-[#2d6ff7] text-[14px]">{timeFormatter(item.createdAt)}</p>
                                         </div>
                                     </li>
                                 )
@@ -63,13 +61,13 @@ const Notification = ({ className, setIsNotification }) => {
                                         hover:bg-gray-100 rounded-[3px] duration-300 flex`}>
                                         {item?.sender?.avatar?.avatarUrl !== "" ?
                                             <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${item?.sender?.avatar?.avatarUrl})` }}></i>
-                                            : <p className="bg-gray-200 border flex h-[40px] items-center justify-center right-0 rounded-full select-none text-gray-500 w-[40px]"> {item?.sender?.fullname?.slice(0, 1)?.toUpperCase()} </p>}
+                                            : <p className="bg-gray-200 border flex h-[40px] items-center justify-center right-0 rounded-full select-none text-gray-500 min-w-[40px]"> {item?.sender?.fullname?.slice(0, 1)?.toUpperCase()} </p>}
                                         <div className="pl-[15px]">
                                             <p className="leading-[20px]">
                                                 <Link className='mr-[5px] font-medium hover:text-blue-500 ' to={`/user/${item.sender.username}`}>{item.sender.fullname}</Link>
                                                 {item.title}
                                             </p>
-                                            <p className="text-[#FF0000] text-[14px]">{timeFormatter(item.createdAt)}</p>
+                                            <p className="text-[#2d6ff7] text-[14px]">{timeFormatter(item.createdAt)}</p>
                                         </div>
                                     </li>
                             )
