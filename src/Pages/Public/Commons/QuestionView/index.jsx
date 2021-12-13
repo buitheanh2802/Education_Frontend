@@ -21,13 +21,14 @@ const QuestionView = ({ questions }) => {
               >
                 <div className="mr-[15px] ">
                   {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
-                    <Link
-                      to={`/user/${item?.createBy?.username}`} >
+                    <Link to={`/user/${item?.createBy?.username}`}>
                       <img
                         className="mx-auto max-h-[40px] rounded-full"
-                        width="40px" height="40px"
+                        width="40px"
+                        height="40px"
                         src={item?.createBy?.avatar?.avatarUrl}
-                        alt="Avatar" />
+                        alt="Avatar"
+                      />
                     </Link>
                   ) : (
                     <Link

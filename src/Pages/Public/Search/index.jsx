@@ -63,8 +63,8 @@ const SearchPage = () => {
       listTagPopular();
     } catch (error) {}
   }, [keyword]);
-  console.log("post", dataSearchPost);
-  console.log("question", dataSearchQuestion);
+  // console.log("post", dataSearchPost);
+  // console.log("question", dataSearchQuestion);
 
   const handleActivePost = () => {
     setTabPost(true);
@@ -125,7 +125,7 @@ const SearchPage = () => {
                               {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                                 <Link
                                   to=""
-                                  className="mt-[5px]  border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
+                                  className="mt-[5px] inline-block border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
                                   style={{
                                     backgroundImage: `url(${item?.createBy?.avatar?.avatarUrl})`,
                                   }}
