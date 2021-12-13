@@ -15,6 +15,7 @@ import { setLoading } from "src/Redux/Slices/Loading.slice";
 import NotificationApi from "src/Apis/NotificationApi";
 
 const Userpage = (props) => {
+    window.scrollTo(0,0)
     const username = props.match.params.username;
     const [user, setUser] = useState(null);
     const dispatch = useDispatch();

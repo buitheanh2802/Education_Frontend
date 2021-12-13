@@ -136,8 +136,6 @@ const ChangePersonal = ({ profile }) => {
                 </p>
                 <div className="w-full">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        {error && <ErrorMessage message={error} />}
-                        {message && <SuccessMessage message={message} />}
                         <div className="mx-auto w-[220px]">
                             {profile?.avatar?.avatarUrl ?
                                 <img className="w-[120px] h-[120px] mx-auto rounded-full" src={profile?.avatar?.avatarUrl} alt="Image" />
@@ -208,6 +206,8 @@ const ChangePersonal = ({ profile }) => {
                                 {renderSkills()}
                             </form>
                         </div>
+                        {error && <ErrorMessage message={error} />}
+                        {message && <SuccessMessage message={message} />}
                         <div className="flex justify-end">
                             <button
                                 onClick={() => { history.push('/profile/me/change-info') }}

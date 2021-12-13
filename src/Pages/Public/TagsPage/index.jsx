@@ -10,6 +10,7 @@ import { setLoading } from "src/Redux/Slices/Loading.slice";
 import UserApi from "src/Apis/UserApi";
 
 const TagsPage = () => {
+    window.scrollTo(0,0);
     const dispatch = useDispatch();
     const token = localStorage.getItem("_token_");
     const history = useHistory();

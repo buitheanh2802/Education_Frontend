@@ -12,6 +12,7 @@ import QuestionInTag from './components/QuestionInTag'
 import { path } from 'src/Constants/'
 
 const DetailTagPage = () => {
+    window.scrollTo(0,0);
     const location = useLocation();
     const { slug } = useParams();
     const [tag, setTag] = useState([]);

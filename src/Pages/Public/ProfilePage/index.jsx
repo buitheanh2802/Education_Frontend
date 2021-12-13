@@ -6,6 +6,7 @@ import { setLoading } from "src/Redux/Slices/Loading.slice";
 import AuthApi from "src/Apis/AuthApi";
 import { path } from "src/Constants/";
 const ProfilePage = () => {
+    window.scrollTo(0,0);
     const dispatch = useDispatch();
     const [profileDetail, setProfileDetail] = useState([]);
 

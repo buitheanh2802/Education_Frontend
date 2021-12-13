@@ -9,6 +9,7 @@ import UserApi from "src/Apis/UserApi";
 import { useSelector } from "react-redux";
 
 const ListUserPage = () => {
+    window.scrollTo(0,0);
     const [users, setUsers] = useState([])
     const dispatch = useDispatch();
     const token = localStorage.getItem("_token_");
