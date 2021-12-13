@@ -13,3 +13,9 @@ export const notificationReadMore = (token, params) => dispatch => {
         .then(({ data }) => dispatch(reducer.readMore({ data: data.data })))
         .catch(err => dispatch(reducer.catchError({ errors: err.response.data, callType: 'readMore' })))
 }
+export const notificationReadAll = (token) => dispatch => {
+    dispatch(reducer.startCall({ callType: 'readAll' }));
+    return NotificationAPI.readAll(token)
+        .then(() => dispatch(reducer.readAll()))
+        .catch(err => dispatch(reducer.catchError({ errors: err.response.data, callType: 'readAll' })))
+}

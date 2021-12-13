@@ -17,6 +17,14 @@ const NotificationApi = {
                 authorization : `Bearer ${token}`
             },
         })
+    },
+    readAll(token){
+        const url = '/notification/readall';
+        return AxiosClient.post(url,{},{
+            headers : {
+                authorization : `Bearer ${token}`
+            },
+        })
     }
 }
 

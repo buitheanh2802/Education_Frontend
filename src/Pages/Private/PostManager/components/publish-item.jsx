@@ -18,7 +18,7 @@ const PublishItem = (props) => {
     const [published, setPublished] = useState(publishedBy);
 
     const onPublish = async (boolean) => {
-        console.log(profile);
+        // console.log(profile);
         try {
             if (boolean) setLoading({ ...loading, success: true });
             else setLoading({ ...loading, error: true });

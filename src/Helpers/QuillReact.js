@@ -36,7 +36,7 @@ const QuillReact = (Content) => {
         .then((response) => response.json())
         .then((data) => {
           const url = data.data.photo.photoUrl;
-          console.log(url);
+          // console.log(url);
           // setUrl(url)
         })
         .catch((err) => {
