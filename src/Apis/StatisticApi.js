@@ -9,6 +9,15 @@ const StatisticApi = {
                 authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
+    },
+
+    async statisticQuestion(option) {
+        const url = `/statistic/question`;
+        return AxiosClient.post(url, option, {
+            headers: {
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
     }
 }
 

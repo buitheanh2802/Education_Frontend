@@ -91,7 +91,7 @@ const ChartPost = () => {
             {
                 label: 'Số lượng bài viết đã tạo',
                 data: dataChart,
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                backgroundColor: '#6febb8',
             }
         ],
     };
