@@ -57,6 +57,7 @@ const SolutionPage = () => {
                                     <button
                                         onClick={() => {
                                             !profile && history.push(path.AUTH)
+                                            history.push(`/solution/${item?._id}`)
                                         }} className="flex gap-[10px] flex-1 justify-center items-center bg-gray-100 hover:bg-gray-300 duration-300 hover:shadow text-blue-900 text-xs rounded h-[40px]">
                                         <Icon.Chat className="fill-current w-[12px]" /> Phản hồi
                                     </button>

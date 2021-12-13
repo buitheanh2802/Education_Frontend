@@ -106,6 +106,7 @@ export const path = {
   CHALLENGE_SOLUTION_DETAIL_ID: "/challenge/solution-detail/:solutionId",
   CHALLENGE_SOLUTION_CHALLENGE_ID: "/challenge/solution/:challengeId",
   MANAGER_CHART: "/manager/chart",
+  SOLUTION_ID: "/solution/:solutionId",
 
   //Quiz
   QUIZ: "/quiz",

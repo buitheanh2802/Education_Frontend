@@ -554,13 +554,6 @@ const QuestionsDetail = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-[20px] flex items-center">
-                <button className="border border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white">
-                  <span className="text-[12x] md:text-[14x] ml-1">
-                    Ghi Câu Trả Lời
-                  </span>
-                </button>
-              </div>
             </div>
           </div>
           <div className="my-[20px]">

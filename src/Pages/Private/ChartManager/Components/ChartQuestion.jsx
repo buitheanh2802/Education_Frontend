@@ -96,10 +96,10 @@ const ChartQuestion = () => {
         ],
     };
     return (
-        <div className="w-full border">
-            <div className="flex items-center justify-between p-5 border-b">
+        <div className="w-full border bg-blue-50 rounded">
+            <div className="flex items-center justify-between px-3 py-2 border-b">
                 <p className="tw-text-[18px] tw-font-medium xl:tw-font-normal md:tw-text-[16px] tw-leading-[35px] font-medium flex items-center gap-2 text-blue-900"><Icon.Questions className="fill-current w-[20px]" /> Thống kê câu hỏi</p>
-                <select name="type" onChangeCapture={handelFilterData} className="border h-[35px] w-[200px] text-center rounded text-gray-600 cursor-pointer text-sm outline-none focus:ring-1 focus:ring-blue-300">
+                <select name="type" onChangeCapture={handelFilterData} className="border h-[35px] w-[150px] text-center rounded text-gray-600 cursor-pointer text-sm outline-none focus:ring-1 focus:ring-blue-300">
                     <option value="7">7 ngày qua</option>
                     <option value="30">1 tháng qua</option>
                     <option value="180">6 tháng qua</option>
@@ -107,7 +107,7 @@ const ChartQuestion = () => {
                     <option value="all">Tất cả thời gian</option>
                 </select>
             </div>
-            <Bar className="w-full" data={data} />
+            <Bar className="w-full p-2" data={data} />
         </div>
     )
 }
