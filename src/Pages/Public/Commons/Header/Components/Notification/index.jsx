@@ -45,7 +45,7 @@ const Notification = ({ className, setIsNotification }) => {
                                         hover:bg-gray-100 rounded-[3px] duration-300 flex`}>
                                         {item?.sender?.avatar?.avatarUrl !== "" ?
                                             <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${item?.sender?.avatar?.avatarUrl})` }}></i>
-                                            : <p className="bg-gray-200 border flex h-[40px] items-center justify-center right-0 rounded-full select-none text-gray-500 w-[40px]"> {item?.sender?.fullname?.slice(0, 1)?.toUpperCase()} </p>}
+                                            : <p className="bg-gray-200 border flex h-[40px] items-center justify-center right-0 rounded-full select-none text-gray-500 min-w-[40px]"> {item?.sender?.fullname?.slice(0, 1)?.toUpperCase()} </p>}
                                         <div className="pl-[15px]">
                                             <p className="leading-[20px]">
                                                 <Link className='mr-[5px] font-medium hover:text-blue-500 ' to={`/user/${item.sender.username}`}>{item.sender.fullname}</Link>
@@ -61,7 +61,7 @@ const Notification = ({ className, setIsNotification }) => {
                                         hover:bg-gray-100 rounded-[3px] duration-300 flex`}>
                                         {item?.sender?.avatar?.avatarUrl !== "" ?
                                             <i className="min-w-[40px] min-h-[40px] max-w-[40px] max-h-[40px] rounded-full border border-solid border-gray-500 block bg-center bg-cover bg-no-repeat" style={{ backgroundImage: `url(${item?.sender?.avatar?.avatarUrl})` }}></i>
-                                            : <p className="bg-gray-200 border flex h-[40px] items-center justify-center right-0 rounded-full select-none text-gray-500 w-[40px]"> {item?.sender?.fullname?.slice(0, 1)?.toUpperCase()} </p>}
+                                            : <p className="bg-gray-200 border flex h-[40px] items-center justify-center right-0 rounded-full select-none text-gray-500 min-w-[40px]"> {item?.sender?.fullname?.slice(0, 1)?.toUpperCase()} </p>}
                                         <div className="pl-[15px]">
                                             <p className="leading-[20px]">
                                                 <Link className='mr-[5px] font-medium hover:text-blue-500 ' to={`/user/${item.sender.username}`}>{item.sender.fullname}</Link>
