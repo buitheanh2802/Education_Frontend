@@ -161,13 +161,13 @@ const ProfilePage = () => {
                             :
                             <div></div>
                         }
-                        {profileDetail?.hobbies ?
+                        {profileDetail?.hobbies?.length > 0 ?
                             <div className="py-[5px]">
                                 <span className="font-bold text-gray-800">Hobbies: </span>
                                 {profileDetail?.hobbies?.map((hob, index) => {
                                     return (
                                         <>
-                                            <div className="font-bold mx-[5px] px-[5px] inline-block border-r border-black last:border-0"
+                                            <div className="px-[15px] inline-block border-r border-black last:border-0"
                                                 key={index}
                                             >
                                                 {hob}
@@ -179,13 +179,14 @@ const ProfilePage = () => {
                             :
                             <div></div>
                         }
-                        {profileDetail?.skills ?
+                        {profileDetail?.skills?.length > 0 ?
                             <div className="py-[5px]">
                                 <span className="font-bold text-gray-800">Skills: </span>
                                 {profileDetail?.skills?.map((ski, index) => {
                                     return (
                                         <>
-                                            <div className="font-bold mx-[5px] inline-block md:px-[10px] px-[10px] py-[5px] lg:px-[8px] xl:px-[15px] hover:bg-gray-300 text-[#4A5568] bg-[#BEE3F8]" key={index}>
+                                            <div className="px-[15px] inline-block border-r border-black last:border-0"
+                                                key={index}>
                                                 {ski}
                                             </div>
                                         </>
@@ -193,7 +194,8 @@ const ProfilePage = () => {
                                 })}
                             </div>
                             :
-                            <div></div>
+                            <div>
+                            </div>
                         }
                     </div>
                 </div>

@@ -39,17 +39,17 @@ const UserPost = (props) => {
               <>
                 <div key={index} className="flex py-[10px] border-b">
                   <div>
-                    {item?.avatar?.avatarUrl ? (
+                    {item?.createBy?.avatar?.avatarUrl ? (
                       <img
-                        src={item?.avatar?.avatarUrl}
+                        src={item?.createBy?.avatar?.avatarUrl}
                         className="mx-auto max-h-[40px] rounded-full"
                         width="40px"
                         height="40px"
                       />
                     ) : (
-                      <div className="py-[5px] text-[#4A5568] mx-auto text-center w-[40px] w-[40px] rounded-full bg-blue-300 font-bold text-[20px]">
-                        {item?.createBy?.fullname?.toUpperCase().substring(0, 1)}
-                      </div>
+                    <div className="py-[5px] text-[#4A5568] mx-auto text-center w-[40px] w-[40px] rounded-full bg-blue-300 font-bold text-[20px]">
+                      {item?.createBy?.fullname?.toUpperCase().substring(0, 1)}
+                    </div>
                     )}
                   </div>
                   <div className="w-full ml-[10px]">

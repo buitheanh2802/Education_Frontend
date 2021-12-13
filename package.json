@@ -28,6 +28,7 @@
     "react-share": "^4.4.0",
     "react-smooth-scrollbar": "^8.0.6",
     "react-swipe": "^6.0.4",
+    "react-tabs": "^3.2.3",
     "redux": "^4.1.0",
     "smooth-scrollbar": "^8.6.3",
     "socket.io-client": "^4.4.0",
