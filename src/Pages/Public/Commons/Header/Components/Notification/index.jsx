@@ -67,7 +67,7 @@ const Notification = ({ className, setIsNotification }) => {
                                                 <Link className='mr-[5px] font-medium hover:text-blue-500 ' to={`/user/${item.sender.username}`}>{item.sender.fullname}</Link>
                                                 {item.title}
                                             </p>
-                                            <p className="text-[#FF0000] text-[14px]">{timeFormatter(item.createdAt)}</p>
+                                            <p className="text-[#2d6ff7] text-[14px]">{timeFormatter(item.createdAt)}</p>
                                         </div>
                                     </li>
                             )
