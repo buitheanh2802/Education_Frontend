@@ -125,7 +125,8 @@ const PostPage = () => {
                     <div className="self-center whitespace-nowrap">
                         <button
                             onClick={() => {
-                                history.push(button?.path);
+                                if(!localStorage.getItem('_token_')) history.push('/auth/login');
+                                else history.push(button.path);
                             }}
                             className="flex my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] "
                         >
