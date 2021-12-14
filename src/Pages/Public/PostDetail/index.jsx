@@ -48,8 +48,11 @@ const PostsDetail = () => {
     const list = async () => {
       try {
         const { data: post } = await PostApi.getPost(id);
-        const { data: otherPosts } = await PostApi.otherPost(
+        const { data: postOther } = await PostApi.otherPost(
           post?.data?.createBy?._id
+        );
+        const otherPosts = postOther?.data?.filter(
+          (item) => item?.shortId !== post?.data?.shortId
         );
         setPostDetail(post);
         setOtherPost(otherPosts);
@@ -61,7 +64,7 @@ const PostsDetail = () => {
     };
     list();
   }, [render, id]);
-
+  const fullname = postDetail?.data?.createBy?.fullname;
   const handleLike = async () => {
     setRender(true);
     if (token === null) return history.push("/auth/login");
@@ -232,7 +235,6 @@ const PostsDetail = () => {
         <Loading className="w-[40px] h-[40px] fill-current text-gray-500" />
       </div>
     );
-  console.log(postDetail);
   return (
     <>
       {/* {postDetail && (
@@ -632,7 +634,7 @@ const PostsDetail = () => {
               </button>
             </div>
           </div>
-          <PostRelated otherPost={otherPost} />
+          <PostRelated otherPost={otherPost} fullname={fullname} />
         </div>
       </div>
       <div

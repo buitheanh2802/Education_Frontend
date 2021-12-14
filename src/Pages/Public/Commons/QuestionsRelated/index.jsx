@@ -2,31 +2,30 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
 import { timeFormatter } from "src/Helpers/Timer";
-const PostRelated = ({ otherPost, fullname }) => {
+const QuestionRelated = ({ otherQuestion, fullname }) => {
+  console.log(otherQuestion);
   return (
     <>
       <div className="bg-white shadow rounded-[5px] mt-[20px] p-[15px] ">
         <div className="leading-[15px]">
           <p className="text-[17px] font-medium text-gray-600">
-            Bài viết khác từ {fullname}
+            Câu hỏi khác từ {fullname}
           </p>
           <span className="inline-block w-[60px] h-[3px] bg-gray-600 "></span>
         </div>
         <div className="mt-[5px]">
-          {otherPost?.length === 0 ? (
+          {otherQuestion?.length === 0 ? (
             <>
-              <div className="mt-[20px] text-[14px]">
-                Không có bài viết khác
-              </div>
+              <div className="mt-[20px] text-[14px]">Không có câu hỏi khác</div>
             </>
           ) : (
             <>
-              {otherPost?.map((item, index) => {
+              {otherQuestion?.map((item, index) => {
                 return (
                   <>
                     <div className="py-[10px] border-b border-gray-100">
                       <Link
-                        to={`/posts/${item?.slug}-${item?.shortId}`}
+                        to={`/question/${item?.slug}-${item?._id}`}
                         className="text-black font-medium hover:underline text-[14px]"
                       >
                         {item.title}
@@ -73,4 +72,4 @@ const PostRelated = ({ otherPost, fullname }) => {
   );
 };
 
-export default PostRelated;
+export default QuestionRelated;

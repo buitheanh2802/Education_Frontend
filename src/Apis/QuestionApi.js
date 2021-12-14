@@ -111,6 +111,10 @@ const QuestionApi = {
       }
     );
   },
+  otherQuestion(userId) {
+    const url = `/question/other-question/same-author/${userId}`;
+    return AxiosClient.get(url);
+  },
 };
 
 export default QuestionApi;

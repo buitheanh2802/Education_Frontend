@@ -18,7 +18,7 @@ import Loading from "src/Components/Loading";
 import SpamApi from "src/Apis/SpamApi";
 import Swal from "sweetalert2";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
-import PostRelated from "../Commons/PostRelated";
+import QuestionRelated from "../Commons/QuestionsRelated";
 
 const QuestionsDetail = () => {
   const shortId = useParams();
@@ -35,7 +35,7 @@ const QuestionsDetail = () => {
   const [loadingLike, setLoadingLike] = useState(false);
   const [loadingFollow, setLoadingFollow] = useState(false);
   const [loadingBookmark, setLoadingBookmark] = useState(false);
-
+  const [otherQuestion, setOtherQuestion] = useState([]);
   const history = useHistory();
   const token = localStorage.getItem("_token_");
   const idQuestion = shortId.id.split("-")[shortId.id.split("-").length - 1];
@@ -43,8 +43,14 @@ const QuestionsDetail = () => {
     setRender(false);
     const list = async (id) => {
       try {
-        // await QuestionApi.view(idQuestion);
         let { data: question } = await QuestionApi.getId(idQuestion);
+        const { data: questionOther } = await QuestionApi.otherQuestion(
+          question?.data?.createBy?._id
+        );
+        const otherQuesstions = questionOther?.data?.filter(
+          (item) => item?.slug !== question?.data?.slug
+        );
+        setOtherQuestion(otherQuesstions);
         setQuestionDetail(question);
         setLoading(false);
         if (question.data.createBy.username) {
@@ -70,7 +76,7 @@ const QuestionsDetail = () => {
     list(idQuestion);
   }, [idQuestion, render]);
   if (Object.keys(questionDetail).length === 0) return null;
-
+  const fullname = questionDetail?.data?.createBy?.fullname;
   const arrLike = questionDetail?.data?.likes;
   const checkLike = arrLike.some((a) => a === profile?._id);
   const handleLike = async () => {
@@ -657,7 +663,7 @@ const QuestionsDetail = () => {
               </button>
             </div>
           </div>
-          {/* <PostRelated /> */}
+          <QuestionRelated otherQuestion={otherQuestion} fullname={fullname} />
         </div>
       </div>
       <div
