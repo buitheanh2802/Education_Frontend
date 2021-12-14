@@ -20,6 +20,15 @@ const SulotionApi = {
     });
   },
 
+  async put(data) {
+    const url = `/solution/${data?._id}`;
+    return AxiosClient.put(url, data, {
+      headers: {
+        authorization: `Bearer ${LocalStorage.Get("_token_")}`,
+      },
+    });
+  },
+
   async post(data) {
     const url = `/solution`;
     return AxiosClient.post(url, data, {

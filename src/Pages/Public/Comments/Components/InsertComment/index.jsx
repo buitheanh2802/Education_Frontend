@@ -66,7 +66,7 @@ const InsertComment = ({ shortId, focus, parentId, setIsRepComment,userId }) => 
                         setIsShow(true)
                         if (!profile) return history.push(path.AUTH)
                     }}
-                    className={`block w-full h-[40px] overflow-y-hidden resize-none outline-none text-[15px] px-3 py-2 focus:ring-1 focus:ring-blue-200 ${errors?.content && "focus:ring-red-200"} duration-300 rounded-t`}
+                    className={`bg-gray-50 block w-full h-[40px] overflow-y-hidden resize-none outline-none text-[15px] px-3 py-2 focus:ring-1 focus:ring-blue-200 ${errors?.content && "focus:ring-red-200"} duration-300 rounded-t`}
                     placeholder="Ý kiến của bạn"
                 ></textarea>
                 {(errors?.content) && <span
