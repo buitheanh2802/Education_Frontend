@@ -18,6 +18,33 @@ const StatisticApi = {
                 authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
+    },
+
+    async statisticSolutions(option) {
+        const url = `/statistic/solutions`;
+        return AxiosClient.post(url, option, {
+            headers: {
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
+    },
+
+    async statisticUser(option) {
+        const url = `/statistic/users`;
+        return AxiosClient.post(url, option, {
+            headers: {
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
+    },
+
+    async statisticResultSulotion() {
+        const url = `/statistic/total-upload-download-challenge`;
+        return AxiosClient.post(url, {}, {
+            headers: {
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
     }
 }
 

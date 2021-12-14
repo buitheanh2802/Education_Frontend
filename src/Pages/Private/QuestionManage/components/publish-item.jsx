@@ -37,16 +37,16 @@ const PublishItem = (props) => {
     // <></>
     <div
       className="nav bg-white border-b  text-[15px] p-[10px] grid
-    grid-cols-[60px,1fr,2.5fr,0.5fr,0.5fr,1.2fr] "
+    grid-cols-[60px,1.5fr,1.2fr,0.5fr,1.2fr] "
     >
       <div className="font-medium ">{index}</div>
       <div className="font-medium mr-[30px] text-blue-500 underline ">
         <Link to={`/question/${slug}-${id}`}>{title}</Link>
       </div>
-      <div
+      {/* <div
         dangerouslySetInnerHTML={{ __html: content }}
         className="mr-[30px] text-ellipsis "
-      ></div>
+      ></div> */}
       <div className="">
         <Link className="text-blue-500 underline " to="">
           {createBy.fullname}

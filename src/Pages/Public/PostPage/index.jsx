@@ -11,7 +11,8 @@ import TagAPi from "src/Apis/TagApi";
 import UserApi from "src/Apis/UserApi";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
-import Panigation from 'src/Pages/Public/Commons/Panigation';
+import Pagination from "src/Pages/Public/Commons/Panigation";
+import queryString from 'query-string';
 
 const PostPage = () => {
     const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const PostPage = () => {
     const [trendings, setTrendings] = useState([]);
     const [follows, setFollows] = useState([]);
     const [bookmarks, setBookmarks] = useState([]);
+    const [panigation,setPanigation] = useState(null)
 
     // Navigation
     const pathName = [
@@ -39,25 +41,33 @@ const PostPage = () => {
             try {
                 dispatch(setLoading(true))
                 if (location.pathname === path.POSTS) {
-                    const { data: newests } = await PostApi.getPostNew()
+                    const query = queryString.parse(location.search);
+                    const { data: newests } = await PostApi.getPostNew(query);
                     setNewests(newests.data);
+                    setPanigation(newests.data.metaData.pagination)
                     dispatch(setLoading(false))
                 } else if (location.pathname === path.POSTS_POPULAR) {
-                    const { data: trendings } = await PostApi.getPostTren()
+                    const query = queryString.parse(location.search);
+                    const { data: trendings } = await PostApi.getPostTren(query)
                     setTrendings(trendings.data);
+                    setPanigation(trendings.data.metaData.pagination)
                     dispatch(setLoading(false))
                 } else if (location.pathname === path.POSTS_FOLLOW) {
+                    const query = queryString.parse(location.search);
                     const token = localStorage.getItem("_token_");
                     if (token) {
-                        const { data: follows } = await PostApi.getPostFol()
+                        const { data: follows } = await PostApi.getPostFol(query)
                         setFollows(follows.data);
+                        setPanigation(follows.data.metaData.pagination)
                         dispatch(setLoading(false))
                     }
                     dispatch(setLoading(false))
                 } else if (location.pathname === path.POSTS_BOOK_MARK) {
+                    const query = queryString.parse(location.search);
                     const token = localStorage.getItem("_token_");
                     if (token) {
-                        const { data: bookmarks } = await PostApi.getPostMark()
+                        const { data: bookmarks } = await PostApi.getPostMark(query);
+                        setPanigation(bookmarks.data.metaData.pagination);
                         setBookmarks(bookmarks.data);
                         dispatch(setLoading(false))
                     }
@@ -88,7 +98,12 @@ const PostPage = () => {
             }
         };
         listTagPopular();
-    }, [location.pathname]);
+    }, [location.pathname,location.search]);
+
+    const onPageChange = (e) => {
+        const query = queryString.stringify({ page : e.selected + 1});
+        history.push(`${location.pathname}?${query}`);
+    }
 
     return (
         <div className="container mx-auto mt-[55px] py-[25px]">
@@ -152,7 +167,14 @@ const PostPage = () => {
                     <TrendingTags tags={tagPopulars} />
                 </div>
             </div>
-            <Panigation />
+            {
+                panigation && panigation?.totalPage > 1 && panigation?.countDocuments !== 0 &&
+                <Pagination 
+                    pageCount={panigation.totalPage}
+                    onChange={onPageChange}
+                    currentPage={panigation.currentPage - 1}
+                />
+            }
         </div>
     );
 };

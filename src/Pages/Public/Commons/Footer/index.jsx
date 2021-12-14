@@ -168,7 +168,7 @@ const Footer = () => {
                     resetRespone("email");
                   }}
                   {...register("email", {
-                    required: regex.REQUIRED,
+                    required: regex.REQUIRED_EMAIL,
                     pattern: regex.EMAIL,
                   })}
                   disabled={isLoading}
