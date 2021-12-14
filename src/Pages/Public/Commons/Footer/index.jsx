@@ -126,7 +126,7 @@ const Footer = () => {
             </Link>
           </li>
           <li className="mb-[15px] text-gray-800">
-            <Link className="hover:text-blue-700" to={path.HOME}>
+            <Link className="hover:text-blue-700" to={path.USERS}>
               Tác giả
             </Link>
           </li>

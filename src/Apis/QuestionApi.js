@@ -115,6 +115,10 @@ const QuestionApi = {
     const url = `/question/other-question/same-author/${userId}`;
     return AxiosClient.get(url);
   },
+  searchQuestion(keySearch) {
+    const url = `/question/manager/filter?keyword=${keySearch}`;
+    return AxiosClient.post(url);
+  },
 };
 
 export default QuestionApi;

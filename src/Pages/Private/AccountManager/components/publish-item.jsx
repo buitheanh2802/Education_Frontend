@@ -21,7 +21,7 @@ const PublishItem = (props) => {
             if (dataSend) setLoading({ ...loading, success: true });
             const { data: user } = await UserApi.editManagerUser(username, dataSend);
             if (user) setLoading({ ...loading, success: false });
-            console.log("Thành công!");
+            // console.log("Thành công!");
         } catch (error) {
             console.log("Thất bại");
         }
@@ -35,7 +35,7 @@ const PublishItem = (props) => {
             }
             const { data: user } = await UserApi.editManagerUser(username, dataSend);
             if (user) reCall();
-            console.log("Thành công!");
+            // console.log("Thành công!");
         } catch (error) {
             console.log("Thất bại");
         }
@@ -80,7 +80,7 @@ const PublishItem = (props) => {
                     className='border py-[5px] px-[8px] border-green-300 rounded' name="role"
                 >
                     <option value="user">User</option>
-                    <option value="collaborator">Collaborator</option>
+                    <option value="collaborators">Collaborator</option>
                     <option value="admin">Admin</option>
                 </select>
             </div>

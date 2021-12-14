@@ -25,9 +25,12 @@ export const path = {
   CHANGE_PERSONAL: "/profile/me/change-info/personal",
   CHANGE_PASSWORD: "/profile/me/change-info/password",
 
+  //list user
+  USERS: "/users",
   //Profile_user
   USER_ID: "/user/:username",
   USER_POST: "/user/:username/post",
+  USER_QUESTION: "/user/:username/question",
   USER_FOLLOWER: "/user/:username/follower",
   USER_FOLLOWING: "/user/:username/following",
   USER_BOOKMARK: "/user/:username/bookmark/post",
@@ -106,6 +109,7 @@ export const path = {
   CHALLENGE_SOLUTION_DETAIL_ID: "/challenge/solution-detail/:solutionId",
   CHALLENGE_SOLUTION_CHALLENGE_ID: "/challenge/solution/:challengeId",
   MANAGER_CHART: "/manager/chart",
+  SOLUTION_ID: "/solution/:solutionId",
 
   //Quiz
   QUIZ: "/quiz",

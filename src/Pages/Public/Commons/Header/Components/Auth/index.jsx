@@ -6,16 +6,15 @@ import { path } from 'src/Constants/';
 import Notification from '../Notification';
 import { ActionLogout } from 'src/Redux/Actions/Auth.action';
 import { hasNotification } from 'src/Redux/Slices/Notification.slice';
-import { notificationGets } from 'src/Redux/Actions/Notification.action';
+import { notificationGets, notificationReadAll } from 'src/Redux/Actions/Notification.action';
 import Loading from 'src/Components/Loading';
 
 const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotification, active }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const { profile, actionLoading } = useSelector(state => state.Auth);
-    const { counter } = useSelector(state => state.Notification);
+    const { counter, models } = useSelector(state => state.Notification);
     const { socket } = useSelector(state => state.SocketService);
-
     // listen notification 
     useEffect(() => {
         socket.on('responseForJoin', (data) => { });
@@ -24,7 +23,12 @@ const Auth = ({ isPopup, setIsPopup, setIsMenu, isNotification, setIsNotificatio
             dispatch(notificationGets(localStorage.getItem("_token_")))
         })
     }, []);
-
+    // set counter notification
+    useEffect(() => {
+        if (isNotification && counter !== 0) {
+            dispatch(notificationReadAll(localStorage.getItem("_token_")))
+        }
+    }, [isNotification]);
     return (
         <>
             {profile ?

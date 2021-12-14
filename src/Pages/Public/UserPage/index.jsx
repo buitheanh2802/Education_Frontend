@@ -13,8 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 import FollowApi from "src/Apis/FollowApi";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import NotificationApi from "src/Apis/NotificationApi";
+import UserQuestion from "./UserQuestion";
 
 const Userpage = (props) => {
+    window.scrollTo(0,0);
     const username = props.match.params.username;
     const [user, setUser] = useState(null);
     const dispatch = useDispatch();
@@ -55,6 +57,10 @@ const Userpage = (props) => {
         {
             path: `/user/${username}`,
             value: "Bài viết",
+        },
+        {
+            path: `/user/${username}/question`,
+            value: "Câu hỏi",
         },
         {
             path: `/user/${username}/bookmark/post`,
@@ -146,6 +152,14 @@ const Userpage = (props) => {
                                     <UserFollowing {...props} />
                                 )}
                             ></Route>
+                            <Route
+                            exact
+                            path={path.USER_QUESTION}
+                            render={(props) => (
+                                <UserQuestion {...props} />
+                            )}
+                            >
+                            </Route>
                             <Route
                                 exact
                                 path={path.USER_FOLLOWER}

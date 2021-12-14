@@ -10,6 +10,7 @@ import ChangePersonal from "./ChangePersonal";
 import ChangePassword from "./ChangePassword";
 
 const EditProfile = () => {
+    window.scrollTo(0,0);
     const dispatch = useDispatch();
     const [profileDetail, setProfileDetail] = useState([]);
 
