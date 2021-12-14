@@ -58,7 +58,7 @@ const SearchPage = () => {
         }
       };
       listTagPopular();
-    } catch (error) { }
+    } catch (error) {}
   }, [keyword]);
   // console.log("post", dataSearchPost);
   // console.log("question", dataSearchQuestion);
@@ -121,13 +121,13 @@ const SearchPage = () => {
                             <div className="mr-[15px] hidden sm:block">
                               {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                                 <Link
-                                  to={`/user/${item?.createBy?.username}`} >
-                                  <img
-                                    className="mx-auto max-h-[40px] rounded-full"
-                                    width="40px" height="40px"
-                                    src={item?.createBy?.avatar?.avatarUrl}
-                                    alt="Avatar" />
-                                </Link>
+                                  to=""
+                                  className="mt-[5px] inline-block border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
+                                  style={{
+                                    backgroundImage: `url(${item?.createBy?.avatar?.avatarUrl})`,
+                                  }}
+                                  alt={item?.createBy?.fullname}
+                                ></Link>
                               ) : (
                                 <Link
                                   to={`/user/${item?.createBy?.username}`}
@@ -184,12 +184,12 @@ const SearchPage = () => {
                                     <span>{item?.views}</span>
                                   </div>
                                   <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                                    <Icon.Chat className="fill-current w-[15px]" />
-                                    <span>{item?.comments}</span>
+                                    <Icon.Like className="fill-current w-[15px]" />
+                                    <span>{item?.countLikes}</span>
                                   </div>
                                   <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                                    <Icon.Bookmark className="fill-current w-[15px]" />
-                                    <span>{item?.bookmarks}</span>
+                                    <Icon.Bookmark className="fill-current w-[14px]" />
+                                    <span>{item?.countBookmarks}</span>
                                   </div>
                                 </div>
                                 <Icon.Pen className="fill-current w-[20px] text-[#5f5f5f]" />

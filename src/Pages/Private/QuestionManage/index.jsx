@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Header from "./components/header";
 import PublishItem from "./components/publish-item";
 import queryString from "query-string";
@@ -11,14 +11,13 @@ const QuesionManage = (props) => {
   const query = queryString.parse(props.location.search, {
     parseNumbers: true,
   });
-  // __state
   const [startCall, setStartCall] = useState(false);
   const [questionList, setQuestionList] = useState(null);
   const [pagination, setPagination] = useState(null);
   const [render, setRender] = useState(false);
+  const timeout = useRef(null);
   // __effect
   useEffect(() => {
-    // setRender(false);
     async function getData() {
       try {
         // start call api
@@ -41,10 +40,26 @@ const QuesionManage = (props) => {
     getData();
   }, []);
 
+  const handleSearch = async (e) => {
+    try {
+      if (timeout.current) {
+        clearTimeout(timeout.current);
+      }
+      timeout.current = setTimeout(async () => {
+        const { data: resultSearch } = await QuestionApi.searchQuestion(
+          e.target.value
+        );
+        setQuestionList(resultSearch.data);
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // __render data
   return (
     <div className="w-full">
-      <Header />
+      <Header handleSearch={handleSearch} />
       <PublishNav />
       {startCall && <SkeletonGroup />}
       {questionList &&

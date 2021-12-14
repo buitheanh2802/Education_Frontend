@@ -1070,12 +1070,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 15px;
 }
 
-.mb-1 {
-  margin-bottom: 0.25rem;
-}
-
 .mb-5 {
   margin-bottom: 1.25rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
 }
 
 .mr-2\.5 {
@@ -1140,14 +1140,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .ml-\[8px\] {
   margin-left: 8px;
-}
-
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
 }
 
 .block {
@@ -1270,6 +1262,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 70px;
 }
 
+.h-\[450px\] {
+  height: 450px;
+}
+
 .h-\[30px\] {
   height: 30px;
 }
@@ -1364,14 +1360,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-\[15px\] {
   height: 15px;
-}
-
-.h-\[350px\] {
-  height: 350px;
-}
-
-.h-\[450px\] {
-  height: 450px;
 }
 
 .max-h-\[110px\] {
@@ -1842,6 +1830,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-template-columns: 60px 1fr 2.5fr 0.5fr 0.5fr 1.2fr;
 }
 
+.grid-cols-\[60px\2c 1\.5fr\2c 1\.2fr\2c 0\.5fr\2c 1\.2fr\] {
+  grid-template-columns: 60px 1.5fr 1.2fr 0.5fr 1.2fr;
+}
+
 .grid-cols-\[60px\2c 1\.5fr\2c 1fr\2c 0\.75fr\2c 0\.75fr\2c 1\.2fr\] {
   grid-template-columns: 60px 1.5fr 1fr 0.75fr 0.75fr 1.2fr;
 }
@@ -2301,11 +2293,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-\[\#4A5568\] {
   --tw-border-opacity: 1;
   border-color: rgb(74 85 104 / var(--tw-border-opacity));
-}
-
-.border-gray-50 {
-  --tw-border-opacity: 1;
-  border-color: rgb(249 250 251 / var(--tw-border-opacity));
 }
 
 .bg-green-100 {
@@ -3218,6 +3205,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 13px;
 }
 
+.text-\[17px\] {
+  font-size: 17px;
+}
+
 .text-\[35px\] {
   font-size: 35px;
 }
@@ -3505,6 +3496,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(102 102 102 / var(--tw-text-opacity));
 }
 
+.text-blue-800 {
+  --tw-text-opacity: 1;
+  color: rgb(30 64 175 / var(--tw-text-opacity));
+}
+
 .text-purple-400 {
   --tw-text-opacity: 1;
   color: rgb(192 132 252 / var(--tw-text-opacity));
@@ -3513,11 +3509,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-\[\#333\] {
   --tw-text-opacity: 1;
   color: rgb(51 51 51 / var(--tw-text-opacity));
-}
-
-.text-blue-800 {
-  --tw-text-opacity: 1;
-  color: rgb(30 64 175 / var(--tw-text-opacity));
 }
 
 .text-yellow-400 {

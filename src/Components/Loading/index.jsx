@@ -1,14 +1,14 @@
-import React from 'react'
-import './style.css'
+import React from "react";
+import "./style.css";
 
 const Loading = ({ ...props }) => {
-    return (
-        <div className="containerLoading">
-        <div className="loading">
+  return (
+    <>
+      <div className="containerLoading">
+        <div className="loading"></div>
+      </div>
+    </>
+  );
+};
 
-        </div>
-    </div>
-    )
-}
-
-export default Loading
+export default Loading;

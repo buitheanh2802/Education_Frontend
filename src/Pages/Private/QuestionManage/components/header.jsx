@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ handleSearch }) => {
   return (
     <div className="p-4 bg-white block w-full sm:flex items-center justify-between border-b border-gray-200">
       <div className="mb-1 w-full">
@@ -59,11 +59,12 @@ const Header = () => {
             </label>
             <div className="mt-1 relative sm:w-64 xl:w-96">
               <input
+                onChange={(e) => handleSearch(e)}
                 type="text"
                 name="email"
                 id="products-search"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                placeholder="Tìm kiếm bài viết"
+                placeholder="Tìm kiếm câu hỏi"
               />
             </div>
           </form>
