@@ -171,7 +171,7 @@ const Header = ({ name }) => {
                                         clipRule="evenodd"
                                     />
                                 </svg>
-                                Add product
+                                Thêm bài tập
                             </button>
                         </div>
                     </div>

@@ -34,7 +34,7 @@ const Modal = ({ isShowing, hide, onAdd }) => {
 
     return (
         isShowing ? (
-            <div className="w-[60%] mx-auto fixed left-[28%] top-[20%] bg-white shadow-lg border border-green-500 rounded z-10">
+            <div className="w-[60%] fixed left-[28%] top-[20%] bg-white shadow-lg border border-green-500 rounded z-10">
                 <div className="px-[20px] py-[20px]">
                     <div className="flex justify-between border-b border-gray-500">
                         <span className="mb-[20px] font-bold text-green-500 text-[26px]">Thêm tag</span>

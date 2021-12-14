@@ -82,23 +82,23 @@ const UserFollowing = (props) => {
                             return (
                                 <div key={index} className="flex items-center py-[20px] px-[10px] my-[5px] bg-white">
                                     <div>
-                                        {item?.followingUserId?.avatar?.avatarUrl ? (
+                                        {item?.avatar?.avatarUrl ? (
                                             <img
-                                                src={item?.followingUserId?.avatar?.avatarUrl}
+                                                src={item?.avatar?.avatarUrl}
                                                 className="mx-auto max-h-[40px] rounded-full"
                                                 width="40px"
                                                 height="40px"
                                             />
                                         ) : (
                                             <div className="py-[5px] text-[#4A5568] mx-auto text-center w-[40px] h-[40px] rounded-full bg-blue-300 font-bold text-[20px]">
-                                                {item?.followingUserId?.fullname?.toUpperCase().substring(0, 1)}
+                                                {item?.fullname?.toUpperCase().substring(0, 1)}
                                             </div>
                                         )}
                                     </div>
                                     <div className="ml-[12px] my-auto">
                                         <div className="">
-                                            <Link to={`/user/${item?.followingUserId?.username}`} className="text-[16px] font-semibold inline-block">
-                                                {item?.followingUserId?.fullname}
+                                            <Link to={`/user/${item?.username}`} className="text-[16px] font-semibold inline-block">
+                                                {item?.fullname}
                                             </Link>
                                         </div>
                                         <div className="flex">
@@ -106,7 +106,7 @@ const UserFollowing = (props) => {
                                                 <span className="flex items-center text-[14px] text-gray-500">
                                                     <Icon.Point className="fill-current w-[10px]" />
                                                     <span className="text-[13px] mx-[2px]">
-                                                        {item?.followingUserId?.points}
+                                                        {item?.points}
                                                     </span>
                                                 </span>
                                             </p>
@@ -114,7 +114,7 @@ const UserFollowing = (props) => {
                                                 <span className="flex items-center text-[14px] text-gray-500">
                                                     <Icon.Pen className="fill-current w-[10px]" />
                                                     <span className="text-[13px] mx-[2px]">
-                                                        {item?.followingUserId?.postCounts}
+                                                        {item?.postCounts}
                                                     </span>
                                                 </span>
                                             </p>{" "}
@@ -122,28 +122,28 @@ const UserFollowing = (props) => {
                                                 <span className="flex items-center text-[14px] text-gray-500">
                                                     <Icon.Questions className="fill-current w-[10px] mx-[2px]" />
                                                     <span className="text-[13px] mx-[2px]">
-                                                        {item?.followingUserId?.questionCounts}
+                                                        {item?.questionCounts}
                                                     </span>
                                                 </span>
                                             </p>
                                         </div>
                                     </div>
-                                    {item?.followingUserId?.username === profile?.username ?
+                                    {item?.username === profile?.username ?
                                         <div className="mx-[10px]">
                                             <button onClick={() => history.push('/profile/me')} className="min-w-[106px] mt-[10px] bg-[#0d61c7] border border-[#0d61c7] hover:bg-[#fff] hover:text-[#0d61c7] text-[#fff] rounded md:px-[10px] md:py-[5px] md:text-[14px] px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px] ">
                                                 Xem thông tin
                                             </button>
                                         </div>
                                         :
-                                        item?.followingUserId?.isFollowing ? (
-                                            <div onClick={() => handleUnFollow(item?.followingUserId?.username)} className="min-w-[116px] mx-[10px] text-center my-auto text-white border border-[#6C91F0] font-bold rounded text-[15px] bg-[#1273eb] hover:bg-blue-200 hover:text-[#6C91F0]">
+                                        item?.isFollowing ? (
+                                            <div onClick={() => handleUnFollow(item?.username)} className="min-w-[116px] mx-[10px] text-center my-auto text-white border border-[#6C91F0] font-bold rounded text-[15px] bg-[#1273eb] hover:bg-blue-200 hover:text-[#6C91F0]">
                                                 <button className="font-bold px-[10px] py-[5px] ">
                                                     {" "}
                                                     - Bỏ theo dõi
                                                 </button>
                                             </div>
                                         ) : (
-                                            <div onClick={() => handleFollow(item?.followingUserId?.username)} className="min-w-[106px] mx-[10px] text-center my-auto text-[#6C91F0] border border-[#6C91F0] font-bold rounded text-[15px] hover:bg-[#1273eb] hover:text-white">
+                                            <div onClick={() => handleFollow(item?.username)} className="min-w-[106px] mx-[10px] text-center my-auto text-[#6C91F0] border border-[#6C91F0] font-bold rounded text-[15px] hover:bg-[#1273eb] hover:text-white">
                                                 <button className="font-bold px-[10px] py-[5px] ">
                                                     {" "}
                                                     + Theo dõi
@@ -152,7 +152,7 @@ const UserFollowing = (props) => {
                                         )
                                     }
                                 </div>
-                            );
+                            )
                         })}
                     </div>
                 </div>

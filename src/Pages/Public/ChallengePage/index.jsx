@@ -11,6 +11,7 @@ import { SplitString } from 'src/Helpers/';
 import { UpperCaseOneKey } from 'src/Helpers/';
 import { Link } from 'react-router-dom';
 import { CompactText } from 'src/Helpers/';
+import ChallengeApi from 'src/Apis/ChallengeApi';
 
 const ChallengePage = () => {
     const dispatch = useDispatch();
@@ -31,6 +32,14 @@ const ChallengePage = () => {
         return () => dispatch(resetChallenge());
     }, [dispatch, cateid])
 
+    const filter = (e) => {
+        // try {
+        //     const { data: challenges } = await ChallengeApi.FilterChallenges(cateid, e.target.value);
+        //     setChallenge(challenges);
+        // } catch (error) {
+        //     console.log(error);
+        // }
+    }
 
     const pathName = [
         { path: path.CHALLENGE, value: "Danh mục bài tập" },
@@ -39,29 +48,42 @@ const ChallengePage = () => {
 
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
-            {routeName && <div className="flex justify-between gap-[15px] mb-3">
-                <div className="py-[10px] flex items-center overflow-x-auto w-full whitespace-nowrap">
-                    {pathName?.map((item, index) => {
-                        if (index === 0) return (
-                            <Link
-                                key={index}
-                                to={item.path}
-                                className="relative after:absolute after:top-1/2 after:transform after:translate-y-[-45%] after:h-2/3 after:right-[-5px] after:w-[1px] after:bg-gray-500 after:rotate-[-20deg] text-[22px] px-[5px] text-gray-600 mr-[10px] font-medium hover:text-blue-600">
-                                {UpperCaseOneKey(item.value, 3, 2)}
-                            </Link>
-                        )
+            {routeName &&
+                <div className="flex justify-between gap-[15px] mb-3">
+                    <div className="py-[10px] flex items-center overflow-x-auto whitespace-nowrap">
+                        {pathName?.map((item, index) => {
+                            if (index === 0) return (
+                                <Link
+                                    key={index}
+                                    to={item.path}
+                                    className="relative after:absolute after:top-1/2 after:transform after:translate-y-[-45%] after:h-2/3 after:right-[-5px] after:w-[1px] after:bg-gray-500 after:rotate-[-20deg] text-[22px] px-[5px] text-gray-600 mr-[10px] font-medium hover:text-blue-600">
+                                    {UpperCaseOneKey(item.value, 3, 2)}
+                                </Link>
+                            )
 
-                        return (
-                            <Link
-                                key={index}
-                                to={item.path}
-                                className="text-[16px] font-light px-[5px] text-blue-600">
-                                {UpperCaseOneKey(item?.value)}
-                            </Link>
-                        )
-                    })}
-                </div>
-            </div>}
+                            return (
+                                <Link
+                                    key={index}
+                                    to={item.path}
+                                    className="text-[16px] font-light px-[5px] text-blue-600">
+                                    {UpperCaseOneKey(item?.value)}
+                                </Link>
+                            )
+                        })}
+                    </div>
+                    <div className='flex py-[10px]'>
+                        <span className="mr-[10px] py-[5px]">Sắp xếp theo</span>
+                        <select onChange={(e) => filter(e)} 
+                            className='border py-[5px] px-[8px] border-blue-300 rounded outline-none'
+                            name="filter"
+                        >
+                            <option value="">Tất cả</option>
+                            <option value="1">Sơ cấp</option>
+                            <option value="2">Trung cấp</option>
+                            <option value="3">Nâng cao</option>
+                        </select>
+                    </div>
+                </div>}
             {routeName ? <div className='w-full h-[200px] filter sepia-0'>
                 <img className='w-full h-full object-cover rounded grayscale-[20%]' src="https://drive.google.com/uc?id=1jMaHlFfIUPnLrjuoNjSoAUaJGYMbDOFl" />
             </div> : <Skeleton className="h-[200px] py-[15px] border" />}
