@@ -222,10 +222,24 @@ const Header = () => {
                 />
                 <span
                   onClick={() => setIsSearch(!isSearch)}
-                  className="hidden  lg:block pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
+                  className={
+                    isSearch
+                      ? "hidden"
+                      : "hidden  lg:block pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
+                  }
                 >
                   <Icon.Search className="w-[22px] h-[22px] mr-[3px] cursor-pointer  fill-current" />
                 </span>
+                <button
+                  type="submit"
+                  className={
+                    isSearch
+                      ? "hidden  lg:block pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
+                      : "hidden"
+                  }
+                >
+                  <Icon.Search className="w-[22px] h-[22px] mr-[3px] cursor-pointer  fill-current" />
+                </button>
               </form>
               <Auth
                 isNotification={isNotification}

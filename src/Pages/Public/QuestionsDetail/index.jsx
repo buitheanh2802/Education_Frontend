@@ -42,6 +42,7 @@ const QuestionsDetail = () => {
   const idQuestion = shortId.id.split("-")[shortId.id.split("-").length - 1];
   useEffect(() => {
     setRender(false);
+    setLoading(true);
     const list = async (id) => {
       try {
         let { data: question } = await QuestionApi.getId(idQuestion);
