@@ -10,7 +10,7 @@ const Comments = ({ shortId, userId }) => {
     useEffect(() => dispatch(ActionGetsComment(shortId)), [dispatch, shortId])
 
     return (
-        <div className="comments w-full">
+        <div className="comments w-full bg-white rounded p-2 border border-gray-100">
             <h3 className="font-medium text-lg my-3">Tổng số thảo luận <span className="font-normal text-base">({Comments?.pagination?.countDocuments})</span></h3>
             {shortId && <>
                 <InsertComment userId={userId} shortId={shortId} />
