@@ -11,6 +11,7 @@ import TagAPi from "src/Apis/TagApi";
 import UserApi from "src/Apis/UserApi";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
+import Panigation from 'src/Pages/Public/Commons/Panigation';
 
 const PostPage = () => {
     const dispatch = useDispatch();
@@ -151,6 +152,7 @@ const PostPage = () => {
                     <TrendingTags tags={tagPopulars} />
                 </div>
             </div>
+            <Panigation />
         </div>
     );
 };
