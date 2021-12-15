@@ -153,7 +153,7 @@ const Header = () => {
                                         clipRule="evenodd"
                                     />
                                 </svg>
-                                Add product
+                                Thêm thể loại
                             </button>
                         </div>
                     </div>

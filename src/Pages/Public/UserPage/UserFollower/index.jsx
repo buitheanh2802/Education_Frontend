@@ -60,6 +60,7 @@ const UserFollower = (props) => {
                 setUserFollowers(followerUser.data.models);
                 dispatch(setLoading(false))
             } catch (error) {
+                dispatch(setLoading(false));
                 console.log(error);
             }
         };

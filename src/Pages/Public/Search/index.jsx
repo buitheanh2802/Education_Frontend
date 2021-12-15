@@ -58,10 +58,10 @@ const SearchPage = () => {
         }
       };
       listTagPopular();
-    } catch (error) {}
+    } catch (error) {
+      setLoading(false);
+    }
   }, [keyword]);
-  // console.log("post", dataSearchPost);
-  // console.log("question", dataSearchQuestion);
 
   const handleActivePost = () => {
     setTabPost(true);
@@ -71,6 +71,7 @@ const SearchPage = () => {
     setTabPost(false);
     setTabQuestion(true);
   };
+
   return (
     <>
       {loading && <Loading />}
@@ -120,14 +121,15 @@ const SearchPage = () => {
                           >
                             <div className="mr-[15px] hidden sm:block">
                               {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
-                                <Link
-                                  to=""
-                                  className="mt-[5px] inline-block border border-gray-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full bg-center bg-cover"
-                                  style={{
-                                    backgroundImage: `url(${item?.createBy?.avatar?.avatarUrl})`,
-                                  }}
-                                  alt={item?.createBy?.fullname}
-                                ></Link>
+                                <Link to={`/user/${item?.createBy?.username}`}>
+                                  <img
+                                    className="mx-auto max-h-[40px] rounded-full"
+                                    width="40px"
+                                    height="40px"
+                                    src={item?.createBy?.avatar?.avatarUrl}
+                                    alt="Avatar"
+                                  />
+                                </Link>
                               ) : (
                                 <Link
                                   to={`/user/${item?.createBy?.username}`}
@@ -207,7 +209,7 @@ const SearchPage = () => {
               </div>
             </div>
           </div>
-          <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded">
+          <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded lg:block hidden">
             <FeaturedAuthor authors={featuredAuthor} />
             <TrendingTags tags={tagPopular} />
           </div>

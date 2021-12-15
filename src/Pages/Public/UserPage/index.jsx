@@ -89,6 +89,7 @@ const Userpage = (props) => {
                 setUser(users.data);
                 dispatch(setLoading(false))
             } catch (error) {
+                dispatch(setLoading(false));
                 console.log(error);
             }
         };

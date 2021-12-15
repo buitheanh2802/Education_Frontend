@@ -17,11 +17,12 @@ const EditProfile = () => {
     useEffect(() => {
         const proDetail = async () => {
             try {
-                dispatch(setLoading(true))
+                dispatch(setLoading(true));
                 const { data : profileDetail } = await AuthApi.profileDetail();
                 setProfileDetail(profileDetail.data)
-                dispatch(setLoading(false))
+                dispatch(setLoading(false));
             } catch (error) {
+                dispatch(setLoading(false));
                 console.log(error.response);
             }
         }

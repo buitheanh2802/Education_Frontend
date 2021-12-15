@@ -18,6 +18,7 @@ const UserPost = (props) => {
         setUserPost(postUser.data.models);
         dispatch(setLoading(false))
       } catch (error) {
+        dispatch(setLoading(false));
         console.log(error);
       }
     };

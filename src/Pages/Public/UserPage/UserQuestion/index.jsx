@@ -18,6 +18,7 @@ const UserQuestion = (props) => {
         setUserQuestion(questionUser.data.models);
         dispatch(setLoading(false))
       } catch (error) {
+        dispatch(setLoading(false));
         console.log(error);
       }
     };

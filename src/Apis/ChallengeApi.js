@@ -86,6 +86,15 @@ const ChallengeApi = {
       },
     });
   },
+  async FilterChallenges(cateId, level) {
+    const token = localStorage.getItem("_token_");
+    const url = `/challenges/${cateId}/challenge-categories?level=${level}`;
+    return AxiosClient.get(url, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+  }
 };
 
 export default ChallengeApi;

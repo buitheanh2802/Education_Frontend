@@ -33,6 +33,7 @@ const ModalEdit = ({ isShowingEdit, hide, name, id, slug, photo, onEdit }) => {
             hide();
             swal("Sửa tag thành công!");
         } catch (error) {
+            setLoading({ ...loading, success: false });
             console.log(error);
             swal("Sửa tag thất bại!");
         }

@@ -18,7 +18,7 @@ const Notfound = () => {
             <div className="text-center py-[15px]">
                 <div className="mb-[20px]">
                     <button onClick={() => { history.push('/') }}
-                        className="bg-[#F56565] rounded-[5px] md:py-[8px] sm:py-[5px] py-[3px] px-[16px] mx-auto text-white hover:bg-[#C53030]">
+                        className="bg-blue-600 opacity-60 rounded-[5px] md:py-[8px] sm:py-[5px] py-[3px] px-[16px] mx-auto text-white hover:bg-blue-800">
                         Đi tới trang chủ
                     </button>
                 </div>

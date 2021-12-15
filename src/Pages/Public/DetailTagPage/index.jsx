@@ -32,6 +32,7 @@ const DetailTagPage = () => {
                 setTag(tag.data);
                 dispatch(setLoading(false))
             } catch (error) {
+                dispatch(setLoading(false))
                 console.log("Failed to get data", error);
             }
         }
@@ -64,6 +65,7 @@ const DetailTagPage = () => {
                     dispatch(setLoading(false))
                 }
             } catch (error) {
+                dispatch(setLoading(false))
                 console.log(error);
             }
         };

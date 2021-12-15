@@ -1,30 +1,34 @@
 import AxiosClient from "./AxiosClient";
 
 const PostApi = {
-  getPostNew() {
+  getPostNew(params) {
     const url = `/post/newest`;
-    return AxiosClient.get(url);
+    return AxiosClient.get(url, {
+      params
+    });
   },
-  getPostTren() {
+  getPostTren(params) {
     const url = `/post/trending`;
-    return AxiosClient.get(url);
+    return AxiosClient.get(url,params);
   },
-  getPostFol() {
+  getPostFol(params) {
     const token = localStorage.getItem("_token_");
     const url = `/post/following`;
     return AxiosClient.get(url, {
       headers: {
         authorization: `Bearer ${token}`,
       },
+      params
     });
   },
-  getPostMark() {
+  getPostMark(params) {
     const token = localStorage.getItem("_token_");
     const url = `/post/bookmark`;
     return AxiosClient.get(url, {
       headers: {
         authorization: `Bearer ${token}`,
       },
+      params
     });
   },
   get(id) {

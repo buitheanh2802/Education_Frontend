@@ -59,6 +59,7 @@ const UserTag = (props) => {
         setUserTag(tagUser.data.models);
         dispatch(setLoading(false))
       } catch (error) {
+        dispatch(setLoading(false));
         console.log(error);
       }
     };

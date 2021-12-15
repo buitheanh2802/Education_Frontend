@@ -72,24 +72,13 @@ const Header = () => {
           </h1>
           <div className="flex items-center gap-[15px]">
             <form className="relative ">
-              <input
-                type="text"
-                className={
-                  isSearch
-                    ? "absolute block lg:hidden top-0 right-full translate-x-[25px] translate-y-[-2px] text-[14px] transition text-gray-700 focus:outline-none rounded-[5px] pl-[10px] py-[3px] opacity-100 w-[250px] border border-gray-300"
-                    : "absolute block lg:hidden top-0 right-full translate-x-[25px] translate-y-[-2px] text-[14px] transition focus:outline-none rounded-[5px] pl-[10px] py-[3px] opacity-0 w-[30px] border border-gray-300"
-                }
-                // className="absolute top-0 right-full translate-x-[25px] translate-y-[-2px] text-[14px] rounded-[10px] pl-[10px] py-[3px] w-[250px] border border-gray-300"
-                placeholder="Tìm kiếm..."
-              />
               <span
                 onClick={() => setIsSearch(!isSearch)}
-                className="block lg:hidden pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
+                className="lg:hidden block pr-[10px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] border-r border-blue-600"
               >
-                <Icon.Search className="w-[22px] h-[22px] mr-[3px] cursor-pointer  fill-current" />
+                <Icon.SearchLarge className="w-[22px] h-[22px] mr-[5px] cursor-pointer text-blue-600 fill-current" />
               </span>
             </form>
-
             {profile && (
               <i
                 onClick={() => setIsNotification(!isNotification)}
@@ -115,7 +104,7 @@ const Header = () => {
               isMenu ? "ml-0 sm:ml-[50%] md:ml-[60%]" : "ml-[100%] lg:ml-0"
             } menu_top lg:flex w-full lg:justify-between font-medium text-[14px] sm:text-[16px] lg:transform lg:translate-y-[2px]`}
           >
-            <ul className="flex justify-between lg:hidden  py-[10px] border-b px-[15px] lg:px-0">
+            <ul className="flex justify-between lg:hidden py-[10px] border-b px-[15px] lg:px-0">
               {profile ? (
                 <Link
                   to={path.PROFILE_ME}
@@ -207,28 +196,30 @@ const Header = () => {
                 </NavLink>
               </li>
             </ul>
-            <div className=" flex items-center">
+            <div className="flex items-center">
               <form onSubmit={(e) => EnterEvent(e)} className="relative ">
                 <input
                   type="text"
-                  onChange={(e) => setSearchKey(e.target.value)}
+                  onChange={(e) => {
+                    setIsSearch(true);
+                    setSearchKey(e.target.value);
+                  }}
+                  onBlur={() => {
+                    setIsSearch(false);
+                  }}
+                  onClick={() => setIsSearch(true)}
                   className={
                     isSearch
-                      ? "absolute top-0 right-full hidden lg:block translate-x-[25px] translate-y-[-3px] text-[14px] transition text-gray-700 focus:outline-none rounded-[5px] pl-[10px] py-[3px] opacity-100 w-[250px] border border-gray-600"
-                      : "absolute top-0 right-full hidden lg:block translate-x-[25px] translate-y-[-3px] text-[14px] transition focus:outline-none rounded-[5px] pl-[10px] py-[3px] opacity-0 w-[30px] border border-gray-300"
+                      ? "absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] transition text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 w-[350px] border border-blue-600"
+                      : "absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] transition text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 w-[200px] border border-blue-600"
                   }
-                  // className="absolute top-0 right-full translate-x-[25px] translate-y-[-2px] text-[14px] rounded-[10px] pl-[10px] py-[3px] w-[250px] border border-gray-300"
                   placeholder="Tìm kiếm..."
                 />
                 <span
                   onClick={() => setIsSearch(!isSearch)}
-                  className={
-                    isSearch
-                      ? "hidden"
-                      : "hidden  lg:block pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
-                  }
+                  className="hidden lg:block border-r border-blue-600 pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%]"
                 >
-                  <Icon.Search className="w-[22px] h-[22px] mr-[3px] cursor-pointer  fill-current" />
+                  <Icon.SearchLarge className="w-[22px] h-[22px] pr-[5px] cursor-pointer text-blue-600 fill-current" />
                 </span>
                 <button
                   type="submit"
@@ -237,9 +228,7 @@ const Header = () => {
                       ? "hidden  lg:block pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
                       : "hidden"
                   }
-                >
-                  <Icon.Search className="w-[22px] h-[22px] mr-[3px] cursor-pointer  fill-current" />
-                </button>
+                ></button>
               </form>
               <Auth
                 isNotification={isNotification}
