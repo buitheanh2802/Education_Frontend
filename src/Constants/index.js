@@ -122,7 +122,7 @@ export const path = {
 export const regex = {
   PASSWORD: {
     value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-    message: "Yêu cầu chứa ít nhất 1 ký tự số, chữ và không có khoảng trắng",
+    message: "Yêu cầu chứa ít nhất 1 ký tự số, chữ, không có khoảng trắng và không có ký tự đặc biệt",
   },
 
   EMAIL: {

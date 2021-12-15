@@ -18,11 +18,11 @@ const ProfilePage = () => {
                 setProfileDetail(profileDetail.data)
                 dispatch(setLoading(false))
             } catch (error) {
+                dispatch(setLoading(false));
                 console.log(error.response);
             }
         }
         proDetail();
-
     }, []);
 
 

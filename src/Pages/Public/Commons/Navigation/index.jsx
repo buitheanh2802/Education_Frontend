@@ -31,7 +31,7 @@ const Navigation = ({ path, button }) => {
                     history.push(button?.path);
                   }
             }
-            className="flex my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] "
+            className="flex hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] "
           >
             <div className="self-center">
               <button.icon className="w-[15px] fill-current" />{" "}

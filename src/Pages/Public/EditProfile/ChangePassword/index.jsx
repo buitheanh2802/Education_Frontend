@@ -37,11 +37,27 @@ const ChangePassword = ({ profile }) => {
                 history.push('/profile/me/change-info')
             }, 2000);
         } catch (error) {
-            setResponse({
-                ...response,
-                message: null,
-                error: ResponseMessage(error?.response?.data?.message[0]),
-            })
+            setLoading({ ...loading, success: false });
+            if(error.response.data.message[0] === "CURRENT_PASSWORD_INCORRECT") {
+                setResponse({
+                    ...response,
+                    message: null,
+                    error: "Mật khẩu cũ không khớp"
+                })
+            } else if (error.response.data.message[0] === "SAME_PASSWORD") {
+                setResponse({
+                    ...response,
+                    message: null,
+                    error: "Mật khẩu mới trùng với mật khẩu hiện tại"
+                })
+            } else if(error.response.data.message[0] === "INVALID_DATA") {
+                setResponse({
+                    ...response,
+                    message: null,
+                    error: "Mật khẩu phải tối thiểu 8 kí tự, ít nhất một chữ cái và một số!"
+                })
+            }
+            
         }
     }
 

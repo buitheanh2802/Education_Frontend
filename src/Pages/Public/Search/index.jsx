@@ -58,10 +58,10 @@ const SearchPage = () => {
         }
       };
       listTagPopular();
-    } catch (error) { }
+    } catch (error) {
+      setLoading(false);
+    }
   }, [keyword]);
-  // console.log("post", dataSearchPost);
-  // console.log("question", dataSearchQuestion);
 
   const handleActivePost = () => {
     setTabPost(true);
@@ -71,6 +71,7 @@ const SearchPage = () => {
     setTabPost(false);
     setTabQuestion(true);
   };
+
   return (
     <>
       {loading && <Loading />}
@@ -207,7 +208,7 @@ const SearchPage = () => {
               </div>
             </div>
           </div>
-          <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded">
+          <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded md:hidden">
             <FeaturedAuthor authors={featuredAuthor} />
             <TrendingTags tags={tagPopular} />
           </div>

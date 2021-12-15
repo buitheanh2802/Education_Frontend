@@ -28,6 +28,7 @@ const Modal = ({ isShowing, hide, onAdd }) => {
             hide();
             swal("Thêm tag thành công!");
         } catch (error) {
+            setLoading({ ...loading, success: false });
             swal("Thêm tag thất bại");
         }
     }

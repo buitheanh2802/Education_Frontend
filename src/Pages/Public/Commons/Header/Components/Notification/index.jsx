@@ -75,7 +75,7 @@ const Notification = ({ className, setIsNotification }) => {
                     </ul>
                     {models && (currentPage < totalPage ? (
                         <button disabled={process.actionLoading.readMore} onClick={onReadMore} 
-                        className="py-[5px] flex items-center justify-center relative bg-gray-100 hover:bg-gray-200 ">
+                        className="py-[5px] flex items-center justify-center relative bg-gray-100 hover:bg-gray-200">
                            {process.actionLoading.readMore && <Loading className="w-[15px] h-[15px] " />}
                            <span className="ml-[8px]">Xem thêm</span>
                         </button>
