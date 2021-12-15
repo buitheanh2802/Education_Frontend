@@ -27,7 +27,7 @@ const DetailSulotion = ({ isModel, setIsModel }) => {
                         <button onClick={() => setIsModel(null)} className="h-[35px] border rounded px-4 text-sm bg-gray-100 hover:bg-red-600 hover:shadow-md duration-300 text-gray-800 hover:text-white">Đóng</button>
                     </div>
                 </div>
-                <iframe className="w-full h-[92%] rounded" src={sulution?.demoUrl} frameborder="0"></iframe>
+                <iframe className="w-full h-[92%] rounded" src={sulution?.demoUrl} frameBorder="0"></iframe>
             </div>
         </div>,
         document.getElementById('modals-devstar')

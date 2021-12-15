@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Icon } from "src/Components/Icon";
 import inner_page_banner from "../../../Assets/media/pictures/contact-image.png";
 import { useForm } from "react-hook-form";
-import {regex } from "src/Constants/";
+import { regex } from "src/Constants/";
 import ContactApi from "src/Apis/ContactApi";
 import Swal from "sweetalert2";
 
@@ -101,7 +101,7 @@ const ContactPage = () => {
               resetRespone("name");
             }}
             {...register("name", {
-              required: regex.REQUIRED,
+              required: regex.REQUIRED_FULLNAME,
             })}
             disabled={isLoading}
             autoComplete="off"
@@ -122,7 +122,7 @@ const ContactPage = () => {
                 resetRespone("email");
               }}
               {...register("email", {
-                required: regex.REQUIRED,
+                required: regex.REQUIRED_EMAIL,
                 pattern: regex.EMAIL,
               })}
               disabled={isLoading}
@@ -141,7 +141,7 @@ const ContactPage = () => {
                 resetRespone("phone");
               }}
               {...register("phone", {
-                required: regex.REQUIRED,
+                required: regex.REQUIRED_PHONE,
                 pattern: regex.PHONE,
               })}
               disabled={isLoading}
@@ -161,7 +161,7 @@ const ContactPage = () => {
               resetRespone("title");
             }}
             {...register("title", {
-              required: regex.REQUIRED,
+              required: regex.REQUIRED_TITLE,
             })}
             disabled={isLoading}
             autoComplete="off"
@@ -180,7 +180,7 @@ const ContactPage = () => {
               resetRespone("content");
             }}
             {...register("content", {
-              required: regex.REQUIRED,
+              required: regex.REQUIRED_DESC,
             })}
             disabled={isLoading}
             autoComplete="off"

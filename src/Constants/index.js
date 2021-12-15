@@ -144,7 +144,26 @@ export const regex = {
     value: true,
     message: "Yêu cầu nhập trường này",
   },
-
+  REQUIRED_FULLNAME: {
+    value: true,
+    message: "Yêu cầu nhập họ và tên",
+  },
+  REQUIRED_EMAIL: {
+    value: true,
+    message: "Yêu cầu nhập email",
+  },
+  REQUIRED_PHONE: {
+    value: true,
+    message: "Yêu cầu nhập số điện thoại",
+  },
+  REQUIRED_TITLE: {
+    value: true,
+    message: "Yêu cầu nhập tiêu đề",
+  },
+  REQUIRED_DESC: {
+    value: true,
+    message: "Yêu cầu nhập mô tả",
+  },
   FULL_NAME: {
     value: (value) => {
       const lengthValue = value.trim().length;

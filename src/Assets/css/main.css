@@ -1365,6 +1365,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 15px;
 }
 
+.h-\[450px\] {
+  height: 450px;
+}
+
 .max-h-\[110px\] {
   max-height: 110px;
 }
@@ -1847,6 +1851,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .grid-cols-\[60px\2c 1\.5fr\2c 1fr\2c 0\.75fr\2c 0\.75fr\2c 1\.2fr\] {
   grid-template-columns: 60px 1.5fr 1fr 0.75fr 0.75fr 1.2fr;
+}
+
+.grid-cols-\[60px\2c 1\.5fr\2c 1\.2fr\2c 0\.5fr\2c 1\.2fr\] {
+  grid-template-columns: 60px 1.5fr 1.2fr 0.5fr 1.2fr;
 }
 
 .flex-col {
@@ -2535,6 +2543,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(42 142 199 / var(--tw-bg-opacity));
 }
 
+.bg-yellow-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 252 232 / var(--tw-bg-opacity));
+}
+
+.bg-pink-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(253 242 248 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
 }
@@ -2695,6 +2713,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .p-\[20px\] {
   padding: 20px;
+}
+
+.p-10 {
+  padding: 2.5rem;
 }
 
 .px-\[15px\] {
@@ -3203,6 +3225,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .text-\[28px\] {
   font-size: 28px;
+}
+
+.text-\[17px\] {
+  font-size: 17px;
 }
 
 .font-bold {
@@ -4119,6 +4145,12 @@ body {
   content: var(--tw-content);
   --tw-bg-opacity: 1;
   background-color: rgb(254 226 226 / var(--tw-bg-opacity));
+}
+
+.before\:bg-\[\#51ffb9\]::before {
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(81 255 185 / var(--tw-bg-opacity));
 }
 
 .before\:content-\[\'\'\]::before {

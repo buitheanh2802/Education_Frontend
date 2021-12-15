@@ -3,7 +3,6 @@ import { Icon } from "src/Components/Icon";
 import { Link, useParams, useHistory, useLocation } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import PostsNew from "../Commons/PostNew";
 import PostApi from "src/Apis/PostApi";
 import { timeFormatter } from "src/Helpers/Timer";
 import { useSelector } from "react-redux";
@@ -19,6 +18,7 @@ import Loading from "src/Components/Loading";
 import Comments from "../Comments";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import NotificationApi from "src/Apis/NotificationApi";
+import PostRelated from "../Commons/PostRelated";
 
 const PostsDetail = () => {
   const shortId = useParams();
@@ -38,16 +38,24 @@ const PostsDetail = () => {
   const [loadingLike, setLoadingLike] = useState(false);
   const [loadingFollow, setLoadingFollow] = useState(false);
   const [loadingBookmark, setLoadingBookmark] = useState(false);
-  const { socket } = useSelector(state => state.SocketService);
+  const [otherPost, setOtherPost] = useState([]);
+  const { socket } = useSelector((state) => state.SocketService);
   const username = postDetail?.data?.createBy?.username;
   // console.log(postDetail);
   useEffect(() => {
     setRender(false);
-
+    setLoading(true);
     const list = async () => {
       try {
         const { data: post } = await PostApi.getPost(id);
+        const { data: postOther } = await PostApi.otherPost(
+          post?.data?.createBy?._id
+        );
+        const otherPosts = postOther?.data?.filter(
+          (item) => item?.shortId !== post?.data?.shortId
+        );
         setPostDetail(post);
+        setOtherPost(otherPosts);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -55,9 +63,8 @@ const PostsDetail = () => {
       }
     };
     list();
-  }, [render]);
-  // console.log(postDetail);
-
+  }, [render, id]);
+  const fullname = postDetail?.data?.createBy?.fullname;
   const handleLike = async () => {
     setRender(true);
     if (token === null) return history.push("/auth/login");
@@ -77,12 +84,23 @@ const PostsDetail = () => {
     }
     // send notifaction
     const notificationRequest = {
-      title: postDetail?.data?.isLike ? "đã bỏ vote bài viết của bạn." : "đã vote bài viết của bạn.",
+      title: postDetail?.data?.isLike
+        ? "đã bỏ vote bài viết của bạn."
+        : "đã vote bài viết của bạn.",
       url: location.pathname,
       type: "vote",
     };
-    const { data: { data } } = await NotificationApi.create(token, notificationRequest, postDetail?.data?.createBy?._id);
-    socket.emit('sendTo', { ...data, sendToId: postDetail?.data?.createBy?._id });
+    const {
+      data: { data },
+    } = await NotificationApi.create(
+      token,
+      notificationRequest,
+      postDetail?.data?.createBy?._id
+    );
+    socket.emit("sendTo", {
+      ...data,
+      sendToId: postDetail?.data?.createBy?._id,
+    });
     setLoadingLike(false);
   };
   // const handleDisLike = async () => {
@@ -120,14 +138,25 @@ const PostsDetail = () => {
         data: { ...postDetail.data, isBookmark: true },
       });
     }
-     // send notifaction
-     const notificationRequest = {
-      title: postDetail?.data?.isBookmark ? "đã bỏ bookmark bài viết của bạn." : "đã bookmark bài viết của bạn",
+    // send notifaction
+    const notificationRequest = {
+      title: postDetail?.data?.isBookmark
+        ? "đã bỏ bookmark bài viết của bạn."
+        : "đã bookmark bài viết của bạn",
       url: location.pathname,
       type: "bookmark",
     };
-    const { data: { data } } = await NotificationApi.create(token, notificationRequest, postDetail?.data?.createBy?._id);
-    socket.emit('sendTo', { ...data, sendToId: postDetail?.data?.createBy?._id });
+    const {
+      data: { data },
+    } = await NotificationApi.create(
+      token,
+      notificationRequest,
+      postDetail?.data?.createBy?._id
+    );
+    socket.emit("sendTo", {
+      ...data,
+      sendToId: postDetail?.data?.createBy?._id,
+    });
     setLoadingBookmark(false);
   };
 
@@ -155,12 +184,23 @@ const PostsDetail = () => {
     }
     // send notifaction
     const notificationRequest = {
-      title: postDetail?.data?.createBy?.isFollowing ? "đã bỏ theo dõi bạn." : "đã theo dõi bạn.",
+      title: postDetail?.data?.createBy?.isFollowing
+        ? "đã bỏ theo dõi bạn."
+        : "đã theo dõi bạn.",
       url: "",
       type: "follow",
     };
-    const { data: { data } } = await NotificationApi.create(token, notificationRequest, postDetail?.data?.createBy?._id);
-    socket.emit('sendTo', { ...data, sendToId: postDetail?.data?.createBy?._id });
+    const {
+      data: { data },
+    } = await NotificationApi.create(
+      token,
+      notificationRequest,
+      postDetail?.data?.createBy?._id
+    );
+    socket.emit("sendTo", {
+      ...data,
+      sendToId: postDetail?.data?.createBy?._id,
+    });
     setLoadingFollow(false);
   };
 
@@ -594,7 +634,7 @@ const PostsDetail = () => {
               </button>
             </div>
           </div>
-          <PostsNew />
+          <PostRelated otherPost={otherPost} fullname={fullname} />
         </div>
       </div>
       <div

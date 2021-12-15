@@ -186,12 +186,12 @@ const SearchPage = () => {
                                     <span>{item?.views}</span>
                                   </div>
                                   <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                                    <Icon.Chat className="fill-current w-[15px]" />
-                                    <span>{item?.comments}</span>
+                                    <Icon.Like className="fill-current w-[15px]" />
+                                    <span>{item?.countLikes}</span>
                                   </div>
                                   <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                                    <Icon.Bookmark className="fill-current w-[15px]" />
-                                    <span>{item?.bookmarks}</span>
+                                    <Icon.Bookmark className="fill-current w-[14px]" />
+                                    <span>{item?.countBookmarks}</span>
                                   </div>
                                 </div>
                                 <Icon.Pen className="fill-current w-[20px] text-[#5f5f5f]" />

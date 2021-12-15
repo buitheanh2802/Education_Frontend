@@ -9828,10 +9828,10 @@ react-loading-skeleton@^3.0.1:
   resolved "https://registry.yarnpkg.com/react-loading-skeleton/-/react-loading-skeleton-3.0.1.tgz#b1ccd07d18ade80ce5d5b1563f4232331efedf46"
   integrity sha512-YL9tSV7w53HLd5aAPPjUGp9iqUJ5+yj8ZI//E1ES1OHrWy2mSCHTRPSc37u77Di+jWph6evGVNKBr3rpAnKwDQ==
 
-react-paginate@^8.0.1:
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-8.0.1.tgz#e256b6f9de25215ef681cffe4cb2309f9cc2c2bd"
-  integrity sha512-8BB/uGfrG9Jy47RXi0WRjPh86PzMUsFbd2HnNt/LSDUYDZZDrh7KkDO4Rtv5cOhiLolTerFmecXhkFzeOOjUsw==
+react-paginate@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-8.1.0.tgz#8c4c6c5b7d90e8a4f33653262204fd32c5dfd207"
+  integrity sha512-XK8cgcX8Zk4De6F4Iozd91a2xm/U+mdD4SB5k4xcBabqZj86U20N7kMiMzOFk1AEGCj6Kg1374xXK03dz7BTRA==
   dependencies:
     prop-types "^15.6.1"
 

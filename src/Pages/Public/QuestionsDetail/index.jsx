@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Icon } from "src/Components/Icon";
 import { Link, useParams, useHistory } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
-import PostsNew from "../Commons/PostNew";
 import { timeFormatter } from "src/Helpers/Timer";
 import { useSelector } from "react-redux";
 import QuestionApi from "src/Apis/QuestionApi";
@@ -19,6 +18,7 @@ import Loading from "src/Components/Loading";
 import SpamApi from "src/Apis/SpamApi";
 import Swal from "sweetalert2";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
+import QuestionRelated from "../Commons/QuestionsRelated";
 import Comments from "../Comments";
 
 const QuestionsDetail = () => {
@@ -36,16 +36,23 @@ const QuestionsDetail = () => {
   const [loadingLike, setLoadingLike] = useState(false);
   const [loadingFollow, setLoadingFollow] = useState(false);
   const [loadingBookmark, setLoadingBookmark] = useState(false);
-
+  const [otherQuestion, setOtherQuestion] = useState([]);
   const history = useHistory();
   const token = localStorage.getItem("_token_");
   const idQuestion = shortId.id.split("-")[shortId.id.split("-").length - 1];
   useEffect(() => {
     setRender(false);
+    setLoading(true);
     const list = async (id) => {
       try {
-        // await QuestionApi.view(idQuestion);
         let { data: question } = await QuestionApi.getId(idQuestion);
+        const { data: questionOther } = await QuestionApi.otherQuestion(
+          question?.data?.createBy?._id
+        );
+        const otherQuesstions = questionOther?.data?.filter(
+          (item) => item?.slug !== question?.data?.slug
+        );
+        setOtherQuestion(otherQuesstions);
         setQuestionDetail(question);
         setLoading(false);
         if (question.data.createBy.username) {
@@ -71,7 +78,7 @@ const QuestionsDetail = () => {
     list(idQuestion);
   }, [idQuestion, render]);
   if (Object.keys(questionDetail).length === 0) return null;
-
+  const fullname = questionDetail?.data?.createBy?.fullname;
   const arrLike = questionDetail?.data?.likes;
   const checkLike = arrLike.some((a) => a === profile?._id);
   const handleLike = async () => {
@@ -280,7 +287,7 @@ const QuestionsDetail = () => {
             <div className="block lg:hidden">
               <div className="flex items-center mb-[5px] ">
                 {questionDetail?.data?.createBy?.avatar?.avatarUrl?.length >
-                  0 ? (
+                0 ? (
                   <Link
                     to={`/user/${questionDetail?.data?.createBy?.fullname}`}
                     className="  border border-gray-300 cursor-pointer select-none w-[55px] h-[55px] rounded-full bg-center bg-cover"
@@ -389,7 +396,7 @@ const QuestionsDetail = () => {
                         : "Sao chép link câu hỏi"}
                     </li>
                     {questionDetail?.data?.createBy?.username ===
-                      profile?.username ? (
+                    profile?.username ? (
                       <>
                         <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
                           <Icon.Fix className="fill-current w-[15px] mr-[5px]" />
@@ -557,7 +564,10 @@ const QuestionsDetail = () => {
             </div>
           </div>
           <div className="my-[20px]">
-            <Comments userId={questionDetail?.data?.createBy?._id} shortId={idQuestion} />
+            <Comments
+              userId={questionDetail?.data?.createBy?._id}
+              shortId={idQuestion}
+            />
           </div>
         </div>
         <div className="hidden lg:block">
@@ -654,7 +664,7 @@ const QuestionsDetail = () => {
               </button>
             </div>
           </div>
-          <PostsNew />
+          <QuestionRelated otherQuestion={otherQuestion} fullname={fullname} />
         </div>
       </div>
       <div

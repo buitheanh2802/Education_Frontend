@@ -11,8 +11,10 @@ import TagAPi from "src/Apis/TagApi";
 import UserApi from "src/Apis/UserApi";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
+import Pagination from "src/Pages/Public/Commons/Panigation";
+import queryString from "query-string";
 
-const PostPage = (props) => {
+const PostPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -22,6 +24,7 @@ const PostPage = (props) => {
   const [trendings, setTrendings] = useState([]);
   const [follows, setFollows] = useState([]);
   const [bookmarks, setBookmarks] = useState([]);
+  const [panigation, setPanigation] = useState(null);
 
   // Navigation
   const pathName = [
@@ -38,32 +41,39 @@ const PostPage = (props) => {
       try {
         dispatch(setLoading(true));
         if (location.pathname === path.POSTS) {
-          const { data: newests } = await PostApi.getPostNew();
+          const query = queryString.parse(location.search);
+          const { data: newests } = await PostApi.getPostNew(query);
           setNewests(newests.data);
+          setPanigation(newests.data.metaData.pagination);
           dispatch(setLoading(false));
         } else if (location.pathname === path.POSTS_POPULAR) {
-          const { data: trendings } = await PostApi.getPostTren();
+          const query = queryString.parse(location.search);
+          const { data: trendings } = await PostApi.getPostTren(query);
           setTrendings(trendings.data);
+          setPanigation(trendings.data.metaData.pagination);
           dispatch(setLoading(false));
         } else if (location.pathname === path.POSTS_FOLLOW) {
+          const query = queryString.parse(location.search);
           const token = localStorage.getItem("_token_");
           if (token) {
-            const { data: follows } = await PostApi.getPostFol();
+            const { data: follows } = await PostApi.getPostFol(query);
             setFollows(follows.data);
+            setPanigation(follows.data.metaData.pagination);
             dispatch(setLoading(false));
           }
           dispatch(setLoading(false));
         } else if (location.pathname === path.POSTS_BOOK_MARK) {
+          const query = queryString.parse(location.search);
           const token = localStorage.getItem("_token_");
           if (token) {
-            const { data: bookmarks } = await PostApi.getPostMark();
+            const { data: bookmarks } = await PostApi.getPostMark(query);
+            setPanigation(bookmarks.data.metaData.pagination);
             setBookmarks(bookmarks.data);
             dispatch(setLoading(false));
           }
           dispatch(setLoading(false));
         }
       } catch (error) {
-        dispatch(setLoading(false));
         console.log(error);
       }
     };
@@ -88,7 +98,12 @@ const PostPage = (props) => {
       }
     };
     listTagPopular();
-  }, [location.pathname]);
+  }, [location.pathname, location.search]);
+
+  const onPageChange = (e) => {
+    const query = queryString.stringify({ page: e.selected + 1 });
+    history.push(`${location.pathname}?${query}`);
+  };
 
   return (
     <div className="container mx-auto mt-[55px] py-[25px]">
@@ -110,9 +125,11 @@ const PostPage = (props) => {
           <div className="self-center whitespace-nowrap">
             <button
               onClick={() => {
-                history.push(button?.path);
+                if (!localStorage.getItem("_token_"))
+                  history.push("/auth/login");
+                else history.push(button.path);
               }}
-              className="flex my-[10px] md:my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] "
+              className="flex my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] "
             >
               <div className="self-center">
                 <button.icon className="w-[15px] fill-current" />{" "}
@@ -122,6 +139,62 @@ const PostPage = (props) => {
           </div>
         )}
       </div>
+      <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
+        <div className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded">
+          <Switch>
+            <Route
+              exact
+              path={path.POSTS}
+              render={(props) => <PostView posts={newests} {...props} />}
+            ></Route>
+            <Route
+              exact
+              path={path.POSTS_POPULAR}
+              render={(props) => <PostView posts={trendings} {...props} />}
+            ></Route>
+            <Route
+              exact
+              path={path.POSTS_FOLLOW}
+              render={(props) => <PostView posts={follows} {...props} />}
+            ></Route>
+            <Route
+              exact
+              path={path.POSTS_BOOK_MARK}
+              render={(props) => <PostView posts={bookmarks} {...props} />}
+            ></Route>
+          </Switch>
+        </div>
+        <div className="col-span-10 lg:col-span-3 bg-white shadow rounded">
+          <FeaturedAuthor authors={featuredAuthors} />
+          <TrendingTags tags={tagPopulars} />
+        </div>
+      </div>
+      {panigation &&
+        panigation?.totalPage > 1 &&
+        panigation?.countDocuments !== 0 && (
+          <Pagination
+            pageCount={panigation.totalPage}
+            onChange={onPageChange}
+            currentPage={panigation.currentPage - 1}
+          />
+        )}
+
+      {button && (
+        <div className="self-center whitespace-nowrap">
+          <button
+            onClick={() => {
+              history.push(button?.path);
+            }}
+            className="flex my-[10px] md:my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] "
+          >
+            <div className="self-center">
+              <button.icon className="w-[15px] fill-current" />{" "}
+            </div>
+            <span className="hidden md:block">{button?.value}</span>
+          </button>
+        </div>
+      )}
+
       <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
         <div className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded">
           <Switch>
