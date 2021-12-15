@@ -422,7 +422,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.-translate-y-1\/2, .-translate-x-1\/2, .translate-y-\[-50\%\], .translate-x-\[-50\%\], .translate-y-\[2px\], .translate-x-\[25px\], .translate-y-\[-5px\], .translate-y-\[0\], .translate-y-\[-100\%\], .translate-y-\[-55\%\], .rotate-\[45deg\], .rotate-180, .transform, .before\:translate-x-\[-50\%\]::before, .before\:translate-y-\[-50\%\]::before, .before\:rotate-\[45deg\]::before, .after\:translate-y-\[-45\%\]::after, .after\:rotate-\[-20deg\]::after, .after\:transform::after, .md\:translate-y-\[-70\%\], .lg\:translate-y-\[2px\], .lg\:transform {
+.-translate-y-1\/2, .-translate-x-1\/2, .translate-y-\[-50\%\], .translate-x-\[-50\%\], .translate-y-\[2px\], .translate-x-\[25px\], .translate-y-\[-5px\], .translate-y-\[0\], .translate-y-\[-100\%\], .translate-y-\[-55\%\], .translate-y-\[-2px\], .translate-y-\[-3px\], .rotate-\[45deg\], .rotate-180, .transform, .before\:translate-x-\[-50\%\]::before, .before\:translate-y-\[-50\%\]::before, .before\:rotate-\[45deg\]::before, .after\:translate-y-\[-45\%\]::after, .after\:rotate-\[-20deg\]::after, .after\:transform::after, .md\:translate-y-\[-70\%\], .lg\:translate-y-\[2px\], .lg\:transform {
   --tw-translate-x: 0;
   --tw-translate-y: 0;
   --tw-rotate: 0;
@@ -1761,6 +1761,18 @@ Ensure the default browser behavior of the `hidden` attribute.
           transform: var(--tw-transform);
 }
 
+.translate-y-\[-2px\] {
+  --tw-translate-y: -2px;
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
+}
+
+.translate-y-\[-3px\] {
+  --tw-translate-y: -3px;
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
+}
+
 .rotate-\[45deg\] {
   --tw-rotate: 45deg;
   -webkit-transform: var(--tw-transform);
@@ -2105,6 +2117,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-radius: 0.5rem;
 }
 
+.rounded-\[10px\] {
+  border-radius: 10px;
+}
+
 .rounded-t-\[3px\] {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -2312,6 +2328,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-\[\#4A5568\] {
   --tw-border-opacity: 1;
   border-color: rgb(74 85 104 / var(--tw-border-opacity));
+}
+
+.border-gray-600 {
+  --tw-border-opacity: 1;
+  border-color: rgb(75 85 99 / var(--tw-border-opacity));
 }
 
 .bg-green-100 {
@@ -2551,6 +2572,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-pink-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(253 242 248 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#F56565\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 101 101 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50 {
@@ -3556,6 +3582,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   opacity: 1;
 }
 
+.opacity-0 {
+  opacity: 0;
+}
+
 .shadow-xl {
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
@@ -4352,6 +4382,11 @@ body {
 .hover\:bg-\[\#67d4a8\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(103 212 168 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-\[\#C53030\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(197 48 48 / var(--tw-bg-opacity));
 }
 
 .hover\:from-\[\#0051b5\]:hover {
