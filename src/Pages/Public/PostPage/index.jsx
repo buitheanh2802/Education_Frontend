@@ -178,53 +178,6 @@ const PostPage = () => {
             currentPage={panigation.currentPage - 1}
           />
         )}
-
-      {button && (
-        <div className="self-center whitespace-nowrap">
-          <button
-            onClick={() => {
-              history.push(button?.path);
-            }}
-            className="flex my-[10px] md:my-auto hover:bg-[#0d61c7] bg-[#1273eb] text-white rounded px-[10px] gap-[5px] py-[10px] md:py-[5px] text-[14px] "
-          >
-            <div className="self-center">
-              <button.icon className="w-[15px] fill-current" />{" "}
-            </div>
-            <span className="hidden md:block">{button?.value}</span>
-          </button>
-        </div>
-      )}
-
-      <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
-        <div className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded">
-          <Switch>
-            <Route
-              exact
-              path={path.POSTS}
-              render={(props) => <PostView posts={newests} {...props} />}
-            ></Route>
-            <Route
-              exact
-              path={path.POSTS_POPULAR}
-              render={(props) => <PostView posts={trendings} {...props} />}
-            ></Route>
-            <Route
-              exact
-              path={path.POSTS_FOLLOW}
-              render={(props) => <PostView posts={follows} {...props} />}
-            ></Route>
-            <Route
-              exact
-              path={path.POSTS_BOOK_MARK}
-              render={(props) => <PostView posts={bookmarks} {...props} />}
-            ></Route>
-          </Switch>
-        </div>
-        <div className="col-span-10 lg:col-span-3 bg-white shadow rounded">
-          <FeaturedAuthor authors={featuredAuthors} />
-          <TrendingTags tags={tagPopulars} />
-        </div>
-      </div>
     </div>
   );
 };
