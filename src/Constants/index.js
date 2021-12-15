@@ -41,7 +41,7 @@ export const path = {
   // question
   QUESTIONS: "/questions",
   QUESTIONS_CREATE: "/questions/create",
-  QUESTIONS_FOLLOWING: "/questions/fllowing",
+  QUESTIONS_FOLLOWING: "/questions/following",
   QUESTIONS_BOOK_MARK: "/questions/bookmark",
   QUESTIONS_DETAIL: "/question/:id",
   QUESTIONS_UPDATE: "/question/update/:id",
