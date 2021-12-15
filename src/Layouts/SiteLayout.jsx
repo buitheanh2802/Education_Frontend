@@ -34,6 +34,7 @@ import PostsDetail from "src/Pages/Public/PostDetail";
 import PostUpdate from "src/Pages/Public/PostUpdate";
 import ContactPage from "src/Pages/Public/ContactPage";
 import SearchPage from "src/Pages/Public/Search";
+import SolutionDetail from "src/Pages/Public/SolutionDetail";
 import ListUserPage from "src/Pages/Public/ListUserPage";
 
 const SiteLayout = () => {
@@ -41,8 +42,8 @@ const SiteLayout = () => {
     <>
       <Header />
       <Switch>
+        <PublicRouter exact path={path.SOLUTION_ID} component={SolutionDetail} />
         <PublicRouter path={path.USERS} component={ListUserPage} />
-        <PublicRouter exact path={path.POSTS_CREATE} component={PostsCreate} />
         <PublicRouter exact path={path.CONTACT} component={ContactPage} />
         <PublicRouter exact path={path.SEARCH} component={SearchPage} />
         <PublicRouter path={path.QUESTIONS_DETAIL} component={QuestionsDetail} />

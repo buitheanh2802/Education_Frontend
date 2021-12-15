@@ -25,6 +25,7 @@ const PublishItem = (props) => {
                 swal("Xóa tag thành công!");
             }
         } catch (error) {
+            setLoading({ ...loading, success: false });
             swal("Xóa tag thất bại!");
         }
     }

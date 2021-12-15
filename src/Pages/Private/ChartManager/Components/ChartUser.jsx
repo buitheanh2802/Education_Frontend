@@ -22,13 +22,13 @@ ChartJS.register(
 );
 
 
-const ChartQuestion = () => {
+const ChartUser = () => {
     const [dataChart, setDataChart] = useState(null)
     const [labelChart, setlabelChart] = useState(null)
 
     const handelFilterData = async (e) => {
         try {
-            const { data } = await StatisticApi.statisticQuestion({ [e.target.name]: e.target.value })
+            const { data } = await StatisticApi.statisticUser({ [e.target.name]: e.target.value })
             switch (e.target.value) {
                 case '7':
                 case '30':
@@ -89,16 +89,16 @@ const ChartQuestion = () => {
         labels: labelChart,
         datasets: [
             {
-                label: 'Số lượng bài câu hỏi đã tạo',
+                label: 'Số lượng tài khoản đã tạo',
                 data: dataChart,
-                backgroundColor: 'aqua',
+                backgroundColor: 'pink',
             }
         ],
     };
     return (
-        <div className="w-full border bg-blue-50 rounded">
+        <div className="w-full border bg-pink-50 rounded">
             <div className="flex items-center justify-between px-3 py-2 border-b">
-                <p className="tw-text-[18px] tw-font-medium xl:tw-font-normal md:tw-text-[16px] tw-leading-[35px] font-medium flex items-center gap-2 text-blue-900"><Icon.Questions className="fill-current w-[20px]" /> Thống kê câu hỏi</p>
+                <p className="tw-text-[18px] tw-font-medium xl:tw-font-normal md:tw-text-[16px] tw-leading-[35px] font-medium flex items-center gap-2 text-blue-900"><Icon.User className="fill-current w-[20px]" /> Thống kê số tài khoản</p>
                 <select name="type" onChangeCapture={handelFilterData} className="border h-[35px] w-[150px] text-center rounded text-gray-600 cursor-pointer text-sm outline-none focus:ring-1 focus:ring-blue-300">
                     <option value="7">7 ngày qua</option>
                     <option value="30">1 tháng qua</option>
@@ -112,4 +112,4 @@ const ChartQuestion = () => {
     )
 }
 
-export default ChartQuestion
+export default ChartUser

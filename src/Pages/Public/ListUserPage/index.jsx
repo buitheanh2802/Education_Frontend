@@ -61,6 +61,7 @@ const ListUserPage = () => {
             setUsers(listUser.data);
             dispatch(setLoading(false));
         } catch (error) {
+            dispatch(setLoading(false));
             console.log(error);
         }
     }
@@ -73,6 +74,7 @@ const ListUserPage = () => {
                 setUsers(listUser.data);
                 dispatch(setLoading(false));
             } catch (error) {
+                dispatch(setLoading(false));
                 console.log(error);
             }
         }

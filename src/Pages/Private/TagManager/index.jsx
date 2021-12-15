@@ -33,24 +33,20 @@ const TagManager = (props) => {
         setTagList(tagList.filter((item) => item.slug !== slug))
     }
 
-    const onAdd = () => {
+    const onReState = () => {
         setReConnect(!reConnect)
-    }
-
-    const onEdit = () => {
-        setReConnect(!reConnect);
     }
 
     return (
         <div className="w-full">
-            <Header onAdd={onAdd} />
+            <Header onAdd={onReState} />
             <PublishNav />
             {startCall && <SkeletonGroup />}
             {tagList &&
                 tagList.map((item, index) => {
                     return (
                         <PublishItem
-                            onEdit={onEdit}
+                            onEdit={onReState}
                             onRemove={onRemove}
                             index={index + 1}
                             key={item._id}

@@ -118,6 +118,7 @@ const ChangePersonal = ({ profile }) => {
                 history.push('/profile/me/change-info')
             }, 2000);
         } catch (error) {
+            setLoading({ ...loading, success: false });
             setResponse({
                 ...response,
                 error: ResponseMessage(error?.response?.data?.message[0]),

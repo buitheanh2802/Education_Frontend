@@ -108,6 +108,11 @@ const Footer = () => {
             </Link>
           </li>
           <li className="mb-[15px] text-gray-800">
+            <Link className="hover:text-blue-700" to={path.HOME}>
+              Cộng đồng
+            </Link>
+          </li>
+          <li className="mb-[15px] text-gray-800">
             <Link className="hover:text-blue-700" to={path.NOT_FOUND}>
               Câu hỏi thường gặp
             </Link>
@@ -130,16 +135,11 @@ const Footer = () => {
               Tác giả
             </Link>
           </li>
-          <li className="mb-[15px] text-gray-800">
-            <Link className="hover:text-blue-700" to={path.HOME}>
-              Cộng đồng
-            </Link>
-          </li>
         </ul>
         <ul className="xl:flex-[1] mt-[20px] md:order-5 xl:order-4">
           <li className="font-bold mb-[24px] text-[18px]">Hỗ trợ</li>
           <li className="mb-[15px] text-gray-800">
-            <Link className="hover:text-blue-700" to={path.NOT_FOUND}>
+            <Link className="hover:text-blue-700" to={path.CONTACT}>
               Hỗ trợ
             </Link>
           </li>
@@ -168,7 +168,7 @@ const Footer = () => {
                     resetRespone("email");
                   }}
                   {...register("email", {
-                    required: regex.REQUIRED,
+                    required: regex.REQUIRED_EMAIL,
                     pattern: regex.EMAIL,
                   })}
                   disabled={isLoading}

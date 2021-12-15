@@ -48,7 +48,9 @@ const SolutionPage = () => {
                                 <div className="w-full h-[150px] sm:h-[190px] xl:h-[150px] bg-no-repeat bg-cover bg-center rounded cursor-pointer border-gray-100" style={{ backgroundImage: `url(${item?.challengeId?.avatar})` }}></div>
                                 <div className="rounded border border-gray-100 px-2 py-2 text-base text-gray-600 my-[15px] font-light">
                                     <p>{item?.descriptions}</p>
-                                    {item.votes.length === 0 && <span className="text-xs text-purple-400 mt-[10px] block">Chưa ai xem xét giải pháp này. Hãy là người đầu tiên</span>}
+                                    {item.votes.length === 0
+                                        ? <span className="text-xs text-purple-400 mt-[10px] block">Chưa ai xem xét giải pháp này. Hãy là người đầu tiên</span>
+                                        : <span className="text-xs text-green-500 mt-[10px] block">{item.votes.length} người đã chấp nhận giải pháp này</span>}
                                 </div>
                                 <div className="flex gap-[15px]">
                                     <button onClick={() => setIsModel(item?._id)} className="flex gap-[10px] flex-1 justify-center items-center bg-gray-100 hover:bg-gray-300 duration-300 hover:shadow text-blue-900 text-xs rounded h-[40px]">
@@ -57,6 +59,7 @@ const SolutionPage = () => {
                                     <button
                                         onClick={() => {
                                             !profile && history.push(path.AUTH)
+                                            history.push(`/solution/${item?._id}`)
                                         }} className="flex gap-[10px] flex-1 justify-center items-center bg-gray-100 hover:bg-gray-300 duration-300 hover:shadow text-blue-900 text-xs rounded h-[40px]">
                                         <Icon.Chat className="fill-current w-[12px]" /> Phản hồi
                                     </button>

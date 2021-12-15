@@ -5,29 +5,29 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 
-const UserPost = (props) => {
+const UserQuestion = (props) => {
   const username = props.match.params.username;
-  const [userPost, setUserPost] = useState([]);
+  const [userQuestion, setUserQuestion] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const userPost = async () => {
+    const userQuestion = async () => {
       try {
         dispatch(setLoading(true))
-        const { data: postUser } = await ProfileUserApi.getPostUser(username);
-        setUserPost(postUser.data.models);
+        const { data: questionUser } = await ProfileUserApi.getQuestionUser(username);
+        setUserQuestion(questionUser.data.models);
         dispatch(setLoading(false))
       } catch (error) {
         dispatch(setLoading(false));
         console.log(error);
       }
     };
-    userPost();
+    userQuestion();
   }, []);
 
   return (
     <div>
-      {userPost?.length == 0 ? (
+      {userQuestion?.length == 0 ? (
         <div>
           <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
             Không có gì ở đây cả
@@ -35,7 +35,7 @@ const UserPost = (props) => {
         </div>
       ) : (
         <div className="w-full px-[10px] py-[15px] border-b lg:mt-0 md:mt-3">
-          {userPost?.map((item, index) => {
+          {userQuestion?.map((item, index) => {
             return (
               <>
                 <div key={index} className="flex py-[10px] border-b">
@@ -69,7 +69,7 @@ const UserPost = (props) => {
                       </div>
                     </div>
                     <h3 className="pr-[50px] my-[2px]">
-                      <Link to={`/posts/${item?.slug}-${item?.shortId}`} className="font-medium text-[18px] hover:underline">
+                      <Link to={`/question/${item?.slug}-${item?.shortId}`} className="font-medium text-[18px] hover:underline">
                         {item?.title}
                       </Link>
                       <span className="px-[5px]">-</span>
@@ -118,4 +118,4 @@ const UserPost = (props) => {
     </div>
   );
 };
-export default UserPost;
+export default UserQuestion;

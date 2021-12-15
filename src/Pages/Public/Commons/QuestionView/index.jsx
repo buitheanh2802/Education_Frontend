@@ -1,8 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
+import { path } from "src/Constants/";
 import { timeFormatter } from "../../../../Helpers/Timer";
+
 const QuestionView = ({ questions }) => {
+  const token = localStorage.getItem("_token_");
+  const location = useLocation();
+  if (
+    !token &&
+    (location.pathname === path.QUESTIONS_FOLLOWING ||
+      location.pathname === path.QUESTIONS_BOOK_MARK)
+  ) {
+    return (
+      <div>
+        <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
+          Vui lòng đăng nhập
+        </p>
+      </div>
+    );
+  }
   return (
     <>
       {questions?.length === 0 ? (
@@ -21,13 +38,14 @@ const QuestionView = ({ questions }) => {
               >
                 <div className="mr-[15px] ">
                   {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
-                    <Link
-                      to={`/user/${item?.createBy?.username}`} >
+                    <Link to={`/user/${item?.createBy?.username}`}>
                       <img
                         className="mx-auto max-h-[40px] rounded-full"
-                        width="40px" height="40px"
+                        width="40px"
+                        height="40px"
                         src={item?.createBy?.avatar?.avatarUrl}
-                        alt="Avatar" />
+                        alt="Avatar"
+                      />
                     </Link>
                   ) : (
                     <Link
@@ -87,8 +105,8 @@ const QuestionView = ({ questions }) => {
                         <span>{item?.countLikes}</span>
                       </div>
                       <div className="flex items-center gap-[5px] text-[#5f5f5f]">
-                        <Icon.Dislike className="fill-current w-[15px]" />
-                        <span>{item?.countDislike}</span>
+                        <Icon.Bookmark className="fill-current w-[14px]" />
+                        <span>{item?.countBookmarks}</span>
                       </div>
                     </div>
                     <Icon.Questions className="fill-current w-[20px] text-[#5f5f5f]" />

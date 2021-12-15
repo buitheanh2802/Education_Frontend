@@ -6,7 +6,7 @@ import { setLoading } from "src/Redux/Slices/Loading.slice";
 import AuthApi from "src/Apis/AuthApi";
 import { path } from "src/Constants/";
 const ProfilePage = () => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
     const dispatch = useDispatch();
     const [profileDetail, setProfileDetail] = useState([]);
 
@@ -18,11 +18,11 @@ const ProfilePage = () => {
                 setProfileDetail(profileDetail.data)
                 dispatch(setLoading(false))
             } catch (error) {
+                dispatch(setLoading(false));
                 console.log(error.response);
             }
         }
         proDetail();
-
     }, []);
 
 
@@ -69,7 +69,7 @@ const ProfilePage = () => {
                                     </div>
                                     <div className="flex items-center justify-end">
                                         <Link to={path.PROFILE_CHANGE}
-                                            className="bg-[#0d61c7] border border-[#0d61c7] hover:bg-[#fff] hover:text-[#0d61c7] text-[#fff] rounded md:px-[10px] md:py-[5px] md:text-[14px]
+                                            className="bg-[#0d61c7] min-w-[102px] border border-[#0d61c7] hover:bg-[#fff] hover:text-[#0d61c7] text-[#fff] rounded md:px-[10px] md:py-[5px] md:text-[14px]
                                              px-[10px] py-[5px] sm:text-[14px] lg:px-[8px] lg:py-[5px] lg:text-[10px] xl:px-[8px] xl:py-[5px] xl:text-[14px]">
                                             Sửa thông tin
                                         </Link>
@@ -85,7 +85,7 @@ const ProfilePage = () => {
                                             <span>{profileDetail?.points}</span>
                                         </div>
                                     </div>
-                                    <div className="mx-auto">
+                                    <Link to={`/user/${profileDetail?.username}`} className="mx-auto">
                                         <div className="text-center gap-[5px] text-[#4A5568]">
                                             <div className="flex items-center">
                                                 <Icon.Pen className="fill-current w-[13px] mr-[5px]" />
@@ -93,8 +93,8 @@ const ProfilePage = () => {
                                             </div>
                                             <span>{profileDetail?.postCounts}</span>
                                         </div>
-                                    </div>
-                                    <div className="mx-auto">
+                                    </Link>
+                                    <Link to={`/user/${profileDetail?.username}/question`} className="mx-auto">
                                         <div className="text-center gap-[5px] text-[#4A5568]">
                                             <div className="flex items-center">
                                                 <Icon.questions className="fill-current w-[13px] mr-[5px]" />
@@ -102,19 +102,10 @@ const ProfilePage = () => {
                                             </div>
                                             <span>{profileDetail?.questionCounts}</span>
                                         </div>
-                                    </div>
+                                    </Link>
                                 </div>
                                 <div className="grid grid-cols-2 gap-[30px] xl:text-[15px] py-[15px] text-[13px]">
-                                    <div className="mx-auto">
-                                        <div className="text-center gap-[5px] text-[#4A5568]">
-                                            <div className="flex items-center">
-                                                <Icon.User className="fill-current w-[13px] mr-[5px]" />
-                                                <span>Có {profileDetail?.followers}</span>
-                                            </div>
-                                            <span>người theo dõi</span>
-                                        </div>
-                                    </div>
-                                    <div className="mx-auto">
+                                    <Link to={`/user/${profileDetail?.username}/following`} className="mx-auto">
                                         <div className="text-center gap-[5px] text-[#4A5568]">
                                             <div className="flex items-center">
                                                 <Icon.Username className="fill-current w-[13px] mr-[5px]" />
@@ -122,7 +113,16 @@ const ProfilePage = () => {
                                             </div>
                                             <span>{profileDetail?.followingCounts} người dùng</span>
                                         </div>
-                                    </div>
+                                    </Link>
+                                    <Link to={`/user/${profileDetail?.username}/follower`} className="mx-auto">
+                                        <div className="text-center gap-[5px] text-[#4A5568]">
+                                            <div className="flex items-center">
+                                                <Icon.User className="fill-current w-[13px] mr-[5px]" />
+                                                <span>Có {profileDetail?.followers}</span>
+                                            </div>
+                                            <span>người theo dõi</span>
+                                        </div>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

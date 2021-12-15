@@ -30,6 +30,7 @@ export const path = {
   //Profile_user
   USER_ID: "/user/:username",
   USER_POST: "/user/:username/post",
+  USER_QUESTION: "/user/:username/question",
   USER_FOLLOWER: "/user/:username/follower",
   USER_FOLLOWING: "/user/:username/following",
   USER_BOOKMARK: "/user/:username/bookmark/post",
@@ -108,6 +109,7 @@ export const path = {
   CHALLENGE_SOLUTION_DETAIL_ID: "/challenge/solution-detail/:solutionId",
   CHALLENGE_SOLUTION_CHALLENGE_ID: "/challenge/solution/:challengeId",
   MANAGER_CHART: "/manager/chart",
+  SOLUTION_ID: "/solution/:solutionId",
 
   //Quiz
   QUIZ: "/quiz",
@@ -120,7 +122,7 @@ export const path = {
 export const regex = {
   PASSWORD: {
     value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-    message: "Yêu cầu chứa ít nhất 1 ký tự số, chữ và không có khoảng trắng",
+    message: "Yêu cầu chứa ít nhất 1 ký tự số, chữ, không có khoảng trắng và không có ký tự đặc biệt",
   },
 
   EMAIL: {
@@ -142,7 +144,26 @@ export const regex = {
     value: true,
     message: "Yêu cầu nhập trường này",
   },
-
+  REQUIRED_FULLNAME: {
+    value: true,
+    message: "Yêu cầu nhập họ và tên",
+  },
+  REQUIRED_EMAIL: {
+    value: true,
+    message: "Yêu cầu nhập email",
+  },
+  REQUIRED_PHONE: {
+    value: true,
+    message: "Yêu cầu nhập số điện thoại",
+  },
+  REQUIRED_TITLE: {
+    value: true,
+    message: "Yêu cầu nhập tiêu đề",
+  },
+  REQUIRED_DESC: {
+    value: true,
+    message: "Yêu cầu nhập mô tả",
+  },
   FULL_NAME: {
     value: (value) => {
       const lengthValue = value.trim().length;
