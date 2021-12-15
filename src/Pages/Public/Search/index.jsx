@@ -121,13 +121,14 @@ const SearchPage = () => {
                           >
                             <div className="mr-[15px] hidden sm:block">
                               {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
-                                <Link
-                                  to={`/user/${item?.createBy?.username}`} >
+                                <Link to={`/user/${item?.createBy?.username}`}>
                                   <img
                                     className="mx-auto max-h-[40px] rounded-full"
-                                    width="40px" height="40px"
+                                    width="40px"
+                                    height="40px"
                                     src={item?.createBy?.avatar?.avatarUrl}
-                                    alt="Avatar" />
+                                    alt="Avatar"
+                                  />
                                 </Link>
                               ) : (
                                 <Link
@@ -208,7 +209,7 @@ const SearchPage = () => {
               </div>
             </div>
           </div>
-          <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded md:hidden">
+          <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded lg:block hidden">
             <FeaturedAuthor authors={featuredAuthor} />
             <TrendingTags tags={tagPopular} />
           </div>
