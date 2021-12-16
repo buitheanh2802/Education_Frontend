@@ -83,6 +83,10 @@ const ModalSolution = ({ isShowModle, setIsShowModle }) => {
                                     required: {
                                         value: true,
                                         message: "Yêu cầu nhập trường này"
+                                    },
+                                    pattern: {
+                                        value: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+                                        message: "Đường dẫn không hợp lệ"
                                     }
                                 })}
                                 disabled={actionLoading}
@@ -100,6 +104,10 @@ const ModalSolution = ({ isShowModle, setIsShowModle }) => {
                                     required: {
                                         value: true,
                                         message: "Yêu cầu nhập trường này"
+                                    },
+                                    pattern: {
+                                        value: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+                                        message: "Đường dẫn không hợp lệ"
                                     }
                                 })}
                                 disabled={actionLoading}

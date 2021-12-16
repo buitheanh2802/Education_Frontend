@@ -80,9 +80,8 @@ const Header = () => {
               </span>
             </form>
             {profile && (
-              <i
+              <span
                 onClick={() => setIsNotification(!isNotification)}
-                onBlur={() => setIsNotification(false)}
                 className={`${
                   active
                     ? "text-gray-500 hover:text-blue-600"
@@ -90,7 +89,7 @@ const Header = () => {
                 } lg:hidden`}
               >
                 <Icon.Bell className="cursor-pointer w-[25px] h-[25px] fill-current" />
-              </i>
+              </span>
             )}
             <button onClick={() => setIsMenu(true)} className="lg:hidden">
               <Icon.Menu

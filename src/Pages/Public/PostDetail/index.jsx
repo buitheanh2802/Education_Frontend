@@ -160,7 +160,6 @@ const PostsDetail = () => {
     });
     setLoadingBookmark(false);
   };
-
   const handleFollow = async () => {
     if (token === null) return history.push("/auth/login");
     setLoadingFollow(true);
@@ -578,7 +577,7 @@ const PostsDetail = () => {
                 <button
                   onClick={() => handleFollow()}
                   className={
-                    postDetail?.data?.isFollowing
+                    postDetail?.data?.createBy?.isFollowing
                       ? "border flex items-center border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
                       : "border flex items-center border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
                   }
@@ -586,7 +585,7 @@ const PostsDetail = () => {
                   {loadingFollow && (
                     <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
                   )}
-                  {postDetail?.data?.isFollowing
+                  {postDetail?.data?.createBy?.isFollowing
                     ? "- Đã theo dõi"
                     : "+ Theo dõi"}
                 </button>
