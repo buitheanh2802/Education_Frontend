@@ -37,6 +37,15 @@ const SulotionApi = {
       },
     });
   },
+
+  async upVote(id) {
+    const url = `/solution/${id}/vote`;
+    return AxiosClient.post(url, {}, {
+      headers: {
+        authorization: `Bearer ${LocalStorage.Get("_token_")}`,
+      },
+    });
+  }
 };
 
 export default SulotionApi;
