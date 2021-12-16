@@ -1,26 +1,27 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import SearchApi from "src/Apis/SearchApi";
-import Loading from "src/Components/Loading";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import QuestionView from "../Commons/QuestionView";
 import { Icon } from "src/Components/Icon";
 import { timeFormatter } from "src/Helpers/Timer";
 import ResultSearchUser from "./ResultSearchUser";
 import ResultSearchTag from "./ResultSearchTag";
+import { setLoading } from "src/Redux/Slices/Loading.slice";
+import { useDispatch } from "react-redux";
+import ResultSearchQuestion from "./ResultSearchQuestion";
 
 const SearchPage = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
   const history = useHistory();
+  const keyword = location.search.substring(9, location.search.length);
   const [dataSearchPost, setDataSearchPost] = useState([]);
-  const [dataSearchQuestion, setDataSearchQuestion] = useState([]);
-  const [dataSearchUser, setDataSearchUer] = useState([]);
-  const [dataSearchTag, setDataSearchTag] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [tabPost, setTabPost] = useState(true);
   const [tabQuestion, setTabQuestion] = useState(false);
   const [tabUser, setTabUser] = useState(false);
   const [tabTag, setTabTag] = useState(false);
+  const [searchKey, setSearchKey] = useState("");
 
   const handleActivePost = () => {
     setTabPost(true);
@@ -47,27 +48,64 @@ const SearchPage = () => {
     setTabTag(true);
   };
 
+  useEffect(() => {
+    const getData = async () => {
+      const doc = document.querySelector(".result");
+      const noneKey = document.querySelector(".noneKey");
+      if (keyword === "") {
+        doc.classList.add("hidden");
+        noneKey.classList.remove("hidden");
+        return;
+      }
+      try {
+        doc.classList.remove("hidden");
+        noneKey.classList.add("hidden");
+        dispatch(setLoading(true));
+        const { data: posts } = await SearchApi.searchPost(keyword);
+        setDataSearchPost(posts.data.models);
+        dispatch(setLoading(false));
+      } catch (error) {
+        dispatch(setLoading(false));
+        console.log(error);
+      }
+    };
+    getData();
+  }, [keyword]);
+
+  const EnterEvent = (e) => {
+    e.preventDefault();
+    history.push(`/search?keyword=${searchKey}`);
+  };
+
   return (
     <>
-      {/* {loading && <Loading />} */}
-      <div className="container mx-auto mt-[80px] mb-[20px]">
+      <div className="container mx-auto mt-[80px] mb-[20px] lg:hidden block">
         <div className="shadow-sm bg-white px-[10px] rounded gap-[15px] border">
-          <form className="flex justify-center">
+          <form className="flex justify-center" onSubmit={(e) => EnterEvent(e)}>
             <input
-              type="password"
-              className="px-[10px] w-[350px] rounded-l-lg py-[5px] border my-[8px] outline-none border border-blue-500"
+              onChange={(e) => {
+                setSearchKey(e.target.value);
+              }}
+              type="text"
+              className="px-[10px] w-[60%] rounded-l-lg py-[5px] border my-[8px] outline-none border border-blue-500"
               placeholder="Tìm kiếm..."
             />
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-400 py-[6px] rounded-r-lg min-w-[100px] my-[8px] text-white outline-none"
+              className="md:block hidden bg-blue-500 hover:bg-blue-400 py-[6px] rounded-r-lg min-w-[100px] my-[8px] text-white outline-none"
             >
               Tìm kiếm
+            </button>
+            <button
+              type="submit"
+              className="md:hidden bg-blue-500 hover:bg-blue-400 py-[6px] rounded-r-lg px-[20px] my-[8px] text-white outline-none"
+            >
+              <Icon.SearchLarge className="w-[22px] h-[22px] cursor-pointer text-white fill-current" />
             </button>
           </form>
         </div>
       </div>
-      <Tabs className="container mx-auto mb-[20px]">
+      <Tabs className="container mx-auto lg:mt-[80px] mb-[20px]">
         <div className="flex justify-between shadow-sm bg-white px-[10px] rounded gap-[15px] border">
           <TabList className="py-[15px] flex items-center overflow-x-auto w-full whitespace-nowrap">
             <Tab
@@ -115,7 +153,12 @@ const SearchPage = () => {
         <div className="mt-[15px] gap-[15px] flex justify-between">
           <div className="w-full shadow-sm bg-white px-[5px] rounded">
             <div className="mt-[15px] gap-[15px] flex justify-between">
-              <div className="w-full shadow-sm bg-white px-[5px] rounded">
+              <div className="hidden noneKey mx-auto">
+                <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
+                  Vui lòng nhập vào từ khoá tìm kiếm
+                </p>
+              </div>
+              <div className="result w-full bg-white px-[5px] rounded">
                 <TabPanel>
                   {dataSearchPost?.length === 0 ? (
                     <div>
@@ -216,13 +259,13 @@ const SearchPage = () => {
                   )}
                 </TabPanel>
                 <TabPanel>
-                  <QuestionView questions={dataSearchQuestion} />
+                  <ResultSearchQuestion />
                 </TabPanel>
                 <TabPanel>
-                  <ResultSearchUser dataSearchUser={dataSearchUser} />
+                  <ResultSearchUser />
                 </TabPanel>
                 <TabPanel>
-                  <ResultSearchTag dataSearchTag={dataSearchTag} />
+                  <ResultSearchTag />
                 </TabPanel>
               </div>
             </div>

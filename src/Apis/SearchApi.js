@@ -14,7 +14,7 @@ const SearchApi = {
     return AxiosClient.get(url);
   },
   searchUser(key) {
-    const url = `/search/authours?keyword=${key}`;
+    const url = `/search/authors?keyword=${key}`;
     return AxiosClient.get(url);
   },
   searchTag(key) {

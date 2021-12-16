@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link, NavLink, useHistory, useLocation } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
@@ -18,6 +18,7 @@ const Header = () => {
   const [searchKey, setSearchKey] = useState("");
   const [suggestSearch, setSuggestSearch] = useState([]);
   const history = useHistory();
+  const timeout = useRef(null);
 
   useEffect(() => {
     const fixedTop = () =>
@@ -41,25 +42,30 @@ const Header = () => {
 
   const handleSearchSuggest = async (e) => {
     try {
-      if (e.target.value) {
-        const { data: res } = await SearchApi.suggestSearch(e.target.value);
-        if (res) {
-          setSuggestSearch(res);
-        }
+      if (timeout.current) {
+        clearTimeout(timeout.current);
       }
-    } catch (error) {}
+      timeout.current = setTimeout(async () => {
+        if (e.target.value) {
+          const { data: res } = await SearchApi.suggestSearch(e.target.value);
+          if (res) {
+            setSuggestSearch(res.data);
+          }
+        }
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
-      {/* Mobile */}
       {isNotification && (
         <Notification
           setIsNotification={setIsNotification}
           className="z-[999] fixed top-0 left-0 bottom-0 right-0 lg:hidden"
         />
       )}
-      {/* end */}
       <div
         className={`${
           active
@@ -67,7 +73,7 @@ const Header = () => {
             : "pt-[15px] border-transparent text-white"
         } border-b border-solid duration-300 fixed top-0 left-0 right-0 z-[999]`}
       >
-        <nav className="container mx-auto select-none flex justify-between items-center py-[10px]">
+        <nav className="container mx-auto select-none flex justify-between items-center py-[10px] relative">
           <h1 className="mr-[80px]">
             <Link
               onClick={() => {
@@ -87,7 +93,6 @@ const Header = () => {
             <form className="relative ">
               <span
                 onClick={() => {
-                  setIsSearch(!isSearch);
                   history.push("/search");
                 }}
                 className="lg:hidden block pr-[10px] relative before:absolute before:inline-block before:w-[0.5px] border-r border-blue-600"
@@ -211,8 +216,8 @@ const Header = () => {
                 </NavLink>
               </li>
             </ul>
-            <div className="flex items-center">
-              <form onSubmit={(e) => EnterEvent(e)} className="relative ">
+            <div className="flex items-center gap-[20px]">
+              <form onSubmit={(e) => EnterEvent(e)} className="relative">
                 <input
                   type="text"
                   onChange={(e) => {
@@ -224,24 +229,22 @@ const Header = () => {
                     setIsSearch(false);
                   }}
                   onClick={() => setIsSearch(true)}
-                  className={
-                    isSearch
-                      ? "absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] transition duration-500 ease-in text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 w-[350px] border border-blue-600"
-                      : "absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 w-[200px] border border-blue-600"
-                  }
+                  className={`absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 border border-blue-600 duration-300 ${
+                    isSearch ? "w-[380px]" : "w-[250px]"
+                  }`}
                   placeholder="Tìm kiếm..."
                 />
                 <span
                   onClick={() => setIsSearch(!isSearch)}
-                  className="hidden lg:block border-r border-blue-600 pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%]"
+                  className="hidden lg:block relative before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%]"
                 >
-                  <Icon.SearchLarge className="w-[22px] h-[22px] pr-[5px] cursor-pointer text-blue-600 fill-current" />
+                  <Icon.SearchLarge className="w-[22px] h-[22px] pr-[5px] cursor-pointer text-blue-600 fill-current " />
                 </span>
                 <button
                   type="submit"
                   className={
                     isSearch
-                      ? "hidden  lg:block pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
+                      ? "hidden lg:block pr-[15px] relative before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
                       : "hidden"
                   }
                 ></button>
@@ -256,6 +259,13 @@ const Header = () => {
               />
             </div>
           </div>
+          {/* {isSearch ? (
+            <div className="absolute w-[380px] h-[40px] shadow-blue-600 border border-t-0 border-blue-400 bg-white top-[46px] right-[118.5px] rounded">
+              {suggestSearch?.map((item, index) => {
+                return <div></div>;
+              })}
+            </div>
+          ) : null} */}
         </nav>
       </div>
     </>

@@ -98,7 +98,7 @@ const ChallengePage = () => {
             })}
           </>
         )}
-        {challenges?.map((item) => {
+        {challenges?.length > 0 ? challenges?.map((item) => {
           return (
             <div
               key={item?._id}
@@ -134,34 +134,32 @@ const ChallengePage = () => {
                 <div className="w-full pr-[30px] absolute bottom-[15px]">
                   <div className="mt-[35px] rounded-[5px] border border-gray-300  pt-[12px] pb-[19px] w-full  ">
                     <p
-                      className={`text-[12px] px-[15px] ${
-                        item?.level > 4
-                          ? "text-red-500"
-                          : item?.level > 2
+                      className={`text-[12px] px-[15px] ${item?.level > 4
+                        ? "text-red-500"
+                        : item?.level > 2
                           ? "text-yellow-500"
                           : "text-green-500"
-                      }`}
+                        }`}
                     >
                       {item?.level > 4
                         ? "Nâng cao"
                         : item?.level > 2
-                        ? "Trung cấp"
-                        : "Sơ cấp"}
+                          ? "Trung cấp"
+                          : "Sơ cấp"}
                       :
                     </p>
                     <div className="grid grid-cols-5 gap-[10px] px-[15px] mt-[6px]">
                       {[...Array(5)].map((arr, index) => (
                         <span
                           key={index}
-                          className={`${
-                            index < item?.level
-                              ? item?.level > 4
-                                ? "bg-red-500"
-                                : item?.level > 2
+                          className={`${index < item?.level
+                            ? item?.level > 4
+                              ? "bg-red-500"
+                              : item?.level > 2
                                 ? "bg-yellow-500"
                                 : "bg-green-500"
-                              : "bg-gray-300"
-                          } h-[5px] rounded-[3px] `}
+                            : "bg-gray-300"
+                            } h-[5px] rounded-[3px] `}
                         ></span>
                       ))}
                     </div>
@@ -170,7 +168,10 @@ const ChallengePage = () => {
               </div>
             </div>
           );
-        })}
+        })
+          : <div className="py-[50px] text-center w-full col-span-3 text-gray-400 text-lg select-none">
+            <p>Chưa có bài tập</p>
+          </div>}
       </div>
     </div>
   );

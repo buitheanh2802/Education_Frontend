@@ -4,6 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 const Navigation = ({ path, button }) => {
   const history = useHistory();
   const token = localStorage.getItem("_token_");
+
   return (
     <div className="flex justify-between shadow-sm bg-white px-[10px] rounded gap-[15px] border">
       <div className="py-[15px] flex items-center overflow-x-auto w-full whitespace-nowrap">

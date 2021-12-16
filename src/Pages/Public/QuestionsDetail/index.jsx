@@ -49,10 +49,11 @@ const QuestionsDetail = () => {
         const { data: questionOther } = await QuestionApi.otherQuestion(
           question?.data?.createBy?._id
         );
-        const otherQuesstions = questionOther?.data?.filter(
+
+        const otherQuestions = questionOther?.data?.filter(
           (item) => item?.slug !== question?.data?.slug
         );
-        setOtherQuestion(otherQuesstions);
+        setOtherQuestion(otherQuestions);
         setQuestionDetail(question);
         setLoading(false);
         if (question.data.createBy.username) {
@@ -575,7 +576,7 @@ const QuestionsDetail = () => {
             <div className="flex py-[5px] block-avt justify-center">
               {questionDetail?.data?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                 <Link
-                  to={`/user/${questionDetail?.data?.createBy?.fullname}`}
+                  to={`/user/${questionDetail?.data?.createBy?.username}`}
                   className="  border border-gray-300 cursor-pointer select-none w-[45px] h-[45px] rounded-full bg-center bg-cover"
                   style={{
                     backgroundImage: `url(${questionDetail?.data?.createBy?.avatar?.avatarUrl})`,
@@ -584,7 +585,7 @@ const QuestionsDetail = () => {
                 ></Link>
               ) : (
                 <Link
-                  to={`/user/${questionDetail?.data?.createBy?.fullname}`}
+                  to={`/user/${questionDetail?.data?.createBy?.username}`}
                   className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
                 >
                   {questionDetail?.data?.createBy?.fullname
@@ -595,7 +596,7 @@ const QuestionsDetail = () => {
             </div>
             <div className="py-[10px] px-[15px]  border-b border-gray-100 flex justify-between items-center">
               <p className="text-[16px] font-medium ">
-                <Link to={`/user/${questionDetail?.data?.createBy?.fullname}`}>
+                <Link to={`/user/${questionDetail?.data?.createBy?.username}`}>
                   <span className="block hover:underline	">
                     {questionDetail?.data?.createBy?.fullname}
                   </span>
@@ -604,19 +605,29 @@ const QuestionsDetail = () => {
                   @{questionDetail?.data?.createBy?.username}
                 </span>
               </p>
-              <button
-                onClick={() => handleFollow()}
-                className={
-                  user?.data?.isFollowing
-                    ? "border flex items-center border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
-                    : "border flex items-center border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
-                }
-              >
-                {loadingFollow && (
-                  <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
-                )}
-                {user?.data?.isFollowing ? "- Đã theo dõi" : "+ Theo dõi"}
-              </button>
+              {questionDetail?.data?.createBy?.username ===
+              profile?.username ? (
+                <button
+                  onClick={() => history.push("/profile/me")}
+                  className="border flex items-center border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
+                >
+                  Xem thông tin
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleFollow()}
+                  className={
+                    user?.data?.isFollowing
+                      ? "border flex items-center border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
+                      : "border flex items-center border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
+                  }
+                >
+                  {loadingFollow && (
+                    <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                  )}
+                  {user?.data?.isFollowing ? "- Đã theo dõi" : "+ Theo dõi"}
+                </button>
+              )}
             </div>
             <div className="py-[10px] flex border-b border-gray-100">
               <div className="m-auto flex">
