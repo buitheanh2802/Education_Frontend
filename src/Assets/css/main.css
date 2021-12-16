@@ -449,7 +449,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-shadow-colored: 0 0 #0000;
 }
 
-.grayscale-\[20\%\], .sepia-0, .filter {
+.grayscale-\[20\%\], .grayscale-\[50\%\], .grayscale-\[5\%\], .sepia-0, .filter {
   --tw-blur: var(--tw-empty,/*!*/ /*!*/);
   --tw-brightness: var(--tw-empty,/*!*/ /*!*/);
   --tw-contrast: var(--tw-empty,/*!*/ /*!*/);
@@ -3598,6 +3598,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .grayscale-\[20\%\] {
   --tw-grayscale: grayscale(20%);
+  filter: var(--tw-filter);
+}
+
+.grayscale-\[50\%\] {
+  --tw-grayscale: grayscale(50%);
+  filter: var(--tw-filter);
+}
+
+.grayscale-\[5\%\] {
+  --tw-grayscale: grayscale(5%);
   filter: var(--tw-filter);
 }
 
