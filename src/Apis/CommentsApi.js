@@ -2,6 +2,14 @@ import LocalStorage from "src/Helpers/Storage";
 import AxiosClient from "./AxiosClient";
 
 const CommentsApi = {
+    async find(page) {
+        const url = `/comment/manager/list?page=${page ? page : 0}`;
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
+    },
     async gets(shortId) {
         const url = `/comment/${shortId}`;
         return AxiosClient.get(url, {
@@ -49,6 +57,14 @@ const CommentsApi = {
                 Authorization: `Bearer ${LocalStorage.Get('_token_')}`
             }
         })
-    }
+    },
+    async adminDelete(id) {
+        const url = `/comment/manager/delete/${id}`;
+        return AxiosClient.delete(url, {
+            headers: {
+                Authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
+    },
 };
 export default CommentsApi;

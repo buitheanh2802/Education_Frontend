@@ -13,6 +13,7 @@ import ContactManager from "src/Pages/Private/ContactManager";
 import TagManager from "src/Pages/Private/TagManager";
 import DetailExercise from "src/Pages/Private/DetailExercise";
 import ChartManager from "src/Pages/Private/ChartManager";
+import CommentManager from "src/Pages/Private/CommentManager";
 
 const AdminLayout = () => {
   return (
@@ -32,6 +33,7 @@ const AdminLayout = () => {
                 <PrivateRouter path={path.MANAGER_CHART} component={ChartManager} />
                 <PrivateRouter path={path.SULOTION_MANAGER_ID} component={DetailExercise} />
                 <PrivateRouter path={path.SULOTION_MANAGER} component={Exercise} />
+                <PrivateRouter path={path.COMMENT_MANGER} component={CommentManager} />
                 <PrivateRouter exact path={path.ADMIN} component={Dashboard} />
               </Switch>
             </div>
