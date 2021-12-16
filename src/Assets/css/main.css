@@ -1381,24 +1381,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-height: 40px;
 }
 
+.max-h-\[75vh\] {
+  max-height: 75vh;
+}
+
 .max-h-\[55px\] {
   max-height: 55px;
 }
 
 .max-h-\[35px\] {
   max-height: 35px;
-}
-
-.max-h-\[90vh\] {
-  max-height: 90vh;
-}
-
-.max-h-\[80vh\] {
-  max-height: 80vh;
-}
-
-.max-h-\[75vh\] {
-  max-height: 75vh;
 }
 
 .min-h-\[50px\] {
@@ -1637,14 +1629,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 280px;
 }
 
-.w-\[0\.5px\] {
-  width: 0.5px;
-}
-
-.w-\[500px\] {
-  width: 500px;
-}
-
 .min-w-\[170px\] {
   min-width: 170px;
 }
@@ -1655,6 +1639,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .min-w-\[350px\] {
   min-width: 350px;
+}
+
+.min-w-\[100px\] {
+  min-width: 100px;
 }
 
 .min-w-\[40px\] {
@@ -1671,14 +1659,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .min-w-\[35px\] {
   min-width: 35px;
-}
-
-.min-w-\[120px\] {
-  min-width: 120px;
-}
-
-.min-w-\[100px\] {
-  min-width: 100px;
 }
 
 .max-w-\[1100px\] {
@@ -1865,8 +1845,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-template-columns: 60px 1.5fr 1.5fr 1.5fr 0.6fr 0.6fr 0.8fr;
 }
 
-.grid-cols-\[60px\2c 0\.9fr\2c 1\.7fr\2c 0\.7fr\2c 0\.9fr\2c 0\.6fr\2c 1\.2fr\] {
-  grid-template-columns: 60px 0.9fr 1.7fr 0.7fr 0.9fr 0.6fr 1.2fr;
+.grid-cols-\[60px\2c 1\.5fr\2c 0\.7fr\2c 0\.9fr\2c 0\.6fr\2c 1\.2fr\] {
+  grid-template-columns: 60px 1.5fr 0.7fr 0.9fr 0.6fr 1.2fr;
 }
 
 .grid-cols-\[65px\2c 1fr\2c 4fr\2c 1fr\2c 0\.5fr\] {
@@ -1883,10 +1863,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .grid-cols-\[60px\2c 1\.5fr\2c 1fr\2c 0\.75fr\2c 0\.75fr\2c 1\.2fr\] {
   grid-template-columns: 60px 1.5fr 1fr 0.75fr 0.75fr 1.2fr;
-}
-
-.grid-cols-\[60px\2c 1\.5fr\2c 0\.7fr\2c 0\.9fr\2c 0\.6fr\2c 1\.2fr\] {
-  grid-template-columns: 60px 1.5fr 0.7fr 0.9fr 0.6fr 1.2fr;
 }
 
 .flex-col {
@@ -2142,6 +2118,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-top-right-radius: 3px;
 }
 
+.rounded-l-lg {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.rounded-r-lg {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
 .rounded-b-\[3px\] {
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -2160,16 +2146,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .rounded-t {
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
-}
-
-.rounded-l-lg {
-  border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-}
-
-.rounded-r-lg {
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
 }
 
 .border {
@@ -2530,14 +2506,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#e7e7e7\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(231 231 231 / var(--tw-bg-opacity));
-}
-
 .bg-blue-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(147 197 253 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#e7e7e7\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(231 231 231 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#dceafe\] {
@@ -2954,11 +2930,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-\[13px\] {
   padding-top: 13px;
   padding-bottom: 13px;
-}
-
-.px-\[4px\] {
-  padding-left: 4px;
-  padding-right: 4px;
 }
 
 .pl-0 {
@@ -3667,12 +3638,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 150ms;
 }
 
-.transition-\[2000ms\] {
-  transition-property: 2000ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
 .duration-300 {
   transition-duration: 300ms;
 }
@@ -3685,20 +3650,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 200ms;
 }
 
-.duration-1000 {
-  transition-duration: 1000ms;
-}
-
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-}
-
-.ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.ease-linear {
-  transition-timing-function: linear;
 }
 
 @-webkit-keyframes newTab {
@@ -4609,22 +4562,6 @@ body {
 .focus\:ring-red-200:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(254 202 202 / var(--tw-ring-opacity));
-}
-
-.focus\:transition:focus {
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.focus\:duration-1000:focus {
-  transition-duration: 1000ms;
-}
-
-.focus\:ease-in-out:focus {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .disabled\:bg-gray-400:disabled {

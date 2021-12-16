@@ -42,7 +42,7 @@ const QuestionsDetail = () => {
   const idQuestion = shortId.id.split("-")[shortId.id.split("-").length - 1];
   useEffect(() => {
     setRender(false);
-    setLoading(true);
+    // setLoading(true);
     const list = async (id) => {
       try {
         let { data: question } = await QuestionApi.getId(idQuestion);
@@ -290,7 +290,7 @@ const QuestionsDetail = () => {
                 {questionDetail?.data?.createBy?.avatar?.avatarUrl?.length >
                 0 ? (
                   <Link
-                    to={`/user/${questionDetail?.data?.createBy?.fullname}`}
+                    to={`/user/${questionDetail?.data?.createBy?.username}`}
                     className="  border border-gray-300 cursor-pointer select-none w-[55px] h-[55px] rounded-full bg-center bg-cover"
                     style={{
                       backgroundImage: `url(${questionDetail?.data?.createBy?.avatar?.avatarUrl})`,
@@ -299,7 +299,7 @@ const QuestionsDetail = () => {
                   ></Link>
                 ) : (
                   <Link
-                    to={`/user/${questionDetail?.data?.createBy?.fullname}`}
+                    to={`/user/${questionDetail?.data?.createBy?.username}`}
                     className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
                   >
                     {questionDetail?.data?.createBy?.fullname
@@ -310,7 +310,7 @@ const QuestionsDetail = () => {
                 <div className="ml-2">
                   <p className="text-blue-500 text-[14px] sm:text-[16px] font-medium flex items-center">
                     <Link
-                      to={`/user/${questionDetail?.data?.createBy?.fullname}`}
+                      to={`/user/${questionDetail?.data?.createBy?.username}`}
                     >
                       <span className="hover:underline">
                         {questionDetail?.data?.createBy?.fullname}
@@ -365,6 +365,7 @@ const QuestionsDetail = () => {
                 <button
                   className="h-full btn__post"
                   onClick={() => setQuestionMenu(!questionMenu)}
+                  onBlur={() => setQuestionMenu(false)}
                 >
                   <Icon.DotsVertical className=" w-[13px] " />
                 </button>
@@ -516,6 +517,7 @@ const QuestionsDetail = () => {
                           : "text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center hover:bg-blue-300 hover:text-white"
                       }
                       onClick={() => setQuestionShare(!questionShare)}
+                      onBlur={() => setQuestionShare(false)}
                     >
                       <Icon.Share className="fill-current w-[15px]" />
                       <span className="text-[12x] md:text-[14x] ml-1">

@@ -82,6 +82,7 @@ const Header = () => {
             {profile && (
               <i
                 onClick={() => setIsNotification(!isNotification)}
+                onBlur={() => setIsNotification(false)}
                 className={`${
                   active
                     ? "text-gray-500 hover:text-blue-600"
