@@ -8,11 +8,8 @@ const SkeletonGroup = () => {
         return (
           <div
             className="bg-white py-[10px] px-[5px] grid 
-                       grid-cols-[60px,0.9fr,1.7fr,0.7fr,0.9fr,0.6fr,1.2fr]  "
+                       grid-cols-[60px,1.5fr,0.7fr,0.9fr,0.6fr,1.2fr]  "
           >
-            <div className="mr-[15px] ">
-              <Skeleton duration={1} />
-            </div>
             <div className="mr-[15px] ">
               <Skeleton duration={1} />
             </div>
