@@ -5,6 +5,7 @@ import { Icon } from "src/Components/Icon";
 import { path } from "src/Constants/";
 import Notification from "./Components/Notification";
 import Auth from "./Components/Auth";
+import SearchApi from "src/Apis/SearchApi";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -15,6 +16,7 @@ const Header = () => {
   const { profile } = useSelector((state) => state.Auth);
   const [isSearch, setIsSearch] = useState(false);
   const [searchKey, setSearchKey] = useState("");
+  const [suggestSearch, setSuggestSearch] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -35,6 +37,17 @@ const Header = () => {
     e.preventDefault();
     setIsSearch(false);
     history.push(`/search?keyword=${searchKey}`);
+  };
+
+  const handleSearchSuggest = async (e) => {
+    try {
+      if (e.target.value) {
+        const { data: res } = await SearchApi.suggestSearch(e.target.value);
+        if (res) {
+          setSuggestSearch(res);
+        }
+      }
+    } catch (error) {}
   };
 
   return (
@@ -73,7 +86,10 @@ const Header = () => {
           <div className="flex items-center gap-[15px]">
             <form className="relative ">
               <span
-                onClick={() => setIsSearch(!isSearch)}
+                onClick={() => {
+                  setIsSearch(!isSearch);
+                  history.push("/search");
+                }}
                 className="lg:hidden block pr-[10px] relative before:absolute before:inline-block before:w-[0.5px] border-r border-blue-600"
               >
                 <Icon.SearchLarge className="w-[22px] h-[22px] mr-[5px] cursor-pointer text-blue-600 fill-current" />
@@ -148,8 +164,7 @@ const Header = () => {
                 </Link>
               )}
               <button onClick={() => setIsMenu(false)}>
-                {" "}
-                <Icon.Close className="w-[20px]" />{" "}
+                <Icon.Close className="w-[20px]" />
               </button>
             </ul>
             <ul className="lg:flex lg:gap-[20px] px-[15px] lg:px-0 pt-[10px] lg:pt-0">
@@ -203,6 +218,7 @@ const Header = () => {
                   onChange={(e) => {
                     setIsSearch(true);
                     setSearchKey(e.target.value);
+                    handleSearchSuggest(e);
                   }}
                   onBlur={() => {
                     setIsSearch(false);
@@ -242,43 +258,6 @@ const Header = () => {
           </div>
         </nav>
       </div>
-      {/* <div
-        className={
-          isSearch
-            ? "fixed  z-[9999999] translate-y-[0] transition w-full px-[30px] md:px-[0] md:w-[650px]  rounded-b-[3px] top-0 left-[50%] translate-x-[-50%]"
-            : "fixed  z-[9999999] translate-y-[-100%]  lg:w-[650px] transition   rounded-b-[3px] top-0 left-[50%] translate-x-[-50%]"
-        }
-      >
-        <div className="bg-blue-200">
-          <div className="flex justify-end ">
-            <button
-              onClick={() => setIsSearch(!isSearch)}
-              className="mr-[17px] mt-[17px]"
-            >
-              <Icon.Close className="fill-current cursor-pointer w-[15px] text-gray-500 hover:text-gray-700 " />
-            </button>
-          </div>
-          <form
-            className="px-[50px] pt-[50px] pb-[40px]"
-            onSubmit={(e) => EnterEvent(e)}
-          >
-            <div className="w-full relative">
-              <input
-                type="text"
-                className="w-full text-[14px] pl-[20px] pr-[50px] py-[10px] border rounded-[3px] focus:outline-none focus:border focus:border-gray-600"
-                placeholder="Tìm kiếm trên DevStart"
-                onChange={(e) => setSearchKey(e.target.value)}
-              />
-              <button
-                type="submit"
-                className="absolute top-0 right-0 w-[43px] flex bg-blue-500 h-[43px]"
-              >
-                <Icon.SearchLarge className="fill-current m-auto cursor-pointer w-[20px] text-white hover:text-gray-700 " />
-              </button>
-            </div>
-          </form>
-        </div>
-      </div> */}
     </>
   );
 };

@@ -1,81 +1,73 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import SearchApi from "src/Apis/SearchApi";
 import Loading from "src/Components/Loading";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import QuestionView from "../Commons/QuestionView";
-import FeaturedAuthor from "../Commons/FeaturedAuthor";
-import TrendingTags from "../Commons/TrendingTags";
-import UserApi from "src/Apis/UserApi";
-import TagAPi from "src/Apis/TagApi";
 import { Icon } from "src/Components/Icon";
 import { timeFormatter } from "src/Helpers/Timer";
+import ResultSearchUser from "./ResultSearchUser";
+import ResultSearchTag from "./ResultSearchTag";
 
 const SearchPage = () => {
   const history = useHistory();
-  const keyword = new URLSearchParams(history.location.search).get("keyword");
-  const [dataSearch, setDataSeach] = useState([]);
   const [dataSearchPost, setDataSearchPost] = useState([]);
   const [dataSearchQuestion, setDataSearchQuestion] = useState([]);
+  const [dataSearchUser, setDataSearchUer] = useState([]);
+  const [dataSearchTag, setDataSearchTag] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [featuredAuthor, setFeaturedAuthor] = useState([]);
-  const [tagPopular, setTagPopular] = useState([]);
   const [tabPost, setTabPost] = useState(true);
   const [tabQuestion, setTabQuestion] = useState(false);
-
-  // useEffect(() => {
-  //   try {
-  //     (async () => {
-  //       const condition = { title: keyword };
-  //       const { data } = await SearchApi.Search(condition);
-  //       const dataNewQuestion = data?.data?.modelsQuestion?.filter(
-  //         (data) => data.spam === false
-  //       );
-  //       setDataSearchQuestion(dataNewQuestion);
-  //       setDataSearchPost(data?.data?.modelsPost);
-  //       setLoading(false);
-  //     })();
-
-  //     const listFeaturedAuthor = async () => {
-  //       try {
-  //         const { data: FeaturedAuthor } = await UserApi.getFeaturedAuthor();
-  //         setFeaturedAuthor(FeaturedAuthor?.data);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     listFeaturedAuthor();
-
-  //     const listTagPopular = async () => {
-  //       try {
-  //         const { data: tagsPopular } = await TagAPi.getTagPopular();
-  //         setTagPopular(tagsPopular?.data);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     listTagPopular();
-  //   } catch (error) {
-  //     setLoading(false);
-  //   }
-  // }, [keyword]);
+  const [tabUser, setTabUser] = useState(false);
+  const [tabTag, setTabTag] = useState(false);
 
   const handleActivePost = () => {
     setTabPost(true);
     setTabQuestion(false);
+    setTabUser(false);
+    setTabTag(false);
   };
   const handleActiveQuestion = () => {
     setTabPost(false);
     setTabQuestion(true);
+    setTabUser(false);
+    setTabTag(false);
+  };
+  const handleActiveUser = () => {
+    setTabPost(false);
+    setTabQuestion(false);
+    setTabUser(true);
+    setTabTag(false);
+  };
+  const handleActiveTag = () => {
+    setTabPost(false);
+    setTabQuestion(false);
+    setTabUser(false);
+    setTabTag(true);
   };
 
   return (
     <>
       {/* {loading && <Loading />} */}
-      <Tabs className="container mx-auto mt-[80px] mb-[20px]">
+      <div className="container mx-auto mt-[80px] mb-[20px]">
+        <div className="shadow-sm bg-white px-[10px] rounded gap-[15px] border">
+          <form className="flex justify-center">
+            <input
+              type="password"
+              className="px-[10px] w-[350px] rounded-l-lg py-[5px] border my-[8px] outline-none border border-blue-500"
+              placeholder="Tìm kiếm..."
+            />
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-400 py-[6px] rounded-r-lg min-w-[100px] my-[8px] text-white outline-none"
+            >
+              Tìm kiếm
+            </button>
+          </form>
+        </div>
+      </div>
+      <Tabs className="container mx-auto mb-[20px]">
         <div className="flex justify-between shadow-sm bg-white px-[10px] rounded gap-[15px] border">
           <TabList className="py-[15px] flex items-center overflow-x-auto w-full whitespace-nowrap">
             <Tab
@@ -92,28 +84,33 @@ const SearchPage = () => {
               onClick={() => handleActiveQuestion()}
               className={
                 tabQuestion
-                  ? "relative text-[15px] px-[10px]  after:absolute after:w-full after:h-[2px] after:rounded after:bottom-[-16px] after:left-0 after:bg-[#1273eb] font-medium text-black"
+                  ? "relative text-[15px] px-[10px] after:absolute after:w-full after:h-[2px] after:rounded after:bottom-[-16px] after:left-0 after:bg-[#1273eb] font-medium text-black"
                   : "relative cursor-pointer text-[15px] px-[10px] text-gray-600 hover:text-blue-600"
               }
             >
               Câu hỏi
             </Tab>
+            <Tab
+              onClick={() => handleActiveUser()}
+              className={
+                tabUser
+                  ? "relative text-[15px] px-[10px] after:absolute after:w-full after:h-[2px] after:rounded after:bottom-[-16px] after:left-0 after:bg-[#1273eb] font-medium text-black"
+                  : "relative cursor-pointer text-[15px] px-[10px] text-gray-600 hover:text-blue-600"
+              }
+            >
+              Tác giả
+            </Tab>
+            <Tab
+              onClick={() => handleActiveTag()}
+              className={
+                tabTag
+                  ? "relative text-[15px] px-[10px] after:absolute after:w-full after:h-[2px] after:rounded after:bottom-[-16px] after:left-0 after:bg-[#1273eb] font-medium text-black"
+                  : "relative cursor-pointer text-[15px] px-[10px] text-gray-600 hover:text-blue-600"
+              }
+            >
+              Tag
+            </Tab>
           </TabList>
-          <div>
-            <form className="flex">
-              <input
-                type="password"
-                className="px-[10px] w-[350px] rounded-l-lg py-[5px] border my-[8px] outline-none"
-                placeholder="Tìm kiếm..."
-              />
-              <button
-                type="submit"
-                className="bg-blue-300 hover:bg-blue-500 py-[6px] rounded-r-lg min-w-[100px] my-[8px] text-white h-full outline-none"
-              >
-                Tìm kiếm
-              </button>
-            </form>
-          </div>
         </div>
         <div className="mt-[15px] gap-[15px] flex justify-between">
           <div className="w-full shadow-sm bg-white px-[5px] rounded">
@@ -221,12 +218,14 @@ const SearchPage = () => {
                 <TabPanel>
                   <QuestionView questions={dataSearchQuestion} />
                 </TabPanel>
+                <TabPanel>
+                  <ResultSearchUser dataSearchUser={dataSearchUser} />
+                </TabPanel>
+                <TabPanel>
+                  <ResultSearchTag dataSearchTag={dataSearchTag} />
+                </TabPanel>
               </div>
             </div>
-          </div>
-          <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded lg:block hidden">
-            <FeaturedAuthor authors={featuredAuthor} />
-            <TrendingTags tags={tagPopular} />
           </div>
         </div>
       </Tabs>
