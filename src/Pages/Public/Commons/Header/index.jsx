@@ -74,7 +74,7 @@ const Header = () => {
             <form className="relative ">
               <span
                 onClick={() => setIsSearch(!isSearch)}
-                className="lg:hidden block pr-[10px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] border-r border-blue-600"
+                className="lg:hidden block pr-[10px] relative before:absolute before:inline-block before:w-[0.5px] border-r border-blue-600"
               >
                 <Icon.SearchLarge className="w-[22px] h-[22px] mr-[5px] cursor-pointer text-blue-600 fill-current" />
               </span>
@@ -210,8 +210,8 @@ const Header = () => {
                   onClick={() => setIsSearch(true)}
                   className={
                     isSearch
-                      ? "absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] transition text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 w-[350px] border border-blue-600"
-                      : "absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] transition text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 w-[200px] border border-blue-600"
+                      ? "absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] transition duration-500 ease-in text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 w-[350px] border border-blue-600"
+                      : "absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 w-[200px] border border-blue-600"
                   }
                   placeholder="Tìm kiếm..."
                 />
