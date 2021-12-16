@@ -576,7 +576,7 @@ const QuestionsDetail = () => {
             <div className="flex py-[5px] block-avt justify-center">
               {questionDetail?.data?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                 <Link
-                  to={`/user/${questionDetail?.data?.createBy?.fullname}`}
+                  to={`/user/${questionDetail?.data?.createBy?.username}`}
                   className="  border border-gray-300 cursor-pointer select-none w-[45px] h-[45px] rounded-full bg-center bg-cover"
                   style={{
                     backgroundImage: `url(${questionDetail?.data?.createBy?.avatar?.avatarUrl})`,
@@ -585,7 +585,7 @@ const QuestionsDetail = () => {
                 ></Link>
               ) : (
                 <Link
-                  to={`/user/${questionDetail?.data?.createBy?.fullname}`}
+                  to={`/user/${questionDetail?.data?.createBy?.username}`}
                   className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
                 >
                   {questionDetail?.data?.createBy?.fullname
@@ -596,7 +596,7 @@ const QuestionsDetail = () => {
             </div>
             <div className="py-[10px] px-[15px]  border-b border-gray-100 flex justify-between items-center">
               <p className="text-[16px] font-medium ">
-                <Link to={`/user/${questionDetail?.data?.createBy?.fullname}`}>
+                <Link to={`/user/${questionDetail?.data?.createBy?.username}`}>
                   <span className="block hover:underline	">
                     {questionDetail?.data?.createBy?.fullname}
                   </span>

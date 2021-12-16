@@ -55,7 +55,6 @@ const QuesionManage = (props) => {
       console.log(error);
     }
   };
-
   // __render data
   return (
     <div className="w-full">
@@ -69,13 +68,14 @@ const QuesionManage = (props) => {
               // onMarkSpam={onMarkSpam}
               index={index + 1}
               key={index}
-              title={item.title}
-              content={item.content}
-              createBy={item.createBy}
-              createAt={item.createdAt}
-              spam={item.spam}
-              id={item._id}
-              slug={item.slug}
+              title={item?.title}
+              content={item?.content}
+              createBy={item?.createBy}
+              createAt={item?.createdAt}
+              spam={item?.spam}
+              id={item?._id}
+              slug={item?.slug}
+              username={item?.createBy?.username}
             />
           );
         })}
