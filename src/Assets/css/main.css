@@ -426,7 +426,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.divide-y > *, .border, .border-0, .border-\[1px\], .border-4, .border-b, .border-b-2, .border-l-4, .border-t, .border-r, .border-l, .border-r-4, .border-l-\[3px\], .last\:border-0, .focus\:border, .md\:divide-x > *, .lg\:border {
+.divide-y > *, .border, .border-0, .border-\[1px\], .border-4, .border-b, .border-b-2, .border-l-4, .border-t, .border-r, .border-l, .border-r-4, .border-l-\[3px\], .border-t-0, .last\:border-0, .focus\:border, .md\:divide-x > *, .lg\:border {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
@@ -628,6 +628,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .top-\[90\%\] {
   top: 90%;
+}
+
+.left-\[20\%\] {
+  left: 20%;
+}
+
+.top-\[46px\] {
+  top: 46px;
+}
+
+.right-\[118\.5px\] {
+  right: 118.5px;
 }
 
 .z-0 {
@@ -1382,6 +1394,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-height: 35px;
 }
 
+.max-h-\[75vh\] {
+  max-height: 75vh;
+}
+
 .min-h-\[50px\] {
   min-height: 50px;
 }
@@ -1626,6 +1642,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 180px;
 }
 
+.w-\[380px\] {
+  width: 380px;
+}
+
 .min-w-\[170px\] {
   min-width: 170px;
 }
@@ -1656,6 +1676,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .min-w-\[35px\] {
   min-width: 35px;
+}
+
+.min-w-\[90px\] {
+  min-width: 90px;
 }
 
 .max-w-\[1100px\] {
@@ -1879,6 +1903,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-template-columns: 60px 1fr 3fr 1.2fr 0.5fr;
 }
 
+.grid-cols-\[60px\2c 1\.5fr\2c 0\.7fr\2c 0\.9fr\2c 0\.6fr\2c 1\.2fr\] {
+  grid-template-columns: 60px 1.5fr 0.7fr 0.9fr 0.6fr 1.2fr;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -1997,6 +2025,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .gap-x-\[20px\] {
   column-gap: 20px;
+}
+
+.gap-y-\[40px\] {
+  row-gap: 40px;
 }
 
 .space-x-12 > :not([hidden]) ~ :not([hidden]) {
@@ -2210,6 +2242,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-left-width: 3px;
 }
 
+.border-t-0 {
+  border-top-width: 0px;
+}
+
 .border-solid {
   border-style: solid;
 }
@@ -2349,6 +2385,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-gray-600 {
   --tw-border-opacity: 1;
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
+}
+
+.border-\[\#1273eb\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(18 115 235 / var(--tw-border-opacity));
+}
+
+.border-blue-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(96 165 250 / var(--tw-border-opacity));
 }
 
 .bg-green-100 {
@@ -3148,6 +3194,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 15px;
 }
 
+.pb-\[30px\] {
+  padding-bottom: 30px;
+}
+
 .text-left {
   text-align: left;
 }
@@ -3637,6 +3687,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-blue-600 {
+  --tw-shadow-color: #2563eb;
+  --tw-shadow: var(--tw-shadow-colored);
 }
 
 .outline-none {
@@ -4345,6 +4400,11 @@ body {
   background-color: rgb(197 48 48 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-blue-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
+}
+
 .hover\:from-\[\#0051b5\]:hover {
   --tw-gradient-from: #0051b5;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(0 81 181 / 0));
@@ -4886,6 +4946,10 @@ body {
 
   .md\:flex {
     display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
   }
 
   .md\:h-\[12px\] {
