@@ -26,42 +26,42 @@ const SearchPage = () => {
   const [tabPost, setTabPost] = useState(true);
   const [tabQuestion, setTabQuestion] = useState(false);
 
-  useEffect(() => {
-    try {
-      (async () => {
-        const condition = { title: keyword };
-        const { data } = await SearchApi.Search(condition);
-        const dataNewQuestion = data?.data?.modelsQuestion?.filter(
-          (data) => data.spam === false
-        );
-        setDataSearchQuestion(dataNewQuestion);
-        setDataSearchPost(data?.data?.modelsPost);
-        setLoading(false);
-      })();
+  // useEffect(() => {
+  //   try {
+  //     (async () => {
+  //       const condition = { title: keyword };
+  //       const { data } = await SearchApi.Search(condition);
+  //       const dataNewQuestion = data?.data?.modelsQuestion?.filter(
+  //         (data) => data.spam === false
+  //       );
+  //       setDataSearchQuestion(dataNewQuestion);
+  //       setDataSearchPost(data?.data?.modelsPost);
+  //       setLoading(false);
+  //     })();
 
-      const listFeaturedAuthor = async () => {
-        try {
-          const { data: FeaturedAuthor } = await UserApi.getFeaturedAuthor();
-          setFeaturedAuthor(FeaturedAuthor?.data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      listFeaturedAuthor();
+  //     const listFeaturedAuthor = async () => {
+  //       try {
+  //         const { data: FeaturedAuthor } = await UserApi.getFeaturedAuthor();
+  //         setFeaturedAuthor(FeaturedAuthor?.data);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     };
+  //     listFeaturedAuthor();
 
-      const listTagPopular = async () => {
-        try {
-          const { data: tagsPopular } = await TagAPi.getTagPopular();
-          setTagPopular(tagsPopular?.data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      listTagPopular();
-    } catch (error) {
-      setLoading(false);
-    }
-  }, [keyword]);
+  //     const listTagPopular = async () => {
+  //       try {
+  //         const { data: tagsPopular } = await TagAPi.getTagPopular();
+  //         setTagPopular(tagsPopular?.data);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     };
+  //     listTagPopular();
+  //   } catch (error) {
+  //     setLoading(false);
+  //   }
+  // }, [keyword]);
 
   const handleActivePost = () => {
     setTabPost(true);
@@ -74,7 +74,7 @@ const SearchPage = () => {
 
   return (
     <>
-      {loading && <Loading />}
+      {/* {loading && <Loading />} */}
       <Tabs className="container mx-auto mt-[80px] mb-[20px]">
         <div className="flex justify-between shadow-sm bg-white px-[10px] rounded gap-[15px] border">
           <TabList className="py-[15px] flex items-center overflow-x-auto w-full whitespace-nowrap">
@@ -99,6 +99,21 @@ const SearchPage = () => {
               Câu hỏi
             </Tab>
           </TabList>
+          <div>
+            <form className="flex">
+              <input
+                type="password"
+                className="px-[10px] w-[350px] rounded-l-lg py-[5px] border my-[8px] outline-none"
+                placeholder="Tìm kiếm..."
+              />
+              <button
+                type="submit"
+                className="bg-blue-300 hover:bg-blue-500 py-[6px] rounded-r-lg min-w-[100px] my-[8px] text-white h-full outline-none"
+              >
+                Tìm kiếm
+              </button>
+            </form>
+          </div>
         </div>
         <div className="mt-[15px] gap-[15px] flex justify-between">
           <div className="w-full shadow-sm bg-white px-[5px] rounded">

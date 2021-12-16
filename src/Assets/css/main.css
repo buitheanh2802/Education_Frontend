@@ -1637,6 +1637,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 280px;
 }
 
+.w-\[0\.5px\] {
+  width: 0.5px;
+}
+
+.w-\[500px\] {
+  width: 500px;
+}
+
 .min-w-\[170px\] {
   min-width: 170px;
 }
@@ -1663,6 +1671,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .min-w-\[35px\] {
   min-width: 35px;
+}
+
+.min-w-\[120px\] {
+  min-width: 120px;
+}
+
+.min-w-\[100px\] {
+  min-width: 100px;
 }
 
 .max-w-\[1100px\] {
@@ -2144,6 +2160,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 .rounded-t {
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
+}
+
+.rounded-l-lg {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.rounded-r-lg {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
 }
 
 .border {
@@ -2930,6 +2956,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 13px;
 }
 
+.px-\[4px\] {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
 .pl-0 {
   padding-left: 0px;
 }
@@ -3636,6 +3667,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 150ms;
 }
 
+.transition-\[2000ms\] {
+  transition-property: 2000ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .duration-300 {
   transition-duration: 300ms;
 }
@@ -3648,8 +3685,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 200ms;
 }
 
+.duration-1000 {
+  transition-duration: 1000ms;
+}
+
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ease-linear {
+  transition-timing-function: linear;
 }
 
 @-webkit-keyframes newTab {
@@ -4560,6 +4609,22 @@ body {
 .focus\:ring-red-200:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(254 202 202 / var(--tw-ring-opacity));
+}
+
+.focus\:transition:focus {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.focus\:duration-1000:focus {
+  transition-duration: 1000ms;
+}
+
+.focus\:ease-in-out:focus {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .disabled\:bg-gray-400:disabled {
