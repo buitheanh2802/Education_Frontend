@@ -5,6 +5,8 @@ import queryString from "query-string";
 import PublishNav from "./components/publish-nav";
 import SkeletonGroup from "./components/skeleton-group";
 import QuestionApi from "src/Apis/QuestionApi";
+import { useHistory, useLocation } from "react-router-dom";
+import Pagination from "src/Pages/Public/Commons/Panigation";
 
 const QuesionManage = (props) => {
   // get query params
@@ -16,17 +18,20 @@ const QuesionManage = (props) => {
   const [pagination, setPagination] = useState(null);
   const [render, setRender] = useState(false);
   const timeout = useRef(null);
+  const history = useHistory();
+  const location = useLocation();
   // __effect
   useEffect(() => {
     async function getData() {
       try {
         // start call api
         setStartCall(true);
+        const query = queryString.parse(location.search);
         const {
           data: {
             data: { models, metaData },
           },
-        } = await QuestionApi.getListPublish();
+        } = await QuestionApi.getListPublish(query);
         if (models && models.length > 0) setQuestionList(models);
         // set Pagination
         setPagination(metaData.pagination);
@@ -38,8 +43,7 @@ const QuesionManage = (props) => {
       }
     }
     getData();
-  }, []);
-
+  }, [location.search]);
   const handleSearch = async (e) => {
     try {
       if (timeout.current) {
@@ -54,6 +58,11 @@ const QuesionManage = (props) => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const onPageChange = (e) => {
+    const query = queryString.stringify({ page: e.selected + 1 });
+    history.push(`${location.pathname}?${query}`);
   };
   // __render data
   return (
@@ -76,9 +85,20 @@ const QuesionManage = (props) => {
               id={item?._id}
               slug={item?.slug}
               username={item?.createBy?.username}
+              pagination={pagination}
+              onPageChange={onPageChange}
             />
           );
         })}
+      {Pagination &&
+        pagination?.totalPage > 1 &&
+        pagination?.countDocuments !== 0 && (
+          <Pagination
+            pageCount={pagination.totalPage}
+            onChange={onPageChange}
+            currentPage={pagination.currentPage - 1}
+          />
+        )}
     </div>
   );
 };

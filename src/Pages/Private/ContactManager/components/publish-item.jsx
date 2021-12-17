@@ -147,7 +147,7 @@ const PublishItem = (props) => {
                 onClick={() => handleCancelBox()}
                 className=" border border-gray-400 text-gray-500 text-[14px] hover:bg-blue-50  hover:text-blue-400 rounded-[3px] px-[15px] py-[3px]"
               >
-                Hủy
+                Đóng
               </button>
             </div>
           </div>

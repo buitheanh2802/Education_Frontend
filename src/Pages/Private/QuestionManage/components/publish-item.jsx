@@ -5,7 +5,6 @@ import { timeFormatter } from "src/Helpers/Timer";
 import { useSelector } from "react-redux";
 import QuestionApi from "src/Apis/QuestionApi";
 import { Icon } from "src/Components/Icon";
-
 const PublishItem = (props) => {
   // _props
   const { title, index, createBy, createAt, id, spam, username } = props;
@@ -77,6 +76,7 @@ const PublishItem = (props) => {
           </button>
         </div>
       </div>
+
       <div
         className={
           isModalVisible
@@ -193,7 +193,7 @@ const PublishItem = (props) => {
                 onClick={() => handleCancelBox()}
                 className=" border border-gray-400 text-gray-500 text-[14px] hover:bg-blue-50  hover:text-blue-400 rounded-[3px] px-[15px] py-[3px]"
               >
-                Hủy
+                Đóng
               </button>
             </div>
           </div>

@@ -83,11 +83,10 @@ const Header = () => {
         />
       )}
       <div
-        className={`${
-          active
-            ? "bg-white text-gray-900 shadow-sm"
-            : "pt-[15px] border-transparent text-white"
-        } border-b border-solid duration-300 fixed top-0 left-0 right-0 z-[999]`}
+        className={`${active
+          ? "bg-white text-gray-900 shadow-sm"
+          : "pt-[15px] border-transparent text-white"
+          } border-b border-solid duration-300 fixed top-0 left-0 right-0 z-[999]`}
       >
         <nav className="container mx-auto select-none flex justify-between items-center py-[10px] relative">
           <h1 className="mr-[80px]">
@@ -117,29 +116,26 @@ const Header = () => {
               </span>
             </form>
             {profile && (
-              <i
+              <span
                 onClick={() => setIsNotification(!isNotification)}
-                className={`${
-                  active
-                    ? "text-gray-500 hover:text-blue-600"
-                    : "text-white hover:text-[#51ffb9]"
-                } lg:hidden`}
+                className={`${active
+                  ? "text-gray-500 hover:text-blue-600"
+                  : "text-white hover:text-[#51ffb9]"
+                  } lg:hidden`}
               >
                 <Icon.Bell className="cursor-pointer w-[25px] h-[25px] fill-current" />
-              </i>
+              </span>
             )}
             <button onClick={() => setIsMenu(true)} className="lg:hidden">
               <Icon.Menu
-                className={`fill-current w-[20px] sm:w-[25px] ${
-                  active ? "text-black" : "text-white"
-                }`}
+                className={`fill-current w-[20px] sm:w-[25px] ${active ? "text-black" : "text-white"
+                  }`}
               />
             </button>
           </div>
           <div
-            className={`${
-              isMenu ? "ml-0 sm:ml-[50%] md:ml-[60%]" : "ml-[100%] lg:ml-0"
-            } menu_top lg:flex w-full lg:justify-between font-medium text-[14px] sm:text-[16px] lg:transform lg:translate-y-[2px]`}
+            className={`${isMenu ? "ml-0 sm:ml-[50%] md:ml-[60%]" : "ml-[100%] lg:ml-0"
+              } menu_top lg:flex w-full lg:justify-between font-medium text-[14px] sm:text-[16px] lg:transform lg:translate-y-[2px]`}
           >
             <ul className="flex justify-between lg:hidden py-[10px] border-b px-[15px] lg:px-0">
               {profile ? (
@@ -245,9 +241,8 @@ const Header = () => {
                     setIsSearch(false);
                   }}
                   onClick={() => setIsSearch(true)}
-                  className={`absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 border border-blue-600 duration-300 ${
-                    isSearch ? "w-[380px]" : "w-[250px]"
-                  }`}
+                  className={`absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 border border-blue-600 duration-300 ${isSearch ? "w-[380px]" : "w-[250px]"
+                    }`}
                   placeholder="Tìm kiếm..."
                 />
                 <span

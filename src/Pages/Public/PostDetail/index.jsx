@@ -64,6 +64,7 @@ const PostsDetail = () => {
     };
     list();
   }, [render, id]);
+
   const fullname = postDetail?.data?.createBy?.fullname;
   const handleLike = async () => {
     setRender(true);
@@ -159,7 +160,6 @@ const PostsDetail = () => {
     });
     setLoadingBookmark(false);
   };
-
   const handleFollow = async () => {
     if (token === null) return history.push("/auth/login");
     setLoadingFollow(true);
@@ -279,7 +279,7 @@ const PostsDetail = () => {
                 )}
                 <div className="ml-2">
                   <p className="text-blue-500 text-[14px] sm:text-[16px] font-medium flex items-center">
-                    <Link to={`/user/${postDetail?.data?.createBy?.fullname}`}>
+                    <Link to={`/user/${postDetail?.data?.createBy?.username}`}>
                       <span className="hover:underline">
                         {postDetail?.data?.createBy?.fullname}
                       </span>
@@ -335,6 +335,7 @@ const PostsDetail = () => {
                 <button
                   className="h-full btn__post"
                   onClick={() => setPostmenu(!postmenu)}
+                  onBlur={() => setPostmenu(false)}
                 >
                   <Icon.DotsVertical className=" w-[13px] " />
                 </button>
@@ -481,6 +482,7 @@ const PostsDetail = () => {
                         : "text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center hover:bg-blue-300 hover:text-white"
                     }
                     onClick={() => setpostShare(!postShare)}
+                    onBlur={() => setpostShare(false)}
                   >
                     <Icon.Share className="fill-current w-[15px]" />
                     <span className="text-[12x] md:text-[14x] ml-1">Share</span>
@@ -535,7 +537,7 @@ const PostsDetail = () => {
             <div className="flex py-[5px] block-avt justify-center">
               {postDetail?.data?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                 <Link
-                  to={`/user/${postDetail?.data?.createBy?.fullname}`}
+                  to={`/user/${postDetail?.data?.createBy?.username}`}
                   className="  border border-gray-300 cursor-pointer select-none w-[45px] h-[45px] rounded-full bg-center bg-cover"
                   style={{
                     backgroundImage: `url(${postDetail?.data?.createBy?.avatar?.avatarUrl})`,
@@ -544,7 +546,7 @@ const PostsDetail = () => {
                 ></Link>
               ) : (
                 <Link
-                  to={`/user/${postDetail?.data?.createBy?.fullname}`}
+                  to={`/user/${postDetail?.data?.createBy?.username}`}
                   className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
                 >
                   {postDetail?.data?.createBy?.fullname
@@ -555,7 +557,7 @@ const PostsDetail = () => {
             </div>
             <div className="py-[10px] px-[15px]  border-b border-gray-100 flex justify-between items-center">
               <p className="text-[16px] font-medium ">
-                <Link to={`/user/${postDetail?.data?.createBy?.fullname}`}>
+                <Link to={`/user/${postDetail?.data?.createBy?.username}`}>
                   <span className="block hover:underline	">
                     {postDetail?.data?.createBy?.fullname}
                   </span>
@@ -575,7 +577,7 @@ const PostsDetail = () => {
                 <button
                   onClick={() => handleFollow()}
                   className={
-                    postDetail?.data?.isFollowing
+                    postDetail?.data?.createBy?.isFollowing
                       ? "border flex items-center border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
                       : "border flex items-center border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
                   }
@@ -583,7 +585,7 @@ const PostsDetail = () => {
                   {loadingFollow && (
                     <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
                   )}
-                  {postDetail?.data?.isFollowing
+                  {postDetail?.data?.createBy?.isFollowing
                     ? "- Đã theo dõi"
                     : "+ Theo dõi"}
                 </button>

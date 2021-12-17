@@ -41,7 +41,9 @@ const PostsCreate = () => {
     listTags();
     const listImage = async () => {
       try {
-        const { data: { data } } = await ImageApi.getImage();
+        const {
+          data: { data },
+        } = await ImageApi.getImage();
         setImages(data);
       } catch (error) {
         console.log(error);
@@ -107,7 +109,7 @@ const PostsCreate = () => {
 
     setContent(e);
   };
-  
+
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -124,12 +126,14 @@ const PostsCreate = () => {
 
     const CallApi = async () => {
       try {
-        const { data : { data } } = await ImageApi.addImage(formData);
+        const {
+          data: { data },
+        } = await ImageApi.addImage(formData);
         const url = data.photo.photoUrl;
         const targetEditor = editor.current.getEditor();
         const curentSpace = targetEditor.getSelection(true);
         targetEditor.insertEmbed(curentSpace.index, "image", url);
-        setImages([...images,data])
+        setImages([...images, data]);
         setIsModalVisible(false);
       } catch (error) {
         console.log(error);
@@ -321,6 +325,7 @@ const PostsCreate = () => {
                     : "relative w-full justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
                 }
                 onClick={() => setBoxBtn(!boxBtn)}
+                onBlur={() => setBoxBtn(false)}
               >
                 <Icon.Pen className="fill-current w-[13px]" />
                 <span className="text-[12x] md:text-[16x] ml-1">
@@ -365,9 +370,9 @@ const PostsCreate = () => {
       <div className="mt-[20px] mb-[40px]">
         <div className="text-editor">
           <Editor
-              onChange={Content}
-              editorInstance={editor}
-              imageHandler={imageHandler}
+            onChange={Content}
+            editorInstance={editor}
+            imageHandler={imageHandler}
           />
         </div>
         <div
