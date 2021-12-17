@@ -39,7 +39,7 @@ const ResultSulotion = () => {
     return (
         <div className='border rounded'>
             <div className="flex items-center justify-between px-3 py-3 border-b">
-                <p className="tw-text-[18px] tw-font-medium xl:tw-font-normal md:tw-text-[16px] tw-leading-[35px] font-medium flex items-center gap-2 text-blue-900"><Icon.Pen className="fill-current w-[20px]" /> Thống kê bài viết</p>
+                <p className="tw-text-[18px] tw-font-medium xl:tw-font-normal md:tw-text-[16px] tw-leading-[35px] font-medium flex items-center gap-2 text-blue-900"><Icon.Pen className="fill-current w-[20px]" /> Thống kê tỷ lệ làm bài tập</p>
             </div>
             <Pie className='p-10' data={data} />
         </div>
