@@ -7,6 +7,7 @@ import ContactApi from "src/Apis/ContactApi";
 import Swal from "sweetalert2";
 
 const ContactPage = () => {
+  window.scrollTo(0, 0);
   const [response, setResponse] = useState({
     isLoading: false,
     error: null,
