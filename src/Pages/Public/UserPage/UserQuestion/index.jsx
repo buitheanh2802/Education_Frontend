@@ -69,7 +69,7 @@ const UserQuestion = (props) => {
                       </div>
                     </div>
                     <h3 className="pr-[50px] my-[2px]">
-                      <Link to={`/question/${item?.slug}-${item?.shortId}`} className="font-medium text-[18px] hover:underline">
+                      <Link to={`/question/${item?.slug}-${item?._id}`} className="font-medium text-[18px] hover:underline">
                         {item?.title}
                       </Link>
                       <span className="px-[5px]">-</span>

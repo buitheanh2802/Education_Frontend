@@ -14,14 +14,7 @@ import QuizPage from "src/Pages/Public/QuizPage";
 import DetailChallenge from "src/Pages/Public/DetailChallenge";
 import SolutionPage from "src/Pages/Public/SolutionPage";
 import TagsPage from "../Pages/Public/TagsPage";
-// import ContactPage from "src/Pages/Public/ContactPage";
 import PostsCreate from "src/Pages/Public/PostsCreate";
-// import QuestionsCreate from "src/Pages/Public/QuestionsCreate";
-// import DetailTagPage from "src/Pages/Public/DetailTagPage";
-// import QuestionsDetail from "src/Pages/Public/QuestionsDetail";
-// import IntroPage from "src/Pages/Public/IntroPage/IntroPage";
-// import ProfilePage from "src/Pages/Public/ProfilePage";
-// import EditProfile from "src/Pages/Public/EditProfile";
 import Userpage from "src/Pages/Public/UserPage";
 import DetailTagPage from "src/Pages/Public/DetailTagPage";
 import IntroPage from "src/Pages/Public/IntroPage/IntroPage";
@@ -42,12 +35,22 @@ const SiteLayout = () => {
     <>
       <Header />
       <Switch>
-        <PublicRouter exact path={path.SOLUTION_ID} component={SolutionDetail} />
+        <PublicRouter
+          exact
+          path={path.SOLUTION_ID}
+          component={SolutionDetail}
+        />
         <PublicRouter path={path.USERS} component={ListUserPage} />
         <PublicRouter exact path={path.CONTACT} component={ContactPage} />
         <PublicRouter exact path={path.SEARCH} component={SearchPage} />
-        <PublicRouter path={path.QUESTIONS_DETAIL} component={QuestionsDetail} />
-        <PublicRouter path={path.QUESTIONS_CREATE} component={QuestionsCreate} />
+        <PublicRouter
+          path={path.QUESTIONS_DETAIL}
+          component={QuestionsDetail}
+        />
+        <PublicRouter
+          path={path.QUESTIONS_CREATE}
+          component={QuestionsCreate}
+        />
         <PublicRouter exact path={path.POSTS_ID} component={PostsDetail} />
         <PublicRouter path={path.TAGS} component={TagsPage} />
         <PublicRouter path={path.USER_ID} component={Userpage} />
@@ -62,10 +65,21 @@ const SiteLayout = () => {
         <PublicRouter path={path.POSTS} component={PostPage} />
         <PublicRouter path={path.PROFILE_CHANGE} component={EditProfile} />
         <PublicRouter exact path={path.PROFILE_ME} component={ProfilePage} />
-        <PublicRouter exact path={path.CHALLENGE} component={ChallengeCatePage} />
-        <PublicRouter exact path={path.CHALLENGE_CATE_ID} component={ChallengePage} />
+        <PublicRouter
+          exact
+          path={path.CHALLENGE}
+          component={ChallengeCatePage}
+        />
+        <PublicRouter
+          exact
+          path={path.CHALLENGE_CATE_ID}
+          component={ChallengePage}
+        />
         <PublicRouter path={path.QUIZ} component={QuizPage} />
-        <PublicRouter path={path.CHALLENGE_SOLUTION_CHALLENGE_ID} component={SolutionPage} />
+        <PublicRouter
+          path={path.CHALLENGE_SOLUTION_CHALLENGE_ID}
+          component={SolutionPage}
+        />
         <PublicRouter path={path.POSTS} component={PostPage} />
         <PublicRouter path="*" component={Notfound} />
       </Switch>

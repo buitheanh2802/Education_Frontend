@@ -1,77 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import SearchApi from "src/Apis/SearchApi";
+import { Link, useLocation } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
-import FollowApi from "src/Apis/FollowApi";
-import { useDispatch } from "react-redux";
+import { timeFormatter } from "src/Helpers/Timer";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
-import UserApi from "src/Apis/UserApi";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-const ListUserPage = () => {
-  window.scrollTo(0, 0);
-  const [users, setUsers] = useState([]);
+const ResultSearchUser = () => {
   const dispatch = useDispatch();
-  const token = localStorage.getItem("_token_");
-  const history = useHistory();
+  const location = useLocation();
+  const keyword = location.search.substring(9, location.search.length);
+  const [dataSearchUser, setDataSearchUer] = useState([]);
   const { profile } = useSelector((state) => state.Auth);
-
-  const handleUnFollow = async (username) => {
-    if (token === null) {
-      history.push("/auth/login");
-      dispatch(setLoading(false));
-      return;
-    }
-    dispatch(setLoading(true));
-    await FollowApi.unFollowTag(username);
-    const userClone = [...users];
-    userClone.map((user) => {
-      if (user.username === username) {
-        user.isFollowing = false;
-      }
-      return user;
-    });
-    setUsers(userClone);
-    dispatch(setLoading(false));
-  };
-
-  const handleFollow = async (username) => {
-    if (token === null) {
-      history.push("/auth/login");
-      dispatch(setLoading(false));
-      return;
-    }
-    dispatch(setLoading(true));
-    await FollowApi.followTag(username);
-    const userClone = [...users];
-    userClone.map((user) => {
-      if (user.username === username) {
-        user.isFollowing = true;
-      }
-      return user;
-    });
-    setUsers(userClone);
-    dispatch(setLoading(false));
-  };
-
-  const filter = async (e) => {
-    try {
-      dispatch(setLoading(true));
-      const { data: listUser } = await UserApi.getListUser(e.target.value);
-      setUsers(listUser.data);
-      dispatch(setLoading(false));
-    } catch (error) {
-      dispatch(setLoading(false));
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     const getData = async () => {
+      const doc = document.querySelector(".result");
+      const noneKey = document.querySelector(".noneKey");
+      if (keyword === "") {
+        doc.classList.add("hidden");
+        noneKey.classList.remove("hidden");
+        return;
+      }
       try {
+        doc.classList.remove("hidden");
+        noneKey.classList.add("hidden");
         dispatch(setLoading(true));
-        const { data: listUser } = await UserApi.getListUser("points");
-        setUsers(listUser.data);
+        const { data: user } = await SearchApi.searchUser(keyword);
+        setDataSearchUer(user.data.models);
         dispatch(setLoading(false));
       } catch (error) {
         dispatch(setLoading(false));
@@ -79,31 +35,20 @@ const ListUserPage = () => {
       }
     };
     getData();
-  }, []);
+  }, [keyword]);
 
   return (
-    <div className="container mx-auto mt-[80px]">
-      <div className="flex justify-between mt-[15px] gap-[30px]">
-        <div className="max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px] sm:gap-x-[60px] gap-y-[20px] mb-[30px] pb-[45px] w-full py-[15px] bg-white shadow rounded">
-          <div className="flex justify-between mb-[35px]">
-            <div className="leading-[35px] text-[25px] font-bold uppercase">
-              Tác giả
-            </div>
-            <div className="leading-[35px]">
-              <span className="mr-[10px]">Sắp xếp theo</span>
-              <select
-                onChange={(e) => filter(e)}
-                className="border py-[5px] px-[8px] border-blue-300 rounded outline-none"
-                name="filter"
-              >
-                <option value="points">Điểm</option>
-                <option value="posts">Bài viết</option>
-                <option value="followers">Người theo dõi</option>
-              </select>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 gap-[20px] xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 px-[20px]">
-            {users?.map((item, index) => {
+    <div>
+      {dataSearchUser?.length === 0 ? (
+        <div>
+          <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
+            Không có gì ở đây cả
+          </p>
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 gap-x-[20px] gap-y-[40px] xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 px-[20px] pb-[30px]">
+            {dataSearchUser?.map((item, index) => {
               return (
                 <div
                   key={index}
@@ -130,7 +75,7 @@ const ListUserPage = () => {
                     </div>
                     <div className="ml-[10px] col-span-3">
                       <div className="flex mb-[10px]">
-                        <h3 className="text-[18px] leading-[20px] font-semibold">
+                        <h3 className="text-[18px] leading-[20px] ">
                           {item?.fullname}
                         </h3>
                       </div>
@@ -156,7 +101,7 @@ const ListUserPage = () => {
                       </div>
                     </div>
                   </Link>
-                  {item?.username === profile?.username ? (
+                  {/* {item?.username === profile?.username ? (
                     <div className="w-[80%] mt-[10px] mx-auto text-center my-auto text-white border border-[#6C91F0] font-bold rounded text-[15px] bg-[#1273eb] hover:bg-blue-200 hover:text-[#6C91F0]">
                       <button
                         onClick={() => history.push("/profile/me")}
@@ -185,14 +130,15 @@ const ListUserPage = () => {
                         + Theo dõi
                       </button>
                     </div>
-                  )}
+                  )} */}
                 </div>
               );
             })}
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };
-export default ListUserPage;
+
+export default ResultSearchUser;

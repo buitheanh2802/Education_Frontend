@@ -9,6 +9,7 @@ import { ActionGetChallengeCate } from "src/Redux/Actions/ChallengeCate.action";
 import { SplitString } from "src/Helpers/";
 import { UpperCaseOneKey } from "src/Helpers/";
 import { Link } from "react-router-dom";
+import Select from 'react-select'
 
 const ChallengePage = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,10 @@ const ChallengePage = () => {
     dispatch(ActionGetsChallenge(cateid));
     return () => dispatch(resetChallenge());
   }, [dispatch, cateid]);
+
+  const handelSlelct = async ({ value }) => {
+    console.log(value)
+  }
 
   const pathName = [
     { path: path.CHALLENGE, value: "Danh mục bài tập" },
@@ -62,12 +67,23 @@ const ChallengePage = () => {
               );
             })}
           </div>
+          <Select
+            className="w-[200px] h-[35px]"
+            options={[
+              { value: 'all', label: 'Tất cả' },
+              { value: 'lv1', label: 'Sơ cấp' },
+              { value: 'lv2', label: 'Trung cấp' },
+              { value: 'lv3', label: 'Nâng cao' }
+            ]}
+            defaultValue={{ value: 'all', label: 'Tất cả' }}
+            onChange={handelSlelct}
+          />
         </div>
       )}
       {routeName ? (
         <div className="w-full h-[200px] filter sepia-0">
           <img
-            className="opacity-60 w-full h-full object-cover rounded grayscale-[20%]"
+            className="opacity-80 w-full h-full object-cover rounded grayscale-[20%]"
             src="https://drive.google.com/uc?id=1jMaHlFfIUPnLrjuoNjSoAUaJGYMbDOFl"
           />
         </div>
