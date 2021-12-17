@@ -11,23 +11,23 @@ const ChallengeApi = {
     });
   },
 
-    async delete(challengeId) {
-        const url = `/challenges/${challengeId}`;
-        return AxiosClient.delete(url, {
-            headers: {
-                authorization: `Bearer ${LocalStorage.Get('_token_')}`
-            }
-        })
-    },
+  async delete(challengeId) {
+    const url = `/challenges/${challengeId}`;
+    return AxiosClient.delete(url, {
+      headers: {
+        authorization: `Bearer ${LocalStorage.Get('_token_')}`
+      }
+    })
+  },
 
-    async gets(cateid) {
-        const url = `/challenges/${cateid}/challenge-categories`;
-        return AxiosClient.get(url, {
-            headers: {
-                authorization: `Bearer ${LocalStorage.Get('_token_')}`
-            }
-        })
-    },
+  async gets(cateid) {
+    const url = `/challenges/${cateid}/challenge-categories`;
+    return AxiosClient.get(url, {
+      headers: {
+        authorization: `Bearer ${LocalStorage.Get('_token_')}`
+      }
+    })
+  },
 
   // async gets(cateid) {
   //     const url = `/challenges/${cateid}/challenge-categories`;
@@ -88,8 +88,8 @@ const ChallengeApi = {
   },
   async FilterChallenges(cateId, level) {
     const token = localStorage.getItem("_token_");
-    const url = `/challenges/${cateId}/challenge-categories?level=${level}`;
-    return AxiosClient.get(url, {
+    const url = `/challenges/${cateId}/challenge-categories`;
+    return AxiosClient.post(url, { level }, {
       headers: {
         authorization: `Bearer ${token}`
       }

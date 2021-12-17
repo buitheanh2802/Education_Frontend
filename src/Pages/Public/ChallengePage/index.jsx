@@ -10,6 +10,7 @@ import { SplitString } from "src/Helpers/";
 import { UpperCaseOneKey } from "src/Helpers/";
 import { Link } from "react-router-dom";
 import Select from 'react-select'
+import ChallengeApi from "src/Apis/ChallengeApi";
 
 const ChallengePage = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,8 @@ const ChallengePage = () => {
   }, [dispatch, cateid]);
 
   const handelSlelct = async ({ value }) => {
-    console.log(value)
+    const { data } = await ChallengeApi.FilterChallenges(cateid, value)
+    console.log(data)
   }
 
   const pathName = [
@@ -71,9 +73,9 @@ const ChallengePage = () => {
             className="w-[200px] h-[35px]"
             options={[
               { value: 'all', label: 'Tất cả' },
-              { value: 'lv1', label: 'Sơ cấp' },
-              { value: 'lv2', label: 'Trung cấp' },
-              { value: 'lv3', label: 'Nâng cao' }
+              { value: '1', label: 'Sơ cấp' },
+              { value: '2', label: 'Trung cấp' },
+              { value: '3', label: 'Nâng cao' }
             ]}
             defaultValue={{ value: 'all', label: 'Tất cả' }}
             onChange={handelSlelct}
