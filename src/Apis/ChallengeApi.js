@@ -22,7 +22,7 @@ const ChallengeApi = {
 
   async gets(cateid) {
     const url = `/challenges/${cateid}/challenge-categories`;
-    return AxiosClient.get(url, {
+    return AxiosClient.post(url, {}, {
       headers: {
         authorization: `Bearer ${LocalStorage.Get('_token_')}`
       }
