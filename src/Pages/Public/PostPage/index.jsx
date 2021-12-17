@@ -45,6 +45,7 @@ const PostPage = () => {
           const { data: newests } = await PostApi.getPostNew(query);
           setNewests(newests.data);
           setPanigation(newests.data.metaData.pagination);
+
           dispatch(setLoading(false));
         } else if (location.pathname === path.POSTS_POPULAR) {
           const query = queryString.parse(location.search);
@@ -104,7 +105,6 @@ const PostPage = () => {
     const query = queryString.stringify({ page: e.selected + 1 });
     history.push(`${location.pathname}?${query}`);
   };
-
   return (
     <div className="container mx-auto mt-[55px] py-[25px]">
       <div className="md:flex md:justify-between sm:grid sm:grid-cols-1 shadow-sm px-[10px] bg-white rounded">

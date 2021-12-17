@@ -5,7 +5,6 @@ import { timeFormatter } from "src/Helpers/Timer";
 import { useSelector } from "react-redux";
 import QuestionApi from "src/Apis/QuestionApi";
 import { Icon } from "src/Components/Icon";
-
 const PublishItem = (props) => {
   // _props
   const { title, index, createBy, createAt, id, spam, username } = props;
@@ -77,6 +76,7 @@ const PublishItem = (props) => {
           </button>
         </div>
       </div>
+
       <div
         className={
           isModalVisible

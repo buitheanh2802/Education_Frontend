@@ -10,8 +10,10 @@ import { useLocation } from "react-router";
 import UserApi from "src/Apis/UserApi";
 import TagAPi from "src/Apis/TagApi";
 import { useDispatch } from "react-redux";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
+import Pagination from "src/Pages/Public/Commons/Panigation";
+import queryString from "query-string";
 
 const QuestionsPage = () => {
   // navigation
@@ -24,7 +26,8 @@ const QuestionsPage = () => {
   const [follows, setFollows] = useState([]);
   const [bookmarks, setBookmarks] = useState([]);
   const dispatch = useDispatch();
-
+  const history = useHistory();
+  const [panigation, setPanigation] = useState(null);
   const pathName = [
     {
       path: path.QUESTIONS,
@@ -54,38 +57,49 @@ const QuestionsPage = () => {
       try {
         dispatch(setLoading(true));
         if (location.pathname === path.QUESTIONS) {
-          const { data: newests } = await QuestionApi.getQuestion();
+          const query = queryString.parse(location.search);
+          const { data: newests } = await QuestionApi.getQuestion(query);
           const dataNew = newests?.data?.models?.filter(
             (data) => data.spam === false
           );
           setNewests(dataNew);
+          setPanigation(newests.data.metaData.pagination);
           dispatch(setLoading(false));
         } else if (location.pathname === path.QUESTIONS_TRENDING) {
-          const { data: trendings } = await QuestionApi.getQuestionTren();
+          const query = queryString.parse(location.search);
+          const { data: trendings } = await QuestionApi.getQuestionTren(query);
           const dataNew = trendings?.data?.models?.filter(
             (data) => data.spam === false
           );
           setTrendings(dataNew);
+          setPanigation(trendings.data.metaData.pagination);
           dispatch(setLoading(false));
         } else if (location.pathname === path.QUESTIONS_FOLLOWING) {
+          const query = queryString.parse(location.search);
           const token = localStorage.getItem("_token_");
           if (token) {
-            const { data: follows } = await QuestionApi.getQuestionFol();
+            const { data: follows } = await QuestionApi.getQuestionFol(query);
             const dataNew = follows?.data?.models?.filter(
               (data) => data.spam === false
             );
             setFollows(dataNew);
+            // console.log("data", follows.data.metaData.pagination);
+            setPanigation(follows.data.metaData.pagination);
             dispatch(setLoading(false));
           }
           dispatch(setLoading(false));
         } else if (location.pathname === path.QUESTIONS_BOOK_MARK) {
+          const query = queryString.parse(location.search);
           const token = localStorage.getItem("_token_");
           if (token) {
-            const { data: bookmarks } = await QuestionApi.getQuestionBookmark();
+            const { data: bookmarks } = await QuestionApi.getQuestionBookmark(
+              query
+            );
             const dataNew = bookmarks?.data?.models?.filter(
               (data) => data.spam === false
             );
             setBookmarks(dataNew);
+            setPanigation(bookmarks.data.metaData.pagination);
             dispatch(setLoading(false));
           }
           dispatch(setLoading(false));
@@ -114,7 +128,12 @@ const QuestionsPage = () => {
       }
     };
     listTagPopular();
-  }, [location.pathname]);
+  }, [location.pathname, location.search]);
+
+  const onPageChange = (e) => {
+    const query = queryString.stringify({ page: e.selected + 1 });
+    history.push(`${location.pathname}?${query}`);
+  };
 
   return (
     <div className="container mx-auto mt-[80px] mb-[20px]">
@@ -157,6 +176,15 @@ const QuestionsPage = () => {
           <TrendingTags tags={tagPopular} />
         </div>
       </div>
+      {panigation &&
+        panigation?.totalPage > 1 &&
+        panigation?.countDocuments !== 0 && (
+          <Pagination
+            pageCount={panigation.totalPage}
+            onChange={onPageChange}
+            currentPage={panigation.currentPage - 1}
+          />
+        )}
     </div>
   );
 };

@@ -3112,12 +3112,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 0.5rem;
 }
 
-.pr-\[5px\] {
-  padding-right: 5px;
-}
-
 .pr-\[15px\] {
   padding-right: 15px;
+}
+
+.pr-\[5px\] {
+  padding-right: 5px;
 }
 
 .pl-\[15px\] {
@@ -4503,11 +4503,6 @@ body {
 
 .focus\:border-transparent:focus {
   border-color: transparent;
-}
-
-.focus\:border-blue-500:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(59 130 246 / var(--tw-border-opacity));
 }
 
 .focus\:shadow:focus {
