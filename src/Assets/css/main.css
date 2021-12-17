@@ -1414,6 +1414,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-height: 500px;
 }
 
+.max-h-\[55px\] {
+  max-height: 55px;
+}
+
 .min-h-\[50px\] {
   min-height: 50px;
 }
@@ -1720,6 +1724,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .max-w-\[80\%\] {
   max-width: 80%;
+}
+
+.max-w-\[55px\] {
+  max-width: 55px;
 }
 
 .flex-1 {
@@ -2370,6 +2378,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(124 58 237 / var(--tw-border-opacity));
 }
 
+.border-\[\#707885\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(112 120 133 / var(--tw-border-opacity));
+}
+
 .bg-green-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(220 252 231 / var(--tw-bg-opacity));
@@ -2958,6 +2971,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-\[7px\] {
   padding-top: 7px;
   padding-bottom: 7px;
+}
+
+.px-\[0px\] {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .pl-0 {
@@ -4785,6 +4803,10 @@ body {
     margin-bottom: 10px;
   }
 
+  .sm\:mr-\[20px\] {
+    margin-right: 20px;
+  }
+
   .sm\:block {
     display: block;
   }
@@ -4900,6 +4922,11 @@ body {
   .sm\:px-\[15px\] {
     padding-left: 15px;
     padding-right: 15px;
+  }
+
+  .sm\:px-\[5px\] {
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   .sm\:pt-\[5px\] {
