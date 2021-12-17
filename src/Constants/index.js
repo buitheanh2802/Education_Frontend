@@ -87,6 +87,7 @@ export const path = {
   SULOTION_MANAGER_ID: "/manager/exercise/:id",
   // Quản trị liên hệ
   CONTACT_MANAGER: "/manager/contact",
+  COMMENT_MANGER: "/manager/comment",
 
   //profile
   PROFILE: "/profile/:username",

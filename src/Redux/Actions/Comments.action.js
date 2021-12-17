@@ -54,3 +54,12 @@ export const ActiondDslikeComment = createAsyncThunk('comments/dislike', async (
         return error.response.data
     }
 })
+
+export const ActionFindComments = createAsyncThunk('comments/find', async (page) => {
+    try {
+        const { data } = await CommentsApi.find(page);
+        return data
+    } catch (error) {
+        return error.response.data
+    }
+})

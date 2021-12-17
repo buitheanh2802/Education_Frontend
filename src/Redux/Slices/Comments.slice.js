@@ -11,6 +11,11 @@ const mySlice = createSlice({
         models: null,
         pagination: null
     },
+    reducers: {
+        appendCommnets: (state, action) => {
+            console.log(action?.payload);
+        }
+    },
     extraReducers: (builder) => {
         // gets comments
         builder.addCase(ActionGetsComment.pending, (state) => {
@@ -64,5 +69,5 @@ const mySlice = createSlice({
         })
     }
 })
-
+export const { appendCommnets } = mySlice.actions;
 export default mySlice.reducer;
