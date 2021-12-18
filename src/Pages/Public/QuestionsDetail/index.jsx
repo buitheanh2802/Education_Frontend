@@ -20,6 +20,7 @@ import Swal from "sweetalert2";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import QuestionRelated from "../Commons/QuestionsRelated";
 import Comments from "../Comments";
+import { getCookie, setCookie } from 'src/Helpers/Cookie';
 import { AlertMessage } from "src/Components/AlertMessage";
 
 const QuestionsDetail = () => {
@@ -41,6 +42,22 @@ const QuestionsDetail = () => {
   const history = useHistory();
   const token = localStorage.getItem("_token_");
   const idQuestion = shortId.id.split("-")[shortId.id.split("-").length - 1];
+  // effect upviews 
+  useEffect(() => {
+    async function upViews() {
+      try {
+        if (!getCookie(idQuestion)) {
+          const dataUpViews = await QuestionApi.view(idQuestion)
+          // console.log(dataUpViews);
+          setCookie(idQuestion, true, 5 * 60 * 1000)
+          // console.log('views is up');
+        }
+      } catch (error) {
+        
+      }
+    }
+    upViews();
+  }, []);
   useEffect(() => {
     setRender(false);
     // setLoading(true);

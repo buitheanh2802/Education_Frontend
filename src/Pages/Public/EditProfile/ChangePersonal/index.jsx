@@ -270,15 +270,6 @@ const ChangePersonal = ({ profile }) => {
             {message && <SuccessMessage message={message} />}
             <div className="flex justify-end">
               <button
-                onClick={() => {
-                  history.push("/profile/me/change-info");
-                }}
-                className="mx-[10px] bg-blue-200 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-gray-200 hover:text-blue-600 focus:border-blue-600"
-                type="submit"
-              >
-                hủy bỏ
-              </button>
-              <button
                 className="flex bg-blue-500 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-blue-800 focus:border-blue-600"
                 type="submit"
               >
@@ -286,6 +277,15 @@ const ChangePersonal = ({ profile }) => {
                   <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
                 )}
                 Cập nhật
+              </button>
+              <button
+                onClick={() => {
+                  history.push("/profile/me/change-info");
+                }}
+                className="mx-[10px] bg-blue-200 text-white rounded-[5px] py-[6px] px-[10px] mt-[15px] text-[15px] hover:bg-gray-200 hover:text-blue-600 focus:border-blue-600"
+                type="submit"
+              >
+                hủy bỏ
               </button>
             </div>
           </form>

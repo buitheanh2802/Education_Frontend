@@ -4,6 +4,7 @@ import ProfileUserApi from "src/Apis/ProfileUserApi";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
+import { timeFormatter } from "../../../../Helpers/Timer";
 
 const UserQuestion = (props) => {
   const username = props.match.params.username;
@@ -71,7 +72,7 @@ const UserQuestion = (props) => {
                       </div>
                       <div className=" inline-block">
                         <span className="col-span-4 text-[13px] text-[#707885]">
-                          {item?.createdAt}
+                          {timeFormatter(item?.createdAt)}
                         </span>
                       </div>
                     </div>

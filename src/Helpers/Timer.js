@@ -4,17 +4,17 @@ export const timeFormatter = function (_time) {
   var interval = seconds / 31536000;
 
   if (interval > 1) {
-    return new Date(_time).toLocaleDateString();
+    return Math.floor(interval) + " năm trước";
   }
   interval = seconds / 2592000;
   if (interval > 1) {
-    return new Date(_time).toLocaleDateString();
+    return Math.floor(interval) + " tháng trước";
   }
   interval = seconds / 86400;
   if (interval > 1) {
     return Math.floor(interval) + " ngày trước";
   }
-  interval = seconds / 36;
+  interval = seconds / 3600;
   if (interval > 1) {
     return Math.floor(interval) + " giờ trước";
   }
