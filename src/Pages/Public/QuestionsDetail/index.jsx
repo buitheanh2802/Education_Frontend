@@ -44,11 +44,15 @@ const QuestionsDetail = () => {
   // effect upviews 
   useEffect(() => {
     async function upViews() {
-      if (!getCookie(idQuestion)) {
-        const dataUpViews = await QuestionApi.view(idQuestion)
-        // console.log(dataUpViews);
-        setCookie(idQuestion, true, 5 * 60 * 1000)
-        // console.log('views is up');
+      try {
+        if (!getCookie(idQuestion)) {
+          const dataUpViews = await QuestionApi.view(idQuestion)
+          // console.log(dataUpViews);
+          setCookie(idQuestion, true, 5 * 60 * 1000)
+          // console.log('views is up');
+        }
+      } catch (error) {
+        
       }
     }
     upViews();
