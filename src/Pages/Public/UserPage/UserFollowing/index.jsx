@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import FollowApi from "src/Apis/FollowApi";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import { useSelector } from "react-redux";
+import UserApi from "src/Apis/UserApi";
 
 const UserFollowing = (props) => {
   const username = props.match.params.username;
@@ -22,7 +23,12 @@ const UserFollowing = (props) => {
       return;
     }
     dispatch(setLoading(true));
-    await FollowApi.unFollowTag(username);
+    await FollowApi.unFollow(username);
+    const data = {
+      type: "down",
+      points: 5,
+    };
+    await UserApi.pointUser(username, data);
     const folClone = [...userFollowing];
     folClone.map((fol) => {
       if (fol.username === username) {
@@ -41,7 +47,12 @@ const UserFollowing = (props) => {
       return;
     }
     dispatch(setLoading(true));
-    await FollowApi.followTag(username);
+    await FollowApi.follow(username);
+    const data = {
+      type: "up",
+      points: 5,
+    };
+    await UserApi.pointUser(username, data);
     const folClone = [...userFollowing];
     folClone.map((fol) => {
       if (fol.username === username) {

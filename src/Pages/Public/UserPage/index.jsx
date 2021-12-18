@@ -14,6 +14,7 @@ import FollowApi from "src/Apis/FollowApi";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import NotificationApi from "src/Apis/NotificationApi";
 import UserQuestion from "./UserQuestion";
+import UserApi from "src/Apis/UserApi";
 
 const Userpage = (props) => {
   window.scrollTo(0, 0);
@@ -40,6 +41,11 @@ const Userpage = (props) => {
     };
     if (user?.isFollowing) {
       await FollowApi.unFollow(username);
+      const dataPoint = {
+        type: "down",
+        points: 5,
+      };
+      await UserApi.pointUser(username, dataPoint);
       const {
         data: { data },
       } = await NotificationApi.create(token, notificationRequest, user._id);
@@ -48,6 +54,11 @@ const Userpage = (props) => {
       dispatch(setLoading(false));
     } else {
       await FollowApi.follow(username);
+      const dataPoint = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(username, dataPoint);
       const {
         data: { data },
       } = await NotificationApi.create(token, notificationRequest, user._id);

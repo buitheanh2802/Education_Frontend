@@ -7,6 +7,7 @@ import Notification from "./Components/Notification";
 import Auth from "./Components/Auth";
 import SearchApi from "src/Apis/SearchApi";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
+import { timeFormatter } from "src/Helpers/Timer";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -41,16 +42,16 @@ const Header = () => {
   }, [pathname]);
 
   useEffect(() => {
-    document.addEventListener('click',handleClickOutside)
-    function handleClickOutside(e){
-      if(!searchBox.current.contains(e.target)){
-        if(isSearch) setIsSearch(false);
+    document.addEventListener("click", handleClickOutside);
+    function handleClickOutside(e) {
+      if (searchBox.current && !searchBox.current?.contains(e.target)) {
+        if (isSearch) setIsSearch(false);
       }
     }
     return () => {
       document.removeEventListener("click", handleClickOutside);
-    }
-  },[isSearch])
+    };
+  }, [isSearch]);
 
   const EnterEvent = (e) => {
     e.preventDefault();
@@ -321,7 +322,7 @@ const Header = () => {
                               </Link>
                               -
                               <span className="ml-[5px] text-gray-600 text-[13px]">
-                                {item.createdAt}
+                                {timeFormatter(item?.createdAt)}
                               </span>
                             </div>
                             <Link
@@ -357,7 +358,7 @@ const Header = () => {
                               </Link>
                               -
                               <span className="ml-[5px] text-gray-600 text-[13px]">
-                                {item.createdAt}
+                                {timeFormatter(item?.createdAt)}
                               </span>
                             </div>
                             <Link

@@ -57,7 +57,8 @@ const PostsDetail = () => {
           (item) => item?.shortId !== post?.data?.shortId
         );
         // const dataUpViews = await PostApi.upViews({ shortId : id});
-        // setCookie('')
+        // setCookie(id,true,5 * 60 * 1000)
+
         setPostDetail(post);
         setOtherPost(otherPosts);
         setLoading(false);
@@ -67,6 +68,18 @@ const PostsDetail = () => {
     };
     list();
   }, [render, id]);
+
+  // effect upviews
+  useEffect(() => {
+    async function upViews() {
+      if (!getCookie(id)) {
+        const dataUpViews = await PostApi.upViews({ shortId: id });
+        setCookie(id, true, 5 * 60 * 1000);
+        // console.log('views is up');
+      }
+    }
+    upViews();
+  }, []);
 
   const fullname = postDetail?.data?.createBy?.fullname;
   const handleLike = async () => {
