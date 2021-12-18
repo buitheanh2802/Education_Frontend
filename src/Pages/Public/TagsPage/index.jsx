@@ -66,7 +66,6 @@ const TagsPage = () => {
         dispatch(setLoading(true));
         const query = queryString.parse(location.search);
         const { data: tags } = await TagAPi.getAll(query);
-
         setTags(tags.data.models);
         setPaginate(tags.data.metaData.pagination);
         dispatch(setLoading(false));
