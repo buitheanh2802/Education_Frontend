@@ -19,6 +19,8 @@ import Comments from "../Comments";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import NotificationApi from "src/Apis/NotificationApi";
 import PostRelated from "../Commons/PostRelated";
+import { getCookie, setCookie } from "src/Helpers/Cookie";
+import UserApi from "src/Apis/UserApi";
 
 const PostsDetail = () => {
   const shortId = useParams();
@@ -44,7 +46,7 @@ const PostsDetail = () => {
   // console.log(postDetail);
   useEffect(() => {
     setRender(false);
-    setLoading(true);
+    // setLoading(true);
     const list = async () => {
       try {
         const { data: post } = await PostApi.getPost(id);
@@ -54,16 +56,31 @@ const PostsDetail = () => {
         const otherPosts = postOther?.data?.filter(
           (item) => item?.shortId !== post?.data?.shortId
         );
+        // const dataUpViews = await PostApi.upViews({ shortId : id});
+        // setCookie(id,true,5 * 60 * 1000)
+
         setPostDetail(post);
         setOtherPost(otherPosts);
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        console.log(error);
       }
     };
     list();
   }, [render, id]);
+
+  // effect upviews
+  useEffect(() => {
+    async function upViews() {
+      if (!getCookie(id)) {
+        const dataUpViews = await PostApi.upViews({ shortId: id });
+        setCookie(id, true, 5 * 60 * 1000);
+        // console.log('views is up');
+      }
+    }
+    upViews();
+  }, []);
+
   const fullname = postDetail?.data?.createBy?.fullname;
   const handleLike = async () => {
     setRender(true);
@@ -75,12 +92,22 @@ const PostsDetail = () => {
         ...postDetail,
         data: { ...postDetail.data, isLike: false },
       });
+      const data = {
+        type: "down",
+        points: 5,
+      };
+      await UserApi.pointUser(postDetail?.data?.createBy?.username, data);
     } else {
       await LikeApi.likePost(id);
       setPostDetail({
         ...postDetail,
         data: { ...postDetail.data, isLike: true },
       });
+      const data = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(postDetail?.data?.createBy?.username, data);
     }
     // send notifaction
     const notificationRequest = {
@@ -159,7 +186,6 @@ const PostsDetail = () => {
     });
     setLoadingBookmark(false);
   };
-
   const handleFollow = async () => {
     if (token === null) return history.push("/auth/login");
     setLoadingFollow(true);
@@ -172,6 +198,11 @@ const PostsDetail = () => {
           createBy: { ...postDetail.data.createBy, isFollowing: false },
         },
       });
+      const data = {
+        type: "down",
+        points: 5,
+      };
+      await UserApi.pointUser(postDetail?.data?.createBy?.username, data);
     } else {
       await FollowApi.follow(username);
       setPostDetail({
@@ -181,6 +212,11 @@ const PostsDetail = () => {
           createBy: { ...postDetail.data.createBy, isFollowing: true },
         },
       });
+      const data = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(postDetail?.data?.createBy?.username, data);
     }
     // send notifaction
     const notificationRequest = {
@@ -205,7 +241,6 @@ const PostsDetail = () => {
   };
 
   const url = window.location.href;
-  // console.log("url: ", url);
   const handelCopy = () => {
     const input = document.createElement("input");
     input.setAttribute("type", "text");
@@ -270,7 +305,7 @@ const PostsDetail = () => {
                 ) : (
                   <Link
                     to={`/user/${postDetail?.data?.createBy?.fullname}`}
-                    className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
+                    className="flex justify-center font-bold items-center text-[#4A5568]   border border-gray-300 bg-blue-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
                   >
                     {postDetail?.data?.createBy?.fullname
                       ?.slice(0, 1)
@@ -279,7 +314,7 @@ const PostsDetail = () => {
                 )}
                 <div className="ml-2">
                   <p className="text-blue-500 text-[14px] sm:text-[16px] font-medium flex items-center">
-                    <Link to={`/user/${postDetail?.data?.createBy?.fullname}`}>
+                    <Link to={`/user/${postDetail?.data?.createBy?.username}`}>
                       <span className="hover:underline">
                         {postDetail?.data?.createBy?.fullname}
                       </span>
@@ -335,6 +370,7 @@ const PostsDetail = () => {
                 <button
                   className="h-full btn__post"
                   onClick={() => setPostmenu(!postmenu)}
+                  onBlur={() => setPostmenu(false)}
                 >
                   <Icon.DotsVertical className=" w-[13px] " />
                 </button>
@@ -481,6 +517,7 @@ const PostsDetail = () => {
                         : "text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center hover:bg-blue-300 hover:text-white"
                     }
                     onClick={() => setpostShare(!postShare)}
+                    onBlur={() => setpostShare(false)}
                   >
                     <Icon.Share className="fill-current w-[15px]" />
                     <span className="text-[12x] md:text-[14x] ml-1">Share</span>
@@ -535,7 +572,7 @@ const PostsDetail = () => {
             <div className="flex py-[5px] block-avt justify-center">
               {postDetail?.data?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                 <Link
-                  to={`/user/${postDetail?.data?.createBy?.fullname}`}
+                  to={`/user/${postDetail?.data?.createBy?.username}`}
                   className="  border border-gray-300 cursor-pointer select-none w-[45px] h-[45px] rounded-full bg-center bg-cover"
                   style={{
                     backgroundImage: `url(${postDetail?.data?.createBy?.avatar?.avatarUrl})`,
@@ -544,8 +581,8 @@ const PostsDetail = () => {
                 ></Link>
               ) : (
                 <Link
-                  to={`/user/${postDetail?.data?.createBy?.fullname}`}
-                  className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
+                  to={`/user/${postDetail?.data?.createBy?.username}`}
+                  className="flex justify-center font-bold items-center text-[#4A5568]   border border-gray-300 bg-blue-300 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
                 >
                   {postDetail?.data?.createBy?.fullname
                     ?.slice(0, 1)
@@ -555,7 +592,7 @@ const PostsDetail = () => {
             </div>
             <div className="py-[10px] px-[15px]  border-b border-gray-100 flex justify-between items-center">
               <p className="text-[16px] font-medium ">
-                <Link to={`/user/${postDetail?.data?.createBy?.fullname}`}>
+                <Link to={`/user/${postDetail?.data?.createBy?.username}`}>
                   <span className="block hover:underline	">
                     {postDetail?.data?.createBy?.fullname}
                   </span>
@@ -564,22 +601,30 @@ const PostsDetail = () => {
                   @{postDetail?.data?.createBy?.username}
                 </span>
               </p>
-              <button
-                onClick={() => handleFollow()}
-                disabled={loadingFollow}
-                className={
-                  postDetail?.data?.createBy?.isFollowing
-                    ? "border flex items-center border-blue-500 px-4 py-[3px] text-[14px] rounded-[3px] bg-blue-500 text-white"
-                    : "border flex items-center border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
-                }
-              >
-                {loadingFollow && (
-                  <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
-                )}
-                {postDetail?.data?.createBy?.isFollowing
-                  ? "- Đã theo dõi"
-                  : "+ Theo dõi"}
-              </button>
+              {postDetail?.data?.createBy?.username === profile?.username ? (
+                <button
+                  onClick={() => history.push("/profile/me")}
+                  className="border flex items-center border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
+                >
+                  Xem thông tin
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleFollow()}
+                  className={
+                    postDetail?.data?.createBy?.isFollowing
+                      ? "border flex items-center border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
+                      : "border flex items-center border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
+                  }
+                >
+                  {loadingFollow && (
+                    <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                  )}
+                  {postDetail?.data?.createBy?.isFollowing
+                    ? "- Đã theo dõi"
+                    : "+ Theo dõi"}
+                </button>
+              )}
             </div>
             <div className="py-[10px] flex border-b border-gray-100">
               <div className="m-auto flex">

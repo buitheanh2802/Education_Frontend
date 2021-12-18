@@ -5,6 +5,8 @@ import queryString from "query-string";
 import PublishNav from "./components/publish-nav";
 import SkeletonGroup from "./components/skeleton-group";
 import QuestionApi from "src/Apis/QuestionApi";
+import { useHistory, useLocation } from "react-router-dom";
+import Pagination from "src/Pages/Public/Commons/Panigation";
 
 const QuesionManage = (props) => {
   // get query params
@@ -16,17 +18,21 @@ const QuesionManage = (props) => {
   const [pagination, setPagination] = useState(null);
   const [render, setRender] = useState(false);
   const timeout = useRef(null);
+  const history = useHistory();
+  const location = useLocation();
   // __effect
   useEffect(() => {
     async function getData() {
       try {
         // start call api
         setStartCall(true);
+        setQuestionList(null);
+        const query = queryString.parse(location.search);
         const {
           data: {
             data: { models, metaData },
           },
-        } = await QuestionApi.getListPublish();
+        } = await QuestionApi.getListPublish(query);
         if (models && models.length > 0) setQuestionList(models);
         // set Pagination
         setPagination(metaData.pagination);
@@ -38,8 +44,7 @@ const QuesionManage = (props) => {
       }
     }
     getData();
-  }, []);
-
+  }, [location.search]);
   const handleSearch = async (e) => {
     try {
       if (timeout.current) {
@@ -56,6 +61,10 @@ const QuesionManage = (props) => {
     }
   };
 
+  const onPageChange = (e) => {
+    const query = queryString.stringify({ page: e.selected + 1 });
+    history.push(`${location.pathname}?${query}`);
+  };
   // __render data
   return (
     <div className="w-full">
@@ -66,19 +75,30 @@ const QuesionManage = (props) => {
         questionList.map((item, index) => {
           return (
             <PublishItem
-              // onMarkSpam={onMarkSpam}
               index={index + 1}
               key={index}
-              title={item.title}
-              content={item.content}
-              createBy={item.createBy}
-              createAt={item.createdAt}
-              spam={item.spam}
-              id={item._id}
-              slug={item.slug}
+              title={item?.title}
+              content={item?.content}
+              createBy={item?.createBy}
+              createAt={item?.createdAt}
+              spam={item?.spam}
+              id={item?._id}
+              slug={item?.slug}
+              username={item?.createBy?.username}
+              pagination={pagination}
+              onPageChange={onPageChange}
             />
           );
         })}
+      {Pagination &&
+        pagination?.totalPage > 1 &&
+        pagination?.countDocuments !== 0 && (
+          <Pagination
+            pageCount={pagination.totalPage}
+            onChange={onPageChange}
+            currentPage={pagination.currentPage - 1}
+          />
+        )}
     </div>
   );
 };

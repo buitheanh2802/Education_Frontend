@@ -41,7 +41,7 @@ export const path = {
   // question
   QUESTIONS: "/questions",
   QUESTIONS_CREATE: "/questions/create",
-  QUESTIONS_FOLLOWING: "/questions/fllowing",
+  QUESTIONS_FOLLOWING: "/questions/following",
   QUESTIONS_BOOK_MARK: "/questions/bookmark",
   QUESTIONS_DETAIL: "/question/:id",
   QUESTIONS_UPDATE: "/question/update/:id",
@@ -87,6 +87,7 @@ export const path = {
   SULOTION_MANAGER_ID: "/manager/exercise/:id",
   // Quản trị liên hệ
   CONTACT_MANAGER: "/manager/contact",
+  COMMENT_MANGER: "/manager/comment",
 
   //profile
   PROFILE: "/profile/:username",

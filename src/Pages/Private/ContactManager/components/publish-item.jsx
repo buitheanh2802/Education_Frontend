@@ -46,7 +46,7 @@ const PublishItem = (props) => {
     <>
       <div
         className="nav bg-white border-b  text-[14px] p-[10px] grid
-    grid-cols-[60px,0.9fr,1.7fr,0.7fr,0.9fr,0.6fr,1.2fr] "
+    grid-cols-[60px,1.5fr,0.7fr,0.9fr,0.6fr,1.2fr] "
       >
         <div className="font-medium">{index}</div>
         <div onClick={() => handelContactDetail(id)} className=" mr-[20px] ">
@@ -54,10 +54,7 @@ const PublishItem = (props) => {
             {title}
           </p>
         </div>
-        <div
-          dangerouslySetInnerHTML={{ __html: content }}
-          className="mr-[20px] text-ellipsis "
-        ></div>
+
         <div className="">
           <p className="text-blue-500 underline pr-[10px]">{name}</p>
         </div>
@@ -66,13 +63,13 @@ const PublishItem = (props) => {
         </div>
         <div className="text-[13px] ">{timeFormatter(createAt)}</div>
 
-        <div className="text-center">
+        <div className="flex items-center justify-center">
           <button
             onClick={() => handelFeedbackContact(id)}
             className={
               feedback
-                ? "px-[15px] py-[5px] mb-[5px] text-white bg-green-500 rounded-md flex mx-auto "
-                : "px-[15px] py-[5px] mb-[5px] text-white bg-blue-500 rounded-md flex mx-auto"
+                ? "px-[15px] text-[14px]  py-[3px] mr-[5px] text-white bg-green-500 rounded-md  "
+                : "px-[15px] text-[14px]  py-[3px] mr-[5px] text-white bg-blue-500 rounded-md "
             }
           >
             {loading.success && (
@@ -82,7 +79,7 @@ const PublishItem = (props) => {
           </button>
           <button
             onClick={() => handelRemoveContact(id)}
-            className="px-[15px] py-[5px] text-white bg-red-500 rounded-md flex mx-auto "
+            className="px-[15px] text-[14px]  py-[3px] text-white bg-red-500 rounded-md  "
           >
             {loading.success && (
               <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
@@ -103,8 +100,8 @@ const PublishItem = (props) => {
             action=""
             class="w-full h-full relative bg-white rounded px-[30px]"
           >
-            <p className="text-[18px] pt-[15px] text-gray-700">
-              Chi tiết liên hệ
+            <p className="text-[18px] font-medium pt-[15px] text-gray-700">
+              Chi tiết liên hệ:
             </p>
             <div className="mt-[25px] text-[14px] text-gray-700 ">
               <div className="">
@@ -150,7 +147,7 @@ const PublishItem = (props) => {
                 onClick={() => handleCancelBox()}
                 className=" border border-gray-400 text-gray-500 text-[14px] hover:bg-blue-50  hover:text-blue-400 rounded-[3px] px-[15px] py-[3px]"
               >
-                Hủy
+                Đóng
               </button>
             </div>
           </div>

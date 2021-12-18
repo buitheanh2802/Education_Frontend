@@ -20,6 +20,7 @@ import Swal from "sweetalert2";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import QuestionRelated from "../Commons/QuestionsRelated";
 import Comments from "../Comments";
+import { getCookie, setCookie } from 'src/Helpers/Cookie';
 
 const QuestionsDetail = () => {
   const shortId = useParams();
@@ -40,19 +41,32 @@ const QuestionsDetail = () => {
   const history = useHistory();
   const token = localStorage.getItem("_token_");
   const idQuestion = shortId.id.split("-")[shortId.id.split("-").length - 1];
+  // effect upviews 
+  useEffect(() => {
+    async function upViews() {
+      if (!getCookie(idQuestion)) {
+        const dataUpViews = await QuestionApi.view(idQuestion)
+        // console.log(dataUpViews);
+        setCookie(idQuestion, true, 5 * 60 * 1000)
+        // console.log('views is up');
+      }
+    }
+    upViews();
+  }, []);
   useEffect(() => {
     setRender(false);
-    setLoading(true);
+    // setLoading(true);
     const list = async (id) => {
       try {
         let { data: question } = await QuestionApi.getId(idQuestion);
         const { data: questionOther } = await QuestionApi.otherQuestion(
           question?.data?.createBy?._id
         );
-        const otherQuesstions = questionOther?.data?.filter(
+
+        const otherQuestions = questionOther?.data?.filter(
           (item) => item?.slug !== question?.data?.slug
         );
-        setOtherQuestion(otherQuesstions);
+        setOtherQuestion(otherQuestions);
         setQuestionDetail(question);
         setLoading(false);
         if (question.data.createBy.username) {
@@ -91,12 +105,22 @@ const QuestionsDetail = () => {
         ...questionDetail,
         data: { ...questionDetail.data },
       });
+      const data = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(questionDetail?.data?.createBy?.username, data);
     } else {
       await LikeApi.delLikeQuestion(idQuestion);
       setQuestionDetail({
         ...questionDetail,
         data: { ...questionDetail.data },
       });
+      const data = {
+        type: "down",
+        points: 5,
+      };
+      await UserApi.pointUser(questionDetail?.data?.createBy?.username, data);
     }
     setLoadingLike(false);
   };
@@ -159,6 +183,11 @@ const QuestionsDetail = () => {
           ...user.data,
         },
       });
+      const data = {
+        type: "down",
+        points: 5,
+      };
+      await UserApi.pointUser(questionDetail?.data?.createBy?.username, data);
     } else {
       setRender(true);
       await FollowApi.follow(user.data.username);
@@ -168,6 +197,11 @@ const QuestionsDetail = () => {
           ...user.data,
         },
       });
+      const data = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(questionDetail?.data?.createBy?.username, data);
     }
     setLoadingFollow(false);
   };
@@ -289,7 +323,7 @@ const QuestionsDetail = () => {
                 {questionDetail?.data?.createBy?.avatar?.avatarUrl?.length >
                 0 ? (
                   <Link
-                    to={`/user/${questionDetail?.data?.createBy?.fullname}`}
+                    to={`/user/${questionDetail?.data?.createBy?.username}`}
                     className="  border border-gray-300 cursor-pointer select-none w-[55px] h-[55px] rounded-full bg-center bg-cover"
                     style={{
                       backgroundImage: `url(${questionDetail?.data?.createBy?.avatar?.avatarUrl})`,
@@ -298,8 +332,8 @@ const QuestionsDetail = () => {
                   ></Link>
                 ) : (
                   <Link
-                    to={`/user/${questionDetail?.data?.createBy?.fullname}`}
-                    className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
+                    to={`/user/${questionDetail?.data?.createBy?.username}`}
+                    className="flex justify-center font-bold items-center text-[#4A5568]   border border-gray-300 bg-blue-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
                   >
                     {questionDetail?.data?.createBy?.fullname
                       ?.slice(0, 1)
@@ -309,7 +343,7 @@ const QuestionsDetail = () => {
                 <div className="ml-2">
                   <p className="text-blue-500 text-[14px] sm:text-[16px] font-medium flex items-center">
                     <Link
-                      to={`/user/${questionDetail?.data?.createBy?.fullname}`}
+                      to={`/user/${questionDetail?.data?.createBy?.username}`}
                     >
                       <span className="hover:underline">
                         {questionDetail?.data?.createBy?.fullname}
@@ -364,6 +398,7 @@ const QuestionsDetail = () => {
                 <button
                   className="h-full btn__post"
                   onClick={() => setQuestionMenu(!questionMenu)}
+                  onBlur={() => setQuestionMenu(false)}
                 >
                   <Icon.DotsVertical className=" w-[13px] " />
                 </button>
@@ -515,6 +550,7 @@ const QuestionsDetail = () => {
                           : "text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center hover:bg-blue-300 hover:text-white"
                       }
                       onClick={() => setQuestionShare(!questionShare)}
+                      onBlur={() => setQuestionShare(false)}
                     >
                       <Icon.Share className="fill-current w-[15px]" />
                       <span className="text-[12x] md:text-[14x] ml-1">
@@ -575,7 +611,7 @@ const QuestionsDetail = () => {
             <div className="flex py-[5px] block-avt justify-center">
               {questionDetail?.data?.createBy?.avatar?.avatarUrl?.length > 0 ? (
                 <Link
-                  to={`/user/${questionDetail?.data?.createBy?.fullname}`}
+                  to={`/user/${questionDetail?.data?.createBy?.username}`}
                   className="  border border-gray-300 cursor-pointer select-none w-[45px] h-[45px] rounded-full bg-center bg-cover"
                   style={{
                     backgroundImage: `url(${questionDetail?.data?.createBy?.avatar?.avatarUrl})`,
@@ -584,8 +620,8 @@ const QuestionsDetail = () => {
                 ></Link>
               ) : (
                 <Link
-                  to={`/user/${questionDetail?.data?.createBy?.fullname}`}
-                  className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
+                  to={`/user/${questionDetail?.data?.createBy?.username}`}
+                  className="flex justify-center font-bold items-center text-[#4A5568]   border border-gray-300 bg-blue-300 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
                 >
                   {questionDetail?.data?.createBy?.fullname
                     ?.slice(0, 1)
@@ -595,7 +631,7 @@ const QuestionsDetail = () => {
             </div>
             <div className="py-[10px] px-[15px]  border-b border-gray-100 flex justify-between items-center">
               <p className="text-[16px] font-medium ">
-                <Link to={`/user/${questionDetail?.data?.createBy?.fullname}`}>
+                <Link to={`/user/${questionDetail?.data?.createBy?.username}`}>
                   <span className="block hover:underline	">
                     {questionDetail?.data?.createBy?.fullname}
                   </span>
@@ -604,19 +640,29 @@ const QuestionsDetail = () => {
                   @{questionDetail?.data?.createBy?.username}
                 </span>
               </p>
-              <button
-                onClick={() => handleFollow()}
-                className={
-                  user?.data?.isFollowing
-                    ? "border flex items-center border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
-                    : "border flex items-center border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
-                }
-              >
-                {loadingFollow && (
-                  <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
-                )}
-                {user?.data?.isFollowing ? "- Đã theo dõi" : "+ Theo dõi"}
-              </button>
+              {questionDetail?.data?.createBy?.username ===
+              profile?.username ? (
+                <button
+                  onClick={() => history.push("/profile/me")}
+                  className="border flex items-center border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
+                >
+                  Xem thông tin
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleFollow()}
+                  className={
+                    user?.data?.isFollowing
+                      ? "border flex items-center border-blue-500 px-4 py-[3px] text-[14px]   rounded-[3px] bg-blue-500 text-white"
+                      : "border flex items-center border-blue-500 px-4 py-[3px] text-[14px] text-blue-500  rounded-[3px] hover:bg-blue-500 hover:text-white"
+                  }
+                >
+                  {loadingFollow && (
+                    <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                  )}
+                  {user?.data?.isFollowing ? "- Đã theo dõi" : "+ Theo dõi"}
+                </button>
+              )}
             </div>
             <div className="py-[10px] flex border-b border-gray-100">
               <div className="m-auto flex">

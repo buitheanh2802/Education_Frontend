@@ -11,35 +11,29 @@ const SolutionDetail = () => {
     const [sulution, setSulution] = useState(null);
     const { profile } = useSelector(state => state.Auth);
     const [isLoading, setIsLoading] = useState(false);
+    const [isSubmit, setIsSubmit] = useState(false)
 
 
     const handleVote = async () => {
         try {
             setIsLoading(true)
-            if (sulution?.votes?.indexOf(profile?._id) < 0) {
-                const dataVote = {
-                    ...sulution,
-                    votes: [
-                        ...sulution?.votes,
-                        profile?._id
-                    ]
-                }
-
-                await SulotionApi.put(dataVote);
-                setIsLoading(false)
-            }
-        } catch (error) { setIsLoading(false) }
+            await SulotionApi.upVote(solutionId);
+            setIsLoading(false)
+            setIsSubmit(!isSubmit)
+        } catch (error) { setIsLoading(false); }
     }
 
     useEffect(() => {
         (async () => {
             try {
+                setIsLoading(true)
                 const { data: resData } = await SulotionApi.get(solutionId);
                 const { data, status } = resData;
+                setIsLoading(false)
                 if (status) return setSulution(data)
-            } catch (error) { }
+            } catch (error) { setIsLoading(false) }
         })()
-    }, [])
+    }, [isSubmit])
 
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
@@ -67,7 +61,7 @@ const SolutionDetail = () => {
                         <div className="flex gap-[15px] mt-5">
                             <button onClick={handleVote} className={`${(sulution?.votes?.indexOf(profile?._id) >= 0) ? "text-blue-800" : "text-gray-700"} flex gap-[10px] flex-1 justify-center items-center bg-gray-100 hover:bg-gray-300 duration-300 hover:shadow text-xs rounded h-[40px]`}>
                                 {isLoading ? <Icon.Loading className="fill-current w-[12px]" /> : <Icon.Like className="fill-current w-[12px]" />}
-                                {(sulution?.votes?.indexOf(profile?._id) > 0) ? sulution?.votes?.length : "Vote"}
+                                {(sulution?.votes?.indexOf(profile?._id) >= 0) ? sulution?.votes?.length : "Vote"}
                             </button>
                         </div>
                     </div>

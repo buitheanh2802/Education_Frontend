@@ -4,12 +4,12 @@ const PostApi = {
   getPostNew(params) {
     const url = `/post/newest`;
     return AxiosClient.get(url, {
-      params
+      params,
     });
   },
   getPostTren(params) {
     const url = `/post/trending`;
-    return AxiosClient.get(url,params);
+    return AxiosClient.get(url, params);
   },
   getPostFol(params) {
     const token = localStorage.getItem("_token_");
@@ -18,7 +18,7 @@ const PostApi = {
       headers: {
         authorization: `Bearer ${token}`,
       },
-      params
+      params,
     });
   },
   getPostMark(params) {
@@ -28,7 +28,7 @@ const PostApi = {
       headers: {
         authorization: `Bearer ${token}`,
       },
-      params
+      params,
     });
   },
   get(id) {
@@ -98,6 +98,23 @@ const PostApi = {
   otherPost(userId) {
     const url = `/user/other-post/same-author/${userId}`;
     return AxiosClient.get(url);
+  },
+  upViews(data){
+    const url = '/post/upviews';
+    return AxiosClient.post(url,data)
+  },
+  searchPost(keySearch) {
+    const token = localStorage.getItem("_token_");
+    const url = `/post/manager/filter?keyword=${keySearch}`;
+    return AxiosClient.post(
+      url,
+      {},
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
   },
 };
 

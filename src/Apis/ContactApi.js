@@ -3,7 +3,7 @@ import AxiosClient from "./AxiosClient";
 const ContactApi = {
   sendContact(data) {
     const token = localStorage.getItem("_token_");
-    const url = `/contact`;
+    const url = `/contact/create`;
     return AxiosClient.post(url, data, {
       headers: {
         authorization: `Bearer ${token}`,
@@ -40,6 +40,19 @@ const ContactApi = {
   feedbackContact(id) {
     const token = localStorage.getItem("_token_");
     const url = `/contact/${id}`;
+    return AxiosClient.post(
+      url,
+      {},
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  },
+  searchContact(keySearch) {
+    const token = localStorage.getItem("_token_");
+    const url = `/contact/manager/filter?keyword=${keySearch}`;
     return AxiosClient.post(
       url,
       {},

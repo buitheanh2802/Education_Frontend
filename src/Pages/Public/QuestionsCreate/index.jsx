@@ -8,7 +8,8 @@ import QuestionApi from "src/Apis/QuestionApi";
 import { useHistory } from "react-router";
 import Swal from "sweetalert2";
 import Editor from "../Commons/Editor";
-
+import { useSelector } from "react-redux";
+import UserApi from "src/Apis/UserApi";
 const QuestionsCreate = () => {
   const [title, setTitle] = useState();
   const [tag, setTag] = useState();
@@ -22,7 +23,7 @@ const QuestionsCreate = () => {
   const editor = useRef();
   const animatedComponents = makeAnimated();
   const history = useHistory();
-
+  const { profile } = useSelector((state) => state.Auth);
   useEffect(() => {
     setRender(false);
     const listTags = async () => {
@@ -41,7 +42,9 @@ const QuestionsCreate = () => {
     listTags();
     const listImage = async () => {
       try {
-        const { data : { data } } = await ImageApi.getImage();
+        const {
+          data: { data },
+        } = await ImageApi.getImage();
         setImages(data);
       } catch (error) {
         console.log(error);
@@ -124,12 +127,14 @@ const QuestionsCreate = () => {
 
     const CallApi = async () => {
       try {
-        const { data : { data } } = await ImageApi.addImage(formData);
+        const {
+          data: { data },
+        } = await ImageApi.addImage(formData);
         const url = data.photo.photoUrl;
         const targetEditor = editor.current.getEditor();
         const curentSpace = targetEditor.getSelection(true);
         targetEditor.insertEmbed(curentSpace.index, "image", url);
-        setImages([...images,data])
+        setImages([...images, data]);
         setIsModalVisible(false);
       } catch (error) {
         console.log(error);
@@ -200,11 +205,13 @@ const QuestionsCreate = () => {
         title: title,
         tags: tagId,
         content: content,
-        // isDraft: false,
       };
-
       await QuestionApi.add(data);
-
+      const dataPoint = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(profile?.username, dataPoint);
       await Toast.fire({
         icon: "success",
         title: "Đăng câu hỏi thành công",

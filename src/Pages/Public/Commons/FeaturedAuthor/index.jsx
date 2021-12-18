@@ -5,7 +5,8 @@ import { Icon } from "src/Components/Icon";
 const FeaturedAuthor = ({ authors }) => {
   return (
     <div>
-      <h2 className="px-[5px] uppercase font-medium py-[10px] border-b mx-[5px] "> Các tác giả nổi bật
+      <h2 className="px-[5px] uppercase font-medium py-[10px] border-b mx-[5px] ">
+        Các tác giả nổi bật
       </h2>
       <div className="py-[5px] mx-[10px]">
         {authors?.map((item, index) => {
@@ -23,7 +24,7 @@ const FeaturedAuthor = ({ authors }) => {
               ) : (
                 <Link
                   to={`/user/${item?.username}`}
-                  className="mt-[5px] mr-[15px] flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none min-w-[40px] max-w-[40px] min-h-[40px] max-h-[40px] rounded-full"
+                  className="mt-[5px] mr-[15px] flex justify-center font-bold items-center text-[#4A5568]   border border-gray-300 bg-blue-300 cursor-pointer select-none min-w-[40px] max-w-[40px] min-h-[40px] max-h-[40px] rounded-full"
                 >
                   {item?.fullname?.slice(0, 1)?.toUpperCase()}
                 </Link>
@@ -42,30 +43,22 @@ const FeaturedAuthor = ({ authors }) => {
                   </span>
                 </div>
                 <div className="flex text-[13px] gap-[15px] items-center">
-                  {/* {item?.points && ( */}
                   <div className="flex items-center gap-[5px] text-[#707885]">
                     <Icon.Point className="fill-current w-[13px]" />
                     <span>{item?.points}</span>
                   </div>
-                  {/* )} */}
-                  {/* {item?.postCounts && ( */}
                   <div className="flex items-center gap-[5px] text-[#707885]">
                     <Icon.Pen className="fill-current w-[13px]" />
                     <span>{item?.postCounts}</span>
                   </div>
-                  {/* )} */}
-                  {/* {item?.questionCounts && ( */}
                   <div className="flex items-center gap-[5px] text-[#707885]">
                     <Icon.Questions className="fill-current w-[12px]" />
                     <span>{item?.questionCounts}</span>
                   </div>
-                  {/* )} */}
-                  {/* {item?.followers && ( */}
                   <div className="flex items-center gap-[5px] text-[#707885]">
                     <Icon.Follower className="fill-current w-[13px]" />
                     <span>{item?.followers}</span>
                   </div>
-                  {/* )} */}
                 </div>
               </div>
             </div>
@@ -77,4 +70,3 @@ const FeaturedAuthor = ({ authors }) => {
 };
 
 export default FeaturedAuthor;
-

@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link, NavLink, useHistory, useLocation } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
 import { path } from "src/Constants/";
 import Notification from "./Components/Notification";
 import Auth from "./Components/Auth";
+import SearchApi from "src/Apis/SearchApi";
+import LoadingIcon from "src/Components/Loading/LoadingIcon";
+import { timeFormatter } from "src/Helpers/Timer";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -15,21 +18,40 @@ const Header = () => {
   const { profile } = useSelector((state) => state.Auth);
   const [isSearch, setIsSearch] = useState(false);
   const [searchKey, setSearchKey] = useState("");
+  const [suggestPost, setSuggestPost] = useState([]);
+  const [suggestQues, setSuggestQues] = useState([]);
+  const [suggestUser, setSuggestUser] = useState([]);
+  const [suggestTag, setSuggestTag] = useState([]);
   const history = useHistory();
-
+  const searchBox = useRef();
+  const timeout = useRef(null);
+  const [loading, setLoading] = useState({
+    error: false,
+    success: false,
+  });
   useEffect(() => {
     const fixedTop = () =>
       window.pageYOffset > 300 ? isActive(true) : isActive(false);
-
     if (pathname === path.HOME)
       return (() => {
         fixedTop();
         window.addEventListener("scroll", fixedTop);
       })();
-
     isActive(true);
     window.addEventListener("scroll", () => isActive(true));
   }, [pathname]);
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    function handleClickOutside(e) {
+      if (searchBox.current && !searchBox.current?.contains(e.target)) {
+        if (isSearch) setIsSearch(false);
+      }
+    }
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isSearch]);
 
   const EnterEvent = (e) => {
     e.preventDefault();
@@ -37,16 +59,42 @@ const Header = () => {
     history.push(`/search?keyword=${searchKey}`);
   };
 
+  const handleSearchSuggest = async (e) => {
+    try {
+      if (timeout.current) {
+        clearTimeout(timeout.current);
+      }
+      timeout.current = setTimeout(async () => {
+        if (e.target.value) {
+          setLoading({ ...loading, success: true });
+          const { data: res } = await SearchApi.SuggestSearch(e.target.value);
+          if (res) {
+            const questions = res.data[0];
+            setSuggestQues(questions);
+            const posts = res.data[1];
+            setSuggestPost(posts);
+            const tags = res.data[2];
+            setSuggestTag(tags);
+            const users = res.data[3];
+            setSuggestUser(users);
+          }
+          setLoading({ ...loading, success: false });
+        }
+      }, 1000);
+    } catch (error) {
+      setLoading({ ...loading, success: false });
+      console.log(error);
+    }
+  };
+
   return (
     <>
-      {/* Mobile */}
       {isNotification && (
         <Notification
           setIsNotification={setIsNotification}
           className="z-[999] fixed top-0 left-0 bottom-0 right-0 lg:hidden"
         />
       )}
-      {/* end */}
       <div
         className={`${
           active
@@ -54,7 +102,7 @@ const Header = () => {
             : "pt-[15px] border-transparent text-white"
         } border-b border-solid duration-300 fixed top-0 left-0 right-0 z-[999]`}
       >
-        <nav className="container mx-auto select-none flex justify-between items-center py-[10px]">
+        <nav className="container mx-auto select-none flex justify-between items-center py-[10px] relative">
           <h1 className="mr-[80px]">
             <Link
               onClick={() => {
@@ -73,14 +121,16 @@ const Header = () => {
           <div className="flex items-center gap-[15px]">
             <form className="relative ">
               <span
-                onClick={() => setIsSearch(!isSearch)}
+                onClick={() => {
+                  history.push("/search");
+                }}
                 className="lg:hidden block pr-[10px] relative before:absolute before:inline-block before:w-[0.5px] border-r border-blue-600"
               >
                 <Icon.SearchLarge className="w-[22px] h-[22px] mr-[5px] cursor-pointer text-blue-600 fill-current" />
               </span>
             </form>
             {profile && (
-              <i
+              <span
                 onClick={() => setIsNotification(!isNotification)}
                 className={`${
                   active
@@ -89,7 +139,7 @@ const Header = () => {
                 } lg:hidden`}
               >
                 <Icon.Bell className="cursor-pointer w-[25px] h-[25px] fill-current" />
-              </i>
+              </span>
             )}
             <button onClick={() => setIsMenu(true)} className="lg:hidden">
               <Icon.Menu
@@ -148,8 +198,7 @@ const Header = () => {
                 </Link>
               )}
               <button onClick={() => setIsMenu(false)}>
-                {" "}
-                <Icon.Close className="w-[20px]" />{" "}
+                <Icon.Close className="w-[20px]" />
               </button>
             </ul>
             <ul className="lg:flex lg:gap-[20px] px-[15px] lg:px-0 pt-[10px] lg:pt-0">
@@ -196,40 +245,231 @@ const Header = () => {
                 </NavLink>
               </li>
             </ul>
-            <div className="flex items-center">
-              <form onSubmit={(e) => EnterEvent(e)} className="relative ">
+            <div className="flex items-center gap-[20px] relative">
+              <form onSubmit={(e) => EnterEvent(e)} className="relative">
                 <input
                   type="text"
+                  ref={searchBox}
                   onChange={(e) => {
                     setIsSearch(true);
                     setSearchKey(e.target.value);
-                  }}
-                  onBlur={() => {
-                    setIsSearch(false);
+                    handleSearchSuggest(e);
                   }}
                   onClick={() => setIsSearch(true)}
-                  className={
-                    isSearch
-                      ? "absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] transition duration-500 ease-in text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 w-[350px] border border-blue-600"
-                      : "absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 w-[200px] border border-blue-600"
-                  }
+                  className={`absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 border border-blue-600 duration-300 ${
+                    isSearch ? "w-[380px]" : "w-[250px]"
+                  }`}
                   placeholder="Tìm kiếm..."
                 />
                 <span
                   onClick={() => setIsSearch(!isSearch)}
-                  className="hidden lg:block border-r border-blue-600 pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%]"
+                  className="hidden lg:block relative before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%]"
                 >
-                  <Icon.SearchLarge className="w-[22px] h-[22px] pr-[5px] cursor-pointer text-blue-600 fill-current" />
+                  <Icon.SearchLarge className="w-[22px] h-[22px] pr-[5px] cursor-pointer text-blue-600 fill-current " />
                 </span>
                 <button
                   type="submit"
                   className={
                     isSearch
-                      ? "hidden  lg:block pr-[15px] relative before:content-[''] before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
+                      ? "hidden lg:block pr-[15px] relative before:absolute before:inline-block before:w-[0.5px] before:h-[60%] before:right-0 before:top-[50%] before:translate-y-[-50%] before:bg-[#51ffb9]"
                       : "hidden"
                   }
                 ></button>
               </form>
+              {isSearch && searchKey.length > 0 ? (
+                suggestPost?.searchResults?.length === 0 &&
+                suggestQues?.searchResults?.length === 0 &&
+                suggestUser?.searchResults?.length === 0 &&
+                suggestTag?.searchResults?.length === 0 ? (
+                  <div
+                    className={`absolute w-[380px] shadow-xl shadow-blue-300 bg-white top-[30px] rounded overflow-auto max-h-[500px] ${
+                      profile ? "right-[118px]" : "right-[225px]"
+                    }`}
+                  >
+                    <p className="text-center text-[16px] leading-[30px] py-[20px] font-bold text-gray-600">
+                      Không có dữ liệu
+                    </p>
+                  </div>
+                ) : (
+                  <div
+                    className={`${
+                      profile ? "right-[118px]" : "right-[225px]"
+                    } absolute w-[380px] shadow-xl shadow-blue-300 bg-white top-[30px] rounded overflow-y-auto max-h-[500px]`}
+                  >
+                    {loading.success && (
+                      <LoadingIcon className="w-[20px] fill-current mx-auto my-[20px] h-[20px] text-blue-200" />
+                    )}
+                    <div className="">
+                      {suggestPost?.searchResults?.length > 0 ? (
+                        <div className="bg-blue-300 rounded">
+                          <p className="py-[10px] pl-[10px] text-white text-[16px] uppercase font-bold">
+                            {suggestPost.title}
+                          </p>
+                        </div>
+                      ) : null}
+                      {suggestPost?.searchResults?.map((item, index) => {
+                        return (
+                          <div
+                            key={index}
+                            className="px-[10px] py-[10px] border-dashed border-b-[0.5px] border-blue-500"
+                          >
+                            <div>
+                              <Link
+                                to={`/user/${item?.createBy?.username}`}
+                                className="font-bold text-blue-600 uppercase text-[13px] mr-[5px]"
+                              >
+                                {item?.createBy?.fullname}
+                              </Link>
+                              -
+                              <span className="ml-[5px] text-gray-600 text-[13px]">
+                                {timeFormatter(item?.createdAt)}
+                              </span>
+                            </div>
+                            <Link
+                              className="font-semibold text-gray-800 text-[14px]"
+                              to={`/posts/${item?.slug}-${item?.shortId}`}
+                            >
+                              {item.title}
+                            </Link>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="">
+                      {suggestQues?.searchResults?.length > 0 ? (
+                        <div className="bg-blue-300 rounded">
+                          <p className="py-[10px] pl-[10px] text-white text-[16px] uppercase font-bold">
+                            {suggestQues.title}
+                          </p>
+                        </div>
+                      ) : null}
+                      {suggestQues?.searchResults?.map((item, index) => {
+                        return (
+                          <div
+                            key={index}
+                            className="px-[10px] py-[10px] border-dashed border-b-[0.5px] border-blue-500"
+                          >
+                            <div>
+                              <Link
+                                to={`/user/${item?.createBy?.username}`}
+                                className="font-bold text-blue-600 uppercase text-[13px] mr-[5px]"
+                              >
+                                {item?.createBy?.fullname}
+                              </Link>
+                              -
+                              <span className="ml-[5px] text-gray-600 text-[13px]">
+                                {timeFormatter(item?.createdAt)}
+                              </span>
+                            </div>
+                            <Link
+                              to={`/question/${item?.slug}-${item?._id}`}
+                              className="font-semibold text-gray-800 text-[14px]"
+                            >
+                              {item.title}
+                            </Link>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="">
+                      {suggestUser?.searchResults?.length > 0 ? (
+                        <div className="bg-blue-300 rounded">
+                          <p className="py-[10px] pl-[10px] text-white text-[16px] uppercase font-bold">
+                            {suggestUser.title}
+                          </p>
+                        </div>
+                      ) : null}
+                      <div className="">
+                        {suggestUser?.searchResults?.map((item, index) => {
+                          return (
+                            <Link
+                              key={index}
+                              to={`/user/${item?.username}`}
+                              className="flex px-[10px] py-[10px] items-center border-dashed border-b-[0.5px] border-blue-500"
+                            >
+                              {item?.avatar?.avatarUrl.length > 0 ? (
+                                <img
+                                  src={item?.avatar?.avatarUrl}
+                                  className="mx-auto max-h-[40px] min-h-[40px] rounded-full"
+                                  width="40px"
+                                  height="40px"
+                                />
+                              ) : (
+                                <div className="py-[5px] text-[#4A5568] mx-auto text-center w-[40px] h-[40px] rounded-full bg-blue-200 font-bold text-[20px]">
+                                  {item?.fullname
+                                    ?.toUpperCase()
+                                    .substring(0, 1)}
+                                </div>
+                              )}
+                              <div className="py-[10px]">
+                                <p className="flex flex-wrap text-[#707885] items-center gap-[5px] mb-[5px] max-w-[300px]">
+                                  <p className="text-[#2d6ff7] hover:underline">
+                                    {item?.fullname}
+                                  </p>
+                                </p>
+                                <div className="flex text-[13px] gap-[15px] items-center w-[300px]">
+                                  <div className="flex items-center gap-[5px] text-[#707885]">
+                                    <Icon.Pen className="fill-current w-[13px]" />
+                                    <span>{item?.postCounts}</span>
+                                  </div>
+                                  <div className="flex items-center gap-[5px] text-[#707885]">
+                                    <Icon.Questions className="fill-current w-[13px]" />
+                                    <span>{item?.questionCounts}</span>
+                                  </div>
+                                  <div className="flex items-center gap-[5px] text-[#707885]">
+                                    <Icon.User className="fill-current w-[13px]" />
+                                    <span>{item?.followerCounts}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div className="">
+                      {suggestTag?.searchResults?.length > 0 ? (
+                        <div className="bg-blue-300 rounded">
+                          <p className="py-[10px] pl-[10px] text-white text-[16px] uppercase font-bold">
+                            {suggestTag.title}
+                          </p>
+                        </div>
+                      ) : null}
+                      <div className="">
+                        {suggestTag?.searchResults?.map((item, index) => {
+                          return (
+                            <Link
+                              key={index}
+                              to={`/tag/${item?.slug}`}
+                              className="flex items-center px-[10px] py-[10px] border-dashed border-b-[0.5px] border-blue-500"
+                            >
+                              {item?.avatar?.avatarUrl.length > 0 ? (
+                                <img
+                                  src={item?.avatar?.avatarUrl}
+                                  className="mx-auto max-h-[40px] min-h-[40px] rounded"
+                                  width="40px"
+                                  height="40px"
+                                />
+                              ) : (
+                                <div className="py-[5px] text-[#4A5568] mx-auto text-center w-[40px] h-[40px] rounded bg-blue-200 font-bold text-[20px]">
+                                  {item?.name?.toUpperCase().substring(0, 1)}
+                                </div>
+                              )}
+                              <div className="py-[10px]">
+                                <div className="text-[#707885] items-center gap-[5px] mb-[5px]">
+                                  <p className="text-[#2d6ff7] hover:underline w-[300px]">
+                                    {item?.name}
+                                  </p>
+                                </div>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                )
+              ) : null}
               <Auth
                 isNotification={isNotification}
                 setIsNotification={setIsNotification}
@@ -242,43 +482,6 @@ const Header = () => {
           </div>
         </nav>
       </div>
-      {/* <div
-        className={
-          isSearch
-            ? "fixed  z-[9999999] translate-y-[0] transition w-full px-[30px] md:px-[0] md:w-[650px]  rounded-b-[3px] top-0 left-[50%] translate-x-[-50%]"
-            : "fixed  z-[9999999] translate-y-[-100%]  lg:w-[650px] transition   rounded-b-[3px] top-0 left-[50%] translate-x-[-50%]"
-        }
-      >
-        <div className="bg-blue-200">
-          <div className="flex justify-end ">
-            <button
-              onClick={() => setIsSearch(!isSearch)}
-              className="mr-[17px] mt-[17px]"
-            >
-              <Icon.Close className="fill-current cursor-pointer w-[15px] text-gray-500 hover:text-gray-700 " />
-            </button>
-          </div>
-          <form
-            className="px-[50px] pt-[50px] pb-[40px]"
-            onSubmit={(e) => EnterEvent(e)}
-          >
-            <div className="w-full relative">
-              <input
-                type="text"
-                className="w-full text-[14px] pl-[20px] pr-[50px] py-[10px] border rounded-[3px] focus:outline-none focus:border focus:border-gray-600"
-                placeholder="Tìm kiếm trên DevStart"
-                onChange={(e) => setSearchKey(e.target.value)}
-              />
-              <button
-                type="submit"
-                className="absolute top-0 right-0 w-[43px] flex bg-blue-500 h-[43px]"
-              >
-                <Icon.SearchLarge className="fill-current m-auto cursor-pointer w-[20px] text-white hover:text-gray-700 " />
-              </button>
-            </div>
-          </form>
-        </div>
-      </div> */}
     </>
   );
 };

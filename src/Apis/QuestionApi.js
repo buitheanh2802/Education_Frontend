@@ -14,30 +14,32 @@ const QuestionApi = {
   //     return AxiosClient.get(url);
   //   }
   // },
-  getQuestion() {
+  getQuestion(params) {
     const url = `/question`;
-    return AxiosClient.get(url);
+    return AxiosClient.get(url, { params });
   },
-  getQuestionTren() {
+  getQuestionTren(params) {
     const url = `/question/trending`;
-    return AxiosClient.get(url);
+    return AxiosClient.get(url, params);
   },
-  getQuestionFol() {
+  getQuestionFol(params) {
     const token = localStorage.getItem("_token_");
     const url = `/question/follow`;
     return AxiosClient.get(url, {
       headers: {
         authorization: `Bearer ${token}`,
       },
+      params,
     });
   },
-  getQuestionBookmark() {
+  getQuestionBookmark(params) {
     const token = localStorage.getItem("_token_");
     const url = `/question/listbookmark`;
     return AxiosClient.get(url, {
       headers: {
         authorization: `Bearer ${token}`,
       },
+      params,
     });
   },
   getId(id) {
@@ -76,13 +78,14 @@ const QuestionApi = {
       },
     });
   },
-  getListPublish() {
+  getListPublish(params) {
     const token = localStorage.getItem("_token_");
-    const url = `/question`;
+    const url = `/question/admin`;
     return AxiosClient.get(url, {
       headers: {
         authorization: `Bearer ${token}`,
       },
+      params,
     });
   },
   questionSpam(id) {
