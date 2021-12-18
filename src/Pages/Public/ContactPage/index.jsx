@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { regex } from "src/Constants/";
 import ContactApi from "src/Apis/ContactApi";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const ContactPage = () => {
   const [response, setResponse] = useState({
@@ -58,6 +59,13 @@ const ContactPage = () => {
       //     isLoading: false
       // })
     }
+  };
+
+  const Intagram = () => {
+    window.open("http://www.instagram.com/devstar_group");
+  };
+  const facebook = () => {
+    window.open("https://www.facebook.com/groups/devstar");
   };
 
   const resetRespone = (filed) => {
@@ -212,7 +220,7 @@ const ContactPage = () => {
                 Email
               </p>
               <p className="text-[14px] underline text-blue-400 cursor-pointer">
-                Vinhtq030901@gmail.com
+                Devstargroup@gmail.com
               </p>
             </div>
             <div className="text-center">
@@ -222,8 +230,11 @@ const ContactPage = () => {
               <p className="text-[16px] font-medium text-[#000] pt-[10px]">
                 Instagram
               </p>
-              <p className=" text-[14px] underline text-blue-400 cursor-pointer">
-                http://www.instagram.com/devstar
+              <p
+                onClick={() => Intagram()}
+                className=" text-[14px] underline text-blue-400 cursor-pointer break-words "
+              >
+                http://www.instagram.com/devstar_group
               </p>
             </div>
 
@@ -234,7 +245,10 @@ const ContactPage = () => {
               <p className="text-[16px] font-medium text-[#000] pt-[10px]">
                 Facebook
               </p>
-              <p className=" text-[14px] underline text-blue-400 cursor-pointer">
+              <p
+                onClick={() => facebook()}
+                className=" text-[14px] underline text-blue-400 cursor-pointer break-words"
+              >
                 https://www.facebook.com/groups/devstar
               </p>
             </div>

@@ -34,19 +34,19 @@ const UserApi = {
     const url = `/user/manager/list`;
     return AxiosClient.get(url, {
       headers: {
-        authorization: `Bearer ${token}`
-      }
-    })
+        authorization: `Bearer ${token}`,
+      },
+    });
   },
 
-  getListUser(filter){
+  getListUser(filter) {
     const token = localStorage.getItem("_token_");
     const url = `/user/featured-author/list?filter=${filter}`;
     return AxiosClient.get(url, {
       headers: {
-        authorization: `Bearer ${token}`
-      }
-    })
+        authorization: `Bearer ${token}`,
+      },
+    });
   },
 
   editManagerUser(username, data) {
@@ -54,16 +54,24 @@ const UserApi = {
     const url = `/user/manager/edit/${username}`;
     return AxiosClient.put(url, data, {
       headers: {
-        authorization: `Bearer ${token}`
-      }
-    })
+        authorization: `Bearer ${token}`,
+      },
+    });
   },
 
   searchUser(keySearch) {
     const url = `/user/manager/filter?keyword=${keySearch}`;
     return AxiosClient.post(url);
-  }
-
+  },
+  pointUser(user, data) {
+    const token = localStorage.getItem("_token_");
+    const url = `/user/${user}/point`;
+    return AxiosClient.post(url, data, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  },
 };
 
 export default UserApi;

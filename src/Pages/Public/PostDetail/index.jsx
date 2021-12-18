@@ -19,7 +19,8 @@ import Comments from "../Comments";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import NotificationApi from "src/Apis/NotificationApi";
 import PostRelated from "../Commons/PostRelated";
-import { getCookie,setCookie } from 'src/Helpers/Cookie';
+import { getCookie, setCookie } from "src/Helpers/Cookie";
+import UserApi from "src/Apis/UserApi";
 
 const PostsDetail = () => {
   const shortId = useParams();
@@ -45,7 +46,7 @@ const PostsDetail = () => {
   // console.log(postDetail);
   useEffect(() => {
     setRender(false);
-    setLoading(true);
+    // setLoading(true);
     const list = async () => {
       try {
         const { data: post } = await PostApi.getPost(id);
@@ -78,12 +79,22 @@ const PostsDetail = () => {
         ...postDetail,
         data: { ...postDetail.data, isLike: false },
       });
+      const data = {
+        type: "down",
+        points: 5,
+      };
+      await UserApi.pointUser(postDetail?.data?.createBy?.username, data);
     } else {
       await LikeApi.likePost(id);
       setPostDetail({
         ...postDetail,
         data: { ...postDetail.data, isLike: true },
       });
+      const data = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(postDetail?.data?.createBy?.username, data);
     }
     // send notifaction
     const notificationRequest = {
@@ -174,6 +185,11 @@ const PostsDetail = () => {
           createBy: { ...postDetail.data.createBy, isFollowing: false },
         },
       });
+      const data = {
+        type: "down",
+        points: 5,
+      };
+      await UserApi.pointUser(postDetail?.data?.createBy?.username, data);
     } else {
       await FollowApi.follow(username);
       setPostDetail({
@@ -183,6 +199,11 @@ const PostsDetail = () => {
           createBy: { ...postDetail.data.createBy, isFollowing: true },
         },
       });
+      const data = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(postDetail?.data?.createBy?.username, data);
     }
     // send notifaction
     const notificationRequest = {
@@ -207,7 +228,6 @@ const PostsDetail = () => {
   };
 
   const url = window.location.href;
-  // console.log("url: ", url);
   const handelCopy = () => {
     const input = document.createElement("input");
     input.setAttribute("type", "text");
@@ -272,7 +292,7 @@ const PostsDetail = () => {
                 ) : (
                   <Link
                     to={`/user/${postDetail?.data?.createBy?.fullname}`}
-                    className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
+                    className="flex justify-center font-bold items-center text-[#4A5568]   border border-gray-300 bg-blue-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
                   >
                     {postDetail?.data?.createBy?.fullname
                       ?.slice(0, 1)
@@ -549,7 +569,7 @@ const PostsDetail = () => {
               ) : (
                 <Link
                   to={`/user/${postDetail?.data?.createBy?.username}`}
-                  className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
+                  className="flex justify-center font-bold items-center text-[#4A5568]   border border-gray-300 bg-blue-300 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
                 >
                   {postDetail?.data?.createBy?.fullname
                     ?.slice(0, 1)
