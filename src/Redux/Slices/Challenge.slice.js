@@ -1,6 +1,6 @@
 import LocalStorage from "src/Helpers/Storage";
 import { createSlice } from '@reduxjs/toolkit';
-import { ActionGetsChallenge } from '../Actions/Challenge.action';
+import { ActionFindChallenge, ActionGetsChallenge } from '../Actions/Challenge.action';
 
 const mySlice = createSlice({
     name: "Challenge",
@@ -37,6 +37,31 @@ const mySlice = createSlice({
                 console.log(message)
             }
         })
+
+        // find cate
+        builder.addCase(ActionFindChallenge.pending, (state) => {
+            state.isLoading = true;
+            state.challenges = null;
+            state.pagination = null;
+        })
+
+        builder.addCase(ActionFindChallenge.rejected, (state) => {
+            state.isLoading = false;
+            LocalStorage.Remove('_token_');
+        })
+
+        builder.addCase(ActionFindChallenge.fulfilled, (state, action) => {
+            const { status, data, message } = action?.payload;
+            state.isLoading = false;
+            if (status) {
+                state.challenges = data?.models;
+                state.pagination = data?.metaData?.pagination
+            }
+            else {
+                console.log(message)
+            }
+        })
+
     }
 })
 

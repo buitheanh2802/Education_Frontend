@@ -14,6 +14,9 @@ const QuizPage = () => {
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
             <Navigation path={pathName} button={profile?.role && button} />
+            <div className="mt-[25px]">
+                <p className='text-yellow-500 font-extralight text-2xl text-center'>Xin lỗi chức năng này đang được phát triển</p>
+            </div>
         </div>
     )
 }
