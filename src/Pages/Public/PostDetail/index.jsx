@@ -19,7 +19,7 @@ import Comments from "../Comments";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import NotificationApi from "src/Apis/NotificationApi";
 import PostRelated from "../Commons/PostRelated";
-import { getCookie,setCookie } from 'src/Helpers/Cookie';
+import { getCookie, setCookie } from 'src/Helpers/Cookie';
 
 const PostsDetail = () => {
   const shortId = useParams();
@@ -56,7 +56,8 @@ const PostsDetail = () => {
           (item) => item?.shortId !== post?.data?.shortId
         );
         // const dataUpViews = await PostApi.upViews({ shortId : id});
-        // setCookie('')
+        // setCookie(id,true,5 * 60 * 1000)
+
         setPostDetail(post);
         setOtherPost(otherPosts);
         setLoading(false);
@@ -66,6 +67,18 @@ const PostsDetail = () => {
     };
     list();
   }, [render, id]);
+
+  // effect upviews 
+  useEffect(() => {
+    async function upViews() {
+      if (!getCookie(id)) {
+        const dataUpViews = await PostApi.upViews({ shortId: id });
+        setCookie(id, true, 5 * 60 * 1000)
+        // console.log('views is up');
+      }
+    }
+    upViews();
+  }, []);
 
   const fullname = postDetail?.data?.createBy?.fullname;
   const handleLike = async () => {
@@ -365,7 +378,7 @@ const PostsDetail = () => {
                         : "Sao chép link bài viết"}
                     </li>
                     {postDetail?.data?.createBy?.username ===
-                    profile?.username ? (
+                      profile?.username ? (
                       <>
                         <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
                           <Icon.Fix className="fill-current w-[15px] mr-[5px]" />
