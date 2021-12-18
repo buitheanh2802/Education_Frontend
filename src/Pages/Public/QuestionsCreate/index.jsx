@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import Editor from "../Commons/Editor";
 import { useSelector } from "react-redux";
 import UserApi from "src/Apis/UserApi";
+import { AlertMessage } from "src/Components/AlertMessage";
 const QuestionsCreate = () => {
   const [title, setTitle] = useState();
   const [tag, setTag] = useState();
@@ -152,18 +153,7 @@ const QuestionsCreate = () => {
   };
 
   ///react-select
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 2000,
-    // timerProgressBar: true,
-    background: "#EFF6FF",
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
+
   const handlerSubmit = async (data) => {
     try {
       var errors = [];
@@ -212,14 +202,14 @@ const QuestionsCreate = () => {
         points: 5,
       };
       await UserApi.pointUser(profile?.username, dataPoint);
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "success",
         title: "Đăng câu hỏi thành công",
       });
       history.push("/questions");
     } catch (error) {
       console.log(error);
-      Toast.fire({
+      AlertMessage.fire({
         icon: "error",
         title: "Đăng câu hỏi thất bại",
       });

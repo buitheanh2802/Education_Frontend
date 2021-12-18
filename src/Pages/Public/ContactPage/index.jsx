@@ -6,6 +6,7 @@ import { regex } from "src/Constants/";
 import ContactApi from "src/Apis/ContactApi";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { AlertMessage } from "src/Components/AlertMessage";
 
 const ContactPage = () => {
   const [response, setResponse] = useState({
@@ -26,38 +27,21 @@ const ContactPage = () => {
     reValidateMode: "onBlur",
   });
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 2000,
-    // timerProgressBar: true,
-    background: "#EFF6FF",
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
   const onSubmit = async (data) => {
     try {
       setResponse({ ...response, isLoading: true });
       await ContactApi.sendContact(data);
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "success",
         title: "Gửi thành công",
       });
       reset();
     } catch (error) {
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "error",
-        title: "Gủi thất bại",
+        title: "Gửi thất bại",
       });
       console.log(error);
-      // setResponse({
-      //     ...response,
-      //     error: ResponseMessage(error?.response?.data?.message[0]),
-      //     isLoading: false
-      // })
     }
   };
 
