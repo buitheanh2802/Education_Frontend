@@ -20,7 +20,7 @@ import cong from "../../../Assets/media/pictures/cong.png";
 import { Link } from "react-router-dom";
 
 const IntroPage = () => {
-  // window.scrollTo(0, 0);
+  window.scrollTo(0, 0);
 
   return (
     <div className="bg-white pb-[20px]">
