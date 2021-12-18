@@ -92,12 +92,22 @@ const QuestionsDetail = () => {
         ...questionDetail,
         data: { ...questionDetail.data },
       });
+      const data = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(questionDetail?.data?.createBy?.username, data);
     } else {
       await LikeApi.delLikeQuestion(idQuestion);
       setQuestionDetail({
         ...questionDetail,
         data: { ...questionDetail.data },
       });
+      const data = {
+        type: "down",
+        points: 5,
+      };
+      await UserApi.pointUser(questionDetail?.data?.createBy?.username, data);
     }
     setLoadingLike(false);
   };
@@ -160,6 +170,11 @@ const QuestionsDetail = () => {
           ...user.data,
         },
       });
+      const data = {
+        type: "down",
+        points: 5,
+      };
+      await UserApi.pointUser(questionDetail?.data?.createBy?.username, data);
     } else {
       setRender(true);
       await FollowApi.follow(user.data.username);
@@ -169,6 +184,11 @@ const QuestionsDetail = () => {
           ...user.data,
         },
       });
+      const data = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(questionDetail?.data?.createBy?.username, data);
     }
     setLoadingFollow(false);
   };

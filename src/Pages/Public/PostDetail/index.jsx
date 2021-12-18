@@ -19,6 +19,7 @@ import Comments from "../Comments";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import NotificationApi from "src/Apis/NotificationApi";
 import PostRelated from "../Commons/PostRelated";
+import UserApi from "src/Apis/UserApi";
 
 const PostsDetail = () => {
   const shortId = useParams();
@@ -44,7 +45,7 @@ const PostsDetail = () => {
   // console.log(postDetail);
   useEffect(() => {
     setRender(false);
-    setLoading(true);
+    // setLoading(true);
     const list = async () => {
       try {
         const { data: post } = await PostApi.getPost(id);
@@ -76,12 +77,22 @@ const PostsDetail = () => {
         ...postDetail,
         data: { ...postDetail.data, isLike: false },
       });
+      const data = {
+        type: "down",
+        points: 5,
+      };
+      await UserApi.pointUser(postDetail?.data?.createBy?.username, data);
     } else {
       await LikeApi.likePost(id);
       setPostDetail({
         ...postDetail,
         data: { ...postDetail.data, isLike: true },
       });
+      const data = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(postDetail?.data?.createBy?.username, data);
     }
     // send notifaction
     const notificationRequest = {
@@ -172,6 +183,11 @@ const PostsDetail = () => {
           createBy: { ...postDetail.data.createBy, isFollowing: false },
         },
       });
+      const data = {
+        type: "down",
+        points: 5,
+      };
+      await UserApi.pointUser(postDetail?.data?.createBy?.username, data);
     } else {
       await FollowApi.follow(username);
       setPostDetail({
@@ -181,6 +197,11 @@ const PostsDetail = () => {
           createBy: { ...postDetail.data.createBy, isFollowing: true },
         },
       });
+      const data = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(postDetail?.data?.createBy?.username, data);
     }
     // send notifaction
     const notificationRequest = {
@@ -205,7 +226,6 @@ const PostsDetail = () => {
   };
 
   const url = window.location.href;
-  // console.log("url: ", url);
   const handelCopy = () => {
     const input = document.createElement("input");
     input.setAttribute("type", "text");

@@ -26,6 +26,7 @@ const QuesionManage = (props) => {
       try {
         // start call api
         setStartCall(true);
+        setQuestionList(null);
         const query = queryString.parse(location.search);
         const {
           data: {
@@ -74,7 +75,6 @@ const QuesionManage = (props) => {
         questionList.map((item, index) => {
           return (
             <PublishItem
-              // onMarkSpam={onMarkSpam}
               index={index + 1}
               key={index}
               title={item?.title}

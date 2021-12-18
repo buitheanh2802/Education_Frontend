@@ -59,19 +59,19 @@ const QuestionsPage = () => {
         if (location.pathname === path.QUESTIONS) {
           const query = queryString.parse(location.search);
           const { data: newests } = await QuestionApi.getQuestion(query);
-          const dataNew = newests?.data?.models?.filter(
-            (data) => data.spam === false
-          );
-          setNewests(dataNew);
+          // const dataNew = newests?.data?.models?.filter(
+          //   (data) => data.spam === false
+          // );
+          setNewests(newests?.data?.models);
           setPanigation(newests.data.metaData.pagination);
           dispatch(setLoading(false));
         } else if (location.pathname === path.QUESTIONS_TRENDING) {
           const query = queryString.parse(location.search);
           const { data: trendings } = await QuestionApi.getQuestionTren(query);
-          const dataNew = trendings?.data?.models?.filter(
-            (data) => data.spam === false
-          );
-          setTrendings(dataNew);
+          // const dataNew = trendings?.data?.models?.filter(
+          //   (data) => data.spam === false
+          // );
+          setTrendings(trendings?.data?.models);
           setPanigation(trendings.data.metaData.pagination);
           dispatch(setLoading(false));
         } else if (location.pathname === path.QUESTIONS_FOLLOWING) {
@@ -79,10 +79,10 @@ const QuestionsPage = () => {
           const token = localStorage.getItem("_token_");
           if (token) {
             const { data: follows } = await QuestionApi.getQuestionFol(query);
-            const dataNew = follows?.data?.models?.filter(
-              (data) => data.spam === false
-            );
-            setFollows(dataNew);
+            // const dataNew = follows?.data?.models?.filter(
+            //   (data) => data.spam === false
+            // );
+            setFollows(follows?.data?.models);
             // console.log("data", follows.data.metaData.pagination);
             setPanigation(follows.data.metaData.pagination);
             dispatch(setLoading(false));
@@ -95,10 +95,10 @@ const QuestionsPage = () => {
             const { data: bookmarks } = await QuestionApi.getQuestionBookmark(
               query
             );
-            const dataNew = bookmarks?.data?.models?.filter(
-              (data) => data.spam === false
-            );
-            setBookmarks(dataNew);
+            // const dataNew = bookmarks?.data?.models?.filter(
+            //   (data) => data.spam === false
+            // );
+            setBookmarks(bookmarks?.data?.models);
             setPanigation(bookmarks.data.metaData.pagination);
             dispatch(setLoading(false));
           }

@@ -50,5 +50,18 @@ const ContactApi = {
       }
     );
   },
+  searchContact(keySearch) {
+    const token = localStorage.getItem("_token_");
+    const url = `/contact/manager/filter?keyword=${keySearch}`;
+    return AxiosClient.post(
+      url,
+      {},
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  },
 };
 export default ContactApi;
