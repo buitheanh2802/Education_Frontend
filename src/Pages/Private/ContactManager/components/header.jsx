@@ -28,10 +28,6 @@ const Header = ({ handleSearch }) => {
     };
     CallApi();
   }, []);
-<<<<<<< HEAD
-=======
-
->>>>>>> hanhnguyen
   return (
     <div className="p-4 bg-white block w-full sm:flex items-center justify-between border-b border-gray-200">
       <div className="mb-1 w-full">
