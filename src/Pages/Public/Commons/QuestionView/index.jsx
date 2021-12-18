@@ -25,7 +25,7 @@ const QuestionView = ({ questions }) => {
       {questions?.length === 0 ? (
         <div>
           <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
-            Không có gì ở đây cả
+            Không có câu hỏi
           </p>
         </div>
       ) : (
@@ -34,7 +34,7 @@ const QuestionView = ({ questions }) => {
             return (
               <div
                 key={item?._id}
-                className="w-full flex px-[10px] py-[15px] border-b"
+                className="w-full flex px-[10px] py-[15px] border-b last:border-none"
               >
                 <div className="mr-[15px] ">
                   {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (

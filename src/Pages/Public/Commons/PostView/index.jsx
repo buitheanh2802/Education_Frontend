@@ -24,7 +24,7 @@ const PostView = ({ posts }) => {
       {posts?.models?.length === 0 ? (
         <div>
           <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
-            Không có gì ở đây cả
+            Không có bài viết
           </p>
         </div>
       ) : (
@@ -33,7 +33,7 @@ const PostView = ({ posts }) => {
             return (
               <div
                 key={index}
-                className="w-full flex px-[10px] py-[15px] border-b"
+                className="w-full flex px-[10px] py-[15px] border-b last:border-none"
               >
                 <div className="mr-[15px] hidden sm:block">
                   {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (

@@ -13,10 +13,10 @@ const UserPost = (props) => {
   useEffect(() => {
     const userPost = async () => {
       try {
-        dispatch(setLoading(true))
+        dispatch(setLoading(true));
         const { data: postUser } = await ProfileUserApi.getPostUser(username);
         setUserPost(postUser.data.models);
-        dispatch(setLoading(false))
+        dispatch(setLoading(false));
       } catch (error) {
         dispatch(setLoading(false));
         console.log(error);
@@ -30,7 +30,7 @@ const UserPost = (props) => {
       {userPost?.length == 0 ? (
         <div>
           <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
-            Không có gì ở đây cả
+            Không có bài viết
           </p>
         </div>
       ) : (
@@ -48,13 +48,18 @@ const UserPost = (props) => {
                         height="40px"
                       />
                     ) : (
-                    <div className="py-[5px] text-[#4A5568] mx-auto text-center w-[40px] w-[40px] rounded-full bg-blue-300 font-bold text-[20px]">
-                      {item?.createBy?.fullname?.toUpperCase().substring(0, 1)}
-                    </div>
+                      <div className="py-[5px] text-[#4A5568] mx-auto text-center w-[40px] w-[40px] rounded-full bg-blue-300 font-bold text-[20px]">
+                        {item?.createBy?.fullname
+                          ?.toUpperCase()
+                          .substring(0, 1)}
+                      </div>
                     )}
                   </div>
                   <div className="w-full ml-[10px]">
-                    <Link to={`/user/${item?.createBy?.username}`} className="text-[#2d6ff7] inline-block hover:underline font-medium text-[15px]">
+                    <Link
+                      to={`/user/${item?.createBy?.username}`}
+                      className="text-[#2d6ff7] inline-block hover:underline font-medium text-[15px]"
+                    >
                       {item?.createBy?.fullname}
                     </Link>
                     <span className="px-[5px]  inline-block">-</span>
@@ -69,7 +74,10 @@ const UserPost = (props) => {
                       </div>
                     </div>
                     <h3 className="pr-[50px] my-[2px]">
-                      <Link to={`/posts/${item?.slug}-${item?.shortId}`} className="font-medium text-[18px] hover:underline">
+                      <Link
+                        to={`/posts/${item?.slug}-${item?.shortId}`}
+                        className="font-medium text-[18px] hover:underline"
+                      >
                         {item?.title}
                       </Link>
                       <span className="px-[5px]">-</span>
@@ -84,7 +92,8 @@ const UserPost = (props) => {
                           <div key={index}>
                             <Link
                               to={`/tag/${tag?.slug}`}
-                              className="block mx-0 hover:bg-gray-300 bg-[#e7e7e7] px-[10px] py-[2px] text-[#5f5f5f] lg:text-[12px] rounded-[3px]">
+                              className="block mx-0 hover:bg-gray-300 bg-[#e7e7e7] px-[10px] py-[2px] text-[#5f5f5f] lg:text-[12px] rounded-[3px]"
+                            >
                               {tag?.name}
                             </Link>
                           </div>

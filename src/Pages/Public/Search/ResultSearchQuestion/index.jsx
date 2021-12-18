@@ -40,7 +40,7 @@ const ResultSearchQuestion = () => {
       {dataSearchQuestion?.length === 0 ? (
         <div>
           <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
-            Không có gì ở đây cả
+            Không có câu hỏi trùng khớp với từ khoá trên
           </p>
         </div>
       ) : (
@@ -49,7 +49,7 @@ const ResultSearchQuestion = () => {
             return (
               <div
                 key={item?._id}
-                className="w-full flex px-[10px] py-[15px] border-b"
+                className="w-full flex px-[10px] py-[15px] border-b last:border-none"
               >
                 <div className="mr-[15px] ">
                   {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
@@ -65,7 +65,7 @@ const ResultSearchQuestion = () => {
                   ) : (
                     <Link
                       to={`/user/${item?.createBy?.username}`}
-                      className="mt-[5px] flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
+                      className="mt-[5px] flex justify-center font-bold items-center text-gray-500 border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
                     >
                       {item?.createBy?.fullname?.slice(0, 1)?.toUpperCase()}
                     </Link>

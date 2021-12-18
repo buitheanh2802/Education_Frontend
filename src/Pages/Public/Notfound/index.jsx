@@ -11,7 +11,7 @@ const Notfound = () => {
   return (
     <div className="container mx-auto mt-[85px] py-[20px]">
       <div className="text-[#4A5568] uppercase md:text-[36px] sm:text-[28px] text-[22px] font-semibold text-center mb-[20px]">
-        Xin lỗi trang này không tồn tại
+        Xin lỗi trang này không tồn tại !
       </div>
       <div className="mx-auto w-[50%] mb-[20px]">
         <img

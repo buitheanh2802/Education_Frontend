@@ -1,7 +1,7 @@
 import React from "react";
-import banner_intro_img from "../../../Assets/media/pictures/banner-intro.png";
-import intro1_img from "../../../Assets/media/pictures/intro1.png";
-import intro2_img from "../../../Assets/media/pictures/intro2.png";
+import banner_intro from "../../../Assets/media/pictures/inner_page_banner.jpg";
+import team from "../../../Assets/media/pictures/teamwork.png";
+import intro_img from "../../../Assets/media/pictures/intro2.png";
 import giatri1_img from "../../../Assets/media/pictures/intro_gtri1.png";
 import giatri2_img from "../../../Assets/media/pictures/intro_gtri2.png";
 import giatri3_img from "../../../Assets/media/pictures/intro_gtri3.png";
@@ -10,8 +10,17 @@ import trinhdo_img from "../../../Assets/media/pictures/intro_trinhdo.png";
 import batdau1_img from "../../../Assets/media/pictures/batdau_1.png";
 import batdau2_img from "../../../Assets/media/pictures/batdau_2.png";
 import batdau3_img from "../../../Assets/media/pictures/batdau_3.png";
+import theanh from "../../../Assets/media/pictures/theanh.png";
+import nguyen from "../../../Assets/media/pictures/hnguyen.png";
+import dat from "../../../Assets/media/pictures/dat.png";
+import hai from "../../../Assets/media/pictures/nguyenhai.png";
+import my from "../../../Assets/media/pictures/myy.png";
+import vinh from "../../../Assets/media/pictures/vinh.png";
+import cong from "../../../Assets/media/pictures/cong.png";
+import { Link } from "react-router-dom";
+
 const IntroPage = () => {
-  window.scrollTo(0, 0);
+  // window.scrollTo(0, 0);
 
   return (
     <div className="bg-white pb-[20px]">
@@ -20,16 +29,16 @@ const IntroPage = () => {
           <div
             className="h-[200px] lg:h-[280px] bg-no-repeat bg-center bg-cover"
             style={{
-              backgroundImage: `linear-gradient(rgba(4, 9 , 30, 0.35), rgba(4, 9, 30, 0.35)) ,url(${banner_intro_img})`,
+              backgroundImage: `linear-gradient(rgba(4, 9 , 30, 0.35), rgba(4, 9, 30, 0.35)) ,url(${banner_intro})`,
             }}
           ></div>
         </div>
       </div>
 
-      <div className="container mx-auto mb-[80px] ">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-[100px] md:gap-[30px] sm:gap-[20px]  ">
+      <div className="container mx-auto mb-[80px]">
+        <div className="grid xl:px-[100px] grid-cols-1 md:grid-cols-2 lg:gap-[100px] md:gap-[30px] sm:gap-[20px]">
           <div className="mt-[-100px] md:mt-[-60px]">
-            <img className="w-full" src={intro1_img} alt="" />
+            <img className="w-full" src={team} alt="" />
           </div>
           <div className="flex items-center">
             <div className="mt-5 md:mt-0">
@@ -45,8 +54,9 @@ const IntroPage = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[50px] xl:gap-[100px] mt-8 lg:mt-[50px] ">
-          <div className=" col-span-1">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[50px] xl:gap-[100px] xl:px-[100px] mt-8 lg:mt-[50px]">
+          <div className="col-span-1">
             <h3 className="lg:text-[36px] font-medium sm:text-[20px] text-[25px]">
               NHIỆM VỤ
             </h3>
@@ -63,13 +73,14 @@ const IntroPage = () => {
           </div>
           <div className=" hidden md:block h-auto mr-[50px]">
             <div className="flex h-full">
-              <img src={intro2_img} alt="" className="m-auto " />
+              <img src={intro_img} alt="" className="m-auto " />
             </div>
           </div>
         </div>
       </div>
-      <div className="bg-[#EBF8FF] pb-[40px] lg:pb-[77px] px-[15px] sm:px-[35px] relative ">
-        <div className="container section-infor mx-auto">
+
+      <div className="bg-[#EBF8FF] pb-[40px] lg:pb-[77px] relative">
+        <div className="container xl:px-[100px] section-infor mx-auto">
           <h3 className="text-center lg:text-[36px] text-[26px] font-bold mb-[35px] lg:pt-[75px] pt-[50px]">
             NHỮNG GIÁ TRỊ HỮU ÍCH
           </h3>
@@ -99,7 +110,7 @@ const IntroPage = () => {
                 </p>
               </div>
             </div>
-            <div className="flex   pt-[23px] pb-[20px] pl-[14px]  pr-[28px] bg-[#FFFFFF]">
+            <div className="flex pt-[23px] pb-[20px] pl-[14px]  pr-[28px] bg-[#FFFFFF]">
               <img src={giatri3_img} className="w-[75px] h-[75px]" alt="" />
               <div className=" ml-[15px]">
                 <h3 className="text-[16px] leading-[24px] font-bold pt-[1px]">
@@ -111,7 +122,7 @@ const IntroPage = () => {
                 </p>
               </div>
             </div>
-            <div className="flex  pt-[25px]  pl-[19px] pb-[20px]  pr-[17px] bg-[#BEE3F8]">
+            <div className="flex pt-[25px] pl-[19px] pb-[20px] pr-[17px] bg-[#BEE3F8]">
               <img src={giatri4_img} className="w-[75px] h-[75px]" alt="" />
               <div className=" ml-[20px]">
                 <h3 className="text-[16px] leading-[24px] font-bold">
@@ -128,10 +139,95 @@ const IntroPage = () => {
         </div>
       </div>
 
-      <div className="mt-[40px] lg:mt-[80px] bg-gray-700 px-[15px] sm:px-[35px]">
-        <div className="container mx-auto py-[30px]  ">
-          <div className="grid  lg:grid-cols-2 grid-cols-1  items-center gap-[30px] xl:gap-[180px] text-[#FFFFFF] justify-items-start xl:px-[80px]">
-            <div className=" ">
+      <div className="mt-[60px]">
+        <div className="container mx-auto xl:px-[100px]">
+          <h3 className="text-[24px] md:text-[30px] font-semibold sm:text-[28px] sm:leading-[40px] text-center lg:text-[36px] lg:leading-[54px] uppercase text-blue-300">
+            Nhóm chúng tôi
+          </h3>
+          <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-[30px] mt-[40px]">
+            <div className="mx-auto">
+              <img
+                src={theanh}
+                className="rounded-full my-[10px] max-w-[220px]"
+                alt="TheAnh"
+              />
+              <div className="text-center font-bold uppercase">Bùi Thế Anh</div>
+              <div className="text-center">Back-End Developer</div>
+            </div>
+            <div className="mx-auto">
+              <img
+                src={hai}
+                className="rounded-full my-[10px] max-w-[220px]"
+                alt="Hai"
+              />
+              <div className="text-center font-bold uppercase">
+                Nguyễn Hồng Hải
+              </div>
+              <div className="text-center">Back-End Developer</div>
+            </div>
+            <div className="mx-auto">
+              <img
+                src={dat}
+                className="rounded-full my-[10px] max-w-[220px]"
+                alt="Dat"
+              />
+              <div className="text-center font-bold uppercase">
+                Nguyễn Thành Đại
+              </div>
+              <div className="text-center">Front-End Developer</div>
+            </div>
+            <div className="mx-auto">
+              <img
+                src={nguyen}
+                className="rounded-full my-[10px] max-w-[220px]"
+                alt="Nguyen"
+              />
+              <div className="text-center font-bold uppercase">
+                Kiều Thị Hạnh Nguyên
+              </div>
+              <div className="text-center">Front-End Developer</div>
+            </div>
+            <div className="mx-auto">
+              <img
+                src={vinh}
+                className="rounded-full my-[10px] max-w-[220px]"
+                alt="Vinh"
+              />
+              <div className="text-center font-bold uppercase">
+                Trần Quang Vĩnh
+              </div>
+              <div className="text-center">Front-End Developer</div>
+            </div>
+            <div className="mx-auto">
+              <img
+                src={my}
+                className="rounded-full my-[10px] max-w-[220px]"
+                alt="My"
+              />
+              <div className="text-center font-bold uppercase">
+                Nguyễn Thị Mỹ Mỹ
+              </div>
+              <div className="text-center">Tester</div>
+            </div>
+            <div className="mx-auto">
+              <img
+                src={cong}
+                className="rounded-full my-[10px] max-w-[220px]"
+                alt="Cong"
+              />
+              <div className="text-center font-bold uppercase">
+                Phạm Minh Công
+              </div>
+              <div className="text-center">Content Doc</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-[60px] bg-blue-400">
+        <div className="container mx-auto">
+          <div className="grid lg:grid-cols-2 grid-cols-1 items-center gap-[30px] xl:gap-[180px] text-[#FFFFFF] justify-items-start xl:px-[100px]">
+            <div className="">
               <p className="text-[24px] md:text-[28px] leading-[40px] lg:text-[36px] md:leading-[54px] font-bold ">
                 ĐÃ ĐẾN LÚC NÂNG CAO TRÌNH ĐỘ CỦA BẠN
               </p>
@@ -143,18 +239,23 @@ const IntroPage = () => {
                 này. Tôi muốn giúp bạn dễ dàng chia sẻ câu chuyện của mình và
                 phát triển mình theo cách tốt nhất.
               </p>
-              <div className="max-w-[300px] md:w-[310px] mx-auto mt-[26px]  bg-blue-400 text-[#FFFFFF] justify-items-center  items-center text-center py-[9px]">
-                <button className=" ">THAM GIA CÁC KHÓA HỌC</button>
+              <div className="text-center mt-[26px]">
+                <Link
+                  to="/"
+                  className="max-w-[300px] md:w-[310px] mx-auto bg-blue-600 hover:bg-blue-800 text-[#FFFFFF] justify-items-center px-[10px] py-[9px] rounded"
+                >
+                  THAM GIA CÁC KHÓA HỌC
+                </Link>
               </div>
             </div>
-            <div className=" mx-auto ">
-              <img src={trinhdo_img} alt="" />
+            <div className="mx-auto">
+              <img src={trinhdo_img} className="max-w-[600px]" alt="" />
             </div>
           </div>
         </div>
       </div>
 
-      <div className=" mt-[60px] lg:mt-[100px]">
+      <div className="mt-[60px] lg:mt-[100px]">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-[20px] xl:gap-[100px] xl:px-[100px]">
           <div className="w-full">
             <div className="w-full">
