@@ -59,7 +59,6 @@ const Header = () => {
   };
 
   const handleSearchSuggest = async (e) => {
-    console.log(searchKey);
     try {
       if (timeout.current) {
         clearTimeout(timeout.current);
@@ -96,10 +95,11 @@ const Header = () => {
         />
       )}
       <div
-        className={`${active
-          ? "bg-white text-gray-900 shadow-sm"
-          : "pt-[15px] border-transparent text-white"
-          } border-b border-solid duration-300 fixed top-0 left-0 right-0 z-[999]`}
+        className={`${
+          active
+            ? "bg-white text-gray-900 shadow-sm"
+            : "pt-[15px] border-transparent text-white"
+        } border-b border-solid duration-300 fixed top-0 left-0 right-0 z-[999]`}
       >
         <nav className="container mx-auto select-none flex justify-between items-center py-[10px] relative">
           <h1 className="mr-[80px]">
@@ -131,24 +131,27 @@ const Header = () => {
             {profile && (
               <span
                 onClick={() => setIsNotification(!isNotification)}
-                className={`${active
-                  ? "text-gray-500 hover:text-blue-600"
-                  : "text-white hover:text-[#51ffb9]"
-                  } lg:hidden`}
+                className={`${
+                  active
+                    ? "text-gray-500 hover:text-blue-600"
+                    : "text-white hover:text-[#51ffb9]"
+                } lg:hidden`}
               >
                 <Icon.Bell className="cursor-pointer w-[25px] h-[25px] fill-current" />
               </span>
             )}
             <button onClick={() => setIsMenu(true)} className="lg:hidden">
               <Icon.Menu
-                className={`fill-current w-[20px] sm:w-[25px] ${active ? "text-black" : "text-white"
-                  }`}
+                className={`fill-current w-[20px] sm:w-[25px] ${
+                  active ? "text-black" : "text-white"
+                }`}
               />
             </button>
           </div>
           <div
-            className={`${isMenu ? "ml-0 sm:ml-[50%] md:ml-[60%]" : "ml-[100%] lg:ml-0"
-              } menu_top lg:flex w-full lg:justify-between font-medium text-[14px] sm:text-[16px] lg:transform lg:translate-y-[2px]`}
+            className={`${
+              isMenu ? "ml-0 sm:ml-[50%] md:ml-[60%]" : "ml-[100%] lg:ml-0"
+            } menu_top lg:flex w-full lg:justify-between font-medium text-[14px] sm:text-[16px] lg:transform lg:translate-y-[2px]`}
           >
             <ul className="flex justify-between lg:hidden py-[10px] border-b px-[15px] lg:px-0">
               {profile ? (
@@ -241,7 +244,7 @@ const Header = () => {
                 </NavLink>
               </li>
             </ul>
-            <div className="flex items-center gap-[20px]">
+            <div className="flex items-center gap-[20px] relative">
               <form onSubmit={(e) => EnterEvent(e)} className="relative">
                 <input
                   type="text"
@@ -252,8 +255,9 @@ const Header = () => {
                     handleSearchSuggest(e);
                   }}
                   onClick={() => setIsSearch(true)}
-                  className={`absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 border border-blue-600 duration-300 ${isSearch ? "w-[380px]" : "w-[250px]"
-                    }`}
+                  className={`absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 border border-blue-600 duration-300 ${
+                    isSearch ? "w-[380px]" : "w-[250px]"
+                  }`}
                   placeholder="Tìm kiếm..."
                 />
                 <span
@@ -271,6 +275,200 @@ const Header = () => {
                   }
                 ></button>
               </form>
+              {isSearch && searchKey.length > 0 ? (
+                suggestPost?.searchResults?.length === 0 &&
+                suggestQues?.searchResults?.length === 0 &&
+                suggestUser?.searchResults?.length === 0 &&
+                suggestTag?.searchResults?.length === 0 ? (
+                  <div
+                    className={`absolute w-[380px] shadow-xl shadow-blue-300 bg-white top-[30px] rounded overflow-auto max-h-[500px] ${
+                      profile ? "right-[118px]" : "right-[225px]"
+                    }`}
+                  >
+                    <p className="text-center text-[16px] leading-[30px] py-[20px] font-bold text-gray-600">
+                      Không có dữ liệu
+                    </p>
+                  </div>
+                ) : (
+                  <div
+                    className={`${
+                      profile ? "right-[118px]" : "right-[225px]"
+                    } absolute w-[380px] shadow-xl shadow-blue-300 bg-white top-[30px] rounded overflow-y-auto max-h-[500px]`}
+                  >
+                    {loading.success && (
+                      <LoadingIcon className="w-[20px] fill-current mx-auto my-[20px] h-[20px] text-blue-200" />
+                    )}
+                    <div className="">
+                      {suggestPost?.searchResults?.length > 0 ? (
+                        <div className="bg-blue-300 rounded">
+                          <p className="py-[10px] pl-[10px] text-white text-[16px] uppercase font-bold">
+                            {suggestPost.title}
+                          </p>
+                        </div>
+                      ) : null}
+                      {suggestPost?.searchResults?.map((item, index) => {
+                        return (
+                          <div
+                            key={index}
+                            className="px-[10px] py-[10px] border-dashed border-b-[0.5px] border-blue-500"
+                          >
+                            <div>
+                              <Link
+                                to={`/user/${item?.createBy?.username}`}
+                                className="font-bold text-blue-600 uppercase text-[13px] mr-[5px]"
+                              >
+                                {item?.createBy?.fullname}
+                              </Link>
+                              -
+                              <span className="ml-[5px] text-gray-600 text-[13px]">
+                                {item.createdAt}
+                              </span>
+                            </div>
+                            <Link
+                              className="font-semibold text-gray-800 text-[14px]"
+                              to={`/posts/${item?.slug}-${item?.shortId}`}
+                            >
+                              {item.title}
+                            </Link>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="">
+                      {suggestQues?.searchResults?.length > 0 ? (
+                        <div className="bg-blue-300 rounded">
+                          <p className="py-[10px] pl-[10px] text-white text-[16px] uppercase font-bold">
+                            {suggestQues.title}
+                          </p>
+                        </div>
+                      ) : null}
+                      {suggestQues?.searchResults?.map((item, index) => {
+                        return (
+                          <div
+                            key={index}
+                            className="px-[10px] py-[10px] border-dashed border-b-[0.5px] border-blue-500"
+                          >
+                            <div>
+                              <Link
+                                to={`/user/${item?.createBy?.username}`}
+                                className="font-bold text-blue-600 uppercase text-[13px] mr-[5px]"
+                              >
+                                {item?.createBy?.fullname}
+                              </Link>
+                              -
+                              <span className="ml-[5px] text-gray-600 text-[13px]">
+                                {item.createdAt}
+                              </span>
+                            </div>
+                            <Link
+                              to={`/question/${item?.slug}-${item?._id}`}
+                              className="font-semibold text-gray-800 text-[14px]"
+                            >
+                              {item.title}
+                            </Link>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="">
+                      {suggestUser?.searchResults?.length > 0 ? (
+                        <div className="bg-blue-300 rounded">
+                          <p className="py-[10px] pl-[10px] text-white text-[16px] uppercase font-bold">
+                            {suggestUser.title}
+                          </p>
+                        </div>
+                      ) : null}
+                      <div className="">
+                        {suggestUser?.searchResults?.map((item, index) => {
+                          return (
+                            <Link
+                              key={index}
+                              to={`/user/${item?.username}`}
+                              className="flex px-[10px] py-[10px] items-center border-dashed border-b-[0.5px] border-blue-500"
+                            >
+                              {item?.avatar?.avatarUrl.length > 0 ? (
+                                <img
+                                  src={item?.avatar?.avatarUrl}
+                                  className="mx-auto max-h-[40px] min-h-[40px] rounded-full"
+                                  width="40px"
+                                  height="40px"
+                                />
+                              ) : (
+                                <div className="py-[5px] text-[#4A5568] mx-auto text-center w-[40px] h-[40px] rounded-full bg-blue-200 font-bold text-[20px]">
+                                  {item?.fullname
+                                    ?.toUpperCase()
+                                    .substring(0, 1)}
+                                </div>
+                              )}
+                              <div className="py-[10px]">
+                                <p className="flex flex-wrap text-[#707885] items-center gap-[5px] mb-[5px] max-w-[300px]">
+                                  <p className="text-[#2d6ff7] hover:underline">
+                                    {item?.fullname}
+                                  </p>
+                                </p>
+                                <div className="flex text-[13px] gap-[15px] items-center w-[300px]">
+                                  <div className="flex items-center gap-[5px] text-[#707885]">
+                                    <Icon.Pen className="fill-current w-[13px]" />
+                                    <span>{item?.postCounts}</span>
+                                  </div>
+                                  <div className="flex items-center gap-[5px] text-[#707885]">
+                                    <Icon.Questions className="fill-current w-[13px]" />
+                                    <span>{item?.questionCounts}</span>
+                                  </div>
+                                  <div className="flex items-center gap-[5px] text-[#707885]">
+                                    <Icon.User className="fill-current w-[13px]" />
+                                    <span>{item?.followerCounts}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div className="">
+                      {suggestTag?.searchResults?.length > 0 ? (
+                        <div className="bg-blue-300 rounded">
+                          <p className="py-[10px] pl-[10px] text-white text-[16px] uppercase font-bold">
+                            {suggestTag.title}
+                          </p>
+                        </div>
+                      ) : null}
+                      <div className="">
+                        {suggestTag?.searchResults?.map((item, index) => {
+                          return (
+                            <Link
+                              key={index}
+                              to={`/tag/${item?.slug}`}
+                              className="flex items-center px-[10px] py-[10px] border-dashed border-b-[0.5px] border-blue-500"
+                            >
+                              {item?.avatar?.avatarUrl.length > 0 ? (
+                                <img
+                                  src={item?.avatar?.avatarUrl}
+                                  className="mx-auto max-h-[40px] min-h-[40px] rounded"
+                                  width="40px"
+                                  height="40px"
+                                />
+                              ) : (
+                                <div className="py-[5px] text-[#4A5568] mx-auto text-center w-[40px] h-[40px] rounded bg-blue-200 font-bold text-[20px]">
+                                  {item?.name?.toUpperCase().substring(0, 1)}
+                                </div>
+                              )}
+                              <div className="py-[10px]">
+                                <div className="text-[#707885] items-center gap-[5px] mb-[5px]">
+                                  <p className="text-[#2d6ff7] hover:underline w-[300px]">
+                                    {item?.name}
+                                  </p>
+                                </div>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                )
+              ) : null}
               <Auth
                 isNotification={isNotification}
                 setIsNotification={setIsNotification}
@@ -281,190 +479,6 @@ const Header = () => {
               />
             </div>
           </div>
-          {isSearch && searchKey.length > 0 ? (
-            suggestPost?.searchResults?.length === 0 &&
-            suggestQues?.searchResults?.length === 0 &&
-            suggestUser?.searchResults?.length === 0 &&
-            suggestTag?.searchResults?.length === 0 ? (
-              <div className="absolute w-[380px] shadow-xl shadow-blue-300 bg-white top-[46px] right-[118px] rounded overflow-auto max-h-[500px]">
-                <p className="text-center text-[16px] leading-[30px] py-[20px] font-bold text-gray-600">
-                  Không có dữ liệu
-                </p>
-              </div>
-            ) : (
-              <div className="absolute w-[380px] shadow-xl shadow-blue-300 bg-white top-[47px] right-[118px] rounded overflow-auto max-h-[500px]">
-                {loading.success && (
-                  <LoadingIcon className="w-[20px] fill-current mx-auto my-[20px] h-[20px] text-blue-200" />
-                )}
-                <div className="">
-                  {suggestPost?.searchResults?.length > 0 ? (
-                    <div className="bg-blue-300 rounded">
-                      <p className="py-[10px] pl-[10px] text-white text-[16px] uppercase font-bold">
-                        {suggestPost.title}
-                      </p>
-                    </div>
-                  ) : null}
-                  {suggestPost?.searchResults?.map((item, index) => {
-                    return (
-                      <div
-                        key={index}
-                        className="px-[10px] py-[10px] border-dashed border-b-[0.5px] border-blue-500"
-                      >
-                        <div>
-                          <Link
-                            to={`/user/${item?.createBy?.username}`}
-                            className="font-bold text-blue-600 uppercase text-[13px] mr-[5px]"
-                          >
-                            {item?.createBy?.fullname}
-                          </Link>
-                          -
-                          <span className="ml-[5px] text-gray-600 text-[13px]">
-                            {item.createdAt}
-                          </span>
-                        </div>
-                        <Link
-                          className="font-semibold text-gray-800 text-[14px]"
-                          to={`/posts/${item?.slug}-${item?.shortId}`}
-                        >
-                          {item.title}
-                        </Link>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="">
-                  {suggestQues?.searchResults?.length > 0 ? (
-                    <div className="bg-blue-300 rounded">
-                      <p className="py-[10px] pl-[10px] text-white text-[16px] uppercase font-bold">
-                        {suggestQues.title}
-                      </p>
-                    </div>
-                  ) : null}
-                  {suggestQues?.searchResults?.map((item, index) => {
-                    return (
-                      <div
-                        key={index}
-                        className="px-[10px] py-[10px] border-dashed border-b-[0.5px] border-blue-500"
-                      >
-                        <div>
-                          <Link
-                            to={`/user/${item?.createBy?.username}`}
-                            className="font-bold text-blue-600 uppercase text-[13px] mr-[5px]"
-                          >
-                            {item?.createBy?.fullname}
-                          </Link>
-                          -
-                          <span className="ml-[5px] text-gray-600 text-[13px]">
-                            {item.createdAt}
-                          </span>
-                        </div>
-                        <Link
-                          to={`/question/${item?.slug}-${item?._id}`}
-                          className="font-semibold text-gray-800 text-[14px]"
-                        >
-                          {item.title}
-                        </Link>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="">
-                  {suggestUser?.searchResults?.length > 0 ? (
-                    <div className="bg-blue-300 rounded">
-                      <p className="py-[10px] pl-[10px] text-white text-[16px] uppercase font-bold">
-                        {suggestUser.title}
-                      </p>
-                    </div>
-                  ) : null}
-                  <div className="">
-                    {suggestUser?.searchResults?.map((item, index) => {
-                      return (
-                        <Link
-                          key={index}
-                          to={`/user/${item?.username}`}
-                          className="flex px-[10px] py-[10px] items-center border-dashed border-b-[0.5px] border-blue-500"
-                        >
-                          {item?.avatar?.avatarUrl.length > 0 ? (
-                            <img
-                              src={item?.avatar?.avatarUrl}
-                              className="mx-auto max-h-[40px] min-h-[40px] rounded-full"
-                              width="40px"
-                              height="40px"
-                            />
-                          ) : (
-                            <div className="py-[5px] text-[#4A5568] mx-auto text-center w-[40px] h-[40px] rounded-full bg-blue-200 font-bold text-[20px]">
-                              {item?.fullname?.toUpperCase().substring(0, 1)}
-                            </div>
-                          )}
-                          <div className="py-[10px]">
-                            <p className="flex flex-wrap text-[#707885] items-center gap-[5px] mb-[5px] max-w-[300px]">
-                              <p className="text-[#2d6ff7] hover:underline">
-                                {item?.fullname}
-                              </p>
-                            </p>
-                            <div className="flex text-[13px] gap-[15px] items-center w-[300px]">
-                              <div className="flex items-center gap-[5px] text-[#707885]">
-                                <Icon.Pen className="fill-current w-[13px]" />
-                                <span>{item?.postCounts}</span>
-                              </div>
-                              <div className="flex items-center gap-[5px] text-[#707885]">
-                                <Icon.Questions className="fill-current w-[13px]" />
-                                <span>{item?.questionCounts}</span>
-                              </div>
-                              <div className="flex items-center gap-[5px] text-[#707885]">
-                                <Icon.User className="fill-current w-[13px]" />
-                                <span>{item?.followerCounts}</span>
-                              </div>
-                            </div>
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div className="">
-                  {suggestTag?.searchResults?.length > 0 ? (
-                    <div className="bg-blue-300 rounded">
-                      <p className="py-[10px] pl-[10px] text-white text-[16px] uppercase font-bold">
-                        {suggestTag.title}
-                      </p>
-                    </div>
-                  ) : null}
-                  <div className="">
-                    {suggestTag?.searchResults?.map((item, index) => {
-                      return (
-                        <Link
-                          key={index}
-                          to={`/tag/${item?.slug}`}
-                          className="flex items-center px-[10px] py-[10px] border-dashed border-b-[0.5px] border-blue-500"
-                        >
-                          {item?.avatar?.avatarUrl.length > 0 ? (
-                            <img
-                              src={item?.avatar?.avatarUrl}
-                              className="mx-auto max-h-[40px] min-h-[40px] rounded"
-                              width="40px"
-                              height="40px"
-                            />
-                          ) : (
-                            <div className="py-[5px] text-[#4A5568] mx-auto text-center w-[40px] h-[40px] rounded bg-blue-200 font-bold text-[20px]">
-                              {item?.name?.toUpperCase().substring(0, 1)}
-                            </div>
-                          )}
-                          <div className="py-[10px]">
-                            <div className="text-[#707885] items-center gap-[5px] mb-[5px]">
-                              <p className="text-[#2d6ff7] hover:underline w-[300px]">
-                                {item?.name}
-                              </p>
-                            </div>
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            )
-          ) : null}
         </nav>
       </div>
     </>
