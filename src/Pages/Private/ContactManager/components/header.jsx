@@ -3,33 +3,7 @@ import { Link } from "react-router-dom";
 import csvDownload from "json-to-csv-export";
 import ContactApi from "src/Apis/ContactApi";
 
-const Header = () => {
-  const [listData, setListData] = useState([]);
-
-  useEffect(() => {
-    const CallApi = async () => {
-      try {
-        const {
-          data: {
-            data: { models, metaData },
-          },
-        } = await ContactApi.getContact();
-        // console.log(models)
-        let result = models.map(x => {
-          return {
-            email: x.email
-          }
-        });
-        console.log(result)
-        setListData(result);
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    CallApi();
-
-  }, []);
-
+const Header = ({ handleSearch }) => {
   return (
     <div className="p-4 bg-white block w-full sm:flex items-center justify-between border-b border-gray-200">
       <div className="mb-1 w-full">
@@ -87,6 +61,7 @@ const Header = () => {
             </label>
             <div className="mt-1 relative sm:w-64 xl:w-96">
               <input
+                onChange={(e) => handleSearch(e)}
                 type="text"
                 name="email"
                 id="products-search"

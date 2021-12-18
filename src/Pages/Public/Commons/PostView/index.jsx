@@ -49,7 +49,7 @@ const PostView = ({ posts }) => {
                   ) : (
                     <Link
                       to={`/user/${item?.createBy?.username}`}
-                      className="mt-[5px] flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
+                      className="mt-[5px] flex justify-center font-bold items-center text-[#4A5568]   border border-gray-300 bg-blue-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
                     >
                       {item?.createBy?.fullname?.slice(0, 1)?.toUpperCase()}
                     </Link>

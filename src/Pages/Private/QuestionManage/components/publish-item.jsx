@@ -5,6 +5,7 @@ import { timeFormatter } from "src/Helpers/Timer";
 import { useSelector } from "react-redux";
 import QuestionApi from "src/Apis/QuestionApi";
 import { Icon } from "src/Components/Icon";
+import UserApi from "src/Apis/UserApi";
 const PublishItem = (props) => {
   // _props
   const { title, index, createBy, createAt, id, spam, username } = props;
@@ -23,10 +24,27 @@ const PublishItem = (props) => {
       if (id) setLoading({ ...loading, success: true });
 
       await QuestionApi.questionSpam(id);
+      const { data: questionDetail } = await QuestionApi.getId(id);
       if (spamName === true) {
         setSpamName(false);
+        const dataPoint = {
+          type: "up",
+          points: 5,
+        };
+        await UserApi.pointUser(
+          questionDetail?.data?.createBy?.username,
+          dataPoint
+        );
       } else {
         setSpamName(true);
+        const dataPoint = {
+          type: "down",
+          points: 5,
+        };
+        await UserApi.pointUser(
+          questionDetail?.data?.createBy?.username,
+          dataPoint
+        );
       }
       if (id) setLoading({ ...loading, success: false });
     } catch (error) {

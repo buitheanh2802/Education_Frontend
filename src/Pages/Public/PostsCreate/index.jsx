@@ -8,6 +8,7 @@ import ImageApi from "src/Apis/ImageApi";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router";
 import Editor from "../Commons/Editor";
+import { AlertMessage } from "src/Components/AlertMessage";
 
 const PostsCreate = () => {
   const [title, setTitle] = useState();
@@ -151,18 +152,7 @@ const PostsCreate = () => {
   };
 
   ///react-select
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 2000,
-    // timerProgressBar: true,
-    background: "#EFF6FF",
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
+
   const handlerSubmit1 = async (data) => {
     try {
       var errors = [];
@@ -208,13 +198,13 @@ const PostsCreate = () => {
       };
 
       await PostApi.add(data);
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "success",
         title: "Đăng bài viết thành công",
       });
       history.push("/posts");
     } catch (error) {
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "error",
         title: "Đăng bài viết thất bại",
       });
@@ -265,13 +255,13 @@ const PostsCreate = () => {
         isDraft: false,
       };
       await PostApi.add(data);
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "success",
         title: "Đăng bài viết thành công, đợi phê duyệt",
       });
       history.push("/posts");
     } catch (error) {
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "error",
         title: "Đăng bài viết thất bại",
       });

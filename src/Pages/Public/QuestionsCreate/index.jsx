@@ -8,7 +8,9 @@ import QuestionApi from "src/Apis/QuestionApi";
 import { useHistory } from "react-router";
 import Swal from "sweetalert2";
 import Editor from "../Commons/Editor";
-
+import { useSelector } from "react-redux";
+import UserApi from "src/Apis/UserApi";
+import { AlertMessage } from "src/Components/AlertMessage";
 const QuestionsCreate = () => {
   const [title, setTitle] = useState();
   const [tag, setTag] = useState();
@@ -22,7 +24,7 @@ const QuestionsCreate = () => {
   const editor = useRef();
   const animatedComponents = makeAnimated();
   const history = useHistory();
-
+  const { profile } = useSelector((state) => state.Auth);
   useEffect(() => {
     setRender(false);
     const listTags = async () => {
@@ -41,7 +43,9 @@ const QuestionsCreate = () => {
     listTags();
     const listImage = async () => {
       try {
-        const { data : { data } } = await ImageApi.getImage();
+        const {
+          data: { data },
+        } = await ImageApi.getImage();
         setImages(data);
       } catch (error) {
         console.log(error);
@@ -124,12 +128,14 @@ const QuestionsCreate = () => {
 
     const CallApi = async () => {
       try {
-        const { data : { data } } = await ImageApi.addImage(formData);
+        const {
+          data: { data },
+        } = await ImageApi.addImage(formData);
         const url = data.photo.photoUrl;
         const targetEditor = editor.current.getEditor();
         const curentSpace = targetEditor.getSelection(true);
         targetEditor.insertEmbed(curentSpace.index, "image", url);
-        setImages([...images,data])
+        setImages([...images, data]);
         setIsModalVisible(false);
       } catch (error) {
         console.log(error);
@@ -147,18 +153,7 @@ const QuestionsCreate = () => {
   };
 
   ///react-select
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 2000,
-    // timerProgressBar: true,
-    background: "#EFF6FF",
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
+
   const handlerSubmit = async (data) => {
     try {
       var errors = [];
@@ -200,19 +195,21 @@ const QuestionsCreate = () => {
         title: title,
         tags: tagId,
         content: content,
-        // isDraft: false,
       };
-
       await QuestionApi.add(data);
-
-      await Toast.fire({
+      const dataPoint = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(profile?.username, dataPoint);
+      await AlertMessage.fire({
         icon: "success",
         title: "Đăng câu hỏi thành công",
       });
       history.push("/questions");
     } catch (error) {
       console.log(error);
-      Toast.fire({
+      AlertMessage.fire({
         icon: "error",
         title: "Đăng câu hỏi thất bại",
       });

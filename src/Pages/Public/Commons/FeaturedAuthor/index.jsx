@@ -24,7 +24,7 @@ const FeaturedAuthor = ({ authors }) => {
               ) : (
                 <Link
                   to={`/user/${item?.username}`}
-                  className="mt-[5px] mr-[15px] flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none min-w-[40px] max-w-[40px] min-h-[40px] max-h-[40px] rounded-full"
+                  className="mt-[5px] mr-[15px] flex justify-center font-bold items-center text-[#4A5568]   border border-gray-300 bg-blue-300 cursor-pointer select-none min-w-[40px] max-w-[40px] min-h-[40px] max-h-[40px] rounded-full"
                 >
                   {item?.fullname?.slice(0, 1)?.toUpperCase()}
                 </Link>

@@ -80,7 +80,7 @@ const QuestionApi = {
   },
   getListPublish(params) {
     const token = localStorage.getItem("_token_");
-    const url = `/question`;
+    const url = `/question/admin`;
     return AxiosClient.get(url, {
       headers: {
         authorization: `Bearer ${token}`,

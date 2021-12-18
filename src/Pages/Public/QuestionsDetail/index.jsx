@@ -21,6 +21,7 @@ import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import QuestionRelated from "../Commons/QuestionsRelated";
 import Comments from "../Comments";
 import { getCookie, setCookie } from 'src/Helpers/Cookie';
+import { AlertMessage } from "src/Components/AlertMessage";
 
 const QuestionsDetail = () => {
   const shortId = useParams();
@@ -109,12 +110,22 @@ const QuestionsDetail = () => {
         ...questionDetail,
         data: { ...questionDetail.data },
       });
+      const data = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(questionDetail?.data?.createBy?.username, data);
     } else {
       await LikeApi.delLikeQuestion(idQuestion);
       setQuestionDetail({
         ...questionDetail,
         data: { ...questionDetail.data },
       });
+      const data = {
+        type: "down",
+        points: 5,
+      };
+      await UserApi.pointUser(questionDetail?.data?.createBy?.username, data);
     }
     setLoadingLike(false);
   };
@@ -177,6 +188,11 @@ const QuestionsDetail = () => {
           ...user.data,
         },
       });
+      const data = {
+        type: "down",
+        points: 5,
+      };
+      await UserApi.pointUser(questionDetail?.data?.createBy?.username, data);
     } else {
       setRender(true);
       await FollowApi.follow(user.data.username);
@@ -186,6 +202,11 @@ const QuestionsDetail = () => {
           ...user.data,
         },
       });
+      const data = {
+        type: "up",
+        points: 5,
+      };
+      await UserApi.pointUser(questionDetail?.data?.createBy?.username, data);
     }
     setLoadingFollow(false);
   };
@@ -218,18 +239,6 @@ const QuestionsDetail = () => {
     setIsModalVisible(true);
   };
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 2000,
-    // timerProgressBar: true,
-    background: "#EFF6FF",
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
   const handelReportSpam = async () => {
     var checkbox = document.getElementsByClassName("cursor-pointer");
     for (var i = 0; i < checkbox.length; i++) {
@@ -265,13 +274,13 @@ const QuestionsDetail = () => {
     };
     try {
       await SpamApi.reportSpamQuestion(dataSpam);
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "success",
         title: "Báo cáo thành công",
       });
       setIsModalVisible(false);
     } catch (error) {
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "error",
         title: "Báo cáo thất bại",
       });
@@ -317,7 +326,7 @@ const QuestionsDetail = () => {
                 ) : (
                   <Link
                     to={`/user/${questionDetail?.data?.createBy?.username}`}
-                    className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
+                    className="flex justify-center font-bold items-center text-[#4A5568]   border border-gray-300 bg-blue-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
                   >
                     {questionDetail?.data?.createBy?.fullname
                       ?.slice(0, 1)
@@ -605,7 +614,7 @@ const QuestionsDetail = () => {
               ) : (
                 <Link
                   to={`/user/${questionDetail?.data?.createBy?.username}`}
-                  className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
+                  className="flex justify-center font-bold items-center text-[#4A5568]   border border-gray-300 bg-blue-300 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
                 >
                   {questionDetail?.data?.createBy?.fullname
                     ?.slice(0, 1)
