@@ -46,7 +46,6 @@ const Header = () => {
   };
 
   const handleSearchSuggest = async (e) => {
-    console.log(searchKey);
     try {
       if (timeout.current) {
         clearTimeout(timeout.current);
