@@ -4,6 +4,7 @@ import { Icon } from "src/Components/Icon";
 import ProfileUserApi from "src/Apis/ProfileUserApi";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
+import { timeFormatter } from "../../../../Helpers/Timer";
 
 const UserBookMark = (props) => {
   const username = props.match.params.username;
@@ -72,7 +73,7 @@ const UserBookMark = (props) => {
                       </div>
                       <div className=" inline-block">
                         <span className="col-span-4 text-[13px] text-[#707885]">
-                          {item?.createdAt}
+                          {timeFormatter(item?.createdAt)}
                         </span>
                       </div>
                     </div>

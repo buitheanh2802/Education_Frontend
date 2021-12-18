@@ -99,6 +99,10 @@ const PostApi = {
     const url = `/user/other-post/same-author/${userId}`;
     return AxiosClient.get(url);
   },
+  upViews(data){
+    const url = '/post/upviews';
+    return AxiosClient.post(url,data)
+  }
 };
 
 export default PostApi;

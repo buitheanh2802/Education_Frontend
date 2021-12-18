@@ -19,6 +19,7 @@ import Comments from "../Comments";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import NotificationApi from "src/Apis/NotificationApi";
 import PostRelated from "../Commons/PostRelated";
+import { getCookie,setCookie } from 'src/Helpers/Cookie';
 
 const PostsDetail = () => {
   const shortId = useParams();
@@ -54,12 +55,13 @@ const PostsDetail = () => {
         const otherPosts = postOther?.data?.filter(
           (item) => item?.shortId !== post?.data?.shortId
         );
+        // const dataUpViews = await PostApi.upViews({ shortId : id});
+        // setCookie('')
         setPostDetail(post);
         setOtherPost(otherPosts);
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        console.log(error);
       }
     };
     list();

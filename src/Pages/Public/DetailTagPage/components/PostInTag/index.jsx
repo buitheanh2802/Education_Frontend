@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
+import { timeFormatter } from "../../../../../Helpers/Timer";
 
 const PostInTag = ({ data }) => {
   return (
@@ -53,7 +54,7 @@ const PostInTag = ({ data }) => {
                       </div>
                       <div className=" inline-block">
                         <span className="col-span-4 text-[13px] text-[#707885]">
-                          {item?.createdAt}
+                          {timeFormatter(item?.createdAt)}
                         </span>
                       </div>
                     </div>
