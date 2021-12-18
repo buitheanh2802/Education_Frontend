@@ -4,6 +4,31 @@ import csvDownload from "json-to-csv-export";
 import ContactApi from "src/Apis/ContactApi";
 
 const Header = ({ handleSearch }) => {
+  const [listData, setListData] = useState([]);
+
+  useEffect(() => {
+    const CallApi = async () => {
+      try {
+        const {
+          data: {
+            data: { models, metaData },
+          },
+        } = await ContactApi.getContact();
+        // console.log(models)
+        let result = models.map(x => {
+          return {
+            email: x.email
+          }
+        });
+        console.log(result)
+        setListData(result);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    CallApi();
+
+  }, []);
   return (
     <div className="p-4 bg-white block w-full sm:flex items-center justify-between border-b border-gray-200">
       <div className="mb-1 w-full">
