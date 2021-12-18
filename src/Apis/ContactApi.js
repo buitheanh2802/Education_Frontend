@@ -3,7 +3,7 @@ import AxiosClient from "./AxiosClient";
 const ContactApi = {
   sendContact(data) {
     const token = localStorage.getItem("_token_");
-    const url = `/contact`;
+    const url = `/contact/create`;
     return AxiosClient.post(url, data, {
       headers: {
         authorization: `Bearer ${token}`,

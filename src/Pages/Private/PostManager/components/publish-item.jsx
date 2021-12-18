@@ -106,11 +106,11 @@ const PublishItem = (props) => {
         ) : (
           <Link className="mx-auto block">
             {published.isConfirm ? (
-              <span className="block py-[10px] bg-green-400 px-[10px] rounded-md text-white ">
+              <span className="block py-[10px] text-[14px] bg-green-400 px-[10px] rounded-md text-white ">
                 Phê duyệt bởi : {published.user.fullname}
               </span>
             ) : (
-              <span className="block py-[10px] bg-gray-400 px-[10px] rounded-md text-white ">
+              <span className="block text-[14px] py-[10px] bg-gray-400 px-[10px] rounded-md text-white ">
                 Hủy bỏ bởi : {published.user.fullname}
               </span>
             )}

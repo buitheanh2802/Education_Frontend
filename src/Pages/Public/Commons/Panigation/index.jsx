@@ -2,7 +2,7 @@ import React from "react";
 import ReactPaginate from "react-paginate";
 import "./index.css";
 
-const Panigation = ({ onChange,pageCount,currentPage }) => {
+const Panigation = ({ onChange, pageCount, currentPage }) => {
   return (
     <ReactPaginate
       onPageChange={onChange}

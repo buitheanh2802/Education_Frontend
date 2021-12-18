@@ -152,7 +152,7 @@ const SearchPage = () => {
         </div>
         <div className="mt-[15px] gap-[15px] flex justify-between">
           <div className="w-full shadow-sm bg-white px-[5px] rounded">
-            <div className="mt-[15px] gap-[15px] flex justify-between">
+            <div className="my-[10px] gap-[15px] flex justify-between">
               <div className="hidden noneKey mx-auto">
                 <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
                   Vui lòng nhập vào từ khoá tìm kiếm
@@ -163,7 +163,7 @@ const SearchPage = () => {
                   {dataSearchPost?.length === 0 ? (
                     <div>
                       <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
-                        Không có gì ở đây cả
+                        Không có bài viết trùng khớp với từ khoá trên
                       </p>
                     </div>
                   ) : (
@@ -172,7 +172,7 @@ const SearchPage = () => {
                         return (
                           <div
                             key={index}
-                            className="w-full flex px-[10px] py-[15px] border-b"
+                            className="w-full flex px-[10px] py-[15px] border-b last:border-none"
                           >
                             <div className="mr-[15px] hidden sm:block">
                               {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (

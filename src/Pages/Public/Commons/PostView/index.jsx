@@ -24,7 +24,7 @@ const PostView = ({ posts }) => {
       {posts?.models?.length === 0 ? (
         <div>
           <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
-            Không có gì ở đây cả
+            Không có bài viết
           </p>
         </div>
       ) : (
@@ -33,7 +33,7 @@ const PostView = ({ posts }) => {
             return (
               <div
                 key={index}
-                className="w-full flex px-[10px] py-[15px] border-b"
+                className="w-full flex px-[10px] py-[15px] border-b last:border-none"
               >
                 <div className="mr-[15px] hidden sm:block">
                   {item?.createBy?.avatar?.avatarUrl?.length > 0 ? (
@@ -49,7 +49,7 @@ const PostView = ({ posts }) => {
                   ) : (
                     <Link
                       to={`/user/${item?.createBy?.username}`}
-                      className="mt-[5px] flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
+                      className="mt-[5px] flex justify-center font-bold items-center text-[#4A5568]   border border-gray-300 bg-blue-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
                     >
                       {item?.createBy?.fullname?.slice(0, 1)?.toUpperCase()}
                     </Link>

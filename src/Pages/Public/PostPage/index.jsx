@@ -140,7 +140,7 @@ const PostPage = () => {
         )}
       </div>
       <div className="grid grid-cols-10 gap-[20px] mt-[20px]">
-        <div className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded">
+        <div className="col-span-10 lg:col-span-7 shadow-sm bg-white px-[5px] rounded py-[10px]">
           <Switch>
             <Route
               exact

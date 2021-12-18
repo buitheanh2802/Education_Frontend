@@ -75,7 +75,7 @@ const UserFollowing = (props) => {
       {userFollowing?.length == 0 ? (
         <div>
           <p className="text-center text-[18px] leading-[30px] py-[35px] font-bold text-gray-500">
-            Không có gì ở đây cả
+            Không theo dõi ai
           </p>
         </div>
       ) : (

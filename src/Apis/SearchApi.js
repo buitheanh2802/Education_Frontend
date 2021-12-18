@@ -1,7 +1,7 @@
 import AxiosClient from "./AxiosClient";
 
 const SearchApi = {
-  suggestSearch(key) {
+  SuggestSearch(key) {
     const url = `/search/multiple?keyword=${key}`;
     return AxiosClient.get(url);
   },

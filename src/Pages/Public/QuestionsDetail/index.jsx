@@ -320,7 +320,7 @@ const QuestionsDetail = () => {
                 ) : (
                   <Link
                     to={`/user/${questionDetail?.data?.createBy?.username}`}
-                    className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
+                    className="flex justify-center font-bold items-center text-[#4A5568]   border border-gray-300 bg-blue-300 cursor-pointer select-none w-[40px] h-[40px] rounded-full"
                   >
                     {questionDetail?.data?.createBy?.fullname
                       ?.slice(0, 1)
@@ -608,7 +608,7 @@ const QuestionsDetail = () => {
               ) : (
                 <Link
                   to={`/user/${questionDetail?.data?.createBy?.username}`}
-                  className="flex justify-center font-bold items-center text-gray-500   border border-gray-300 bg-gray-200 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
+                  className="flex justify-center font-bold items-center text-[#4A5568]   border border-gray-300 bg-blue-300 cursor-pointer select-none w-[55px] h-[55px] rounded-full"
                 >
                   {questionDetail?.data?.createBy?.fullname
                     ?.slice(0, 1)
