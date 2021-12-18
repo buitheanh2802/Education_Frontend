@@ -315,7 +315,6 @@ const PostsCreate = () => {
                     : "relative w-full justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
                 }
                 onClick={() => setBoxBtn(!boxBtn)}
-                onBlur={() => setBoxBtn(false)}
               >
                 <Icon.Pen className="fill-current w-[13px]" />
                 <span className="text-[12x] md:text-[16x] ml-1">

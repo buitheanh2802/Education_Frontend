@@ -355,7 +355,6 @@ const PostsDetail = () => {
                 <button
                   className="h-full btn__post"
                   onClick={() => setPostmenu(!postmenu)}
-                  onBlur={() => setPostmenu(false)}
                 >
                   <Icon.DotsVertical className=" w-[13px] " />
                 </button>
@@ -502,7 +501,6 @@ const PostsDetail = () => {
                         : "text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center hover:bg-blue-300 hover:text-white"
                     }
                     onClick={() => setpostShare(!postShare)}
-                    onBlur={() => setpostShare(false)}
                   >
                     <Icon.Share className="fill-current w-[15px]" />
                     <span className="text-[12x] md:text-[14x] ml-1">Share</span>

@@ -374,7 +374,6 @@ const QuestionsDetail = () => {
                 <button
                   className="h-full btn__post"
                   onClick={() => setQuestionMenu(!questionMenu)}
-                  onBlur={() => setQuestionMenu(false)}
                 >
                   <Icon.DotsVertical className=" w-[13px] " />
                 </button>
@@ -526,7 +525,6 @@ const QuestionsDetail = () => {
                           : "text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center hover:bg-blue-300 hover:text-white"
                       }
                       onClick={() => setQuestionShare(!questionShare)}
-                      onBlur={() => setQuestionShare(false)}
                     >
                       <Icon.Share className="fill-current w-[15px]" />
                       <span className="text-[12x] md:text-[14x] ml-1">
