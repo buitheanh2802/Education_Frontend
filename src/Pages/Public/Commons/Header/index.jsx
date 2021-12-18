@@ -43,7 +43,7 @@ const Header = () => {
   useEffect(() => {
     document.addEventListener('click',handleClickOutside)
     function handleClickOutside(e){
-      if(searchBox && !searchBox.current.contains(e.target)){
+      if(searchBox.current && !searchBox.current?.contains(e.target)){
         if(isSearch) setIsSearch(false);
       }
     }
