@@ -22,6 +22,7 @@ const Header = () => {
   const [suggestUser, setSuggestUser] = useState([]);
   const [suggestTag, setSuggestTag] = useState([]);
   const history = useHistory();
+  const searchBox = useRef();
   const timeout = useRef(null);
   const [loading, setLoading] = useState({
     error: false,
@@ -38,6 +39,18 @@ const Header = () => {
     isActive(true);
     window.addEventListener("scroll", () => isActive(true));
   }, [pathname]);
+
+  useEffect(() => {
+    document.addEventListener('click',handleClickOutside)
+    function handleClickOutside(e){
+      if(!searchBox.current.contains(e.target)){
+        if(isSearch) setIsSearch(false);
+      }
+    }
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    }
+  },[isSearch])
 
   const EnterEvent = (e) => {
     e.preventDefault();
@@ -232,13 +245,11 @@ const Header = () => {
               <form onSubmit={(e) => EnterEvent(e)} className="relative">
                 <input
                   type="text"
+                  ref={searchBox}
                   onChange={(e) => {
                     setIsSearch(true);
                     setSearchKey(e.target.value);
                     handleSearchSuggest(e);
-                  }}
-                  onBlur={() => {
-                    setIsSearch(false);
                   }}
                   onClick={() => setIsSearch(true)}
                   className={`absolute lg:block hidden right-full translate-x-[25px] translate-y-[-5px] text-[14px] text-gray-700 outline-none rounded-[5px] pl-[10px] py-[5px] opacity-100 border border-blue-600 duration-300 ${isSearch ? "w-[380px]" : "w-[250px]"
