@@ -15,20 +15,23 @@ const Header = ({ handleSearch }) => {
           },
         } = await ContactApi.getContact();
         // console.log(models)
-        let result = models.map(x => {
+        let result = models.map((x) => {
           return {
-            email: x.email
-          }
+            email: x.email,
+          };
         });
-        console.log(result)
+        console.log(result);
         setListData(result);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
+    };
     CallApi();
-
   }, []);
+<<<<<<< HEAD
+=======
+
+>>>>>>> hanhnguyen
   return (
     <div className="p-4 bg-white block w-full sm:flex items-center justify-between border-b border-gray-200">
       <div className="mb-1 w-full">
@@ -86,7 +89,6 @@ const Header = ({ handleSearch }) => {
             </label>
             <div className="mt-1 relative sm:w-64 xl:w-96">
               <input
-                onChange={(e) => handleSearch(e)}
                 type="text"
                 name="email"
                 id="products-search"
@@ -97,7 +99,18 @@ const Header = ({ handleSearch }) => {
           </form>
           <div className="flex items-center sm:justify-end w-full">
             <div className="hidden md:flex pl-2 space-x-1">
-              <button onClick={() => csvDownload(listData)} className="btn" style={{ backgroundColor: "green", padding: "0px 10px", color: "white", borderRadius: "10px" }}>Tải danh sách</button>
+              <button
+                onClick={() => csvDownload(listData)}
+                className="btn"
+                style={{
+                  backgroundColor: "green",
+                  padding: "0px 10px",
+                  color: "white",
+                  borderRadius: "10px",
+                }}
+              >
+                Tải danh sách
+              </button>
               <a
                 href="#"
                 className="text-gray-500 hover:text-gray-900 cursor-pointer p-1 hover:bg-gray-100 rounded inline-flex justify-center"

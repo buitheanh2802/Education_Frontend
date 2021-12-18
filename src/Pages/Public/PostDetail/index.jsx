@@ -69,13 +69,13 @@ const PostsDetail = () => {
     list();
   }, [render, id]);
 
-  // effect upviews 
+  // effect upviews
   useEffect(() => {
     async function upViews() {
      try {
       if (!getCookie(id)) {
         const dataUpViews = await PostApi.upViews({ shortId: id });
-        setCookie(id, true, 5 * 60 * 1000)
+        setCookie(id, true, 5 * 60 * 1000);
         // console.log('views is up');
       }
      } catch (error) {
@@ -401,7 +401,7 @@ const PostsDetail = () => {
                         : "Sao chép link bài viết"}
                     </li>
                     {postDetail?.data?.createBy?.username ===
-                      profile?.username ? (
+                    profile?.username ? (
                       <>
                         <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
                           <Icon.Fix className="fill-current w-[15px] mr-[5px]" />

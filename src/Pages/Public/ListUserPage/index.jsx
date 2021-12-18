@@ -9,7 +9,6 @@ import UserApi from "src/Apis/UserApi";
 import { useSelector } from "react-redux";
 
 const ListUserPage = () => {
-  window.scrollTo(0, 0);
   const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
   const token = localStorage.getItem("_token_");
@@ -23,7 +22,12 @@ const ListUserPage = () => {
       return;
     }
     dispatch(setLoading(true));
-    await FollowApi.unFollowTag(username);
+    await FollowApi.unFollow(username);
+    const dataPoint = {
+      type: "down",
+      points: 5,
+    };
+    await UserApi.pointUser(username, dataPoint);
     const userClone = [...users];
     userClone.map((user) => {
       if (user.username === username) {
@@ -42,7 +46,12 @@ const ListUserPage = () => {
       return;
     }
     dispatch(setLoading(true));
-    await FollowApi.followTag(username);
+    await FollowApi.follow(username);
+    const dataPoint = {
+      type: "up",
+      points: 5,
+    };
+    await UserApi.pointUser(username, dataPoint);
     const userClone = [...users];
     userClone.map((user) => {
       if (user.username === username) {
