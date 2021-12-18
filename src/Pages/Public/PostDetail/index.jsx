@@ -72,11 +72,15 @@ const PostsDetail = () => {
   // effect upviews
   useEffect(() => {
     async function upViews() {
+     try {
       if (!getCookie(id)) {
         const dataUpViews = await PostApi.upViews({ shortId: id });
         setCookie(id, true, 5 * 60 * 1000);
         // console.log('views is up');
       }
+     } catch (error) {
+       
+     }
     }
     upViews();
   }, []);
