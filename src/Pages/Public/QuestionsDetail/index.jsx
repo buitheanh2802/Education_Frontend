@@ -294,16 +294,26 @@ const QuestionsDetail = () => {
     );
   return (
     <>
-      {/* {postDetail && (
-        <> */}
-      <div className="mt-[80px] container mx-auto bg-white rounded-[5px] shadow">
-        <div className="px-[10px] sm:px-[15px] py-[10px] ">
-          <p className="text-gray-500 text-[14px] ">
-            Trang chủ / Câu hỏi /
-            <span className="text-blue-500 ml-1">
-              {questionDetail?.data?.title || <Skeleton width={200} />}
-            </span>
-          </p>
+      <div className="mt-[80px] container mx-auto">
+        <div className="py-[5px] flex items-center overflow-x-auto whitespace-nowrap">
+          <Link
+            to=""
+            className="relative after:absolute after:top-1/2 after:transform after:translate-y-[-45%] after:h-2/3 after:right-[-5px] after:w-[1px] after:bg-gray-500 after:rotate-[-20deg] text-[16px] px-[5px] text-gray-600 mr-[10px] font-medium hover:text-blue-600"
+          >
+            {" "}
+            Trang chủ
+          </Link>
+          <Link
+            to="/questions"
+            className="relative after:absolute after:top-1/2 after:transform after:translate-y-[-45%] after:h-2/3 after:right-[-5px] after:w-[1px] after:bg-gray-500 after:rotate-[-20deg] text-[16px] px-[5px] text-gray-600 mr-[10px] font-medium hover:text-blue-600"
+          >
+            {" "}
+            Câu hỏi
+          </Link>
+
+          <span className="text-blue-500 ml-1 text-[15px]">
+            {questionDetail?.data?.title}
+          </span>
         </div>
       </div>
       <div className="w-full container mx-auto grid grid-cols-1 lg:grid-cols-[2.8fr,1.2fr] gap-[30px] mt-[20px]">
@@ -580,7 +590,7 @@ const QuestionsDetail = () => {
                             Chia sẻ đến Twitter
                           </TwitterShareButton>
                         </li>
-                        <li className=" text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
+                        {/* <li className=" text-gray-500 py-1 px-[15px] cursor-pointer hover:bg-blue-100 hover:text-blue-500">
                           <EmailShareButton
                             url={url}
                             className="flex items-center"
@@ -588,7 +598,7 @@ const QuestionsDetail = () => {
                             <Icon.Email className="fill-current w-[12px] mr-[5px]" />
                             Chia sẻ đến Email
                           </EmailShareButton>
-                        </li>
+                        </li> */}
                       </ul>
                     </div>
                   </div>

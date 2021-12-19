@@ -85,6 +85,7 @@ const Header = ({ handleSearch }) => {
             </label>
             <div className="mt-1 relative sm:w-64 xl:w-96">
               <input
+                onChange={(e) => handleSearch(e)}
                 type="text"
                 name="email"
                 id="products-search"
