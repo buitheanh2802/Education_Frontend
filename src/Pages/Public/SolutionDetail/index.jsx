@@ -24,8 +24,8 @@ const SolutionDetail = () => {
             setIsLoading(true)
             await SulotionApi.upVote(solutionId);
             (sulution?.votes?.indexOf(profile?._id) >= 0)
-                ? await PointApi.downPoint(profile?.username, 5)
-                : await PointApi.upPoint(profile?.username, 5)
+                ? await PointApi.downPoint(sulution?.createBy?.username, 5)
+                : await PointApi.upPoint(sulution?.createBy?.username, 5)
             setIsLoading(false)
             setIsSubmit(!isSubmit)
         } catch (error) { setIsLoading(false); }
