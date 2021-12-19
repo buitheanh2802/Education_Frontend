@@ -26,11 +26,15 @@ const PublishItem = ({ data, checked, reLoad, setReLoad }) => {
             <div className='font-medium pl-2'>
                 <input checked={checked} type="checkbox" name={data?._id} className='cursor-pointer' />
             </div>
-            <div>{data?.createBy?.fullname}</div>
+            <div>
+                {data?.createBy?.fullname}
+                <p className='text-xs text-gray-300'>(@{data?.createBy?.username})</p>
+            </div>
             <div>
                 <p className='font-light'>{data?.content}</p>
-                {data?.parentId ? <p className='font-light text-sm text-yellow-500'>Trả lời bình luận</p> : <p className='text-green-500 font-light text-sm'>Bình luận mới</p>}
-                {/* //  "Trả lời bình luận" : "Bình luận mới"}</p> */}
+                {data?.parentId
+                    ? <p className='font-light text-sm text-yellow-500'>Trả lời bình luận</p>
+                    : <p className='text-green-500 font-light text-sm'>Bình luận mới</p>}
             </div>
             <div className='text-center font-light text-sm'>{timeFormatter(data?.createdAt)}</div>
             <div className="text-center flex justify-center">
