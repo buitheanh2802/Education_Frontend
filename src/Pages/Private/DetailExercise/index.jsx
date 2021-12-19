@@ -5,6 +5,7 @@ import ChallengeCateApi from 'src/Apis/ChallengeCateApi';
 import Header from './Components/Header'
 import PublishItem from './Components/publish-item';
 import PublishNav from './Components/publish-nav';
+import SkeletonGroup from './Components/skeleton-group';
 
 const DetailExercise = () => {
     const { id } = useParams();
@@ -35,7 +36,7 @@ const DetailExercise = () => {
         <div className="w-full">
             <Header name={challengeCate?.title} />
             <PublishNav />
-            {challenge?.models?.map((item, index) => <PublishItem key={index} index={index} data={item} />)}
+            {challenge ? challenge?.models?.map((item, index) => <PublishItem key={index} index={index} data={item} />) : <SkeletonGroup />}
             {challenge?.models?.length === 0 && <div className="text-center py-[20vh] select-none"> <p className="font-light text-gray-400">Hãy thêm bài tập đầu tiên</p> </div>}
         </div>
     )

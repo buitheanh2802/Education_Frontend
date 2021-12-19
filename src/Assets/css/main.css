@@ -1152,6 +1152,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.5rem;
 }
 
+.mr-5 {
+  margin-right: 1.25rem;
+}
+
 .block {
   display: block;
 }
@@ -1370,6 +1374,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-\[15px\] {
   height: 15px;
+}
+
+.h-20 {
+  height: 5rem;
 }
 
 .max-h-\[110px\] {

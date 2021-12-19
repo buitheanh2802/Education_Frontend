@@ -5,6 +5,7 @@ import { ActionGetsChallengeCate } from 'src/Redux/Actions/ChallengeCate.action'
 import Header from "./components/header";
 import PublishItem from './components/publish-item';
 import PublishNav from "./components/publish-nav";
+import SkeletonGroup from './components/skeleton-group';
 
 const Exercise = () => {
     const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const Exercise = () => {
         <div className="w-full">
             <Header />
             <PublishNav />
-            {challengeCates?.map((item, index) => <PublishItem key={index} index={index} data={item} />)}
+            {challengeCates ? challengeCates?.map((item, index) => <PublishItem key={index} index={index} data={item} />) : <SkeletonGroup />}
         </div>
     )
 }
