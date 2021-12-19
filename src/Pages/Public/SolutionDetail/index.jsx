@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom'
 import PointApi from 'src/Apis/PointApi';
 import SulotionApi from 'src/Apis/SulotionApi';
@@ -58,7 +58,7 @@ const SolutionDetail = () => {
                             <div className="w-[30px] h-[30px] border rounded-sm border-gray-100">
                                 <img className="w-full h-full object-cover" src={sulution?.challengeId?.avatar} />
                             </div>
-                            <p className="text-sm text-gray-600">{sulution?.createBy?.fullname}</p>
+                            <p className="text-sm text-gray-600 hover:text-blue-600"><Link to={`/user/${sulution?.createBy?.username}`}>{sulution?.createBy?.fullname}</Link></p>
 
                         </div>
                         <p className="my-[15px] text-[18px] font-medium text-gray-800">{sulution?.title}</p>
