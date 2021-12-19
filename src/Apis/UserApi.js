@@ -29,13 +29,14 @@ const UserApi = {
     });
   },
 
-  getListUserAdmin() {
+  getListUserAdmin(params) {
     const token = localStorage.getItem("_token_");
     const url = `/user/manager/list`;
     return AxiosClient.get(url, {
       headers: {
         authorization: `Bearer ${token}`,
       },
+      params,
     });
   },
 
