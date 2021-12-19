@@ -1,9 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { Icon } from "src/Components/Icon";
 import { path } from "src/Constants/";
 
 const SlideBar = () => {
+  const { profile } = useSelector(state => state.Auth);
   return (
     <div className="h-screen hidden lg:block shadow-lg relative w-80">
       <div className="bg-white h-full rounded-2xl">
@@ -85,7 +87,7 @@ const SlideBar = () => {
             </span>
             <span className="mx-4 text-sm font-normal">Quản lý liên hệ</span>
           </NavLink>
-          <NavLink
+          {profile?.role === "admin" && <NavLink
             activeClassName="text-blue-500 bg-gradient-to-r from-white to-blue-100 border-r-4 border-blue-500"
             className="w-full font-thin uppercase text-gray-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
             to="/manager/account"
@@ -94,7 +96,7 @@ const SlideBar = () => {
               <Icon.User className="fill-current w-[20px]" />
             </span>
             <span className="mx-4 text-sm font-normal">Quản lý tài khoản</span>
-          </NavLink>
+          </NavLink>}
           <NavLink
             activeClassName="text-blue-500 bg-gradient-to-r from-white to-blue-100 border-r-4 border-blue-500"
             className="w-full font-thin uppercase text-gray-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"

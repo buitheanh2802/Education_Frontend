@@ -658,6 +658,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   right: 226px;
 }
 
+.top-3 {
+  top: 0.75rem;
+}
+
+.left-3 {
+  left: 0.75rem;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -2771,6 +2779,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .p-\[20px\] {
   padding: 20px;
+}
+
+.p-6 {
+  padding: 1.5rem;
 }
 
 .px-\[15px\] {

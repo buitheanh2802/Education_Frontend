@@ -11,6 +11,7 @@ const ResponseMessage = (ERROR) => {
         case "EMPTY_TOKEN": return "Phiên làm việc hết hạn";
         case "EXPIRED_TOKEN": return "Phiên làm việc hết hạn";
         case "ACCESS_DENIED": return "Không có quyền truy cập";
+        case "ACCOUNT_BLOCKED": return "Tài khoản của bạn đã bị khoá, Vui lòng liên hệ với quản trị viên trong form liên hệ";
         case "LIMITED_REQUEST": return "Bạn thao tác quá nhanh";
         
         case "LOGOUT_SUCCESS": return "Đăng xuất thành công";

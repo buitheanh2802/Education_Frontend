@@ -7,6 +7,10 @@ import PublishItem from "./components/publish-item";
 import { useHistory, useLocation } from "react-router-dom";
 import Pagination from "src/Pages/Public/Commons/Panigation";
 import queryString from "query-string";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
+import Notfound from "src/Pages/Public/Notfound";
+import { path } from "src/Constants/";
 
 const AccountManager = () => {
   const [startCall, setStartCall] = useState(false);
@@ -16,6 +20,9 @@ const AccountManager = () => {
   const history = useHistory();
   const location = useLocation();
   const [pagination, setPagination] = useState(null);
+  const { profile } = useSelector(state => state.Auth);
+
+
   useEffect(() => {
     setListUsers(null);
     const query = queryString.parse(location.search);
@@ -55,6 +62,8 @@ const AccountManager = () => {
       console.log(error);
     }
   };
+
+  if (profile?.role !== "admin") return <Redirect to={path?.NOT_FOUND} component={Notfound} />
 
   return (
     <div className="w-full">
