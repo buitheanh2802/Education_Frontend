@@ -29,7 +29,7 @@ const PublishItem = ({ data, checked, reLoad, setReLoad }) => {
             </div>
             <div>
                 {data?.createBy?.fullname}
-                <p className='text-xs text-gray-300 hover:underline hover:text-blue-700'>(<Link to={`/user/${data?.createBy?.username}`}>@{data?.createBy?.username}</Link>)</p>
+                <p className='text-xs text-gray-300 hover:underline hover:text-blue-700'><Link to={`/user/${data?.createBy?.username}`}>@{data?.createBy?.username}</Link></p>
             </div>
             <div>
                 <p className='font-light'>{data?.content}</p>

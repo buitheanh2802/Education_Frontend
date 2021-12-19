@@ -283,7 +283,7 @@ const Header = () => {
                 suggestTag?.searchResults?.length === 0 ? (
                   <div
                     className={`absolute w-[380px] shadow-xl shadow-blue-300 bg-white top-[30px] rounded overflow-auto max-h-[500px] ${
-                      profile ? "right-[118px]" : "right-[225px]"
+                      profile ? "right-[118px]" : "right-[226px]"
                     }`}
                   >
                     <p className="text-center text-[16px] leading-[30px] py-[20px] font-bold text-gray-600">
@@ -293,7 +293,7 @@ const Header = () => {
                 ) : (
                   <div
                     className={`${
-                      profile ? "right-[118px]" : "right-[225px]"
+                      profile ? "right-[118px]" : "right-[226px]"
                     } absolute w-[380px] shadow-xl shadow-blue-300 bg-white top-[30px] rounded overflow-y-auto max-h-[500px]`}
                   >
                     {loading.success && (

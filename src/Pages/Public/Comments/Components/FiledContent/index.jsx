@@ -2,10 +2,35 @@ import React, { useState } from 'react'
 import { Icon } from 'src/Components/Icon'
 import IntroUser from '../IntroUser'
 import InsertComment from '../InsertComment'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import { path } from 'src/Constants/'
+import { useSelector } from 'react-redux'
+import CommentsApi from 'src/Apis/CommentsApi'
 
 const FiledContent = ({ data, shortId, userId }) => {
+    const { profile } = useSelector(state => state.Auth);
+    const history = useHistory();
     const [isRepComment, setIsRepComment] = useState(false);
+    const [isLoading, setIsLoading] = useState(null);
+
+    const like = async (dataLike) => {
+        try {
+            setIsLoading(dataLike)
+            if (!profile) return history.push(path.AUTH);
+            await CommentsApi.like(dataLike?.id)
+            setIsLoading(null)
+        } catch (error) { }
+    }
+
+    const disLike = async (dataLike) => {
+        try {
+            setIsLoading(dataLike)
+            if (!profile) return history.push(path.AUTH);
+            await CommentsApi.dislike(dataLike?.id)
+            setIsLoading(null)
+        } catch (error) { }
+    }
+
     return (
         <div className="flex my-[20px] gap-3">
             <Link to={`/user/${data?.createBy?.username}`}><IntroUser className="max-w-[35px] max-h-[35px] min-w-[35px] min-h-[35px]" avatarUrl={data?.createBy?.avatar?.avatarUrl} fullname={data?.createBy?.fullname} /></Link>
@@ -15,8 +40,12 @@ const FiledContent = ({ data, shortId, userId }) => {
                     <p className="text-gray-600">{data.content}</p>
                 </div>
                 <div className="mt-2 flex gap-5">
-                    <button className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500"><Icon.Like className="w-[12px] h-[12px] fill-current" /> 0</button>
-                    <button className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500"><Icon.Dislike className="w-[12px] h-[12px] fill-current" /> 0</button>
+                    <button onClick={() => like({ id: data?._id, type: true })} className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500">
+                        {((isLoading?.id === data?._id) && isLoading?.type) ? <Icon.Loading className="w-[12px] h-[12px] fill-current" /> : <Icon.Like className="w-[12px] h-[12px] fill-current" />} 0
+                    </button>
+                    <button onClick={() => disLike({ id: data?._id, type: false })} className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500">
+                        {((isLoading?.id === data?._id) && !isLoading?.type) ? <Icon.Loading className="w-[12px] h-[12px] fill-current" /> : <Icon.Dislike className="w-[12px] h-[12px] fill-current" />} 0
+                    </button>
                     <button onClick={() => setIsRepComment(true)} className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500"><Icon.Share className="w-[12px] h-[12px] fill-current" /> Trả lời</button>
                 </div>
                 {data?.replyComments && <>
@@ -30,8 +59,12 @@ const FiledContent = ({ data, shortId, userId }) => {
                                         <p className="text-gray-600">{item.content}</p>
                                     </div>
                                     <div className="mt-2 flex gap-5">
-                                        <button className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500"><Icon.Like className="w-[12px] h-[12px] fill-current" /> 0</button>
-                                        <button className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500"><Icon.Dislike className="w-[12px] h-[12px] fill-current" /> 0</button>
+                                        <button onClick={() => like({ id: item?._id, type: true })} className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500">
+                                            {((isLoading?.id === item?._id) && isLoading?.type) ? <Icon.Loading className="w-[12px] h-[12px] fill-current" /> : <Icon.Like className="w-[12px] h-[12px] fill-current" />} 0
+                                        </button>
+                                        <button onClick={() => disLike({ id: item?._id, type: false })} className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500">
+                                            {((isLoading?.id === item?._id) && !isLoading?.type) ? <Icon.Loading className="w-[12px] h-[12px] fill-current" /> : <Icon.Dislike className="w-[12px] h-[12px] fill-current" />} 0
+                                        </button>
                                         <button onClick={() => setIsRepComment(true)} className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500"><Icon.Share className="w-[12px] h-[12px] fill-current" /> Trả lời</button>
                                     </div>
                                 </div>

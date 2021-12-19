@@ -34,8 +34,8 @@ const Dashboard = () => {
             </div>
 
             <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4'>
-                <div>
-                    {postTrend && <div className='shadow-lg rounded-xl p-4 bg-white w-full'>
+                {postTrend && <div>
+                    <div className='shadow-lg rounded-xl p-4 bg-white w-full'>
                         <p className='text-green-900'>Bài viết được quan tâm nhiều:</p>
                         <div className='mt-5'>
                             <h3 className='text-lg hover:text-blue-600 border-b pb-2 mb-2'>
@@ -50,10 +50,10 @@ const Dashboard = () => {
                                 <li className='flex items-center gap-3 my-1'><Icon.Bookmark className="w-3 fill-current" /> {postTrend?.bookmarks} Lưu bài viết</li>
                             </ul>
                         </div>
-                    </div>}
-                </div>
-                <div>
-                    {questionTrend && <div className='shadow-lg rounded-xl p-4 bg-white w-full'>
+                    </div>
+                </div>}
+                {questionTrend && <div>
+                    <div className='shadow-lg rounded-xl p-4 bg-white w-full'>
                         <p className='text-red-900'>Câu hỏi được quan tâm nhiều nhất:</p>
                         <div className='mt-5'>
                             <h3 className='text-lg hover:text-blue-600 border-b pb-2 mb-2'>
@@ -66,8 +66,8 @@ const Dashboard = () => {
                                 <li className='flex items-center gap-3 my-1'><Icon.Bookmark className="w-3 fill-current" /> {questionTrend?.bookmarks?.length} Lưu bài viết</li>
                             </ul>
                         </div>
-                    </div>}
-                </div>
+                    </div>
+                </div>}
             </div>
         </>
     )
