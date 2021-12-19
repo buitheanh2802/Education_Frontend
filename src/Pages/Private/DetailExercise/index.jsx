@@ -47,7 +47,7 @@ const DetailExercise = () => {
             <Header name={challengeCate?.title} />
             <PublishNav />
             {isLoading ? <SkeletonGroup /> : challenge?.map((item, index) => <PublishItem isReload={isReload} setIsReload={setIsReload} key={index} index={index} data={item} />)}
-            {challenge?.models?.length === 0 && <div className="text-center py-[20vh] select-none"> <p className="font-light text-gray-400">Hãy thêm bài tập đầu tiên</p> </div>}
+            {challenge?.length === 0 && <div className="text-center py-[20vh] select-none"> <p className="font-light text-gray-400">Hãy thêm bài tập đầu tiên</p> </div>}
             {pagination?.totalPage > 1 && <Panigation onChange={handelPagination} pageCount={pagination?.totalPage} currentPage={pagination?.currentPage - 1} />}
         </div>
     )
