@@ -107,7 +107,7 @@ const UserFollowing = ({ paginate, setPaginate, ...props }) => {
                     {item?.avatar?.avatarUrl ? (
                       <img
                         src={item?.avatar?.avatarUrl}
-                        className="mx-auto max-h-[40px] min-h-[40px] rounded-full"
+                        className="mx-auto min-w-[40px] min-h-[40px] rounded-full"
                         width="40px"
                         height="40px"
                       />
