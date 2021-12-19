@@ -43,6 +43,7 @@ const SiteLayout = () => {
         <PublicRouter path={path.USERS} component={ListUserPage} />
         <PublicRouter exact path={path.CONTACT} component={ContactPage} />
         <PublicRouter exact path={path.SEARCH} component={SearchPage} />
+        <PublicRouter path={path.QUESTIONS_UPDATE} component={QuestionUpdate} />
         <PublicRouter
           path={path.QUESTIONS_DETAIL}
           component={QuestionsDetail}
@@ -51,6 +52,7 @@ const SiteLayout = () => {
           path={path.QUESTIONS_CREATE}
           component={QuestionsCreate}
         />
+        <PublicRouter exact path={path.POSTS_UPDATE} component={PostUpdate} />
         <PublicRouter exact path={path.POSTS_ID} component={PostsDetail} />
         <PublicRouter path={path.TAGS} component={TagsPage} />
         <PublicRouter path={path.USER_ID} component={Userpage} />

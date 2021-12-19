@@ -61,7 +61,6 @@ const PostManager = (props) => {
       console.log(error);
     }
   };
-
   const onPageChange = (e) => {
     const query = queryString.stringify({ page: e.selected + 1 });
     history.push(`${location.pathname}?${query}`);

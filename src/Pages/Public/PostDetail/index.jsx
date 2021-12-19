@@ -19,7 +19,7 @@ import Comments from "../Comments";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import NotificationApi from "src/Apis/NotificationApi";
 import PostRelated from "../Commons/PostRelated";
-import { getCookie, setCookie } from 'src/Helpers/Cookie';
+import { getCookie, setCookie } from "src/Helpers/Cookie";
 import UserApi from "src/Apis/UserApi";
 
 const PostsDetail = () => {
@@ -46,7 +46,7 @@ const PostsDetail = () => {
   // console.log(postDetail);
   useEffect(() => {
     setRender(false);
-    // setLoading(true);
+    setLoading(true);
     const list = async () => {
       try {
         const { data: post } = await PostApi.getPost(id);
@@ -67,20 +67,18 @@ const PostsDetail = () => {
       }
     };
     list();
-  }, [render, id]);
+  }, [render, id, shortId]);
 
-  // effect upviews 
+  // effect upviews
   useEffect(() => {
     async function upViews() {
-     try {
-      if (!getCookie(id)) {
-        const dataUpViews = await PostApi.upViews({ shortId: id });
-        setCookie(id, true, 5 * 60 * 1000)
-        // console.log('views is up');
-      }
-     } catch (error) {
-       
-     }
+      try {
+        if (!getCookie(id)) {
+          const dataUpViews = await PostApi.upViews({ shortId: id });
+          setCookie(id, true, 5 * 60 * 1000);
+          // console.log('views is up');
+        }
+      } catch (error) {}
     }
     upViews();
   }, []);
@@ -160,13 +158,13 @@ const PostsDetail = () => {
       await BookmarkApi.addBookmarkPost(id);
       setPostDetail({
         ...postDetail,
-        data: { ...postDetail.data, isBookmark: false },
+        data: { ...postDetail?.data, isBookmark: false },
       });
     } else {
       await BookmarkApi.addBookmarkPost(id);
       setPostDetail({
         ...postDetail,
-        data: { ...postDetail.data, isBookmark: true },
+        data: { ...postDetail?.data, isBookmark: true },
       });
     }
     // send notifaction
@@ -379,13 +377,13 @@ const PostsDetail = () => {
                 </button>
                 <div className={postmenu ? "post__menu  bg-white" : " hidden"}>
                   <ul className="relative text-[14px] py-[5px]">
-                    <li
+                    {/* <li
                       onClick={() => handleViewBox()}
                       className="flex items-center cursor-pointer text-gray-700 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500"
                     >
                       <Icon.Flag className="fill-current w-[16px]  mr-[5px]" />
                       Báo cáo
-                    </li>
+                    </li> */}
 
                     <li
                       onClick={() => handelCopy()}
@@ -401,7 +399,7 @@ const PostsDetail = () => {
                         : "Sao chép link bài viết"}
                     </li>
                     {postDetail?.data?.createBy?.username ===
-                      profile?.username ? (
+                    profile?.username ? (
                       <>
                         <li className="flex items-center cursor-pointer text-gray-700 mt-1 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500">
                           <Icon.Fix className="fill-current w-[15px] mr-[5px]" />

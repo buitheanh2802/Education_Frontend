@@ -28,6 +28,7 @@ const QuestionsPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [panigation, setPanigation] = useState(null);
+
   const pathName = [
     {
       path: path.QUESTIONS,

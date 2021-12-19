@@ -11,6 +11,9 @@ import { useHistory, useParams } from "react-router-dom";
 import Loading from "src/Components/Loading";
 import Swal from "sweetalert2";
 import ImageResize from "quill-image-resize-module-react";
+import { AlertMessage } from "src/Components/AlertMessage";
+import LoadingIcon from "src/Components/Loading/LoadingIcon";
+
 Quill.register("modules/imageResize", ImageResize);
 const QuestionUpdate = () => {
   const [title, setTitle] = useState();
@@ -27,6 +30,8 @@ const QuestionUpdate = () => {
   const [questionDetail, setQuestionDetail] = useState([]);
   const shortId = useParams();
   const [loading, setLoading] = useState(true);
+  const [loadingIcon, setLoadingIcon] = useState(false);
+
   useEffect(() => {
     const listDetailQuestion = async (id) => {
       try {
@@ -204,18 +209,6 @@ const QuestionUpdate = () => {
     "image",
   ];
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 2000,
-    // timerProgressBar: true,
-    background: "#EFF6FF",
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
   const handlerSubmit = async (data) => {
     try {
       var errors = [];
@@ -237,7 +230,6 @@ const QuestionUpdate = () => {
           },
         ];
       }
-
       if (!content || validateContent.indexOf(content) !== -1) {
         errors = [
           ...errors,
@@ -247,12 +239,11 @@ const QuestionUpdate = () => {
           },
         ];
       }
-
       if (errors.length !== 0) {
         setValidateError(errors);
         return;
       }
-
+      setLoadingIcon(true);
       let data = {
         title: title,
         tags: tagId.map((item) => {
@@ -260,19 +251,20 @@ const QuestionUpdate = () => {
         }),
         content: content,
       };
-
       await QuestionApi.update(
         shortId?.id.split("-")[shortId?.id.split("-").length - 1],
         data
       );
-      await Toast.fire({
+      setLoadingIcon(false);
+
+      await AlertMessage.fire({
         icon: "success",
         title: "Sửa câu hỏi thành công",
       });
       // console.log(data);
       // console.log(shortId?.id.split("-")[shortId?.id.split("-").length - 1]);
     } catch (error) {
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "error",
         title: "Sửa câu hỏi thất bại",
       });
@@ -337,7 +329,11 @@ const QuestionUpdate = () => {
                     : "relative w-full justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
                 }
                 onClick={() => handlerSubmit()}
+                disabled={loadingIcon}
               >
+                {loadingIcon && (
+                  <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                )}
                 <Icon.Pen className="fill-current w-[13px]" />
                 <span className="text-[12x] md:text-[16x] ml-1">
                   Sửa câu hỏi
