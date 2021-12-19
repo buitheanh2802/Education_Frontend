@@ -10,13 +10,14 @@ import { SplitString } from "src/Helpers/";
 import { UpperCaseOneKey } from "src/Helpers/";
 import { Link } from "react-router-dom";
 import Select from 'react-select'
+import Panigation from "../Commons/Panigation";
 
 const ChallengePage = () => {
   const dispatch = useDispatch();
   const { cateid } = useParams();
   const [routeName, setRouteName] = useState(null);
   const history = useHistory();
-  const { challenges, isLoading } = useSelector((state) => state.Challenge);
+  const { challenges, isLoading, pagination } = useSelector((state) => state.Challenge);
 
   useEffect(() => {
     (async () => {
@@ -33,6 +34,10 @@ const ChallengePage = () => {
   const handelSlelct = ({ value }) => {
     if (value === "all") return dispatch(ActionGetsChallenge(cateid));
     dispatch(ActionFindChallenge({ cateid, value }))
+  }
+
+  const handelPagination = () => {
+
   }
 
   const pathName = [
@@ -190,6 +195,8 @@ const ChallengePage = () => {
             <p>Chưa có bài tập</p>
           </div>}
       </div>
+
+      {pagination?.totalPage > 1 && <Panigation onChange={handelPagination} pageCount={pagination?.totalPage} currentPage={pagination?.currentPage - 1} />}
     </div>
   );
 };
