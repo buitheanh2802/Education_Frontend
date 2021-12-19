@@ -20,11 +20,14 @@ const ChallengeApi = {
     })
   },
 
-  async gets(cateid) {
+  async gets(cateid, page) {
     const url = `/challenges/${cateid}/challenge-categories`;
     return AxiosClient.post(url, {}, {
       headers: {
         authorization: `Bearer ${LocalStorage.Get('_token_')}`
+      },
+      params: {
+        page: page ? page : 1
       }
     })
   },

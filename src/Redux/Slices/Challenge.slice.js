@@ -42,7 +42,6 @@ const mySlice = createSlice({
         builder.addCase(ActionFindChallenge.pending, (state) => {
             state.isLoading = true;
             state.challenges = null;
-            state.pagination = null;
         })
 
         builder.addCase(ActionFindChallenge.rejected, (state) => {

@@ -17,6 +17,7 @@ const CommentManager = () => {
     const [checked, setChecked] = useState(false);
 
     const handelPagination = async ({ selected }) => {
+        setIsLoading(true)
         setPagination({ ...pagination, currentPage: selected + 1 })
         setReLoad(!reLoad);
     }
@@ -38,9 +39,9 @@ const CommentManager = () => {
             <Header />
             <PublishNav setChecked={setChecked} />
             {/* {isLoading} */}
-            {models ? models?.map((item, index) => <PublishItem reLoad={reLoad} setReLoad={setReLoad} checked={checked} key={index} data={item} />) : <SkeletonGroup />}
+            {isLoading ? <SkeletonGroup /> : models?.map((item, index) => <PublishItem reLoad={reLoad} setReLoad={setReLoad} checked={checked} key={index} data={item} />)}
 
-            {pagination?.totalPage > 1 && <Panigation onChange={handelPagination} pageCount={pagination?.totalPage} currentPage={pagination?.currentPage - 1} />}
+            <Panigation onChange={handelPagination} pageCount={pagination?.totalPage} currentPage={pagination?.currentPage - 1} />
         </div>
     )
 }

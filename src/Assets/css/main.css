@@ -1656,6 +1656,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 0.75rem;
 }
 
+.w-96 {
+  width: 24rem;
+}
+
+.w-60 {
+  width: 15rem;
+}
+
 .min-w-\[170px\] {
   min-width: 170px;
 }
@@ -4436,6 +4444,10 @@ body {
 
 .hover\:to-\[\#1273eb\]:hover {
   --tw-gradient-to: #1273eb;
+}
+
+.hover\:uppercase:hover {
+  text-transform: uppercase;
 }
 
 .hover\:text-blue-600:hover {

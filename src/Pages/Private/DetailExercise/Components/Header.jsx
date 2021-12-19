@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Form from '../Modals/Form';
+import Skeleton from 'react-loading-skeleton';
 
 const Header = ({ name }) => {
     const [isModals, setIsModals] = useState(false);
@@ -64,12 +65,12 @@ const Header = ({ name }) => {
                                                 clipRule="evenodd"
                                             />
                                         </svg>
-                                        <p className="text-gray-700 hover:text-gray-900 ml-1 md:ml-2 text-sm font-medium" > {name} </p>
+                                        <p className="text-gray-700 hover:text-gray-900 ml-1 md:ml-2 text-sm font-medium" > {name ? name : <Skeleton className='w-60' duration={1} />} </p>
                                     </div>
                                 </li>
                             </ol>
                         </nav>
-                        <h1 className="text-xl sm:text-2xl font-semibold text-gray-900">{name}</h1>
+                        <h1 className="text-xl sm:text-2xl font-semibold text-gray-900">{name ? name : <Skeleton className='w-1/2' duration={1} />}</h1>
                     </div>
                     <div className="block sm:flex items-center md:divide-x md:divide-gray-100">
                         <form className="sm:pr-3 mb-4 sm:mb-0 hidden" action="#" method="GET">
@@ -87,7 +88,7 @@ const Header = ({ name }) => {
                             </div>
                         </form>
                         <div className="flex items-center sm:justify-end w-full">
-                            
+
                             <button
                                 onClick={() => setIsModals(true)}
                                 type="button"
