@@ -831,6 +831,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 2px;
 }
 
+.my-1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
 .mt-\[20px\] {
   margin-top: 20px;
 }
@@ -1143,6 +1148,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: 8px;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .block {
   display: block;
 }
@@ -1165,6 +1174,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .grid {
   display: grid;
+}
+
+.list-item {
+  display: list-item;
 }
 
 .hidden {
@@ -1623,6 +1636,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 280px;
 }
 
+.w-3 {
+  width: 0.75rem;
+}
+
 .min-w-\[170px\] {
   min-width: 170px;
 }
@@ -1783,6 +1800,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   resize: both;
 }
 
+.list-disc {
+  list-style-type: disc;
+}
+
 .appearance-none {
   -webkit-appearance: none;
           appearance: none;
@@ -1836,16 +1857,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-template-columns: 60px 1fr 2.5fr 0.5fr 0.5fr 1.2fr;
 }
 
+.grid-cols-\[60px\2c 1\.5fr\2c 0\.8fr\2c 0\.5fr\2c 1\.1fr\] {
+  grid-template-columns: 60px 1.5fr 0.8fr 0.5fr 1.1fr;
+}
+
 .grid-cols-\[60px\2c 1\.5fr\2c 1\.2fr\2c 0\.5fr\2c 1\.2fr\] {
   grid-template-columns: 60px 1.5fr 1.2fr 0.5fr 1.2fr;
 }
 
 .grid-cols-\[60px\2c 1\.5fr\2c 1fr\2c 0\.75fr\2c 0\.75fr\2c 1\.2fr\] {
   grid-template-columns: 60px 1.5fr 1fr 0.75fr 0.75fr 1.2fr;
-}
-
-.grid-cols-\[60px\2c 1\.5fr\2c 0\.8fr\2c 0\.5fr\2c 1\.1fr\] {
-  grid-template-columns: 60px 1.5fr 0.8fr 0.5fr 1.1fr;
 }
 
 .flex-col {
@@ -2042,10 +2063,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .overflow-y-scroll {
   overflow-y: scroll;
-}
-
-.text-ellipsis {
-  text-overflow: ellipsis;
 }
 
 .whitespace-nowrap {
@@ -2481,6 +2498,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(18 115 235 / var(--tw-bg-opacity));
 }
 
+.bg-blue-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(147 197 253 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#E2E8F0\] {
   --tw-bg-opacity: 1;
   background-color: rgb(226 232 240 / var(--tw-bg-opacity));
@@ -2494,11 +2516,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-\[\#e7e7e7\] {
   --tw-bg-opacity: 1;
   background-color: rgb(231 231 231 / var(--tw-bg-opacity));
-}
-
-.bg-blue-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(147 197 253 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#dceafe\] {
@@ -3103,6 +3120,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 15px;
 }
 
+.pl-5 {
+  padding-left: 1.25rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -3216,6 +3237,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 13px;
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .text-\[17px\] {
   font-size: 17px;
 }
@@ -3226,11 +3252,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .text-\[28px\] {
   font-size: 28px;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 
 .font-bold {
@@ -3253,12 +3274,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-weight: 400;
 }
 
-.font-thin {
-  font-weight: 100;
-}
-
 .font-extralight {
   font-weight: 200;
+}
+
+.font-thin {
+  font-weight: 100;
 }
 
 .uppercase {
@@ -3335,6 +3356,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .leading-\[120px\] {
   line-height: 120px;
+}
+
+.leading-3 {
+  line-height: .75rem;
 }
 
 .text-green-500 {
@@ -3550,6 +3575,21 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-\[\#818181\] {
   --tw-text-opacity: 1;
   color: rgb(129 129 129 / var(--tw-text-opacity));
+}
+
+.text-red-900 {
+  --tw-text-opacity: 1;
+  color: rgb(127 29 29 / var(--tw-text-opacity));
+}
+
+.text-yellow-900 {
+  --tw-text-opacity: 1;
+  color: rgb(113 63 18 / var(--tw-text-opacity));
+}
+
+.text-green-900 {
+  --tw-text-opacity: 1;
+  color: rgb(20 83 45 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -5446,6 +5486,11 @@ body {
 
   .lg\:text-\[12px\] {
     font-size: 12px;
+  }
+
+  .lg\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .lg\:leading-\[110px\] {
