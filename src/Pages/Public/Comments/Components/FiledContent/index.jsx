@@ -7,13 +7,15 @@ import { path } from 'src/Constants/'
 import { useSelector } from 'react-redux'
 import CommentsApi from 'src/Apis/CommentsApi'
 import { timeFormatter } from 'src/Helpers/Timer'
+import SpamApi from 'src/Apis/SpamApi'
 
 const FiledContent = ({ data, shortId, userId }) => {
     const { profile } = useSelector(state => state.Auth);
     const history = useHistory();
     const [isRepComment, setIsRepComment] = useState(false);
     const [isLoading, setIsLoading] = useState(null);
-    console.log(data)
+    const [isSpam, setIsSpam] = useState(false);
+
     const like = async (dataLike) => {
         try {
             setIsLoading(dataLike)
@@ -32,6 +34,16 @@ const FiledContent = ({ data, shortId, userId }) => {
         } catch (error) { setIsLoading(null) }
     }
 
+    const reqSpam = async (id) => {
+        try {
+            if (!window.confirm('Xác nhận báo cáo ý kiến này')) return
+            await SpamApi.reportSpamQuestion({
+                referenceTo: id,
+                type: "comments"
+            })
+        } catch (error) { }
+    }
+
     return (
         <div className="flex my-[20px] gap-3">
             <Link to={`/user/${data?.createBy?.username}`}><IntroUser className="max-w-[35px] max-h-[35px] min-w-[35px] min-h-[35px]" avatarUrl={data?.createBy?.avatar?.avatarUrl} fullname={data?.createBy?.fullname} /></Link>
@@ -48,7 +60,12 @@ const FiledContent = ({ data, shortId, userId }) => {
                         {((isLoading?.id === data?._id) && !isLoading?.type) ? <Icon.Loading className="w-[12px] h-[12px] fill-current" /> : <Icon.Dislike className="w-[12px] h-[12px] fill-current" />} {data?.dislikes}
                     </button>
                     <button onClick={() => setIsRepComment(true)} className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500"><Icon.Share className="w-[12px] h-[12px] fill-current" /> Trả lời</button>
-                    
+                    <button className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 relative">
+                        <Icon.List onClick={() => setIsSpam(!isSpam)} className="w-4 fill-current hover:text-blue-500" />
+                        {isSpam && <div onClick={() => reqSpam(data?._id)} className='hover:text-blue-500 absolute top-full border border-gray-100 right-0 bg-white rounded shadow p-3 whitespace-nowrap'>
+                            Báo cáo bình luận
+                        </div>}
+                    </button>
                 </div>
                 {data?.replyComments && <>
                     {data?.replyComments?.map((item, index) => {

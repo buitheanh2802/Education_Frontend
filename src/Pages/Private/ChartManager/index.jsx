@@ -5,7 +5,6 @@ import ChartPost from "./Components/ChartPost";
 import ChartQuestion from "./Components/ChartQuestion";
 import ChartSolutions from "./Components/ChartSolutions";
 import ChartUser from "./Components/ChartUser";
-// import ResultSulotion from "./Components/ResultSulotion";
 import Skeleton from 'react-loading-skeleton'
 
 const ChartManager = () => {
@@ -51,7 +50,6 @@ const ChartManager = () => {
         <ChartQuestion />
         <ChartSolutions />
         <ChartUser />
-        {/* <ResultSulotion /> */}
       </div>
     </>
   );
