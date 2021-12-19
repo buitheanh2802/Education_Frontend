@@ -10,13 +10,14 @@ const ContactApi = {
       },
     });
   },
-  getContact() {
+  getContact(params) {
     const token = localStorage.getItem("_token_");
     const url = `/contact`;
     return AxiosClient.get(url, {
       headers: {
         authorization: `Bearer ${token}`,
       },
+      params,
     });
   },
   getContactDetail(id) {
