@@ -91,6 +91,11 @@ const PostView = ({ posts }) => {
                         </Link>
                       );
                     })}
+                    {item?.views > 100 ? (
+                      <p className="block hover:bg-blue-300 bg-blue-500 px-[10px] py-[2px] text-[#fff] text-[12px] rounded-[3px]">
+                        Trending
+                      </p>
+                    ) : null}
                   </div>
 
                   <div className="flex justify-between mt-[5px] ">
