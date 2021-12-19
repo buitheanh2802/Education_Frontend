@@ -7,7 +7,7 @@ import { path } from 'src/Constants/'
 import { useSelector } from 'react-redux'
 import CommentsApi from 'src/Apis/CommentsApi'
 import { timeFormatter } from 'src/Helpers/Timer'
-import SpamApi from 'src/Apis/SpamApi'
+import FormReport from '../FormReport'
 
 const FiledContent = ({ data, shortId, userId }) => {
     const { profile } = useSelector(state => state.Auth);
@@ -15,6 +15,7 @@ const FiledContent = ({ data, shortId, userId }) => {
     const [isRepComment, setIsRepComment] = useState(false);
     const [isLoading, setIsLoading] = useState(null);
     const [isSpam, setIsSpam] = useState(false);
+    const [isModel, setIsModel] = useState(null)
 
     const like = async (dataLike) => {
         try {
@@ -34,68 +35,75 @@ const FiledContent = ({ data, shortId, userId }) => {
         } catch (error) { setIsLoading(null) }
     }
 
-    const reqSpam = async (id) => {
-        try {
-            if (!window.confirm('Xác nhận báo cáo ý kiến này')) return
-            await SpamApi.reportSpamQuestion({
-                referenceTo: id,
-                type: "comments"
-            })
-        } catch (error) { }
-    }
-
     return (
-        <div className="flex my-[20px] gap-3">
-            <Link to={`/user/${data?.createBy?.username}`}><IntroUser className="max-w-[35px] max-h-[35px] min-w-[35px] min-h-[35px]" avatarUrl={data?.createBy?.avatar?.avatarUrl} fullname={data?.createBy?.fullname} /></Link>
-            <div className="w-full">
-                <div>
-                    <h3 className="font-medium"><Link className='hover:text-blue-800' to={`/user/${data?.createBy?.username}`}>{data?.createBy?.fullname}</Link> - <span className='font-light text-sm text-gray-500'>{timeFormatter(data?.createdAt)}</span></h3>
-                    <p className="text-gray-600">{data.content}</p>
-                </div>
-                <div className="mt-2 flex gap-5">
-                    <button onClick={() => like({ id: data?._id, type: true })} className={`p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500 ${data?.isLike && 'text-blue-600'}`}>
-                        {((isLoading?.id === data?._id) && isLoading?.type) ? <Icon.Loading className="w-[12px] h-[12px] fill-current" /> : <Icon.Like className="w-[12px] h-[12px] fill-current" />} {data?.likes}
-                    </button>
-                    <button onClick={() => disLike({ id: data?._id, type: false })} className={`p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500 ${data?.isDislike && 'text-blue-600'}`}>
-                        {((isLoading?.id === data?._id) && !isLoading?.type) ? <Icon.Loading className="w-[12px] h-[12px] fill-current" /> : <Icon.Dislike className="w-[12px] h-[12px] fill-current" />} {data?.dislikes}
-                    </button>
-                    <button onClick={() => setIsRepComment(true)} className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500"><Icon.Share className="w-[12px] h-[12px] fill-current" /> Trả lời</button>
-                    <button className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 relative">
-                        <Icon.List onClick={() => setIsSpam(!isSpam)} className="w-4 fill-current hover:text-blue-500" />
-                        {isSpam && <div onClick={() => reqSpam(data?._id)} className='hover:text-blue-500 absolute top-full border border-gray-100 right-0 bg-white rounded shadow p-3 whitespace-nowrap'>
-                            Báo cáo bình luận
-                        </div>}
-                    </button>
-                </div>
-                {data?.replyComments && <>
-                    {data?.replyComments?.map((item, index) => {
-                        return (
-                            <div key={index} className="flex mt-[20px] gap-3">
-                                <Link to={`/user/${item?.createBy?.username}`}><IntroUser className="max-w-[35px] max-h-[35px] min-w-[35px] min-h-[35px]" avatarUrl={item?.createBy?.avatar?.avatarUrl} fullname={item?.createBy?.fullname} /></Link>
-                                <div className="w-full">
-                                    <div>
-                                        <h3 className="font-medium"><Link className='hover:text-blue-800' to={`/user/${item?.createBy?.username}`}>{item?.createBy?.fullname}</Link>  - <span className='font-light text-sm text-gray-500'>{timeFormatter(item?.createdAt)}</span></h3>
-                                        <p className="text-gray-600">{item.content}</p>
-                                    </div>
-                                    <div className="mt-2 flex gap-5">
-                                        <button onClick={() => like({ id: item?._id, type: true })} className={`p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500 ${item?.isLike && 'text-blue-600'}`}>
-                                            {((isLoading?.id === item?._id) && isLoading?.type) ? <Icon.Loading className="w-[12px] h-[12px] fill-current" /> : <Icon.Like className="w-[12px] h-[12px] fill-current" />} {item?.likes}
-                                        </button>
-                                        <button onClick={() => disLike({ id: item?._id, type: false })} className={`p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500 ${item?.isDislike && 'text-blue-600'}`}>
-                                            {((isLoading?.id === item?._id) && !isLoading?.type) ? <Icon.Loading className="w-[12px] h-[12px] fill-current" /> : <Icon.Dislike className="w-[12px] h-[12px] fill-current" />} {item?.dislikes}
-                                        </button>
-                                        <button onClick={() => setIsRepComment(true)} className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500"><Icon.Share className="w-[12px] h-[12px] fill-current" /> Trả lời</button>
+        <>
+            {isModel && <FormReport isModel={isModel} setIsModel={setIsModel} />}
+            <div className="flex my-[20px] gap-3">
+                <Link to={`/user/${data?.createBy?.username}`}><IntroUser className="max-w-[35px] max-h-[35px] min-w-[35px] min-h-[35px]" avatarUrl={data?.createBy?.avatar?.avatarUrl} fullname={data?.createBy?.fullname} /></Link>
+                <div className="w-full">
+                    <div>
+                        <h3 className="font-medium"><Link className='hover:text-blue-800' to={`/user/${data?.createBy?.username}`}>{data?.createBy?.fullname}</Link> - <span className='font-light text-sm text-gray-500'>{timeFormatter(data?.createdAt)}</span></h3>
+                        <p className="text-gray-600">{data.content}</p>
+                    </div>
+                    <div className="mt-2 flex gap-5">
+                        <button onClick={() => like({ id: data?._id, type: true })} className={`p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500 ${data?.isLike && 'text-blue-600'}`}>
+                            {((isLoading?.id === data?._id) && isLoading?.type) ? <Icon.Loading className="w-[12px] h-[12px] fill-current" /> : <Icon.Like className="w-[12px] h-[12px] fill-current" />} {data?.likes}
+                        </button>
+                        <button onClick={() => disLike({ id: data?._id, type: false })} className={`p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500 ${data?.isDislike && 'text-blue-600'}`}>
+                            {((isLoading?.id === data?._id) && !isLoading?.type) ? <Icon.Loading className="w-[12px] h-[12px] fill-current" /> : <Icon.Dislike className="w-[12px] h-[12px] fill-current" />} {data?.dislikes}
+                        </button>
+                        <button onClick={() => setIsRepComment(true)} className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500"><Icon.Share className="w-[12px] h-[12px] fill-current" /> Trả lời</button>
+                        <button className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 relative">
+                            <Icon.List onClick={() => setIsSpam(isSpam ? null : data?._id)} className="w-4 fill-current hover:text-blue-500" />
+                            {(isSpam === data?._id) && <div
+                                onClick={() => {
+                                    setIsModel(data?._id)
+                                    setIsSpam(null)
+                                }}
+                                className='hover:text-blue-500 absolute top-full border flex gap-2 items-center border-gray-100 right-0 bg-white rounded shadow p-3 whitespace-nowrap'>
+                                <Icon.Flag className="w-4 fill-current" /> Báo cáo bình luận
+                            </div>}
+                        </button>
+                    </div>
+                    {data?.replyComments && <>
+                        {data?.replyComments?.map((item, index) => {
+                            return (
+                                <div key={index} className="flex mt-[20px] gap-3">
+                                    <Link to={`/user/${item?.createBy?.username}`}><IntroUser className="max-w-[35px] max-h-[35px] min-w-[35px] min-h-[35px]" avatarUrl={item?.createBy?.avatar?.avatarUrl} fullname={item?.createBy?.fullname} /></Link>
+                                    <div className="w-full">
+                                        <div>
+                                            <h3 className="font-medium"><Link className='hover:text-blue-800' to={`/user/${item?.createBy?.username}`}>{item?.createBy?.fullname}</Link>  - <span className='font-light text-sm text-gray-500'>{timeFormatter(item?.createdAt)}</span></h3>
+                                            <p className="text-gray-600">{item.content}</p>
+                                        </div>
+                                        <div className="mt-2 flex gap-5">
+                                            <button onClick={() => like({ id: item?._id, type: true })} className={`p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500 ${item?.isLike && 'text-blue-600'}`}>
+                                                {((isLoading?.id === item?._id) && isLoading?.type) ? <Icon.Loading className="w-[12px] h-[12px] fill-current" /> : <Icon.Like className="w-[12px] h-[12px] fill-current" />} {item?.likes}
+                                            </button>
+                                            <button onClick={() => disLike({ id: item?._id, type: false })} className={`p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500 ${item?.isDislike && 'text-blue-600'}`}>
+                                                {((isLoading?.id === item?._id) && !isLoading?.type) ? <Icon.Loading className="w-[12px] h-[12px] fill-current" /> : <Icon.Dislike className="w-[12px] h-[12px] fill-current" />} {item?.dislikes}
+                                            </button>
+                                            <button onClick={() => setIsRepComment(true)} className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500"><Icon.Share className="w-[12px] h-[12px] fill-current" /> Trả lời</button>
+                                            <button className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 relative">
+                                                <Icon.List onClick={() => setIsSpam(isSpam ? null : item?._id)} className="w-4 fill-current hover:text-blue-500" />
+                                                {(isSpam === item?._id) && <div onClick={() => {
+                                                    setIsModel(item?._id)
+                                                    setIsSpam(null)
+                                                }} className='hover:text-blue-500 absolute top-full border flex gap-2 items-center border-gray-100 right-0 bg-white rounded shadow p-3 whitespace-nowrap'>
+                                                    <Icon.Flag className="w-4 fill-current" /> Báo cáo bình luận
+                                                </div>}
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )
-                    })}
-                </>}
-                {isRepComment && <div className="insertRepCommnet mt-3 duration-300">
-                    <InsertComment userId={userId} parentId={data?._id} focus={true} shortId={shortId} setIsRepComment={setIsRepComment} />
-                </div>}
+                            )
+                        })}
+                    </>}
+                    {isRepComment && <div className="insertRepCommnet mt-3 duration-300">
+                        <InsertComment userId={userId} parentId={data?._id} focus={true} shortId={shortId} setIsRepComment={setIsRepComment} />
+                    </div>}
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
