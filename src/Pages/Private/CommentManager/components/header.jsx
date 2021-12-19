@@ -52,44 +52,6 @@ const Header = () => {
             Tất cả bình luận
           </h1>
         </div>
-        <div className="block sm:flex items-center md:divide-x md:divide-gray-100">
-          <form className="sm:pr-3 mb-4 sm:mb-0" action="#" method="GET">
-            <label htmlFor="products-search" className="sr-only">
-              Search
-            </label>
-            <div className="mt-1 relative sm:w-64 xl:w-96">
-              <input
-                type="text"
-                name="email"
-                id="products-search"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                placeholder="Tìm kiếm bình luận"
-              />
-            </div>
-          </form>
-          <div className="flex items-center sm:justify-end w-full">
-            <div className="hidden md:flex pl-2 space-x-1">
-              <a
-                href="#"
-                title="Xoá những mục đã đánh dấu"
-                className="text-gray-500 hover:text-gray-900 cursor-pointer p-1 hover:bg-gray-100 rounded inline-flex justify-center"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
