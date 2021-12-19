@@ -70,7 +70,6 @@ const mySlice = createSlice({
         state.message = [ResponseMessage("ACCOUNT_BLOCKED")];
       } else {
         AlartMessage(false, ResponseMessage(message[0]));
-        // LocalStorage.Remove("_token_");
       }
     });
 
