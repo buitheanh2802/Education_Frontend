@@ -8,9 +8,11 @@ import TagApi from "src/Apis/TagApi";
 import ImageApi from "src/Apis/ImageApi";
 import { useHistory, useParams } from "react-router-dom";
 import Loading from "src/Components/Loading";
-import Swal from "sweetalert2";
 import ImageResize from "quill-image-resize-module-react";
 import PostApi from "src/Apis/PostApi";
+import { AlertMessage } from "src/Components/AlertMessage";
+import LoadingIcon from "src/Components/Loading/LoadingIcon";
+
 Quill.register("modules/imageResize", ImageResize);
 const PostUpdate = () => {
   const [title, setTitle] = useState();
@@ -27,6 +29,7 @@ const PostUpdate = () => {
   const [postDetail, setPostDetail] = useState([]);
   const shortId = useParams();
   const [loading, setLoading] = useState(true);
+  const [loadingIcon, setLoadingIcon] = useState(false);
   useEffect(() => {
     const listDetailPost = async (id) => {
       try {
@@ -204,18 +207,6 @@ const PostUpdate = () => {
     "image",
   ];
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 2000,
-    // timerProgressBar: true,
-    background: "#EFF6FF",
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
   const handlerSubmit = async (data) => {
     try {
       var errors = [];
@@ -252,7 +243,7 @@ const PostUpdate = () => {
         setValidateError(errors);
         return;
       }
-
+      setLoadingIcon(true);
       let data = {
         title: title,
         tags: tagId.map((item) => {
@@ -265,12 +256,13 @@ const PostUpdate = () => {
         shortId?.id.split("-")[shortId?.id.split("-").length - 1],
         data
       );
-      await Toast.fire({
+      setLoadingIcon(false);
+      await AlertMessage.fire({
         icon: "success",
         title: "Sửa bài viết thành công",
       });
     } catch (error) {
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "error",
         title: "Sửa bài viết thất bại",
       });
@@ -331,7 +323,11 @@ const PostUpdate = () => {
               <button
                 className="relative w-full justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
                 onClick={() => handlerSubmit()}
+                disabled={loadingIcon}
               >
+                {loadingIcon && (
+                  <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                )}
                 <Icon.Pen className="fill-current w-[13px]" />
                 <span className="text-[12x] md:text-[16x] ml-1">
                   Sửa bài viết

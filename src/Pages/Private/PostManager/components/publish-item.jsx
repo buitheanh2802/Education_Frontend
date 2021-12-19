@@ -104,7 +104,7 @@ const PublishItem = (props) => {
             </button>
           </div>
         ) : (
-          <Link className="mx-auto block">
+          <p className="mx-auto block">
             {published.isConfirm ? (
               <span className="block py-[10px] text-[14px] bg-green-400 px-[10px] rounded-md text-white ">
                 Phê duyệt bởi : {published.user.fullname}
@@ -114,7 +114,7 @@ const PublishItem = (props) => {
                 Hủy bỏ bởi : {published.user.fullname}
               </span>
             )}
-          </Link>
+          </p>
         )}
       </div>
       <div

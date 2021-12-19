@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import { useHistory } from "react-router";
 import Editor from "../Commons/Editor";
 import { AlertMessage } from "src/Components/AlertMessage";
+import LoadingIcon from "src/Components/Loading/LoadingIcon";
 
 const PostsCreate = () => {
   const [title, setTitle] = useState();
@@ -22,7 +23,7 @@ const PostsCreate = () => {
   const editor = useRef();
   const animatedComponents = makeAnimated();
   const history = useHistory();
-
+  const [loadingIcon, setLoadingIcon] = useState(false);
   useEffect(() => {
     // register quill modules
 
@@ -247,6 +248,7 @@ const PostsCreate = () => {
         setValidateError(errors);
         return;
       }
+      setLoadingIcon(true);
 
       let data = {
         title: title,
@@ -255,6 +257,7 @@ const PostsCreate = () => {
         isDraft: false,
       };
       await PostApi.add(data);
+      setLoadingIcon(false);
       await AlertMessage.fire({
         icon: "success",
         title: "Đăng bài viết thành công, đợi phê duyệt",
@@ -311,17 +314,22 @@ const PostsCreate = () => {
               <button
                 className={
                   boxBtn
-                    ? "relative w-full justify-center bg-blue-500 text-white px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center"
+                    ? "relative  w-full justify-center bg-blue-500 text-white px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center"
                     : "relative w-full justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
                 }
-                onClick={() => setBoxBtn(!boxBtn)}
+                // onClick={() => setBoxBtn(!boxBtn)}
+                onClick={() => handlerSubmit2()}
+                disabled={loadingIcon}
               >
+                {loadingIcon && (
+                  <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                )}
                 <Icon.Pen className="fill-current w-[13px]" />
                 <span className="text-[12x] md:text-[16x] ml-1">
                   Xuất bản bài viết
                 </span>
               </button>
-              <ul
+              {/* <ul
                 className={
                   boxBtn
                     ? "absolute z-10 text-center w-full mt-[10px] box_btn bg-white top-full left-0 rounded-[3px]"
@@ -342,7 +350,7 @@ const PostsCreate = () => {
                   <Icon.Pen className="fill-current w-[13px]" />
                   <span className="ml-2"> Xuất bản bài ngay   </span>
                 </li>
-              </ul>
+              </ul> */}
             </div>
           </div>
           <div className="m-0">

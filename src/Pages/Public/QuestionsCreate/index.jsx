@@ -11,6 +11,8 @@ import Editor from "../Commons/Editor";
 import { useSelector } from "react-redux";
 import UserApi from "src/Apis/UserApi";
 import { AlertMessage } from "src/Components/AlertMessage";
+import LoadingIcon from "src/Components/Loading/LoadingIcon";
+
 const QuestionsCreate = () => {
   const [title, setTitle] = useState();
   const [tag, setTag] = useState();
@@ -25,6 +27,7 @@ const QuestionsCreate = () => {
   const animatedComponents = makeAnimated();
   const history = useHistory();
   const { profile } = useSelector((state) => state.Auth);
+  const [loadingIcon, setLoadingIcon] = useState(false);
   useEffect(() => {
     setRender(false);
     const listTags = async () => {
@@ -190,13 +193,14 @@ const QuestionsCreate = () => {
         setValidateError(errors);
         return;
       }
-
+      setLoadingIcon(true);
       let data = {
         title: title,
         tags: tagId,
         content: content,
       };
       await QuestionApi.add(data);
+      setLoadingIcon(false);
       const dataPoint = {
         type: "up",
         points: 5,
@@ -264,7 +268,11 @@ const QuestionsCreate = () => {
                     : "relative w-full justify-center bg-white text-blue-500 px-3  py-[8px] border border-blue-500 rounded-[3px] flex items-center hover:bg-blue-500 hover:text-white"
                 }
                 onClick={() => handlerSubmit()}
+                disabled={loadingIcon}
               >
+                {loadingIcon && (
+                  <LoadingIcon className="w-[20px] fill-current mr-[5px] h-[20px] " />
+                )}
                 <Icon.Pen className="fill-current w-[13px]" />
                 <span className="text-[12x] md:text-[16x] ml-1">
                   Xuất bản câu hỏi

@@ -20,7 +20,7 @@ import Swal from "sweetalert2";
 import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import QuestionRelated from "../Commons/QuestionsRelated";
 import Comments from "../Comments";
-import { getCookie, setCookie } from 'src/Helpers/Cookie';
+import { getCookie, setCookie } from "src/Helpers/Cookie";
 import { AlertMessage } from "src/Components/AlertMessage";
 
 const QuestionsDetail = () => {
@@ -42,19 +42,17 @@ const QuestionsDetail = () => {
   const history = useHistory();
   const token = localStorage.getItem("_token_");
   const idQuestion = shortId.id.split("-")[shortId.id.split("-").length - 1];
-  // effect upviews 
+  // effect upviews
   useEffect(() => {
     async function upViews() {
       try {
         if (!getCookie(idQuestion)) {
-          const dataUpViews = await QuestionApi.view(idQuestion)
+          const dataUpViews = await QuestionApi.view(idQuestion);
           // console.log(dataUpViews);
-          setCookie(idQuestion, true, 5 * 60 * 1000)
+          setCookie(idQuestion, true, 5 * 60 * 1000);
           // console.log('views is up');
         }
-      } catch (error) {
-        
-      }
+      } catch (error) {}
     }
     upViews();
   }, []);
@@ -402,13 +400,21 @@ const QuestionsDetail = () => {
                   }
                 >
                   <ul className="relative text-[14px] py-[5px]">
-                    <li
-                      onClick={() => handleViewBox()}
-                      className="flex items-center cursor-pointer text-gray-700 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500"
-                    >
-                      <Icon.Flag className="fill-current w-[16px]  mr-[5px]" />
-                      Báo cáo
-                    </li>
+                    {questionDetail?.data?.createBy?.username ===
+                    profile?.username ? (
+                      <></>
+                    ) : (
+                      <>
+                        <li
+                          onClick={() => handleViewBox()}
+                          className="flex items-center cursor-pointer text-gray-700 hover:bg-blue-100 py-1 px-[10px] hover:text-blue-500"
+                        >
+                          <Icon.Flag className="fill-current w-[16px]  mr-[5px]" />
+                          Báo cáo
+                        </li>
+                      </>
+                    )}
+
                     <li
                       onClick={() => handelCopy()}
                       className={
