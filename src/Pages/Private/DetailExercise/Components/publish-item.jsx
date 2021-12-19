@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { Icon } from 'src/Components/Icon';
-import { path } from 'src/Constants/';
 import { timeFormatter } from 'src/Helpers/Timer';
-import { useHistory } from 'react-router-dom';
 import FormEdit from '../Modals/FormEdit';
 import ChallengeApi from 'src/Apis/ChallengeApi';
 
-const PublishItem = ({ data, index }) => {
-    const history = useHistory();
+const PublishItem = ({ data, index, isReload, setIsReload }) => {
     const [isModals, setIsModals] = useState(null)
+    const [isLoading, setIsLoading] = useState(false);
 
     const deleteItem = async (id) => {
         const comform = window.confirm('Xác nhận xoá bài tập')
         if (comform) {
             try {
+                setIsLoading(true)
                 await ChallengeApi.delete(id);
-                history.push(path.SULOTION_MANAGER)
+                setIsReload(!isReload)
+                setIsLoading(false)
             } catch (error) { }
         }
     }
@@ -34,7 +34,9 @@ const PublishItem = ({ data, index }) => {
                 <div className="text-[13px]">{timeFormatter(data?.createdAt)}</div>
                 <div className="text-[13px] flex justify-center">
                     <button onClick={() => deleteItem(data?._id)} className="h-[35px] px-2 flex items-center disabled:bg-gray-400 mr-[5px] text-red-400 hover:text-red-600 rounded-md" title="Chỉnh sửa">
-                        <Icon.Detele className="w-[25px] fill-current" />
+                        {isLoading
+                            ? <Icon.Loading className="w-[25px] fill-current" />
+                            : <Icon.Detele className="w-[25px] fill-current" />}
                     </button>
                     <button onClick={() => setIsModals(data)} className="h-[35px] px-2 flex items-center disabled:bg-gray-400 mr-[5px] text-yellow-400 hover:text-blue-600 rounded-md" title="Chỉnh sửa">
                         <Icon.Pen className="w-[20px] fill-current" />
