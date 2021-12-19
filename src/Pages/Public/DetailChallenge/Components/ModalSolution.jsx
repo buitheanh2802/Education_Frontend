@@ -1,14 +1,17 @@
 ﻿import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import ChallengeApi from 'src/Apis/ChallengeApi';
+import PointApi from 'src/Apis/PointApi';
 import SulotionApi from 'src/Apis/SulotionApi';
 import { Icon } from 'src/Components/Icon';
 
 const ModalSolution = ({ isShowModle, setIsShowModle }) => {
     const history = useHistory();
     const { id } = useParams();
+    const { profile } = useSelector(state => state.Auth)
     const [actionLoading, setActionLoading] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: { challengeId: id }
@@ -18,6 +21,7 @@ const ModalSolution = ({ isShowModle, setIsShowModle }) => {
             setActionLoading(true)
             await SulotionApi.post(data)
             await ChallengeApi.solutionSubmited(id);
+            await PointApi.upPoint(profile?.username, 5)
             history.push(`/challenge/solution/${id}`);
             setActionLoading(false)
         } catch (error) {

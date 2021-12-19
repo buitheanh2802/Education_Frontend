@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom'
+import PointApi from 'src/Apis/PointApi';
 import SulotionApi from 'src/Apis/SulotionApi';
 import { Icon } from 'src/Components/Icon';
+import { path } from 'src/Constants/';
 // import { timeFormatter } from 'src/Helpers/Timer';
 import Comments from '../Comments';
 
@@ -12,12 +15,17 @@ const SolutionDetail = () => {
     const { profile } = useSelector(state => state.Auth);
     const [isLoading, setIsLoading] = useState(false);
     const [isSubmit, setIsSubmit] = useState(false)
+    const history = useHistory();
 
 
     const handleVote = async () => {
         try {
+            if (!profile) return history.push(path.AUTH)
             setIsLoading(true)
             await SulotionApi.upVote(solutionId);
+            (sulution?.votes?.indexOf(profile?._id) >= 0)
+                ? await PointApi.downPoint(profile?.username, 5)
+                : await PointApi.upPoint(profile?.username, 5)
             setIsLoading(false)
             setIsSubmit(!isSubmit)
         } catch (error) { setIsLoading(false); }

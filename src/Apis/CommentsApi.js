@@ -43,15 +43,15 @@ const CommentsApi = {
     })
   },
   async like(id) {
-    const url = `comment/${id}/like`;
-    return AxiosClient.put(url, {
+    const url = `/comment/${id}/like`;
+    return AxiosClient.put(url,{}, {
       headers: {
         Authorization: `Bearer ${LocalStorage.Get('_token_')}`
       }
     })
   },
   async dislike(id) {
-    const url = `comment/${id}/dislike`;
+    const url = `/comment/${id}/dislike`;
     return AxiosClient.delete(url, {
       headers: {
         Authorization: `Bearer ${LocalStorage.Get('_token_')}`
