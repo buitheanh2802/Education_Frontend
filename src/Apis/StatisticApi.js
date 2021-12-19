@@ -2,6 +2,15 @@ import LocalStorage from 'src/Helpers/Storage';
 import AxiosClient from './AxiosClient';
 
 const StatisticApi = {
+    async totalAll() {
+        const url = `/statistic/total-all`;
+        return AxiosClient.post(url, {}, {
+            headers: {
+                authorization: `Bearer ${LocalStorage.Get('_token_')}`
+            }
+        })
+    },
+
     async statisticPost(option) {
         const url = `/statistic/post`;
         return AxiosClient.post(url, option, {
