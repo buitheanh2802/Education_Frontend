@@ -46,6 +46,8 @@ const mySlice = createSlice({
         LocalStorage.Set("_token_", data?.token);
       } else {
         state.error = [ResponseMessage(message[0])];
+        console.log(message[0]);
+
       }
     });
 
@@ -64,10 +66,7 @@ const mySlice = createSlice({
       state.isLoading = false;
       if (status) {
         state.message = [ResponseMessage("LOGIN_SUCCESS")];
-        // console.log(data);
         state.profile = data;
-      } else if(message[0] === "ACCOUNT_BLOCKED"){
-        state.message = [ResponseMessage("ACCOUNT_BLOCKED")];
       } else {
         AlartMessage(false, ResponseMessage(message[0]));
       }
@@ -91,7 +90,7 @@ const mySlice = createSlice({
         state.profile = null;
         LocalStorage.Remove("_token_");
       } else {
-        AlartMessage(false, ResponseMessage(message[0]));
+        state.message = [ResponseMessage(message[0])];
       }
     });
   },
