@@ -27,7 +27,7 @@ const Auth = ({
   const { socket } = useSelector((state) => state.SocketService);
   // listen notification
   useEffect(() => {
-    socket.on("responseForJoin", (data) => {});
+    socket.on("responseForJoin", (data) => { });
     socket.on("responseForSendTo", () => {
       dispatch(hasNotification());
       dispatch(notificationGets(localStorage.getItem("_token_")));
@@ -58,7 +58,7 @@ const Auth = ({
                 Thông tin cá nhân
               </NavLink>
             </li>
-            {profile?.role === "admin" && (
+            {profile?.role && (
               <li className="py-[10px] lg:py-0">
                 <NavLink
                   onClick={() => {
@@ -149,7 +149,7 @@ const Auth = ({
                         <p className="ml-[10px]">Thông tin cá nhân</p>
                       </li>
                     </Link>
-                    {profile?.role === "admin" && (
+                    {profile?.role && (
                       <Link
                         onClick={() => setIsPopup(!isPopup)}
                         to={path.ADMIN}
@@ -193,11 +193,10 @@ const Auth = ({
         <ul className="lg:flex lg:gap-[5px] mx-[15px] lg:mx-0 border-t lg:border-none">
           <li className="py-[10px] lg:py-0">
             <Link
-              className={`lg:px-[15px] lg:py-[5px] lg:border lg:border-solid lg:rounded duration-300 lg:border-[#fff0] ${
-                active
-                  ? "lg:text-gray-800 lg:hover:text-blue-600"
-                  : "hover:text-[#51ffb9]"
-              }`}
+              className={`lg:px-[15px] lg:py-[5px] lg:border lg:border-solid lg:rounded duration-300 lg:border-[#fff0] ${active
+                ? "lg:text-gray-800 lg:hover:text-blue-600"
+                : "hover:text-[#51ffb9]"
+                }`}
               to={path.LOGIN}
             >
               Đăng nhập
@@ -205,11 +204,10 @@ const Auth = ({
           </li>
           <li className="py-[10px] lg:py-0">
             <Link
-              className={`lg:px-[15px] lg:py-[5px] lg:border lg:border-solid lg:rounded duration-300 ${
-                active
-                  ? "lg:border-[#1273eb] lg:text-gray-800 hover:text-[#fff] hover:bg-blue-600"
-                  : "lg:border-white hover:border-[#67d4a8] hover:text-[#fff] hover:bg-[#67d4a8]"
-              }`}
+              className={`lg:px-[15px] lg:py-[5px] lg:border lg:border-solid lg:rounded duration-300 ${active
+                ? "lg:border-[#1273eb] lg:text-gray-800 hover:text-[#fff] hover:bg-blue-600"
+                : "lg:border-white hover:border-[#67d4a8] hover:text-[#fff] hover:bg-[#67d4a8]"
+                }`}
               to={path.REGISTER}
             >
               Đăng ký
