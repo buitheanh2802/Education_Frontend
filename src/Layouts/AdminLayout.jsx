@@ -14,6 +14,7 @@ import TagManager from "src/Pages/Private/TagManager";
 import DetailExercise from "src/Pages/Private/DetailExercise";
 import ChartManager from "src/Pages/Private/ChartManager";
 import CommentManager from "src/Pages/Private/CommentManager";
+import ReportManager from "src/Pages/Private/ReportManager";
 
 const AdminLayout = () => {
   return (
@@ -25,6 +26,7 @@ const AdminLayout = () => {
           <div className="overflow-auto h-screen pb-24 pt-2 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
             <div className="flex flex-col flex-wrap sm:flex-row ">
               <Switch>
+                <PrivateRouter path="/manager/spam" component={ReportManager} />
                 <PrivateRouter path={path.ACCOUNT_MANAGER} component={AccountManager} />
                 <PrivateRouter path={path.POST_MANAGER} component={PostManager} />
                 <PrivateRouter path={path.CONTACT_MANAGER} component={ContactManager} />

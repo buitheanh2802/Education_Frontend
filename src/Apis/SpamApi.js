@@ -10,5 +10,23 @@ const SpamApi = {
       },
     });
   },
+
+  async listSpam() {
+    const url = `/spam/list-comment`;
+    return AxiosClient.get(url, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("_token_")}`,
+      },
+    })
+  },
+
+  async updateSpam(id) {
+    const url = `/comment/spam/${id}`;
+    return AxiosClient.put(url, {}, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("_token_")}`,
+      },
+    })
+  }
 };
 export default SpamApi;
