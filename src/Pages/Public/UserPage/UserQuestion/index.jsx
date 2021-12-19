@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "src/Components/Icon";
 import ProfileUserApi from "src/Apis/ProfileUserApi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import { timeFormatter } from "../../../../Helpers/Timer";
+import queryString from "query-string";
 
-const UserQuestion = (props) => {
+const UserQuestion = ({ paginate, setPaginate, ...props }) => {
   const username = props.match.params.username;
   const [userQuestion, setUserQuestion] = useState([]);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     const userQuestion = async () => {
       try {
         dispatch(setLoading(true));
+        const query = queryString.parse(location.search);
         const { data: questionUser } = await ProfileUserApi.getQuestionUser(
-          username
+          username,
+          query
         );
         setUserQuestion(questionUser.data.models);
+        setPaginate(questionUser.data.metaData.pagination);
         dispatch(setLoading(false));
       } catch (error) {
         dispatch(setLoading(false));
@@ -26,7 +31,7 @@ const UserQuestion = (props) => {
       }
     };
     userQuestion();
-  }, []);
+  }, [location.search]);
 
   return (
     <div>

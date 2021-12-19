@@ -15,6 +15,7 @@ import { setLoading } from "src/Redux/Slices/Loading.slice";
 import NotificationApi from "src/Apis/NotificationApi";
 import UserQuestion from "./UserQuestion";
 import UserApi from "src/Apis/UserApi";
+import Panigation from "src/Pages/Public/Commons/Panigation";
 
 const Userpage = (props) => {
   window.scrollTo(0, 0);
@@ -26,6 +27,7 @@ const Userpage = (props) => {
   const token = localStorage.getItem("_token_");
   const { socket } = useSelector((state) => state.SocketService);
   const { profile } = useSelector((state) => state.Auth);
+  const [paginate, setPaginate] = useState(null);
 
   const handleFollow = async () => {
     dispatch(setLoading(true));
@@ -110,6 +112,10 @@ const Userpage = (props) => {
     user();
   }, [location.pathname]);
 
+  const onPageChange = (e) => {
+    history.push(`?page=${e.selected + 1}`);
+  };
+
   return (
     <div className="container mx-auto mt-[80px]">
       <div className="my-[15px] lg:grid lg:grid-cols-4 gap-3">
@@ -171,35 +177,80 @@ const Userpage = (props) => {
               <Route
                 exact
                 path={path.USER_FOLLOWING}
-                render={(props) => <UserFollowing {...props} />}
+                render={(props) => (
+                  <UserFollowing
+                    paginate={paginate}
+                    setPaginate={setPaginate}
+                    {...props}
+                  />
+                )}
               ></Route>
               <Route
                 exact
                 path={path.USER_QUESTION}
-                render={(props) => <UserQuestion {...props} />}
+                render={(props) => (
+                  <UserQuestion
+                    paginate={paginate}
+                    setPaginate={setPaginate}
+                    {...props}
+                  />
+                )}
               ></Route>
               <Route
                 exact
                 path={path.USER_FOLLOWER}
-                render={(props) => <UserFollower {...props} />}
+                render={(props) => (
+                  <UserFollower
+                    paginate={paginate}
+                    setPaginate={setPaginate}
+                    {...props}
+                  />
+                )}
               ></Route>
               <Route
                 exact
                 path={path.USER_BOOKMARK}
-                render={(props) => <UserBookMark {...props} />}
+                render={(props) => (
+                  <UserBookMark
+                    paginate={paginate}
+                    setPaginate={setPaginate}
+                    {...props}
+                  />
+                )}
               ></Route>
               <Route
                 exact
                 path={path.USER_ID}
-                render={(props) => <UserPost {...props} />}
+                render={(props) => (
+                  <UserPost
+                    paginate={paginate}
+                    setPaginate={setPaginate}
+                    {...props}
+                  />
+                )}
               ></Route>
               <Route
                 exact
                 path={path.USER_TAG}
-                render={(props) => <UserTag {...props} />}
+                render={(props) => (
+                  <UserTag
+                    paginate={paginate}
+                    setPaginate={setPaginate}
+                    {...props}
+                  />
+                )}
               ></Route>
             </Switch>
           </div>
+          {paginate &&
+            paginate?.totalPage > 1 &&
+            paginate?.countDocuments !== 0 && (
+              <Panigation
+                pageCount={paginate.totalPage}
+                currentPage={paginate.currentPage - 1}
+                onChange={onPageChange}
+              />
+            )}
         </div>
         <div className="min-w-100 max-w-100 bg-white shadow rounded px-[20px] py-[20px] text-[15px] ">
           <div className="flex justify-between my-[5px] ">

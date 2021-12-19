@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import FeaturedAuthor from "../Commons/FeaturedAuthor";
 import { Icon } from "../../../Components/Icon";
 import TagAPi from "src/Apis/TagApi";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import FollowApi from "src/Apis/FollowApi";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import UserApi from "src/Apis/UserApi";
 import Panigation from "src/Pages/Public/Commons/Panigation";
-import { useLocation } from "react-router-dom";
-import queryString from 'query-string';
+import queryString from "query-string";
 
 const TagsPage = () => {
   window.scrollTo(0, 0);
@@ -19,7 +18,7 @@ const TagsPage = () => {
   const history = useHistory();
   const token = localStorage.getItem("_token_");
   const [featuredAuthors, setFeaturedAuthor] = useState([]);
-  const [paginate,setPaginate] = useState(null);
+  const [paginate, setPaginate] = useState(null);
 
   const handleUnFollow = async (id) => {
     if (token === null) {
@@ -75,7 +74,9 @@ const TagsPage = () => {
       }
     };
     tag();
+  }, [location.search]);
 
+  useEffect(() => {
     const listFeaturedAuthor = async () => {
       try {
         const { data: featuredAuthors } = await UserApi.getFeaturedAuthor();
@@ -85,11 +86,11 @@ const TagsPage = () => {
       }
     };
     listFeaturedAuthor();
-  }, [location.search]);
+  }, []);
 
   const onPageChange = (e) => {
     history.push(`?page=${e.selected + 1}`);
-  }
+  };
 
   return (
     <div className="container mx-auto mt-[80px]  ">
@@ -173,12 +174,13 @@ const TagsPage = () => {
               );
             })}
           </div>
-          {paginate && 
-          <Panigation 
-            pageCount={paginate.totalPage}
-            currentPage={paginate.currentPage - 1}
-            onChange={onPageChange}
-          />}
+          {paginate && (
+            <Panigation
+              pageCount={paginate.totalPage}
+              currentPage={paginate.currentPage - 1}
+              onChange={onPageChange}
+            />
+          )}
         </div>
         <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded hidden lg:block mb-[30px]">
           <FeaturedAuthor authors={featuredAuthors} />

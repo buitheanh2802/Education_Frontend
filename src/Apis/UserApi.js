@@ -40,9 +40,9 @@ const UserApi = {
     });
   },
 
-  getListUser(filter) {
+  getListUser() {
     const token = localStorage.getItem("_token_");
-    const url = `/user/featured-author/list?filter=${filter}`;
+    const url = `/user/featured-author/list?`;
     return AxiosClient.get(url, {
       headers: {
         authorization: `Bearer ${token}`,

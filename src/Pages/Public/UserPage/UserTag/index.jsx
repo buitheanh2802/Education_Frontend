@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "src/Components/Icon";
 import ProfileUserApi from "src/Apis/ProfileUserApi";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import FollowApi from "src/Apis/FollowApi";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
+import queryString from "query-string";
 
-const UserTag = (props) => {
+const UserTag = ({ paginate, setPaginate, ...props }) => {
   const username = props.match.params.username;
   const dispatch = useDispatch();
   const token = localStorage.getItem("_token_");
   const history = useHistory();
   const [userTag, setUserTag] = useState([]);
+  const location = useLocation();
 
   const handleUnFollow = async (id) => {
     if (token === null) {
@@ -55,8 +57,13 @@ const UserTag = (props) => {
     const userTag = async () => {
       try {
         dispatch(setLoading(true));
-        const { data: tagUser } = await ProfileUserApi.getTagUser(username);
+        const query = queryString.parse(location.search);
+        const { data: tagUser } = await ProfileUserApi.getTagUser(
+          username,
+          query
+        );
         setUserTag(tagUser.data.models);
+        setPaginate(tagUser.data.metaData.pagination);
         dispatch(setLoading(false));
       } catch (error) {
         dispatch(setLoading(false));
@@ -64,7 +71,7 @@ const UserTag = (props) => {
       }
     };
     userTag();
-  }, []);
+  }, [location.search]);
 
   return (
     <div>

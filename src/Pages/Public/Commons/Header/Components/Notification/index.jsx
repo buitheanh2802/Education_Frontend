@@ -31,10 +31,7 @@ const Notification = ({ className, setIsNotification }) => {
                 <div className="sticky top-0 bg-white lg:bg-transparent lg:relative px-[15px] py-[5px] flex justify-between items-center border-b border-solid border-gray-200 lg:border-none">
                     <button onClick={() => setIsNotification(false)} className="lg:hidden"><Icon.Back className="w-[20px] h-[20px]" /></button>
                     <h4 className="font-bold text-[22px]">Thông báo</h4>
-                    <button onClick={() => setIsList(!isList)} className="hover:bg-gray-200 p-[5px] rounded-[3px] duration-300"><Icon.List className="w-[20px] h-[20px]" /></button>
-                    {isList && <ul className="absolute top-[90%] w-[280px] right-[15px] rounded-[3px] bg-white shadow-lg p-[5px] border border-solid border-gray-200">
-                        <li className="px-[15px] py-[7px] hover:bg-gray-100 rounded-[3px] duration-300 cursor-pointer flex items-center"><Icon.Detele className="w-[20px] h-[20px]" /> <p className="ml-[10px]">Xóa tất cả thông báo</p></li>
-                    </ul>}
+                
                 </div>
                 <div className="px-[5px] flex flex-col ">
                     <ul className="text-black">
