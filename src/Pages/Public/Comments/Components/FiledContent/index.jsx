@@ -60,7 +60,7 @@ const FiledContent = ({ data, shortId, userId }) => {
                                     setIsModel(data?._id)
                                     setIsSpam(null)
                                 }}
-                                className='hover:text-blue-500 absolute top-full border flex gap-2 items-center border-gray-100 right-0 bg-white rounded shadow p-3 whitespace-nowrap'>
+                                className='hover:text-blue-500 absolute top-full border flex gap-2 items-center border-gray-100 left-0 bg-white rounded shadow p-3 whitespace-nowrap'>
                                 <Icon.Flag className="w-4 fill-current" /> Báo cáo bình luận
                             </div>}
                         </button>
@@ -88,7 +88,7 @@ const FiledContent = ({ data, shortId, userId }) => {
                                                 {(isSpam === item?._id) && <div onClick={() => {
                                                     setIsModel(item?._id)
                                                     setIsSpam(null)
-                                                }} className='hover:text-blue-500 absolute top-full border flex gap-2 items-center border-gray-100 right-0 bg-white rounded shadow p-3 whitespace-nowrap'>
+                                                }} className='hover:text-blue-500 absolute top-full border flex gap-2 items-center border-gray-100 left-0 bg-white rounded shadow p-3 whitespace-nowrap'>
                                                     <Icon.Flag className="w-4 fill-current" /> Báo cáo bình luận
                                                 </div>}
                                             </button>

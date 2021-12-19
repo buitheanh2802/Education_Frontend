@@ -1,10 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useForm } from 'react-hook-form'
+import SpamApi from 'src/Apis/SpamApi'
 import { Icon } from 'src/Components/Icon'
 
 const FormReport = ({ isModel, setIsModel }) => {
-    if (!isModel) return null
+    const [isLoading, setIsLoading] = useState(false);
 
+    const { register, handleSubmit, formState: { errors } } = useForm()
+
+    const handelOnSubmit = async (data) => {
+        try {
+            setIsLoading(true)
+            await SpamApi.reportSpamQuestion({
+                ...data,
+                referenceTo: isModel,
+                type: "comments"
+            })
+            setIsModel(null)
+            setIsLoading(false)
+        } catch (error) {
+            setIsModel(null)
+            setIsLoading(false)
+        }
+    }
+
+    if (!isModel) return null
     return createPortal(
         <>
             <div className='fixed  top-0 left-0 right-0 bottom-0 bg-gray-500 bg-opacity-70 z-[999] overflow-auto'>
@@ -13,7 +34,7 @@ const FormReport = ({ isModel, setIsModel }) => {
                         <Icon.Close className="fill-current w-[11px] text-gray-500 hover:text-gray-700" />
                     </button>
                     <p className='text-[18px] pt-[15px] text-gray-700'>Nội dung báo cáo</p>
-                    <form className='mt-[25px] text-[14px] text-gray-700 '>
+                    <form onSubmit={handleSubmit(handelOnSubmit)} className='mt-[25px] text-[14px] text-gray-700 '>
                         <div className="mb-[18px]">
                             <label htmlFor="" className="text-[14px]">
                                 <span className="text-red-500 ">*</span> Lý do báo cáo nội
@@ -24,7 +45,12 @@ const FormReport = ({ isModel, setIsModel }) => {
                                     <input
                                         type="radio"
                                         id="spam1"
-                                        name="fav_language"
+                                        {...register('reason', {
+                                            required: {
+                                                value: true,
+                                                message: "Yêu cầu nhập trường này"
+                                            }
+                                        })}
                                         value="1"
                                         className="cursor-pointer"
                                     />
@@ -36,7 +62,12 @@ const FormReport = ({ isModel, setIsModel }) => {
                                     <input
                                         type="radio"
                                         id="spam2"
-                                        name="fav_language"
+                                        {...register('reason', {
+                                            required: {
+                                                value: true,
+                                                message: "Yêu cầu nhập trường này"
+                                            }
+                                        })}
                                         value="2"
                                         className="cursor-pointer"
                                     />
@@ -48,7 +79,12 @@ const FormReport = ({ isModel, setIsModel }) => {
                                     <input
                                         type="radio"
                                         id="spam3"
-                                        name="fav_language"
+                                        {...register('reason', {
+                                            required: {
+                                                value: true,
+                                                message: "Yêu cầu nhập trường này"
+                                            }
+                                        })}
                                         value="3"
                                         className="cursor-pointer"
                                     />
@@ -60,7 +96,12 @@ const FormReport = ({ isModel, setIsModel }) => {
                                     <input
                                         type="radio"
                                         id="spam4"
-                                        name="fav_language"
+                                        {...register('reason', {
+                                            required: {
+                                                value: true,
+                                                message: "Yêu cầu nhập trường này"
+                                            }
+                                        })}
                                         value="3"
                                         className="cursor-pointer"
                                     />
@@ -72,7 +113,12 @@ const FormReport = ({ isModel, setIsModel }) => {
                                     <input
                                         type="radio"
                                         id="spam5"
-                                        name="fav_language"
+                                        {...register('reason', {
+                                            required: {
+                                                value: true,
+                                                message: "Yêu cầu nhập trường này"
+                                            }
+                                        })}
                                         value="3"
                                         className="cursor-pointer"
                                     />
@@ -80,20 +126,26 @@ const FormReport = ({ isModel, setIsModel }) => {
                                         Bản dịch chất lượng kém
                                     </label>
                                 </div>
+                                <span className='text-xs text-red-500'>{errors?.reason && errors?.reason?.message}</span>
                             </div>
-                            <div className="mt-[30px]">
+                            <div className="mt-[20px]">
                                 <textarea
-                                    name=""
-                                    id=""
-                                    rows="3"
+                                    {...register('content', {
+                                        required: {
+                                            value: true,
+                                            message: "Yêu cầu nhập trường này"
+                                        }
+                                    })}
                                     className="w-full px-[10px] text-[14px] py-[3px] border border-gray-400 rounded-[3px] focus:outline-none focus:border focus:border-blue-400 "
                                     placeholder="Nhận xét..."
                                 ></textarea>
+                                <span className='text-xs text-red-500'>{errors?.content && errors?.content?.message}</span>
                             </div>
                         </div>
 
                         <div className=" pb-[15px] flex justify-end">
-                            <button className=" border border-gray-400 text-gray-500 text-[14px] hover:bg-blue-50  hover:text-blue-400 rounded-[3px] px-[15px] py-[3px]">
+                            <button className="flex items-center gap-2 border border-gray-400 text-gray-500 text-[14px] hover:bg-blue-50  hover:text-blue-400 rounded-[3px] px-[15px] py-[3px]">
+                                {isLoading && <Icon.Loading className="w-3 fill-current" />}
                                 Báo cáo
                             </button>
                         </div>
