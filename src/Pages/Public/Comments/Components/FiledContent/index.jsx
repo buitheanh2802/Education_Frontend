@@ -6,6 +6,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { path } from 'src/Constants/'
 import { useSelector } from 'react-redux'
 import CommentsApi from 'src/Apis/CommentsApi'
+import { timeFormatter } from 'src/Helpers/Timer'
 
 const FiledContent = ({ data, shortId, userId }) => {
     const { profile } = useSelector(state => state.Auth);
@@ -36,7 +37,7 @@ const FiledContent = ({ data, shortId, userId }) => {
             <Link to={`/user/${data?.createBy?.username}`}><IntroUser className="max-w-[35px] max-h-[35px] min-w-[35px] min-h-[35px]" avatarUrl={data?.createBy?.avatar?.avatarUrl} fullname={data?.createBy?.fullname} /></Link>
             <div className="w-full">
                 <div>
-                    <h3 className="font-medium"><Link className='hover:text-blue-800' to={`/user/${data?.createBy?.username}`}>{data?.createBy?.fullname}</Link></h3>
+                    <h3 className="font-medium"><Link className='hover:text-blue-800' to={`/user/${data?.createBy?.username}`}>{data?.createBy?.fullname}</Link> - <span className='font-light text-sm text-gray-500'>{timeFormatter(data?.createdAt)}</span></h3>
                     <p className="text-gray-600">{data.content}</p>
                 </div>
                 <div className="mt-2 flex gap-5">
@@ -47,6 +48,7 @@ const FiledContent = ({ data, shortId, userId }) => {
                         {((isLoading?.id === data?._id) && !isLoading?.type) ? <Icon.Loading className="w-[12px] h-[12px] fill-current" /> : <Icon.Dislike className="w-[12px] h-[12px] fill-current" />} {data?.dislikes}
                     </button>
                     <button onClick={() => setIsRepComment(true)} className="p-0 m-0 flex items-center gap-1 text-sm text-gray-500 hover:text-blue-500"><Icon.Share className="w-[12px] h-[12px] fill-current" /> Trả lời</button>
+                    
                 </div>
                 {data?.replyComments && <>
                     {data?.replyComments?.map((item, index) => {
@@ -55,7 +57,7 @@ const FiledContent = ({ data, shortId, userId }) => {
                                 <Link to={`/user/${item?.createBy?.username}`}><IntroUser className="max-w-[35px] max-h-[35px] min-w-[35px] min-h-[35px]" avatarUrl={item?.createBy?.avatar?.avatarUrl} fullname={item?.createBy?.fullname} /></Link>
                                 <div className="w-full">
                                     <div>
-                                        <h3 className="font-medium"><Link className='hover:text-blue-800' to={`/user/${item?.createBy?.username}`}>{item?.createBy?.fullname}</Link></h3>
+                                        <h3 className="font-medium"><Link className='hover:text-blue-800' to={`/user/${item?.createBy?.username}`}>{item?.createBy?.fullname}</Link>  - <span className='font-light text-sm text-gray-500'>{timeFormatter(item?.createdAt)}</span></h3>
                                         <p className="text-gray-600">{item.content}</p>
                                     </div>
                                     <div className="mt-2 flex gap-5">
