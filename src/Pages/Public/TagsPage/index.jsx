@@ -2,19 +2,23 @@ import React, { useEffect, useState } from "react";
 import FeaturedAuthor from "../Commons/FeaturedAuthor";
 import { Icon } from "../../../Components/Icon";
 import TagAPi from "src/Apis/TagApi";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import FollowApi from "src/Apis/FollowApi";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import UserApi from "src/Apis/UserApi";
+import Pagination from "src/Pages/Public/Commons/Panigation";
+import queryString from "query-string";
 
 const TagsPage = () => {
   window.scrollTo(0, 0);
   const dispatch = useDispatch();
+  const location = useLocation();
   const token = localStorage.getItem("_token_");
   const history = useHistory();
   const [featuredAuthors, setFeaturedAuthor] = useState([]);
+  const [panigation, setPanigation] = useState(null);
 
   const handleUnFollow = async (id) => {
     if (token === null) {
@@ -60,7 +64,8 @@ const TagsPage = () => {
       try {
         dispatch(setLoading(true));
         const { data: tags } = await TagAPi.getAll();
-        setTags(tags.data.models);
+        setTags(tags.data);
+        setPanigation(tags.data.metaData.pagination);
         dispatch(setLoading(false));
       } catch (error) {
         dispatch(setLoading(false));
@@ -80,12 +85,17 @@ const TagsPage = () => {
     listFeaturedAuthor();
   }, []);
 
+  const onPageChange = (e) => {
+    const query = queryString.stringify({ page: e.selected + 1 });
+    history.push(`${location.pathname}?${query}`);
+  };
+
   return (
     <div className="container mx-auto mt-[80px]  ">
       <div className="flex justify-between mt-[15px]  gap-[30px]">
         <div className="max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px] sm:gap-x-[60px] gap-y-[20px] mb-[30px] pb-[45px] w-full py-[15px] bg-white shadow rounded">
           <div className="grid grid-cols-1 gap-x-[20px] gap-y-[30px] xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
-            {tags?.map((item, index) => {
+            {tags?.models?.map((item, index) => {
               return (
                 <div
                   key={index}
@@ -167,6 +177,15 @@ const TagsPage = () => {
           <FeaturedAuthor authors={featuredAuthors} />
         </div>
       </div>
+      {panigation &&
+        panigation?.totalPage > 1 &&
+        panigation?.countDocuments !== 0 && (
+          <Pagination
+            pageCount={panigation.totalPage}
+            onChange={onPageChange}
+            currentPage={panigation.currentPage - 1}
+          />
+        )}
     </div>
   );
 };
