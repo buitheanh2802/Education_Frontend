@@ -66,9 +66,10 @@ const mySlice = createSlice({
         state.message = [ResponseMessage("LOGIN_SUCCESS")];
         // console.log(data);
         state.profile = data;
+      } else if(message[0] === "ACCOUNT_BLOCKED"){
+        state.message = [ResponseMessage("ACCOUNT_BLOCKED")];
       } else {
         AlartMessage(false, ResponseMessage(message[0]));
-        // LocalStorage.Remove("_token_");
       }
     });
 
