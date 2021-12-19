@@ -50,7 +50,7 @@ const PublishItem = (props) => {
 
   const handelPostDetail = async (shortId) => {
     setIsModalVisible(true);
-    const { data: postDetails } = await PostAPI.getPost(shortId);
+    const { data: postDetails } = await PostAPI.getDetailPublish(shortId);
     setPostDetail(postDetails);
   };
   const handleCancelBox = () => {

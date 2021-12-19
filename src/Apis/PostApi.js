@@ -86,6 +86,15 @@ const PostApi = {
       params: request,
     });
   },
+  getDetailPublish(id) {
+    const token = localStorage.getItem("_token_");
+    const url = `/post/publish/list/${id}`;
+    return AxiosClient.get(url, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  },
   publish(request) {
     const token = localStorage.getItem("_token_");
     const url = `post/publish/${request.shortId}`;
@@ -99,9 +108,9 @@ const PostApi = {
     const url = `/user/other-post/same-author/${userId}`;
     return AxiosClient.get(url);
   },
-  upViews(data){
-    const url = '/post/upviews';
-    return AxiosClient.post(url,data)
+  upViews(data) {
+    const url = "/post/upviews";
+    return AxiosClient.post(url, data);
   },
   searchPost(keySearch) {
     const token = localStorage.getItem("_token_");
