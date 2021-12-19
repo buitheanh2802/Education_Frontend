@@ -13,6 +13,7 @@ const mySlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(ActionGetsChallengeCate.pending, (state) => {
             state.isLoading = true;
+            state.challengeCates = null;
         })
 
         builder.addCase(ActionGetsChallengeCate.rejected, (state) => {

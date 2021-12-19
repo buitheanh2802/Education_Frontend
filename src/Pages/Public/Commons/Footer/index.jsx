@@ -6,6 +6,7 @@ import ContactApi from "src/Apis/ContactApi";
 import { Icon } from "src/Components/Icon";
 import Swal from "sweetalert2";
 import { path, regex } from "src/Constants/";
+import { AlertMessage } from "src/Components/AlertMessage";
 
 const Footer = () => {
   const { pathname } = useLocation;
@@ -29,29 +30,17 @@ const Footer = () => {
     reValidateMode: "onBlur",
   });
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 2000,
-    // timerProgressBar: true,
-    background: "#EFF6FF",
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
   const onSubmit = async (data) => {
     try {
       setResponse({ ...response, isLoading: true });
       await ContactApi.sendContact(data);
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "success",
         title: "Gửi thành công",
       });
       reset();
     } catch (error) {
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "error",
         title: "Gủi thất bại",
       });

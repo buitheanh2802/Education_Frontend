@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "src/Components/Icon";
 import ProfileUserApi from "src/Apis/ProfileUserApi";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import FollowApi from "src/Apis/FollowApi";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import { useSelector } from "react-redux";
 import UserApi from "src/Apis/UserApi";
-const UserFollower = (props) => {
+import queryString from "query-string";
+
+const UserFollower = ({ paginate, setPaginate, ...props }) => {
   const username = props.match.params.username;
   const { profile } = useSelector((state) => state.Auth);
   const [userFollowers, setUserFollowers] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
   const token = localStorage.getItem("_token_");
+  const location = useLocation();
 
   const handleUnFollow = async (username) => {
     if (token === null) {
@@ -67,10 +70,13 @@ const UserFollower = (props) => {
     const userFollowers = async () => {
       try {
         dispatch(setLoading(true));
+        const query = queryString.parse(location.search);
         const { data: followerUser } = await ProfileUserApi.getFollowerUser(
-          username
+          username,
+          query
         );
         setUserFollowers(followerUser.data.models);
+        setPaginate(followerUser.data.metaData.pagination);
         dispatch(setLoading(false));
       } catch (error) {
         dispatch(setLoading(false));
@@ -78,7 +84,7 @@ const UserFollower = (props) => {
       }
     };
     userFollowers();
-  }, []);
+  }, [location.search]);
 
   return (
     <div className="container mx-auto">

@@ -33,7 +33,7 @@ const ContactManager = (props) => {
           data: {
             data: { models, metaData },
           },
-        } = await ContactApi.getContact();
+        } = await ContactApi.getContact(query);
         if (models && models.length > 0) setContactList(models);
         // set Pagination
         setPagination(metaData.pagination);

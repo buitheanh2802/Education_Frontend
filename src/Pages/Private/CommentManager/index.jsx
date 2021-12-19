@@ -6,6 +6,7 @@ import Panigation from '../Commons/Panigation';
 import Header from './components/header'
 import PublishItem from './components/publish-item';
 import PublishNav from './components/publish-nav'
+import SkeletonGroup from './components/skeleton-group';
 
 const CommentManager = () => {
     const dispath = useDispatch();
@@ -16,6 +17,7 @@ const CommentManager = () => {
     const [checked, setChecked] = useState(false);
 
     const handelPagination = async ({ selected }) => {
+        setIsLoading(true)
         setPagination({ ...pagination, currentPage: selected + 1 })
         setReLoad(!reLoad);
     }
@@ -37,9 +39,9 @@ const CommentManager = () => {
             <Header />
             <PublishNav setChecked={setChecked} />
             {/* {isLoading} */}
-            {models?.map((item, index) => <PublishItem reLoad={reLoad} setReLoad={setReLoad} checked={checked} key={index} data={item} />)}
+            {isLoading ? <SkeletonGroup /> : models?.map((item, index) => <PublishItem reLoad={reLoad} setReLoad={setReLoad} checked={checked} key={index} data={item} />)}
 
-            {pagination?.totalPage > 1 && <Panigation onChange={handelPagination} pageCount={pagination?.totalPage} currentPage={pagination?.currentPage - 1} />}
+            <Panigation onChange={handelPagination} pageCount={pagination?.totalPage} currentPage={pagination?.currentPage - 1} />
         </div>
     )
 }

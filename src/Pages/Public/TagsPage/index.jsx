@@ -8,17 +8,17 @@ import FollowApi from "src/Apis/FollowApi";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import UserApi from "src/Apis/UserApi";
-import Pagination from "src/Pages/Public/Commons/Panigation";
+import Panigation from "src/Pages/Public/Commons/Panigation";
 import queryString from "query-string";
 
 const TagsPage = () => {
   window.scrollTo(0, 0);
   const dispatch = useDispatch();
   const location = useLocation();
-  const token = localStorage.getItem("_token_");
   const history = useHistory();
+  const token = localStorage.getItem("_token_");
   const [featuredAuthors, setFeaturedAuthor] = useState([]);
-  const [panigation, setPanigation] = useState(null);
+  const [paginate, setPaginate] = useState(null);
 
   const handleUnFollow = async (id) => {
     if (token === null) {
@@ -63,9 +63,10 @@ const TagsPage = () => {
     const tag = async () => {
       try {
         dispatch(setLoading(true));
-        const { data: tags } = await TagAPi.getAll();
-        setTags(tags.data);
-        setPanigation(tags.data.metaData.pagination);
+        const query = queryString.parse(location.search);
+        const { data: tags } = await TagAPi.getAll(query);
+        setTags(tags.data.models);
+        setPaginate(tags.data.metaData.pagination);
         dispatch(setLoading(false));
       } catch (error) {
         dispatch(setLoading(false));
@@ -73,7 +74,9 @@ const TagsPage = () => {
       }
     };
     tag();
+  }, [location.search]);
 
+  useEffect(() => {
     const listFeaturedAuthor = async () => {
       try {
         const { data: featuredAuthors } = await UserApi.getFeaturedAuthor();
@@ -86,8 +89,7 @@ const TagsPage = () => {
   }, []);
 
   const onPageChange = (e) => {
-    const query = queryString.stringify({ page: e.selected + 1 });
-    history.push(`${location.pathname}?${query}`);
+    history.push(`?page=${e.selected + 1}`);
   };
 
   return (
@@ -95,7 +97,7 @@ const TagsPage = () => {
       <div className="flex justify-between mt-[15px]  gap-[30px]">
         <div className="max-[200px] px-[15px] sm:px-[35px] xl:gap-x-[95px] sm:gap-x-[60px] gap-y-[20px] mb-[30px] pb-[45px] w-full py-[15px] bg-white shadow rounded">
           <div className="grid grid-cols-1 gap-x-[20px] gap-y-[30px] xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2">
-            {tags?.models?.map((item, index) => {
+            {tags?.map((item, index) => {
               return (
                 <div
                   key={index}
@@ -172,20 +174,18 @@ const TagsPage = () => {
               );
             })}
           </div>
+          {paginate && (
+            <Panigation
+              pageCount={paginate.totalPage}
+              currentPage={paginate.currentPage - 1}
+              onChange={onPageChange}
+            />
+          )}
         </div>
         <div className="w-[350px] min-w-[350px] max-w-[350px] bg-white shadow rounded hidden lg:block mb-[30px]">
           <FeaturedAuthor authors={featuredAuthors} />
         </div>
       </div>
-      {panigation &&
-        panigation?.totalPage > 1 &&
-        panigation?.countDocuments !== 0 && (
-          <Pagination
-            pageCount={panigation.totalPage}
-            onChange={onPageChange}
-            currentPage={panigation.currentPage - 1}
-          />
-        )}
     </div>
   );
 };

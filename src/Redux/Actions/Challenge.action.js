@@ -18,3 +18,13 @@ export const ActionGetChallenge = createAsyncThunk('challenge/findone', async (i
         return error.response.data
     }
 })
+
+export const ActionFindChallenge = createAsyncThunk('challegne/cate', async (findCate) => {
+    try {
+        const { cateid, value } = findCate;
+        const { data } = await ChallengeApi.FilterChallenges(cateid, value)
+        return data
+    } catch (error) {
+        return error.response.data
+    }
+})

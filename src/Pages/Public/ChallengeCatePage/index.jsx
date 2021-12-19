@@ -7,11 +7,12 @@ import { ActionGetsChallengeCate } from 'src/Redux/Actions/ChallengeCate.action'
 import Skeleton from 'react-loading-skeleton'
 import { Images } from 'src/Constants/'
 import { SplitString } from 'src/Helpers/'
+import Panigation from '../Commons/Panigation'
 
 const ChallengeCatePage = () => {
     const dispatch = useDispatch();
     const history = useHistory()
-    const { challengeCates, isLoading } = useSelector(state => state.ChallengeCate);
+    const { challengeCates, isLoading, pagination } = useSelector(state => state.ChallengeCate);
     const pathName = [
         { path: path.CHALLENGE, value: "Danh mục bài tập" },
         { path: path.QUIZ, value: "Quiz" }
@@ -21,6 +22,10 @@ const ChallengeCatePage = () => {
         if (challengeCates) return
         dispatch(ActionGetsChallengeCate())
     }, [dispatch, challengeCates])
+
+    const handelPagination = async ({ selected }) => {
+        dispatch(ActionGetsChallengeCate(selected + 1))
+    }
 
     return (
         <div className="container mx-auto mt-[55px] py-[20px]">
@@ -93,6 +98,7 @@ const ChallengeCatePage = () => {
                     })}
                 </div>
             </div>
+            <Panigation onChange={handelPagination} pageCount={pagination?.totalPage} currentPage={pagination?.currentPage - 1} />
         </div>
     )
 }

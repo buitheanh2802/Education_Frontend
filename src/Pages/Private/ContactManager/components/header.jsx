@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import csvDownload from "json-to-csv-export";
 import ContactApi from "src/Apis/ContactApi";
 
-const Header = () => {
+const Header = ({ handleSearch }) => {
   const [listData, setListData] = useState([]);
 
   useEffect(() => {
@@ -28,7 +28,6 @@ const Header = () => {
     };
     CallApi();
   }, []);
-
   return (
     <div className="p-4 bg-white block w-full sm:flex items-center justify-between border-b border-gray-200">
       <div className="mb-1 w-full">

@@ -7,48 +7,57 @@ const ProfileUserApi = {
         return AxiosClient.get(url, {
             headers: {
                 authorization: `Bearer ${token}`
-            }
+            },
         })
     },
-    getPostUser(username) {
+    getPostUser(username, params) {
         const url = `/user/${username}/post`
-        return AxiosClient.get(url)
+        return AxiosClient.get(url, {
+            params,
+        })
     },
-    getQuestionUser(username) {
+    getQuestionUser(username, params) {
         const url = `/user/${username}/question`
-        return AxiosClient.get(url)
+        return AxiosClient.get(url, {
+            params,
+        })
     },
 
-    getFollowerUser(username) {
+    getFollowerUser(username, params) {
         const token = localStorage.getItem("_token_");
         const url = `/user/${username}/follower`
         return AxiosClient.get(url, {
             headers: {
                 authorization: `Bearer ${token}`
-            }
+            },
+                params,
         })
     },
-    getFollowingUser(username) {
+    getFollowingUser(username, params) {
         const token = localStorage.getItem("_token_");
         const url = `/user/${username}/following`
         return AxiosClient.get(url, {
             headers: {
                 authorization: `Bearer ${token}`
-            }
+            },
+            params,
         })
     },
-    getTagUser(username) {
+    getTagUser(username, params) {
         const token = localStorage.getItem("_token_");
         const url = `/user/${username}/tag`
         return AxiosClient.get(url, {
             headers: {
                 authorization: `Bearer ${token}`
-            }
+            },
+            params,
         })
     },
-    getBookmarkUser(username) {
+    getBookmarkUser(username,params) {
         const url = `/user/${username}/bookmark/post`
-        return AxiosClient.get(url)
+        return AxiosClient.get(url, {
+            params,
+        })
     },
 }
 export default ProfileUserApi

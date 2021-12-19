@@ -2,8 +2,18 @@ import LocalStorage from "src/Helpers/Storage";
 import AxiosClient from "./AxiosClient";
 
 const ChallengeCateApi = {
-  async gets() {
+  async gets(page) {
     const url = `/challenge-categories`;
+    return AxiosClient.get(url, {
+      headers: {
+        authorization: `Bearer ${LocalStorage.Get("_token_")}`,
+      },
+      params: { page }
+    });
+  },
+
+  async get(id) {
+    const url = `/challenge-categories/${id}`;
     return AxiosClient.get(url, {
       headers: {
         authorization: `Bearer ${LocalStorage.Get("_token_")}`,
@@ -11,9 +21,9 @@ const ChallengeCateApi = {
     });
   },
 
-  async get(id) {
+  async delete(id) {
     const url = `/challenge-categories/${id}`;
-    return AxiosClient.get(url, {
+    return AxiosClient.delete(url, {
       headers: {
         authorization: `Bearer ${LocalStorage.Get("_token_")}`,
       },

@@ -10,9 +10,9 @@ export const ActionGetChallengeCate = createAsyncThunk('challengeCate/findone', 
     }
 })
 
-export const ActionGetsChallengeCate = createAsyncThunk('challengeCate/find', async () => {
+export const ActionGetsChallengeCate = createAsyncThunk('challengeCate/find', async (page) => {
     try {
-        const { data } = await ChallengeCateApi.gets();
+        const { data } = await ChallengeCateApi.gets(page);
         return data
     } catch (error) {
         return error.response.data

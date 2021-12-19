@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { path } from "src/Constants/";
-import { ActionGetsChallenge } from "src/Redux/Actions/Challenge.action";
+import { ActionFindChallenge, ActionGetsChallenge } from "src/Redux/Actions/Challenge.action";
 import { resetChallenge } from "src/Redux/Slices/Challenge.slice";
 import Skeleton from "react-loading-skeleton";
 import { ActionGetChallengeCate } from "src/Redux/Actions/ChallengeCate.action";
@@ -10,14 +10,14 @@ import { SplitString } from "src/Helpers/";
 import { UpperCaseOneKey } from "src/Helpers/";
 import { Link } from "react-router-dom";
 import Select from 'react-select'
-import ChallengeApi from "src/Apis/ChallengeApi";
+import Panigation from "../Commons/Panigation";
 
 const ChallengePage = () => {
   const dispatch = useDispatch();
   const { cateid } = useParams();
   const [routeName, setRouteName] = useState(null);
   const history = useHistory();
-  const { challenges, isLoading } = useSelector((state) => state.Challenge);
+  const { challenges, isLoading, pagination } = useSelector((state) => state.Challenge);
 
   useEffect(() => {
     (async () => {
@@ -31,9 +31,13 @@ const ChallengePage = () => {
     return () => dispatch(resetChallenge());
   }, [dispatch, cateid]);
 
-  const handelSlelct = async ({ value }) => {
-    const { data } = await ChallengeApi.FilterChallenges(cateid, value)
-    console.log(data)
+  const handelSlelct = ({ value }) => {
+    if (value === "all") return dispatch(ActionGetsChallenge(cateid));
+    dispatch(ActionFindChallenge({ cateid, value }))
+  }
+
+  const handelPagination = () => {
+
   }
 
   const pathName = [
@@ -187,10 +191,12 @@ const ChallengePage = () => {
             </div>
           );
         })
-          : <div className="py-[50px] text-center w-full col-span-3 text-gray-400 text-lg select-none">
+          : !isLoading && <div className="py-[50px] text-center w-full col-span-3 text-gray-400 text-lg select-none">
             <p>Chưa có bài tập</p>
           </div>}
       </div>
+
+      {pagination?.totalPage > 1 && <Panigation onChange={handelPagination} pageCount={pagination?.totalPage} currentPage={pagination?.currentPage - 1} />}
     </div>
   );
 };

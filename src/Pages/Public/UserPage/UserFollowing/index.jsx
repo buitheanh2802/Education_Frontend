@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "src/Components/Icon";
 import ProfileUserApi from "src/Apis/ProfileUserApi";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import FollowApi from "src/Apis/FollowApi";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import { useSelector } from "react-redux";
 import UserApi from "src/Apis/UserApi";
+import queryString from "query-string";
 
-const UserFollowing = (props) => {
+const UserFollowing = ({ paginate, setPaginate, ...props }) => {
   const username = props.match.params.username;
   const { profile } = useSelector((state) => state.Auth);
   const [userFollowing, setUserFollowing] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
   const token = localStorage.getItem("_token_");
+  const location = useLocation();
 
   const handleUnFollow = async (username) => {
     if (token === null) {
@@ -68,10 +70,13 @@ const UserFollowing = (props) => {
     const userFollowing = async () => {
       try {
         dispatch(setLoading(true));
+        const query = queryString.parse(location.search);
         const { data: userFollowing } = await ProfileUserApi.getFollowingUser(
-          username
+          username,
+          query
         );
         setUserFollowing(userFollowing.data.models);
+        setPaginate(userFollowing.data.metaData.pagination);
         dispatch(setLoading(false));
       } catch (error) {
         dispatch(setLoading(false));
@@ -79,7 +84,7 @@ const UserFollowing = (props) => {
       }
     };
     userFollowing();
-  }, []);
+  }, [location.search]);
 
   return (
     <div>

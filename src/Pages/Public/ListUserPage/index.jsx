@@ -63,23 +63,23 @@ const ListUserPage = () => {
     dispatch(setLoading(false));
   };
 
-  const filter = async (e) => {
-    try {
-      dispatch(setLoading(true));
-      const { data: listUser } = await UserApi.getListUser(e.target.value);
-      setUsers(listUser.data);
-      dispatch(setLoading(false));
-    } catch (error) {
-      dispatch(setLoading(false));
-      console.log(error);
-    }
-  };
+  // const filter = async (e) => {
+  //   try {
+  //     dispatch(setLoading(true));
+  //     const { data: listUser } = await UserApi.getListUser(e.target.value);
+  //     setUsers(listUser.data);
+  //     dispatch(setLoading(false));
+  //   } catch (error) {
+  //     dispatch(setLoading(false));
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     const getData = async () => {
       try {
         dispatch(setLoading(true));
-        const { data: listUser } = await UserApi.getListUser("points");
+        const { data: listUser } = await UserApi.getListUser();
         setUsers(listUser.data);
         dispatch(setLoading(false));
       } catch (error) {
@@ -97,18 +97,6 @@ const ListUserPage = () => {
           <div className="flex justify-between mb-[35px]">
             <div className="leading-[35px] text-[25px] font-bold uppercase">
               Tác giả
-            </div>
-            <div className="leading-[35px]">
-              <span className="mr-[10px]">Sắp xếp theo</span>
-              <select
-                onChange={(e) => filter(e)}
-                className="border py-[5px] px-[8px] border-blue-300 rounded outline-none"
-                name="filter"
-              >
-                <option value="points">Điểm</option>
-                <option value="posts">Bài viết</option>
-                <option value="followers">Người theo dõi</option>
-              </select>
             </div>
           </div>
           <div className="grid grid-cols-1 gap-[20px] xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 px-[20px]">

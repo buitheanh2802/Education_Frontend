@@ -1,25 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Icon } from "src/Components/Icon";
 import ProfileUserApi from "src/Apis/ProfileUserApi";
 import { useDispatch } from "react-redux";
 import { setLoading } from "src/Redux/Slices/Loading.slice";
 import { timeFormatter } from "../../../../Helpers/Timer";
+import queryString from "query-string";
 
-const UserBookMark = (props) => {
+const UserBookMark = ({ paginate, setPaginate, ...props }) => {
   const username = props.match.params.username;
   const [userBookMark, setUserBookMark] = useState([]);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     const userBookMark = async () => {
       try {
         dispatch(setLoading(true));
+        const query = queryString.parse(location.search);
         const { data: bookMarkUser } = await ProfileUserApi.getBookmarkUser(
-          username
+          username,
+          query
         );
         setUserBookMark(bookMarkUser.data.models);
-        console.log(bookMarkUser.data.models);
+        setPaginate(bookMarkUser.data.metaData.pagination);
         dispatch(setLoading(false));
       } catch (error) {
         dispatch(setLoading(false));
@@ -27,7 +31,7 @@ const UserBookMark = (props) => {
       }
     };
     userBookMark();
-  }, []);
+  }, [location.search]);
 
   return (
     <div className="">

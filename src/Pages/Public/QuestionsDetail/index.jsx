@@ -21,6 +21,7 @@ import LoadingIcon from "src/Components/Loading/LoadingIcon";
 import QuestionRelated from "../Commons/QuestionsRelated";
 import Comments from "../Comments";
 import { getCookie, setCookie } from 'src/Helpers/Cookie';
+import { AlertMessage } from "src/Components/AlertMessage";
 
 const QuestionsDetail = () => {
   const shortId = useParams();
@@ -238,18 +239,6 @@ const QuestionsDetail = () => {
     setIsModalVisible(true);
   };
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 2000,
-    // timerProgressBar: true,
-    background: "#EFF6FF",
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
   const handelReportSpam = async () => {
     var checkbox = document.getElementsByClassName("cursor-pointer");
     for (var i = 0; i < checkbox.length; i++) {
@@ -285,13 +274,13 @@ const QuestionsDetail = () => {
     };
     try {
       await SpamApi.reportSpamQuestion(dataSpam);
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "success",
         title: "Báo cáo thành công",
       });
       setIsModalVisible(false);
     } catch (error) {
-      await Toast.fire({
+      await AlertMessage.fire({
         icon: "error",
         title: "Báo cáo thất bại",
       });
@@ -402,7 +391,6 @@ const QuestionsDetail = () => {
                 <button
                   className="h-full btn__post"
                   onClick={() => setQuestionMenu(!questionMenu)}
-                  onBlur={() => setQuestionMenu(false)}
                 >
                   <Icon.DotsVertical className=" w-[13px] " />
                 </button>
@@ -554,7 +542,6 @@ const QuestionsDetail = () => {
                           : "text-gray-500 px-2 md:px-5 py-[1px]  rounded-t-[3px] flex items-center hover:bg-blue-300 hover:text-white"
                       }
                       onClick={() => setQuestionShare(!questionShare)}
-                      onBlur={() => setQuestionShare(false)}
                     >
                       <Icon.Share className="fill-current w-[15px]" />
                       <span className="text-[12x] md:text-[14x] ml-1">
