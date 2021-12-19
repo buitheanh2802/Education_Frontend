@@ -60,7 +60,7 @@ const PublishItem = (props) => {
     <>
       <div
         className="nav bg-white border-b  text-[15px] p-[10px] grid 
-        grid-cols-[60px,1.5fr,0.8fr,0.5fr,1.1fr] "
+        grid-cols-[60px,1.5fr,0.8fr,0.5fr,1.1fr] items-center"
       >
         <div className="font-medium ">{index}</div>
         <div className="font-medium mr-[30px] text-blue-500 underline ">

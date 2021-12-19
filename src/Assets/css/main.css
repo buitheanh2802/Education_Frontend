@@ -1613,6 +1613,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 400px;
 }
 
+.w-2 {
+  width: 0.5rem;
+}
+
 .min-w-\[170px\] {
   min-width: 170px;
 }
